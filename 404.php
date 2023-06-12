@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-	<title>Pizza Emoji</title>
+	<title>Pizza Emoji - Page Not Found</title>
 	<meta name="title" content="Pizza Emoji - A small pictorial symbol that represents a slice of delicious baked dough with tomato sauce, cheese, and various toppings." />
 	<meta name="description" content="A bit of technology, movies, games, and Disneyland." />
 	<meta name="author" content="Brandon Butler" />
@@ -18,13 +18,16 @@
 			<a href="index.html">
 			<img src="logo-rainbow.webp" id="logo" alt="Pizza Emoji">
 			</a>
-			<div id="byline"><a href="getinfo.html">by Brandon Butler</a></div>
+			<div id="byline">by Brandon Butler</div>
 		</div>
 	</header>
 	<main>
 		<article>
-			<div id="tagline">
-			A small pictorial symbol that represents a slice of delicious baked dough with tomato sauce, cheese, and various toppings.
+			<div class="post">
+				<div id="fourohfour">
+					Page not found.
+				</div>
+				<p align="center">I'm just as surprised as you are.</p>
 			</div>
 		</article>
 	</main>	

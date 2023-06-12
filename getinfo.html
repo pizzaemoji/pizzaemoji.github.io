@@ -58,6 +58,26 @@ toggleDarkMode(localStorage.getItem("light") == "true");
 // Listen for OS settings
 useDark.addListener((evt) => toggleDarkMode(evt.matches));
 
+
+
+
+    // When someone clicks the button
+    darkModeToggle.addEventListener('click', () => {
+      // get their darkMode setting
+      darkMode = localStorage.getItem('darkMode'); 
+
+      // if it not current enabled, enable it
+      if (darkMode !== 'enabled') {
+        enableDarkMode();
+      // if it has been enabled, turn it off  
+      } else {  
+        disableDarkMode(); 
+      }
+});
+
+
+
+
 // Toggles dark class on click and sets localStorage state
 button.addEventListener("click", () => {
 	darkModeState = !darkModeState;

@@ -47,7 +47,7 @@ header {
 	/* Orange to hot pink */
 	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
 	/* Rainbow? */
-	background: linear-gradient(90deg, #ff0000 100%, #ffff00 100%, #0000ff 100%);
+	background: linear-gradient(90deg, #ff0000 33%, #ffff00 34%, #0000ff 33%);
 }
 .divider {
 	display: block;

@@ -49,7 +49,7 @@ header {
 	/* Rainbow? */
 	/* background: linear-gradient(90deg, #ff0000 15%, #ffff00 60%, #0000ff 100%); */
 	/* Apple */
-	background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #00ffff 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%);
+	background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%);
 }
 .divider {
 	display: block;

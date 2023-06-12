@@ -83,7 +83,7 @@ header {
 	top: 0;
 	padding: 6px 0px 0px 0px;
 	/* Solid orange */
-	background: linear-gradient(90deg, #fe6000 100%);
+	background: linear-gradient(90deg, #fe6000 100%, #fe6000 100%);
 	/* Orange to hot pink */
 	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
 }

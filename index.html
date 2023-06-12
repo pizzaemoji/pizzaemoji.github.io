@@ -1,1 +1,70 @@
-<html><body><p>pizza emoji</p><p>in progress....</p></body></html>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Pizza Emoji</title>
+	<meta name="title" content="Pizza Emoji - A small pictorial symbol that represents a slice of delicious baked dough with tomato sauce, cheese, and various toppings." />
+	<meta name="description" content="A bit of technology, movies, games, and Disneyland." />
+	<meta name="author" content="Brandon Butler" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name='robots' content='max-image-preview:large' />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link title="RSS" rel="alternate" type="application/rss+xml" href="https://pizzaemoji.net/feed/" />
+	<link href="style.css" rel="stylesheet" />
+</head>
+<body>
+	<header>
+		<div class="topstyle"></div>
+		<div id="pizzaemoji">
+			<a href="index.html">
+			<img src="logo-orange.webp" id="logo" alt="Pizza Emoji">
+			</a>
+			<div id="byline"><a href="about">by Brandon Butler</a></div>
+		</div>
+	</header>
+	<main>
+		<article>
+			<div class="post">
+				&nbsp;
+			</div>
+		</article>
+	</main>	
+	<footer>
+	<div>
+		<p class="darkmode">Dark Mode &nbsp; <label class="switch"><input type="checkbox" checked onclick="toggleDarkMode()"><span class="slider-orange"></span></label>
+		</p>
+<!-- <p><button class="btn" onclick="alert('hello')"></button> -->
+		<p class="copy">&copy; <?php echo date("Y"); ?> Brandon Butler</p>
+	</div>
+	</footer>
+	<script>
+//const button = document.querySelector(".btn");
+// MediaQueryList object
+const useDark = window.matchMedia("(prefers-color-scheme: light)");
+
+// Toggles light/dark class
+function toggleDarkMode(state) {
+	document.documentElement.classList.toggle("light", state);
+	darkModeState = state;
+}
+
+// Sets localStorage state
+function setDarkModeLocalStorage(state) {
+	localStorage.setItem("light", state);
+}
+
+// Initial setting
+toggleDarkMode(localStorage.getItem("light") == "true");
+
+// Listen for OS settings
+useDark.addListener((evt) => toggleDarkMode(evt.matches));
+
+// Toggles dark class on click and sets localStorage state
+button.addEventListener("click", () => {
+	darkModeState = !darkModeState;
+
+	toggleDarkMode(darkModeState);
+	setDarkModeLocalStorage(darkModeState);
+});
+	</script>
+</body>
+</html>

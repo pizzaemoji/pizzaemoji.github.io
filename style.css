@@ -68,12 +68,12 @@ header {
 	font-size: 1em;
 }
 #tagline {
-	font-size: 1.4em;
-	line-height: 1.2em;
+	font-size: 1.1em;
+	line-height: 1em;
 	font-weight: 100;
 	text-align: center;
 	font-family: "Courier New", monospace;
-	padding: 0px 100px 200px 100px;
+	padding: 0px 20px 200px 20px;
 }
 .topstyle {
 	display: block;

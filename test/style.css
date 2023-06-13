@@ -138,7 +138,7 @@ article {
 }
 .hero {
 	display: block;
-	max-width: 60%;
+	max-width: 64%;
 	margin: auto;
 	}
 .post {
@@ -186,9 +186,6 @@ a:hover {
 }
 .nbsp {
 	padding: 1em;
-}
-code {
-	font-family: "Courier", monospace;
 }
 .image-header {
 	display: block;
@@ -238,11 +235,6 @@ footer {
 	font-weight: 200;
 	padding: 0;
 }
-.darkmode {
-	font-size: 1.3em;
-	font-weight: 400;
-	padding: 0;
-}
 #fourohfour {
 	font-size: 2em;
 	line-height: 2em;
@@ -265,7 +257,7 @@ footer {
 		margin-left: auto;
 	}
 	.post {
-		max-width: 680px;
+	/*	max-width: 650px; */
 	}
 	.image-large {
 		width: 85%;
@@ -301,7 +293,7 @@ footer {
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
 	#logo {
-		width: 95%;
+		width: 98%;
 	}
 	#tagline {
 		font-size: 1em;
@@ -309,7 +301,8 @@ footer {
 		padding: 0px 5px 80px 5px;
 	}
 	main {
-		padding: 0 5px 0 5px;
+		margin-right: auto;
+		margin-left: auto;
 	}
 	.post {
 		max-width: 100%;

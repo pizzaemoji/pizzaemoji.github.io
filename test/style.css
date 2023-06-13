@@ -57,9 +57,9 @@ header {
 }
 article {
 	margin-top: 0px;
-	margin-right: 10px;
+	margin-right: 0px;
 	margin-bottom: 50px;
-	margin-left: 20px;
+	margin-left: 0px;
 }
 .home {
 	font-size: 1.2em;
@@ -193,7 +193,6 @@ code {
 .image-header {
 	display: block;
 	width: 100%;
-	margin: 20px 0 20px 0;
 }
 .image-large {
 	display: block;
@@ -266,7 +265,7 @@ footer {
 		margin-left: auto;
 	}
 	.post {
-		max-width: 600px;
+		max-width: 680px;
 	}
 	.image-large {
 		width: 85%;

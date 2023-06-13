@@ -8,6 +8,7 @@ body {
 	background-color: #222;
 }
 header {
+	max-width: 600px;
 	line-height: 1.5em;
 	padding: 100px 0 100px 0;
 	text-align: center;

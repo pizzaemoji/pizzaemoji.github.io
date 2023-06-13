@@ -110,7 +110,7 @@ article {
 .headline {
 	text-decoration: none;
 	color: #FFF;
-	font-size: 3em;
+	font-size: 3.2em;
 	line-height: 1.1em;
 	font-weight: 600;
 	word-spacing: .05em;
@@ -118,7 +118,7 @@ article {
 	padding: 0;
 }
 .subtitle {
-	font-size: 2em;
+	font-size: 2.2em;
 	line-height: 1em;
 	font-weight: 300;
 	text-align: left;
@@ -128,7 +128,7 @@ article {
 }
 .date {
 	color: #888;
-	font-size: .85em;
+	font-size: 1em;
 	text-align: left;
 	font-weight: 300;
 	line-height: 1em;
@@ -138,8 +138,8 @@ article {
 }
 .hero {
 	display: block;
-	margin-right: auto;
-	width: 68%;
+	max-width: 68%;
+	margin: auto;
 	}
 .post {
 	margin-right: auto;

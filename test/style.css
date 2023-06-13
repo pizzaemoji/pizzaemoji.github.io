@@ -138,6 +138,8 @@ article {
 }
 .hero {
 	display: block;
+	max-width: 60%;
+	margin: auto;
 	}
 .post {
 	font-size: 1.2em;

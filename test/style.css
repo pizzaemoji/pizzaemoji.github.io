@@ -104,7 +104,7 @@ article {
 	font-weight: 300;
 	text-align: left; */
 	text-align: left;
-	max-width: 68%;
+	max-width: 64%;
 	margin: auto;
 	}
 .headline {
@@ -138,16 +138,14 @@ article {
 }
 .hero {
 	display: block;
-	max-width: 68%;
-	margin: auto;
 	}
 .post {
-	margin-right: auto;
-	margin-left: 100px;
 	font-size: 1.2em;
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
+	max-width: 60%;
+	margin: auto;	
 }
 blockquote {
 	margin: 2em 2em 2em 0em;

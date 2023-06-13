@@ -124,7 +124,7 @@ article {
 	text-align: left;
 	font-style: italic;
 	display: block;
-	padding: 5px 0 10px 0;
+	padding: 5px 30px; 10px 0;
 }
 .date {
 	color: #888;
@@ -146,8 +146,8 @@ article {
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
-	max-width: 60%;
-	margin: auto;	
+	max-width: 640px;
+	margin: auto;
 }
 blockquote {
 	margin: 2em 2em 2em 0em;
@@ -245,7 +245,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		max-width: 68%;
+		max-width: 80%;
 	}
 	#tagline {
 		font-size: 1.2em;

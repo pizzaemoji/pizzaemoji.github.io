@@ -335,7 +335,7 @@ footer {
 	.float-left {
 		float: left;
 		text-align: left;
-		margin: 5px 20px 5px -20px;
+		margin: 5px 10px 5px 10px;
 		padding: 12px 0 12px 0;
 	}
 	.float-right {

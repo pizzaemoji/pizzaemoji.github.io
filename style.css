@@ -29,8 +29,6 @@ header {
 }
 #tagline {
 	color: #777;
-	font-size: 1em;
-	line-height: 1em;
 	font-weight: 100;
 	text-align: center;
 	font-family: "Courier New", monospace;
@@ -244,6 +242,8 @@ footer {
 		width: 500px;
 	}
 	#tagline {
+		font-size: 1em;
+		line-height: 1em;
 		padding: 0px 40px 80px 40px;
 	}
 	main {
@@ -288,6 +288,8 @@ footer {
 		width: 95%;
 	}
 	#tagline {
+		font-size: .75em;
+		line-height: .75em;
 		padding: 0px 10px 80px 10px;
 	}
 	main {

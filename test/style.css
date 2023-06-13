@@ -139,7 +139,6 @@ article {
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
-	max-width: 640px;
 	margin: auto;
 }
 blockquote {
@@ -251,13 +250,16 @@ footer {
 	}
 	.title {
 		text-align: left;
-		max-width: 64%;
+		width: 600px;
+		max-width: 90%;
 	}
 	.hero {
-		max-width: 64%;		
+		width: 640px;
+		max-width: 99%;		
 	}
 	.post {
-	/*	max-width: 650px; */
+		width: 600px;
+		max-width: 90%;
 	}
 	.image-large {
 		width: 85%;

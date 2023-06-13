@@ -131,7 +131,9 @@ article {
 	padding: 10px 0 0 0;
 }
 .hero {
-	margin: auto;
+	display: block;
+	margin-right: auto;
+	width: 40%;
 	}
 .post {
 	margin: auto;

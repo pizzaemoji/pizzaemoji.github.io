@@ -98,6 +98,15 @@ article {
 	line-height: 1em;
 	padding: 0 0 40px 0;
 }
+.title {
+/*	font-size: 1.2em;
+	line-height: 1.6em;
+	font-weight: 300;
+	text-align: left; */
+	text-align: left;
+	max-width: 68%;
+	margin: auto;
+	}
 .headline {
 	text-decoration: none;
 	color: #FFF;
@@ -108,12 +117,6 @@ article {
 	text-align: left;
 	padding: 0;
 }
-.title {
-	font-size: 1.2em;
-	line-height: 1.6em;
-	font-weight: 300;
-	text-align: left;
-	}
 .subtitle {
 	font-size: 2em;
 	line-height: 1em;
@@ -136,7 +139,7 @@ article {
 .hero {
 	display: block;
 	margin-right: auto;
-	width: 70%;
+	width: 68%;
 	}
 .post {
 	margin-right: auto;

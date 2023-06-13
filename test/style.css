@@ -25,7 +25,7 @@ header {
 	/*	Width size in @media screen */
 }
 #byline {
-	font-size: 1.5em;
+	font-size: 1.25em;
 }
 #tagline {
 	color: #777;
@@ -55,7 +55,6 @@ header {
 	padding: 3px 0px 0px 0px;
 	background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%);
 }
-
 article {
 	margin-bottom: 5em;
 }
@@ -106,6 +105,12 @@ article {
 	text-align: left;
 	padding: 0;
 }
+.title {
+	font-size: 1.2em;
+	line-height: 1.6em;
+	font-weight: 300;
+	text-align: left;
+	}
 .subtitle {
 	font-size: 2em;
 	line-height: 1em;
@@ -125,18 +130,11 @@ article {
 	position: relative;
 	padding: 10px 0 0 0;
 }
-.postheader {
-	padding: 0;
-}
-.title {
-	font-size: 1.2em;
-	line-height: 1.6em;
-	font-weight: 300;
-	text-align: left;
-	}
 .hero {
+	margin: auto;
 	}
 .post {
+	margin: auto;
 	font-size: 1.2em;
 	line-height: 1.6em;
 	font-weight: 300;

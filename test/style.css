@@ -139,7 +139,8 @@ article {
 	width: 70%;
 	}
 .post {
-	margin: auto;
+	margin-right: auto;
+	margin-left: 100px;
 	font-size: 1.2em;
 	line-height: 1.6em;
 	font-weight: 300;
@@ -250,7 +251,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		max-width: 50%;
+		max-width: 68%;
 	}
 	#tagline {
 		font-size: 1.2em;

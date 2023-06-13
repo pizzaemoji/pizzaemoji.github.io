@@ -8,7 +8,6 @@ body {
 	background-color: #222;
 }
 header {
-	max-width: 600px;
 	line-height: 1.5em;
 	padding: 100px 0 100px 0;
 	text-align: center;
@@ -19,6 +18,7 @@ header {
 	text-decoration: none;
 }
 #logo {
+	max-width: 100%;
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -26,7 +26,7 @@ header {
 	/*	Width size in @media screen */
 }
 #byline {
-	font-size: 1em;
+	font-size: 1.5em;
 }
 #tagline {
 	color: #777;

@@ -56,7 +56,10 @@ header {
 	background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%);
 }
 article {
-	margin-bottom: 5em;
+	margin-top: 0px;
+	margin-right: 10px;
+	margin-bottom: 50px;
+	margin-left: 20px;
 }
 .home {
 	font-size: 1.2em;
@@ -133,7 +136,7 @@ article {
 .hero {
 	display: block;
 	margin-right: auto;
-	width: 40%;
+	width: 70%;
 	}
 .post {
 	margin: auto;

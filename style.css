@@ -243,8 +243,8 @@ footer {
 	}
 	#tagline {
 		font-size: 1.25em;
-		line-height: 1.35em;
-		padding: 0px 40px 80px 40px;
+		line-height: 1.25em;
+		padding: 0px 25px 80px 25px;
 	}
 	main {
 		max-width: 600px;
@@ -288,8 +288,8 @@ footer {
 		width: 95%;
 	}
 	#tagline {
-		font-size: 1.25em;
-		line-height: 1.35em;
+		font-size: 1.15em;
+		line-height: 1.2em;
 		padding: 0px 10px 80px 10px;
 	}
 	main {

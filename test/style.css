@@ -99,12 +99,6 @@ article {
 	padding: 0 0 40px 0;
 }
 .title {
-/*	font-size: 1.2em;
-	line-height: 1.6em;
-	font-weight: 300;
-	text-align: left; */
-	text-align: left;
-	max-width: 64%;
 	margin: auto;
 	}
 .headline {
@@ -124,7 +118,7 @@ article {
 	text-align: left;
 	font-style: italic;
 	display: block;
-	padding: 5px 30px; 10px 0;
+	padding: 5px -50px; 10px 0;
 }
 .date {
 	color: #888;
@@ -138,7 +132,6 @@ article {
 }
 .hero {
 	display: block;
-	max-width: 64%;
 	margin: auto;
 	}
 .post {
@@ -256,6 +249,13 @@ footer {
 		margin-right: auto;
 		margin-left: auto;
 	}
+	.title {
+		text-align: left;
+		max-width: 64%;
+	}
+	.hero {
+		max-width: 64%;		
+	}
 	.post {
 	/*	max-width: 650px; */
 	}
@@ -304,6 +304,13 @@ footer {
 		margin-right: auto;
 		margin-left: auto;
 	}
+	.title {
+		text-align: left;
+		max-width: 98%;
+	}
+	.hero {
+		max-width: 100%;		
+	}
 	.post {
 		max-width: 100%;
 	}
@@ -328,13 +335,13 @@ footer {
 	.float-left {
 		float: left;
 		text-align: left;
-		margin: 5px 20px 5px -25px;
+		margin: 5px 20px 5px -20px;
 		padding: 12px 0 12px 0;
 	}
 	.float-right {
 		float: right;
 		text-align: left;
-		margin: 5px -25px 5px 20px;
+		margin: 5px -20px 5px 20px;
 		padding: 12px 0 12px 0;
 	}
 }

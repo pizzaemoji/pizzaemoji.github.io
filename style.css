@@ -44,11 +44,14 @@ header {
 	font-size: 1.25em;
 }
 #tagline {
-	margin: auto;
 	color: #AAA;
+	font-size: 1.2em;
+	line-height: 1.1em;
 	font-weight: 100;
 	text-align: center;
 	font-family: "Courier New", monospace;
+	padding: 100px 0 100px 0;
+	margin: auto;
 }
 article {
 	margin: 0 0 50px 0;
@@ -203,8 +206,10 @@ a:hover {
 	display: inline;
 	text-decoration: none;
 	color: #FE6000;
+	font-size: 1.25em;
+	font-weight: 100;
+	line-height: 1.2em;
 	font-style: italic;
-	font-weight: 600;
 	text-transform: uppercase;
 	border-top: #FE6000 1px solid;
 	border-bottom: #FE6000 1px solid;
@@ -233,9 +238,6 @@ footer {
 	}
 	#tagline {
 		width: 70%;
-		font-size: 1.2em;
-		line-height: 1.1em;
-		padding-bottom: 100px;
 	}
 	main {
 		margin-right: auto;
@@ -266,10 +268,6 @@ footer {
 		width: 300px;
 	}
 	.pullquote {
-		font-size: 1.25em;
-		line-height: 1.25em;
-		word-spacing: 120%;
-		font-weight: 100;
 		width: 50%;
 	}
 	.float-left {
@@ -291,10 +289,7 @@ footer {
 		width: 100%;
 	}
 	#tagline {
-		width: 90%;
-		font-size: 1.2em;
-		line-height: 1.1em;
-		padding-bottom: 100px;
+		width: 96%;
 	}
 	main {
 		margin-right: auto;
@@ -315,18 +310,13 @@ footer {
 		padding-top: 15px;
 	}
 	.caption {
-		width: 80%;
+		width: 90%;
 		padding-bottom: 15px;
 	}
 	.image-small {
 		width: 200px;
 	}
 	.pullquote {
-		font-size: 1.25em;
-		font-weight: 100;
-		line-height: 1em;
-		word-spacing: 100%;
-		margin-bottom: 20px;
 		width: 100%;
 	}
 	.float-left {

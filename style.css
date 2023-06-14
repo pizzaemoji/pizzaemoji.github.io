@@ -301,7 +301,8 @@ footer {
 		max-width: 98%;
 	}
 	.hero {
-		max-width: 100%;		
+		max-width: 100%;
+		padding: 10px;
 	}
 	.post {
 		max-width: 98%;

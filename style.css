@@ -12,6 +12,22 @@ header {
 	padding: 100px 0 100px 0;
 	text-align: center;
 }
+.topstyle {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	padding: 12px 0px 0px 0px;
+	/* Solid orange */
+	background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%);
+	/* Orange to hot pink */
+	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
+	/* Rainbow */
+	/* background: linear-gradient(90deg, #ff0000 15%, #ff9900 30%, #ffff00 45%, #00ff00 60%, #0000ff 75%, #ff00ff 100%); */
+	/* Apple */
+	/* background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%); */
+}
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
 	line-height: .5;
@@ -25,7 +41,7 @@ header {
 	/*	Width size in @media screen */
 }
 #byline {
-	font-size: 1em;
+	font-size: 1.25em;
 }
 #tagline {
 	color: #777;
@@ -33,31 +49,8 @@ header {
 	text-align: center;
 	font-family: "Courier New", monospace;
 }
-.topstyle {
-	display: block;
-	position: absolute;
-	right: 0;
-	left: 0;
-	top: 0;
-	padding: 12px 0px 0px 0px;
-	/* Solid orange */
-	background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%);
-	/* Orange to hot pink */
-	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
-	/* Rainbow */
-	/* background: linear-gradient(90deg, #ff0000 15%, #ff9900 30%, #ffff00 45%, #00ff00 60%, #0000ff 75%, #ff00ff 100%); */
-	/* Apple */
-	/* background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%); */
-}
-.divider {
-	display: block;
-	position: relative;
-	padding: 3px 0px 0px 0px;
-	background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%);
-}
-
 article {
-	margin-bottom: 5em;
+	margin: 0 0 50px 0;
 }
 .home {
 	font-size: 1.2em;
@@ -96,43 +89,48 @@ article {
 	line-height: 1em;
 	padding: 0 0 40px 0;
 }
+.title {
+	margin: auto;
+}
 .headline {
 	text-decoration: none;
 	color: #FFF;
-	font-size: 3em;
+	font-size: 3.2em;
 	line-height: 1.1em;
 	font-weight: 600;
 	word-spacing: .05em;
 	text-align: left;
 	padding: 0;
 }
-.subtitle {
-	font-size: 2em;
+.tag {
+	font-size: 2.2em;
 	line-height: 1em;
 	font-weight: 300;
 	text-align: left;
 	font-style: italic;
 	display: block;
-	padding: 5px 0 10px 0;
+	padding: 10px 0px 20px 0px;
 }
 .date {
 	color: #888;
-	font-size: .85em;
+	font-size: 1em;
 	text-align: left;
 	font-weight: 300;
 	line-height: 1em;
 	display: block;
 	position: relative;
-	padding: 10px 0 0 0;
 }
-.postheader {
-	padding: 0;
+.hero {
+	display: block;
+	margin: auto;
+	width: 100%;
 }
 .post {
 	font-size: 1.2em;
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
+	margin: auto;
 }
 blockquote {
 	margin: 2em 2em 2em 0em;
@@ -169,16 +167,11 @@ a:hover {
 	line-height: 1em;
 	text-align: left;
 }
-.nbsp {
-	padding: 1em;
-}
-code {
-	font-family: "Courier", monospace;
-}
-.image-header {
+.divider {
 	display: block;
-	width: 100%;
-	margin: 20px 0 20px 0;
+	position: relative;
+	padding: 3px 0px 0px 0px;
+	background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%);
 }
 .image-large {
 	display: block;
@@ -214,7 +207,7 @@ code {
 	border-top: #FE6000 1px solid;
 	border-bottom: #FE6000 1px solid;
 	/* Width, font-size, line-height, and word-spacing in @media screen */
-	}
+}
 footer {
 	text-align: center;
 	padding: 0 0 2em 0;
@@ -222,11 +215,6 @@ footer {
 .copy {
 	font-size: .8em;
 	font-weight: 200;
-	padding: 0;
-}
-.darkmode {
-	font-size: 1.3em;
-	font-weight: 400;
 	padding: 0;
 }
 #fourohfour {
@@ -239,7 +227,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		width: 500px;
+		max-width: 80%;
 	}
 	#tagline {
 		font-size: 1.2em;
@@ -247,9 +235,21 @@ footer {
 		padding: 0px 0px 80px 0px;
 	}
 	main {
-		max-width: 600px;
 		margin-right: auto;
 		margin-left: auto;
+	}
+	.title {
+		text-align: left;
+		width: 680px;
+		max-width: 94%;
+	}
+	.hero {
+		width: 680px;
+		max-width: 100%;
+	}
+	.post {
+		width: 600px;
+		max-width: 94%;
 	}
 	.image-large {
 		width: 85%;
@@ -285,7 +285,7 @@ footer {
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
 	#logo {
-		width: 95%;
+		width: 100%;
 	}
 	#tagline {
 		font-size: 1em;
@@ -293,8 +293,18 @@ footer {
 		padding: 0px 5px 80px 5px;
 	}
 	main {
-		max-width: 100%;
-		padding: 0 5px 0 5px;
+		margin-right: auto;
+		margin-left: auto;
+	}
+	.title {
+		text-align: left;
+		max-width: 98%;
+	}
+	.hero {
+		max-width: 100%;		
+	}
+	.post {
+		max-width: 98%;
 	}
 	.image-large {
 		width: 100%;
@@ -312,18 +322,19 @@ footer {
 		font-weight: 100;
 		line-height: 1em;
 		word-spacing: 100%;
-		width: 113%;
+		margin-bottom: 20px;
+		width: 100%;
 	}
 	.float-left {
 		float: left;
 		text-align: left;
-		margin: 5px 20px 5px -25px;
+		margin: 0;
 		padding: 12px 0 12px 0;
 	}
 	.float-right {
-		float: right;
+		float: left;
 		text-align: left;
-		margin: 5px -25px 5px 20px;
+		margin: 0;
 		padding: 12px 0 12px 0;
 	}
 }

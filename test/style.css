@@ -176,13 +176,6 @@ a:hover {
 	line-height: 1em;
 	text-align: left;
 }
-.nbsp {
-	padding: 1em;
-}
-.image-header {
-	display: block;
-	width: 100%;
-}
 .image-large {
 	display: block;
 	margin-left: auto;
@@ -295,7 +288,7 @@ footer {
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
 	#logo {
-		width: 98%;
+		width: 100%;
 	}
 	#tagline {
 		font-size: 1em;

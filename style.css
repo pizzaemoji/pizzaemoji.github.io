@@ -70,8 +70,8 @@ article {
 	font-weight: 200;
 	text-align: left;
 	font-style: italic;
-	display: block;
-	padding: 20px;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 .indexdate {
 	text-decoration: none;
@@ -101,7 +101,6 @@ article {
 	font-weight: 300;
 	text-align: left;
 	font-style: italic;
-	display: block;
 	padding: 10px 0px 20px 0px;
 }
 .date {

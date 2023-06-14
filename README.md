@@ -1,6 +1,11 @@
 # pizzaemoji.github.io
+
 A basic, free, and dumb website for the domain pizzaemoji.net.
 
-TODO
+TODO:
 
-Learn Jekyll.
+Learn Swift.
+
+Go to gym.
+
+Watch the new Spider-Man movie.

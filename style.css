@@ -81,6 +81,14 @@ article {
 	font-weight: 300;
 	line-height: 1em;
 }
+.indexpost {
+	font-size: 1.2em;
+	line-height: 1.6em;
+	font-weight: 300;
+	text-align: left;
+	margin: auto;
+	padding-bottom: 40px;
+}
 .title {
 	margin: auto;
 }
@@ -242,7 +250,7 @@ footer {
 		width: 680px;
 		max-width: 100%;
 	}
-	.post {
+	.post, .indexpost {
 		width: 600px;
 		max-width: 94%;
 	}
@@ -299,7 +307,7 @@ footer {
 	.hero {
 		max-width: 100%;
 	}
-	.post {
+	.post, .indexpost {
 		max-width: 98%;
 	}
 	.image-large {

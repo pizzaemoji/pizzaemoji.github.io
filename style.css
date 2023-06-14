@@ -38,7 +38,7 @@ header {
 	padding: 0;
 	border: 0;
 	background-color: inherit;
-	/*	Width size in @media screen */
+	/*	Width in @media screen */
 }
 #byline {
 	font-size: 1.25em;
@@ -52,7 +52,12 @@ header {
 	font-family: "Courier New", monospace;
 	padding: 50px 0 100px 0;
 	margin: auto;
+	/*	Width in @media screen */
 }
+main {
+	margin-right: auto;
+	margin-left: auto;
+	}
 article {
 	margin: 0;
 }
@@ -84,16 +89,10 @@ article {
 	font-weight: 300;
 	line-height: 1em;
 }
-.indexpost {
-	font-size: 1.2em;
-	line-height: 1.6em;
-	font-weight: 300;
-	text-align: left;
-	padding-bottom: 50px;
-	margin: auto;
-}
 .title {
 	margin: auto;
+	text-align: left;
+	/*	Width in @media screen */
 }
 .headline {
 	text-decoration: none;
@@ -129,6 +128,7 @@ article {
 	display: block;
 	margin: auto;
 	width: 100%;
+	/*	Width in @media screen */
 }
 .post {
 	font-size: 1.2em;
@@ -137,6 +137,7 @@ article {
 	text-align: left;
 	padding-bottom: 50px;
 	margin: auto;
+	/* Width in @media screen */
 }
 blockquote {
 	margin: 2em 2em 2em 0em;
@@ -181,9 +182,10 @@ a:hover {
 }
 .image-large {
 	display: block;
+	padding-top: 20px;
 	margin-left: auto;
 	margin-right: auto;
-	/* Width and padding in @media screen */
+	/* Width in @media screen */
 }
 .caption {
 	text-decoration: none;
@@ -193,15 +195,17 @@ a:hover {
 	line-height: 1em;
 	font-style: italic;
 	text-align: center;
+	padding-bottom: 20px;
 	margin-left: auto;
 	margin-right: auto;	
-	/* Width and padding in @media screen */
+	/* Width in @media screen */
 }
 .image-small {
 	margin-left: auto;
 	margin-right: auto;
 	border-top: #FE6000 1px solid;
 	border-bottom: #FE6000 1px solid;
+	/* Width in @media screen */
 }
 .pullquote {
 	display: inline;
@@ -215,7 +219,17 @@ a:hover {
 	text-transform: uppercase;
 	border-top: #FE6000 1px solid;
 	border-bottom: #FE6000 1px solid;
-	/* Width, font-size, line-height, and word-spacing in @media screen */
+	/* Width in @media screen */
+}
+.float-left {
+	float: left;
+	text-align: left;
+	/* Margin and padding in @media screen */
+}
+.float-right {
+	float: right;
+	text-align: left;
+	/* Margin and padding in @media screen */
 }
 footer {
 	text-align: center;
@@ -241,12 +255,7 @@ footer {
 	#tagline {
 		width: 70%;
 	}
-	main {
-		margin-right: auto;
-		margin-left: auto;
-	}
 	.title {
-		text-align: left;
 		width: 680px;
 		max-width: 94%;
 	}
@@ -254,17 +263,15 @@ footer {
 		width: 680px;
 		max-width: 100%;
 	}
-	.post, .indexpost {
+	.post {
 		width: 600px;
 		max-width: 94%;
 	}
 	.image-large {
 		width: 85%;
-		padding-top: 25px;
 	}
 	.caption {
 		width: 85%;
-		padding-bottom: 25px;
 	}
 	.image-small {
 		width: 300px;
@@ -273,14 +280,10 @@ footer {
 		width: 50%;
 	}
 	.float-left {
-		float: left;
-		text-align: left;
 		margin: 10px 30px 10px -60px;
 		padding: 16px 0 16px 0;
 	}
 	.float-right {	
-		float: right;
-		text-align: left;
 		margin: 10px -60px 10px 30px;
 		padding: 16px 0 16px 0;
 	}
@@ -293,46 +296,34 @@ footer {
 	#tagline {
 		width: 96%;
 	}
-	main {
-		margin-right: auto;
-		margin-left: auto;
-	}
 	.title {
-		text-align: left;
 		max-width: 98%;
 	}
 	.hero {
 		max-width: 100%;
 	}
-	.post, .indexpost {
+	.post {
 		max-width: 98%;
 	}
 	.image-large {
 		width: 100%;
-		padding-top: 15px;
 	}
 	.caption {
 		width: 90%;
-		padding-bottom: 15px;
 	}
 	.image-small {
 		width: 200px;
 	}
 	.pullquote {
 		width: 100%;
-		padding-bottom: 20px;
 	}
 	.float-left {
-		float: left;
-		text-align: left;
-		margin: 0;
-		padding: 12px 10px 12px 0;
+		margin: 0 0 20px 0;
+		padding: 12px 12px 12px 0;
 	}
 	.float-right {
-		float: right;
-		text-align: left;
-		margin: 0;
-		padding: 12px 0 12px 10px;
+		margin: 0 0 20px 0;
+		padding: 12px 0 12px 12px;
 	}
 }
 /* End Exceptions */

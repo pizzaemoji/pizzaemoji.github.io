@@ -53,21 +53,11 @@ header {
 article {
 	margin: 0 0 50px 0;
 }
-.index a:link, .index a:visited {
-	text-decoration: none;
-	border-bottom: #FE6000 3px solid;
-	background-color: inherit;
-}
-.index a:hover {
-	text-decoration: none;
-	border-bottom: #FE0088 3px solid;
-	background-color: inherit;
-}
 .indexheadline {
 	text-decoration: none;
 	color: #FFF;
 	font-size: 2em;
-	line-height: 1em;
+	line-height: 1.4em;
 	font-weight: 400;
 	word-spacing: .05em;
 	text-align: left;

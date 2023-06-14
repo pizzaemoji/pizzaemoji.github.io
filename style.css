@@ -119,12 +119,12 @@ article {
 	line-height: 1em;
 	display: block;
 	position: relative;
+	padding: 0 0 30px 0;
 }
 .hero {
 	display: block;
 	margin: auto;
 	width: 100%;
-	padding: 10px;
 }
 .post {
 	font-size: 1.2em;

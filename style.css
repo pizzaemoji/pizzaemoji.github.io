@@ -53,22 +53,12 @@ header {
 article {
 	margin: 0 0 50px 0;
 }
-.home {
-	font-size: 1.2em;
-	line-height: 1.5em;
-	font-weight: 600;
-	word-spacing: .05em;
-	text-align: left;
-	display: block;
-	padding: 0;
-	margin: 0;
-}
-.home a:link, .home a:visited {
+.index a:link, .index a:visited {
 	text-decoration: none;
 	border-bottom: #FE6000 3px solid;
 	background-color: inherit;
 }
-.home a:hover {
+.index a:hover {
 	text-decoration: none;
 	border-bottom: #FE0088 3px solid;
 	background-color: inherit;
@@ -91,7 +81,7 @@ article {
 	text-align: left;
 	font-style: italic;
 	display: block;
-	padding: 0;
+	padding: 20px;
 }
 .indexdate {
 	text-decoration: none;
@@ -245,7 +235,7 @@ footer {
 		max-width: 70%;
 	}
 	#tagline {
-		width: 35%;
+		width: 60%;
 		font-size: 1.2em;
 		line-height: 1.1em;
 		padding: 0px 0px 80px 0px;

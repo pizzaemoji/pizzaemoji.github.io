@@ -89,8 +89,8 @@ article {
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
+	padding-bottom: 50px;
 	margin: auto;
-	padding-bottom: 40px;
 }
 .title {
 	margin: auto;
@@ -135,6 +135,7 @@ article {
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
+	padding-bottom: 50px;
 	margin: auto;
 }
 blockquote {

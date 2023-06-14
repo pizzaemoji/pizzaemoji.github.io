@@ -329,13 +329,13 @@ footer {
 		float: left;
 		text-align: left;
 		margin: 0;
-		padding: 12px 3px 12px 0;
+		padding: 12px 6px 12px 0;
 	}
 	.float-right {
-		float: left;
+		float: right;
 		text-align: left;
 		margin: 0;
-		padding: 12px 0 12px 3px;
+		padding: 12px 0 12px 6px;
 	}
 }
 /* End Exceptions */

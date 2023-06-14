@@ -251,12 +251,15 @@ footer {
 	.title {
 		text-align: left;
 		width: 640px;
+		max-width: 94%;
 	}
 	.hero {
-		width: 70%;	
+		width: 690px;
+		max-width: 100%;
 	}
 	.post {
 		width: 640px;
+		max-width: 94%;
 	}
 	.image-large {
 		width: 85%;

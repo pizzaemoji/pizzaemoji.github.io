@@ -124,6 +124,7 @@ article {
 	display: block;
 	margin: auto;
 	width: 100%;
+	padding: 10px;
 }
 .post {
 	font-size: 1.2em;
@@ -302,7 +303,6 @@ footer {
 	}
 	.hero {
 		max-width: 100%;
-		padding: 10px;
 	}
 	.post {
 		max-width: 98%;

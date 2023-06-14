@@ -227,7 +227,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		max-width: 80%;
+		max-width: 70%;
 	}
 	#tagline {
 		font-size: 1.2em;

@@ -109,7 +109,7 @@ article {
 	text-align: left;
 	font-style: italic;
 	display: block;
-/*	padding: 5px 0px; 10px 0; */
+	padding: 5px 0px; 20px 0;
 }
 .date {
 	color: #888;
@@ -119,11 +119,11 @@ article {
 	line-height: 1em;
 	display: block;
 	position: relative;
-/*	padding: 10px 0 0 0; */
 }
 .hero {
 	display: block;
 	margin: auto;
+	width: 100%;
 	}
 .post {
 	font-size: 1.2em;
@@ -174,8 +174,7 @@ a:hover {
 	background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%);
 }
 .image-header {
-	display: block;
-	width: 100%;
+
 }
 .image-large {
 	display: block;

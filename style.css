@@ -3,7 +3,6 @@ body {
 	font-family: "Helvetica", "Arial", sans-serif;
 	font-size: 100%;
 	margin: 0;
-	padding: 0 20px 0 20px;
 	color: #CCC;
 	background-color: #222;
 }
@@ -59,6 +58,7 @@ main {
 	margin-left: auto;
 	}
 article {
+	padding: 0 20px 0 20px;
 	margin: 0;
 }
 .indexheadline {
@@ -69,7 +69,6 @@ article {
 	font-weight: 400;
 	word-spacing: .05em;
 	text-align: left;
-	padding: 0;
 }
 .indextag {
 	text-decoration: none;
@@ -90,8 +89,9 @@ article {
 	line-height: 1em;
 }
 .title {
-	margin: auto;
 	text-align: left;
+	padding: 20px;
+	margin: auto;
 	/*	Width in @media screen */
 }
 .headline {

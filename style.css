@@ -60,8 +60,10 @@ main {
 	margin-left: auto;
 	}
 article {
+		width: 680px;
+		max-width: 96%;
 	padding-left: 10px;
-	margin: 0;
+	margin: auto;
 }
 .indexheadline {
 	text-decoration: none;
@@ -257,7 +259,7 @@ footer {
 	}
 	.title {
 		width: 680px;
-		max-width: 94%;
+		max-width: 96%;
 	}
 	.hero {
 		width: 680px;

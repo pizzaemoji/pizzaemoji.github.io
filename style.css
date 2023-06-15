@@ -64,8 +64,8 @@ article {
 .indexheadline {
 	text-decoration: none;
 	color: #FFF;
-	font-size: 1.6em;
-	line-height: 1.2em;
+	font-size: 2em;
+	line-height: 1.4em;
 	font-weight: 400;
 	word-spacing: .05em;
 	text-align: left;
@@ -73,8 +73,8 @@ article {
 }
 .indextag {
 	text-decoration: none;
-	font-size: 1.2em;
-	line-height: 1em;
+	font-size: 1.4em;
+	line-height: 1.2em;
 	font-weight: 200;
 	text-align: left;
 	font-style: italic;

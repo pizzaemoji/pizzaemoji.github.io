@@ -73,8 +73,8 @@ article {
 }
 .indextag {
 	text-decoration: none;
-	font-size: 1.4em;
-	line-height: 1.2em;
+	font-size: 1.5em;
+	line-height: 1.4em;
 	font-weight: 200;
 	text-align: left;
 	font-style: italic;
@@ -107,7 +107,7 @@ article {
 .tag {
 	text-decoration: none;
 	font-size: 2.2em;
-	line-height: 1em;
+	line-height: 1.2em;
 	font-weight: 300;
 	text-align: left;
 	font-style: italic;
@@ -250,7 +250,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		max-width: 64%;
+		max-width: 60%;
 	}
 	#tagline {
 		width: 70%;

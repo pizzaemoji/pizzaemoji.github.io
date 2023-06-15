@@ -44,7 +44,7 @@ header {
 	font-size: 1.25em;
 }
 #tagline {
-	color: #BBB;
+	color: #AAA;
 	font-size: 1.2em;
 	line-height: 1.1em;
 	font-weight: 100;
@@ -64,8 +64,8 @@ article {
 .indexheadline {
 	text-decoration: none;
 	color: #FFF;
-	font-size: 2em;
-	line-height: 1.4em;
+	font-size: 1.6em;
+	line-height: 1.2em;
 	font-weight: 400;
 	word-spacing: .05em;
 	text-align: left;
@@ -73,7 +73,7 @@ article {
 }
 .indextag {
 	text-decoration: none;
-	font-size: 1.4em;
+	font-size: 1.2em;
 	line-height: 1em;
 	font-weight: 200;
 	text-align: left;
@@ -83,7 +83,7 @@ article {
 }
 .indexdate {
 	text-decoration: none;
-	color: #888;
+	color: #AAA;
 	font-size: 1em;
 	text-align: left;
 	font-weight: 300;
@@ -97,8 +97,8 @@ article {
 .headline {
 	text-decoration: none;
 	color: #FFF;
-	font-size: 3.2em;
-	line-height: 1.1em;
+	font-size: 3em;
+	line-height: 1.2em;
 	font-weight: 600;
 	word-spacing: .05em;
 	text-align: left;
@@ -115,7 +115,7 @@ article {
 }
 .date {
 	text-decoration: none;
-	color: #888;
+	color: #AAA;
 	font-size: 1em;
 	text-align: left;
 	font-weight: 300;

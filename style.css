@@ -139,6 +139,17 @@ article {
 	position: relative;
 	padding-bottom: 30px;
 }
+datetime {
+	text-decoration: none;
+	color: #AAA;
+	font-size: 1em;
+	text-align: left;
+	font-weight: 300;
+	line-height: 1em;
+	display: block;
+	position: relative;
+	padding-bottom: 30px;
+}
 .hero {
 	display: block;
 	margin: auto;

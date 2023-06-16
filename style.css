@@ -76,8 +76,6 @@ main {
 	margin-left: auto;
 	}
 article {
-		width: 680px;
-		max-width: 96%;
 	padding-left: 10px;
 	margin: auto;
 }
@@ -309,7 +307,7 @@ footer {
 		max-width: 96%;
 	}
 	.hero {
-		width: 680px;
+		width: 700px;
 		max-width: 100%;
 	}
 	.post {

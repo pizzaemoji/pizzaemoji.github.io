@@ -2,9 +2,10 @@
 body {
 	font-family: "Helvetica", "Arial", sans-serif;
 	font-size: 100%;
-	margin: 0;
 	color: #CCC;
 	background-color: #222;
+	margin-right: auto;
+	margin-left: auto;
 }
 header, header a:link, header a:hover, header a:visited {
 	border: 0;
@@ -31,36 +32,12 @@ header, header a:link, header a:hover, header a:visited {
 	/* Apple */
 	/* background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%); */
 }
-.topstyle {
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0;
-	left: 0;
-	padding-top: 12px;
-	/* Solid orange */
-	background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%);
-	/* Orange to hot pink */
-	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
-	/* Rainbow */
-	/* background: linear-gradient(90deg, #ff0000 15%, #ff9900 30%, #ffff00 45%, #00ff00 60%, #0000ff 75%, #ff00ff 100%); */
-	/* Apple */
-	/* background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%); */
-}
-#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
-	border: 0;
-	line-height: .5;
-	text-decoration: none;
-}
 #logo {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	background-color: inherit;
 	/*	Width in @media screen */
-}
-#byline {
-	font-size: 1.25em;
 }
 #tagline {
 	color: #AAA;
@@ -74,12 +51,9 @@ header, header a:link, header a:hover, header a:visited {
 	margin: auto;
 	/*	Width in @media screen */
 }
-main {
-	margin-right: auto;
-	margin-left: auto;
-	}
 article {
-	padding-left: 10px;
+	padding-left: 5px;
+	padding-right: 5px;
 	margin: auto;
 }
 .indexheadline {
@@ -90,6 +64,25 @@ article {
 	font-weight: 400;
 	word-spacing: .05em;
 	text-align: left;
+}
+.index1 {
+	text-decoration: none;
+	color: #FFF;
+	font-size: 1.8em;
+	line-height: 1.4em;
+	font-weight: 400;
+	word-spacing: .05em;
+	text-align: left;
+}
+.index2 {
+	text-decoration: none;
+	font-size: 1.5em;
+	line-height: 1.4em;
+	font-weight: 200;
+	text-align: left;
+	font-style: italic;
+	padding-top: 20px;
+	padding-bottom: 20px;
 }
 .indextag {
 	text-decoration: none;
@@ -115,24 +108,6 @@ article {
 	margin: auto;
 	/*	Width in @media screen */
 }
-.headline {
-	text-decoration: none;
-	color: #FFF;
-	font-size: 3em;
-	line-height: 1.2em;
-	font-weight: 600;
-	word-spacing: .05em;
-	text-align: left;
-}
-.tag {
-	text-decoration: none;
-	font-size: 2.2em;
-	line-height: 1.2em;
-	font-weight: 300;
-	text-align: left;
-	font-style: italic;
-	padding: 10px 0px 20px 0px;
-}
 h1 {
 	text-decoration: none;
 	color: #FFF;
@@ -155,16 +130,13 @@ h2 {
 	margin: 0;
 	padding: 10px 0px 20px 0px;
 }
-.date {
+h3 {
 	text-decoration: none;
-	color: #AAA;
-	font-size: 1em;
-	text-align: left;
-	font-weight: 300;
-	line-height: 1em;
 	display: block;
-	position: relative;
-	padding-bottom: 30px;
+	font-size: 1.3em;
+	font-weight: 600;
+	line-height: 1em;
+	text-align: left;
 }
 time {
 	text-decoration: none;
@@ -215,14 +187,6 @@ a:hover {
 	text-decoration: none;
 	color: #FFF;
 	border-color: #222;
-}
-h3 {
-	text-decoration: none;
-	display: block;
-	font-size: 1.3em;
-	font-weight: 600;
-	line-height: 1em;
-	text-align: left;
 }
 .divider {
 	display: block;
@@ -377,3 +341,57 @@ footer {
 	}
 }
 /* End Exceptions */
+
+#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
+	border: 0;
+	line-height: .5;
+	text-decoration: none;
+}
+#byline {
+	font-size: 1.25em;
+}
+.topstyle {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	padding-top: 12px;
+	/* Solid orange */
+	background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%);
+	/* Orange to hot pink */
+	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
+	/* Rainbow */
+	/* background: linear-gradient(90deg, #ff0000 15%, #ff9900 30%, #ffff00 45%, #00ff00 60%, #0000ff 75%, #ff00ff 100%); */
+	/* Apple */
+	/* background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%); */
+}
+.headline {
+	text-decoration: none;
+	color: #FFF;
+	font-size: 3em;
+	line-height: 1.2em;
+	font-weight: 600;
+	word-spacing: .05em;
+	text-align: left;
+}
+.tag {
+	text-decoration: none;
+	font-size: 2.2em;
+	line-height: 1.2em;
+	font-weight: 300;
+	text-align: left;
+	font-style: italic;
+	padding: 10px 0px 20px 0px;
+}
+.date {
+	text-decoration: none;
+	color: #AAA;
+	font-size: 1em;
+	text-align: left;
+	font-weight: 300;
+	line-height: 1em;
+	display: block;
+	position: relative;
+	padding-bottom: 30px;
+}

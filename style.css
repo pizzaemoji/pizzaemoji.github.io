@@ -299,13 +299,13 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		max-width: 60%;
+		max-width: 64%;
 	}
 	#tagline {
 		width: 70%;
 	}
 	.title {
-		width: 680px;
+		width: 700px;
 		max-width: 96%;
 	}
 	.hero {

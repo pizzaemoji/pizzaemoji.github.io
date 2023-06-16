@@ -8,6 +8,7 @@ body {
 }
 header, header a:link, header a:hover, header a:visited {
 	border: 0;
+	font-size: 1.25em;
 	line-height: .5;
 	text-align: center;
 	text-decoration: none;

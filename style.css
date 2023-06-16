@@ -8,6 +8,8 @@ body {
 	margin-left: auto;
 }
 header {
+	margin-right: auto;
+	margin-left: auto;
 	padding-top: 100px;
 	padding-bottom: 100px;
 }

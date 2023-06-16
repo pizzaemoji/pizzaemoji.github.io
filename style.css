@@ -8,10 +8,9 @@ body {
 	margin-left: auto;
 }
 header {
-	margin-right: auto;
-	margin-left: auto;
-	padding-top: 100px;
-	padding-bottom: 100px;
+	line-height: 1.5em;
+	padding: 100px 0 100px 0;
+	text-align: center;
 }
 #topstyle {
 	display: block;
@@ -29,19 +28,20 @@ header {
 	/* Apple */
 	/* background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%); */
 }
+#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
+	border: 0;
+	line-height: .5;
+	text-decoration: none;
+}
 #logo {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	background-color: inherit;
-	/*	Width in @media screen */
+	/*	Width size in @media screen */
 }
 #byline {
-	text-decoration: none;
-	border: 0;
-	font-size: 1.2em;
-	line-height: .5;
-	text-align: center;
+	font-size: 1em;
 }
 #tagline {
 	color: #AAA;

@@ -106,6 +106,9 @@ article {
 	word-spacing: .05em;
 	text-align: left;
 }
+. author {
+	visibility: hidden;
+	}
 .tag {
 	text-decoration: none;
 	font-size: 2.2em;
@@ -168,7 +171,7 @@ a:hover {
 	color: #FFF;
 	border-color: #222;
 }
-.chapter {
+h3 {
 	text-decoration: none;
 	display: block;
 	font-size: 1.3em;

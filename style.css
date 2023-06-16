@@ -139,6 +139,8 @@ h1 {
 	font-weight: 600;
 	word-spacing: .05em;
 	text-align: left;
+	margin: 0;
+	padding: 0;
 }
 h2 {
 	text-decoration: none;
@@ -160,7 +162,7 @@ h2 {
 	position: relative;
 	padding-bottom: 30px;
 }
-datetime {
+time {
 	text-decoration: none;
 	color: #AAA;
 	font-size: 1em;

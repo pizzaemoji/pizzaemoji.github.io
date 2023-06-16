@@ -7,12 +7,7 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 }
-header, header a:link, header a:hover, header a:visited {
-	border: 0;
-	font-size: 1.2em;
-	line-height: .5;
-	text-align: center;
-	text-decoration: none;
+header {
 	padding-top: 100px;
 	padding-bottom: 100px;
 }
@@ -38,6 +33,13 @@ header, header a:link, header a:hover, header a:visited {
 	border: 0;
 	background-color: inherit;
 	/*	Width in @media screen */
+}
+#byline {
+	text-decoration: none;
+	border: 0;
+	font-size: 1.2em;
+	line-height: .5;
+	text-align: center;
 }
 #tagline {
 	color: #AAA;

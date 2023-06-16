@@ -12,6 +12,22 @@ header {
 	padding-bottom: 100px;
 	text-align: center;
 }
+#topstyle {
+	display: block;
+	position: absolute;
+	top: 0;
+	right: 0;
+	left: 0;
+	padding-top: 12px;
+	/* Solid orange */
+	background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%);
+	/* Orange to hot pink */
+	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
+	/* Rainbow */
+	/* background: linear-gradient(90deg, #ff0000 15%, #ff9900 30%, #ffff00 45%, #00ff00 60%, #0000ff 75%, #ff00ff 100%); */
+	/* Apple */
+	/* background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%); */
+}
 .topstyle {
 	display: block;
 	position: absolute;
@@ -156,6 +172,15 @@ datetime {
 	/*	Width in @media screen */
 }
 .post {
+	font-size: 1.2em;
+	line-height: 1.6em;
+	font-weight: 300;
+	text-align: left;
+	padding-bottom: 50px;
+	margin: auto;
+	/* Width in @media screen */
+}
+.blog {
 	font-size: 1.2em;
 	line-height: 1.6em;
 	font-weight: 300;

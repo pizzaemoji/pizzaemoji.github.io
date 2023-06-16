@@ -180,10 +180,6 @@ datetime {
 	margin: auto;
 	/* Width in @media screen */
 }
-.blog {
-		width: 680px;
-		max-width: 96%;
-}
 blockquote {
 	margin: 2em 2em 2em 0em;
 	padding: 0 0 0 1.5em;

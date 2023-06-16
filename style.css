@@ -181,13 +181,8 @@ datetime {
 	/* Width in @media screen */
 }
 .blog {
-	font-size: 1.2em;
-	line-height: 1.6em;
-	font-weight: 300;
-	text-align: left;
-	padding-bottom: 50px;
-	margin: auto;
-	/* Width in @media screen */
+		width: 680px;
+		max-width: 96%;
 }
 blockquote {
 	margin: 2em 2em 2em 0em;

@@ -119,6 +119,15 @@ article {
 	font-style: italic;
 /*	padding: 10px 0px 20px 0px; */
 }
+.description {
+	text-decoration: none;
+	font-size: 2.2em;
+	line-height: 1.2em;
+	font-weight: 300;
+	text-align: left;
+	font-style: italic;
+/*	padding: 10px 0px 20px 0px; */
+}
 .date {
 	text-decoration: none;
 	color: #AAA;

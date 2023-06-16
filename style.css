@@ -110,17 +110,16 @@ h2 {
 	font-weight: 300;
 	text-align: left;
 	font-style: italic;
-	padding: 0;
-	margin: 0;
 	padding: 10px 0px 20px 0px;
+	margin: 0;
 }
 h3 {
 	text-decoration: none;
-	display: block;
 	font-size: 1.3em;
-	font-weight: 600;
 	line-height: 1em;
+	font-weight: 600;
 	text-align: left;
+	margin: 0;
 }
 time {
 	text-decoration: none;
@@ -132,10 +131,10 @@ time {
 .hero {
 	display: block;
 	margin: auto;
-	width: 100%;
 	/*	Width in @media screen */
 }
 .post {
+	text-decoration: none;
 	font-size: 1.2em;
 	line-height: 1.6em;
 	font-weight: 300;

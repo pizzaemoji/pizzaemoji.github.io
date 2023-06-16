@@ -59,6 +59,12 @@ article {
 	padding-right: 5px;
 	margin: auto;
 }
+.title {
+	text-align: left;
+	padding-bottom: 30px;
+	margin: auto;
+	/*	Width in @media screen */
+}
 .index1 {
 	text-decoration: none;
 	color: #FFF;
@@ -77,20 +83,6 @@ article {
 	font-style: italic;
 	padding-top: 20px;
 	padding-bottom: 20px;
-}
-.indexdate {
-	text-decoration: none;
-	color: #AAA;
-	font-size: 1em;
-	text-align: left;
-	font-weight: 300;
-	line-height: 1em;
-}
-.title {
-	text-align: left;
-	padding-bottom: 30px;
-	margin: auto;
-	/*	Width in @media screen */
 }
 h1 {
 	text-decoration: none;
@@ -231,13 +223,10 @@ a:hover {
 	/* Margin and padding in @media screen */
 }
 footer {
-	text-align: center;
-	padding: 0 0 2em 0;
-}
-.copy {
 	font-size: .8em;
 	font-weight: 200;
-	padding: 0;
+	text-align: center;
+	padding: 0 0 2em 0;
 }
 #fourohfour {
 	font-size: 2em;
@@ -249,7 +238,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		max-width: 64%;
+		width: 64%;
 	}
 	#tagline {
 		width: 70%;

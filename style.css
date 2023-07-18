@@ -18,8 +18,10 @@ header {
 	right: 0;
 	left: 0;
 	padding-top: 12px;
+	/* Neon orange */	
+	background: linear-gradient(90deg, #FF772B 50%, #fe6000 100%);
 	/* Solid orange */
-	background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%);
+	/* background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%); */
 	/* Orange to hot pink */
 	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
 	/* Rainbow */
@@ -142,7 +144,7 @@ time {
 blockquote {
 	margin: 2em 2em 2em 0em;
 	padding: 0 0 0 1.5em;
-	border-left: #FE6000 3px solid;
+	border-left: #FF772B 3px solid;
 }
 a {
 	text-decoration: none;
@@ -170,7 +172,7 @@ a:hover {
 	display: block;
 	position: relative;
 	padding: 3px 0px 0px 0px;
-	background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%);
+	background: linear-gradient(90deg, #FF772B 15%, #ff0000 60%, #fe0088 100%);
 }
 .image-large {
 	display: block;
@@ -195,22 +197,22 @@ a:hover {
 .image-small {
 	margin-left: auto;
 	margin-right: auto;
-	border-top: #FE6000 1px solid;
-	border-bottom: #FE6000 1px solid;
+	border-top: #FF772B 1px solid;
+	border-bottom: #FF772B 1px solid;
 	/* Width in @media screen */
 }
 .pullquote {
 	display: inline;
 	text-decoration: none;
-	color: #FE6000;
+	color: #FF772B;
 	font-size: 1.25em;
 	font-weight: 100;
 	line-height: 1.2em;
 	font-style: italic;
 	word-spacing: 125%;
 	text-transform: uppercase;
-	border-top: #FE6000 1px solid;
-	border-bottom: #FE6000 1px solid;
+	border-top: #FF772B 1px solid;
+	border-bottom: #FF772B 1px solid;
 	/* Width in @media screen */
 }
 .float-left {

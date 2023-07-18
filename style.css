@@ -19,7 +19,7 @@ header {
 	left: 0;
 	padding-top: 12px;
 	/* Neon orange */	
-	background: linear-gradient(90deg, #FF772B 50%, #fe6000 100%);
+	background: linear-gradient(90deg, #FF772B 50%, #FF772B 100%);
 	/* Solid orange */
 	/* background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%); */
 	/* Orange to hot pink */

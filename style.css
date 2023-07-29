@@ -3,7 +3,7 @@ body {
 	font-family: "Helvetica", "Arial", sans-serif;
 	font-size: 100%;
 	color: #CCC;
-	background-color: #252733;
+	background-color: #252550;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -166,7 +166,7 @@ a:visited {
 a:hover {
 	text-decoration: none;
 	color: #FFF;
-	border-color: #252733;
+	border-color: #252550;
 }
 .divider {
 	display: block;

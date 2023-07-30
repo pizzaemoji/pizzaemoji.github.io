@@ -15,24 +15,6 @@ header {
 	padding: 100px 0 100px 0;
 	text-align: center;
 }
-	#topstyle {
-	display: block;
-	position: absolute;
-	top: 0;
-	right: 0; 
-	left: 0;
-	padding-top: 12px;
-	/* Neon orange */	
-	/* background: linear-gradient(90deg, #FF772B 50%, #FF772B 100%); */
-	/* Solid orange */
-	/* background: linear-gradient(90deg, #fe6000 50%, #fe6000 100%); */
-	/* Orange to hot pink */
-	/* background: linear-gradient(90deg, #fe6000 15%, #ff0000 60%, #fe0088 100%); */
-	/* Rainbow */
-	/* background: linear-gradient(90deg, #ff0000 15%, #ff9900 30%, #ffff00 45%, #00ff00 60%, #0000ff 75%, #ff00ff 100%); */
-	/* Apple */
-	/* background: linear-gradient(90deg, #00ff00 15%, #ffff00 30%, #ff9900 45%, #ff0000 60%, #ff00ff 75%, #0000ff 100%); */
-}
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
 	color: #EEEEEE;

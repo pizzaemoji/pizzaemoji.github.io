@@ -2,8 +2,8 @@
 body {
 	font-family: "Helvetica", "Arial", sans-serif;
 	font-size: 100%;
-	color: #CCC;
-	background-color: #252550;
+	color: #DDDDFF;
+	background-color: #222233;
 	margin-right: auto;
 	margin-left: auto;
 }
@@ -31,6 +31,8 @@ header {
 }
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
+	color: #EEEEEE;
+	font-size: 1.15em;
 	line-height: .5;
 	text-decoration: none;
 }
@@ -42,10 +44,9 @@ header {
 	/*	Width size in @media screen */
 }
 #byline {
-	font-size: 1.25em;
 }
 #tagline {
-	color: #AAA;
+	color: #BBBBEE;
 	font-size: 1.2em;
 	line-height: 1.1em;
 	font-weight: 100;
@@ -69,7 +70,7 @@ article {
 }
 .index1 {
 	text-decoration: none;
-	color: #FFF;
+	color: #FFFFFF;
 	font-size: 1.8em;
 	line-height: 1.4em;
 	font-weight: 400;
@@ -88,7 +89,7 @@ article {
 }
 h1 {
 	text-decoration: none;
-	color: #FFF;
+	color: #FFFFFF;
 	font-size: 3.2em;
 	line-height: 1.1em;
 	font-weight: 600;
@@ -151,22 +152,22 @@ a {
 }
 a:link {
 	text-decoration: none;
-	color: #FFF;
+	color: #FFFFFF;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
 }
 a:visited {
 	text-decoration: none;
-	color: #FFF;
+	color: #FFFFFF;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
 }
 a:hover {
 	text-decoration: none;
-	color: #FFF;
-	border-color: #252550;
+	color: #FFFFFF;
+	border-color: #222233;
 }
 .divider {
 	display: block;

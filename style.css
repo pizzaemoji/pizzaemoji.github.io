@@ -119,7 +119,7 @@ time {
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
-	padding-bottom: 5em;
+	padding-bottom: 3em;
 	margin: auto;
 	/* Width in @media screen */
 }
@@ -208,7 +208,7 @@ a:hover {
 	/* Margin and padding in @media screen */
 }
 footer {
-	font-size: .8em;
+	font-size: .5em;
 	font-weight: 200;
 	text-align: center;
 	padding-bottom: 2em;
@@ -226,7 +226,7 @@ footer {
 		width: 50%;
 	}
 	.title {
-		width: 65%;
+		width: 50%;
 		max-width: 95%;
 	}
 	.indextitle {
@@ -234,7 +234,7 @@ footer {
 		max-width: 95%;
 	}
 	.hero {
-		width: 65%;
+		width: 60%;
 		max-width: 100%;
 	}
 	.post {
@@ -265,7 +265,7 @@ footer {
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
 	#logo {
-		width: 100%;
+		max-width: 100%;
 	}
 	.title {
 		max-width: 98%;

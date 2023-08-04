@@ -229,7 +229,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		width: 64%;
+		width: 40%;
 	}
 	#tagline {
 		width: 70%;

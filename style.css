@@ -18,7 +18,7 @@ header {
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
 	color: #EEEEEE;
-	font-size: 1.15em;
+	font-size: 1.099em;
 	line-height: .5;
 	text-decoration: none;
 }
@@ -229,7 +229,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		width: 40%;
+		width: 44%;
 	}
 	#tagline {
 		width: 70%;

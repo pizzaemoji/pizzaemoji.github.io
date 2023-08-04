@@ -223,22 +223,22 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		width: 44%;
+		width: 50%;
 	}
 	.title {
-		width: 700px;
-		max-width: 98%;
+		width: 65%;
+		max-width: 95%;
 	}
 	.indextitle {
-		width: 600px;
+		width: 50%;
 		max-width: 95%;
 	}
 	.hero {
-		width: 700px;
+		width: 65%;
 		max-width: 100%;
 	}
 	.post {
-		width: 600px;
+		width: 50%;
 		max-width: 95%;
 	}
 	.image-large {

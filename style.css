@@ -81,13 +81,13 @@ h1 {
 }
 h2 {
 	text-decoration: none;
-	font-size: 2em;
+	font-size: 2.2em;
 	line-height: 1em;
 	font-weight: 300;
 	text-align: left;
 	font-style: italic;
-	padding-top: .5em;
-	padding-bottom: .5em;
+	padding-top: .7em;
+	padding-bottom: .7em;
 	margin: 0;
 }
 h3 {
@@ -104,7 +104,7 @@ time {
 	text-decoration: none;
 	font-size: 1em;
 	line-height: 1em;
-	font-weight: 300;
+	font-weight: 100;
 	text-align: left;
 }
 .hero {

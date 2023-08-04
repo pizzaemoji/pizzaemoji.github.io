@@ -31,24 +31,18 @@ header {
 }
 #byline {
 }
-#tagline {
-	color: #BBBBEE;
-	font-size: 1.2em;
-	line-height: 1.1em;
-	font-weight: 100;
-	text-align: center;
-	font-family: "Courier New", monospace;
-	padding-top: 50px;
-	padding-bottom: 100px;
-	margin: auto;
-	/*	Width in @media screen */
-}
 article {
 	padding-left: 5px;
 	padding-right: 5px;
 	margin: auto;
 }
 .title {
+	text-align: left;
+	padding-bottom: 30px;
+	margin: auto;
+	/*	Width in @media screen */
+}
+.indextitle {
 	text-align: left;
 	padding-bottom: 30px;
 	margin: auto;
@@ -231,12 +225,13 @@ footer {
 	#logo {
 		width: 44%;
 	}
-	#tagline {
-		width: 70%;
-	}
 	.title {
 		width: 700px;
-		max-width: 96%;
+		max-width: 98%;
+	}
+	.indextitle {
+		width: 600px;
+		max-width: 95%;
 	}
 	.hero {
 		width: 700px;
@@ -244,7 +239,7 @@ footer {
 	}
 	.post {
 		width: 600px;
-		max-width: 94%;
+		max-width: 95%;
 	}
 	.image-large {
 		width: 85%;
@@ -272,10 +267,10 @@ footer {
 	#logo {
 		width: 100%;
 	}
-	#tagline {
-		width: 96%;
-	}
 	.title {
+		max-width: 98%;
+	}
+	.indextitle {
 		max-width: 98%;
 	}
 	.hero {

@@ -233,7 +233,7 @@ footer {
 		width: 50%;
 		max-width: 95%;
 	}
-	.h1 {
+	h1 {
 		font-size: 3em;
 	}
 	.hero {
@@ -276,8 +276,8 @@ footer {
 	.indextitle {
 		max-width: 98%;
 	}
-	.h1 {
-		font-size: 2em;
+	h1 {
+		font-size: 2.2em;
 	}
 	.hero {
 		max-width: 100%;

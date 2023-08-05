@@ -27,7 +27,7 @@ header {
 	padding: 0;
 	border: 0;
 	background-color: inherit;
-	/*	Width size in @media screen */
+	/*	width size in @media screen */
 }
 #byline {
 }
@@ -40,13 +40,13 @@ article {
 	text-align: left;
 	padding-bottom: 30px;
 	margin: auto;
-	/*	Width in @media screen */
+	/*	width in @media screen */
 }
 .indextitle {
 	text-align: left;
 	padding-bottom: 30px;
 	margin: auto;
-	/*	Width in @media screen */
+	/*	width in @media screen */
 }
 .index1 {
 	text-decoration: none;
@@ -71,7 +71,7 @@ article {
 h1 {
 	text-decoration: none;
 	color: #FFFFFF;
-	/* font-size: in @media screen */
+	/* font-size in @media screen */
 	line-height: 1.1em;
 	font-weight: 600;
 	word-spacing: .05em;
@@ -111,7 +111,7 @@ time {
 	display: block;
 	padding-bottom: 1em;
 	margin: auto;
-	/*	Width in @media screen */
+	/*	width in @media screen */
 }
 .post {
 	text-decoration: none;
@@ -121,7 +121,7 @@ time {
 	text-align: left;
 	padding-bottom: 3em;
 	margin: auto;
-	/* Width in @media screen */
+	/* width in @media screen */
 }
 blockquote {
 	margin: 2em 2em 2em 0em;
@@ -161,7 +161,7 @@ a:hover {
 	padding-top: 1em;
 	margin-left: auto;
 	margin-right: auto;
-	/* Width in @media screen */
+	/* width in @media screen */
 }
 .caption {
 	text-decoration: none;
@@ -174,14 +174,14 @@ a:hover {
 	padding-bottom: 1em;
 	margin-left: auto;
 	margin-right: auto;	
-	/* Width in @media screen */
+	/* width in @media screen */
 }
 .image-small {
 	margin-left: auto;
 	margin-right: auto;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	/* Width in @media screen */
+	/* width in @media screen */
 }
 .pullquote {
 	display: inline;
@@ -195,17 +195,17 @@ a:hover {
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	/* Width in @media screen */
+	/* width in @media screen */
 }
 .float-left {
 	float: left;
 	text-align: left;
-	/* Margin and padding in @media screen */
+	/* margin and padding in @media screen */
 }
 .float-right {
 	float: right;
 	text-align: left;
-	/* Margin and padding in @media screen */
+	/* margin and padding in @media screen */
 }
 footer {
 	font-size: .5em;
@@ -219,7 +219,6 @@ footer {
 	text-align: center;
 	font-weight: 300;
 }
-/* End orange button toggle */
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {

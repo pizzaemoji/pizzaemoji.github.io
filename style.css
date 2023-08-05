@@ -71,7 +71,7 @@ article {
 h1 {
 	text-decoration: none;
 	color: #FFFFFF;
-	font-size: 2em;
+	/* font-size: in @media screen */
 	line-height: 1.1em;
 	font-weight: 600;
 	word-spacing: .05em;
@@ -92,7 +92,7 @@ h2 {
 }
 h3 {
 	text-decoration: none;
-	font-size: 1.3em;
+	font-size: 1.25em;
 	line-height: 1em;
 	font-weight: 600;
 	text-align: left;
@@ -233,6 +233,9 @@ footer {
 		width: 50%;
 		max-width: 95%;
 	}
+	.h1 {
+		font-size: 3em;
+	}
 	.hero {
 		width: 60%;
 		max-width: 100%;
@@ -272,6 +275,9 @@ footer {
 	}
 	.indextitle {
 		max-width: 98%;
+	}
+	.h1 {
+		font-size: 2em;
 	}
 	.hero {
 		max-width: 100%;

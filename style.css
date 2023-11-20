@@ -123,6 +123,17 @@ time {
 	margin: auto;
 	/* width in @media screen */
 }
+.definition {
+	text-decoration: none;
+	color: #AAAAAA;
+	font-size: 1em;
+	line-height: 1.2em;
+	font-weight: 100;
+	text-align: left;
+	padding-bottom: 3em;
+	margin: auto;
+	/* width in @media screen */
+}
 blockquote {
 	margin: 2em 2em 2em 0em;
 	padding: 0 0 0 1.5em;
@@ -222,7 +233,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		width: 50%;
+		width: 33%;
 	}
 	.title {
 		width: 50%;
@@ -242,6 +253,10 @@ footer {
 	.post {
 		width: 50%;
 		max-width: 95%;
+	}
+	.definition {
+		width: 50%;
+		max-width: 95%;	
 	}
 	.image-large {
 		width: 85%;
@@ -283,6 +298,9 @@ footer {
 	}
 	.post {
 		max-width: 90%;
+	}
+	.definition {
+		max-width: 90%;		
 	}
 	.image-large {
 		width: 100%;

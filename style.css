@@ -92,6 +92,7 @@ time {
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
+	padding: 4em;
 	margin: auto;
 	/* width in @media screen */
 }
@@ -198,7 +199,6 @@ footer {
 	font-size: .8em;
 	font-weight: 200;
 	text-align: center;
-	padding-top: 3em;
 	padding-bottom: 3em;
 }
 #fourohfour {

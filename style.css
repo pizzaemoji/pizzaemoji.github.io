@@ -257,13 +257,13 @@ footer {
 		max-width: 98%;
 	}
 	.hero {
-		max-width: 100%;
+		width: 100%;
 	}
 	.post {
-		max-width: 90%;
+		width: 90%;
 	}
 	.linkpage {
-		max-width: 80%;		
+		width: 80%;		
 	}
 	.image-large {
 		width: 100%;

@@ -119,6 +119,11 @@ blockquote {
 	padding: 0 0 0 1.5em;
 	border-left: #FF772B 3px solid;
 }
+hr {
+	height: 3px;
+	border-width: 0px;
+	background-color: #3F3F4E;
+}
 a {
 	text-decoration: none;
 }

@@ -108,7 +108,7 @@ time {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: 20%;
+	width: fit-content;
 }
 blockquote {
 	margin: 2em 2em 2em 0em;

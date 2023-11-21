@@ -102,10 +102,12 @@ time {
 	line-height: 1.2em;
 	font-weight: 100;
 	text-align: center;
-	padding-bottom: 3em;
 	margin: auto;
 	border: 2px solid #373747;
-	border-radius: 25px;
+	border-radius: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 	/* width in @media screen */
 	
 	/*

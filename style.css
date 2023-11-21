@@ -263,10 +263,10 @@ footer {
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
 	#logo {
-		max-width: 100%;
+		width: 100%;
 	}
 	.title {
-		max-width: 98%;
+		width: 98%;
 	}
 	.hero {
 		width: 100%;

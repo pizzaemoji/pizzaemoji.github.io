@@ -111,6 +111,10 @@ time {
 	align-items: center;
 	/* width in @media screen */
 }
+.spacer {
+	text-decoration: none;
+	padding: 4em;
+}
 blockquote {
 	margin: 2em 2em 2em 0em;
 	padding: 0 0 0 1.5em;

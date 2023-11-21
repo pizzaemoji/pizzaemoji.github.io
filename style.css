@@ -123,6 +123,7 @@ hr {
 	height: 3px;
 	border-width: 0px;
 	background-color: #3F3F4E;
+	/* width in @media screen */
 }
 a {
 	text-decoration: none;
@@ -235,6 +236,9 @@ footer {
 	.linkpage {
 		width: 25%;
 	}
+	hr {
+		width: 40%;
+	{
 	.image-large {
 		width: 85%;
 	}
@@ -273,6 +277,9 @@ footer {
 	.linkpage {
 		width: 80%;		
 	}
+	hr {
+		width: 40%;
+	{
 	.image-large {
 		width: 100%;
 	}

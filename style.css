@@ -108,7 +108,7 @@ time {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	width: fit-content;
+	/* width in @media screen */
 }
 blockquote {
 	margin: 2em 2em 2em 0em;
@@ -224,6 +224,9 @@ footer {
 		width: 50%;
 		max-width: 95%;
 	}
+	.linkpage {
+		width: 25%;
+	}
 	.image-large {
 		width: 85%;
 	}
@@ -260,7 +263,7 @@ footer {
 		max-width: 90%;
 	}
 	.linkpage {
-		max-width: 90%;		
+		max-width: 80%;		
 	}
 	.image-large {
 		width: 100%;

@@ -246,7 +246,6 @@ footer {
 	}
 	.titleindex {
 		width: 50%;
-		max-width: 95%;
 	}
 	.titleblog {
 		width: 50%;
@@ -255,10 +254,10 @@ footer {
 		font-size: 3em;
 	}
 	.h1index {
-		font-size: 3em;
+		font-size: 2em;
 	}
 	.h1blog {
-		font-size: 3em;
+		font-size: 2em;
 	}
 	.hero {
 		width: 60%;

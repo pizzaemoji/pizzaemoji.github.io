@@ -123,10 +123,9 @@ time {
 	margin: auto;
 	/* width in @media screen */
 }
-.definition {
+.linkpage {
 	text-decoration: none;
-	color: #AAAAAA;
-	font-size: 1em;
+	font-size: 1.3em;
 	line-height: 1.2em;
 	font-weight: 100;
 	text-align: left;
@@ -254,7 +253,7 @@ footer {
 		width: 50%;
 		max-width: 95%;
 	}
-	.definition {
+	.linkpage {
 		width: 50%;
 		max-width: 95%;	
 	}
@@ -299,7 +298,7 @@ footer {
 	.post {
 		max-width: 90%;
 	}
-	.definition {
+	.linkpage {
 		max-width: 90%;		
 	}
 	.image-large {

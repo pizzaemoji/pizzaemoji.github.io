@@ -50,7 +50,6 @@ h1 {
 	font-weight: 600;
 	word-spacing: .05em;
 	text-align: left;
-	padding-bottom: .7;
 	margin: 0;
 }
 h2 {
@@ -60,6 +59,7 @@ h2 {
 	font-weight: 100;
 	text-align: left;
 	font-style: italic;
+	padding-top: .7em;
 	padding-bottom: .7em;
 	margin: 0;
 }

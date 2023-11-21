@@ -104,7 +104,11 @@ time {
 	text-align: center;
 	padding-bottom: 3em;
 	margin: auto;
+	border: 2px solid #343444;
+	border-radius: 25px;
 	/* width in @media screen */
+	
+	/*
 	appearance: none;
 	background-color: none;
 	border-radius: 24px;
@@ -117,6 +121,7 @@ time {
 	padding: 2px 24px;
 	position: relative;
 	text-align: center;
+	*/
 }
 blockquote {
 	margin: 2em 2em 2em 0em;

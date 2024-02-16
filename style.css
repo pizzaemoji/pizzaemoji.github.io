@@ -13,7 +13,7 @@ body {
 .pizzaemoji {
 	border: 0;
 	margin: 0;
-	padding: 100px 0 100px 0;
+	padding-top: 50%;
 	text-align: center;
 	text-decoration: none;
 }
@@ -55,7 +55,7 @@ a:hover {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	#logo {
-		width: 33%;
+		width: 50%;
 	}
 }
 /* Mobile Exceptions */

@@ -7,7 +7,6 @@ body {
 	color: #DDDDDD;
 	background-color: #333343;
 }
-
 .pizzaemoji {
 	display: flex;
 	justify-content: center;
@@ -15,11 +14,9 @@ body {
 	height: 500px;
 	background-color: inherit;
 }
-
 img {
 	/*	width size in @media screen */
 }
-
 a {
 	text-decoration: none;
 }
@@ -42,13 +39,6 @@ a:hover {
 	color: #FFFFFF;
 	border-color: #333343;
 }
-
-#fourohfour {
-	font-size: 2em;
-	line-height: 2em;
-	text-align: center;
-	font-weight: 300;
-}
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	img {
@@ -58,7 +48,7 @@ a:hover {
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
 	img {
-		width: 70%;
+		width: 88%;
 	}
 }
 /* End Exceptions */

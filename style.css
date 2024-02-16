@@ -42,7 +42,7 @@ a:hover {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	img {
-		width: 80%;
+		width: 60%;
 	}
 }
 /* Mobile Exceptions */

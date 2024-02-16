@@ -9,28 +9,18 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 }
-.home {
+
+.pizzaemoji {
+	border: 0;
+	margin: 0;
 	padding: 100px 0 100px 0;
 	text-align: center;
-}
-#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
-	border: 0;
-	color: #EEEEEE;
-	font-size: 1.099em;
-	line-height: .5;
 	text-decoration: none;
-}
-#logo {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background-color: inherit;
-	/*	width size in @media screen */
 }
 
-.spacer {
-	text-decoration: none;
-	padding: 1em;
+#logo {
+	background-color: inherit;
+	/*	width size in @media screen */
 }
 
 a {

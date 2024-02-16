@@ -6,20 +6,16 @@ body {
 	font-size: 100%;
 	color: #DDDDDD;
 	background-color: #333343;
-	margin-right: auto;
-	margin-left: auto;
 }
 
 .pizzaemoji {
-	border: 0;
-	margin: 50%;
-	padding: 0;
-	text-align: center;
-	text-decoration: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+	background-color: inherit;
 }
 
 #logo {
-	background-color: inherit;
 	/*	width size in @media screen */
 }
 

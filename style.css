@@ -9,9 +9,10 @@ body {
 }
 
 .pizzaemoji {
-  display: flex;
-  justify-content: center;
-  height: 500px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 500px;
 	background-color: inherit;
 }
 

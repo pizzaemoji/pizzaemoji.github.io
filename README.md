@@ -1,3 +1,3 @@
 # pizzaemoji.github.io
 
-This is my blog, pizzaemoji.net. 🍕
+This is pizzaemoji.net. 🍕

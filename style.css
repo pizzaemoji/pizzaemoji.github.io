@@ -42,13 +42,13 @@ a:hover {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	img {
-		width: 70%;
+		width: 80%;
 	}
 }
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
 	img {
-		width: 88%;
+		width: 80%;
 	}
 }
 /* End Exceptions */

@@ -11,7 +11,6 @@ body {
 .pizzaemoji {
   display: flex;
   justify-content: center;
-  align-items: center;
   height: 500px;
 	background-color: inherit;
 }
@@ -51,13 +50,13 @@ a:hover {
 }
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
-	#logo {
+	img {
 		width: 70%;
 	}
 }
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
-	#logo {
+	img {
 		width: 100%;
 	}
 }

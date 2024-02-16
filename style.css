@@ -22,6 +22,12 @@ header {
 	line-height: .5;
 	text-decoration: none;
 }
+#logo-home {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
+	/*	width size in @media screen */
 #logo {
 	margin: 0;
 	padding: 0;
@@ -218,6 +224,8 @@ footer {
 }
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
+	#logo-home {
+		width: 50%;
 	#logo {
 		width: 33%;
 	}
@@ -262,6 +270,8 @@ footer {
 }
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
+	#logo-home {
+		width: 100%;
 	#logo {
 		width: 100%;
 	}

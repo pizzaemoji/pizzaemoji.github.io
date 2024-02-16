@@ -227,6 +227,7 @@ footer {
 @media only screen and (min-width: 500px) {
 	#logo-home {
 		width: 50%;
+	}
 	#logo {
 		width: 33%;
 	}
@@ -273,6 +274,7 @@ footer {
 @media only screen and (max-width: 499px) {
 	#logo-home {
 		width: 100%;
+	}
 	#logo {
 		width: 100%;
 	}

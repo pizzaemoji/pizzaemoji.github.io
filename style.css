@@ -16,7 +16,7 @@ body {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	img {
-		width: 75%;
+		width: 60%;
 	}
 }
 /* Mobile Exceptions */

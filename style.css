@@ -1,11 +1,7 @@
 /* Pizza Emoji Cascading Style Sheet */ 
-html {
-	height: 100%;
-	width: 100%;
-}
 body {
 	font-family: "Helvetica", "Arial", sans-serif;
-	color: #DDDDDD;
+	color: #000;
 	background-color: #333343;
 }
 .pizzaemoji {
@@ -15,6 +11,15 @@ body {
 	height: 444px;
 	background-color: inherit;
 }
-img {
-	width: 50%;
+/* Full Screen Exceptions */
+@media only screen and (min-width: 500px) {
+	img {
+		width: 50%;
+	}
+}
+/* Mobile Exceptions */
+@media only screen and (max-width: 499px) {
+	img {
+		width: 80%;
+	}
 }

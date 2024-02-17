@@ -3,7 +3,6 @@ html {
 }
 body {
 	font-family: "Helvetica", "Arial", sans-serif;
-	font-size: 100%;
 	color: #DDDDDD;
 	background-color: #333343;
 }
@@ -14,13 +13,10 @@ body {
 	height: 500px;
 	background-color: inherit;
 }
-img {
-	/*	width size in @media screen */
-}
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
 	img {
-		width: 60%;
+		width: 75%;
 	}
 }
 /* Mobile Exceptions */

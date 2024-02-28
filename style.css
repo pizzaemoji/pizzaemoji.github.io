@@ -1,14 +1,13 @@
-/* Pizza Emoji Cascading Style Sheet */ 
+/* Pizza Emoji Cascading Style Sheet 333343 */ 
 body {
-	font-family: "Helvetica", "Arial", sans-serif;
-	color: #000;
-	background-color: #333343;
+	background-color: #1E1E1E;
 }
 .pizzaemoji {
+	width: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 444px;
+	height: 616px;
 	background-color: inherit;
 }
 /* Full Screen Exceptions */
@@ -20,6 +19,6 @@ body {
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
 	img {
-		width: 80%;
+		width: 50%;
 	}
 }

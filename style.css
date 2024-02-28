@@ -6,17 +6,22 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 500px;
 	background-color: inherit;
 }
 /* Full Screen Exceptions */
 @media only screen and (min-width: 500px) {
+	.pizzaemoji {
+		height: 800px;
+	}
 	img {
 		width: 50%;
 	}
 }
 /* Mobile Exceptions */
 @media only screen and (max-width: 499px) {
+	.pizzaemoji {
+		height: 600px;
+	}
 	img {
 		width: 80%;
 	}

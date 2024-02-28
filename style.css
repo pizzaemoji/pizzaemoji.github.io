@@ -3,10 +3,12 @@ body {
 	background-color: #1E1E1E;
 }
 .pizzaemoji {
-	width: 50%;
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 400px;
+	height: 616px;
 	background-color: inherit;
+}
+img {
+	width: 50%;
 }

@@ -6,9 +6,18 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	height: 616px;
+	height: 500px;
 	background-color: inherit;
 }
-img {
-	width: 50%;
+/* Full Screen Exceptions */
+@media only screen and (min-width: 500px) {
+	img {
+		width: 50%;
+	}
+}
+/* Mobile Exceptions */
+@media only screen and (max-width: 499px) {
+	img {
+		width: 80%;
+	}
 }

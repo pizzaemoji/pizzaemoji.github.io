@@ -8,7 +8,7 @@ body {
 	align-items: center;
 	background-color: inherit;
 }
-/* Full Screen Exceptions */
+/* Desktop */
 @media only screen and (min-width: 500px) {
 	.pizzaemoji {
 		height: 800px;
@@ -17,10 +17,10 @@ body {
 		width: 50%;
 	}
 }
-/* Mobile Exceptions */
+/* Mobile */
 @media only screen and (max-width: 499px) {
 	.pizzaemoji {
-		height: 600px;
+		height: 500px;
 	}
 	img {
 		width: 80%;

@@ -142,7 +142,7 @@ a:hover {
 }
 .image-large {
 	display: block;
-	margin-top: 40px auto 0 auto; /* centers, space between image and P above */
+	margin: 40px auto 0 auto; /* centers, space between image and P above */
 	width: 90%;
 }
 .caption {
@@ -240,10 +240,10 @@ footer {
 		font-size: .8em;
 	}
 	.float-left {
-		margin: 10px 40px 30px -10px; /* position of element */
+		margin: 10px 5px 30px -10px; /* position of element */
 	}
 	.float-right {
-		margin: 10px -10px 30px 40px; /* position of element */
+		margin: 10px -10px 30px 5px; /* position of element */
 	}
 }
 /* End Exceptions */

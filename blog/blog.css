@@ -3,6 +3,7 @@ html {
 	font-size: 1em;
 	font: -apple-system-body;
 	font-family: "Helvetica", "Verdana", "Tahoma", sans-serif;
+	web-kit-appearance: none; 
 }
 body {
 	color: #DDDDDD;

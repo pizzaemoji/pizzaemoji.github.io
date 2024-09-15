@@ -145,7 +145,9 @@ a:hover {
 	padding-top: 1em;
 	margin-left: auto;
 	margin-right: auto;
-	width: 95%;
+	border-left: #FF772B 1px solid;
+	border-right: #FF772B 1px solid;
+	width: 100%;
 }
 .caption {
 	text-decoration: none;
@@ -235,7 +237,7 @@ footer {
 		width: 90%;
 	}
 	.image-small {
-		width: 250px;
+		width: 300px;
 	}
 	.pullquote {
 		width: 100%;

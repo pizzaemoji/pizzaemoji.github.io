@@ -1,9 +1,10 @@
 /* Pizza Emoji Cascading Style Sheet */ 
 html {
+	font-size: 1em;
+	font: -apple-system-body;
+	font-family: "Helvetica", "Verdana", "Tahoma", sans-serif;
 }
 body {
-	font-family: "Helvetica", "Arial", sans-serif;
-	font-size: 100%;
 	color: #DDDDDD;
 	background-color: #222222;
 	margin-right: auto;

@@ -167,14 +167,6 @@ a:hover {
 	border-bottom: #FF772B 1px solid;
 	/* width in @media */
 }
-.image-float-left {
-	float: left;
-	/* margin in @media */
-}
-.image-float-right {
-	float: right;
-	/* margin in @media */
-}
 .pullquote {
 	display: inline;
 	text-decoration: none;
@@ -188,13 +180,17 @@ a:hover {
 	border-bottom: #FF772B 1px solid;
 	/* width and font-size in @media */
 }
-.quote-float-left {
+.float-left {
 	float: left;
-	/* margin and padding in @media */
+	text-align: left;
+	padding: 15px 0 15px 0; /* space between element and line */
+	/* margin in @media */
 }
-.quote-float-right {
+.float-right {
 	float: right;
-	/* margin and padding in @media */
+	text-align: right;
+	padding: 15px 0 15px 0; /* space between element and line */
+	/* margin in @media */
 }
 footer {
 	font-size: 1em;
@@ -219,27 +215,15 @@ footer {
 	.image-small {
 		width: 300px;
 	}
-	.image-float-left {
-		padding: 15px 0 15px 0; /* space between image and line */
-		margin: 10px 30px 10px -60px; /* position of image */
-	}
-	.image-float-right {
-		padding: 15px 0 15px 0; /* space between image and line */
-		margin: 10px -60px 10px 30px; /* position of image */
-	}
 	.pullquote {
-		font-size: 1.2em;
 		width: 60%;
+		font-size: 1.2em;
 	}
-	.quote-float-left {
-		text-align: left;
-		padding: 15px 0 15px 0; /* space between text and line */
-		margin: 10px 30px 10px -60px; /* position of quote */
+	.float-left {
+		margin: 10px 30px 10px -60px; /* position of element */
 	}
-	.quote-float-right {
-		text-align: right;
-		padding: 15px 0 15px 0; /* space between text and line */
-		margin: 10px -60px 10px 30px; /* position of quote */
+	.float-right {
+		margin: 10px -60px 10px 30px; /* position of element */
 	}
 }
 /* Mobile Exceptions */
@@ -253,27 +237,15 @@ footer {
 	.image-small {
 		width: 250px;
 	}
-	.image-float-left {
-		padding: 15px 0 15px 0; /* space between image and line */
-		margin: 10px 40px 40px 0px; /* position of image */
-	}
-	.image-float-right {
-		padding: 15px 0 15px 0; /* space between image and line */
-		margin: 10px 0px 40px 40px; /* position of image */
-	}
 	.pullquote {
-		font-size: .8em;
 		width: 100%;
+		font-size: .8em;
 	}
-	.quote-float-left {
-		text-align: left;
-		padding: 15px 0 15px 0; /* space between text and line */
-		margin: 10px 40px 40px 0px; /* position of image */
+	.float-left {
+		margin: 10px 40px 40px 0; /* position of element */
 	}
-	.quote-float-right {
-		text-align: right;
-		padding: 15px 0px 15px 0px; /* space between text and line */
-		margin: 10px 0px 40px 40px; /* position of image */
+	.float-right {
+		margin: 10px 0 40px 40px; /* position of element */
 	}
 }
 /* End Exceptions */

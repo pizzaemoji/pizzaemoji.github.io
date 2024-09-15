@@ -90,12 +90,11 @@ time {
 }
 .post {
 	text-decoration: none;
-	font-size: 1.5em;
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
 	margin: auto;
-	/* width in @media */
+	/* width and font-size in @media */
 }
 .spacer {
 	text-decoration: none;
@@ -209,6 +208,7 @@ footer {
 	}
 	.post {
 		width: 70%;
+		font-size: 1.5em;
 	}
 	.image-small {
 		width: 300px;
@@ -231,6 +231,7 @@ footer {
 	}
 	.post {
 		width: 90%;
+		font-size: 1.2em;
 	}
 	.image-small {
 		width: 200px;

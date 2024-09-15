@@ -205,7 +205,7 @@ footer {
 		font-size: 2em;
 	}
 	#logo {
-		width: 33%;
+		width: 20%;
 	}
 	.title {
 		width: 50%;
@@ -216,7 +216,7 @@ footer {
 		max-width: 100%;
 	}
 	.post {
-		width: 50%;
+		width: 40%;
 		max-width: 95%;
 	}
 	.linkpage {

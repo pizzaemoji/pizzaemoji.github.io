@@ -202,7 +202,7 @@ footer {
 	font-weight: 300;
 }
 /* Desktop Exceptions */
-@media screen (min-width: 3000px) {
+@media screen (min-width: 1000px) {
 	#logo {
 		width: 40%;
 	}

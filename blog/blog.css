@@ -8,6 +8,8 @@ body {
 	background-color: #222222;
 	margin-right: auto;
 	margin-left: auto;
+			max-width: 2000px;
+
 }
 header {
 	padding: 100px 0 100px 0;
@@ -202,9 +204,10 @@ footer {
 }
 /* Desktop Exceptions */
 @media (min-width: 1000px) {
-
+	body {
+	}
 	#logo {
-		width: 40%;
+		width: 50%;
 	}
 	.title {
 		width: 50%;

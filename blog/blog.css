@@ -248,7 +248,7 @@ footer {
 /* Tablet Exceptions */
 @media (min-width: 1000px) and (max-width: 2999px) {
 	#logo {
-		width: 50%;
+		width: 100%;
 	}
 	.title {
 		width: 50%;
@@ -292,7 +292,7 @@ footer {
 /* Mobile Exceptions */
 @media (max-width: 999px) {
 	#logo {
-		width: 10%;
+		width: 80%;
 	}
 	.title {
 		width: 98%;

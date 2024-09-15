@@ -8,23 +8,14 @@ body {
     justify-content: center;
     height: 600px;
 }
-img {
-
-	}
 /* Desktop */
-@media only screen and (min-width: 500px) {
-	.pizzaemoji {
-
-	}
+@media (min-width: 1000px) {
 	img {
-		width: 50%;
+		width: 40%;
 	}
 }
 /* Mobile */
-@media only screen and (max-width: 499px) {
-	.pizzaemoji {
-
-	}
+@media (max-width: 999px) {
 	img {
 		width: 80%;
 	}

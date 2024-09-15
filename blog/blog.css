@@ -202,7 +202,7 @@ footer {
 	font-weight: 300;
 }
 /* Desktop Exceptions */
-@media (min-width: 3000px) {
+@media screen (min-width: 3000px) {
 	#logo {
 		width: 25%;
 	}
@@ -246,7 +246,7 @@ footer {
 	}
 }
 /* Tablet Exceptions */
-@media (max-width: 2999px) {
+@media screen and (min-width:1000px) and (max-width: 2999px) {
 	#logo {
 		width: 100%;
 	}
@@ -290,7 +290,7 @@ footer {
 	}
 }
 /* Mobile Exceptions */
-@media (max-width: 999px) {
+@media screen and (max-width: 999px) {
 	#logo {
 		width: 80%;
 	}

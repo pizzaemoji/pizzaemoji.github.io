@@ -192,12 +192,11 @@ a:hover {
 }
 .quote-float-left {
 	float: left;
-	/* margin in @media */
+	/* margin and padding in @media */
 }
 .quote-float-right {
 	float: right;
-	padding: 15px 50px 15px 50px; /* space between text and line */
-	/* margin in @media */
+	/* margin and padding in @media */
 }
 footer {
 	font-size: 1em;
@@ -266,17 +265,17 @@ footer {
 	}
 	.pullquote {
 		font-size: .8em;
-		width: 110%;
+		width: 100%;
 	}
 	.quote-float-left {
-		text-align: center;
+		text-align: justify;
 		padding: 15px 10px 15px 10px; /* space between text and line */
-		margin: 0 0 20px -10px; /* position of quote */
+		margin: 0 0 20px 0; /* position of quote */
 	}
 	.quote-float-right {
-		text-align: center;
-		padding: 15px 5px 15px 5px; /* space between text and line */
-		margin: 0 -10px 20px 0; /* position of quote */
+		text-align: justify;
+		padding: 15px 10px 15px 10px; /* space between text and line */
+		margin: 0 0 20px 0; /* position of quote */
 	}
 }
 /* End Exceptions */

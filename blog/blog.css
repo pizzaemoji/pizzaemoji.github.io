@@ -29,6 +29,7 @@ header {
 	/*	width size in @media screen */
 }
 #byline {
+	font-size: 1em;
 }
 article {
 	padding-left: 5px;

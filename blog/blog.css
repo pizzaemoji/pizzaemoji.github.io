@@ -171,7 +171,7 @@ a:hover {
 	display: inline;
 	text-decoration: none;
 	color: #FF772B;
-	font-size: 1.2em;
+/*	font-size: 1.2em; */
 	font-weight: 100;
 	line-height: 1.2em;
 	font-style: italic;
@@ -183,11 +183,13 @@ a:hover {
 }
 .float-left {
 	float: left;
-	/* margin and padding in @media screen */
+	padding: 15px 0 15px 0; /* space between image and line */
+	/* margin in @media */
 }
 .float-right {
 	float: right;
-	/* margin and padding in @media screen */
+	padding: 15px 0 15px 0; /* space between image and line */
+	/* margin in @media */
 }
 footer {
 	font-size: 1em;
@@ -213,15 +215,14 @@ footer {
 		width: 300px;
 	}
 	.pullquote {
+	font-size: 1.2em;
 		width: 60%;
 	}
 	.float-left {
 		margin: 10px 30px 10px -60px; /* position of image */
-		padding: 16px 0 16px 0; /* space between image and line */
 	}
 	.float-right {	
 		margin: 10px -60px 10px 30px; /* position of image */
-		padding: 16px 0 16px 0; /* space between image and line */
 	}
 }
 /* Mobile Exceptions */
@@ -236,15 +237,14 @@ footer {
 		width: 250px;
 	}
 	.pullquote {
-		width: 110%;
+	font-size: .8em;
+		width: 100%;
 	}
 	.float-left {
-		margin: 0 10px 10px -40px; /* position of image */
-		padding: 14px 0px 14px 0; /* space between image and line */
+		margin: 10px 10px 10px -20px; /* position of image */
 	}
 	.float-right {
-		margin: 0 -40px 10px 10px; /* position of image */
-		padding: 14px 0 14px 0px; /* space between image and line */
+		margin: 10px -20px 10px 10px; /* position of image */
 	}
 }
 /* End Exceptions */

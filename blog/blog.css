@@ -142,7 +142,7 @@ a:hover {
 }
 .image-large {
 	display: block;
-	margin: 10px 0 0 0; /* provides space between image and paragraph above */
+	margin: 40px 0 0 0; /* provides space between image and paragraph above */
 	padding: 0 25px 0 25px; /* space between element and lines */
 	border-left: #FF772B 1px solid;
 	border-right: #FF772B 1px solid;

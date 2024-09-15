@@ -270,12 +270,12 @@ footer {
 	.quote-float-left {
 		text-align: justify;
 		padding: 15px 10px 15px 10px; /* space between text and line */
-		margin: 0 0 20px 0; /* position of quote */
+		margin: 10px 10px 10px -20px; /* position of image */
 	}
 	.quote-float-right {
 		text-align: justify;
 		padding: 15px 10px 15px 10px; /* space between text and line */
-		margin: 0 0 20px 0; /* position of quote */
+		margin: 10px -20px 10px 10px; /* position of image */
 	}
 }
 /* End Exceptions */

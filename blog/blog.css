@@ -171,7 +171,7 @@ a:hover {
 	display: inline;
 	text-decoration: none;
 	color: #FF772B;
-	font-size: 1.25em;
+	font-size: 1.2em;
 	font-weight: 100;
 	line-height: 1.2em;
 	font-style: italic;
@@ -183,12 +183,10 @@ a:hover {
 }
 .float-left {
 	float: left;
-/*	text-align: left; */
 	/* margin and padding in @media screen */
 }
 .float-right {
 	float: right;
-/*	text-align: left; */
 	/* margin and padding in @media screen */
 }
 footer {
@@ -241,17 +239,17 @@ footer {
 		width: 90%;
 	}
 	.image-small {
-		width: 150px;
+		width: 250px;
 	}
 	.pullquote {
-		width: 100%;
+		width: 120%;
 	}
 	.float-left {
-		margin: 0 10px 20px -10px;
+		margin: 0 10px 10px -20px;
 		padding: 12px 0px 12px 0;
 	}
 	.float-right {
-		margin: 0 -10px 20px 10px;
+		margin: 0 -20px 10px 10px;
 		padding: 12px 0 12px 0px;
 	}
 }

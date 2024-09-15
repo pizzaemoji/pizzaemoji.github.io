@@ -3,14 +3,11 @@ body {
 	background-color: #222222; /*Be sure to also update theme-color on index! */
 }
 .pizzaemoji {
-/*	justify-content: center;
-	align-items: center; */
-	background-color: inherit;
-			height: 100%;
+  display: flex;
+  justify-content: center;
 }
 img {
-	display: block;
-	align-content: center;
+
 	}
 /* Desktop */
 @media only screen and (min-width: 500px) {

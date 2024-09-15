@@ -41,7 +41,7 @@ article {
 	text-align: left;
 	padding-bottom: 30px;
 	margin: auto;
-	/*	width in @media screen */
+	width: 90%;
 }
 h1 {
 	text-decoration: none;
@@ -86,7 +86,7 @@ time {
 	display: block;
 	padding-bottom: 1em;
 	margin: auto;
-	/*	width in @media screen */
+	width: 100%;
 }
 .post {
 	text-decoration: none;
@@ -110,7 +110,7 @@ hr {
 	height: 3px;
 	border-width: 0px;
 	background-color: #3F3F4F;
-	/* width in @media screen */
+	width: 40%;
 }
 a {
 	text-decoration: none;
@@ -158,7 +158,7 @@ a:hover {
 	padding-bottom: 1em;
 	margin-left: auto;
 	margin-right: auto;	
-	/* width in @media screen */
+	width: 85%;
 }
 .image-small {
 	margin-left: auto;
@@ -208,32 +208,17 @@ footer {
 	#logo {
 		width: 60%;
 	}
-	.title {
-		width: 90%;
-		max-width: 95%;	
-	}
-	.hero {
-		width: 100%;
-		max-width: 100%;
-	}
 	.post {
 		width: 60%;
-		max-width: 90%;
-	}
-	hr {
-		width: 40%;
 	}
 	.image-large {
-		width: 85%;
-	}
-	.caption {
-		width: 85%;
+		width: 90%;
 	}
 	.image-small {
 		width: 300px;
 	}
 	.pullquote {
-		width: 50%;
+		width: 60%;
 	}
 	.float-left {
 		margin: 10px 30px 10px -60px;
@@ -249,26 +234,14 @@ footer {
 	#logo {
 		width: 80%;
 	}
-	.title {
-		width: 98%;
-	}
-	.hero {
-		width: 100%;
-	}
 	.post {
 		width: 90%;
 	}
-	hr {
-		width: 40%;
-	}
 	.image-large {
-		width: 100%;
-	}
-	.caption {
 		width: 90%;
 	}
 	.image-small {
-		width: 200px;
+		width: 150px;
 	}
 	.pullquote {
 		width: 100%;

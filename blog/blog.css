@@ -27,7 +27,7 @@ header {
 	padding: 0;
 	border: 0;
 	background-color: inherit;
-	/*	width size in @media screen */
+	/*	width size in @media */
 }
 #byline {
 	font-size: 1.2em;
@@ -95,7 +95,7 @@ time {
 	font-weight: 300;
 	text-align: left;
 	margin: auto;
-	/* width in @media screen */
+	/* width in @media */
 }
 .spacer {
 	text-decoration: none;
@@ -165,7 +165,7 @@ a:hover {
 	margin-right: auto;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	/* width in @media screen */
+	/* width in @media */
 }
 .image-float-left {
 	float: left;
@@ -181,7 +181,6 @@ a:hover {
 	display: inline;
 	text-decoration: none;
 	color: #FF772B;
-/*	font-size: 1.2em; */
 	font-weight: 100;
 	line-height: 1.2em;
 	font-style: italic;
@@ -189,16 +188,16 @@ a:hover {
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	/* width in @media screen */
+	/* width and font-size in @media */
 }
 .quote-float-left {
 	float: left;
-	padding: 15px 0 15px 0; /* space between text and line */
+	padding: 15px 50px 15px 50px; /* space between text and line */
 	/* margin in @media */
 }
 .quote-float-right {
 	float: right;
-	padding: 15px 0 15px 0; /* space between text and line */
+	padding: 15px 50px 15px 50px; /* space between text and line */
 	/* margin in @media */
 }
 footer {

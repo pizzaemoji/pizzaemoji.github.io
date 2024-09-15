@@ -1,13 +1,12 @@
 /* Pizza Emoji Cascading Style Sheet */ 
 body {
-	height: 100%;
 	background-color: #222222; /*Be sure to also update theme-color on index! */
 }
 .pizzaemoji {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100%;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 img {
 

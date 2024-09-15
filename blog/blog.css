@@ -257,11 +257,11 @@ footer {
 	}
 	.image-float-left {
 		padding: 15px 0 15px 0; /* space between image and line */
-		margin: 10px 10px 10px -20px; /* position of image */
+		margin: 10px 20px 20px -20px; /* position of image */
 	}
 	.image-float-right {
 		padding: 15px 0 15px 0; /* space between image and line */
-		margin: 10px -20px 10px 10px; /* position of image */
+		margin: 10px -20px 20px 20px; /* position of image */
 	}
 	.pullquote {
 		font-size: .8em;
@@ -269,13 +269,13 @@ footer {
 	}
 	.quote-float-left {
 		text-align: justify;
-		padding: 15px 10px 15px 10px; /* space between text and line */
-		margin: 10px 10px 10px -20px; /* position of image */
+		padding: 15px 0px 15px 0px; /* space between text and line */
+		margin: 10px 20px 20px -20px; /* position of image */
 	}
 	.quote-float-right {
 		text-align: justify;
-		padding: 15px 10px 15px 10px; /* space between text and line */
-		margin: 10px -20px 10px 10px; /* position of image */
+		padding: 15px 0px 15px 0px; /* space between text and line */
+		margin: 10px -20px 20px 20px; /* position of image */
 	}
 }
 /* End Exceptions */

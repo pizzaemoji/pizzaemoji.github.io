@@ -169,12 +169,10 @@ a:hover {
 }
 .image-float-left {
 	float: left;
-	padding: 15px 0 15px 0; /* space between image and line */
 	/* margin in @media */
 }
 .image-float-right {
 	float: right;
-	padding: 15px 0 15px 0; /* space between image and line */
 	/* margin in @media */
 }
 .pullquote {
@@ -256,7 +254,7 @@ footer {
 		width: 250px;
 	}
 	.image-float-left {
-		padding: 15px 0 15px 0; /* space between image and line */
+		padding: 15px 100% 15px 100%; /* space between image and line */
 		margin: 10px 20px 20px -20px; /* position of image */
 	}
 	.image-float-right {

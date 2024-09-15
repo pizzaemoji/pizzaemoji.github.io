@@ -158,6 +158,7 @@ a:hover {
 	width: 85%;
 }
 .image-small {
+	display: inline;
 	margin-left: auto;
 	margin-right: auto;
 	border-top: #FF772B 1px solid;

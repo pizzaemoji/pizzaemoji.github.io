@@ -183,12 +183,12 @@ a:hover {
 }
 .float-left {
 	float: left;
-	text-align: left;
+/*	text-align: left; */
 	/* margin and padding in @media screen */
 }
 .float-right {
 	float: right;
-	text-align: left;
+/*	text-align: left; */
 	/* margin and padding in @media screen */
 }
 footer {
@@ -247,12 +247,12 @@ footer {
 		width: 100%;
 	}
 	.float-left {
-		margin: 0 0 16px 0;
-		padding: 12px 12px 12px 0;
+		margin: 0 0 20px 0;
+		padding: 12px 0px 12px 0;
 	}
 	.float-right {
-		margin: 0 0 16px 0;
-		padding: 12px 0 12px 12px;
+		margin: 0 0 20px 0;
+		padding: 12px 0 12px 0px;
 	}
 }
 /* End Exceptions */

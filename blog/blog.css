@@ -202,7 +202,7 @@ footer {
 	text-align: center;
 	font-weight: 300;
 }
-/* Desktop Exceptions */
+/* Desktop */
 @media (min-width: 1000px) {
 	#logo {
 		width: 60%;
@@ -225,7 +225,7 @@ footer {
 		margin: 10px -60px 10px 30px; /* position of element */
 	}
 }
-/* Mobile Exceptions */
+/* Mobile */
 @media (max-width: 999px) {
 	#logo {
 		width: 80%;
@@ -243,10 +243,10 @@ footer {
 		margin-bottom: 20px;
 	}
 	.float-left {
-		margin: 10px 10px 30px -10px; /* position of element */
+		margin: 10px 10px 10px -10px; /* position of element */
 	}
 	.float-right {
-		margin: 10px -10px 30px 10px; /* position of element */
+		margin: 10px -10px 10px 10px; /* position of element */
 	}
 }
 /* End Exceptions */

@@ -290,7 +290,7 @@ footer {
 	}
 }
 /* Mobile Exceptions */
-@media (min-width: 1px) and (max-width: 999px) {
+@media (max-width: 999px) {
 	#logo {
 		width: 80%;
 	}

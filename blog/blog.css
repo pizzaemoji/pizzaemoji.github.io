@@ -223,11 +223,11 @@ footer {
 		width: 300px;
 	}
 	.image-float-left {
-		padding: 15px 0 15px 0; /* space between text and line */
+		padding: 15px 0 15px 0; /* space between image and line */
 		margin: 10px 30px 10px -60px; /* position of image */
 	}
 	.image-float-right {
-		padding: 15px 0 15px 0; /* space between text and line */
+		padding: 15px 0 15px 0; /* space between image and line */
 		margin: 10px -60px 10px 30px; /* position of image */
 	}
 	.pullquote {
@@ -237,12 +237,12 @@ footer {
 	.quote-float-left {
 		text-align: left;
 		padding: 15px 0 15px 0; /* space between text and line */
-		margin: 10px 30px 10px -60px; /* position of image */
+		margin: 10px 30px 10px -60px; /* position of quote */
 	}
 	.quote-float-right {
 		text-align: right;
 		padding: 15px 0 15px 0; /* space between text and line */
-		margin: 10px -60px 10px 30px; /* position of image */
+		margin: 10px -60px 10px 30px; /* position of quote */
 	}
 }
 /* Mobile Exceptions */
@@ -257,26 +257,26 @@ footer {
 		width: 250px;
 	}
 	.image-float-left {
-		padding: 15px 0 15px 0; /* space between text and line */
+		padding: 15px 0 15px 0; /* space between image and line */
 		margin: 10px 10px 10px -20px; /* position of image */
 	}
 	.image-float-right {
-		padding: 15px 0 15px 0; /* space between text and line */
+		padding: 15px 0 15px 0; /* space between image and line */
 		margin: 10px -20px 10px 10px; /* position of image */
 	}
 	.pullquote {
 		font-size: .8em;
-		width: 100%;
+		width: 110%;
 	}
 	.quote-float-left {
 		text-align: center;
-		padding: 15px 50px 15px 50px; /* space between text and line */
-		margin: 0 0 10px 0; /* position of quote */
+		padding: 15px 20px 15px 20px; /* space between text and line */
+		margin: 0 0 20px 0; /* position of quote */
 	}
 	.quote-float-right {
 		text-align: center;
-		padding: 15px 50px 15px 50px; /* space between text and line */
-		margin: 0 0 10px 0; /* position of quote */
+		padding: 15px 20px 15px 20px; /* space between text and line */
+		margin: 0 0 20px 0; /* position of quote */
 	}
 }
 /* End Exceptions */

@@ -268,14 +268,14 @@ footer {
 		width: 100%;
 	}
 	.quote-float-left {
-		text-align: justify;
+		text-align: left;
 		padding: 15px 0px 15px 0px; /* space between text and line */
-		margin: 10px 20px 20px -20px; /* position of image */
+		margin: 10px 20px 40px -20px; /* position of image */
 	}
 	.quote-float-right {
-		text-align: justify;
+		text-align: right;
 		padding: 15px 0px 15px 0px; /* space between text and line */
-		margin: 10px -20px 20px 20px; /* position of image */
+		margin: 10px -20px 40px 20px; /* position of image */
 	}
 }
 /* End Exceptions */

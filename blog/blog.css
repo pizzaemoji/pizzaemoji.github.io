@@ -48,7 +48,7 @@ h1 {
 	color: #FFFFFF;
 	font-size: 3em;
 	line-height: 1.2em;
-	font-weight: bold;
+	font-weight: 900;
 	text-align: left;
 	word-spacing: .05em;
 	text-align: left;
@@ -58,7 +58,7 @@ h2 {
 	text-decoration: none;
 	font-size: 2em;
 	line-height: 1em;
-	font-weight: light;
+	font-weight: 100;
 	text-align: left;
 	font-style: italic;
 	padding-top: .7em;
@@ -67,9 +67,9 @@ h2 {
 }
 h3 {
 	text-decoration: none;
- 	font-size: 1.3em;
+ 	font-size: 1.5em;
 	line-height: 1em;
-	font-weight: normal;
+	font-weight: 600;
 	text-align: left;
 	padding-top: 1em;
 	padding-bottom: .5em;
@@ -90,7 +90,7 @@ time {
 }
 .post {
 	text-decoration: none;
-	font-size: 1em;
+	font-size: 1.5em;
 	line-height: 1.6em;
 	font-weight: 300;
 	text-align: left;
@@ -150,7 +150,7 @@ a:hover {
 .caption {
 	text-decoration: none;
 	display: block;
-/*	font-size: .8em; */
+	font-size: .8em;
 	font-weight: 300;
 	line-height: 1em;
 	font-style: italic;
@@ -171,11 +171,11 @@ a:hover {
 	display: inline;
 	text-decoration: none;
 	color: #FF772B;
-/*	font-size: 1.25em; */
+	font-size: 1.25em;
 	font-weight: 100;
 	line-height: 1.2em;
 	font-style: italic;
-	word-spacing: 125%;
+	word-spacing: 110%;
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
@@ -192,7 +192,7 @@ a:hover {
 	/* margin and padding in @media screen */
 }
 footer {
-/*	font-size: .8em; */
+	font-size: 1em;
 	font-weight: 200;
 	text-align: center;
 	padding-bottom: 1em;

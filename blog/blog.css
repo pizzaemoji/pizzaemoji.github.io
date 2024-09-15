@@ -217,11 +217,8 @@ footer {
 		max-width: 100%;
 	}
 	.post {
-		width: 40%;
-		max-width: 95%;
-	}
-	.linkpage {
-		width: 25%;
+		width: 50%;
+		max-width: 90%;
 	}
 	hr {
 		width: 40%;
@@ -236,7 +233,7 @@ footer {
 		width: 300px;
 	}
 	.pullquote {
-		width: 50%;
+		width: 60%;
 	}
 	.float-left {
 		margin: 10px 30px 10px -60px;
@@ -260,9 +257,6 @@ footer {
 	}
 	.post {
 		width: 90%;
-	}
-	.linkpage {
-		width: 80%;		
 	}
 	hr {
 		width: 40%;

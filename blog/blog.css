@@ -201,7 +201,7 @@ footer {
 	font-weight: 300;
 }
 /* Full Screen Exceptions */
-@media only screen and (min-width: 500px) {
+@media only screen and (min-width: 800px) {
 	body {
 		font-size: 2em;
 	}
@@ -248,7 +248,7 @@ footer {
 	}
 }
 /* Mobile Exceptions */
-@media only screen and (max-width: 499px) {
+@media only screen and (max-width: 799px) {
 	#logo {
 		width: 80%;
 	}

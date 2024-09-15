@@ -1,5 +1,6 @@
 /* Pizza Emoji Cascading Style Sheet */ 
 body {
+	height: 100%;
 	background-color: #222222; /*Be sure to also update theme-color on index! */
 }
 .pizzaemoji {

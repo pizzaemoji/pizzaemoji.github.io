@@ -204,51 +204,7 @@ footer {
 /* Desktop Exceptions */
 @media screen (min-width: 3000px) {
 	#logo {
-		width: 25%;
-	}
-	.title {
-		width: 50%;
-		max-width: 95%;	
-	}
-	.hero {
-		width: 60%;
-		max-width: 100%;
-	}
-	.post {
 		width: 40%;
-		max-width: 95%;
-	}
-	.linkpage {
-		width: 25%;
-	}
-	hr {
-		width: 40%;
-	}
-	.image-large {
-		width: 85%;
-	}
-	.caption {
-		width: 85%;
-	}
-	.image-small {
-		width: 300px;
-	}
-	.pullquote {
-		width: 50%;
-	}
-	.float-left {
-		margin: 10px 30px 10px -60px;
-		padding: 16px 0 16px 0;
-	}
-	.float-right {	
-		margin: 10px -60px 10px 30px;
-		padding: 16px 0 16px 0;
-	}
-}
-/* Tablet Exceptions */
-@media screen and (min-width:1000px) and (max-width: 2999px) {
-	#logo {
-		width: 100%;
 	}
 	.title {
 		width: 50%;

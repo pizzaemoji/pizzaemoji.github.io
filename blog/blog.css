@@ -246,7 +246,7 @@ footer {
 	}
 }
 /* Tablet Exceptions */
-@media (min-width: 1000px) and (max-width: 2999px) {
+@media (max-width: 2999px) {
 	#logo {
 		width: 100%;
 	}

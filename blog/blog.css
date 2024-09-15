@@ -270,13 +270,13 @@ footer {
 	}
 	.quote-float-left {
 		text-align: center;
-		padding: 15px 20px 15px 20px; /* space between text and line */
-		margin: 0 0 20px 0; /* position of quote */
+		padding: 15px 10px 15px 10px; /* space between text and line */
+		margin: 0 0 20px -10px; /* position of quote */
 	}
 	.quote-float-right {
 		text-align: center;
-		padding: 15px 20px 15px 20px; /* space between text and line */
-		margin: 0 0 20px 0; /* position of quote */
+		padding: 15px 5px 15px 5px; /* space between text and line */
+		margin: 0 -10px 20px 0; /* position of quote */
 	}
 }
 /* End Exceptions */

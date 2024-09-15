@@ -6,12 +6,13 @@ body {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+	vertical-align: 50%;
 	background-color: inherit;
 }
 /* Desktop */
 @media only screen and (min-width: 500px) {
 	.pizzaemoji {
-		height: 800px;
+		height: 100%;
 	}
 	img {
 		width: 50%;
@@ -20,7 +21,7 @@ body {
 /* Mobile */
 @media only screen and (max-width: 499px) {
 	.pizzaemoji {
-		height: 500px;
+		height: 100%;
 	}
 	img {
 		width: 80%;

@@ -1,10 +1,9 @@
 /* Pizza Emoji Cascading Style Sheet */ 
 html {
-	font-size: 1em;
-	font: -apple-system-body;
-	font-family: "Helvetica", "Verdana", "Tahoma", sans-serif;
 }
 body {
+	font-size: 1em;
+	font-family: "Helvetica", "Verdana", "Tahoma", sans-serif;
 	color: #DDDDDD;
 	background-color: #222222;
 	margin-right: auto;
@@ -203,6 +202,7 @@ footer {
 }
 /* Desktop Exceptions */
 @media (min-width: 1000px) {
+
 	#logo {
 		width: 40%;
 	}

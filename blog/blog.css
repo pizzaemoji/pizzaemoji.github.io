@@ -142,7 +142,7 @@ a:hover {
 }
 .image-large {
 	display: block;
-	margin: 40px 0 0 0; /* provides space between image and paragraph above */
+	margin-top: 40px auto 0 auto; /* centers, space between image and P above */
 	width: 90%;
 }
 .caption {
@@ -233,17 +233,17 @@ footer {
 		width: 90%;
 	}
 	.image-small {
-		width: 300px;
+		width: 200px;
 	}
 	.pullquote {
 		width: 100%;
 		font-size: .8em;
 	}
 	.float-left {
-		margin: 10px 40px 30px 0; /* position of element */
+		margin: 10px 40px 30px -10px; /* position of element */
 	}
 	.float-right {
-		margin: 10px 0 30px 40px; /* position of element */
+		margin: 10px -10px 30px 40px; /* position of element */
 	}
 }
 /* End Exceptions */

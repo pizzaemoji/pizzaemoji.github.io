@@ -240,6 +240,7 @@ footer {
 	.pullquote {
 		width: 100%;
 		font-size: .8em;
+		margin-bottom: 20px;
 	}
 	.float-left {
 		margin: 10px 10px 30px -10px; /* position of element */

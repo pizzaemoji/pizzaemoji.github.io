@@ -22,11 +22,11 @@ header {
 	text-decoration: none;
 }
 #logo {
-	width: 80%;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	background-color: inherit;
+	/*	width size in @media screen */
 }
 #byline {
 	/* font-size: .5em; */
@@ -45,7 +45,7 @@ article {
 h1 {
 	text-decoration: none;
 	color: #FFFFFF;
-	font-size: 2.5em;
+/*	font-size: 2.5em; */
 	line-height: 1.2em;
 	font-weight: 600;
 	word-spacing: .05em;
@@ -54,7 +54,7 @@ h1 {
 }
 h2 {
 	text-decoration: none;
-	font-size: 1.8em;
+/*	font-size: 1.8em; */
 	line-height: 1em;
 	font-weight: 100;
 	text-align: left;
@@ -65,7 +65,7 @@ h2 {
 }
 h3 {
 	text-decoration: none;
-	font-size: 1.25em;
+/* 	font-size: 1.25em; */
 	line-height: 1em;
 	font-weight: 600;
 	text-align: left;
@@ -75,7 +75,7 @@ h3 {
 }
 time {
 	text-decoration: none;
-	font-size: 1em;
+/*	font-size: 1em; */
 	line-height: 1em;
 	font-weight: 100;
 	text-align: left;
@@ -147,7 +147,7 @@ a:hover {
 .caption {
 	text-decoration: none;
 	display: block;
-	font-size: .8em;
+/*	font-size: .8em; */
 	font-weight: 300;
 	line-height: 1em;
 	font-style: italic;
@@ -168,7 +168,7 @@ a:hover {
 	display: inline;
 	text-decoration: none;
 	color: #FF772B;
-	font-size: 1.25em;
+/*	font-size: 1.25em; */
 	font-weight: 100;
 	line-height: 1.2em;
 	font-style: italic;
@@ -189,7 +189,7 @@ a:hover {
 	/* margin and padding in @media screen */
 }
 footer {
-	font-size: .8em;
+/*	font-size: .8em; */
 	font-weight: 200;
 	text-align: center;
 	padding-bottom: 1em;
@@ -203,7 +203,7 @@ footer {
 /* Full Screen Exceptions */
 @media only screen and (min-width: 800px) {
 	body {
-		font-size: 2em;
+/*		font-size: 2em; */
 	}
 	#logo {
 		width: 20%;
@@ -249,7 +249,9 @@ footer {
 }
 /* Mobile Exceptions */
 @media only screen and (max-width: 799px) {
-
+	#logo {
+		width: 80%;
+	}
 	.title {
 		width: 98%;
 	}

@@ -167,6 +167,16 @@ a:hover {
 	border-bottom: #FF772B 1px solid;
 	/* width in @media screen */
 }
+.image-float-left {
+	float: left;
+	padding: 15px 0 15px 0; /* space between image and line */
+	/* margin in @media */
+}
+.image-float-right {
+	float: right;
+	padding: 15px 0 15px 0; /* space between image and line */
+	/* margin in @media */
+}
 .pullquote {
 	display: inline;
 	text-decoration: none;
@@ -181,14 +191,14 @@ a:hover {
 	border-bottom: #FF772B 1px solid;
 	/* width in @media screen */
 }
-.float-left {
+.quote-float-left {
 	float: left;
-	padding: 15px 0 15px 0; /* space between image and line */
+	padding: 15px 0 15px 0; /* space between text and line */
 	/* margin in @media */
 }
-.float-right {
+.quote-float-right {
 	float: right;
-	padding: 15px 0 15px 0; /* space between image and line */
+	padding: 15px 0 15px 0; /* space between text and line */
 	/* margin in @media */
 }
 footer {
@@ -214,14 +224,20 @@ footer {
 	.image-small {
 		width: 300px;
 	}
-	.pullquote {
-	font-size: 1.2em;
-		width: 60%;
-	}
-	.float-left {
+	.image-float-left {
 		margin: 10px 30px 10px -60px; /* position of image */
 	}
-	.float-right {	
+	.image-float-right {	
+		margin: 10px -60px 10px 30px; /* position of image */
+	}
+	.pullquote {
+		font-size: 1.2em;
+		width: 60%;
+	}
+	.quote-float-left {
+		margin: 10px 30px 10px -60px; /* position of image */
+	}
+	.quote-float-right {	
 		margin: 10px -60px 10px 30px; /* position of image */
 	}
 }
@@ -236,15 +252,21 @@ footer {
 	.image-small {
 		width: 250px;
 	}
-	.pullquote {
-	font-size: .8em;
-		width: 100%;
-	}
-	.float-left {
+	.image-float-left {
 		margin: 10px 10px 10px -20px; /* position of image */
 	}
-	.float-right {
+	.image-float-right {
 		margin: 10px -20px 10px 10px; /* position of image */
+	}
+	.pullquote {
+		font-size: .8em;
+		width: 100%;
+	}
+	.quote-float-left {
+		margin: 0 0 10px 0; /* position of quote */
+	}
+	.quote-float-right {
+		margin: 0 0 10px 0; /* position of quote */
 	}
 }
 /* End Exceptions */

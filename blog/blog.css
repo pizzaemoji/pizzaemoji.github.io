@@ -22,14 +22,14 @@ header {
 	text-decoration: none;
 }
 #logo {
+	width: 80%;
 	margin: 0;
 	padding: 0;
 	border: 0;
 	background-color: inherit;
-	/*	width size in @media screen */
 }
 #byline {
-	font-size: 1em;
+	/* font-size: .5em; */
 }
 article {
 	padding-left: 5px;
@@ -249,9 +249,7 @@ footer {
 }
 /* Mobile Exceptions */
 @media only screen and (max-width: 799px) {
-	#logo {
-		width: 80%;
-	}
+
 	.title {
 		width: 98%;
 	}

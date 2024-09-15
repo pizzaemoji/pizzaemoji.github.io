@@ -3,10 +3,10 @@ body {
 	background-color: #222222; /*Be sure to also update theme-color on index! */
 }
 .pizzaemoji {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 600px;
 }
 img {
 

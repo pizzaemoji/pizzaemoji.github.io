@@ -255,11 +255,11 @@ footer {
 	}
 	.image-float-left {
 		padding: 15px 0 15px 0; /* space between image and line */
-		margin: 10px 30px 40px 10px; /* position of image */
+		margin: 10px 40px 40px 0px; /* position of image */
 	}
 	.image-float-right {
 		padding: 15px 0 15px 0; /* space between image and line */
-		margin: 10px 10px 40px 20px; /* position of image */
+		margin: 10px 0px 40px 40px; /* position of image */
 	}
 	.pullquote {
 		font-size: .8em;
@@ -268,12 +268,12 @@ footer {
 	.quote-float-left {
 		text-align: left;
 		padding: 15px 0 15px 0; /* space between text and line */
-		margin: 10px 30px 40px 10px; /* position of image */
+		margin: 10px 40px 40px 0px; /* position of image */
 	}
 	.quote-float-right {
 		text-align: right;
 		padding: 15px 0px 15px 0px; /* space between text and line */
-		margin: 10px 10px 40px 20px; /* position of image */
+		margin: 10px 0px 40px 40px; /* position of image */
 	}
 }
 /* End Exceptions */

@@ -292,7 +292,7 @@ footer {
 /* Mobile Exceptions */
 @media (max-width: 999px) {
 	#logo {
-		width: 80%;
+		width: 10%;
 	}
 	.title {
 		width: 98%;

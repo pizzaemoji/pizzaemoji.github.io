@@ -243,10 +243,10 @@ footer {
 		font-size: .8em;
 	}
 	.float-left {
-		margin: 10px 40px 40px 0; /* position of element */
+		margin: 10px 40px 30px 0; /* position of element */
 	}
 	.float-right {
-		margin: 10px 0 40px 40px; /* position of element */
+		margin: 10px 0 30px 40px; /* position of element */
 	}
 }
 /* End Exceptions */

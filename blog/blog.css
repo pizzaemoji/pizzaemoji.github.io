@@ -145,7 +145,7 @@ a:hover {
 	padding-top: 1em;
 	margin-left: auto;
 	margin-right: auto;
-	/* width in @media screen */
+	width: 95%;
 }
 .caption {
 	text-decoration: none;
@@ -209,9 +209,6 @@ footer {
 	.post {
 		width: 60%;
 	}
-	.image-large {
-		width: 90%;
-	}
 	.image-small {
 		width: 300px;
 	}
@@ -219,12 +216,12 @@ footer {
 		width: 60%;
 	}
 	.float-left {
-		margin: 10px 30px 10px -60px;
-		padding: 16px 0 16px 0;
+		margin: 10px 30px 10px -60px; /* position of image */
+		padding: 16px 0 16px 0; /* space between image and line */
 	}
 	.float-right {	
-		margin: 10px -60px 10px 30px;
-		padding: 16px 0 16px 0;
+		margin: 10px -60px 10px 30px; /* position of image */
+		padding: 16px 0 16px 0; /* space between image and line */
 	}
 }
 /* Mobile Exceptions */
@@ -235,22 +232,19 @@ footer {
 	.post {
 		width: 90%;
 	}
-	.image-large {
-		width: 90%;
-	}
 	.image-small {
 		width: 250px;
 	}
 	.pullquote {
-		width: 120%;
+		width: 110%;
 	}
 	.float-left {
-		margin: 0 10px 10px -20px;
-		padding: 12px 0px 12px 0;
+		margin: 0 10px 10px -40px; /* position of image */
+		padding: 14px 0px 14px 0; /* space between image and line */
 	}
 	.float-right {
-		margin: 0 -20px 10px 10px;
-		padding: 12px 0 12px 0px;
+		margin: 0 -40px 10px 10px; /* position of image */
+		padding: 14px 0 14px 0px; /* space between image and line */
 	}
 }
 /* End Exceptions */

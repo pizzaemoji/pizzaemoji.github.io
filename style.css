@@ -8,10 +8,9 @@ body {
 	height: 800px;
 	}
 .links {
- 	display: inline-block;
-	margin-left: auto;
-	margin-right: auto;
-	width: 400px;
+	-webkit-align-content: center;
+	align-content: center;
+	height: 100px;
 	}
 /* Desktop */
 @media (min-width: 1000px) {
@@ -23,6 +22,9 @@ body {
 		}
 	.icon {
 		width: 40px;
+		display: block;
+		margin-left: auto;
+		margin-right: auto;
 		padding: 20px;
 		}
 	}

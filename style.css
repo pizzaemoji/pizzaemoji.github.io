@@ -3,8 +3,8 @@ body {
 	background-color: #222222; /*Be sure to also update theme-color on index! */
 }
 .pizzaemoji {
-	display: grid; 
-	align-content: center;
+	-webkit-align-content: center;
+	align-content: center; 
 }
 .links {
     

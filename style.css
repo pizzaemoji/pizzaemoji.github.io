@@ -13,7 +13,7 @@ body {
 /* Desktop */
 @media (min-width: 1000px) {
 	.pizzaemoji {
-		height: 800px;
+		height: 400px;
 		}
 	.logo {
 		width: 40%;

@@ -5,20 +5,21 @@ body {
 .pizzaemoji {
 	-webkit-align-content: center;
 	align-content: center;
-	height: 500px;
+	height: 800px;
 	}
 .links {
- 	display:block;
-	margin-left:auto;
-	margin-right:auto;
+ 	display: inline-block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 400px;
 	}
 /* Desktop */
 @media (min-width: 1000px) {
 	.logo {
 		width: 40%;
- 		display:block;
-		margin-left:auto;
-		margin-right:auto;
+ 		display: block;
+		margin-left: auto;
+		margin-right: auto;
 		}
 	.icon {
 		width: 40px;
@@ -29,5 +30,8 @@ body {
 @media (max-width: 999px) {
 	.logo {
 		width: 80%;
+ 		display: block;
+		margin-left: auto;
+		margin-right: auto;
 		}
 	}

@@ -8,6 +8,12 @@ body {
     justify-content: center;
     height: 600px;
 }
+.para {
+	color: #111111;
+	position: absolute;
+	top: 1px;
+	left: 1px;
+}
 /* Desktop */
 @media (min-width: 1000px) {
 	img {

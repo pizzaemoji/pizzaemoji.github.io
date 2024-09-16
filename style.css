@@ -1,35 +1,33 @@
 /* Pizza Emoji Cascading Style Sheet */ 
 body {
 	background-color: #222222; /*Be sure to also update theme-color on index! */
-	color: #ffffff;
-/*}
+	}
 .pizzaemoji {
 	-webkit-align-content: center;
-	align-content: center; 
-}
+	align-content: center;
+	height: 500px;
+	}
 .links {
-    
-}
-.icon {
-	width: 50px;
-	padding: 20px;
-}
-/ Desktop /
+ 	display:block;
+	margin-left:auto;
+	margin-right:auto;
+	}
+/* Desktop */
 @media (min-width: 1000px) {
 	.logo {
 		width: 40%;
+ 		display:block;
+		margin-left:auto;
+		margin-right:auto;
+		}
+	.icon {
+		width: 40px;
+		padding: 20px;
+		}
 	}
-}
-/ Mobile /
+/* Mobile */
 @media (max-width: 999px) {
 	.logo {
 		width: 80%;
+		}
 	}
-}
-
-*/
-
-.center {
-align-content: center;
-height: 500px;
-}

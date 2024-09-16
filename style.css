@@ -13,7 +13,7 @@ body {
 /* Desktop */
 @media (min-width: 1000px) {
 	.pizzaemoji {
-		height: 400px;
+		height: 500px;
 		}
 	.logo {
 		width: 40%;
@@ -26,7 +26,7 @@ body {
 /* Mobile */
 @media (max-width: 999px) {
 	.pizzaemoji {
-		height: 400px;
+		height: 500px;
 		}
 	.logo {
 		width: 80%;

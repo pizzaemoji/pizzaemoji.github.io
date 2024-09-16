@@ -8,24 +8,18 @@ body {
     justify-content: center;
     height: 600px;
 }
-.links {
-	position: flex;
-	align-items: center;
-    justify-content: center;
-    height: 100px;
-}
 .icon {
 	width: 80px;
 }
 /* Desktop */
 @media (min-width: 1000px) {
-	logo {
+	.logo {
 		width: 40%;
 	}
 }
 /* Mobile */
 @media (max-width: 999px) {
-	logo {
+	.logo {
 		width: 80%;
 	}
 }

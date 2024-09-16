@@ -6,17 +6,17 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 600px;
+    height: 300px;
 }
 .links {
     display: flex;
     align-items: center;
     justify-content: center;
-    height: 600px;
+    height: 100px;
 }
 .icon {
-	width: 20px;
-	padding: 50px;
+	width: 50px;
+	padding: 20px;
 }
 /* Desktop */
 @media (min-width: 1000px) {

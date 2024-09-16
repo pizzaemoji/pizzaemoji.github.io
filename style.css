@@ -10,6 +10,7 @@ body {
 }
 .icon {
 	width: 80px;
+	padding: 50px;
 }
 /* Desktop */
 @media (min-width: 1000px) {

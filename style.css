@@ -3,16 +3,13 @@ body {
 	background-color: #222222; /*Be sure to also update theme-color on index! */
 }
 .pizzaemoji {
-    display: flex;
+    display: block;
     align-items: center;
-    justify-content: center;
-    height: 300px;
+    padding: 400px 0 200px 0; /*this is a crutch until align-content becomes more widely supported*/
 }
 .links {
-    display: flex;
+    display: block;
     align-items: center;
-    justify-content: center;
-    height: 100px;
 }
 .icon {
 	width: 50px;

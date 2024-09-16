@@ -6,23 +6,28 @@ body {
 	-webkit-align-content: center;
 	align-content: center;
 	text-align: center;
-	height: 800px;
 	}
 .links {
 	text-align: center;
 	}
 /* Desktop */
 @media (min-width: 1000px) {
+	.pizzaemoji {
+		height: 800px;
+		}
 	.logo {
 		width: 40%;
 		}
 	.icon {
 		width: 20px;
-		padding: 10px;
+		padding: 20px;
 		}
 	}
 /* Mobile */
 @media (max-width: 999px) {
+	.pizzaemoji {
+		height: 400px;
+		}
 	.logo {
 		width: 80%;
  		display: block;
@@ -31,6 +36,6 @@ body {
 		}
 	.icon {
 		width: 20px;
-		padding: 10px;
+		padding: 20px;
 		}
 	}

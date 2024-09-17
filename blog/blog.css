@@ -146,7 +146,7 @@ sup {
 	display: block;
 	position: relative;
 	padding: 3px 0px 0px 0px;
-	background: linear-gradient(90deg, #FF772B 15%, #ff0000 60%, #fe0088 100%);
+	background: linear-gradient(90deg, #222222 10%, #FF772B 70%, #222222 100%);
 	}
 .image-large {
 	display: block;

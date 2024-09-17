@@ -132,8 +132,12 @@ a:hover {
 	color: #FFFFFF;
 	border-color: #222222;
 	}
-a.footnote {
+#footnote, #footnote a:link, #footnote a:visited, #footnote a:hover {
 	text-decoration: none;
+	font-size: .5em;
+	background: #FF772B;
+	border: #FF772B 1px dashed;
+	border-radius: 50%;
 	}
 sup {
 	text-decoration: none;
@@ -146,7 +150,7 @@ sup {
 	display: block;
 	position: relative;
 	padding: 3px 0px 0px 0px;
-	background: linear-gradient(90deg, #222222 10%, #FF772B 70%, #222222 100%);
+	background: linear-gradient(90deg, #222222 1%, #FF772B 50%, #222222 100%);
 	}
 .image-large {
 	display: block;

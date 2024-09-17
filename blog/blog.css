@@ -133,44 +133,21 @@ a:hover {
 	border-color: #222222;
 	}
 a.footnote {
-	text-decoration:none;
-	background-color: #FEF6BB;
-	padding-left: 2px;
-	padding-right: 2px;
-	margin-right: 2px;
-	-webkit-transition: all 2s ease;
-	-moz-transition: all 2s ease;
-	-o-transition: all 2s ease;
-	transition: all 2s ease;
+	text-decoration: none;
 	}
-a.footnote span {
-	z-index: -1;
-	opacity: 0;
-	position: fixed;
-	left: 15px; 
-	bottom: 20px;
-	margin-left: 0px;
-	margin-right: 18px;
-	padding:14px 20px;
-	border-radius:4px; box-shadow: 5px 5px 8px #CCC;
-	border:1px solid #DCA;
-	background-color: #FEF6BB;
-	-webkit-transition: all 2s ease;
-	-moz-transition: all 2s ease;
-	-o-transition: all 2s ease;
-	transition: all 2s ease;
+sup {
+	text-decoration: none;
+	font-size: .8em;
+	background: #FF772B;
+	border: #FF772B 1px solid;
+	border-radius: 100px;
+	opacity: 50%;
 	}
 .divider {
 	display: block;
 	position: relative;
 	padding: 3px 0px 0px 0px;
 	background: linear-gradient(90deg, #FF772B 15%, #ff0000 60%, #fe0088 100%);
-	}
-sup {
-	text-decoration: none;
-	background: #FF772B;
-	border: #FF772B 1px solid;
-	border-radius: 100px;
 	}
 .image-large {
 	display: block;

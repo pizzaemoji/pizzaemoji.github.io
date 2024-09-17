@@ -132,7 +132,7 @@ a:hover {
 	color: #FFFFFF;
 	border-color: #222222;
 	}
-#footnote, #footnote a:link, #footnote a:visited, #footnote a:hover {
+.footnote, .footnote a:link, .footnote a:visited, .footnote a:hover {
 	text-decoration: none;
 	font-size: .5em;
 	background: #FF772B;

@@ -137,11 +137,10 @@ a.footnote {
 	}
 sup {
 	text-decoration: none;
-	font-size: .8em;
+	font-size: .5em;
 	background: #FF772B;
 	border: #FF772B 1px solid;
-	border-radius: 100px;
-	opacity: 50%;
+	border-radius: 200px;
 	}
 .divider {
 	display: block;

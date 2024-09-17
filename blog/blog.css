@@ -132,11 +132,8 @@ a:hover {
 	color: #FFFFFF;
 	border-color: #222222;
 	}
-.footnote, .footnote a:link, .footnote a:visited, .footnote a:hover {
+a.footnote:link, a.footnote:visited, a.footnote:hover {
 	text-decoration: none;
-	font-size: .5em;
-	background: #FF772B;
-
 	}
 sup {
 	text-decoration: none;

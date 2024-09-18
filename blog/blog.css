@@ -130,7 +130,7 @@ a.fnlink:hover {
 	text-decoration: none;
 	border-color: #222222;
 	cursor:pointer;
-
+	}
 .footnote {
 	text-decoration: none;
 	font-size: .8em;
@@ -145,10 +145,7 @@ sup {
 	font-size: .7em;
 	font-weight: 600;
 	line-height: 0; /* removes gap above superscript number */
-/*	background: #FF772B;
-	border: #FF772B 1px solid;
-	border-radius: 100%;
-*/	}
+	}
 
 
 
@@ -158,14 +155,14 @@ sup {
 
 /* This creates the counter  */
 body {
-  counter-reset: cb_counter_var;
+  counter-reset: fn_counter_var;
 }
 
 /* This increments the counter value and defines 
 the displayed content  */
 sup::after {
-  counter-increment: cb_counter_var;
-  content: counter(cb_counter_var);
+  counter-increment: fn_counter_var;
+  content: counter(fn_counter_var);
 }
 
 

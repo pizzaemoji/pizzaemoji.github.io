@@ -107,10 +107,8 @@ blockquote {
 hr {
 	height: 3px;
 	border-width: 0px;
-	background-color: #3F3F4F;
+	background-color: #BBBBBB;
 	width: 40%;
-	padding-top: 2em;
-	padding-bottom: 2em;
 	}
 a {
 	text-decoration: none;
@@ -134,7 +132,7 @@ a:hover {
 	color: #FFFFFF;
 	border-color: #222222;
 	}
-a.footnote:link, a.footnote:visited, a.footnote:hover {
+a.fn:link, a.fn:visited, a.fn:hover {
 	text-decoration: none;
 	color: #FFFFFF;
 	border-color: #222222;
@@ -149,8 +147,11 @@ sup {
 .divider {
 	display: block;
 	position: relative;
-	padding: 3px 0px 0px 0px;
-	background: linear-gradient(90deg, #222222 1%, #FF772B 50%, #222222 100%);
+	padding-top: 2px;
+	margin-top: 2em;
+	margin-bottom: 2em;
+	background: #BBBBBB;
+/*	background: linear-gradient(90deg, #222222 1%, #FF772B 50%, #222222 100%); */
 	}
 .image-large {
 	display: block;

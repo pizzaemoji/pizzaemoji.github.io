@@ -157,6 +157,7 @@ sup {
 	position: relative;
 	margin-top: 2em;
 	margin-bottom: 2em;
+	padding: 1px;
 	background: #AAAAAA;
 /*	background: linear-gradient(90deg, #222222 1%, #FF772B 50%, #222222 100%); */
 	}

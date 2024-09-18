@@ -134,8 +134,7 @@ a.fnlink:link, a.fnlink:visited, a.fnlink:hover {
 	line-height: 1.2em;
 	font-weight: 300;
 	text-align: left;
-	margin-left: 2em;
-	margin-right: 3em;
+	/* width in @media */
 	}
 sup {
 	text-decoration: none;
@@ -239,6 +238,9 @@ footer {
 	.post {
 		width: 70%;
 		}
+	.footnote {
+		width: 80%;
+		}
 	.image-small {
 		width: 300px;
 		}
@@ -260,6 +262,9 @@ footer {
 		}
 	.post {
 		width: 90%;
+		}
+	.footnote {
+		width: 80%;
 		}
 	.image-small {
 		width: 200px;

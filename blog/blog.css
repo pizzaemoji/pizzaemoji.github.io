@@ -126,14 +126,6 @@ a.fnlink:link, a.fnlink:visited, a.fnlink:hover {
 	color: #FFFFFF;
 	border-color: #222222;
 	}
-sup {
-	text-decoration: none;
-	font-size: .6em;
-	line-height: 0; /* removes gap above superscript number */
-	background: #FF772B;
-	border: #FF772B 1px solid;
-	border-radius: 100px;
-	}
 .footnote {
 	text-decoration: none;
 	font-size: .8em;
@@ -142,6 +134,14 @@ sup {
 	text-align: left;
 	margin-left: 2em;
 	margin-right: 2em;
+	}
+sup {
+	text-decoration: none;
+	font-size: .6em;
+	line-height: 0; /* removes gap above superscript number */
+	background: #FF772B;
+	border: #FF772B 1px solid;
+	border-radius: 100px;
 	}
 .divider {
 	display: block;

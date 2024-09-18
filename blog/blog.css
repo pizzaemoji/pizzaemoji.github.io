@@ -1,11 +1,11 @@
-/* Pizza Emoji Cascading Style Sheet */
+/* Pizza Emoji Blog Cascading Style Sheet */
 html {
 	font-size: 100%;
 	}
 body {
 	font-family: "Helvetica", "Verdana", "Tahoma", sans-serif;
 	color: #DDDDDD;
-	background-color: #222222;
+	background-color: #222222; /* Remember to update theme-color on index! */
 	margin-right: auto;
 	margin-left: auto;
 	max-width: 1000px;

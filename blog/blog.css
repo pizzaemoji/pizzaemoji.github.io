@@ -206,6 +206,9 @@ sup {
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}
+#slice {
+	height: 16px;
+	}
 footer {
 	font-size: .8em;
 	font-weight: 200;

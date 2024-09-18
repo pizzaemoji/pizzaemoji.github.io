@@ -207,8 +207,13 @@ sup {
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}
-#appleintgrad {
-	background: -webkit-linear-gradient(45deg, #55CBFF 20%, #DE6FFF 35%, #FE6A6A 50%, #FFAD5B 65%, #FAFF55 80%);
+#appleintelligencegradienta {
+	background: -webkit-linear-gradient(45deg, #55CBFF 20%, #DE6FFF 40%, #FE6A6A 60%, #FFAD5B 80%, #FAFF55 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+	}
+#appleintelligencegradientb {
+	background: -webkit-linear-gradient(45deg, #55CBFF 0%, #DE6FFF 20%, #FE6A6A 40%, #FFAD5B 60%, #FAFF55 80%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	}

@@ -207,6 +207,10 @@ sup {
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}
+#appleintgrad {
+	color: linear-gradient(90deg, #0000FF 20%, #FF0000 60%, #FFFF00 100%)
+	}
+
 #slice {
 	height: 16px;
 	}

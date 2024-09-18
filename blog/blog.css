@@ -9,6 +9,7 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 	max-width: 1000px;
+	counter-reset: fn_counter; /* Creates footnote counter */
 	}
 header {
 	padding: 100px 0 100px 0;
@@ -146,36 +147,13 @@ sup {
 	font-weight: 600;
 	line-height: 0; /* removes gap above superscript number */
 	}
-
-
-
-
-
-
-
-/* This creates the counter  */
-body {
-  counter-reset: fn_counter_var;
-}
-
-/* This increments the counter value and defines 
-the displayed content  */
 sup::after {
-  counter-increment: fn_counter_var;
-  content: counter(fn_counter_var);
-}
-
-
-
-
-
-
-
-
-
-
-
-
+	counter-increment: fn_counter; /* Increments footnote counter */
+	content: counter(fn_counter); /* Displays footnote counter */
+	}
+li {
+	margin-bottom: 1em;
+	}
 
 
 

@@ -265,14 +265,14 @@ footer {
 	.post {
 		width: 90%;
 		font-size: 1.4rem;
-		font-weight: 400;
+		font-weight: 300;
 		}
 	.image-small {
 		width: 200px;
 		}
 	.pullquote {
 		width: 100%;
-		font-size: .8em;
+		font-size: 1em;
 		}
 	.float-left {
 		margin: 10px 10px 10px -10px; /* position of element */

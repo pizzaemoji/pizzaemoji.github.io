@@ -90,10 +90,9 @@ time {
 .post {
 	text-decoration: none;
 	line-height: 1.6em;
-	font-weight: 400;
 	text-align: left;
 	margin: auto;
-	/* width and font-size in @media */
+	/* width, font-size, and font-weight in @media */
 	}
 blockquote {
 	margin: 2em 2em 2em 0em;
@@ -227,6 +226,7 @@ footer {
 	.post {
 		width: 70%;
 		font-size: 1.5em;
+		font-weight: 300;
 		}
 	.image-small {
 		width: 300px;
@@ -250,6 +250,7 @@ footer {
 	.post {
 		width: 90%;
 		font-size: 1.2em;
+		font-weight: 400;
 		}
 	.image-small {
 		width: 200px;

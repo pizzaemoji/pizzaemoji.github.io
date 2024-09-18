@@ -130,15 +130,7 @@ a.fnlink:link, a.fnlink:visited {
 a.fnlink:hover {
 	text-decoration: none;
 	border-color: #222222;
-	cursor:pointer;
-	}
-.footnote {
-	text-decoration: none;
-	font-size: .8em;
-	line-height: 1.4em;
-	font-weight: 200;
-	text-align: left;
-	/* padding in @media */
+	cursor: pointer;
 	}
 sup {
 	text-decoration: none;
@@ -151,14 +143,17 @@ sup::after {
 	counter-increment: fn_counter; /* Increments footnote counter */
 	content: counter(fn_counter); /* Displays footnote counter */
 	}
+.footnote {
+	text-decoration: none;
+	font-size: .8em;
+	line-height: 1.4em;
+	font-weight: 200;
+	text-align: left;
+	/* padding in @media */
+	}
 li {
 	margin-bottom: 1em;
 	}
-
-
-
-
-
 .divider {
 	display: block;
 	position: relative;
@@ -225,9 +220,6 @@ li {
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}
-#slice {
-	height: 16px;
-	}
 footer {
 	font-size: .8em;
 	font-weight: 200;
@@ -238,6 +230,9 @@ footer {
 	font-size: 2em;
 	line-height: 2em;
 	text-align: center;
+	}
+#slice {
+	height: 1em;
 	}
 /* 2024-10-XX-ios-18-point-1-the-apple-intelligence-update */
 #appleintelligencegradient {

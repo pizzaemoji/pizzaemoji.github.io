@@ -2,28 +2,28 @@
 body {
 	background-color: #222222; /*Be sure to also update theme-color on index! */
 	}
-.pizzaemoji {
+#pizzaemoji {
 	-webkit-align-content: center;
 	align-content: center;
 	text-align: center;
 	height: 500px;
 	}
-.links {
+#links {
 	text-align: center;
 	}
 .icon {
-	width: 20px;
-	padding: 20px;
+	width: 25px;
+	padding: 25px;
 	}
 /* Desktop */
 @media (min-width: 1000px) {
-	.logo {
+	#logo {
 		width: 40%;
 		}
 	}
 /* Mobile */
 @media (max-width: 999px) {
-	.logo {
+	#logo {
 		width: 80%;
 		}
 	}

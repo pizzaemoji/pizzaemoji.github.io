@@ -129,7 +129,7 @@ a.fnlink:link, a.fnlink:visited, a.fnlink:hover {
 sup {
 	text-decoration: none;
 	font-size: .5em;
-	line-height: 0;
+	line-height: 0; /* removes gap above superscript number */
 	background: #FF772B;
 	border: #FF772B 1px solid;
 	border-radius: 100px;

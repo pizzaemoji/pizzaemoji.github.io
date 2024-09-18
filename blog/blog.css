@@ -146,21 +146,18 @@ sup {
 	}
 .footnote {
 	text-decoration: none;
-	font-size: 1em;
+	font-size: .8em;
 	line-height: 1.2em;
 	font-weight: 300;
 	text-align: left;
 	padding-left: 2em;
-	padding-right: 2em;
-	margin: auto;
 	}
 .divider {
 	display: block;
 	position: relative;
-	padding-top: 2px;
 	margin-top: 2em;
-	margin-bottom: 10em;
-	background: #BBBBBB;
+	margin-bottom: 2em;
+	background: #AAAAAA;
 /*	background: linear-gradient(90deg, #222222 1%, #FF772B 50%, #222222 100%); */
 	}
 .image-large {

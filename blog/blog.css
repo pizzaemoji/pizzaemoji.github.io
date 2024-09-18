@@ -36,11 +36,17 @@ article {
 	padding-right: 5px;
 	margin: auto;
 	}
-.title {
+#title {
 	text-align: left;
 	padding-bottom: 30px;
 	margin: auto;
 	width: 90%;
+	}
+#hero {
+	display: block;
+	padding-bottom: 1em;
+	margin: auto;
+	width: 100%;
 	}
 h1 {
 	text-decoration: none;
@@ -81,12 +87,6 @@ time {
 	font-weight: 100;
 	text-align: left;
 	}
-.hero {
-	display: block;
-	padding-bottom: 1em;
-	margin: auto;
-	width: 100%;
-	}
 .post {
 	text-decoration: none;
 	line-height: 1.6em;
@@ -95,20 +95,10 @@ time {
 	margin: auto;
 	/* width and font-size in @media */
 	}
-.spacer {
-	text-decoration: none;
-	padding: 3em;
-	}
 blockquote {
 	margin: 2em 2em 2em 0em;
 	padding: 0 0 0 1.5em;
 	border-left: #FF772B 3px solid;
-	}
-hr {
-	height: 3px;
-	border-width: 0px;
-	background-color: #BBBBBB;
-	width: 40%;
 	}
 a {
 	text-decoration: none;
@@ -158,9 +148,13 @@ sup {
 	position: relative;
 	margin-top: 2em;
 	margin-bottom: 2em;
-	height: 1px;
+	height: 2px;
 	background: #AAAAAA;
 /*	background: linear-gradient(90deg, #222222 1%, #FF772B 50%, #222222 100%); */
+	}
+.spacer {
+	text-decoration: none;
+	padding: 3em;
 	}
 .image-large {
 	display: block;

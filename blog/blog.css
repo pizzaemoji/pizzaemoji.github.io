@@ -132,7 +132,7 @@ a:hover {
 	color: #FFFFFF;
 	border-color: #222222;
 	}
-a.fn:link, a.fn:visited, a.fn:hover {
+a.fnlink:link, a.fnlink:visited, a.fnlink:hover {
 	text-decoration: none;
 	color: #FFFFFF;
 	border-color: #222222;
@@ -142,7 +142,17 @@ sup {
 	font-size: .5em;
 	background: #FF772B;
 	border: #FF772B 1px solid;
-	border-radius: 200px;
+	border-radius: 100px;
+	}
+.footnote {
+	text-decoration: none;
+	font-size: 1em;
+	line-height: 1.2em;
+	font-weight: 300;
+	text-align: left;
+	padding-left: 2em;
+	padding-right: 2em;
+	margin: auto;
 	}
 .divider {
 	display: block;

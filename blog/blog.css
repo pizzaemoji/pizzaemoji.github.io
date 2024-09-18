@@ -50,7 +50,7 @@ article {
 	}
 .post {
 	text-decoration: none;
-	line-height: 2.5rem;
+	line-height: 2.2rem;
 	text-align: left;
 	margin: auto;
 	/* width, font-size, and font-weight in @media */
@@ -264,7 +264,7 @@ footer {
 		}
 	.post {
 		width: 90%;
-		font-size: 1.2rem;
+		font-size: 1.4rem;
 		font-weight: 400;
 		}
 	.image-small {

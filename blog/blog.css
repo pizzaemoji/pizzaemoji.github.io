@@ -26,7 +26,7 @@ header {
 	padding: 0;
 	border: 0;
 	background-color: inherit;
-	/*	width size in @media */
+	/*	width in @media */
 	}
 #byline {
 	text-decoration: none;	
@@ -50,10 +50,12 @@ article {
 	}
 .post {
 	text-decoration: none;
+	font-size: 1.4rem;
+	font-weight: 400;
 	line-height: 2.2rem;
 	text-align: left;
 	margin: auto;
-	/* width, font-size, and font-weight in @media */
+	/* width in @media */
 	}
 h1 {
 	text-decoration: none;
@@ -137,11 +139,11 @@ a.fnlink:link, a.fnlink:visited, a.fnlink:hover {
 	}
 sup {
 	text-decoration: none;
-	font-size: .6em;
+	font-size: .7em;
 	line-height: 0; /* removes gap above superscript number */
 	background: #FF772B;
 	border: #FF772B 1px solid;
-	border-radius: 100px;
+	border-radius: 100%;
 	}
 .divider {
 	display: block;
@@ -150,7 +152,6 @@ sup {
 	margin-bottom: 2em;
 	height: 2px;
 	background: #AAAAAA;
-/*	background: linear-gradient(90deg, #222222 1%, #FF772B 50%, #222222 100%); */
 	}
 .spacerhome {
 	text-decoration: none;
@@ -169,7 +170,6 @@ sup {
 	text-decoration: none;
 	display: block;
 	font-size: .8em;
-	font-weight: 300;
 	line-height: 1em;
 	font-style: italic;
 	text-align: center;
@@ -224,9 +224,7 @@ footer {
 	font-size: 2em;
 	line-height: 2em;
 	text-align: center;
-	font-weight: 300;
 	}
-/* Special exceptions */
 /* 2024-10-XX-ios-18-point-1-the-apple-intelligence-update */
 #appleintelligencegradient {
 	background: -webkit-linear-gradient(0deg, #55CBFF 20%, #DF7CFF 40%, #FF796E 60%, #FFAD5B 80%, #FAFF55 100%);
@@ -240,8 +238,6 @@ footer {
 		}
 	.post {
 		width: 70%;
-		font-size: 1.4rem;
-		font-weight: 300;
 		}
 	.image-small {
 		width: 300px;
@@ -264,15 +260,13 @@ footer {
 		}
 	.post {
 		width: 90%;
-		font-size: 1.4rem;
-		font-weight: 300;
 		}
 	.image-small {
 		width: 200px;
 		}
 	.pullquote {
 		width: 100%;
-		font-size: 1em;
+		font-size: .8em;
 		}
 	.float-left {
 		margin: 10px 10px 10px -10px; /* position of element */

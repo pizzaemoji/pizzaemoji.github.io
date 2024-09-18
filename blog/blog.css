@@ -145,6 +145,83 @@ sup {
 	border: #FF772B 1px solid;
 	border-radius: 100%;
 */	}
+
+
+
+
+
+
+
+/* This creates the counter  */
+body {
+  counter-reset: cb_counter_var;
+}
+
+/* This increments the counter value and defines 
+the displayed content  */
+sup::after {
+  counter-increment: cb_counter_var;
+  content: counter(cb_counter_var);
+}
+
+/* This initially hides the footnote (i.e. span)  */
+input[type=checkbox] ~ span {
+    display:none; 
+}
+
+/* This styles the footnote text which appears 
+when the label is clicked  */
+input[type=checkbox]:checked ~ span {
+    display:inline; 
+    font-size: 85%;
+    font-family:$monospace;
+    color: mix(#000, $text-color, 30%);
+    cursor:default;
+}
+
+/* This permanently hides the checkbox  */
+input[type=checkbox]{
+    display:none;  
+}
+
+/* This styles the footnote label to appear 
+like a hyperlink  */
+input[type=checkbox] ~ label {
+    display:inline;
+    cursor:pointer;
+    color:$link-color;
+    text-decoration:underline;
+}
+
+/* This styles the footnote label when the mouse 
+hovers over it */
+input[type=checkbox] ~ label:hover {
+    text-decoration:underline;
+    cursor:pointer;
+    color:red;
+}
+
+/* This styles the footnote label after it is clicked */
+input[type=checkbox]:checked ~ label {
+    color:red;
+    text-decoration:none;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .divider {
 	display: block;
 	position: relative;

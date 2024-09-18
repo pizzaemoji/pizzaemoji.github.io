@@ -128,7 +128,7 @@ a.fnlink:link, a.fnlink:visited, a.fnlink:hover {
 	}
 sup {
 	text-decoration: none;
-	font-size: .5em;
+	font-size: .6em;
 	line-height: 0; /* removes gap above superscript number */
 	background: #FF772B;
 	border: #FF772B 1px solid;
@@ -207,11 +207,6 @@ sup {
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}
-#appleintelligencegradient {
-	background: -webkit-linear-gradient(0deg, #55CBFF 20%, #DF7CFF 40%, #FF796E 60%, #FFAD5B 80%, #FAFF55 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-	}
 #slice {
 	height: 16px;
 	}
@@ -226,6 +221,13 @@ footer {
 	line-height: 2em;
 	text-align: center;
 	font-weight: 300;
+	}
+/* Special exceptions */
+/* apple-intelligence */
+#appleintelligencegradient {
+	background: -webkit-linear-gradient(0deg, #55CBFF 20%, #DF7CFF 40%, #FF796E 60%, #FFAD5B 80%, #FAFF55 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
 	}
 /* Desktop */
 @media (min-width: 1000px) {

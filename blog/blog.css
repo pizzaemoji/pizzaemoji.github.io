@@ -150,14 +150,15 @@ sup {
 	line-height: 1.2em;
 	font-weight: 300;
 	text-align: left;
-	padding-left: 2em;
+	margin-left: 2em;
+	margin-right: 2em;
 	}
 .divider {
 	display: block;
 	position: relative;
 	margin-top: 2em;
 	margin-bottom: 2em;
-	padding: 1px;
+	height: 1px;
 	background: #AAAAAA;
 /*	background: linear-gradient(90deg, #222222 1%, #FF772B 50%, #222222 100%); */
 	}

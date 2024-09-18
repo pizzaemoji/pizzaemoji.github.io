@@ -213,7 +213,7 @@ sup {
 	-webkit-text-fill-color: transparent;
 	}
 #appleintelligencegradientb {
-	background: -webkit-linear-gradient(45deg, #55CBFF 0%, #DE6FFF 20%, #FE6A6A 40%, #FFAD5B 60%, #FAFF55 80%);
+	background: -webkit-linear-gradient(45deg, #55CBFF 10%, #DE6FFF 30%, #FE6A6A 50%, #FFAD5B 70%, #FAFF55 90%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	}

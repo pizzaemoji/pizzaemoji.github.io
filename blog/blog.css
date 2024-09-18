@@ -1,8 +1,8 @@
 /* Pizza Emoji Cascading Style Sheet */
 html {
+	font-size: 100%;
 	}
 body {
-	font-size: 1em;
 	font-family: "Helvetica", "Verdana", "Tahoma", sans-serif;
 	color: #DDDDDD;
 	background-color: #222222;
@@ -29,7 +29,7 @@ header {
 	/*	width size in @media */
 	}
 #byline {
-	font-size: 1em;
+	text-decoration: none;	
 	}
 article {
 	padding-left: 5px;
@@ -38,12 +38,12 @@ article {
 	}
 #title {
 	text-align: left;
-	padding-bottom: 2em;
 	margin: auto;
 	width: 90%;
 	}
 #hero {
 	display: block;
+	padding-top: 1em;
 	padding-bottom: 1em;
 	margin: auto;
 	width: 100%;
@@ -89,7 +89,7 @@ h3 {
 	}
 time {
 	text-decoration: none;
-	font-size: .8em;
+	font-size: 1em;
 	line-height: 1em;
 	font-weight: 100;
 	text-align: left;

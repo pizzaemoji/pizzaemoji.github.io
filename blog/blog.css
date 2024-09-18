@@ -36,9 +36,18 @@ article {
 	padding-right: 5px;
 	margin: auto;
 	}
+#blog {
+	text-decoration: none;
+	line-height: 1.2em;
+	text-align: left;
+	width: 80%;
+	}
+.bloglink {
+	font-size: 1.4em;
+	}
 #title {
 	text-align: left;
-	padding-bottom: 30px;
+	padding-bottom: 2em;
 	margin: auto;
 	width: 90%;
 	}

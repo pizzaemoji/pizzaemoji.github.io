@@ -208,7 +208,7 @@ sup {
 	/* margin in @media */
 	}
 #appleintgrad {
-	background: -webkit-linear-gradient(45deg, #55CBFF 20%, #DE6FFF 40%, #FE6A6A 60%, #FFAD5B 80%, #FAFF55 100%);
+	background: -webkit-linear-gradient(45deg, #55CBFF 20%, #DE6FFF 35%, #FE6A6A 50%, #FFAD5B 65%, #FAFF55 80%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 	}

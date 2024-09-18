@@ -238,7 +238,8 @@ footer {
 		width: 70%;
 		}
 	.footnote {
-		width: 80%;
+		padding-left: 2em;
+		padding-right: 3em;
 		}
 	.image-small {
 		width: 300px;
@@ -263,7 +264,8 @@ footer {
 		width: 90%;
 		}
 	.footnote {
-		width: 80%;
+		padding-left: 1em;
+		padding-right: 1em;
 		}
 	.image-small {
 		width: 200px;

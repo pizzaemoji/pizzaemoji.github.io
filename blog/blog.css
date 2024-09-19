@@ -198,7 +198,7 @@ li {
 	}
 .pullquote {
 	display: inline-block;
-	position: relative:
+	position: relative;
 	top: 5em;
 	text-decoration: none;
 	color: #FF772B;
@@ -220,6 +220,7 @@ li {
 .float-right {
 	float: right;
 	text-align: right;
+
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}

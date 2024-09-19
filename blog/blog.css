@@ -197,7 +197,7 @@ li {
 	/* width in @media */
 	}
 .pullquote {
-	display: inline-block;
+	display: inline;
 	position: relative;
 	top: 5em;
 	text-decoration: none;

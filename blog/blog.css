@@ -220,6 +220,8 @@ li {
 .float-right {
 	float: right;
 	text-align: right;
+		position: relative;
+		top: 5em;
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}

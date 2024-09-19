@@ -160,7 +160,7 @@ li {
 	margin-top: 2em;
 	margin-bottom: 2em;
 	height: 2px;
-	background: #AAAAAA;
+	background: #888888;
 	}
 .spacerhome {
 	text-decoration: none;
@@ -177,6 +177,7 @@ li {
 	}
 .caption {
 	text-decoration: none;
+	color: #DDDDDD;
 	display: block;
 	font-size: .8em;
 	line-height: 1em;
@@ -197,6 +198,8 @@ li {
 	}
 .pullquote {
 	display: inline;
+	position: relative:
+	top: 5em;
 	text-decoration: none;
 	color: #FF772B;
 	font-weight: 100;
@@ -221,6 +224,7 @@ li {
 	/* margin in @media */
 	}
 footer {
+	color: #EEEEEE;
 	font-size: .8em;
 	font-weight: 200;
 	text-align: center;

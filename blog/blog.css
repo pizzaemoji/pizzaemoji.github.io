@@ -198,8 +198,6 @@ li {
 	}
 .pullquote {
 	display: inline;
-	position: relative;
-	top: 5em;
 	text-decoration: none;
 	color: #FF772B;
 	font-weight: 100;
@@ -214,13 +212,14 @@ li {
 .float-left {
 	float: left;
 	text-align: left;
+		position: relative;
+		top: 5em;
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}
 .float-right {
 	float: right;
 	text-align: right;
-
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}

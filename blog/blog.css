@@ -189,6 +189,61 @@ li {
 	margin-right: auto;	
 	width: 85%;
 	}
+.image-small-left {
+	display: inline;
+	position: relative;
+	float: left;
+	text-align: left;
+	border-top: #FF772B 1px solid;
+	border-bottom: #FF772B 1px solid;
+	padding: 15px 0 15px 0; /* space between element and lines */
+	/* width and margin in @media */
+	}
+.image-small-right {
+	display: inline;
+	position: relative;
+	float: right;
+	text-align: right;
+	border-top: #FF772B 1px solid;
+	border-bottom: #FF772B 1px solid;
+	padding: 15px 0 15px 0; /* space between element and lines */
+	/* width and margin in @media */
+	}
+.pullquote-left {
+	display: inline;
+	position: relative;
+	float: left;
+	text-align: left;
+	text-decoration: none;
+	color: #FF772B;
+	font-weight: 100;
+	line-height: 1.2em;
+	font-style: italic;
+	word-spacing: 50%;
+	text-transform: uppercase;
+	border-top: #FF772B 1px solid;
+	border-bottom: #FF772B 1px solid;
+	padding: 15px 0 15px 0; /* space between element and lines */
+	/* width font-size, and margin in @media */
+	}
+.pullquote-right {
+	display: inline;
+	position: relative;
+	float: right;
+	text-align: right;
+	text-decoration: none;
+	color: #FF772B;
+	font-weight: 100;
+	line-height: 1.2em;
+	font-style: italic;
+	word-spacing: 50%;
+	text-transform: uppercase;
+	border-top: #FF772B 1px solid;
+	border-bottom: #FF772B 1px solid;
+	padding: 15px 0 15px 0; /* space between element and lines */
+	/* width, font-size, and margin in @media */
+	}
+/* old float quotes */
 .image-small {
 	display: inline;
 	position: relative;
@@ -222,6 +277,7 @@ li {
 	padding: 15px 0 15px 0; /* space between element and lines */
 	/* margin in @media */
 	}
+/* end old float quotes */
 footer {
 	color: #EEEEEE;
 	font-size: .8em;
@@ -255,6 +311,24 @@ footer {
 		padding-left: 2em;
 		padding-right: 3em;
 		}
+	.image-small-left {
+		width: 300px;
+		margin: 10px 30px 10px -60px; /* position of element */
+		}
+	.image-small-right {
+		width: 300px;
+		margin: 10px 30px 10px -60px; /* position of element */
+		}
+	.pullquote-left {
+		width: 60%;
+		font-size: 1.2em;
+		margin: 10px 30px 10px -60px; /* position of element */
+		}
+	.pullquote-right {
+		width: 60%;
+		font-size: 1.2em;
+		margin: 10px 30px 10px -60px; /* position of element */
+		}
 	.image-small {
 		width: 300px;
 		}
@@ -281,6 +355,25 @@ footer {
 		padding-left: 1em;
 		padding-right: 1em;
 		}
+	.image-small-left {
+		width: 200px;
+		margin: 10px 10px 10px -10px; /* position of element */
+		}
+	.image-small-right {
+		width: 200px;
+		margin: 10px 10px 10px -10px; /* position of element */
+		}
+	.pullquote-left {
+		width: 100%;
+		font-size: .8em;
+		margin: 10px 10px 10px 10px; /* position of element */
+		}
+	.pullquote-right {
+		width: 100%;
+		font-size: .8em;
+		margin: 10px 10px 10px 10px; /* position of element */
+		}
+		/* old quote float */
 	.image-small {
 		width: 200px;
 		}
@@ -294,5 +387,6 @@ footer {
 	.float-right {
 		margin: 10px -10px 10px 10px; /* position of element */
 		}
+		/* end old quote float */
 	}
 /* End CSS */

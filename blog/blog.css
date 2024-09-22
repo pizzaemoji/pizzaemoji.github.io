@@ -368,7 +368,7 @@ footer {
 		text-align: justify;
 		width: 100%;
 		font-size: .8em;
-		margin: 1em 1em 3em 1em; /* position of element */
+		margin: 1em 0em 2em 0em; /* position of element */
 		}
 	.pullquote-right {
 		float: right;

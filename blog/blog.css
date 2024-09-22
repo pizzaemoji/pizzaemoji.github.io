@@ -361,7 +361,7 @@ footer {
 		}
 	.image-small-right {
 		width: 200px;
-		margin: 10px 10px 10px -10px; /* position of element */
+		margin: 10px -10px 10px 10px; /* position of element */
 		}
 	.pullquote-left {
 		width: 100%;

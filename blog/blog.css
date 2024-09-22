@@ -212,8 +212,6 @@ li {
 .pullquote-left {
 	display: inline;
 	position: relative;
-	float: left;
-	text-align: left;
 	text-decoration: none;
 	color: #FF772B;
 	font-weight: 100;
@@ -229,8 +227,6 @@ li {
 .pullquote-right {
 	display: inline;
 	position: relative;
-	float: right;
-	text-align: right;
 	text-decoration: none;
 	color: #FF772B;
 	font-weight: 100;
@@ -320,11 +316,15 @@ footer {
 		margin: 10px -60px 10px 30px; /* position of element */
 		}
 	.pullquote-left {
+		float: left;
+		text-align: left;
 		width: 60%;
 		font-size: 1.2em;
 		margin: 10px 30px 10px -60px; /* position of element */
 		}
 	.pullquote-right {
+		float: right;
+		text-align: right;
 		width: 60%;
 		font-size: 1.2em;
 		margin: 10px -60px 10px 30px; /* position of element */
@@ -364,11 +364,15 @@ footer {
 		margin: 10px -10px 10px 10px; /* position of element */
 		}
 	.pullquote-left {
+		float: center;
+		text-align: center;
 		width: 100%;
 		font-size: .8em;
 		margin: 1em 1em 3em 1em; /* position of element */
 		}
 	.pullquote-right {
+		float: center;
+		text-align: center;
 		width: 100%;
 		font-size: .8em;
 		margin: 1em 1em 3em 1em; /* position of element */

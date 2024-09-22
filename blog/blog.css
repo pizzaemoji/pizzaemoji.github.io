@@ -365,14 +365,14 @@ footer {
 		}
 	.pullquote-left {
 		float: center;
-		text-align: center;
+		text-align: justify;
 		width: 100%;
 		font-size: .8em;
 		margin: 1em 1em 3em 1em; /* position of element */
 		}
 	.pullquote-right {
 		float: center;
-		text-align: center;
+		text-align: justify;
 		width: 100%;
 		font-size: .8em;
 		margin: 1em 1em 3em 1em; /* position of element */

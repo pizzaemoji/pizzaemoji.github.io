@@ -9,7 +9,7 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 	max-width: 1000px;
-	counter-reset: fn_counter; /* Creates footnote counter */
+	counter-reset: fn_counter; /* Creates footnote <sup> counter */
 	}
 header {
 	padding: 100px 0 100px 0;
@@ -126,6 +126,7 @@ a:hover {
 	border-color: #222222;
 	}
 /* pullquotes and images */
+/* margin: position of element padding: space between element and lines */
 .pullquote-left {
 	display: inline;
 	position: relative;
@@ -139,8 +140,8 @@ a:hover {
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	padding: 1em 0 1em 0; /* space between element and lines */
-	/* width, text-align, and margin in @media */
+	padding: 1em 0 1em 0;
+	/* width, font-size, text-align, and margin in @media */
 	}
 .pullquote-right {
 	display: inline;
@@ -155,8 +156,8 @@ a:hover {
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	padding: 1em 0 1em 0; /* space between element and lines */
-	/* width, text-align, and margin in @media */
+	padding: 1em 0 1em 0;
+	/* width, font-size, text-align, and margin in @media */
 	}
 .image-small-left {
 	display: inline;
@@ -165,7 +166,7 @@ a:hover {
 	text-align: left;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	padding: 15px 0 15px 0; /* space between element and lines */
+	padding: 15px 0 15px 0;
 	/* width and margin in @media */
 	}
 .image-small-right {
@@ -175,13 +176,13 @@ a:hover {
 	text-align: right;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	padding: 15px 0 15px 0; /* space between element and lines */
+	padding: 15px 0 15px 0;
 	/* width and margin in @media */
 	}
 .image-large {
 	display: block;
 	position: relative;
-	margin: 40px auto 0 auto; /* centers, space between image and P above */
+	margin: 40px auto 0 auto; /* centers, space between image and <p> above */
 	width: 90%;
 	}
 .caption {
@@ -229,8 +230,7 @@ a.fnlink:hover {
 	border-color: #222222;
 	cursor: pointer;
 	}
-/* spacing, footer, etc formatting */
-.divider {
+.divider { /* separates post from footnotes */
 	display: block;
 	position: relative;
 	margin-top: 2em;
@@ -238,6 +238,7 @@ a.fnlink:hover {
 	height: 2px;
 	background: #888888;
 	}
+/* spacing, footer, etc formatting */
 .spacerhome {
 	text-decoration: none;
 	padding: 1em;
@@ -279,21 +280,21 @@ footer {
 		width: 60%;
 		font-size: 1.2em;
 		text-align: left;
-		margin: 10px 30px 10px -60px; /* position of element */
+		margin: 10px 30px 10px -60px;
 		}
 	.pullquote-right {
 		width: 60%;
 		font-size: 1.2em;
 		text-align: right;
-		margin: 10px -60px 10px 30px; /* position of element */
+		margin: 10px -60px 10px 30px;
 		}
 	.image-small-left {
 		width: 300px;
-		margin: 10px 30px 10px -60px; /* position of element */
+		margin: 10px 30px 10px -60px;
 		}
 	.image-small-right {
 		width: 300px;
-		margin: 10px -60px 10px 30px; /* position of element */
+		margin: 10px -60px 10px 30px;
 		}
 	.footnote {
 		padding-left: 2em;
@@ -310,11 +311,11 @@ footer {
 		}
 	.image-small-left {
 		width: 200px;
-		margin: 10px 10px 10px -10px; /* position of element */
+		margin: 10px 10px 10px -10px;
 		}
 	.image-small-right {
 		width: 200px;
-		margin: 10px -10px 10px 10px; /* position of element */
+		margin: 10px -10px 10px 10px;
 		}
 	.pullquote-left {
 		width: 100%;

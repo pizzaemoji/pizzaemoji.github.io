@@ -221,7 +221,6 @@ li {
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	padding: 15px 0 15px 0; /* space between element and lines */
 	/* width, float, text-align, font-size, and margin in @media */
 	}
 .pullquote-right {
@@ -236,7 +235,6 @@ li {
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	padding: 15px 0 15px 0; /* space between element and lines */
 	/* width, float, text-align, font-size, and margin in @media */
 	}
 /* old float quotes */
@@ -320,6 +318,7 @@ footer {
 		text-align: left;
 		width: 60%;
 		font-size: 1.2em;
+		padding: 15px 0 15px 0; /* space between element and lines */
 		margin: 10px 30px 10px -60px; /* position of element */
 		}
 	.pullquote-right {
@@ -327,6 +326,7 @@ footer {
 		text-align: right;
 		width: 60%;
 		font-size: 1.2em;
+		padding: 15px 0 15px 0; /* space between element and lines */
 		margin: 10px -60px 10px 30px; /* position of element */
 		}
 	.image-small {
@@ -366,15 +366,17 @@ footer {
 	.pullquote-left {
 		float: left;
 		text-align: justify;
-		width: 100%;
-		font-size: .8em;
+		width: 110%;
+		font-size: 1.2em;
+		padding: 1em 1em 1em 1em; /* space between element and lines */
 		margin-bottom: 1em;
 		}
 	.pullquote-right {
 		float: left;
 		text-align: justify;
-		width: 100%;
-		font-size: .8em;
+		width: 110%;
+		font-size: 1.2em;
+		padding: 1em 1em 1em 1em; /* space between element and lines */
 		margin-bottom: 1em;
 		}
 		/* old quote float */

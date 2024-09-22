@@ -366,12 +366,12 @@ footer {
 	.pullquote-left {
 		width: 100%;
 		font-size: .8em;
-		margin: 10px 10px 10px 10px; /* position of element */
+		margin: 1em 1em 3em 1em; /* position of element */
 		}
 	.pullquote-right {
 		width: 100%;
 		font-size: .8em;
-		margin: 10px 10px 10px 10px; /* position of element */
+		margin: 1em 1em 3em 1em; /* position of element */
 		}
 		/* old quote float */
 	.image-small {

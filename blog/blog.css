@@ -192,8 +192,6 @@ li {
 .image-small {
 	display: inline;
 	position: relative;
-	margin-left: auto;
-	margin-right: auto;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
 	/* width in @media */

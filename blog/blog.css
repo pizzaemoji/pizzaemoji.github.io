@@ -132,7 +132,6 @@ a:hover {
 	text-decoration: none;
 	float: left;
 	color: #FF772B;
-	font-size: 1.2em;
 	font-weight: 100;
 	line-height: 1.2em;
 	font-style: italic;
@@ -149,7 +148,6 @@ a:hover {
 	text-decoration: none;
 	float: right;
 	color: #FF772B;
-	font-size: 1.2em;
 	font-weight: 100;
 	line-height: 1.2em;
 	font-style: italic;
@@ -278,13 +276,15 @@ footer {
 		width: 70%;
 		}
 	.pullquote-left {
-		text-align: left;
 		width: 60%;
+		font-size: 1.2em;
+		text-align: left;
 		margin: 10px 30px 10px -60px; /* position of element */
 		}
 	.pullquote-right {
-		text-align: right;
 		width: 60%;
+		font-size: 1.2em;
+		text-align: right;
 		margin: 10px -60px 10px 30px; /* position of element */
 		}
 	.image-small-left {
@@ -317,13 +317,15 @@ footer {
 		margin: 10px -10px 10px 10px; /* position of element */
 		}
 	.pullquote-left {
-		text-align: justify;
 		width: 100%;
+		font-size: 1em;
+		text-align: justify;
 		margin-bottom: 1em;
 		}
 	.pullquote-right {
-		text-align: justify;
 		width: 100%;
+		font-size: 1em;
+		text-align: justify;
 		margin-bottom: 1em;
 		}
 	.footnote {

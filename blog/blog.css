@@ -364,14 +364,14 @@ footer {
 		margin: 10px -10px 10px 10px; /* position of element */
 		}
 	.pullquote-left {
-		float: center;
+		float: none;
 		text-align: justify;
 		width: 100%;
 		font-size: .8em;
 		margin: 1em 1em 3em 1em; /* position of element */
 		}
 	.pullquote-right {
-		float: center;
+		float: none;
 		text-align: justify;
 		width: 100%;
 		font-size: .8em;

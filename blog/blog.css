@@ -330,13 +330,13 @@ footer {
 	.pullquote-left {
 		width: 100%;
 		font-size: 1em;
-		text-align: justify;
+		text-align: left;
 		margin-bottom: 1em;
 		}
 	.pullquote-right {
 		width: 100%;
 		font-size: 1em;
-		text-align: justify;
+		text-align: left;
 		margin-bottom: 1em;
 		}
 	.footnote {

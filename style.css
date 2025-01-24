@@ -1,0 +1,29 @@
+/* Pizza Emoji Cascading Style Sheet */ 
+body {
+	background-color: #222222; /* Remember to update theme-color on index! */
+	}
+#pizzaemoji {
+	-webkit-align-content: center;
+	align-content: center;
+	text-align: center;
+	height: 500px;
+	}
+#links {
+	text-align: center;
+	}
+.icon {
+	width: 25px;
+	padding: 20px;
+	}
+/* Desktop */
+@media (min-width: 1000px) {
+	#logo {
+		width: 40%;
+		}
+	}
+/* Mobile */
+@media (max-width: 999px) {
+	#logo {
+		width: 80%;
+		}
+	}

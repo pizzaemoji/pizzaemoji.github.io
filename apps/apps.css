@@ -105,7 +105,7 @@ main {
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center; /* Centers the columns as a group */
-	gap: 20px;
+	gap: 10px;
 	padding-bottom: 2em;
 }
 .left-column,

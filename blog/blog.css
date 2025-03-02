@@ -290,7 +290,7 @@ footer {
 /* Desktop */
 @media (min-width: 1000px) {
 	#logo {
-		width: 60%;
+		width: 40%;
 	}
 	.post {
 		width: 70%;

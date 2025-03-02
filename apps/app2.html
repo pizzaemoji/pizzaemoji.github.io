@@ -96,22 +96,20 @@ main {
 	padding: 0 0 0 20px;
 	font-size: 1.2em;
     }
-.download-badge img {
+.download-badge {
 	display: block;
 	margin: 0 auto; /* Center the badge container */   
 }
     /* Carousel Styles */
 .carousel {
-	display: none;
 	position: relative;
 	overflow: hidden;
+	display: none;
 	width: 300px;  /* Match the image width */
-	padding-left: 20px;
 	margin: 0; /* Center the carousel container */
 }
 .carousel-image {
 	width: 300px; /* Match the carousel */
-	padding-left: 20px;
 	margin: 0; /* Center the image container */
 }
 .carousel-image.active {
@@ -145,97 +143,87 @@ footer {
 </head>
 
 <body>
-  <!-- Header with Brand Logo and Navigation -->
-  <header>
-    <div class="logo">
-    <a href="https://pizzaemoji.net/">
-      <img src="/apps/images/logo-mini.png" alt="Pizza Emoji" id="pizza-emoji" />
-      </a>
-    </div>
-    <nav>
-      <ul>
-        <li><a href="/apps/rainy-night/">Rainy Night</a></li>
-        <li><a href="/apps/find-the-pizza/">Find the Pizza</a></li>
-      </ul>
-    </nav>
-  </header>
+	<header>
+	<div class="logo">
+	<a href="https://pizzaemoji.net/">
+		<img src="/apps/images/logo-mini.png" alt="Pizza Emoji" id="pizza-emoji" />
+	</a>
+	</div>
+	<nav>
+		<ul>
+		<li><a href="/apps/rainy-night/">Rainy Night</a></li>
+		<li><a href="/apps/find-the-pizza/">Find the Pizza</a></li>
+		</ul>
+	</nav>
+	</header>
 
-  <!-- Main Content -->
-  <main>
-    <!-- App Title & Logline -->
-    <div class="app-header">
-    <div><img src="/apps/images/rainy-night-icon.png" id="app-icon"></div>
-      <h1 class="app-title">Rainy Night</h1>
-      <p class="app-logline">A minimalist sleep app for iPhone</p>
-    </div>
-    <div class="content-wrapper">
-      <!-- Left Column: Description & Download Badge -->
-      <div class="left-column">
-        <p class="description">
-          Rainy Night is a minimalist sleep app with relaxing sounds like rain, a stream, and brown noise. It includes a timer to quiet the sounds, and Night Watch.
-        </p>
-            <p class="description">
-          Night Watch mimics the smoothing lights of a television by cycling random colors at random intervals. Night Watch can automatically dim your screen when it starts.
-                  <p class="description">
-          Rainy Night is not designed to cure or relieve sleep disorders. If you have trouble sleeping or don't feel well rested, please speak to your doctor.
-        </p>
-        </p>
-        <div class="download-badge">
-          <img src="/apps/images/AppStore-White.png" alt="Download on the App Store" />
-        </div>
-      </div>
-      <!-- Right Column: Image Carousel -->
-      <div class="right-column">
-        <div class="carousel">
-          <img class="carousel-image active" src="/apps/images/ss-rainy-night-1.png" alt="Screenshot 1" />
-          <img class="carousel-image" src="/apps/images/ss-rainy-night-2.png" alt="Screenshot 2" />
-          <img class="carousel-image" src="/apps/images/ss-rainy-night-3.png" alt="Screenshot 3" />
-          <div class="carousel-dots">
-            <span class="dot active"></span>
-            <span class="dot"></span>
-            <span class="dot"></span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </main>
+	<main>
+	<div class="app-header">
+	<div><img src="/apps/images/rainy-night-icon.png" id="app-icon"></div>
+		<h1 class="app-title">Rainy Night</h1>
+		<p class="app-logline">A minimalist sleep app for iPhone</p>
+	</div>
+	<div class="content-wrapper">
+		<!-- Left Column: Text -->
+		<div class="left-column">
+			<p class="description">Rainy Night is a minimalist sleep app with relaxing sounds like rain, a stream, and brown noise. It includes a timer to quiet the sounds, and Night Watch.
+			</p>
+			<p class="description">Night Watch mimics the smoothing lights of a television by cycling random colors at random intervals. Night Watch can automatically dim your screen when it starts.
+			</p>
+			<p class="description">Rainy Night is not designed to cure or relieve sleep disorders. If you have trouble sleeping or don't feel well rested, please speak to your doctor.
+			</p>
+			<img src="/apps/images/AppStore-White.png" alt="Download on the App Store" class="download-badge" />
+		</div>
+		<!-- Right Column: Image Carousel -->
+		<div class="right-column">
+			<div class="carousel">
+			<img class="carousel-image active" src="/apps/images/ss-rainy-night-1.png" alt="Screenshot 1" />
+			<img class="carousel-image" src="/apps/images/ss-rainy-night-2.png" alt="Screenshot 2" />
+			<img class="carousel-image" src="/apps/images/ss-rainy-night-3.png" alt="Screenshot 3" />
+				<div class="carousel-dots">
+				<span class="dot active"></span>
+				<span class="dot"></span>
+				<span class="dot"></span>
+				</div>
+			</div>
+		</div>
+	</div>
+	</main>
+	<footer>
+    &copy; 2025 Brandon Butler
+	</footer>
 
-  <!-- Footer -->
-  <footer>
-    &copy; 2025 [Your Brand]. All rights reserved.
-  </footer>
+	<!-- Carousel Script -->
+	<script>
+	(function() {
+		const images = document.querySelectorAll('.carousel-image');
+		const dots = document.querySelectorAll('.dot');
+		let currentIndex = 0;
+		const totalImages = images.length;
 
-  <!-- Carousel Script -->
-  <script>
-    (function() {
-      const images = document.querySelectorAll('.carousel-image');
-      const dots = document.querySelectorAll('.dot');
-      let currentIndex = 0;
-      const totalImages = images.length;
+		function showImage(index) {
+			images.forEach((img, i) => {
+				img.classList.toggle('active', i === index);
+				dots[i].classList.toggle('active', i === index);
+			});
+		}
 
-      function showImage(index) {
-        images.forEach((img, i) => {
-          img.classList.toggle('active', i === index);
-          dots[i].classList.toggle('active', i === index);
-        });
-      }
+		function nextImage() {
+			currentIndex = (currentIndex + 1) % totalImages;
+			showImage(currentIndex);
+		}
 
-      function nextImage() {
-        currentIndex = (currentIndex + 1) % totalImages;
-        showImage(currentIndex);
-      }
+		// Automatically change images every 3 seconds (3000ms)
+		setInterval(nextImage, 3000);
 
-      // Automatically change images every 3 seconds (3000ms)
-      setInterval(nextImage, 3000);
-
-      // Optionally, add click events on dots to navigate manually
-      dots.forEach((dot, index) => {
+		// Add click events on dots to navigate manually
+		dots.forEach((dot, index) => {
         dot.addEventListener('click', () => {
-          currentIndex = index;
-          showImage(currentIndex);
-        });
-      });
-    })();
-  </script>
+			currentIndex = index;
+			showImage(currentIndex);
+			});
+		});
+	})();
+	</script>
 </body>
 </html>

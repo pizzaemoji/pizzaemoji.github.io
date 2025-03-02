@@ -48,7 +48,7 @@ a:hover {
 	border-color: #222222;
 }
 header {
-	padding: 100px 0 100px 0;
+	padding: 100px 060px 0;
 	text-align: center;
 }
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
@@ -63,7 +63,7 @@ header {
 	padding: 0;
 	border: 0;
 	background-color: inherit;
-	width: 400px;
+	/*	width in @media */
 }
 #byline {
 	text-decoration: none;	
@@ -126,6 +126,26 @@ footer {
 	font-weight: 200;
 	text-align: center;
 	padding-bottom: 1em;
+}
+/* Desktop */
+@media (min-width: 1000px) {
+	#logo {
+		width: 40%;
+	}
+	.footnote {
+		padding-left: 2em;
+		padding-right: 3em;
+	}
+}
+/* Mobile */
+@media (max-width: 999px) {
+	#logo {
+		width: 80%;
+	}
+	.footnote {
+		padding-left: 1em;
+		padding-right: 1em;
+	}
 }
 	</style>
 </head>

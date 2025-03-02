@@ -51,7 +51,7 @@ header {
 	align-items: center;
 	justify-content: space-between;
 	padding: 1em;
-/*	border-bottom: 1px solid #444; */
+	border-bottom: 2px solid #000000;
 }
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
@@ -77,7 +77,7 @@ header {
 nav ul {
 	list-style: none;
 	display: flex;
-	gap: 2em;
+	gap: 1.5em;
 	margin: 0;
 	padding: 0;
 }
@@ -119,7 +119,7 @@ main {
 }
 .left-column,
 .right-column {
-	flex: 0 0 400px;  /* sets each column to a fixed width (adjust as needed) */
+	flex: 0 0 400px;  /* sets each column to a fixed width */
 	max-width: 400px;
 }
 .description {
@@ -204,7 +204,6 @@ footer {
 /* End CSS */
 </style>
 </head>
-
 <body>
 	<header>
 	<div id="pizzaemoji">
@@ -227,7 +226,6 @@ footer {
 		<p class="app-logline">A minimalist sleep app for iPhone</p>
 	</div>
 	<div class="content-wrapper">
-		<!-- Left Column: Text -->
 		<div class="left-column">
 			<div class="carousel">
 			<img class="carousel-image active" src="/apps/images/ss-rainy-night-1.png" alt="Screenshot 1" />
@@ -240,7 +238,6 @@ footer {
 				</div>
 			</div>
 		</div>
-		<!-- Right Column: Image Carousel -->
 		<div class="right-column">
 			<div class="description">
 			<p>Rainy Night is a minimalist sleep app with relaxing sounds like rain, a small stream, a cozy fire, brown noise, and more, with a sleep timer and Night Watch.
@@ -257,7 +254,6 @@ footer {
 	<footer>
 	<p>&copy;2025 Brandon Butler — <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
 	</footer>
-	<!-- Carousel Script -->
 	<script>
 	(function() {
 		const images = document.querySelectorAll('.carousel-image');

@@ -17,19 +17,33 @@
 <!--	<link href="/apps/apps.css" rel="stylesheet" /> -->
 	<style>
 body {
-	margin: 0;
 	font-family: -apple-system, BlinkMacSystemFont, Helvetica, sans-serif;
-	background-color: #222222;
 	color: #DDDDDD;
-	font-size: 1em;
-	/* line-height: 1.6; */
+	background-color: #222222; /* Remember to update theme-color on index! */
+	margin-right: auto;
+	margin-left: auto;
 }
 a {
-	color: #EEEEEE;
 	text-decoration: none;
 }
+a:link {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
 a:hover {
-	text-decoration: underline;
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #222222;
 }
 /* Header */
 header {
@@ -85,19 +99,19 @@ main {
 	justify-content: center; /* centers the columns as a group */
 	gap: 40px;
 }
-
 .left-column,
 .right-column {
-	flex: 0 0 300px;  /* sets each column to a fixed width (adjust as needed) */
-	max-width: 300px;
+	flex: 0 0 400px;  /* sets each column to a fixed width (adjust as needed) */
+	max-width: 400px;
 }
 .description {
 	margin-bottom: 20px;
 	padding: 0 0 0 20px;
 	font-size: 1.2em;
+	line-height: 1em;
     }
 .download-badge {
-	width: 60px;
+	height: 50px;
 	display: block;
 	margin: 0 auto; /* Center the badge container */   
 }
@@ -166,9 +180,9 @@ footer {
 	<div class="content-wrapper">
 		<!-- Left Column: Text -->
 		<div class="left-column">
-			<p class="description">Rainy Night is a minimalist sleep app with relaxing sounds like rain, a stream, and brown noise. It includes a timer to quiet the sounds, and Night Watch.
+			<p class="description">Rainy Night is a minimalist sleep app with relaxing sounds like rain, a small stream, a cozy fire, brown noise, and more, with a sleep timer and Night Watch.
 			</p>
-			<p class="description">Night Watch mimics the smoothing lights of a television by cycling random colors at random intervals. Night Watch can automatically dim your screen when it starts.
+			<p class="description">Night Watch mimics the soothing lights of a television. Night Watch can automatically dim your screen when it starts to give you the perfect soft glow — and it pairs great with your favorite bedside MagSafe <a href="https://www.twelvesouth.com/products/hirise-2-deluxe">charging stand</a>.
 			</p>
 			<p class="description">Rainy Night is not designed to cure or relieve sleep disorders. If you have trouble sleeping or don't feel well rested, please speak to your doctor.
 			</p>

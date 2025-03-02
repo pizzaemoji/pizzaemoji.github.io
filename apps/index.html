@@ -14,144 +14,7 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
 	<link rel="manifest" href="/favicon/site.webmanifest">
-	<style>
-html {
-	font-size: 100%;
-}
-body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
-	color: #DDDDDD;
-	background-color: #222222; /* Remember to update theme-color on index! */
-	margin-right: auto;
-	margin-left: auto;
-	max-width: 1000px;
-}
-header {
-	padding: 100px 0 100px 0;
-	text-align: center;
-}
-#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
-	border: 0;
-	color: #EEEEEE;
-	font-size: 1em;
-	line-height: .5;
-	text-decoration: none;
-}
-#logo {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background-color: inherit;
-	/*	width in @media */
-}
-#byline {
-	text-decoration: none;	
-}
-/* links formatting */
-a {
-	text-decoration: none;
-}
-a:link {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-color: #222222;
-}
-/* container holds the apps */
-.container {
-	max-width: 500px;
-	margin: 0 auto;
-	padding: 20px;
-	
-	text-decoration: none;
-	font-size: 1.4rem;
-	font-weight: 300;
-	line-height: 2rem;
-	text-align: left;
-}
-.intro {
-	padding: 0 0 40px 10px;
-}
-.app-item {
-	display: flex;
-	align-items: center;
-	margin-bottom: 20px;
-	border-bottom: 1px solid #eee;
-	padding-bottom: 20px;
-}
-.app-item:last-child {
-	border-bottom: none;
-}
-.app-icon {
-	width: 100px;
-	margin-right: 20px;
-	text-align: center;
-}
-.app-icon img {
-	width: 100%;
-	height: auto;
-	border-radius: 10px;
-}
-.app-icon a {
-	text-decoration: none;	
-	border-bottom: none;
-}
-.app-details {
-	flex: 1;
-}
-.app-description {
-	margin: 0;
-	line-height: 1.4;
-}
-/* outside container elements */
-.download-badge {
-	height: 40px;
-	padding-top: 1em;
-	padding-bottom: 1em;
-	display: block;
-	margin: 0 auto; /* Center the badge container */   
-}
-footer {
-	color: #EEEEEE;
-	font-size: .8em;
-	font-weight: 200;
-	text-align: center;
-	padding-bottom: 1em;
-}
-/* Desktop */
-@media (min-width: 1000px) {
-	#logo {
-		width: 50%;
-	}
-	.footnote {
-		padding-left: 2em;
-		padding-right: 3em;
-	}
-}
-/* Mobile */
-@media (max-width: 999px) {
-	#logo {
-		width: 80%;
-	}
-	.footnote {
-		padding-left: 1em;
-		padding-right: 1em;
-	}
-}
-	</style>
+	<link href="/apps/apps.css" rel="stylesheet" />
 </head>
 <body>
 	<header>
@@ -163,30 +26,30 @@ footer {
 		</div>
 	</header>
 	<main>
-		<div class="container">
+		<div class="container-index">
 			<div class="intro">Apps for iPhone. Please enjoy.</div>
 	
 			<!-- Rainy Night -->
-			<div class="app-item">
-				<div class="app-icon">
+			<div class="app-item-index">
+				<div class="app-icon-index">
 					<a href="https://pizzaemoji.net/apps/rainy-night">
 					<img src="/apps/images/rainy-night-icon.png" alt="Rainy Night icon" />
 					</a>
 				</div>
-				<div class="app-details">
-					<p class="app-description"><a href="https://pizzaemoji.net/apps/rainy-night"><strong>Rainy Night</strong></a> is a minimalist sleep app for iPhone with relaxing sounds, a sleep timer and Night Watch. It's free on the App Store.</p>
+				<div class="app-details-index">
+					<p class="app-description-index"><a href="https://pizzaemoji.net/apps/rainy-night"><strong>Rainy Night</strong></a> is a minimalist sleep app for iPhone with relaxing sounds, a sleep timer and Night Watch. It's free on the App Store.</p>
 				</div>
 			</div>
 
 			<!-- Find the Pizza -->
-			<div class="app-item">
-				<div class="app-icon">
+			<div class="app-item-index">
+				<div class="app-icon-index">
 				<a href="https://pizzaemoji.net/apps/find-the-pizza">
 				<img src="/apps/images/find-the-pizza-icon.png" alt="Find the Pizza icon" />
 				</a>
 				</div>
-				<div class="app-details">
-					<p class="app-description"><a href="https://pizzaemoji.net/apps/find-the-pizza"><strong>Find the Pizza</strong></a> is a free, silly little game made in an afternoon with a bunch of emojis. Get it on the App Store, exclusively for iPhone.</p>
+				<div class="app-details-index">
+					<p class="app-description-index"><a href="https://pizzaemoji.net/apps/find-the-pizza"><strong>Find the Pizza</strong></a> is a free, silly little game made in an afternoon with a bunch of emojis. Get it on the App Store, exclusively for iPhone.</p>
 				</div>
 			</div>
 		</div>

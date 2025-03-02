@@ -8,14 +8,11 @@ body {
 	background-color: #222222; /* Remember to update theme-color on index! */
 	margin-right: auto;
 	margin-left: auto;
+	max-width: 1000px;
 }
-/* altered header for app display */
 header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 1em;
-	border-bottom: 2px solid #333333;
+	padding: 100px 0 100px 0;
+	text-align: center;
 }
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
@@ -23,6 +20,16 @@ header {
 	font-size: 1em;
 	color: #EEEEEE;
 	width: auto;
+}
+#logo {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
+	/*	width in @media */
+}
+#byline {
+	text-decoration: none;	
 }
 #logo-mini {
 	margin: 0;
@@ -62,6 +69,13 @@ a:hover {
 	border-color: #222222;
 }
 /* top nav */
+navheader {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1em;
+	border-bottom: 2px solid #333333;
+}
 nav ul {
 	list-style: none;
 	display: flex;
@@ -77,7 +91,7 @@ main {
 	max-width: 1200px;
 	margin: auto;
 }
-.app-header {
+.app-item {
 	text-align: center;
 }
 #app-icon {
@@ -166,6 +180,51 @@ main {
 .dot.active {
 	background-color: #495BEB;
 }
+/* apps/index.html */
+.container-index {
+	max-width: 500px;
+	margin: 0 auto;
+	padding: 20px;
+	text-decoration: none;
+	font-size: 1.4rem;
+	font-weight: 300;
+	line-height: 2rem;
+	text-align: left;
+}
+.intro {
+	padding: 0 0 40px 10px;
+}
+.app-item-index {
+	display: flex;
+	align-items: center;
+	margin-bottom: 20px;
+	border-bottom: 1px solid #eee;
+	padding-bottom: 20px;
+}
+.app-item-index:last-child {
+	border-bottom: none;
+}
+.app-icon-index {
+	width: 100px;
+	margin-right: 20px;
+	text-align: center;
+}
+.app-icon-index img {
+	width: 100%;
+	height: auto;
+	border-radius: 10px;
+}
+.app-icon-index a {
+	text-decoration: none;	
+	border-bottom: none;
+}
+.app-details-index {
+	flex: 1;
+}
+.app-description-index {
+	margin: 0;
+	line-height: 1.4;
+}
 /* additional elements */
 #fourohfour {
 	font-size: 2em;
@@ -184,13 +243,16 @@ footer {
 }
 /* Desktop */
 @media (min-width: 1000px) {
+	#logo {
+		width: 50%;
+	}
 	#logo-mini {
 		height: 40px;
 	}
 	#logo-slice {
 		display: none;
 	}
-	.description {
+	.app-description {
 		font-size: 1.2em;
 	}
 	.footnote {
@@ -200,13 +262,16 @@ footer {
 }
 /* Mobile */
 @media (max-width: 999px) {
+	#logo {
+		width: 80%;
+	}
 	#logo-mini {
 		display: none;
 	}
 	#logo-slice {
 		height: 50px;
 	}
-	.description {
+	.app-description {
 		font-size: 1.6em;
 	}
 	.footnote {

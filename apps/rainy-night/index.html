@@ -17,7 +17,7 @@
 	<link href="/apps/apps.css" rel="stylesheet" />
 </head>
 <body>
-	<header>
+	<navheader>
 	<div id="pizzaemoji">
 	<a href="https://pizzaemoji.net/apps">
 		<img src="/images/logo-mini.png" alt="Pizza Emoji" id="logo-mini" />
@@ -30,9 +30,9 @@
 		<li><a href="/apps/find-the-pizza">Find the Pizza</a></li>
 		</ul>
 	</nav>
-	</header>
+	</navheader>
 	<main>
-	<div class="app-header">
+	<div class="app-item">
 	<img src="/apps/images/rainy-night-icon.png" id="app-icon">
 		<h1 class="app-name">Rainy Night</h1>
 		<p class="app-logline">A minimalist sleep app for iPhone</p>
@@ -85,7 +85,7 @@
 		}
 
 		// Automatically change images every 3 seconds (3000ms)
-		setInterval(nextImage, 3000);
+		setInterval(nextImage, 5000);
 
 		// Add click events on dots to navigate manually
 		dots.forEach((dot, index) => {

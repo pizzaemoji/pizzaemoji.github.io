@@ -89,8 +89,13 @@ main {
 	margin: 0;
 	padding: 0;
 }
-	.app-logline {
-	font-size: 1.5em;
+.app-logline {
+	text-decoration: none;
+	font-size: 1.5rem;
+	font-weight: 300;
+	line-height: 1rem;
+	text-align: center;
+	margin: auto;
 	color: #495BEB;
 }
 .content-wrapper {
@@ -105,13 +110,16 @@ main {
 	max-width: 400px;
 }
 .description {
-	margin-bottom: 20px;
-	padding: 0 0 0 20px;
-	font-size: 1.2em;
-	line-height: 1em;
-    }
+	text-decoration: none;
+	font-size: 1.4rem;
+	font-weight: 300;
+	line-height: 2.2rem;
+	text-align: left;
+	margin: auto;
+}
 .download-badge {
 	height: 50px;
+	padding: 50px;
 	display: block;
 	margin: 0 auto; /* Center the badge container */   
 }
@@ -120,12 +128,12 @@ main {
 	position: relative;
 	overflow: hidden;
 	width: 300px;  /* Match the image width */
-	margin: 0; /* Center the carousel container */
+	margin: 0 auto; /* Center the carousel container */
 }
 .carousel-image {
 	display: none;
 	width: 300px; /* Match the carousel */
-	margin: 0; /* Center the image container */
+	margin: 0 auto; /* Center the image container */
 }
 .carousel-image.active {
 	display: block;
@@ -141,7 +149,7 @@ main {
 	height: 10px;
 	margin: 0 5px;
 	border-radius: 50%;
-	background-color: #555;
+	background-color: #555555;
 	cursor: pointer;
 }
 .dot.active {

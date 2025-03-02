@@ -16,10 +16,10 @@ header {
 }
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
-	text-decoration: none;
-	font-size: 1em;
 	color: #EEEEEE;
-	width: auto;
+	font-size: 1em;
+	line-height: .5;
+	text-decoration: none;
 }
 #logo {
 	margin: 0;

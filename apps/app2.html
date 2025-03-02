@@ -60,7 +60,14 @@ header {
 	color: #EEEEEE;
 	width: auto;
 }
-#logo {
+#logo-mini {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
+	/*	width in @media */
+}
+#logo-slice {
 	margin: 0;
 	padding: 0;
 	border: 0;
@@ -170,9 +177,12 @@ footer {
 }
 	/* Desktop */
 @media (min-width: 1000px) {
-	#logo {
-		width: 200px;
+	#logo-mini {
+		height: 50px;
 	}
+	#logo-slice {
+		display: none;
+}
 	.footnote {
 		padding-left: 2em;
 		padding-right: 3em;
@@ -180,8 +190,11 @@ footer {
 }
 /* Mobile */
 @media (max-width: 999px) {
-	#logo {
-		width: 100px;
+	#logo-mini {
+		display: none;
+	}
+	#logo-slice {
+		height: 50px;
 	}
 	.footnote {
 		padding-left: 1em;

@@ -104,7 +104,6 @@ main {
 .carousel {
 	position: relative;
 	overflow: hidden;
-	display: none;
 	width: 300px;  /* Match the image width */
 	margin: 0; /* Center the carousel container */
 }
@@ -132,13 +131,13 @@ main {
 .dot.active {
 	background-color: #495BEB;
 }
-/* Footer */
 footer {
+	color: #EEEEEE;
+	font-size: .8em;
+	font-weight: 200;
 	text-align: center;
-	padding: 20px;
-	border-top: 1px solid #444;
-	font-size: 14px;
-}
+	padding-bottom: 1em;
+	}
 </style>
 </head>
 
@@ -156,7 +155,6 @@ footer {
 		</ul>
 	</nav>
 	</header>
-
 	<main>
 	<div class="app-header">
 	<div><img src="/apps/images/rainy-night-icon.png" id="app-icon"></div>
@@ -190,9 +188,8 @@ footer {
 	</div>
 	</main>
 	<footer>
-    &copy; 2025 Brandon Butler
+	<p>&copy;2025 Brandon Butler — <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
 	</footer>
-
 	<!-- Carousel Script -->
 	<script>
 	(function() {

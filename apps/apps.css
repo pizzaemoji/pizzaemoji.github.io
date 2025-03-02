@@ -121,11 +121,12 @@ main {
 	font-weight: 900;
 	text-align: center;
 	margin: auto;
-	padding-top: 2em; /* Give this to download-badge when removed */
+	padding-top: 1em; /* Give this to download-badge when removed */
 	padding-bottom: .3em;
 }
 .download-badge {
 	height: 60px;
+/*	padding-top: 2em; Restore after removing comingSoon */
 	padding-bottom: 2em;
 	display: block;
 	margin: 0 auto; /* Center the badge container */   

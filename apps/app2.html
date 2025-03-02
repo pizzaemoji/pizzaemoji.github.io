@@ -56,16 +56,16 @@ header {
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
 	text-decoration: none;
+	font-size: 1em;
 	color: #EEEEEE;
-	height: 50px;
-	padding: 12px;
 	width: auto;
 }
 #logo {
 	margin: 0;
-	padding: 0;
+	padding: 12px;
 	border: 0;
 	background-color: inherit;
+	/*	width in @media */
 }
 nav ul {
 	list-style: none;
@@ -170,7 +170,28 @@ footer {
 	font-weight: 200;
 	text-align: center;
 	padding-bottom: 1em;
+}
+	/* Desktop */
+@media (min-width: 1000px) {
+	#logo {
+		width: 200px;
 	}
+	.footnote {
+		padding-left: 2em;
+		padding-right: 3em;
+	}
+}
+/* Mobile */
+@media (max-width: 999px) {
+	#logo {
+		width: 50px;
+	}
+	.footnote {
+		padding-left: 1em;
+		padding-right: 1em;
+	}
+}
+/* End CSS */
 </style>
 </head>
 

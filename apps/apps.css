@@ -129,6 +129,7 @@ main {
 	text-align: center;
 	margin: auto;
 	padding-bottom: 2em; /* Give this to download-badge when removed */
+}
 .carousel {
 	position: relative;
 	overflow: hidden;

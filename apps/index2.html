@@ -65,13 +65,13 @@ header {
       padding: 20px;
     }
     /* App Item Styles */
-    .app-item {
-      display: flex;
-      align-items: flex-start;
-      margin-bottom: 20px;
-      border-bottom: 1px solid #eee;
-      padding-bottom: 20px;
-    }
+.app-item {
+  display: flex;
+  align-items: center; /* Centers both columns vertically */
+  margin-bottom: 20px;
+  border-bottom: 1px solid #eee;
+  padding-bottom: 20px;
+}
     .app-item:last-child {
       border-bottom: none;
     }
@@ -86,10 +86,9 @@ header {
       height: auto;
       border-radius: 10px;
     }
-.app-details {
-  display: flex;
-  align-items: center; /* Centers the description vertically within this container */
-}
+    .app-details {
+      flex: 1;
+    }
     .app-description {
       margin: 0;
       line-height: 1.4;

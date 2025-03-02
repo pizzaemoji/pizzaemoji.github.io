@@ -115,20 +115,20 @@ main {
 	padding: 0 1em 0 1em;
 	margin: auto;
 }
-.download-badge {
-	height: 60px;
-	padding-top: 2em;
-	display: block;
-	margin: 0 auto; /* Center the badge container */   
-}
 .comingSoon	{
 	text-decoration: none;
-	font-size: 2rem;
-	font-weight: 800;
-	line-height: 1rem;
+	font-size: 2.2rem;
+	font-weight: 900;
+	line-height: 0rem;
 	text-align: center;
 	margin: auto;
-	padding-bottom: 2em; /* Give this to download-badge when removed */
+	padding-top: 2em; /* Give this to download-badge when removed */
+}
+.download-badge {
+	height: 60px;
+	padding-bottom: 2em;
+	display: block;
+	margin: 0 auto; /* Center the badge container */   
 }
 .carousel {
 	position: relative;

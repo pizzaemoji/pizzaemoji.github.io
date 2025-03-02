@@ -53,10 +53,19 @@ header {
 	padding: 20px;
 	border-bottom: 1px solid #444;
 }
-	#pizza-emoji {
-	width: auto;
+#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
+	border: 0;
+	text-decoration: none;
+	color: #EEEEEE;
 	height: 50px;
 	padding: 12px;
+	width: auto;
+}
+#logo {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
 }
 nav ul {
 	list-style: none;
@@ -167,9 +176,9 @@ footer {
 
 <body>
 	<header>
-	<div class="logo">
+	<div id="pizzaemoji">
 	<a href="https://pizzaemoji.net/">
-		<img src="/apps/images/logo-mini.png" alt="Pizza Emoji" id="pizza-emoji" />
+		<img src="/apps/images/logo-mini.png" alt="Pizza Emoji" id="logo" />
 	</a>
 	</div>
 	<nav>

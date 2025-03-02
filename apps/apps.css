@@ -117,12 +117,12 @@ main {
 }
 .comingSoon	{
 	text-decoration: none;
-	font-size: 2.2rem;
+	font-size: 2rem;
 	font-weight: 900;
-	line-height: 0rem;
 	text-align: center;
 	margin: auto;
 	padding-top: 2em; /* Give this to download-badge when removed */
+	padding-bottom: .3em;
 }
 .download-badge {
 	height: 60px;

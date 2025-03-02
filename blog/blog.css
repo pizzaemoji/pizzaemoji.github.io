@@ -32,6 +32,29 @@ header {
 #byline {
 	text-decoration: none;	
 }
+/* links formatting */
+a {
+	text-decoration: none;
+}
+a:link {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:hover {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #222222;
+}
 /* main post formatting */
 article {
 	padding-left: 5px;
@@ -101,29 +124,6 @@ blockquote {
 	margin: 2em 2em 2em 0em;
 	padding: 0 0 0 1.5em;
 	border-left: #FF772B 3px solid;
-}
-/* links formatting */
-a {
-	text-decoration: none;
-}
-a:link {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-color: #222222;
 }
 /* pullquotes and images */
 /* margin: position of element padding: space between element and lines */

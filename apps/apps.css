@@ -110,7 +110,16 @@ main {
 	font-weight: 300;
 	padding: 1em;
 	margin: auto;
-	color: #495BEB;
+	color: var(--accent-color);
+}
+:root {
+	--accent-color: #EEEEEE; /* default fallback */
+}
+body.rainy-night {
+	--accent-color: #495BEB;
+}
+body.find-the-pizza {
+	--accent-color: #F1A33C;
 }
 .content-wrapper {
 	display: flex;

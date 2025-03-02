@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>[App Name] - Showcase</title>
+  <style>
+    /* Global Styles */
+    body {
+      margin: 0;
+      font-family: -apple-system, BlinkMacSystemFont, "Helvetica Neue", Helvetica, Arial, sans-serif;
+      background-color: #222222;
+      color: #DDDDDD;
+      line-height: 1.6;
+    }
+    a {
+      color: #EEEEEE;
+      text-decoration: none;
+    }
+    a:hover {
+      text-decoration: underline;
+    }
+    /* Header */
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 20px;
+      border-bottom: 1px solid #444;
+    }
+    .pizza-emoji {
+      /* Placeholder for your brand's logo */
+      width: 120px;
+      height: auto;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 20px;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      font-size: 16px;
+    }
+    /* Main Content */
+    main {
+      max-width: 1200px;
+      margin: 40px auto;
+      padding: 0 20px;
+    }
+    .app-header {
+      text-align: center;
+      margin-bottom: 40px;
+    }
+    .app-title {
+      font-size: 48px;
+      margin: 0;
+    }
+    .app-logline {
+      font-size: 20px;
+      margin: 10px 0 0 0;
+      color: #FF772B;
+    }
+    .content-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 40px;
+    }
+    .left-column,
+    .right-column {
+      flex: 1;
+      min-width: 300px;
+    }
+    .description {
+      margin-bottom: 20px;
+      font-size: 18px;
+    }
+    .download-badge img {
+      max-width: 200px;
+    }
+    /* Carousel Styles */
+    .carousel {
+      position: relative;
+      overflow: hidden;
+    }
+    .carousel-image {
+      width: 100%;
+      display: none;
+    }
+    .carousel-image.active {
+      display: block;
+    }
+    .carousel-dots {
+      text-align: center;
+      margin-top: 10px;
+    }
+    .dot {
+      display: inline-block;
+      width: 10px;
+      height: 10px;
+      margin: 0 5px;
+      border-radius: 50%;
+      background-color: #555;
+      cursor: pointer;
+    }
+    .dot.active {
+      background-color: #FF772B;
+    }
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 20px;
+      border-top: 1px solid #444;
+      font-size: 14px;
+    }
+  </style>
+</head>
+<body>
+  <!-- Header with Brand Logo and Navigation -->
+  <header>
+    <div class="logo">
+      <img src="apps/images/logo-mini" alt="Pizza Emoji" class="pizza-emoji" />
+    </div>
+    <nav>
+      <ul>
+        <li><a href="[Link1_URL]">App One</a></li>
+        <li><a href="[Link2_URL]">App Two</a></li>
+        <li><a href="[Link3_URL]">App Three</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <!-- Main Content -->
+  <main>
+    <!-- App Title & Logline -->
+    <div class="app-header">
+      <h1 class="app-title">[App Name]</h1>
+      <p class="app-logline">[The best app for pizza]</p>
+    </div>
+    <div class="content-wrapper">
+      <!-- Left Column: Description & Download Badge -->
+      <div class="left-column">
+        <p class="description">
+          [Brief description of the app goes here. Replace this text with details about the app’s features, benefits, and unique selling points.]
+        </p>
+        <div class="download-badge">
+          <img src="apps/images/AppStore-White.png" alt="Download on the App Store" />
+        </div>
+      </div>
+      <!-- Right Column: Image Carousel -->
+      <div class="right-column">
+        <div class="carousel">
+          <img class="carousel-image active" src="apps/images/ss-rainy-night-1.png" alt="Screenshot 1" />
+          <img class="carousel-image" src="apps/images/ss-rainy-night-1.png" alt="Screenshot 2" />
+          <img class="carousel-image" src="apps/images/ss-rainy-night-1.png" alt="Screenshot 3" />
+          <div class="carousel-dots">
+            <span class="dot active"></span>
+            <span class="dot"></span>
+            <span class="dot"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer>
+    &copy; 2025 [Your Brand]. All rights reserved.
+  </footer>
+
+  <!-- Carousel Script -->
+  <script>
+    (function() {
+      const images = document.querySelectorAll('.carousel-image');
+      const dots = document.querySelectorAll('.dot');
+      let currentIndex = 0;
+      const totalImages = images.length;
+
+      function showImage(index) {
+        images.forEach((img, i) => {
+          img.classList.toggle('active', i === index);
+          dots[i].classList.toggle('active', i === index);
+        });
+      }
+
+      function nextImage() {
+        currentIndex = (currentIndex + 1) % totalImages;
+        showImage(currentIndex);
+      }
+
+      // Automatically change images every 3 seconds (3000ms)
+      setInterval(nextImage, 3000);
+
+      // Optionally, add click events on dots to navigate manually
+      dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+          currentIndex = index;
+          showImage(currentIndex);
+        });
+      });
+    })();
+  </script>
+</body>
+</html>

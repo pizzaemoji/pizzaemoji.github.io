@@ -45,6 +45,13 @@ header {
 	color: #EEEEEE;
 	width: auto;
 }
+#logo {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
+	/*	width in @media */
+}
 #logo-mini {
 	margin: 0;
 	padding: 0;
@@ -106,7 +113,7 @@ main {
 	flex: 0 0 400px;  /* Sets each column to a fixed width */
 	max-width: 400px;
 }
-.description {
+.app-description {
 	text-decoration: none;
 	font-size: 1.4rem;
 	font-weight: 300;
@@ -170,6 +177,9 @@ footer {
 }
 /* Desktop */
 @media (min-width: 1000px) {
+	#logo {
+		height: 60px;
+	}
 	#logo-mini {
 		height: 40px;
 	}
@@ -186,6 +196,9 @@ footer {
 }
 /* Mobile */
 @media (max-width: 999px) {
+	#logo {
+		height: 60px;
+	}
 	#logo-mini {
 		display: none;
 	}

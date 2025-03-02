@@ -9,6 +9,36 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 }
+/* altered header for app display */
+header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 1em;
+	border-bottom: 2px solid #333333;
+}
+#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
+	border: 0;
+	text-decoration: none;
+	font-size: 1em;
+	color: #EEEEEE;
+	width: auto;
+}
+#logo-mini {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
+	/*	width in @media */
+}
+#logo-slice {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
+	/*	width in @media */
+}
+/* links formatting */
 a {
 	text-decoration: none;
 }
@@ -31,41 +61,7 @@ a:hover {
 	color: #EEEEEE;
 	border-color: #222222;
 }
-header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 1em;
-	border-bottom: 2px solid #333333;
-}
-#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
-	border: 0;
-	text-decoration: none;
-	font-size: 1em;
-	color: #EEEEEE;
-	width: auto;
-}
-#logo {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background-color: inherit;
-	/*	width in @media */
-}
-#logo-mini {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background-color: inherit;
-	/*	width in @media */
-}
-#logo-slice {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background-color: inherit;
-	/*	width in @media */
-}
+/* top nav */
 nav ul {
 	list-style: none;
 	display: flex;
@@ -76,6 +72,7 @@ nav ul {
 nav ul li {
 	font-size: 1.4em;
 }
+/* main content */
 main {
 	max-width: 1200px;
 	margin: auto;
@@ -138,6 +135,7 @@ main {
 	display: block;
 	margin: 0 auto; /* Center the badge container */   
 }
+/* image carousel */
 .carousel {
 	position: relative;
 	overflow: hidden;
@@ -168,6 +166,15 @@ main {
 .dot.active {
 	background-color: #495BEB;
 }
+/* additional elements */
+#fourohfour {
+	font-size: 2em;
+	line-height: 2em;
+	text-align: center;
+}
+#slice {
+	height: 1rem;
+}
 footer {
 	color: #EEEEEE;
 	font-size: .8em;
@@ -177,9 +184,6 @@ footer {
 }
 /* Desktop */
 @media (min-width: 1000px) {
-	#logo {
-		height: 60px;
-	}
 	#logo-mini {
 		height: 40px;
 	}
@@ -196,9 +200,6 @@ footer {
 }
 /* Mobile */
 @media (max-width: 999px) {
-	#logo {
-		height: 60px;
-	}
 	#logo-mini {
 		display: none;
 	}

@@ -80,16 +80,16 @@ main {
 	color: #495BEB;
 }
 .content-wrapper {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center; /* centers the columns as a group */
-  gap: 20px; /* reduced from 40px */
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center; /* centers the columns as a group */
+	gap: 20px; /* reduced from 40px */
 }
 
 .left-column,
 .right-column {
-  flex: 0 0 500px;  /* sets each column to a fixed width (adjust as needed) */
-  max-width: 500px;
+	flex: 0 0 500px;  /* sets each column to a fixed width (adjust as needed) */
+	max-width: 500px;
 }
 .description {
 	margin-bottom: 20px;
@@ -97,50 +97,51 @@ main {
 	font-size: 1.2em;
     }
 .download-badge img {
-	height: 40px;
+	display: block;
 	margin: 0 auto; /* Center the badge container */   
-    }
+}
     /* Carousel Styles */
 .carousel {
-  position: relative;
-  overflow: hidden;
-  width: 300px;  /* Match the image width */
-  margin: 0; /* Center the carousel container */
+	display: none;
+	position: relative;
+	overflow: hidden;
+	width: 300px;  /* Match the image width */
+	padding-left: 20px;
+	margin: 0; /* Center the carousel container */
 }
-    .carousel-image {
-      width: 300px; /* Match the carousel */
-      display: none;
-  margin: 0; /* Center the image container */
-
-    }
-    .carousel-image.active {
-      display: block;
-    }
-    .carousel-dots {
-      text-align: center;
-      margin-top: 10px;
-      margin-bottom: 20px;
-    }
-    .dot {
-      display: inline-block;
-      width: 10px;
-      height: 10px;
-      margin: 0 5px;
-      border-radius: 50%;
-      background-color: #555;
-      cursor: pointer;
-    }
-    .dot.active {
-      background-color: #495BEB;
-    }
-    /* Footer */
-    footer {
-      text-align: center;
-      padding: 20px;
-      border-top: 1px solid #444;
-      font-size: 14px;
-    }
-  </style>
+.carousel-image {
+	width: 300px; /* Match the carousel */
+	padding-left: 20px;
+	margin: 0; /* Center the image container */
+}
+.carousel-image.active {
+	display: block;
+}
+.carousel-dots {
+	text-align: center;
+	margin-top: 10px;
+	margin-bottom: 20px;
+}
+.dot {
+	display: inline-block;
+	width: 10px;
+	height: 10px;
+	margin: 0 5px;
+	border-radius: 50%;
+	background-color: #555;
+	cursor: pointer;
+}
+.dot.active {
+	background-color: #495BEB;
+}
+/* Footer */
+footer {
+	text-align: center;
+	padding: 20px;
+	border-top: 1px solid #444;
+	font-size: 14px;
+}
+</style>
 </head>
 
 <body>

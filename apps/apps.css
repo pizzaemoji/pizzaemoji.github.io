@@ -121,6 +121,13 @@ main {
 	display: block;
 	margin: 0 auto; /* Center the badge container */   
 }
+.comingSoon	{
+	text-decoration: none;
+	font-size: 1.2rem;
+	font-weight: 600;
+	line-height: 1rem;
+	text-align: center;
+	margin: auto;
 .carousel {
 	position: relative;
 	overflow: hidden;

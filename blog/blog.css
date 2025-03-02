@@ -1,7 +1,7 @@
-/* Pizza Emoji Blog Cascading Style Sheet */
+/* Pizza Emoji Blog Cascading Style Sheet - /blog/blog.css */
 html {
 	font-size: 100%;
-	}
+}
 body {
 	font-family: "Helvetica", "Verdana", "Tahoma", sans-serif;
 	color: #DDDDDD;
@@ -10,45 +10,45 @@ body {
 	margin-left: auto;
 	max-width: 1000px;
 	counter-reset: fn_counter; /* Creates footnote <sup> counter */
-	}
+}
 header {
 	padding: 100px 0 100px 0;
 	text-align: center;
-	}
+}
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
 	color: #EEEEEE;
 	font-size: 1em;
 	line-height: .5;
 	text-decoration: none;
-	}
+}
 #logo {
 	margin: 0;
 	padding: 0;
 	border: 0;
 	background-color: inherit;
 	/*	width in @media */
-	}
+}
 #byline {
 	text-decoration: none;	
-	}
+}
 /* main post formatting */
 article {
 	padding-left: 5px;
 	padding-right: 5px;
 	margin: auto;
-	}
+}
 #title {
 	text-align: left;
 	margin: auto;
 	width: 90%;
-	}
+}
 #hero {
 	display: block;
 	padding-top: 2em;
 	margin: auto;
 	width: 100%;
-	}
+}
 .post {
 	text-decoration: none;
 	font-size: 1.4rem;
@@ -57,7 +57,7 @@ article {
 	text-align: left;
 	margin: auto;
 	/* width in @media */
-	}
+}
 h1 {
 	text-decoration: none;
 	color: #EEEEEE;
@@ -68,7 +68,7 @@ h1 {
 	word-spacing: .05em;
 	text-align: left;
 	margin: 0;
-	}
+}
 h2 {
 	text-decoration: none;
 	font-size: 2em;
@@ -79,7 +79,7 @@ h2 {
 	padding-top: .7em;
 	padding-bottom: .7em;
 	margin: 0;
-	}
+}
 h3 {
 	text-decoration: none;
  	font-size: 1em;
@@ -89,42 +89,42 @@ h3 {
 	padding-top: 1em;
 	padding-bottom: .5em;
 	margin: 0;
-	}
+}
 time {
 	text-decoration: none;
 	font-size: 1rem;
 	line-height: 1rem;
 	font-weight: 100;
 	text-align: left;
-	}
+}
 blockquote {
 	margin: 2em 2em 2em 0em;
 	padding: 0 0 0 1.5em;
 	border-left: #FF772B 3px solid;
-	}
+}
 /* links formatting */
 a {
 	text-decoration: none;
-	}
+}
 a:link {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
-	}
+}
 a:visited {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
-	}
+}
 a:hover {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-color: #222222;
-	}
+}
 /* pullquotes and images */
 /* margin: position of element padding: space between element and lines */
 .pullquote-left {
@@ -142,7 +142,7 @@ a:hover {
 	border-bottom: #FF772B 1px solid;
 	padding: 1em 0 1em 0;
 	/* width, font-size, text-align, and margin in @media */
-	}
+}
 .pullquote-right {
 	display: inline;
 	position: relative;
@@ -158,7 +158,7 @@ a:hover {
 	border-bottom: #FF772B 1px solid;
 	padding: 1em 0 1em 0;
 	/* width, font-size, text-align, and margin in @media */
-	}
+}
 .image-small-left {
 	display: inline;
 	position: relative;
@@ -168,7 +168,7 @@ a:hover {
 	border-bottom: #FF772B 1px solid;
 	padding: 15px 0 15px 0;
 	/* width and margin in @media */
-	}
+}
 .image-small-right {
 	display: inline;
 	position: relative;
@@ -178,13 +178,13 @@ a:hover {
 	border-bottom: #FF772B 1px solid;
 	padding: 15px 0 15px 0;
 	/* width and margin in @media */
-	}
+}
 .image-large {
 	display: block;
 	position: relative;
 	margin: 40px auto 0 auto; /* centers, space between image and <p> above */
 	width: 90%;
-	}
+}
 .caption {
 	text-decoration: none;
 	color: #DDDDDD;
@@ -197,7 +197,7 @@ a:hover {
 	margin-left: auto;
 	margin-right: auto;	
 	width: 85%;
-	}
+}
 /* footnote formatting */
 .footnote {
 	text-decoration: none;
@@ -206,30 +206,30 @@ a:hover {
 	font-weight: 200;
 	text-align: left;
 	/* padding in @media */
-	}
+}
 sup {
 	text-decoration: none;
 	color: #FF772B;
 	font-size: .7em;
 	font-weight: 600;
 	line-height: 0; /* removes gap above superscript number */
-	}
+}
 sup::after {
 	counter-increment: fn_counter; /* Increments footnote counter */
 	content: counter(fn_counter); /* Displays footnote counter */
-	}
+}
 li {
 	margin-bottom: 1em;
-	}
+}
 a.fnlink:link, a.fnlink:visited {
 	text-decoration: none;
 	border-color: #222222;
-	}
+}
 a.fnlink:hover {
 	text-decoration: none;
 	border-color: #222222;
 	cursor: pointer;
-	}
+}
 .divider { /* separates post from footnotes */
 	display: block;
 	position: relative;
@@ -237,12 +237,12 @@ a.fnlink:hover {
 	margin-bottom: 2em;
 	height: 2px;
 	background: #888888;
-	}
+}
 /* spacing, footer, etc formatting */
 .spacer {
 	text-decoration: none;
 	padding: 3em;
-	}
+}
 .posthome {
 	text-decoration: none;
 	font-size: 1.4rem;
@@ -251,32 +251,32 @@ a.fnlink:hover {
 	text-align: left;
 	margin: auto;
 	/* width in @media */
-	}
+}
 .spacerhome {
 	text-decoration: none;
 	padding: 1em;
-	}
+}
 #fourohfour {
 	font-size: 2em;
 	line-height: 2em;
 	text-align: center;
-	}
+}
 #slice {
 	height: 1rem;
-	}
+}
 footer {
 	color: #EEEEEE;
 	font-size: .8em;
 	font-weight: 200;
 	text-align: center;
 	padding-bottom: 1em;
-	}
-/* 2024-10-XX-ios-18-point-1-the-apple-intelligence-update */
+}
+/* 2024-10-28-ios-the-apple-intelligence-update */
 #appleintelligencegradient {
 	background: -webkit-linear-gradient(0deg, #55CBFF 20%, #DF7CFF 40%, #FF796E 60%, #FFAD5B 80%, #FAFF55 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
-	}
+}
 /* 2025-02-04-a-brief-history-of-spider-man-in-cinema */
 #spideyproverb {
 	text-decoration: none;
@@ -286,77 +286,76 @@ footer {
 	font-weight: 100;
 	text-align: center;
 	padding-top: 2em;
-	}
+}
 /* Desktop */
 @media (min-width: 1000px) {
 	#logo {
 		width: 60%;
-		}
+	}
 	.post {
 		width: 70%;
-		}
+	}
 	.posthome {
 		width: 60%;
-		}
+	}
 	.pullquote-left {
 		width: 60%;
 		font-size: 1.2em;
 		text-align: left;
 		margin: 10px 30px 10px -60px;
-		}
+	}
 	.pullquote-right {
 		width: 60%;
 		font-size: 1.2em;
 		text-align: right;
 		margin: 10px -60px 10px 30px;
-		}
+	}
 	.image-small-left {
 		width: 300px;
 		margin: 10px 30px 10px -60px;
-		}
+	}
 	.image-small-right {
 		width: 300px;
 		margin: 10px -60px 10px 30px;
-		}
+	}
 	.footnote {
 		padding-left: 2em;
 		padding-right: 3em;
-		}
 	}
+}
 /* Mobile */
 @media (max-width: 999px) {
 	#logo {
 		width: 80%;
-		}
+	}
 	.post {
 		width: 90%;
-		}
+	}
 	.posthome {
 		width: 90%;
-		}
+	}
 	.image-small-left {
 		width: 200px;
 		margin: 10px 10px 10px -10px;
-		}
+	}
 	.image-small-right {
 		width: 200px;
 		margin: 10px -10px 10px 10px;
-		}
+	}
 	.pullquote-left {
 		width: 100%;
 		font-size: 1em;
 		text-align: left;
 		margin-bottom: 1em;
-		}
+	}
 	.pullquote-right {
 		width: 100%;
 		font-size: 1em;
 		text-align: left;
 		margin-bottom: 1em;
-		}
+	}
 	.footnote {
 		padding-left: 1em;
 		padding-right: 1em;
-		}
 	}
-/* End CSS */
+}

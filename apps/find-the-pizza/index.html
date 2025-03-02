@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Find the Pizza — A silly game with emojis for iPhone</title>
+	<meta name="title" content="Pizza Emoji - A small pictorial symbol that represents a slice of delicious baked dough with tomato sauce, cheese, and various toppings." />
+	<meta name="description" content="The best website named Pizza Emoji" />
+	<meta name="keywords" content="app, iphone, game, emoji, pizza, app store" />
+	<meta name="author" content="Brandon Butler" />
+	<meta name="theme-color" content="#222222" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name='robots' content='max-image-preview:large' />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/favicon/site.webmanifest">
+	<link href="/apps/apps.css" rel="stylesheet" />
+</head>
+<body>
+	<header>
+	<div id="pizzaemoji">
+	<a href="https://pizzaemoji.net/">
+		<img src="/images/logo-mini.png" alt="Pizza Emoji" id="logo-mini" />
+		<img src="/images/logo-slice.png" alt="Pizza Emoji" id="logo-slice" />
+	</a>
+	</div>
+	<nav>
+		<ul>
+		<li><a href="/apps/rainy-night/">Rainy Night</a></li>
+		<li>Find the Pizza</li>
+		</ul>
+	</nav>
+	</header>
+	<main>
+	<div class="app-header">
+	<img src="/apps/images/find-the-pizza-icon.png" id="app-icon">
+		<h1 class="app-title">Find the Pizza</h1>
+		<p class="app-logline">A silly game with emojis</p>
+	</div>
+	<div class="content-wrapper">
+		<div class="left-column">
+			<div class="carousel">
+			<img class="carousel-image active" src="/apps/images/ss-find-the-pizza-1.png" alt="Screenshot 1" />
+			<img class="carousel-image" src="/apps/images/ss-find-the-pizza-2.png" alt="Screenshot 2" />
+			<img class="carousel-image" src="/apps/images/ss-find-the-pizza-3.png" alt="Screenshot 3" />
+				<div class="carousel-dots">
+				<span class="dot active"></span>
+				<span class="dot"></span>
+				<span class="dot"></span>
+				</div>
+			</div>
+		</div>
+		<div class="right-column">
+			<div class="description">
+			<p>Find the Pizza is a free, silly little game made in an afternoon with a bunch of emojis.
+			</p>
+			<p>One of these silly emojis is hiding the 🍕! Watch carefully until you see the 🍕 revealed, then tap it! Pretty easy, right? Watch out, there’s a little surprise on level 25… Keep playing until it’s game over! Did I mention it’s free? 😂
+			</p>
+			</div>
+			<img src="/apps/images/AppStore-White.png" alt="Download on the App Store" class="download-badge" />
+		</div>
+	</div>
+	</main>
+	<footer>
+	<p>&copy;2025 Brandon Butler — <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
+	</footer>
+	<script>
+	(function() {
+		const images = document.querySelectorAll('.carousel-image');
+		const dots = document.querySelectorAll('.dot');
+		let currentIndex = 0;
+		const totalImages = images.length;
+
+		function showImage(index) {
+			images.forEach((img, i) => {
+				img.classList.toggle('active', i === index);
+				dots[i].classList.toggle('active', i === index);
+			});
+		}
+
+		function nextImage() {
+			currentIndex = (currentIndex + 1) % totalImages;
+			showImage(currentIndex);
+		}
+
+		// Automatically change images every 3 seconds (3000ms)
+		setInterval(nextImage, 3000);
+
+		// Add click events on dots to navigate manually
+		dots.forEach((dot, index) => {
+        dot.addEventListener('click', () => {
+			currentIndex = index;
+			showImage(currentIndex);
+			});
+		});
+	})();
+	</script>
+</body>
+</html>

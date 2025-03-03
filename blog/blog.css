@@ -51,7 +51,7 @@ nav ul {
 	padding: 0;
 }
 nav ul li {
-	font-size: 1.4em;
+	font-size: 1.2em;
 }
     /* Container for the Read More menu */
     .read-more-container {
@@ -71,7 +71,7 @@ nav ul li {
     .read-more .chevron {
       margin-left: 0.5em;
       color: #FF772B;
-      font-size: 0.8em;
+      font-size: 1em;
     }
     /* The dropdown menu (hidden by default) */
     .dropdown {
@@ -81,7 +81,7 @@ nav ul li {
       background-color: #222222;
       border: 1px solid #333333;
       margin-top: 0px;
-      min-width: 300px;
+      min-width: 400px;
       z-index: 100;
       flex-direction: column;
     }

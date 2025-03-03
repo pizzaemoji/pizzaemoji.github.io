@@ -50,6 +50,7 @@ header {
 	font-weight: 600;
 	text-align: left;
 	margin-top: 2em;
+	padding-top: 2px; /* Puts a little space above border */
 	border-top: 3px solid #FF772B;
 }
 time {

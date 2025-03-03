@@ -32,8 +32,31 @@ header {
 #byline {
 	text-decoration: none;	
 }
+/* links formatting */
+a {
+	text-decoration: none;
+}
+a:link {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:hover {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #222222;
+}
 
-/* TEST HEADER */
+/* ************** */
 
 /* top nav */
 navheader {
@@ -106,6 +129,12 @@ nav ul li {
 .dropdown:hover {
 	display: flex;
 }
+navhead a:link, navhead a:visited {
+  border: none;
+  padding: 0;
+  color: #EEEEEE;
+  text-decoration: none;
+}
 
 
 .intro {
@@ -115,29 +144,6 @@ nav ul li {
 	text-align: center;
 	padding-bottom: 20px;
 	margin: 0 auto;
-}
-/* links formatting */
-a {
-	text-decoration: none;
-}
-a:link {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-color: #222222;
 }
 /* main post formatting */
 article {

@@ -380,10 +380,7 @@ footer {
 		width: 50%;
 	}
 	#logo-mini {
-		height: 40px;
-	}
-	#logo-slice {
-		display: none;
+		height: 50px;
 	}
 	.post {
 		width: 70%;
@@ -422,9 +419,6 @@ footer {
 		width: 80%;
 	}
 	#logo-mini {
-		display: none;
-	}
-	#logo-slice {
 		height: 50px;
 	}
 	.post {

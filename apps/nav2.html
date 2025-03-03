@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Read More Hover Example</title>
+  <style>
+    body {
+      background-color: #222222;
+      color: #DDDDDD;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+    }
+    /* Container for the Read More menu */
+    .read-more-container {
+      position: relative;
+      display: inline-block;
+    }
+    /* The Read More button */
+    .read-more {
+      background-color: #222222;
+      padding: 0.5em 1em;
+      cursor: pointer;
+      color: #DDDDDD;
+      border: 1px solid #333333;
+      display: inline-flex;
+      align-items: center;
+    }
+    /* Chevron styling */
+    .read-more .chevron {
+      margin-left: 0.5em;
+      color: #FF772B;
+      font-size: 0.8em;
+    }
+    /* The dropdown menu (hidden by default) */
+    .dropdown {
+      display: none;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #222222;
+      border: 1px solid #333333;
+      margin-top: 5px;
+      min-width: 150px;
+      z-index: 100;
+      flex-direction: column;
+    }
+    /* Show the dropdown on hover */
+    .read-more-container:hover .dropdown {
+      display: flex;
+    }
+    /* Dropdown item styling */
+    .dropdown-item {
+      padding: 0.5em;
+      color: #EEEEEE;
+      text-decoration: none;
+      cursor: pointer;
+    }
+    .dropdown-item:hover {
+      color: #FF772B;
+      background-color: #333333;
+    }
+  </style>
+</head>
+<body>
+  <div class="read-more-container">
+    <div class="read-more">Read More <span class="chevron">V</span></div>
+    <div class="dropdown">
+      <div class="dropdown-item">Placeholder 1</div>
+      <div class="dropdown-item">Placeholder 2</div>
+      <div class="dropdown-item">Placeholder 3</div>
+    </div>
+  </div>
+</body>
+</html>

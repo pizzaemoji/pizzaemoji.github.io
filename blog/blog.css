@@ -78,11 +78,10 @@ nav ul li {
       display: none;
       position: absolute;
       top: 100%;
-      left: 0;
       background-color: #222222;
       border: 1px solid #333333;
       margin-top: 0px;
-      min-width: 150px;
+      min-width: 300px;
       z-index: 100;
       flex-direction: column;
     }
@@ -94,6 +93,7 @@ nav ul li {
     .dropdown-item {
       padding: 0.5em;
       color: #EEEEEE;
+      font-size: 1em;
       text-decoration: none;
       cursor: pointer;
     }

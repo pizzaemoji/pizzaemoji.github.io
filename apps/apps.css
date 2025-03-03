@@ -293,7 +293,7 @@ footer {
 /* Desktop */
 @media (min-width: 1000px) {
 	#logo {
-		width: 200px;
+		width: 500px;
 	}
 	#logo-mini {
 		height: 50px;
@@ -309,7 +309,7 @@ footer {
 /* Mobile */
 @media (max-width: 999px) {
 	#logo {
-		width: 800px;
+		width: 200px;
 	}
 	#logo-mini {
 		height: 30px;

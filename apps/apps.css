@@ -293,7 +293,7 @@ footer {
 /* Desktop */
 @media (min-width: 1000px) {
 	#logo {
-		width: 500px;
+		width: 200px;
 	}
 	#logo-mini {
 		height: 50px;

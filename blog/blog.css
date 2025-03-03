@@ -129,7 +129,7 @@ nav ul li {
 .dropdown:hover {
 	display: flex;
 }
-navhead a:link, navhead a:visited {
+navheader a:link, navheader a:visited {
   border: none;
   padding: 0;
   color: #EEEEEE;

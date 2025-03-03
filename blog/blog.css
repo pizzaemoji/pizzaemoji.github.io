@@ -63,8 +63,9 @@ navheader {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1em 1em 2em 1em;
+	padding: 1em;
 	border-bottom: 2px solid #333333;
+	margin-bottom: 3em;
 }
 nav ul {
 	list-style: none;

@@ -403,7 +403,7 @@ footer {
 /* Mobile */
 @media (max-width: 999px) {
 	#logo {
-		width: 300px;
+		width: 333px;
 	}
 	#logo-mini {
 		height: 30px;

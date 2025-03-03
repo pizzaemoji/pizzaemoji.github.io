@@ -86,7 +86,7 @@ navheader a:link, navheader a:visited {
 .menu-item .chevron {
 	margin-left: 0.5em;
 	color: #FF772B;
-	font-size: .8em;
+	font-size: 1em;
 }
 .menu-dropdown {
 	display: none; /* The dropdown menu (hidden by default) */
@@ -102,7 +102,7 @@ navheader a:link, navheader a:visited {
 .menu-dropdown-item {
 	padding: 0.5em;
 	color: #EEEEEE;
-	font-size: 1em;
+	font-size: 1.1em;
 	text-decoration: none;
 	cursor: pointer;
 }

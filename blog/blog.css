@@ -40,9 +40,9 @@ header {
 	margin: auto;
 	width: 100%;
 }
-#byline {
+#myname {
 	text-decoration: none;
-}
+	}
 .byline {
 	display: inline-block;
 	text-decoration: none;

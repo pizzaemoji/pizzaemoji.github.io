@@ -27,8 +27,10 @@ header {
 	border: 0;
 	background-color: inherit;
 	/*	width in @media */
-}
-#byline {
+#myname {
+	text-decoration: none;
+	}
+.byline {
 	text-decoration: none;	
 }
 #logo-mini {
@@ -37,21 +39,6 @@ header {
 	border: 0;
 	background-color: inherit;
 	/*	width in @media */
-}
-#logo-slice {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background-color: inherit;
-	/*	width in @media */
-}
-.intro {
-	text-decoration: none;
-	font-size: 1.4rem;
-	font-weight: 500;
-	text-align: center;
-	padding-bottom: 20px;
-	margin: 0 auto;
 }
 /* links formatting */
 a {
@@ -76,23 +63,70 @@ a:hover {
 	color: #EEEEEE;
 	border-color: #222222;
 }
-/* top nav */
+/* Top navigation and menu */
 navheader {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1em;
+	padding: .5em;
 	border-bottom: 2px solid #333333;
+	margin-bottom: 2em; /* provides space between nav border and headline */
 }
-nav ul {
-	list-style: none;
-	display: flex;
-	gap: 1.6em;
-	margin: 0;
+navheader a:link, navheader a:visited {
+	border: none;
 	padding: 0;
+	color: #EEEEEE;
+	text-decoration: none;
 }
-nav ul li {
+.menu-container {
+	position: relative;
+	display: inline-block;
+}
+.menu-item {
+	background-color: #222222;
+	padding: 0.5em 1em 0.5em 1em;
 	font-size: 1.4em;
+	cursor: pointer;
+	color: #DDDDDD;
+	display: inline-flex;
+	align-items: center;
+}
+.menu-item .chevron {
+	margin-left: 0.5em;
+	color: #FF772B;
+	font-size: 1em;
+}
+.menu-dropdown {
+	display: none; /* The dropdown menu (hidden by default) */
+	position: absolute;
+	top: 100%;
+	background-color: #222222;
+	border: 1px solid #333333;
+	margin-top: 0px;
+	min-width: 300px;
+	z-index: 100;
+	flex-direction: column;
+}
+.menu-dropdown-item {
+	padding: 0.5em;
+	color: #EEEEEE;
+	font-size: 1.1em;
+	text-decoration: none;
+	cursor: pointer;
+}
+.menu-dropdown-item:hover {
+    background-color: #333333; /* highlight menu color */
+}
+.menu-container:hover .menu-dropdown, .menu-dropdown:hover {
+	display: flex; /* Open menu on hover */
+}
+.intro {
+	text-decoration: none;
+	font-size: 1.4rem;
+	font-weight: 500;
+	text-align: center;
+	padding-bottom: 20px;
+	margin: 0 auto;
 }
 /* main content */
 main {

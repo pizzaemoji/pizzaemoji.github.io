@@ -37,6 +37,14 @@ header {
 	padding-top: 2em;
 	margin: auto;
 }
+.byline {
+	text-decoration: none;
+	font-size: 1.2rem;
+	font-weight: 600;
+	text-align: left;
+	padding-top: 2em;
+	margin: auto;
+}
 .time {
 	text-decoration: none;
 	font-size: 1rem;
@@ -371,6 +379,9 @@ footer {
 	#logo-mini {
 		height: 50px;
 	}
+	.byline {
+		width: 70%;
+	}
 	.post {
 		width: 70%;
 	}
@@ -409,6 +420,9 @@ footer {
 	}
 	#logo-mini {
 		height: 40px;
+	}
+	.byline {
+		width: 90%;
 	}
 	.post {
 		width: 90%;

@@ -119,8 +119,8 @@ navheader a:link, navheader a:visited {
 	display: none; /* The dropdown menu (hidden by default) */
 	position: absolute;
 	top: 100%;
-	background-color: #222222;
-	border: 1px solid #333333;
+	background-color: #444444;
+	border: 1px solid #666666;
 	margin-top: 0px;
 	min-width: 300px;
 	z-index: 100;
@@ -134,7 +134,7 @@ navheader a:link, navheader a:visited {
 	cursor: pointer;
 }
 .menu-dropdown-item:hover {
-    background-color: #333333; /* highlight menu color */
+    background-color: #555555; /* highlight menu color */
 }
 .menu-container:hover .menu-dropdown, .menu-dropdown:hover {
 	display: flex; /* Open menu on hover */

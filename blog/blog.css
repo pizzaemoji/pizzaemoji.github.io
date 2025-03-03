@@ -30,7 +30,17 @@ header {
 	/*	width in @media */
 }
 #byline {
-	text-decoration: none;	
+	text-decoration: none;
+	font-size: 1.2rem;
+	font-weight: 600;
+	line-height: 1em;
+	text-align: left;
+}
+.time {
+	text-decoration: none;
+	font-size: 1rem;
+	font-weight: 300;
+	text-align: left;
 }
 /* links formatting */
 a {
@@ -65,10 +75,10 @@ navheader {
 	margin-bottom: 2em; /* provides space between nav border and headline */
 }
 navheader a:link, navheader a:visited {
-  border: none;
-  padding: 0;
-  color: #EEEEEE;
-  text-decoration: none;
+	border: none;
+	padding: 0;
+	color: #EEEEEE;
+	text-decoration: none;
 }
 .menu-container {
 	position: relative;

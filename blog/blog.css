@@ -53,8 +53,6 @@ nav ul {
 nav ul li {
 	font-size: 1.4em;
 }
-
-
     /* Container for the Read More menu */
     .read-more-container {
       position: relative;
@@ -385,6 +383,12 @@ footer {
 	#logo {
 		width: 50%;
 	}
+	#logo-mini {
+		height: 40px;
+	}
+	#logo-slice {
+		display: none;
+	}
 	.post {
 		width: 70%;
 	}
@@ -420,6 +424,12 @@ footer {
 @media (max-width: 999px) {
 	#logo {
 		width: 80%;
+	}
+	#logo-mini {
+		display: none;
+	}
+	#logo-slice {
+		height: 50px;
 	}
 	.post {
 		width: 90%;

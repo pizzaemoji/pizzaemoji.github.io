@@ -78,21 +78,21 @@ nav ul li {
 	font-size: 1.2em;
 } */
 /* Container for the Read More menu */
-.read-more-container {
+.more-container {
 	position: relative;
 	display: inline-block;
 }
 /* The Read More button */
-.read-more {
+.more-item {
 	background-color: #222222;
 	padding: 0.5em 1em 0.5em 1em;
-		font-size: 1.2em;
+	font-size: 1.4em;
 	cursor: pointer;
 	color: #DDDDDD;
 	display: inline-flex;
 	align-items: center;
 }
-.read-more .chevron {
+.more-item .chevron {
 	margin-left: 0.5em;
 	color: #FF772B;
 	font-size: .8em;
@@ -104,7 +104,7 @@ nav ul li {
 	background-color: #222222;
 	border: 1px solid #333333;
 	margin-top: 0px;
-	min-width: 400px;
+	min-width: 300px;
 	z-index: 100;
 	flex-direction: column;
 }
@@ -115,7 +115,7 @@ nav ul li {
 .dropdown-item {
 	padding: 0.5em; /* Dropdown item styling */
 	color: #EEEEEE;
-	font-size: .8em;
+	font-size: 1em;
 	text-decoration: none;
 	cursor: pointer;
 }
@@ -123,8 +123,8 @@ nav ul li {
 /*	color: #FF772B; */
     background-color: #333333; /* highlight menu color */
 }
-.read-more-container:hover .dropdown, .dropdown:hover {
-	display: flex; /* Keep menu open on hover */
+.more-container:hover .dropdown, .dropdown:hover {
+	display: flex; /* Open menu on hover */
 }
 navheader a:link, navheader a:visited {
   border: none;

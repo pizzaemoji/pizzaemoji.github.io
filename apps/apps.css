@@ -27,9 +27,10 @@ header {
 	border: 0;
 	background-color: inherit;
 	/*	width in @media */
+}
 #myname {
 	text-decoration: none;
-	}
+}
 .byline {
 	text-decoration: none;	
 }

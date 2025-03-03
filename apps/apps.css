@@ -296,10 +296,7 @@ footer {
 		width: 50%;
 	}
 	#logo-mini {
-		height: 40px;
-	}
-	#logo-slice {
-		display: none;
+		height: 50px;
 	}
 	.app-description {
 		font-size: 1.2em;
@@ -315,10 +312,7 @@ footer {
 		width: 80%;
 	}
 	#logo-mini {
-		display: none;
-	}
-	#logo-slice {
-		height: 50px;
+		height: 40px;
 	}
 	.app-description {
 		font-size: 1.6em;

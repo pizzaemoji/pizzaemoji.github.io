@@ -65,7 +65,7 @@ navheader {
 	justify-content: space-between;
 	padding: 1em;
 	border-bottom: 2px solid #333333;
-	margin-bottom: 3em;
+	margin-bottom: 2em; /* provides space between nav border and headline */
 }
 nav ul {
 	list-style: none;
@@ -91,15 +91,13 @@ nav ul li {
 	display: inline-flex;
 	align-items: center;
 }
-/* Chevron styling */
 .read-more .chevron {
 	margin-left: 0.5em;
 	color: #FF772B;
-	font-size: 1em;
+	font-size: .8em;
 }
-/* The dropdown menu (hidden by default) */
 .dropdown {
-	display: none;
+	display: none; /* The dropdown menu (hidden by default) */
 	position: absolute;
 	top: 100%;
 	background-color: #222222;
@@ -109,26 +107,23 @@ nav ul li {
 	z-index: 100;
 	flex-direction: column;
 }
-/* Show the dropdown on hover */
+/* Show the dropdown on hover 
 .read-more-container:hover .dropdown {
 	display: flex;
-}
-/* Dropdown item styling */
+} */
 .dropdown-item {
-	padding: 0.5em;
+	padding: 0.5em; /* Dropdown item styling */
 	color: #EEEEEE;
-	font-size: 1em;
+	font-size: .8em;
 	text-decoration: none;
 	cursor: pointer;
 }
 .dropdown-item:hover {
-	color: #FF772B;
-    background-color: #111111;
+/*	color: #FF772B; */
+    background-color: #333333; /* highlight menu color */
 }
-/* Ensure menu remains open on hover */
-.read-more-container:hover .dropdown,
-.dropdown:hover {
-	display: flex;
+.read-more-container:hover .dropdown, .dropdown:hover {
+	display: flex; /* Keep menu open on hover */
 }
 navheader a:link, navheader a:visited {
   border: none;

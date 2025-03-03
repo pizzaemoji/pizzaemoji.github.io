@@ -113,7 +113,7 @@ navheader a:link, navheader a:visited {
 .menu-item .chevron {
 	margin-left: 0.5em;
 	color: #FF772B;
-	font-size: 1em;
+	font-size: .5em;
 }
 .menu-dropdown {
 	display: none; /* The dropdown menu (hidden by default) */

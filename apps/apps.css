@@ -95,14 +95,14 @@ navheader a:link, navheader a:visited {
 .menu-item .chevron {
 	margin-left: 0.5em;
 	color: #FF772B;
-	font-size: 1em;
+	font-size: .5em;
 }
 .menu-dropdown {
 	display: none; /* The dropdown menu (hidden by default) */
 	position: absolute;
 	top: 100%;
-	background-color: #222222;
-	border: 1px solid #333333;
+	background-color: #333333;
+	border: 1px solid #555555;
 	margin-top: 0px;
 	min-width: 300px;
 	z-index: 100;
@@ -116,7 +116,7 @@ navheader a:link, navheader a:visited {
 	cursor: pointer;
 }
 .menu-dropdown-item:hover {
-    background-color: #333333; /* highlight menu color */
+    background-color: #444444; /* highlight menu color */
 }
 .menu-container:hover .menu-dropdown, .menu-dropdown:hover {
 	display: flex; /* Open menu on hover */

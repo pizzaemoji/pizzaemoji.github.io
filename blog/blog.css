@@ -29,13 +29,19 @@ header {
 	background-color: inherit;
 	/*	width in @media */
 }
-#byline {
-	text-decoration: none;
-	font-size: 1.2rem;
-	font-weight: 600;
+#title {
 	text-align: left;
+	margin: auto;
+	width: 90%;
+}
+#hero {
+	display: block;
 	padding-top: 2em;
 	margin: auto;
+	width: 100%;
+}
+#byline {
+	text-decoration: none;
 }
 .byline {
 	text-decoration: none;
@@ -44,11 +50,13 @@ header {
 	text-align: left;
 	padding-top: 2em;
 	margin: auto;
+	border-top: 1px solid #FF772B;
 }
-.time {
+time {
 	text-decoration: none;
 	font-size: 1rem;
-	font-weight: 600;
+	line-height: 1rem;
+	font-weight: 100;
 	text-align: left;
 }
 /* links formatting */
@@ -145,17 +153,6 @@ article {
 	padding-right: 5px;
 	margin: auto;
 }
-#title {
-	text-align: left;
-	margin: auto;
-	width: 90%;
-}
-#hero {
-	display: block;
-	padding-top: 2em;
-	margin: auto;
-	width: 100%;
-}
 .post {
 	text-decoration: none;
 	font-size: 1.4rem;
@@ -196,13 +193,6 @@ h3 {
 	padding-top: 1em;
 	padding-bottom: .5em;
 	margin: 0;
-}
-time {
-	text-decoration: none;
-	font-size: 1rem;
-	line-height: 1rem;
-	font-weight: 100;
-	text-align: left;
 }
 blockquote {
 	margin: 2em 2em 2em 0em;

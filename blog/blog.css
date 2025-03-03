@@ -29,20 +29,9 @@ header {
 	background-color: inherit;
 	/*	width in @media */
 }
-#title {
-	text-align: left;
-	margin: auto;
-	width: 90%;
-}
-#hero {
-	display: block;
-	padding: 2em 0;
-	margin: auto;
-	width: 100%;
-}
 #myname {
 	text-decoration: none;
-	}
+}
 .byline {
 	display: inline-block;
 	text-decoration: none;
@@ -58,6 +47,17 @@ time {
 	line-height: 1rem;
 	font-weight: 100;
 	text-align: left;
+}
+#title {
+	text-align: left;
+	margin: auto;
+	width: 90%;
+}
+#hero {
+	display: block;
+	padding: 2em 0;
+	margin: auto;
+	width: 100%;
 }
 /* links formatting */
 a {

@@ -309,7 +309,7 @@ footer {
 /* Mobile */
 @media (max-width: 999px) {
 	#logo {
-		width: 200px;
+		width: 300px;
 	}
 	#logo-mini {
 		height: 30px;

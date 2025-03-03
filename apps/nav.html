@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Apps Menu</title>
+  <style>
+    /* Global Styles */
+    body {
+      background-color: #222222;
+      color: #DDDDDD;
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+    a {
+      color: #EEEEEE;
+      text-decoration: none;
+    }
+    a:hover {
+      color: #FF772B;
+    }
+    
+    /* Top Nav Header */
+    navheader {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1em;
+      border-bottom: 2px solid #333333;
+      background-color: #222222;
+    }
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 1.6em;
+      margin: 0;
+      padding: 0;
+    }
+    nav ul li {
+      font-size: 1.4em;
+      position: relative; /* For positioning dropdown content */
+    }
+    
+    /* Dropdown Menu using details/summary */
+    nav ul li details {
+      position: relative;
+    }
+    nav ul li details summary {
+      cursor: pointer;
+      list-style: none;
+      display: inline-flex;
+      align-items: center;
+      color: #DDDDDD;
+      padding: 0;
+    }
+    /* Remove default triangle */
+    nav ul li details summary::-webkit-details-marker {
+      display: none;
+    }
+    /* Chevron styling */
+    nav ul li details summary .chevron {
+      margin-left: 0.3em;
+      font-size: 0.8em;
+      color: #FF772B;
+    }
+    
+    /* Dropdown content styling */
+    nav ul li details .dropdown {
+      position: absolute;
+      top: 100%;
+      left: 0;
+      background-color: #222222;
+      padding: 0.5em;
+      list-style: none;
+      margin: 0;
+      border: 1px solid #333333;
+      display: none;
+      flex-direction: column;
+      gap: 0.5em;
+      z-index: 10;
+    }
+    nav ul li details[open] .dropdown {
+      display: flex;
+    }
+    nav ul li details .dropdown li {
+      font-size: 1.2em;
+    }
+    nav ul li details .dropdown li a {
+      color: #EEEEEE;
+      text-decoration: none;
+    }
+    nav ul li details .dropdown li a:hover {
+      color: #FF772B;
+    }
+  </style>
+</head>
+<body>
+  <navheader>
+    <nav>
+      <ul>
+        <li><a href="/apps/rainy-night">Rainy Night</a></li>
+        <li><a href="/apps/find-the-pizza">Find the Pizza</a></li>
+        <li>
+          <details>
+            <summary>
+              Read More <span class="chevron">▼</span>
+            </summary>
+            <ul class="dropdown">
+              <li><a href="#">Placeholder 1</a></li>
+              <li><a href="#">Placeholder 2</a></li>
+              <li><a href="#">Placeholder 3</a></li>
+            </ul>
+          </details>
+        </li>
+      </ul>
+    </nav>
+  </navheader>
+</body>
+</html>

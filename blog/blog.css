@@ -53,66 +53,59 @@ nav ul {
 nav ul li {
 	font-size: 1.2em;
 }
-    /* Container for the Read More menu */
-    .read-more-container {
-      position: relative;
-      display: inline-block;
-    }
-    /* The Read More button */
-    .read-more {
-      background-color: #222222;
-      padding: 0.5em 1em 0.5em 1em;
-      cursor: pointer;
-      color: #DDDDDD;
-      display: inline-flex;
-      align-items: center;
-    }
-    /* Chevron styling */
-    .read-more .chevron {
-      margin-left: 0.5em;
-      color: #FF772B;
-      font-size: 1em;
-    }
-    /* The dropdown menu (hidden by default) */
-    .dropdown {
-      display: none;
-      position: absolute;
-      top: 100%;
-      background-color: #222222;
-      border: 1px solid #333333;
-      margin-top: 0px;
-      min-width: 400px;
-      z-index: 100;
-      flex-direction: column;
-    }
-    /* Show the dropdown on hover */
-    .read-more-container:hover .dropdown {
-      display: flex;
-    }
-    /* Dropdown item styling */
-    .dropdown-item {
-      padding: 0.5em;
-      color: #EEEEEE;
-      font-size: 1em;
-      text-decoration: none;
-      cursor: pointer;
-    }
-    .dropdown-item:hover {
-      color: #FF772B;
-      /* background-color: #FF5B00; */
-    }
-    /* Ensure menu remains open on hover */
-	.read-more-container:hover .dropdown,
-	.dropdown:hover {
+/* Container for the Read More menu */
+.read-more-container {
+	position: relative;
+	display: inline-block;
+}
+/* The Read More button */
+.read-more {
+	background-color: #222222;
+	padding: 0.5em 1em 0.5em 1em;
+	cursor: pointer;
+	color: #DDDDDD;
+	display: inline-flex;
+	align-items: center;
+}
+/* Chevron styling */
+.read-more .chevron {
+	margin-left: 0.5em;
+	color: #FF772B;
+	font-size: 1em;
+}
+/* The dropdown menu (hidden by default) */
+.dropdown {
+	display: none;
+	position: absolute;
+	top: 100%;
+	background-color: #222222;
+	border: 1px solid #333333;
+	margin-top: 0px;
+	min-width: 400px;
+	z-index: 100;
+	flex-direction: column;
+}
+/* Show the dropdown on hover */
+.read-more-container:hover .dropdown {
 	display: flex;
 }
-
-
-
-
-
-
-
+/* Dropdown item styling */
+.dropdown-item {
+	padding: 0.5em;
+	color: #EEEEEE;
+	font-size: 1em;
+	text-decoration: none;
+	cursor: pointer;
+}
+.dropdown-item:hover {
+	color: #FF772B;
+    background-color: #111111;
+}
+/* Ensure menu remains open on hover */
+.read-more-container:hover .dropdown,
+.dropdown:hover {
+	display: flex;
+}
 
 
 .intro {

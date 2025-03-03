@@ -55,35 +55,20 @@ a:hover {
 	color: #EEEEEE;
 	border-color: #222222;
 }
-
-/* ************** */
-
-/* top nav */
+/* Top navigation */
 navheader {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 1em;
+	padding: .5em;
 	border-bottom: 2px solid #333333;
 	margin-bottom: 2em; /* provides space between nav border and headline */
 }
-/*nav ul {
-	list-style: none;
-	display: flex;
-	gap: 1.6em;
-	margin: 0;
-	padding: 0;
-}
-nav ul li {
-	font-size: 1.2em;
-} */
-/* Container for the Read More menu */
-.more-container {
+.menu-container {
 	position: relative;
 	display: inline-block;
 }
-/* The Read More button */
-.more-item {
+.menu-item {
 	background-color: #222222;
 	padding: 0.5em 1em 0.5em 1em;
 	font-size: 1.4em;
@@ -92,12 +77,12 @@ nav ul li {
 	display: inline-flex;
 	align-items: center;
 }
-.more-item .chevron {
+.menu-item .chevron {
 	margin-left: 0.5em;
 	color: #FF772B;
 	font-size: .8em;
 }
-.dropdown {
+.menu-dropdown {
 	display: none; /* The dropdown menu (hidden by default) */
 	position: absolute;
 	top: 100%;
@@ -108,22 +93,17 @@ nav ul li {
 	z-index: 100;
 	flex-direction: column;
 }
-/* Show the dropdown on hover 
-.read-more-container:hover .dropdown {
-	display: flex;
-} */
-.dropdown-item {
-	padding: 0.5em; /* Dropdown item styling */
+.menu-dropdown-item {
+	padding: 0.5em;
 	color: #EEEEEE;
 	font-size: 1em;
 	text-decoration: none;
 	cursor: pointer;
 }
-.dropdown-item:hover {
-/*	color: #FF772B; */
+.menu-dropdown-item:hover {
     background-color: #333333; /* highlight menu color */
 }
-.more-container:hover .dropdown, .dropdown:hover {
+.menu-container:hover .menu-dropdown, .menu-dropdown:hover {
 	display: flex; /* Open menu on hover */
 }
 navheader a:link, navheader a:visited {
@@ -132,7 +112,6 @@ navheader a:link, navheader a:visited {
   color: #EEEEEE;
   text-decoration: none;
 }
-
 
 .intro {
 	text-decoration: none;

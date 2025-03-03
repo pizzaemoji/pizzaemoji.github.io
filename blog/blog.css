@@ -49,9 +49,8 @@ time {
 	text-align: left;
 }
 #title {
-	text-align: left;
 	margin: auto;
-	width: 90%;
+	width: 100%;
 }
 #hero {
 	display: block;

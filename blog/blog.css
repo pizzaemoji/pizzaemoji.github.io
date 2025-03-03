@@ -55,7 +55,7 @@ a:hover {
 	color: #EEEEEE;
 	border-color: #222222;
 }
-/* Top navigation */
+/* Top navigation and menu */
 navheader {
 	display: flex;
 	align-items: center;
@@ -63,6 +63,12 @@ navheader {
 	padding: .5em;
 	border-bottom: 2px solid #333333;
 	margin-bottom: 2em; /* provides space between nav border and headline */
+}
+navheader a:link, navheader a:visited {
+  border: none;
+  padding: 0;
+  color: #EEEEEE;
+  text-decoration: none;
 }
 .menu-container {
 	position: relative;
@@ -106,13 +112,6 @@ navheader {
 .menu-container:hover .menu-dropdown, .menu-dropdown:hover {
 	display: flex; /* Open menu on hover */
 }
-navheader a:link, navheader a:visited {
-  border: none;
-  padding: 0;
-  color: #EEEEEE;
-  text-decoration: none;
-}
-
 .intro {
 	text-decoration: none;
 	font-size: 1.4rem;
@@ -121,7 +120,7 @@ navheader a:link, navheader a:visited {
 	padding-bottom: 20px;
 	margin: 0 auto;
 }
-/* main post formatting */
+/* Main post formatting */
 article {
 	padding-left: 5px;
 	padding-right: 5px;

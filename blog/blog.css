@@ -54,7 +54,8 @@ time {
 }
 #hero {
 	display: block;
-	padding: 2em 0;
+	padding-top: .5em;
+	padding-bottom: 2em;
 	margin: auto;
 	width: 100%;
 }
@@ -187,8 +188,6 @@ h2 {
 	font-weight: 100;
 	text-align: left;
 	font-style: italic;
-	padding-top: .7em;
-	padding-bottom: .7em;
 	margin: 0;
 }
 h3 {

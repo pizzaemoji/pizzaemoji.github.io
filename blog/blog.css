@@ -133,7 +133,6 @@ navheader a:link, navheader a:visited {
 	cursor: pointer;
 }
 .menu-dropdown-item .chevron-right {
-	margin-left: 0.5em;
 	color: #FF772B;
 	font-size: .9em;
 }
@@ -142,6 +141,10 @@ navheader a:link, navheader a:visited {
 }
 .menu-container:hover .menu-dropdown, .menu-dropdown:hover {
 	display: flex; /* Open menu on hover */
+}
+.this-page {
+	color: #FF772B;
+
 }
 .intro {
 	text-decoration: none;

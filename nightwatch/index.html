@@ -2,22 +2,35 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Random Color Cycle</title>
+  <title>Random Color Cycle with Black Overlay</title>
   <style>
     html, body {
       height: 100%;
       margin: 0;
     }
-    /* The full-page div with a transition for smooth color changes */
+    /* Main div with the random background color */
     #colorDiv {
       height: 100%;
       width: 100%;
       transition: background-color 0.1s linear;
+      position: relative;
+    }
+    /* Overlay layer with 80% black opacity */
+    .overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-color: rgba(0, 0, 0, 0.8);
+      pointer-events: none;
     }
   </style>
 </head>
 <body>
-  <div id="colorDiv"></div>
+  <div id="colorDiv">
+    <div class="overlay"></div>
+  </div>
   <script>
     // Flag to control the color cycling
     let isNightWatchActive = true;
@@ -26,14 +39,11 @@
     function startColorCycle() {
       // Generate a random interval between 0.3 and 3 seconds
       const randomDuration = Math.random() * (3 - 0.3) + 0.3;
-      // Generate a random color in rgb format
-      const randomColor = `rgb(${Math.floor(Math.random() * 256)}, 
-                               ${Math.floor(Math.random() * 256)}, 
-                               ${Math.floor(Math.random() * 256)})`;
-      // Use setTimeout to change the color after the random duration
+      // Generate a random RGB color
+      const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+      
       setTimeout(() => {
         document.getElementById('colorDiv').style.backgroundColor = randomColor;
-        // Continue the color cycle as long as isNightWatchActive is true
         if (isNightWatchActive) {
           startColorCycle();
         }

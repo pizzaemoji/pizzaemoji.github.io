@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Random Color Cycle</title>
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+    }
+    /* The full-page div with a transition for smooth color changes */
+    #colorDiv {
+      height: 100%;
+      width: 100%;
+      transition: background-color 0.1s linear;
+    }
+  </style>
+</head>
+<body>
+  <div id="colorDiv"></div>
+  <script>
+    // Flag to control the color cycling
+    let isNightWatchActive = true;
+    
+    // Function to start the random color cycle
+    function startColorCycle() {
+      // Generate a random interval between 0.3 and 3 seconds
+      const randomDuration = Math.random() * (3 - 0.3) + 0.3;
+      // Generate a random color in rgb format
+      const randomColor = `rgb(${Math.floor(Math.random() * 256)}, 
+                               ${Math.floor(Math.random() * 256)}, 
+                               ${Math.floor(Math.random() * 256)})`;
+      // Use setTimeout to change the color after the random duration
+      setTimeout(() => {
+        document.getElementById('colorDiv').style.backgroundColor = randomColor;
+        // Continue the color cycle as long as isNightWatchActive is true
+        if (isNightWatchActive) {
+          startColorCycle();
+        }
+      }, randomDuration * 1000);
+    }
+    
+    // Start the color cycle when the page loads
+    startColorCycle();
+  </script>
+</body>
+</html>

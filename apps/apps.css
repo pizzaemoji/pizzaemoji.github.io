@@ -92,10 +92,10 @@ navheader a:link, navheader a:visited {
 	display: inline-flex;
 	align-items: center;
 }
-.menu-item .chevron {
-	margin-left: 0.5em;
+.menu-item .chevron-down {
+	margin-right: 0.25em;
 	color: #FF772B;
-	font-size: .5em;
+	font-size: .75em;
 }
 .menu-dropdown {
 	display: none; /* The dropdown menu (hidden by default) */
@@ -114,6 +114,11 @@ navheader a:link, navheader a:visited {
 	font-size: 1.1em;
 	text-decoration: none;
 	cursor: pointer;
+}
+.menu-dropdown-item .chevron-right {
+	margin-right: 0.25em;
+	color: #FF772B;
+	font-size: 1em;
 }
 .menu-dropdown-item:hover {
     background-color: #444444; /* highlight menu color */

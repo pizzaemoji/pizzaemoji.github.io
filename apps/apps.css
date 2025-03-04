@@ -120,6 +120,9 @@ navheader a:link, navheader a:visited {
 	color: #FF772B;
 	font-size: 1em;
 }
+.this-page {
+	color: #FF772B;
+}
 .menu-dropdown-item:hover {
     background-color: #444444; /* highlight menu color */
 }

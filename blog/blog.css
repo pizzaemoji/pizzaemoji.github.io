@@ -111,7 +111,7 @@ navheader a:link, navheader a:visited {
 	align-items: center;
 }
 .menu-item .chevron-down {
-	margin-left: 0.25em;
+	margin-right: 0.25em;
 	color: #FF772B;
 	font-size: 1em;
 }

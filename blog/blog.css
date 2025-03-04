@@ -135,7 +135,7 @@ navheader a:link, navheader a:visited {
 .menu-dropdown-item .chevron-right {
 	margin-left: 0.5em;
 	color: #FF772B;
-	font-size: .5em;
+	font-size: .9em;
 }
 .menu-dropdown-item:hover {
     background-color: #444444; /* highlight menu color */

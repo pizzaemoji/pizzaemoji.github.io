@@ -105,7 +105,6 @@ navheader a:link, navheader a:visited {
 	background-color: #222222;
 	padding: 0.5em 1em 0.5em 1em;
 	font-size: 1.4em;
-	cursor: pointer;
 	color: #DDDDDD;
 	display: inline-flex;
 	align-items: center;
@@ -131,7 +130,6 @@ navheader a:link, navheader a:visited {
 	color: #EEEEEE;
 	font-size: 1.1em;
 	text-decoration: none;
-	cursor: default;
 }
 .menu-dropdown-item .chevron-right {
 	margin-right: 0.25em;

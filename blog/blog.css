@@ -131,7 +131,7 @@ navheader a:link, navheader a:visited {
 	color: #EEEEEE;
 	font-size: 1.1em;
 	text-decoration: none;
-	cursor: pointer;
+	cursor: default;
 }
 .menu-dropdown-item .chevron-right {
 	margin-right: 0.25em;

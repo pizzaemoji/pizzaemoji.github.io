@@ -381,7 +381,7 @@ footer {
 	padding-top: 2em;
 }
 /* Desktop */
-@media (min-width: 1000px) {
+@media (min-width: 900px) {
 	#logo {
 		width: 500px;
 	}
@@ -423,7 +423,7 @@ footer {
 	}
 }
 /* Mobile */
-@media (max-width: 999px) {
+@media (max-width: 899px) {
 	#logo {
 		width: 333px;
 	}

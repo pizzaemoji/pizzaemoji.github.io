@@ -103,7 +103,7 @@ navheader a:link, navheader a:visited {
 }
 .menu-item {
 	background-color: #222222;
-	padding: 0.5em 1em 0.5em 1em;
+	padding: 0.5em 1em 0.5em 0em;
 	font-size: 1.4em;
 	cursor: default;
 	color: #DDDDDD;

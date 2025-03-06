@@ -92,13 +92,13 @@ navheader {
     top: 0;
     left: 0;
     right: 0;
-    margin: 0 auto;
+	margin: 0 auto;
+	padding: 0;
     width: 100%;
     max-width: 1000px;
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 0;
     background-color: #222222;
     border-bottom: 2px solid #333333;
 }
@@ -108,7 +108,7 @@ navheader a:link, navheader a:visited {
 	color: #EEEEEE;
 	text-decoration: none;
 }
-navbuffer {
+.navbuffer {
 	padding-top: 100px;
 }
 .menu-container {

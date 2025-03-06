@@ -88,6 +88,7 @@ a:hover {
 }
 /* Top navigation and menu */
 navheader {
+	position: fixed;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

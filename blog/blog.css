@@ -105,6 +105,13 @@ navheader a:link, navheader a:visited {
 	color: #EEEEEE;
 	text-decoration: none;
 }
+navheader-buffer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-top: 100px;
+	margin-bottom: 2em; /* provides space between nav border and headline */
+}
 .menu-container {
 	position: relative;
 	display: inline-block;

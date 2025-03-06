@@ -109,7 +109,7 @@ navheader a:link, navheader a:visited {
 	text-decoration: none;
 }
 .navbuffer {
-	padding-top: 100px;
+	/* padding-top in @media */
 }
 .menu-container {
 	position: relative;
@@ -388,6 +388,9 @@ footer {
 	#logo-mini {
 		height: 50px;
 	}
+	.navbuffer {
+		padding-top: 100px;
+	}
 	.post {
 		width: 70%;
 	}
@@ -426,6 +429,9 @@ footer {
 	}
 	#logo-mini {
 		height: 30px;
+	}
+	.navbuffer {
+		padding-top: 80px;
 	}
 	.post {
 		width: 90%;

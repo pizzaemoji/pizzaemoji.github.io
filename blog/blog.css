@@ -108,6 +108,9 @@ navheader a:link, navheader a:visited {
 	color: #EEEEEE;
 	text-decoration: none;
 }
+navbuffer {
+	padding-top: 100px;
+}
 .menu-container {
 	position: relative;
 	display: inline-block;
@@ -167,7 +170,6 @@ navheader a:link, navheader a:visited {
 }
 /* Main post formatting */
 article {
-	padding-top: 300px;
 	padding-left: 5px;
 	padding-right: 5px;
 	margin: auto;

@@ -167,7 +167,7 @@ navheader a:link, navheader a:visited {
 }
 /* Main post formatting */
 article {
-	margin-top: 300px;
+	padding-top: 300px;
 	padding-left: 5px;
 	padding-right: 5px;
 	margin: auto;

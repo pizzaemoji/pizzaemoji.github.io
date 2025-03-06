@@ -88,11 +88,14 @@ a:hover {
 }
 /* Top navigation and menu */
 navheader {
+	position: fixed;
 	display: flex;
-	background-color: #222222;
+    width: 100%;  /* Make it span the full width */
+    top: 0;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0;
+	background-color: #222222;
 	border-bottom: 2px solid #333333;
 	margin-bottom: 2em; /* provides space between nav border and headline */
 }

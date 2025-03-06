@@ -87,7 +87,7 @@ navheader {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: .5em;
+	padding: 0em;
 	border-bottom: 2px solid #333333;
 	margin-bottom: 2em; /* provides space between nav border and headline */
 }
@@ -103,7 +103,7 @@ navheader a:link, navheader a:visited {
 }
 .menu-item {
 	background-color: #222222;
-	padding: 0.5em 1em 0.5em 0em;
+	padding: 0.5em 0em;
 	font-size: 1.4em;
 	cursor: default;
 	color: #DDDDDD;
@@ -121,7 +121,6 @@ navheader a:link, navheader a:visited {
 	top: 100%;
 	background-color: #333333;
 	border: 1px solid #555555;
-	margin-top: 0px;
 	min-width: 300px;
 	z-index: 100;
 	flex-direction: column;

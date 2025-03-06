@@ -90,7 +90,6 @@ a:hover {
 navheader {
 	position: fixed;
 	display: flex;
-    width: 100%;  /* Make it span the full width */
     top: 0;
 	align-items: center;
 	justify-content: space-between;

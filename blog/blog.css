@@ -29,7 +29,7 @@ header {
 	background-color: inherit;
 	/*	width in @media */
 }
-	#logo-mini {
+#logo-mini {
     padding: 1em;
 	/*	height in @media */
 }
@@ -88,8 +88,8 @@ a:hover {
 }
 /* Top navigation and menu */
 navheader {
-	position: fixed;
 	display: flex;
+	background-color: #222222;
 	align-items: center;
 	justify-content: space-between;
 	padding: 0;
@@ -108,7 +108,7 @@ navheader a:link, navheader a:visited {
 }
 .menu-item {
 	background-color: #222222;
-	padding: 0.5em 1em;
+	padding: 0.5em;
 	font-size: 1.6em;
 	cursor: default;
 	color: #DDDDDD;

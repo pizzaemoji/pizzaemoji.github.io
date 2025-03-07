@@ -18,7 +18,6 @@ header {
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
 	margin: 0 auto;
-	width: 60%;
 	color: #EEEEEE;
 	font-size: 1em;
 	line-height: .5;
@@ -28,14 +27,12 @@ header {
 	margin: 0;
 	padding: 0;
 	border: 0;
-	max-width: 100%;
-	height: auto;
 	background-color: inherit;
 	/*	width in @media */
 }
 #logo-mini {
     padding: 1em;
-	height: 44px;
+	height: 40px;
 }
 #myname {
 	text-decoration: none;
@@ -386,9 +383,9 @@ footer {
 }
 /* Desktop */
 @media (min-width: 800px) {
-/*	#logo {
-		width: 500px;
-	} */
+	#logo {
+		width: 400px;
+	}
 	.post {
 		width: 70%;
 	}
@@ -422,9 +419,9 @@ footer {
 }
 /* Mobile */
 @media (max-width: 799px) {
-/*	#logo {
-		width: 333px;
-	} */
+	#logo {
+		width: 400px;
+	}
 	.post {
 		width: 90%;
 	}

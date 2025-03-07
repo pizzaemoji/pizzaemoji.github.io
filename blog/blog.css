@@ -223,7 +223,6 @@ blockquote {
 /* margin: position of element padding: space between element and lines */
 .pullquote-left {
 	display: inline;
-	position: relative;
 	text-decoration: none;
 	float: left;
 	color: #FF772B;
@@ -239,7 +238,6 @@ blockquote {
 }
 .pullquote-right {
 	display: inline;
-	position: relative;
 	text-decoration: none;
 	float: right;
 	color: #FF772B;
@@ -255,7 +253,6 @@ blockquote {
 }
 .image-small-left {
 	display: inline;
-	position: relative;
 	float: left;
 	text-align: left;
 	border-top: #FF772B 1px solid;
@@ -265,7 +262,6 @@ blockquote {
 }
 .image-small-right {
 	display: inline;
-	position: relative;
 	float: right;
 	text-align: right;
 	border-top: #FF772B 1px solid;
@@ -275,7 +271,7 @@ blockquote {
 }
 .image-large {
 	display: block;
-	position: relative;
+/*	position: relative; Breaking navheader, images scroll over */
 	margin: 40px auto 0 auto; /* centers, space between image and <p> above */
 	width: 90%;
 }

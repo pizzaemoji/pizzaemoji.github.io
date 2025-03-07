@@ -17,6 +17,7 @@ header {
 }
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
+	width: 80%;
 	color: #EEEEEE;
 	font-size: 1em;
 	line-height: .5;
@@ -31,7 +32,7 @@ header {
 }
 #logo-mini {
     padding: 1em;
-	/*	height in @media */
+	height: 40px;
 }
 #myname {
 	text-decoration: none;
@@ -109,7 +110,7 @@ navheader a:link, navheader a:visited {
 	text-decoration: none;
 }
 .navbuffer {
-	/* padding-top in @media */
+	padding-top: 80px;
 }
 .menu-container {
 	position: relative;
@@ -382,15 +383,9 @@ footer {
 }
 /* Desktop */
 @media (min-width: 800px) {
-	#logo {
+/*	#logo {
 		width: 500px;
-	}
-	#logo-mini {
-		height: 40px;
-	}
-	.navbuffer {
-		padding-top: 80px;
-	}
+	} */
 	.post {
 		width: 70%;
 	}
@@ -424,15 +419,9 @@ footer {
 }
 /* Mobile */
 @media (max-width: 799px) {
-	#logo {
+/*	#logo {
 		width: 333px;
-	}
-	#logo-mini {
-		height: 40px;
-	}
-	.navbuffer {
-		padding-top: 80px;
-	}
+	} */
 	.post {
 		width: 90%;
 	}

@@ -100,7 +100,7 @@ navheader {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    background-color: #222222;
+    background-color: #22222280;
     border-bottom: 2px solid #333333;
 }
 navheader a:link, navheader a:visited {

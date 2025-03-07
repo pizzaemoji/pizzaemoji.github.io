@@ -17,7 +17,7 @@ header {
 }
 #pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
 	border: 0;
-	margin: 0 auto;
+	margin: 0;
 	color: #EEEEEE;
 	font-size: 1em;
 	line-height: .5;
@@ -25,7 +25,7 @@ header {
 }
 #logo {
 	margin: 0;
-	padding: 0;
+	padding: 0 .5em;
 	border: 0;
 	background-color: inherit;
 	/*	width in @media */

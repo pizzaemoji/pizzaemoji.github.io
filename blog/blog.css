@@ -350,7 +350,7 @@ a.fnlink:hover {
 	text-decoration: none;
 	padding: 1em;
 }
-#fourohfour {
+.fourohfour {
 	font-size: 2em;
 	line-height: 2em;
 	text-align: center;
@@ -420,7 +420,7 @@ footer {
 /* Mobile */
 @media (max-width: 799px) {
 	#logo {
-		width: 365px;
+		width: 350px;
 	}
 	.post {
 		width: 90%;

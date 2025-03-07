@@ -298,6 +298,7 @@ blockquote {
 	line-height: 1.4em;
 	font-weight: 200;
 	text-align: left;
+	scroll-margin-top: 100px;
 	/* padding in @media */
 }
 sup {
@@ -325,7 +326,6 @@ a.fnlink:hover {
 }
 .divider { /* separates post from footnotes */
 	display: block;
-	position: relative;
 	margin-top: 2em;
 	margin-bottom: 2em;
 	height: 2px;

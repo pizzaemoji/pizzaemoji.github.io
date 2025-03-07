@@ -420,7 +420,7 @@ footer {
 /* Mobile */
 @media (max-width: 799px) {
 	#logo {
-		width: 333px;
+		width: 365px;
 	}
 	.post {
 		width: 90%;

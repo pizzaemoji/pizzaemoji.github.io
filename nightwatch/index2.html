@@ -1,96 +1,93 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Night Watch</title>
-  <style>
-    /* Set full height, remove default margin, and define black background with white text for the page */
-    html, body {
-      height: 100%;
-      margin: 0;
-      background-color: black;
-      color: white;
-      font-family: sans-serif;
-    }
-    /* Main div that displays the random background colors */
-    #colorDiv {
-      height: 100%;
-      width: 100%;
-      transition: background-color 0.1s linear;
-      position: relative;
-    }
-    /* Overlay layer with 80% black opacity */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.8);
-      pointer-events: none;
-    }
-    /* Container for the warning message and button, centered on the page with a high z-index */
-    #warningContainer {
-      position: absolute;
-      width: 33%;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      text-align: center;
-      z-index: 9999; /* Ensure the warning container appears above everything else */
-    }
-    /* Red rounded box for the warning message */
-    #warningBox {
-      border: 2px solid red;
-      border-radius: 10px;
-      padding: 20px;
-      margin-bottom: 20px;
-    }
-    /* Rounded button style for the "Start Night Watch" link */
-    #startButton {
-      display: inline-block;
-      padding: 10px 20px;
-      text-decoration: none;
-      color: white;
-      background-color: #444; /* Dark background for the button */
-      border: 2px solid red;
-      border-radius: 10px;
-      cursor: pointer;
-    }
-    /* Change button background on hover */
-    #startButton:hover {
-      background-color: #555;
-    }
-  </style>
+	<meta charset="UTF-8">
+	<title>Night Watch</title>
+	<style>
+	html, body {
+		height: 100%;
+		margin: 0;
+		background-color: #000000;
+		color: #ffffff;
+		font-family: sans-serif;
+	}
+	/* Main div that displays the random background colors */
+	#colorDiv {
+		height: 100%;
+		width: 100%;
+		transition: background-color 0.1s linear;
+		position: relative;
+	}
+	/* Overlay layer with 80% black opacity */
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.8);
+		pointer-events: none;
+	}
+	/* Container for the warning message and button, centered on the page with a high z-index */
+	#warningContainer {
+		position: absolute;
+		width: 25%;
+		top: 50%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		z-index: 9999; /* Ensure the warning container appears above everything else */
+	}
+	/* Red rounded box for the warning message */
+	#warningBox {
+		border: 2px solid red;
+		border-radius: 10px;
+		padding: 20px;
+		margin-bottom: 20px;
+	}
+	/* Rounded button style for the "Start Night Watch" link */
+	#startButton {
+		display: inline-block;
+		padding: 10px 20px;
+		text-decoration: none;
+		color: #ffffff;
+		background-color: #333333;
+		border: 2px solid #ffffff;
+		border-radius: 10px;
+	}
+	/* Change button background on hover */
+	#startButton:hover {
+		background-color: #111111;
+	}
+	</style>
 </head>
 <body>
-  <!-- Warning container displayed before JavaScript starts running -->
-  <div id="warningContainer">
-    <!-- Warning message in a red rounded box -->
-    <div id="warningBox">
-      Night Watch displays random colors at random intervals. It is not recommended for those who are photosensitive or prone to seizers.
-    </div>
-    <!-- "Start Night Watch" link styled as a rounded button -->
-    <a id="startButton" href="#">Start Night Watch</a>
-  </div>
 
-  <!-- Main div that will display the random background colors -->
-  <div id="colorDiv">
-    <div class="overlay"></div>
-  </div>
+	<!-- Warning container displayed before JavaScript starts running -->
+	<div id="warningContainer">
+		<div id="warningBox">
+		Night Watch displays random colors at random intervals. It is not recommended for those who are photosensitive or prone to seizers.
+		</div>
+		<a id="startButton" href="#">Start Night Watch</a>
+	</div>
 
-  <script>
-    // Flag to control the color cycling, initially false so it doesn't run until button is clicked
-    let isNightWatchActive = false;
+	<!-- Main div that will display the random background colors -->
+	<div id="colorDiv">
+	<div class="overlay"></div>
+	</div>
+
+	<script>
+	// Flag to control the color cycling, initially false so it doesn't run until button is clicked
+	let isNightWatchActive = false;
     
-    // Function to start the random color cycle
-    function startColorCycle() {
-      // Set flag to true to indicate the cycle is active
-      isNightWatchActive = true;
-      // Generate a random interval between 0.3 and 3 seconds
-      const randomDuration = Math.random() * (3 - 0.3) + 0.3;
-      // Generate a random RGB color
-      const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+	// Function to start the random color cycle
+	function startColorCycle() {
+		// Set flag to true to indicate the cycle is active
+		isNightWatchActive = true;
+		// Generate a random interval between 0.3 and 3 seconds
+		const randomDuration = Math.random() * (3 - 0.3) + 0.3;
+		// Generate a random RGB color
+		const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
       
       setTimeout(() => {
         // Change the background color of the main div to the random color

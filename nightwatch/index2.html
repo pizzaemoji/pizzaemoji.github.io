@@ -18,7 +18,7 @@
 		transition: background-color 0.1s linear;
 		position: relative;
 	}
-	/* Overlay layer with 80% black opacity */
+	/* Overlay layer with 80% black opacity to reduce brightness */
 	.overlay {
 		position: absolute;
 		top: 0;
@@ -28,7 +28,7 @@
 		background-color: rgba(0, 0, 0, 0.8);
 		pointer-events: none;
 	}
-	/* Container for the warning message and button, centered on the page with a high z-index */
+	/* Container for the warning message and button */
 	#warningContainer {
 		position: absolute;
 		width: 25%;
@@ -45,19 +45,24 @@
 		padding: 20px;
 		margin-bottom: 20px;
 	}
-	/* Rounded button style for the "Start Night Watch" link */
-	#startButton {
-		display: inline-block;
-		padding: 10px 20px;
+	/* "Start Night Watch" link */
+	a {
+		text-decoration: none;
+	}
+	a:link {
 		text-decoration: none;
 		color: #ffffff;
-		background-color: #333333;
-		border: 2px solid #ffffff;
-		border-radius: 10px;
+		border-bottom: 2px solid #ffffff;
 	}
-	/* Change button background on hover */
-	#startButton:hover {
-		background-color: #111111;
+	a:visited {
+		text-decoration: none;
+		color: #ffffff;
+		border-bottom: 2px solid #ffffff;
+	}
+	a:hover {
+		text-decoration: none;
+		color: #ffffff;
+		border-bottom: 4px solid #ffffff;
 	}
 	</style>
 </head>
@@ -67,8 +72,9 @@
 	<div id="warningContainer">
 		<div id="warningBox">
 		Night Watch displays random colors at random intervals. It is not recommended for those who are photosensitive or prone to seizers.
+		
+		<p><a href="#">Start Night Watch</a>
 		</div>
-		<a id="startButton" href="#">Start Night Watch</a>
 	</div>
 
 	<!-- Main div that will display the random background colors -->

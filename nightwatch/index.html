@@ -1,57 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Night Watch</title>
-  <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-    }
-    /* Main div with the random background color */
-    #colorDiv {
-      height: 100%;
-      width: 100%;
-      transition: background-color 0.1s linear;
-      position: relative;
-    }
-    /* Overlay layer with 80% black opacity */
-    .overlay {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      bottom: 0;
-      background-color: rgba(0, 0, 0, 0.8);
-      pointer-events: none;
-    }
-  </style>
+	<meta charset="UTF-8">
+	<title>Night Watch</title>
+	<style>
+	html, body {
+		font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+		height: 100%;
+		margin: 0;
+		background-color: #000000;
+		color: #ffffff;
+	}
+	/* Main div that displays the random background colors */
+	#colorDiv {
+		height: 100%;
+		width: 100%;
+		transition: background-color 0.1s linear;
+		position: relative;
+	}
+	/* Overlay layer with 80% black opacity to reduce brightness */
+	.overlay {
+		position: absolute;
+		top: 0;
+		left: 0;
+		right: 0;
+		bottom: 0;
+		background-color: rgba(0, 0, 0, 0.8);
+		pointer-events: none;
+	}
+	/* Container for the warning message and button */
+	#warningContainer {
+		position: absolute;
+		width: 30%;
+		top: 30%;
+		left: 50%;
+		transform: translate(-50%, -50%);
+		text-align: center;
+		z-index: 9999; /* Ensure the warning container appears above everything else */
+	}
+	/* Red rounded box for the warning message */
+	#warningBox {
+		border: 2px solid #ff0000;
+		border-radius: 10px;
+		padding: 20px;
+	}
+	/* "Start Night Watch" link */
+	a {
+		text-decoration: none;
+	}
+	a:link {
+		text-decoration: none;
+		color: #ffffff;
+		border-bottom: 2px solid #ffffff;
+	}
+	a:visited {
+		text-decoration: none;
+		color: #ffffff;
+		border-bottom: 2px solid #ffffff;
+	}
+	a:hover {
+		text-decoration: none;
+		color: #ffffff;
+		border-bottom: 4px solid #ffffff;
+	}
+	</style>
 </head>
 <body>
-  <div id="colorDiv">
-    <div class="overlay"></div>
-  </div>
-  <script>
-    // Flag to control the color cycling
-    let isNightWatchActive = true;
+
+	<!-- Warning container displayed before JavaScript starts running -->
+	<div id="warningContainer">
+		<div id="warningBox">
+		Night Watch displays random colors at random intervals. It is not recommended for those who are photosensitive or prone to seizers.
+		<p><a id="startButton" href="#">Start Night Watch</a></p>
+		</div>
+	</div>
+
+	<!-- Main div that will display the random background colors -->
+	<div id="colorDiv">
+	<div class="overlay"></div>
+	</div>
+
+	<script>
+	// Flag to control the color cycling, initially false so it doesn't run until button is clicked
+	let isNightWatchActive = false;
     
-    // Function to start the random color cycle
-    function startColorCycle() {
-      // Generate a random interval between 0.3 and 3 seconds
-      const randomDuration = Math.random() * (3 - 0.3) + 0.3;
-      // Generate a random RGB color
-      const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
+	// Function to start the random color cycle
+	function startColorCycle() {
+		// Set flag to true to indicate the cycle is active
+		isNightWatchActive = true;
+		// Generate a random interval between 0.3 and 3 seconds
+		const randomDuration = Math.random() * (3 - 0.3) + 0.3;
+		// Generate a random RGB color
+		const randomColor = `rgb(${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)}, ${Math.floor(Math.random() * 256)})`;
       
       setTimeout(() => {
+        // Change the background color of the main div to the random color
         document.getElementById('colorDiv').style.backgroundColor = randomColor;
+        // Continue the color cycle if active
         if (isNightWatchActive) {
           startColorCycle();
         }
       }, randomDuration * 1000);
     }
     
-    // Start the color cycle when the page loads
-    startColorCycle();
+    // Event listener for the "Start Night Watch" button
+    document.getElementById('startButton').addEventListener('click', function(e) {
+      e.preventDefault(); // Prevent default link behavior
+      // Hide the warning container once the button is clicked
+      document.getElementById('warningContainer').style.display = 'none';
+      // Start the random color cycle
+      startColorCycle();
+    });
   </script>
 </body>
 </html>

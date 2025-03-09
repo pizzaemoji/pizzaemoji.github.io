@@ -29,20 +29,21 @@
       background-color: rgba(0, 0, 0, 0.8);
       pointer-events: none;
     }
-    /* Container for the warning message and button, centered on the page */
+    /* Container for the warning message and button, centered on the page with a high z-index */
     #warningContainer {
       position: absolute;
+      width: 33%;
       top: 50%;
       left: 50%;
       transform: translate(-50%, -50%);
       text-align: center;
+      z-index: 9999; /* Ensure the warning container appears above everything else */
     }
     /* Red rounded box for the warning message */
     #warningBox {
       border: 2px solid red;
       border-radius: 10px;
       padding: 20px;
-      width: 33%;
       margin-bottom: 20px;
     }
     /* Rounded button style for the "Start Night Watch" link */

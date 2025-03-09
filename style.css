@@ -5,11 +5,10 @@ body {
 	height: 100%;
 	margin: 0;
 }
-#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
-	position: absolute;
-	top: 50%;
-	left: 50%;
-	transform: translate(-50%, -50%);
+#pizzaemoji {
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
 #logo {
 	width: 80%;

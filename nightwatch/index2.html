@@ -42,6 +42,7 @@
       border: 2px solid red;
       border-radius: 10px;
       padding: 20px;
+      width: 33%;
       margin-bottom: 20px;
     }
     /* Rounded button style for the "Start Night Watch" link */
@@ -78,11 +79,13 @@
   </div>
 
   <script>
-    // Flag to control the color cycling
-    let isNightWatchActive = true;
+    // Flag to control the color cycling, initially false so it doesn't run until button is clicked
+    let isNightWatchActive = false;
     
     // Function to start the random color cycle
     function startColorCycle() {
+      // Set flag to true to indicate the cycle is active
+      isNightWatchActive = true;
       // Generate a random interval between 0.3 and 3 seconds
       const randomDuration = Math.random() * (3 - 0.3) + 0.3;
       // Generate a random RGB color

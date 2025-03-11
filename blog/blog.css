@@ -37,56 +37,13 @@ header {
 #myname {
 	text-decoration: none;
 }
-.byline {
-	display: inline-block;
+.intro {
 	text-decoration: none;
-	font-size: 1.2rem;
-	font-weight: 600;
-	text-align: left;
-	padding-top: 2px; /* Puts a little space above border */
-	border-top: 3px solid #FF772B;
-}
-time {
-	text-decoration: none;
-	font-size: 1rem;
-	line-height: 1rem;
-	font-weight: 100;
-	text-align: left;
-}
-#title {
-	margin: auto;
-	width: 100%;
-}
-#hero {
-	display: block;
-	background-color: inherit;
-	padding-top: .5em;
-	padding-bottom: 2em;
-	margin: auto;
-	width: 100%;
-}
-/* links formatting */
-a {
-	text-decoration: none;
-}
-a:link {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-color: #222222;
+	font-size: 1.4rem;
+	font-weight: 500;
+	text-align: center;
+	padding-bottom: 20px;
+	margin: 0 auto;
 }
 /* Top navigation and menu */
 navheader {
@@ -164,28 +121,13 @@ navheader a:link, navheader a:visited {
 .menu-container:hover .menu-dropdown, .menu-dropdown:hover {
 	display: flex; /* Open menu on hover */
 }
-.intro {
-	text-decoration: none;
-	font-size: 1.4rem;
-	font-weight: 500;
-	text-align: center;
-	padding-bottom: 20px;
-	margin: 0 auto;
+/* Article header and titles/hero */
+#article-header {
+	margin: 0;
 }
-/* Main post formatting */
-article {
-	padding-left: 5px;
-	padding-right: 5px;
+#title {
 	margin: auto;
-}
-.post {
-	text-decoration: none;
-	font-size: 1.4rem;
-	font-weight: 300;
-	line-height: 2.2rem;
-	text-align: left;
-	margin: auto;
-	/* width in @media */
+	width: 100%;
 }
 h1 {
 	text-decoration: none;
@@ -207,6 +149,68 @@ h2 {
 	font-style: italic;
 	margin: 0;
 }
+#hero {
+	display: block;
+	background-color: inherit;
+	padding-top: .5em;
+	padding-bottom: 2em;
+	margin: auto;
+	width: 100%;
+}
+.byline {
+	display: inline-block;
+	text-decoration: none;
+	font-size: 1.2rem;
+	font-weight: 600;
+	text-align: left;
+	padding-top: 2px; /* Puts a little space above border */
+	border-top: 3px solid #FF772B;
+}
+time {
+	text-decoration: none;
+	font-size: 1rem;
+	line-height: 1rem;
+	font-weight: 100;
+	text-align: left;
+}
+/* links formatting */
+a {
+	text-decoration: none;
+}
+a:link {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:hover {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #222222;
+}
+/* Main post formatting */
+article {
+	padding-left: 5px;
+	padding-right: 5px;
+	margin: auto;
+}
+.post {
+	text-decoration: none;
+	font-size: 1.4rem;
+	font-weight: 300;
+	line-height: 2.2rem;
+	text-align: left;
+	margin: auto;
+	/* width in @media */
+}
 h3 {
 	text-decoration: none;
  	font-size: 1em;
@@ -221,6 +225,9 @@ blockquote {
 	margin: 2em 2em 2em 0em;
 	padding: 0 0 0 1.5em;
 	border-left: #FF772B 3px solid;
+}
+#endslice {
+	height: 1rem;
 }
 /* pullquotes and images */
 /* margin: position of element padding: space between element and lines */
@@ -274,7 +281,6 @@ blockquote {
 }
 .image-large {
 	display: block;
-/*	position: relative; Breaking navheader, images scroll over */
 	margin: 40px auto 0 auto; /* centers, space between image and <p> above */
 	width: 90%;
 }
@@ -332,7 +338,7 @@ a.fnlink:hover {
 	height: 2px;
 	background: #888888;
 }
-/* spacing, footer, etc formatting */
+/* home, spacing, footer, etc formatting */
 .spacer {
 	text-decoration: none;
 	padding: 3em;
@@ -355,9 +361,6 @@ a.fnlink:hover {
 	line-height: 2em;
 	text-align: center;
 }
-#endslice {
-	height: 1rem;
-}
 footer {
 	color: #EEEEEE;
 	font-size: .8em;
@@ -365,6 +368,7 @@ footer {
 	text-align: center;
 	padding-bottom: 1em;
 }
+/* Special page formatting */
 /* 2024-10-28-ios-the-apple-intelligence-update */
 #appleintelligencegradient {
 	background: -webkit-linear-gradient(0deg, #55CBFF 20%, #DF7CFF 40%, #FF796E 60%, #FFAD5B 80%, #FAFF55 100%);
@@ -381,6 +385,7 @@ footer {
 	text-align: center;
 	padding-top: 2em;
 }
+/* Desktop & Mobile formatting overrides */
 /* Desktop */
 @media (min-width: 800px) {
 	#logo {

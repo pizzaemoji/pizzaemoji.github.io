@@ -121,6 +121,29 @@ navheader a:link, navheader a:visited {
 .menu-container:hover .menu-dropdown, .menu-dropdown:hover {
 	display: flex; /* Open menu on hover */
 }
+/* links formatting */
+a {
+	text-decoration: none;
+}
+a:link {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:hover {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #222222;
+}
 /* Article header and titles/hero */
 #article-header {
 	margin: 0;
@@ -172,29 +195,6 @@ time {
 	line-height: 1rem;
 	font-weight: 100;
 	text-align: left;
-}
-/* links formatting */
-a {
-	text-decoration: none;
-}
-a:link {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-color: #222222;
 }
 /* Main post formatting */
 article {

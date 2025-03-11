@@ -144,10 +144,7 @@ a:hover {
 	color: #EEEEEE;
 	border-color: #222222;
 }
-/* Article header and titles/hero */
-#article-header {
-	margin: 0;
-}
+/* Article titles and hero image */
 #title {
 	margin: auto;
 	width: 100%;

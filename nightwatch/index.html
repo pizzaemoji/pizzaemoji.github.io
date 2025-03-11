@@ -31,8 +31,7 @@
 	/* Container for the warning message and button */
 	#warningContainer {
 		position: absolute;
-		width: 30%;
-		top: 30%;
+	/* Width and Top in @media */
 		left: 50%;
 		transform: translate(-50%, -50%);
 		text-align: center;
@@ -63,6 +62,20 @@
 		color: #ffffff;
 		border-bottom: 4px solid #ffffff;
 	}
+	/* Desktop */
+	@media (min-width: 800px) {
+		#warningContainer {
+			width: 30%;
+			top: 30%;
+		}
+	}
+	/* Mobile */
+	@media (max-width: 799px) {
+		#warningContainer {
+			width: 80%;
+			top: 40%;
+		}
+	}
 	</style>
 </head>
 <body>
@@ -70,7 +83,7 @@
 	<!-- Warning container displayed before JavaScript starts running -->
 	<div id="warningContainer">
 		<div id="warningBox">
-		Night Watch displays random colors at random intervals. It is not recommended for those who are photosensitive or prone to seizers.
+		Night Watch displays flashing colors is not recommended for individuals who are photosensitive or prone to seizers.
 		<p><a id="startButton" href="#">Start Night Watch</a></p>
 		</div>
 	</div>

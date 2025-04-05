@@ -55,9 +55,9 @@ navheader {
 	padding: 0;
     width: 100%;
     max-width: 1000px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
     background-color: #222222E6;
 	backdrop-filter: blur(5px); /* Applies a 5px blur to the background */
 	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
@@ -68,6 +68,15 @@ navheader a:link, navheader a:visited {
 	padding: 0;
 	color: #EEEEEE;
 	text-decoration: none;
+}
+.nav-left {
+	display: flex;
+	align-items: center;
+}
+.nav-right {
+	display: flex;
+	justify-content: flex-end;
+	flex: 1;
 }
 .navbuffer {
 	padding-top: 80px;

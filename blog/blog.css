@@ -400,7 +400,7 @@ footer {
 		width: 50%;
 	}
 	#logo-mini {
-		max-width: 300px;
+		max-width: 200px;
 	}
 	.post {
 		width: 70%;
@@ -439,7 +439,8 @@ footer {
 		width: 90%;
 	}
 	#logo-mini {
-		max-width: 160px;
+		max-width: 140px;
+		padding-right: 1em;
 	}
 	.post {
 		width: 90%;

@@ -33,6 +33,7 @@ header {
 #logo-mini {
 	width: 100%;
 	height: auto;
+	/*	max-width in @media */
 }
 #myname {
 	text-decoration: none;
@@ -52,7 +53,7 @@ navheader {
     left: 0;
     right: 0;
 	margin: 0 auto;
-    padding: 1em 0em;
+    padding: .5em 0em;
     width: 100%;
     max-width: 1000px;
 	display: flex;

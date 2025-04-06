@@ -32,7 +32,9 @@ header {
 }
 #logo-mini {
     padding: 1em;
-	width: 60%;
+	width: 100%;
+	max-width: 150px;
+	height: auto;
 }
 #myname {
 	text-decoration: none;
@@ -62,6 +64,8 @@ navheader {
 	backdrop-filter: blur(5px); /* Applies a 5px blur to the background */
 	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
     border-bottom: 2px solid #333333;
+    	box-sizing: border-box;
+
 }
 navheader a:link, navheader a:visited {
 	border: none;
@@ -72,12 +76,10 @@ navheader a:link, navheader a:visited {
 .nav-left {
 	display: flex;
 	align-items: center;
-	flex: 1;
 }
 .nav-right {
 	display: flex;
-	justify-content: flex-end;
-	flex: 1;
+	justify-content: center;
 }
 .navbuffer {
 	padding-top: 80px;

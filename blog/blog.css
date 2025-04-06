@@ -33,7 +33,6 @@ header {
 #logo-mini {
     padding: 1em 0em;
 	width: 100%;
-	max-width: 222px;
 	height: auto;
 }
 #myname {
@@ -400,6 +399,9 @@ footer {
 	#logo {
 		width: 50%;
 	}
+	#logo-mini {
+		max-width: 300px;
+	}
 	.post {
 		width: 70%;
 	}
@@ -435,6 +437,9 @@ footer {
 @media (max-width: 799px) {
 	#logo {
 		width: 90%;
+	}
+	#logo-mini {
+		max-width: 160px;
 	}
 	.post {
 		width: 90%;

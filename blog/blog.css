@@ -31,7 +31,6 @@ header {
 	/*	width in @media */
 }
 #logo-mini {
-    padding: 1em 0em;
 	width: 100%;
 	height: auto;
 }
@@ -53,7 +52,7 @@ navheader {
     left: 0;
     right: 0;
 	margin: 0 auto;
-	padding: 0;
+    padding: 1em 0em;
     width: 100%;
     max-width: 1000px;
 	display: flex;
@@ -63,8 +62,6 @@ navheader {
 	backdrop-filter: blur(5px); /* Applies a 5px blur to the background */
 	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
     border-bottom: 2px solid #333333;
-    	box-sizing: border-box;
-
 }
 navheader a:link, navheader a:visited {
 	border: none;
@@ -81,7 +78,7 @@ navheader a:link, navheader a:visited {
 	justify-content: center;
 }
 .navbuffer {
-	padding-top: 80px;
+	padding-top: 100px;
 }
 .menu-container {
 	position: relative;
@@ -439,7 +436,7 @@ footer {
 		width: 90%;
 	}
 	#logo-mini {
-		max-width: 160px;
+		max-width: 150px;
 		padding-right: 1em;
 	}
 	.post {

@@ -31,9 +31,9 @@ header {
 	/*	width in @media */
 }
 #logo-mini {
-    padding: 1em;
+    padding: 1em 0em;
 	width: 100%;
-	max-width: 150px;
+	max-width: 250px;
 	height: auto;
 }
 #myname {

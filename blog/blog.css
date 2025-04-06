@@ -15,7 +15,8 @@ header {
 	padding: 100px 0;
 	text-align: center;
 }
-#pizzaemoji, #pizzaemoji a:link, #pizzaemoji a:hover, #pizzaemoji a:visited {
+/* Home-specific formatting */
+.title-logo-byline, .title-logo-byline a:link, .title-logo-byline a:hover, .title-logo-byline a:visited {
 	border: 0;
 	margin: 0;
 	color: #EEEEEE;
@@ -30,20 +31,15 @@ header {
 	background-color: inherit;
 	/*	width in @media */
 }
-#logo-mini {
-	width: 100%;
-	height: auto;
-	/*	max-width in @media */
-}
-#myname {
+.byline-under-img {
 	text-decoration: none;
 }
-.intro {
+.intro-text-home {
 	text-decoration: none;
 	font-size: 1.4rem;
 	font-weight: 500;
 	text-align: center;
-	padding-bottom: 20px;
+	padding-bottom: 2em;
 	margin: 0 auto;
 }
 /* Top navigation and menu */
@@ -69,14 +65,6 @@ navheader a:link, navheader a:visited {
 	padding: 0;
 	color: #EEEEEE;
 	text-decoration: none;
-}
-.nav-left {
-	display: flex;
-	align-items: center;
-}
-.nav-right {
-	display: flex;
-	justify-content: center;
 }
 .navbuffer {
 	padding-top: 100px;
@@ -129,6 +117,15 @@ navheader a:link, navheader a:visited {
 }
 .menu-container:hover .menu-dropdown, .menu-dropdown:hover {
 	display: flex; /* Open menu on hover */
+}
+.img-container {
+	display: flex;
+	justify-content: center;
+}
+#logo-mini {
+	width: 100%;
+	height: auto;
+	/*	max-width in @media */
 }
 /* links formatting */
 a {
@@ -349,7 +346,11 @@ a.fnlink:hover {
 	text-decoration: none;
 	padding: 3em;
 }
-.posthome {
+.spacer-home {
+	text-decoration: none;
+	padding: 1em;
+}
+.post-home {
 	text-decoration: none;
 	font-size: 1.4rem;
 	font-weight: 300;
@@ -357,10 +358,6 @@ a.fnlink:hover {
 	text-align: left;
 	margin: auto;
 	/* width in @media */
-}
-.spacerhome {
-	text-decoration: none;
-	padding: 1em;
 }
 .fourohfour {
 	font-size: 2em;

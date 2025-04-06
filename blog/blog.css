@@ -72,6 +72,7 @@ navheader a:link, navheader a:visited {
 .nav-left {
 	display: flex;
 	align-items: center;
+	flex: 1;
 }
 .nav-right {
 	display: flex;

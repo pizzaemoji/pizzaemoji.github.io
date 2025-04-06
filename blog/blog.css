@@ -22,10 +22,6 @@ header {
 	font-size: 1em;
 	line-height: .5;
 	text-decoration: none;
-		display: flex;
-	justify-content: flex-end;
-	align-items: center;
-	width: 100%;
 }
 #logo {
 	margin: 0;

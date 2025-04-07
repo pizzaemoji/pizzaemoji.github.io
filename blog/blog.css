@@ -373,13 +373,13 @@ footer {
 }
 /* Special page formatting */
 /* 2024-10-28-ios-the-apple-intelligence-update */
-#appleintelligencegradient {
+#apple-intelligence-gradient {
 	background: -webkit-linear-gradient(0deg, #55CBFF 20%, #DF7CFF 40%, #FF796E 60%, #FFAD5B 80%, #FAFF55 100%);
 	-webkit-background-clip: text;
 	-webkit-text-fill-color: transparent;
 }
 /* 2025-02-04-a-brief-history-of-spider-man-in-cinema */
-#spideyproverb {
+#spidey-proverb {
 	text-decoration: none;
 	color: #EEEEEE;
 	font-size: .9em;

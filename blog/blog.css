@@ -165,7 +165,6 @@ h1 {
 	word-spacing: .05em;
 	text-align: left;
 	margin: 0;
-	text-wrap: balance;
 }
 h2 {
 	text-decoration: none;
@@ -175,7 +174,6 @@ h2 {
 	text-align: left;
 	font-style: italic;
 	margin: 0;
-	text-wrap: balance;
 }
 #hero {
 	display: block;

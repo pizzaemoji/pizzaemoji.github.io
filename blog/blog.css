@@ -240,6 +240,7 @@ blockquote {
 	display: inline;
 	text-decoration: none;
 	float: left;
+	hyphens: none;
 	color: #FF772B;
 	font-weight: 100;
 	line-height: 1.2em;
@@ -255,6 +256,7 @@ blockquote {
 	display: inline;
 	text-decoration: none;
 	float: right;
+	hyphens: none;
 	color: #FF772B;
 	font-weight: 100;
 	line-height: 1.2em;

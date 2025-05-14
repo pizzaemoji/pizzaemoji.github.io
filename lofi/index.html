@@ -62,7 +62,6 @@
 		align-items: center;
 		justify-content: center;
 		padding: 0;
-		z-index: 5; 
 	}
 	</style>
 </head>
@@ -71,49 +70,52 @@
 	<div id="player"></div>
 	<div class="player-mask"></div>
 </div>
-<!-- <button id="big-btn">&#9654;</button> -->
-<button id="big-btn"><span id="icon">&#9654;</span></button>
+<button id="big-btn">&#9654;</button>
+
 	<!-- IFrame Player API script -->
-<script src="https://www.youtube.com/iframe_api"></script>
-<script>
-	let player, ready = false;
-	function onYouTubeIframeAPIReady() {
-		player = new YT.Player("yt-frame", {
+	<script src="https://www.youtube.com/iframe_api"></script>
+	<script>
+    let player, ready = false;
+
+    // Called automatically by the API once it loads
+    function onYouTubeIframeAPIReady() {
+		player = new YT.Player("player", {
+		height: "200",
+		width: "200",
+		videoId: "jfKfPfyJRdk",
 		host: "https://www.youtube-nocookie.com",
-			events: {
-		onReady: () => (ready = true),
-		onStateChange: onStateChange,
+		playerVars: {
+			origin: window.location.origin
+		},
+		events: {
+			onReady: () => (ready = true),
+			onStateChange: onStateChange,
 			},
 		});
 	}
-  const btn  = document.getElementById("big-btn");
-  const icon = document.getElementById("icon");
 
-  function setToPlay()  { icon.textContent = "\u25B6"; } // ▶
-  function setToPause() { icon.textContent = "\u23F8"; } // ⏸
+	const btn = document.getElementById("big-btn");
 
-  btn.addEventListener("click", () => {
-    if (!ready) return;
-    const state = player.getPlayerState();
-    if (state === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-      setToPlay();
-    } else {
-      player.playVideo();
-      setToPause();
-    }
-  });
+	btn.addEventListener("click", () => {
+		if (!ready) return;
+		const state = player.getPlayerState();
+		if (state === YT.PlayerState.PLAYING) {
+			player.pauseVideo();
+		} else {
+			player.playVideo();
+		}
+	});
 
-  function onStateChange(e) {
-    if (e.data === YT.PlayerState.PLAYING) {
-      setToPause();
-    } else if (
-      e.data === YT.PlayerState.PAUSED ||
-      e.data === YT.PlayerState.ENDED
-    ) {
-      setToPlay();
-    }
-  }
-</script>
+	function onStateChange(e) {
+		if (e.data === YT.PlayerState.PLAYING) {
+			btn.textContent = '\u23F8';
+		} else if (
+			e.data === YT.PlayerState.PAUSED ||
+			e.data === YT.PlayerState.ENDED
+		) {
+			btn.textContent = '\u25B6';
+		}
+	}
+	</script>
 </body>
 </html>

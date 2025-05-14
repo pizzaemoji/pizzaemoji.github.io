@@ -83,24 +83,23 @@
 	<!-- IFrame Player API script -->
 	<script src="https://www.youtube.com/iframe_api"></script>
 	<script>
-let playerReady = false;
+	let playerReady = false;
 
-function onYouTubeIframeAPIReady() {
-  player = new YT.Player("yt-frame", {
-    videoId: "jfKfPfyJRdk",
-    host: "https://www.youtube-nocookie.com",
-    height: 200, width: 200,
-    events: {
-      onReady: () => { apiReady = true; playerReady = true; },
-      onStateChange: syncIcon,
-    },
-  });
-}
+	function onYouTubeIframeAPIReady() {
+		player = new YT.Player("yt-frame", {
+		videoId: "jfKfPfyJRdk",
+		host: "https://www.youtube-nocookie.com",
+		height: 200, width: 200,
+			events: {
+		onReady: () => { apiReady = true; playerReady = true; },
+			},
+		});
+	}
 
 	const btn = document.getElementById("big-btn");
 
 	btn.addEventListener("click", () => {
-		if (!ready) return;
+		if (!playerReady) return;
 		const state = player.getPlayerState();
 		if (state === YT.PlayerState.PLAYING) {
 			player.pauseVideo();

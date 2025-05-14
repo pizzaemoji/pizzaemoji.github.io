@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lofi Radio – Legal Embed</title>
+  <style>
+    /* Page styling */
+    body {
+      margin: 0;
+      background: #222222;
+      color: #ffffff;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
+        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+
+    /* Wrapper keeps the player responsive while respecting the 200×200 minimum */
+    .video-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 560px; /* nice size on tablets / desktops */
+      min-width: 200px; /* YouTube minimum */
+      padding-top: 56.25%; /* 16:9 ratio */
+      margin-top: 1rem; /* small top gap */
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    /* Optional heading */
+    h1 {
+      font-size: 1.25rem;
+      font-weight: 500;
+      margin: 1rem 0 0.25rem;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Lofi Girl – Beats to Relax/Study To</h1>
+  <div class="video-wrapper">
+    <iframe
+      src="https://www.youtube.com/embed/jfKfPfyJRdk"
+      title="lofi hip hop radio 📚 - beats to relax/study to"
+      allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+      allowfullscreen
+    ></iframe>
+  </div>
+</body>
+</html>

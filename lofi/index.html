@@ -83,15 +83,15 @@
 	<!-- IFrame Player API script -->
 	<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-  let player, playerReady = false;          /* ← declare both */
+  window.playerReady = false;
 
   function onYouTubeIframeAPIReady () {
-    player = new YT.Player("player", {      /* id matches the DIV */
+    player = new YT.Player("player", {
       videoId: "jfKfPfyJRdk",
       host:   "https://www.youtube-nocookie.com",
       height: 200, width: 200,
       events: {
-        onReady: () => (playerReady = true),
+        onReady: () => { window.playerReady = true; },  // set the same flag
         onStateChange
       }
     });
@@ -111,7 +111,7 @@
 
   function onStateChange (e) {
     btn.textContent =
-      e.data === YT.PlayerState.PLAYING ? "\u23F8\uFE0E" : "\u25B6\uFE0E";
+      e.data === YT.PlayerState.PLAYING ? "\u23F8\uFE0E" : "\u25B6"; //Pause : Play 
   }
 
   /* iOS Shortcut helper */

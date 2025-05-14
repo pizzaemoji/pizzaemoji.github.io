@@ -83,15 +83,16 @@
 	<!-- IFrame Player API script -->
 	<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-  window.playerReady = false;
+  var playerReady = false;
 
   function onYouTubeIframeAPIReady () {
-    player = new YT.Player("player", {
+    window.player = new YT.Player("player", {
       videoId: "jfKfPfyJRdk",
-      host:   "https://www.youtube-nocookie.com",
+      host:    "https://www.youtube-nocookie.com",
       height: 200, width: 200,
+      playerVars: { playsinline: 1, mute: 0 },
       events: {
-        onReady: () => { window.playerReady = true; },  // set the same flag
+        onReady: () => (playerReady = true),
         onStateChange
       }
     });
@@ -115,7 +116,7 @@
   }
 
   /* iOS Shortcut helper */
-  function playLofi () {
+ function playLofi () {
     if (playerReady) player.playVideo();
   }
   window.playLofi = playLofi;

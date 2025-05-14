@@ -82,47 +82,43 @@
 </div>
 	<!-- IFrame Player API script -->
 	<script src="https://www.youtube.com/iframe_api"></script>
-	<script>
-	let playerReady = false;
+<script>
+  let player, playerReady = false;          /* ← declare both */
 
-	function onYouTubeIframeAPIReady() {
-		player = new YT.Player("yt-frame", {
-		videoId: "jfKfPfyJRdk",
-		host: "https://www.youtube-nocookie.com",
-		height: 200, width: 200,
-			events: {
-		onReady: () => { apiReady = true; playerReady = true; },
-			},
-		});
-	}
+  function onYouTubeIframeAPIReady () {
+    player = new YT.Player("player", {      /* id matches the DIV */
+      videoId: "jfKfPfyJRdk",
+      host:   "https://www.youtube-nocookie.com",
+      height: 200, width: 200,
+      events: {
+        onReady: () => (playerReady = true),
+        onStateChange
+      }
+    });
+  }
 
-	const btn = document.getElementById("big-btn");
+  const btn = document.getElementById("big-btn");
 
-	btn.addEventListener("click", () => {
-		if (!playerReady) return;
-		const state = player.getPlayerState();
-		if (state === YT.PlayerState.PLAYING) {
-			player.pauseVideo();
-		} else {
-			player.playVideo();
-		}
-	});
+  btn.addEventListener("click", () => {
+    if (!playerReady) return;
+    const state = player.getPlayerState();
+    if (state === YT.PlayerState.PLAYING) {
+      player.pauseVideo();
+    } else {
+      player.playVideo();
+    }
+  });
 
-	function onStateChange(e) {
-		if (e.data === YT.PlayerState.PLAYING) {
-			btn.textContent = '\u23F8\uFE0E'; //pause
-		} else if (
-			e.data === YT.PlayerState.PAUSED ||
-			e.data === YT.PlayerState.ENDED
-		) {
-			btn.textContent = '\u25B6\uFE0E'; //play
-		}
-	}
-	//Allows iOS to auto-play via Shortcuts with playLofi() 
-	function playLofi() {
-		if (apiReady) player.playVideo();
-	}
-	window.playLofi = playLofi;
+  function onStateChange (e) {
+    btn.textContent =
+      e.data === YT.PlayerState.PLAYING ? "\u23F8\uFE0E" : "\u25B6\uFE0E";
+  }
+
+  /* iOS Shortcut helper */
+  function playLofi () {
+    if (playerReady) player.playVideo();
+  }
+  window.playLofi = playLofi;
 </script>
 </body>
 </html>

@@ -27,20 +27,26 @@
 		flex-direction: column;
 		align-items: center;
 	}
-	.video-wrapper {
-		width: 200px;
-		height: 200px;
-		margin-top: 1rem; /* keep a small gap from the heading */
-		position: relative;
-	}
-	.video-wrapper iframe {
-		position: absolute;
-		top: 0;
-		left: 0;
-		width: 100%;
-		height: 100%;
-		border: 0;
-	}  
+.video-wrapper {
+  position: relative;
+  width: 200px;
+  height: 200px;
+}
+
+.video-wrapper iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}
+
+/* ⚠️  This mask hides the video (YouTube TOS violation) */
+.player-mask {
+  position: absolute;
+  inset: 0;                 /* top:0; right:0; bottom:0; left:0; */
+  background: #222222;
+  pointer-events: none;     /* makes clicks fall through (optional) */
+  /* opacity: 0.9;           <- uncomment to show it’s there */
+}
     #big-btn {
 		margin: 1rem 0 2rem;
 		background: #00bfa5;
@@ -58,8 +64,15 @@
   </style>
 </head>
 <body>
+
+<div class="video-wrapper">
+
+
   <!-- The YouTube API will replace this div with the player iframe -->
   <div id="player"></div>
+
+  <div class="player-mask"></div>
+</div>
 
   <!-- Big Play / Pause toggle -->
   <button id="big-btn">Play</button>

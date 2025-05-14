@@ -17,12 +17,12 @@
       align-items: center;
     }
 
-    /* Wrapper keeps the player responsive while respecting the 200×200 minimum */
+    /* Fixed-size player wrapper */
     .video-wrapper {
+      width: 200px;
+      height: 200px;
+      margin-top: 1rem; /* keep a small gap from the heading */
       position: relative;
-      width: 100%;
-      padding-top: 10%; /* 16:9 ratio */
-      margin-top: 1rem; /* small top gap */
     }
 
     .video-wrapper iframe {

@@ -108,12 +108,12 @@
 
 	function onStateChange(e) {
 		if (e.data === YT.PlayerState.PLAYING) {
-			btn.textContent = '\u23F8';
+			btn.textContent = '\u23F8\uFE0E'; //pause
 		} else if (
 			e.data === YT.PlayerState.PAUSED ||
 			e.data === YT.PlayerState.ENDED
 		) {
-			btn.textContent = '\u25B6';
+			btn.textContent = '\u25B6\uFE0E'; //play
 		}
 	}
 	</script>

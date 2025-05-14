@@ -124,6 +124,11 @@
 			btn.textContent = '\u25B6\uFE0E'; //play
 		}
 	}
-	</script>
+	//Allows iOS to auto-play via Shortcuts with playLofi() 
+	function playLofi() {
+		if (apiReady) player.playVideo();
+	}
+	window.playLofi = playLofi;
+</script>
 </body>
 </html>

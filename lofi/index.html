@@ -1,55 +1,60 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lofi</title>
-  <style>
-    /* Page styling */
-    body {
-      margin: 0;
-      background: #222222;
-      color: #ffffff;
-      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen,
-        Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-    }
-
-    /* Fixed-size player wrapper */
-    .video-wrapper {
-      width: 200px;
-      height: 200px;
-      margin-top: 1rem; /* keep a small gap from the heading */
-      position: relative;
-    }
-
-    .video-wrapper iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      border: 0;
-    }
-    
-	/* Large custom play / pause control */
+	<title>Pizza Emoji — Lofi</title>
+	<meta name="title" content="Pizza Emoji - A small pictorial symbol that represents a slice of delicious baked dough with tomato sauce, cheese, and various toppings." />
+	<meta name="description" content="The best website named Pizza Emoji" />
+	<meta name="keywords" content="pizza emoji, pizzaemoji.net, slice, lofi" />
+	<meta name="author" content="Brandon Butler" />
+	<meta name="pronouns" content="he/him" />
+	<meta name="theme-color" content="#222222" />
+	<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+	<meta name='robots' content='max-image-preview:large' />
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	<meta charset="UTF-8" />
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+	<link rel="shortcut icon" type="image/x-icon" href="/favicon/favicon.ico">
+	<link rel="icon" type="image/x-icon" sizes="48x48" href="/favicon/favicon.ico">
+	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/favicon/site.webmanifest">
+	<style>
+	body {
+		margin: 0;
+		background: #222222;
+		font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+	}
+	.video-wrapper {
+		width: 200px;
+		height: 200px;
+		margin-top: 1rem; /* keep a small gap from the heading */
+		position: relative;
+	}
+	.video-wrapper iframe {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		border: 0;
+	}  
     #big-btn {
-      margin: 1rem 0 2rem;
-      background: #00bfa5;
-      border: none;
-      color: #ffffff;
-      font-size: 1rem;
-      padding: 0.6rem 2rem;
-      border-radius: 9999px;
-      cursor: pointer;
-      transition: background 0.2s ease;
-    }
-
-    #big-btn:hover {
-      background: #26c6da;
-    }
+		margin: 1rem 0 2rem;
+		background: #00bfa5;
+		border: none;
+		color: #ffffff;
+		font-size: 1rem;
+		padding: 0.6rem 2rem;
+		border-radius: 9999px;
+		cursor: pointer;
+		transition: background 0.2s ease;
+	}
+	#big-btn:hover {
+		background: #26c6da;
+	}
   </style>
 </head>
 <body>
@@ -67,11 +72,14 @@
   <!-- IFrame Player API -->
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
-    let player;
+    let player, ready = false;
 
+    /* Called by the YouTube IFrame API once it has loaded */
     function onYouTubeIframeAPIReady() {
       player = new YT.Player("yt-frame", {
+        host: "https://www.youtube-nocookie.com", // required when using the nocookie domain
         events: {
+          onReady: () => (ready = true),
           onStateChange: onStateChange,
         },
       });
@@ -79,9 +87,8 @@
 
     const btn = document.getElementById("big-btn");
 
-    // Toggle play/pause when the button is clicked
     btn.addEventListener("click", () => {
-      if (!player || typeof player.getPlayerState !== "function") return;
+      if (!ready) return; // ignore clicks until the API is ready
       const state = player.getPlayerState();
       if (state === YT.PlayerState.PLAYING) {
         player.pauseVideo();
@@ -90,7 +97,6 @@
       }
     });
 
-    // Update button label to reflect current state
     function onStateChange(e) {
       if (e.data === YT.PlayerState.PLAYING) {
         btn.textContent = "Pause";

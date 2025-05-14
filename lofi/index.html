@@ -18,68 +18,64 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
 	<link rel="manifest" href="/favicon/site.webmanifest">
-	<style>
-	body {
-		margin: 0;
-		background: #222222;
-		font-family: -apple-system, BlinkMacSystemFont, sans-serif;
-		display: flex;
-		flex-direction: column;
-		align-items: center;
-	}
-	.video-wrapper {
-		position: relative;
-		width: 200px;
-		height: 200px;
-	}
-	.video-wrapper iframe {
-		width: 100%;
-		height: 100%;
-		border: 0;
-	}
-	.player-mask {
-		position: absolute;
-		inset: 0;
-		background: #222222;
-		/* opacity: 0.9; */
-	}
-	#big-btn {
-		margin: 1rem 0 2rem;
-		background: #ee0000;
-		border: none;
-		color: #ffffff;
-		font-size: 1rem;
-		padding: 0.6rem 2rem;
-		border-radius: 9999px;
-		cursor: pointer;
-		transition: background 0.2s ease;
-	}
-	#big-btn:hover {
-		background: #eeeeee;
-	}
-	</style>
+  <style>
+    body {
+      margin: 0;
+      background: #222222;
+      font-family: -apple-system, BlinkMacSystemFont, sans-serif;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: flex-start;
+    }
+    .video-wrapper {
+      width: 200px;
+      height: 200px;
+      position: relative;
+      margin-top: 1rem;
+    }
+    .video-wrapper iframe {
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+    .player-mask {
+      position: absolute;
+      inset: 0;
+      background: #222222;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      user-select: none;
+    }
+    .player-mask span {
+      font-size: 0.9rem;
+      padding: 0.4rem 1.2rem;
+      border: 2px solid #fff;
+      border-radius: 9999px;
+    }
+  </style>
 </head>
 <body>
-<div class="video-wrapper">
-	<div id="player"></div>
-	<div class="player-mask"></div>
-</div>
-<button id="big-btn">Play</button>
-  <!-- IFrame Player API script -->
+  <div class="video-wrapper">
+    <!-- YouTube player (privacy-enhanced + JS API) -->
+    <iframe
+      id="yt-frame"
+      src="https://www.youtube-nocookie.com/embed/jfKfPfyJRdk?enablejsapi=1"
+      allow="autoplay; encrypted-media;>
+      </iframe>
+    <div class="player-mask" id="mask"><span id="mask-label">Play</span></div>
+  </div>
+
+  <!-- YouTube IFrame API -->
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     let player, ready = false;
 
-    // Called automatically by the API once it loads
     function onYouTubeIframeAPIReady() {
-      player = new YT.Player("player", {
-        height: "200",
-        width: "200",
-        videoId: "jfKfPfyJRdk",
+      player = new YT.Player("yt-frame", {
         host: "https://www.youtube-nocookie.com",
-        playerVars: {
-          origin: window.location.origin
-        },
         events: {
           onReady: () => (ready = true),
           onStateChange: onStateChange,
@@ -87,9 +83,10 @@
       });
     }
 
-    const btn = document.getElementById("big-btn");
+    const mask = document.getElementById("mask");
+    const label = document.getElementById("mask-label");
 
-    btn.addEventListener("click", () => {
+    mask.addEventListener("click", () => {
       if (!ready) return;
       const state = player.getPlayerState();
       if (state === YT.PlayerState.PLAYING) {
@@ -101,12 +98,9 @@
 
     function onStateChange(e) {
       if (e.data === YT.PlayerState.PLAYING) {
-        btn.textContent = "Pause";
-      } else if (
-        e.data === YT.PlayerState.PAUSED ||
-        e.data === YT.PlayerState.ENDED
-      ) {
-        btn.textContent = "Play";
+        label.textContent = "Pause";
+      } else if (e.data === YT.PlayerState.PAUSED || e.data === YT.PlayerState.ENDED) {
+        label.textContent = "Play";
       }
     }
   </script>

@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Lofi Radio – Legal Embed</title>
+  <title>Lofi</title>
   <style>
     /* Page styling */
     body {
@@ -33,16 +33,74 @@
       height: 100%;
       border: 0;
     }
+    
+	/* Large custom play / pause control */
+    #big-btn {
+      margin: 1rem 0 2rem;
+      background: #00bfa5;
+      border: none;
+      color: #ffffff;
+      font-size: 1rem;
+      padding: 0.6rem 2rem;
+      border-radius: 9999px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+
+    #big-btn:hover {
+      background: #26c6da;
+    }
   </style>
 </head>
 <body>
   <div class="video-wrapper">
     <iframe
-      src="https://www.youtube.com/embed/jfKfPfyJRdk"
-      title="lofi hip hop radio 📚 - beats to relax/study to"
+      src="https://www.youtube-nocookie.com/embed/jfKfPfyJRdk"
+      title="lofi girl"
       allow="autoplay; encrypted-media"
       allowfullscreen
     ></iframe>
   </div>
+    <!-- Big Play/Pause toggle -->
+  <button id="big-btn">Play</button>
+
+  <!-- IFrame Player API -->
+  <script src="https://www.youtube.com/iframe_api"></script>
+  <script>
+    let player;
+
+    function onYouTubeIframeAPIReady() {
+      player = new YT.Player("yt-frame", {
+        events: {
+          onStateChange: onStateChange,
+        },
+      });
+    }
+
+    const btn = document.getElementById("big-btn");
+
+    // Toggle play/pause when the button is clicked
+    btn.addEventListener("click", () => {
+      if (!player || typeof player.getPlayerState !== "function") return;
+      const state = player.getPlayerState();
+      if (state === YT.PlayerState.PLAYING) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    });
+
+    // Update button label to reflect current state
+    function onStateChange(e) {
+      if (e.data === YT.PlayerState.PLAYING) {
+        btn.textContent = "Pause";
+      } else if (
+        e.data === YT.PlayerState.PAUSED ||
+        e.data === YT.PlayerState.ENDED
+      ) {
+        btn.textContent = "Play";
+      }
+    }
+  </script>
 </body>
 </html>

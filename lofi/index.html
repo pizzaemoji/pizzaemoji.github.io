@@ -58,26 +58,27 @@
   </style>
 </head>
 <body>
-  <div class="video-wrapper">
-    <iframe
-      src="https://www.youtube-nocookie.com/embed/jfKfPfyJRdk"
-      title="lofi girl"
-      allow="autoplay; encrypted-media"
-      allowfullscreen
-    ></iframe>
-  </div>
-    <!-- Big Play/Pause toggle -->
+  <!-- The YouTube API will replace this div with the player iframe -->
+  <div id="player"></div>
+
+  <!-- Big Play / Pause toggle -->
   <button id="big-btn">Play</button>
 
-  <!-- IFrame Player API -->
+  <!-- IFrame Player API script -->
   <script src="https://www.youtube.com/iframe_api"></script>
   <script>
     let player, ready = false;
 
-    /* Called by the YouTube IFrame API once it has loaded */
+    // Called automatically by the API once it loads
     function onYouTubeIframeAPIReady() {
-      player = new YT.Player("yt-frame", {
-        host: "https://www.youtube-nocookie.com", // required when using the nocookie domain
+      player = new YT.Player("player", {
+        height: "200",
+        width: "200",
+        videoId: "jfKfPfyJRdk",
+        host: "https://www.youtube-nocookie.com",
+        playerVars: {
+          origin: window.location.origin
+        },
         events: {
           onReady: () => (ready = true),
           onStateChange: onStateChange,
@@ -88,7 +89,7 @@
     const btn = document.getElementById("big-btn");
 
     btn.addEventListener("click", () => {
-      if (!ready) return; // ignore clicks until the API is ready
+      if (!ready) return;
       const state = player.getPlayerState();
       if (state === YT.PlayerState.PLAYING) {
         player.pauseVideo();

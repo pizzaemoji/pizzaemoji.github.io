@@ -67,10 +67,22 @@
 		z-index: 100;
 	}
 	.chan-btn {
+		position: relative;
 		background: none;
 		border: none;
 		padding: 0;
 	}
+	.chan-btn.active :: after {
+		content: '';
+		display: block;
+		position :absolute;
+		left: 20%; 
+		right: 20%;
+		bottom: -6px; /* a little gap below the img */
+		height: 3px;
+		background: #D44E52;
+		border-radius: 2px;
+}
 	.chan-btn img {
 		width: 80px;
 		height: 80px;
@@ -88,7 +100,7 @@
 	<br>
 	<div>
 
-		<button class="chan-btn" id="btn-girl">
+		<button class="chan-btn active" id="btn-girl">
 		<img src="lofi-girl.webp" alt="Lofi Girl">
 		</button>
 		<button class="chan-btn" id="btn-boy">
@@ -141,6 +153,22 @@
     document.getElementById("btn-boy")
             .addEventListener("click",()=>switchChannel("4xDzrJKXOOY"));
 
+const chanBtns = document.querySelectorAll('.chan-btn');
+
+function switchChannel(id, btn){
+    if(!playerReady) return;
+    player.loadVideoById(id);
+    player.playVideo();                   // ignored on iOS if autoplay blocked
+
+    /* add .active to the clicked button, remove from the others */
+    chanBtns.forEach(b => b.classList.toggle('active', b === btn));
+}
+
+document.getElementById('btn-girl')
+        .addEventListener('click', function(){ switchChannel('jfKfPfyJRdk', this); });
+
+document.getElementById('btn-boy')
+        .addEventListener('click', function(){ switchChannel('4xDzrJKXOOY', this); });
 
 	/* iOS Shortcut helper */
 	function playLofi () {

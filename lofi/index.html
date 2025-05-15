@@ -29,7 +29,6 @@
 		display: flex;
 		align-items: center;
 		justify-content: center;
-	    gap: 2rem;                 /* space between player and channel buttons */
 		width: 100%;
 		height: 80%;
 	}
@@ -73,8 +72,8 @@
 		padding:0;
 	}
 	.chan-btn img {
-		width:100px;
-		height:100px;
+		width:80px;
+		height:80px;
 		display:block;
 	}
 	</style>
@@ -86,12 +85,14 @@
 		<div id="mask"></div>
 		<button id="big-btn">&#9654;</button>
 	</div>
-	<button class="chan-btn" id="btn-girl">
-	<img src="lofi-girl.webp" alt="Lofi Girl">
-	</button>
-	<button class="chan-btn" id="btn-boy">
-	<img src="lofi-boy.webp" alt="Lofi Boy">
-	</button>
+	<div>
+		<button class="chan-btn" id="btn-girl">
+		<img src="lofi-girl.webp" alt="Lofi Girl">
+		</button>
+		<button class="chan-btn" id="btn-boy">
+		<img src="lofi-boy.webp" alt="Lofi Boy">
+		</button>
+	</div>
 </div>
 <script src="https://www.youtube.com/iframe_api"></script>
 <script>

@@ -31,7 +31,7 @@
 		align-items: center;
 		justify-content: center;
 		width: 100%;
-		height: 80%;
+		height: 60%;
 	}
 	#wrapper {
 		position: relative;
@@ -67,13 +67,13 @@
 		margin: 0;
 		z-index: 100;
 	}
-	.chan-btn {
+	.channel-btn {
 		position: relative;
 		background: none;
 		border: none;
 		padding: 0;
 	}
-	.chan-btn.active::after {
+	.channel-btn.active::after {
 		content: '';
 		display: block;
 		position :absolute;
@@ -84,7 +84,7 @@
 		background: #D44E52;
 		border-radius: 2px;
 }
-	.chan-btn img {
+	.channel-btn img {
 		width: 80px;
 		height: 80px;
 		display: block;
@@ -98,13 +98,11 @@
 		<div id="mask"></div>
 		<button id="big-btn">&#9654;</button>
 	</div>
-	<br>
 	<div>
-
-		<button class="chan-btn active" id="btn-girl">
+		<button class="channel-btn active" id="btn-girl">
 		<img src="lofi-girl.webp" alt="Lofi Girl">
 		</button>
-		<button class="chan-btn" id="btn-boy">
+		<button class="channel-btn" id="btn-boy">
 		<img src="lofi-boy.webp" alt="Lofi Boy">
 		</button>
 	</div>
@@ -143,9 +141,9 @@
 		e.data === YT.PlayerState.PLAYING ? "\u23F8\uFE0E" : "\u25B6"; //Pause : Play 
 	}
 
-    function switchChannel(id){
+	function switchChannel(id){
         if(!playerReady) return;
-        player.loadVideoById(id);          // swap stream
+        player.loadVideoById(id); // swap stream
         // try to autoplay; some browsers (iOS Safari) may block it
         player.playVideo();
     }
@@ -154,22 +152,21 @@
     document.getElementById("btn-boy")
             .addEventListener("click",()=>switchChannel("4xDzrJKXOOY"));
 
-const chanBtns = document.querySelectorAll('.chan-btn');
+	const chanBtns = document.querySelectorAll('.chan-btn');
 
-function switchChannel(id, btn){
-    if(!playerReady) return;
-    player.loadVideoById(id);
-    player.playVideo();                   // ignored on iOS if autoplay blocked
+	function switchChannel(id, btn){
+		if(!playerReady) return;
+		player.loadVideoById(id);
+		player.playVideo();
+		/* add .active to the clicked button, remove from the others */
+		chanBtns.forEach(b => b.classList.toggle('active', b === btn));
+	}
 
-    /* add .active to the clicked button, remove from the others */
-    chanBtns.forEach(b => b.classList.toggle('active', b === btn));
-}
+	document.getElementById('btn-girl')
+		.addEventListener('click', function(){ switchChannel('jfKfPfyJRdk', this); });
 
-document.getElementById('btn-girl')
-        .addEventListener('click', function(){ switchChannel('jfKfPfyJRdk', this); });
-
-document.getElementById('btn-boy')
-        .addEventListener('click', function(){ switchChannel('4xDzrJKXOOY', this); });
+	document.getElementById('btn-boy')
+		.addEventListener('click', function(){ switchChannel('4xDzrJKXOOY', this); });
 
 	/* iOS Shortcut helper */
 	function playLofi () {

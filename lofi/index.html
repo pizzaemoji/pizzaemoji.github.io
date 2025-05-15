@@ -18,7 +18,7 @@
 	<link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
 	<link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
 	<link rel="manifest" href="/favicon/site.webmanifest">
-  <style>
+	<style>
     body {
 		margin: 0;
 		background: #222222;
@@ -79,48 +79,46 @@
 </div>
 <div id="centered">
 	<button id="big-btn">&#9654;</button>
-	Hello!
 </div>
-	<!-- IFrame Player API script -->
-	<script src="https://www.youtube.com/iframe_api"></script>
+<script src="https://www.youtube.com/iframe_api"></script>
 <script>
-  var playerReady = false;
+	var playerReady = false;
 
-  function onYouTubeIframeAPIReady () {
-    window.player = new YT.Player("player", {
-      videoId: "jfKfPfyJRdk",
-      host:    "https://www.youtube-nocookie.com",
-      height: 200, width: 200,
-      playerVars: { playsinline: 1, mute: 0 },
-      events: {
-        onReady: () => (playerReady = true),
-        onStateChange
-      }
-    });
-  }
+	function onYouTubeIframeAPIReady () {
+		window.player = new YT.Player("player", {
+			videoId: "jfKfPfyJRdk",
+			host:    "https://www.youtube-nocookie.com",
+			height: 200, width: 200,
+			playerVars: { playsinline: 1, mute: 0 },
+				events: {
+			onReady: () => (playerReady = true),
+			onStateChange
+				}
+			});
+		}
 
-  const btn = document.getElementById("big-btn");
+	const btn = document.getElementById("big-btn");
 
-  btn.addEventListener("click", () => {
-    if (!playerReady) return;
-    const state = player.getPlayerState();
-    if (state === YT.PlayerState.PLAYING) {
-      player.pauseVideo();
-    } else {
-      player.playVideo();
-    }
-  });
+	btn.addEventListener("click", () => {
+		if (!playerReady) return;
+		const state = player.getPlayerState();
+		if (state === YT.PlayerState.PLAYING) {
+			player.pauseVideo();
+		} else {
+			player.playVideo();
+		}
+	});
 
-  function onStateChange (e) {
-    btn.textContent =
-      e.data === YT.PlayerState.PLAYING ? "\u23F8\uFE0E" : "\u25B6"; //Pause : Play 
-  }
+	function onStateChange (e) {
+		btn.textContent =
+		e.data === YT.PlayerState.PLAYING ? "\u23F8\uFE0E" : "\u25B6"; //Pause : Play 
+	}
 
-  /* iOS Shortcut helper */
- function playLofi () {
-    if (playerReady) player.playVideo();
-  }
-  window.playLofi = playLofi;
+	/* iOS Shortcut helper */
+	function playLofi () {
+	if (playerReady) player.playVideo();
+	}
+	window.playLofi = playLofi;
 </script>
 </body>
 </html>

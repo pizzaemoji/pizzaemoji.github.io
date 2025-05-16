@@ -111,6 +111,19 @@ article {
 	font-weight: 600;
 	line-height: 2.2rem;
 	text-align: left;
+}
+	.center-image {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+	.slice {
+		height: 100px;
+		margin: 0;
+		padding: 20px;
+		border: 0;
+		background-color: inherit;
+	}	
 .spacer {
 	text-decoration: none;
 	padding: 3em;
@@ -145,8 +158,10 @@ footer {
 
 <p>Been working on some HTML projects. And doing some writing.
 
-<p><img src="/images/slice-white.webp" class="slice" alt="Slice" /></p>
-			</div>
+<div class="center-image">
+	<img src="/images/slice-white.webp" alt="White Slice" class="slice" />
+</div>
+						</div>
 			<div class="spacer"></div>
 		</article>
 	</main>	

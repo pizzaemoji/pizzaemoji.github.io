@@ -244,12 +244,11 @@ a:hover, a:active {
 	/* width and margin in @media */
 }
 .center-image {
-	display: flex;
+	display: block;
 	align-items: center;
 	justify-content: center;
 }
 .image-large2 {
-	display: block;
 	width: 90%;
 	margin: 2em 0 0 0;
 	padding: 0;

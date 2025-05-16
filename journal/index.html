@@ -54,6 +54,19 @@ navheader a:link, navheader a:visited {
 .navbuffer {
 	padding-top: 50px;
 }
+.menu-container {
+	position: relative;
+	display: inline-block;
+}
+.menu-item {
+	background-color: inherit;
+	padding: 0.5em;
+	font-size: 1.6em;
+	cursor: default;
+	color: #DDDDDD;
+	display: inline-flex;
+	align-items: center;
+}
 .img-container {
 	display: flex;
 	justify-content: center;
@@ -149,8 +162,13 @@ footer {
 </head>
 <body>
 	<navheader>
+		<div class="menu-container">
+			<div class="menu-item">	
+				<div class="title">Bran‘s Journal</div>
+			</div>
+		</div>
 		<div class="img-container">
-			<a href="https://pizzaemoji.net/blog">
+			<a href="https://pizzaemoji.net/">
 			<img src="/blog/images/logo-mini.webp"
 			srcset="/blog/images/logo-mini.webp 1x, /blog/images/logo-mini@2x.webp 2x"
 			alt="The Pizza Emoji logo" id="logo-mini" />
@@ -159,7 +177,6 @@ footer {
 	</navheader>
     <div class="navbuffer"></div>
 	<main>
-	<div class="title">Bran‘s Journal</div>
 	<div class="post">
 <p class="date">May 15, 2025</p>
 

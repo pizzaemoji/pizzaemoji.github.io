@@ -11,45 +11,14 @@ body {
 	max-width: 1000px;
 	counter-reset: fn_counter; /* Creates footnote <sup> counter */
 }
-header {
-	padding: 100px 0;
-	text-align: center;
-}
-/* Home-specific formatting */
-.title-logo-byline, .title-logo-byline a:link, .title-logo-byline a:hover, .title-logo-byline a:visited {
-	border: 0;
-	margin: 0;
-	color: #EEEEEE;
-	font-size: 1em;
-	line-height: .5;
-	text-decoration: none;
-}
-#logo {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background-color: inherit;
-	/*	width in @media */
-}
-.byline-under-img {
-	text-decoration: none;
-}
-.intro-text-home {
-	text-decoration: none;
-	font-size: 1.4rem;
-	font-weight: 500;
-	text-align: center;
-	padding-bottom: 2em;
-	margin: 0 auto;
-}
 /* Top navigation and menu */
-navheader {
+nav {
     position: fixed;
     top: 0;
     left: 0;
     right: 0;
 	margin: 0 auto;
-    padding: .5em 0em;
+    padding: 1em 0em;
     width: 100%;
     max-width: 1000px;
 	display: flex;
@@ -60,14 +29,11 @@ navheader {
 	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
     border-bottom: 2px solid #333333;
 }
-navheader a:link, navheader a:visited {
+nav a:link, nav a:visited {
 	border: none;
 	padding: 0;
 	color: #EEEEEE;
 	text-decoration: none;
-}
-.navbuffer {
-	padding-top: 100px;
 }
 .menu-container {
 	position: relative;
@@ -127,31 +93,12 @@ navheader a:link, navheader a:visited {
 	height: auto;
 	/*	max-width in @media */
 }
-/* links formatting */
-a {
-	text-decoration: none;
+/* Header titles and hero image */
+main {
+	padding: 100px 10px 50px 10px;
+	margin: 0 auto;
 }
-a:link {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-color: #222222;
-}
-/* Article titles and hero image */
-#title {
+header {
 	margin: auto;
 	width: 100%;
 }
@@ -199,13 +146,8 @@ time {
 	font-weight: 100;
 	text-align: left;
 }
-/* Main post formatting */
+/* Article and links formatting */
 article {
-	padding-left: 5px;
-	padding-right: 5px;
-	margin: auto;
-}
-.post {
 	text-decoration: none;
 	font-size: 1.4rem;
 	font-weight: 300;
@@ -233,6 +175,21 @@ blockquote {
 }
 #endslice {
 	height: 1rem;
+}
+a {
+	text-decoration: none;
+}
+a:link, a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:hover, a:active {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #222222;
 }
 /* pullquotes and images */
 /* margin: position of element padding: space between element and lines */
@@ -304,14 +261,14 @@ blockquote {
 	margin-right: auto;	
 	width: 85%;
 }
-/* footnote formatting */
+/* footnote and footer formatting */
 .footnote {
 	text-decoration: none;
 	font-size: .8em;
 	line-height: 1.4em;
 	font-weight: 200;
 	text-align: left;
-	scroll-margin-top: 80px; /* Scrolls down a bit to accommodate navheader */
+	margin: 6em 0 0 0;
 	/* padding in @media */
 }
 sup {
@@ -326,8 +283,8 @@ sup::after {
 	content: counter(fn_counter); /* Displays footnote counter */
 }
 li {
-	margin-bottom: 1em;
-
+	margin-top: 2em;
+	scroll-margin-top: 120px; /* Scrolls down a bit to accommodate nav overlay */
 }
 a.fnlink:link, a.fnlink:visited {
 	text-decoration: none;
@@ -344,24 +301,6 @@ a.fnlink:hover {
 	margin-bottom: 2em;
 	height: 2px;
 	background: #888888;
-}
-/* home, spacing, footer, etc formatting */
-.spacer {
-	text-decoration: none;
-	padding: 3em;
-}
-.spacer-home {
-	text-decoration: none;
-	padding: 1em;
-}
-.post-home {
-	text-decoration: none;
-	font-size: 1.4rem;
-	font-weight: 300;
-	line-height: 2.2rem;
-	text-align: left;
-	margin: auto;
-	/* width in @media */
 }
 footer {
 	color: #EEEEEE;
@@ -390,17 +329,11 @@ footer {
 /* Desktop & Mobile formatting overrides */
 /* Desktop */
 @media (min-width: 800px) {
-	#logo {
-		width: 50%;
-	}
 	#logo-mini {
 		max-width: 200px;
 	}
-	.post {
+	article {
 		width: 70%;
-	}
-	.post-home {
-		width: 60%;
 	}
 	.pullquote-left {
 		width: 60%;
@@ -429,17 +362,11 @@ footer {
 }
 /* Mobile */
 @media (max-width: 799px) {
-	#logo {
-		width: 90%;
-	}
 	#logo-mini {
 		max-width: 150px;
 		padding-right: 1em;
 	}
-	.post {
-		width: 90%;
-	}
-	.post-home {
+	article {
 		width: 90%;
 	}
 	.image-small-left {

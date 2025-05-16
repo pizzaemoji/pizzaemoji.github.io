@@ -46,11 +46,11 @@
 		border: none;
 		text-decoration: none;
 	}
-	.title-container {
+	.left-container {
 		position: relative;
 		display: inline-block;
 	}
-	#title {
+	#left {
 		text-decoration: none;
 		color: #EEEEEE;
 		font-size: 2em;
@@ -72,10 +72,22 @@
 		max-width: 200px;
 	}
 	main {
+		padding: 100px 10px 50px 10px;
+		margin: 0 auto;
+	}
+	header {
+		margin: auto;
+		width: 100%;
+	}
+	#memoji {
+		display: block;
+		background-color: inherit;
+		margin: 2em auto;
+		width: 100%;
+	}	
+	article {
 		width: 100%;
 		max-width: 600px;
-		padding: 50px 10px;
-		margin: 0 auto;
 		text-decoration: none;
 		font-size: 1.2rem;
 		font-weight: 300;
@@ -87,11 +99,6 @@
 	.date {
 		font-weight: 600;
 		text-decoration: underline;
-	}
-	.center-image {
-		display: flex;
-		align-items: center;
-		justify-content: center;
 	}
 	a {
 		text-decoration: none;
@@ -108,10 +115,11 @@
 		color: #EEEEEE;
 		border-color: #222222;
 	}
-	.slice {
-		height: 100px;
-		margin: 0;
-		padding: 20px;
+	.bigslice {
+		display: block;
+		height: 60px;
+		padding: 0;
+		margin: 2em auto;
 		border: 0;
 		background-color: inherit;
 	}	
@@ -126,8 +134,8 @@
 </head>
 <body>
 	<nav>
-		<div class="title-container">
-			<div id="title">&nbsp;</div>
+		<div class="left-container">
+			<div id="left">&nbsp;</div>
 		</div>
 		<div class="logo-container">
 			<a href="https://pizzaemoji.net/">
@@ -138,10 +146,18 @@
 		</div>
 	</nav>
 	<main>
+		<header>
+			<img src="memoji.webp" 
+			srcset="memoji.webp 1x, memoji@2x.webp 2x"
+			id="memoji" alt="My Memoji" />
+		</header>
+		<article>
 	<p class="date">May 16, 2025</p>
-<p>Well, it took another day I think the formatting is cleaned up. I even made myself a little logo to keep the nav a little neater looking.</p>
+<p>Well, it took another day but I think the formatting is cleaned up. I even made myself a little logo to keep the nav a little neater looking.</p>
 
 <p>That'll do, pig. That'll do.</p>
+
+<p>Tomorrow I'll be leaving for SoCal…
 	
 	<p class="date">May 15, 2025</p>
 
@@ -151,9 +167,8 @@
 
 <p>Still trying to get all the CSS formatting just right...</p>
 
-<div class="center-image">
-	<img src="/images/slice-white.webp" alt="White Slice" class="slice" />
-</div>
+<img src="/images/bigslice.webp" alt="Big Slice" class="bigslice" />
+		</article>
 	</main>	
 	<footer>
 	<p>&copy; 2025 Brandon Butler — <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>

@@ -33,7 +33,7 @@ navheader {
     top: 0;
     left: 0;
     right: 0;
-	margin: 0 auto 50px auto;
+	margin: auto;
     padding: .5em 0em;
     width: 100%;
     max-width: 800px;
@@ -50,7 +50,7 @@ navheader {
 	position: relative;
 	display: inline-block;
 }
-.title {
+#title {
 	text-decoration: none;
 	color: #EEEEEE;
 	font-size: 1.6em;
@@ -84,8 +84,7 @@ a:hover, a:active {
 	border-color: #222222;
 }
 main {
-	padding-left: 5px;
-	padding-right: 5px;
+	padding: 50px 5px 50px 5px;
 	margin: auto;
 }
 .post {
@@ -134,7 +133,7 @@ footer {
 <body>
 	<navheader>
 		<div class="title-container">
-			<div class="title">Bran‘s Journal</div>
+			<div id="title">Bran‘s Journal</div>
 		</div>
 		<div class="logo-container">
 			<a href="https://pizzaemoji.net/">
@@ -163,7 +162,6 @@ footer {
 	<img src="/images/slice-white.webp" alt="White Slice" class="slice" />
 </div>
 		</div>
-		<div class="spacer"></div>
 	</main>	
 	<footer>
 	<p>&copy; 2025 Brandon Butler — <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>

@@ -129,25 +129,33 @@
 		}
 
 	const btn = document.getElementById("big-btn");
-	// Click the button or...
-	btn.addEventListener("click", () => {	
-	// Listen for spacebar keydown on the whole document
+
 	document.addEventListener("keydown", function(e) {
-    // If focus is in a text input/textarea, don't do anything
+
 		if (e.target.tagName === "INPUT" || e.target.tagName === "TEXTAREA" || e.target.isContentEditable) return;
 
 		// 32 is spacebar. Also support ' ' (Space) for newer browsers
 		if (e.code === "Space" || e.keyCode === 32) {
 			e.preventDefault(); // prevent scrolling
-		if (!playerReady) return;
+			if (!playerReady) return;
 			const state = player.getPlayerState();
-        if (state === YT.PlayerState.PLAYING) {
+			if (state === YT.PlayerState.PLAYING) {
+				player.pauseVideo();
+			} else {
+				player.playVideo();
+			}
+		}
+	});
+
+	btn.addEventListener("click", () => {
+		if (!playerReady) return;
+		const state = player.getPlayerState();
+		if (state === YT.PlayerState.PLAYING) {
 			player.pauseVideo();
-        } else {
-            player.playVideo();
-        }
-    }
-});
+		} else {
+			player.playVideo();
+		}
+	});
 
 	function onStateChange (e) {
 		btn.textContent =

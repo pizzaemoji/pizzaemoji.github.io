@@ -244,7 +244,7 @@ a:hover, a:active {
 	/* width and margin in @media */
 }
 .center-image {
-	display: block;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 }

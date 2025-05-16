@@ -95,7 +95,7 @@ nav a:link, nav a:visited {
 }
 /* Article titles and hero image */
 main {
-	padding: 50px 10px;
+	padding: 100px 10px 50px 10px;
 	margin: 0 auto;
 }
 header {

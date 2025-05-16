@@ -27,15 +27,6 @@
 		margin-left: auto;
 		max-width: 1000px;
 	}
-	.post {
-		text-decoration: none;
-		font-size: 1.2rem;
-		font-weight: 300;
-		line-height: 2.2rem;
-		text-align: left;
-		margin: auto;
-		width: 80%;
-	}
 	.center-image {
 		display: flex;
 		align-items: center;
@@ -48,21 +39,36 @@
 		border: 0;
 		background-color: inherit;
 	}
-	.fourohfour {
+	.fourohfour-big {
 		font-size: 2em;
 		line-height: 2em;
 		text-align: center;
 	}
+	.fourohfour-small {
+		font-size: 1.2em;
+		line-height: 2em;
+		text-align: center;
+	}
+	a:link, a:vistied, a:hover {
+		text-decoration: none;
+		font-size: 1.2em;
+		line-height: 2em;
+		text-align: center;
+		color: #EEEEEE;
+		border-width: 0 0 1px 0;
+		border-style: none none solid none;
+		padding: 0 0 2px 0;
+	}
 	</style>
 </head>
 <body>
-	<div class="post">
-		<p class="fourohfour">Page not found.</p>
+	<div>
+		<p class="fourohfour-big">Page not found.</p>
 		<p><div class="center-image">
 		<img src="/images/slice-white.webp" alt="White Slice" class="slice" />
 		</div></p>
-		<p align="center">I'm just as surprised as you are.</p>
-		<p align="center"><a href="https://pizzaemoji.net">pizzaemoji.net</a>
+		<p class="fourohfour-small">I'm just as surprised as you are.</p>
+		<p><a href="https://pizzaemoji.net">pizzaemoji.net</a>
 	</div>
 </body>
 </html>

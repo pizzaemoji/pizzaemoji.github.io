@@ -89,9 +89,10 @@ nav a:link, nav a:visited {
 	justify-content: center;
 }
 #logo-mini {
-	width: 100%;
-	height: auto;
-	/*	max-width in @media */
+	width: auto;
+	height: 100%;
+	max-height: 30px;
+	padding-right: 10px;
 }
 /* Header titles and hero image */
 main {
@@ -332,7 +333,7 @@ footer {
 /* Desktop */
 @media (min-width: 800px) {
 	#logo-mini {
-		max-width: 200px;
+/*		max-width: 200px; */
 	}
 	article {
 /*		width: 70%; */
@@ -365,8 +366,8 @@ footer {
 /* Mobile */
 @media (max-width: 799px) {
 	#logo-mini {
-		max-width: 150px;
-		padding-right: 1em;
+/*		max-width: 150px;
+		padding-right: 1em; */
 	}
 	article {
 /*		width: 90%; */

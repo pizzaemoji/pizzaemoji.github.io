@@ -159,7 +159,6 @@ article {
 	margin: 0 auto;
 	hyphens: auto;
 	text-wrap: pretty;
-	/* width in @media */
 }
 h3 {
 	text-decoration: none;
@@ -332,12 +331,6 @@ footer {
 /* Desktop & Mobile formatting overrides */
 /* Desktop */
 @media (min-width: 800px) {
-	#logo-mini {
-/*		max-width: 200px; */
-	}
-	article {
-/*		width: 70%; */
-	}
 	.pullquote-left {
 		width: 60%;
 		font-size: 1.2em;
@@ -365,13 +358,6 @@ footer {
 }
 /* Mobile */
 @media (max-width: 799px) {
-	#logo-mini {
-/*		max-width: 150px;
-		padding-right: 1em; */
-	}
-	article {
-/*		width: 90%; */
-	}
 	.image-small-left {
 		width: 200px;
 		margin: 10px 10px 10px -10px;

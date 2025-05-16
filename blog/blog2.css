@@ -294,7 +294,7 @@ sup::after {
 	content: counter(fn_counter); /* Displays footnote counter */
 }
 li {
-	margin-bottom: 1em;
+	margin-top: 2em;
 	scroll-margin-top: 120px; /* Scrolls down a bit to accommodate nav overlay */
 }
 a.fnlink:link, a.fnlink:visited {

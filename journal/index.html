@@ -23,7 +23,7 @@
 body {
 	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
 	color: #DDDDDD;
-	background: #222222; /* Remember to update theme-color on index! */
+	background: #222222;
 	margin-right: auto;
 	margin-left: auto;
 	max-width: 1000px;
@@ -45,20 +45,26 @@ navheader {
 	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
     border-bottom: 2px solid #333333;
 }
-navheader a:link, navheader a:visited {
-	border: none;
-	padding: 0;
-	color: #EEEEEE;
-	text-decoration: none;
-}
 .navbuffer {
 	padding-top: 50px;
 }
-.menu-container {
+.title-container {
 	position: relative;
 	display: inline-block;
 }
-.img-container {
+.title {
+	text-decoration: none;
+	color: #EEEEEE;
+	font-size: 1.6em;
+	font-weight: 900;
+	text-align: left;
+	text-align: left;
+	margin: 0;
+	padding: 0;
+		display: inline-flex;
+		background-color: inherit;
+}
+.logo-container {
 	display: flex;
 	justify-content: center;
 }
@@ -67,24 +73,14 @@ navheader a:link, navheader a:visited {
 	height: auto;
 	/*	max-width in @media */
 }
-a {
-	text-decoration: none;
-}
-a:link {
+a:link, a:visited {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
 }
-a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover {
+a:hover, a:active {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-color: #222222;
@@ -93,19 +89,6 @@ main {
 	padding-left: 5px;
 	padding-right: 5px;
 	margin: auto;
-}
-.title {
-	text-decoration: none;
-	color: #EEEEEE;
-	font-size: 1.6em;
-	line-height: 1em;
-	font-weight: 900;
-	text-align: left;
-	text-align: left;
-	margin: 0;
-	padding: 0.5em;	
-		display: inline-flex;
-		background-color: inherit;
 }
 .post {
 	text-decoration: none;
@@ -152,12 +135,10 @@ footer {
 </head>
 <body>
 	<navheader>
-		<div class="menu-container">
-			<div class="menu-item">	
-				<div class="title">Bran‘s Journal</div>
-			</div>
+		<div class="title-container">
+			<div class="title">Bran‘s Journal</div>
 		</div>
-		<div class="img-container">
+		<div class="logo-container">
 			<a href="https://pizzaemoji.net/">
 			<img src="/blog/images/logo-mini.webp"
 			srcset="/blog/images/logo-mini.webp 1x, /blog/images/logo-mini@2x.webp 2x"
@@ -167,20 +148,18 @@ footer {
 	</navheader>
     <div class="navbuffer"></div>
 	<main>
-	<div class="post">
+		<div class="post">
 <p class="date">May 15, 2025</p>
 
-<p>Been working on some HTML projects. And doing some writing.
+<p>Been working on some HTML projects. And doing some writing.<p>
 
 <p>Back in America in the mid-’80s, Marvel sold the Spider-Man film rights to producer Menahem Golan and his company Cannon Films. Stan Lee vetoed the “Peter Parker transforms into a giant, hairy, eight-armed tarantula and is locked in a basement after refusing to join a mutant master-race” concept at Cannon. Later, a new script was written and the film was given a $20 million budget, however due to the failures of Superman IV and Masters of the Universe, Cannon slashed the budget to just $7 million, losing their director in the process. Cannon later bailed on the whole idea of a superhero movie and later went bankrupt.
 
-After Cannon Films closed, Golan retained the rights to Spider-Man and formed 21st Century Film Corp (not to be confused with 21st Century Fox or 20th Century Studios). He tried to revive the film as a big budget production again, but needed funding, so he pre-sold the theatrical, television, and home video rights to three different companies — the latter going to Sony Pictures. (Although the films are released under the Columbia Pictures banner, both Columbia and the Spider-Man film rights are owned by parent company Sony Pictures.)
+<p>After Cannon Films closed, Golan retained the rights to Spider-Man and formed 21st Century Film Corp (not to be confused with 21st Century Fox or 20th Century Studios). He tried to revive the film as a big budget production again, but needed funding, so he pre-sold the theatrical, television, and home video rights to three different companies — the latter going to Sony Pictures. (Although the films are released under the Columbia Pictures banner, both Columbia and the Spider-Man film rights are owned by parent company Sony Pictures.)
 
-Several scripts of a potential Spider-Man film were written for Golan, including a profanity-filled draft by James Cameron with Leonardo DiCaprio as Peter Parker and Arnold Schwarzenegger as Doc Ock, and a sex scene between Spider-Man and MJ on top of the Brooklyn Bridge. Cameron was ready to make the film but several bankruptcies by film studios followed by lawsuits from more film studios resulted in a Spider-Man filmmaking limbo for several years. (Variety attempted to unravel the mess back in 1998.)
+<p>Several scripts of a potential Spider-Man film were written for Golan, including a profanity-filled draft by James Cameron with Leonardo DiCaprio as Peter Parker and Arnold Schwarzenegger as Doc Ock, and a sex scene between Spider-Man and MJ on top of the Brooklyn Bridge. Cameron was ready to make the film but several bankruptcies by film studios followed by lawsuits from more film studios resulted in a Spider-Man filmmaking limbo for several years. (Variety attempted to unravel the mess back in 1998.)
 
-In 1995, a judge ruled that the film rights had reverted to Marvel, with the exception of the home video rights, which Sony Pictures retained. By this time, however, the entire comic book industry was struggling. Marvel’s financial woes were worsened by several poor investments made by then-CEO Ronald Perelman, ultimately leading the company to file for bankruptcy. Following the bankruptcy, ToyBiz owners Ike Perlmutter and Avi Arad took control of Marvel, with Arad founding Marvel Films, which was later renamed Marvel Studios.
-
-Emerging from bankruptcy is expensive, so to pay off their debts, Marvel sold the film rights to their most popular characters for whatever amount of cash they could get in the late ’90s. As Sony Pictures still had the home video rights for Spider-Man, Marvel wasn’t able to sell the film rights to anyone else, so they offered Sony Pictures nearly the entire catalog of Marvel characters (with the exception of the X-Men) for $25 million. Sony Pictures had the entire future MCU on the table, but they passed, telling Marvel “audiences only care about Spider-Man.” In the end, Sony Pictures picked up the film rights to Spidey in 1999 for a mere $7 million, which is where Spider-Man remains jailed in perpetuity.</p>
+<p>In 1995, a judge ruled that the film rights had reverted to Marvel, with the exception of the home video rights, which Sony Pictures retained. By this time, however, the entire comic book industry was struggling. Marvel’s financial woes were worsened by several poor investments made by then-CEO Ronald Perelman, ultimately leading the company to file for bankruptcy. Following the bankruptcy, ToyBiz owners Ike Perlmutter and Avi Arad took control of Marvel, with Arad founding Marvel Films, which was later renamed Marvel Studios. Emerging from bankruptcy is expensive, so to pay off their debts, Marvel sold the film rights to their most popular characters for whatever amount of cash they could get in the late ’90s. As Sony Pictures still had the home video rights for Spider-Man, Marvel wasn’t able to sell the film rights to anyone else, so they offered Sony Pictures nearly the entire catalog of Marvel characters (with the exception of the X-Men) for $25 million. Sony Pictures had the entire future MCU on the table, but they passed, telling Marvel “audiences only care about Spider-Man.” In the end, Sony Pictures picked up the film rights to Spidey in 1999 for a mere $7 million, which is where Spider-Man remains jailed in perpetuity.</p>
 
 <div class="center-image">
 	<img src="/images/slice-white.webp" alt="White Slice" class="slice" />

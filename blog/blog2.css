@@ -12,7 +12,7 @@ body {
 	counter-reset: fn_counter; /* Creates footnote <sup> counter */
 }
 /* Top navigation and menu */
-header {
+nav {
     position: fixed;
     top: 0;
     left: 0;
@@ -29,7 +29,7 @@ header {
 	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
     border-bottom: 2px solid #333333;
 }
-header a:link, header a:visited {
+nav a:link, nav a:visited {
 	border: none;
 	padding: 0;
 	color: #EEEEEE;
@@ -93,24 +93,12 @@ header a:link, header a:visited {
 	height: auto;
 	/*	max-width in @media */
 }
-/* links formatting */
-a {
-	text-decoration: none;
-}
-a:link, a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover, a:active {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-color: #222222;
-}
 /* Article titles and hero image */
-#title {
+main {
+	padding: 50px 10px;
+	margin: 0 auto;
+}
+header {
 	margin: auto;
 	width: 100%;
 }
@@ -158,11 +146,7 @@ time {
 	font-weight: 100;
 	text-align: left;
 }
-/* Main post formatting */
-main {
-	padding: 50px 10px;
-	margin: 0 auto;
-}
+/* Article formatting */
 article {
 	text-decoration: none;
 	font-size: 1.4rem;
@@ -191,6 +175,22 @@ blockquote {
 }
 #endslice {
 	height: 1rem;
+}
+/* links formatting */
+a {
+	text-decoration: none;
+}
+a:link, a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:hover, a:active {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #222222;
 }
 /* pullquotes and images */
 /* margin: position of element padding: space between element and lines */
@@ -304,10 +304,6 @@ a.fnlink:hover {
 	background: #888888;
 }
 /* home, spacing, footer, etc formatting */
-.spacer {
-	text-decoration: none;
-	padding: 3em;
-}
 footer {
 	color: #EEEEEE;
 	font-size: .8em;

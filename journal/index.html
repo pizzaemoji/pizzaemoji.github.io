@@ -16,6 +16,55 @@
 	<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
 	<link rel="manifest" href="/favicon/site.webmanifest">
 	<link href="/blog/blog.css" rel="stylesheet">
+	<style>
+	html {
+	font-size: 100%;
+}
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	color: #DDDDDD;
+	background: #222222; /* Remember to update theme-color on index! */
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 1000px;
+}
+navheader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+	margin: 0 auto;
+    padding: .5em 0em;
+    width: 100%;
+    max-width: 1000px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+    background-color: #222222E6;
+	backdrop-filter: blur(5px); /* Applies a 5px blur to the background */
+	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
+    border-bottom: 2px solid #333333;
+}
+navheader a:link, navheader a:visited {
+	border: none;
+	padding: 0;
+	color: #EEEEEE;
+	text-decoration: none;
+}
+.navbuffer {
+	padding-top: 100px;
+}
+.img-container {
+	display: flex;
+	justify-content: center;
+}
+#logo-mini {
+	width: 100%;
+	height: auto;
+	/*	max-width in @media */
+}
+
+	</style>
 </head>
 <body>
 	<navheader>

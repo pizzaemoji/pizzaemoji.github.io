@@ -97,21 +97,14 @@ header a:link, header a:visited {
 a {
 	text-decoration: none;
 }
-a:link {
+a:link, a:visited {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
 }
-a:visited {
-	text-decoration: none;
-	color: #EEEEEE;
-	border-width: 0 0 1px 0;
-	border-style: none none solid none;
-	padding: 0 0 2px 0;
-}
-a:hover {
+a:hover, a:active {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-color: #222222;

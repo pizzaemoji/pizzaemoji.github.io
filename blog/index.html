@@ -15,7 +15,6 @@
 	<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
 	<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
 	<link rel="manifest" href="/favicon/site.webmanifest">
-	<link href="/blog/blog.css" rel="stylesheet">
 	 <!-- Open Graph -->
 	<meta property="og:type"        content="website">
 	<meta property="og:url"         content="https://pizzaemoji.net/blog">
@@ -26,22 +25,106 @@
 	<meta property="og:image:width" content="1200">
 	<meta property="og:image:height"content="630">
 	<meta property="og:image:alt"   content="Pizza Emoji dot Net">
+	<style>
+html {
+	font-size: 100%;
+}
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	color: #DDDDDD;
+	background: #222222; /* Remember to update theme-color on index! */
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 1000px;
+}
+header {
+	padding: 100px 0;
+	text-align: center;
+}
+.title, .title a:link, .title a:hover, .title a:visited {
+	border: 0;
+	margin: 0;
+	color: #EEEEEE;
+	font-size: 1em;
+	line-height: .5;
+	text-decoration: none;
+}
+#logo {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	background-color: inherit;
+	/*	width in @media */
+}
+
+.byline {
+	text-decoration: none;
+}
+.intro {
+	text-decoration: none;
+	font-size: 1.4rem;
+	font-weight: 500;
+	text-align: center;
+	padding-bottom: 2em;
+	margin: 0 auto;
+}
+.spacer-home {
+	text-decoration: none;
+	padding: 1em;
+}
+main {
+	text-decoration: none;
+	font-size: 1.4rem;
+	font-weight: 300;
+	line-height: 2.2rem;
+	text-align: left;
+	margin: auto;
+	/* width in @media */
+}
+time {
+	text-decoration: none;
+	font-size: 1rem;
+	line-height: 1rem;
+	font-weight: 100;
+	text-align: left;
+}
+a {
+	text-decoration: none;
+}
+a:link, a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:hover, a:active {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #222222;
+}
+footer {
+	color: #EEEEEE;
+	font-size: .8em;
+	font-weight: 200;
+	text-align: center;
+	padding-bottom: 1em;
+}
+	</style>
 </head>
 <body>
 	<header>
-		<div class="title-logo-byline">
+		<div class="title">
 			<a href="/blog">
 			<img src="/blog/images/logo.webp"
 			srcset="/blog/images/logo.webp 1x, /blog/images/logo@2x.webp 2x"
 			id="logo" alt="The Pizza Emoji logo">
 			</a>
-			<div class="byline-under-img">by Brandon Butler</div>
+			<div class="byline">by Brandon Butler</div>
 		</div>
 	</header>
 	<main>
-		<div class="intro-text-home">Essays and thoughts.</div>
-		<article>
-			<div class="post-home">
+		<div class="intro">Essays and thoughts.</div>
 				<div class="spacer-home"></div>
 <a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/">
 Letterboxd — A Love Letterd</a>
@@ -77,9 +160,6 @@ Splash Mountain</a>
 The Blue Shell — The Worst Item in Mario Kart</a>
 				<br>
 				<time datetime="2019-09-01 12:00">September 1, 2019</time>
-			</div>
-			<div class="spacer"></div>
-		</article>
 	</main>	
 	<footer>
 	<p>&copy;2025 Brandon Butler — <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>

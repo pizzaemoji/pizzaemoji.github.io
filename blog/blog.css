@@ -103,16 +103,16 @@ header {
 }
 h1 {
 	color: #EEEEEE;
-	font-size: 3em;
-	line-height: 1.2em;
+	font-size: 3rem;
+	line-height: 1.2rem;
 	font-weight: 900;
-	word-spacing: .05em;
+	word-spacing: .05rem;
 	text-align: left;
 	margin: 0;
 }
 h2 {
-	font-size: 2em;
-	line-height: 1em;
+	font-size: 2rem;
+	line-height: 1rem;
 	font-weight: 100;
 	text-align: left;
 	font-style: italic;
@@ -121,9 +121,10 @@ h2 {
 #hero {
 	display: block;
 	background-color: inherit;
-	padding-top: .5em;
-	padding-bottom: 2em;
+	padding-top: .5rem;
+	padding-bottom: 2rem;
 	margin: auto;
+	border: 0;
 	width: 100%;
 }
 .byline {
@@ -149,21 +150,22 @@ article {
 	line-height: 2.2rem;
 	text-align: left;
 	margin: 0 auto;
+	padding: 0;
 	hyphens: auto;
 	text-wrap: pretty;
 }
 h3 {
- 	font-size: 1em;
-	line-height: 1em;
+ 	font-size: 1rem;
+	line-height: 1rem;
 	font-weight: 600;
 	text-align: left;
-	padding-top: 1em;
+	padding-top: 1rem;
 	padding-bottom: .5em;
 	margin: 0;
 }
 blockquote {
-	margin: 2em 2em 2em 0em;
-	padding: 0 0 0 1.5em;
+	margin: 2rem 2rem 2rem 0rem;
+	padding: 0 0 0 1.5rem;
 	border-left: #FF772B 3px solid;
 }
 #endslice {
@@ -192,13 +194,13 @@ a:hover, a:active {
 	hyphens: none;
 	color: #FF772B;
 	font-weight: 100;
-	line-height: 1.2em;
+	line-height: 1.2rem;
 	font-style: italic;
 	word-spacing: 25%;
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	padding: 1em 0 1em 0;
+	padding: 1rem 0 1rem 0;
 	/* width, font-size, text-align, and margin in @media */
 }
 .pullquote-right {
@@ -213,7 +215,7 @@ a:hover, a:active {
 	text-transform: uppercase;
 	border-top: #FF772B 1px solid;
 	border-bottom: #FF772B 1px solid;
-	padding: 1em 0 1em 0;
+	padding: 1rem 0 1rem 0;
 	/* width, font-size, text-align, and margin in @media */
 }
 .image-small-left {
@@ -242,19 +244,19 @@ a:hover, a:active {
 .caption {
 	color: #DDDDDD;
 	display: block;
-	font-size: .8em;
-	line-height: 1em;
+	font-size: .8rem;
+	line-height: 1rem;
 	font-style: italic;
 	text-align: center;
-	padding-bottom: 1em;
+	padding-bottom: 1rem;
 	margin-left: auto;
 	margin-right: auto;	
 	width: 85%;
 }
 /* footnote and footer formatting */
 .footnote {
-	font-size: .8em;
-	line-height: 1.4em;
+	font-size: .8rem;
+	line-height: 1.4rem;
 	font-weight: 200;
 	text-align: left;
 	margin: 6em 0 0 0;
@@ -262,7 +264,7 @@ a:hover, a:active {
 }
 sup {
 	color: #FF772B;
-	font-size: .7em;
+	font-size: .7rem;
 	font-weight: 600;
 	line-height: 0; /* removes gap above superscript number */
 }
@@ -270,8 +272,13 @@ sup::after {
 	counter-increment: fn_counter; /* Increments footnote counter */
 	content: counter(fn_counter); /* Displays footnote counter */
 }
+ol {
+	padding: 0;
+	margin: 0;
+}
 li {
-	margin-top: 2em;
+	padding: 0;
+	margin: 1rem 0;
 	scroll-margin-top: 120px; /* Scrolls down a bit to accommodate nav overlay */
 }
 a.fnlink:link, a.fnlink:visited {
@@ -283,19 +290,12 @@ a.fnlink:hover {
 	border-color: #222222;
 	cursor: pointer;
 }
-.divider { /* separates post from footnotes */
-	display: block;
-	margin-top: 2em;
-	margin-bottom: 2em;
-	height: 2px;
-	background: #888888;
-}
 footer {
 	color: #EEEEEE;
-	font-size: .8em;
+	font-size: .8rem;
 	font-weight: 200;
 	text-align: center;
-	padding-bottom: 1em;
+	padding-bottom: 1rem;
 }
 /* Special page formatting */
 /* 2024-10-28-ios-the-apple-intelligence-update */
@@ -307,27 +307,15 @@ footer {
 /* 2025-02-04-a-brief-history-of-spider-man-in-cinema */
 #spidey-proverb {
 	color: #EEEEEE;
-	font-size: 1em;
+	font-size: 1rem;
 	font-style: italic;
 	font-weight: 100;
 	text-align: center;
-	padding-top: 2em;
+	padding-top: 2rem;
 }
 /* Desktop & Mobile formatting overrides */
 /* Desktop */
 @media (min-width: 800px) {
-	.pullquote-left {
-		width: 60%;
-		font-size: 1.2em;
-		text-align: left;
-		margin: 10px 30px 10px -60px;
-	}
-	.pullquote-right {
-		width: 60%;
-		font-size: 1.2em;
-		text-align: right;
-		margin: 10px -60px 10px 30px;
-	}
 	.image-small-left {
 		width: 300px;
 		margin: 10px 30px 10px -60px;
@@ -336,9 +324,21 @@ footer {
 		width: 300px;
 		margin: 10px -60px 10px 30px;
 	}
+	.pullquote-left {
+		width: 60%;
+		font-size: 1.2rem;
+		text-align: left;
+		margin: 10px 30px 10px -60px;
+	}
+	.pullquote-right {
+		width: 60%;
+		font-size: 1.2rem;
+		text-align: right;
+		margin: 10px -60px 10px 30px;
+	}
 	.footnote {
-		padding-left: 2em;
-		padding-right: 3em;
+		padding-left: 2rem;
+		padding-right: 3rem;
 	}
 }
 /* Mobile */
@@ -353,18 +353,18 @@ footer {
 	}
 	.pullquote-left {
 		width: 100%;
-		font-size: 1em;
+		font-size: 1rem;
 		text-align: left;
-		margin-bottom: 1em;
+		margin-bottom: 1rem;
 	}
 	.pullquote-right {
 		width: 100%;
-		font-size: 1em;
+		font-size: 1rem;
 		text-align: left;
-		margin-bottom: 1em;
+		margin-bottom: 1rem;
 	}
 	.footnote {
-		padding-left: 1em;
-		padding-right: 1em;
+		padding-left: 1rem;
+		padding-right: 1rem;
 	}
 }

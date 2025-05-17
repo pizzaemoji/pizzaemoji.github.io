@@ -19,7 +19,7 @@ nav {
     right: 0;
 	margin: 0 auto;
     padding: 1em 0em;
-
+	width: 100%;
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
@@ -89,7 +89,6 @@ nav a:link, nav a:visited {
 }
 #logo-mini {
 	width: auto;
-	height: 100%;
 	max-height: 30px;
 	padding-right: 10px;
 }
@@ -108,7 +107,6 @@ h1 {
 	font-size: 3em;
 	line-height: 1.2em;
 	font-weight: 900;
-	text-align: left;
 	word-spacing: .05em;
 	text-align: left;
 	margin: 0;

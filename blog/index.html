@@ -37,24 +37,16 @@ body {
 	margin-left: auto;
 	max-width: 1000px;
 }
-header {
+main {
 	padding: 100px 0;
 	text-align: center;
-}
-#logo {
-	margin: 0;
-	padding: 0;
-	border: 0;
-	background-color: inherit;
-	/*	width in @media */
-}
-.title, .title a:link, .title a:hover, .title a:visited {
+	}
+header {	
 	border: 0;
 	margin: 0;
 	color: #EEEEEE;
 	font-size: 1em;
 	line-height: .5;
-	text-decoration: none;
 }
 #logo {
 	margin: 0;
@@ -67,7 +59,6 @@ header {
 	text-decoration: none;
 }
 .intro {
-	text-decoration: none;
 	font-size: 1.4rem;
 	font-weight: 500;
 	text-align: center;
@@ -75,20 +66,19 @@ header {
 	margin: 0 auto;
 }
 main {
-	text-decoration: none;
+	width: 100%;
+	max-width: 600px;	
 	font-size: 1.4rem;
 	font-weight: 300;
 	line-height: 2.2rem;
 	text-align: left;
 	padding: 50px 10px;
 	margin: 0 auto;
-	/* width in @media */
 }
 section {
 	padding: 1em;
 	}
 time {
-	text-decoration: none;
 	font-size: 1rem;
 	line-height: 1rem;
 	font-weight: 100;
@@ -107,7 +97,7 @@ a:link, a:visited {
 a:hover, a:active {
 	text-decoration: none;
 	color: #EEEEEE;
-	border-color: #222222;
+	border-color: #FF772B;
 }
 footer {
 	color: #EEEEEE;
@@ -138,18 +128,17 @@ footer {
 	</style>
 </head>
 <body>
-	<header>
-		<div class="title">
+	<main>
+		<header>
 			<a href="/blog">
 			<img src="/blog/images/logo.webp"
 			srcset="/blog/images/logo.webp 1x, /blog/images/logo@2x.webp 2x"
 			id="logo" alt="The Pizza Emoji logo">
 			</a>
 			<div class="byline">by Brandon Butler</div>
-		</div>
-	</header>
-	<main>
-		<div class="intro">Essays and thoughts.</div>
+		</header>
+		<article>
+			<div class="intro">Essays and thoughts.</div>
 		<section>
 <a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/">
 Letterboxd — A Love Letterd</a>
@@ -192,6 +181,7 @@ The Blue Shell — The Worst Item in Mario Kart</a>
 			<br>
 			<time datetime="2019-09-01 12:00">September 1, 2019</time>
 		</section>
+		</article>
 	</main>	
 	<footer>
 	<p>&copy;2025 Brandon Butler — <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>

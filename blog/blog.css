@@ -194,7 +194,7 @@ a:hover, a:active {
 	hyphens: none;
 	color: #FF772B;
 	font-weight: 100;
-	line-height: 1.2rem;
+	line-height: 1.5rem;
 	font-style: italic;
 	word-spacing: 25%;
 	text-transform: uppercase;
@@ -209,7 +209,7 @@ a:hover, a:active {
 	hyphens: none;
 	color: #FF772B;
 	font-weight: 100;
-	line-height: 1.2em;
+	line-height: 1.5em;
 	font-style: italic;
 	word-spacing: 25%;
 	text-transform: uppercase;
@@ -244,7 +244,7 @@ a:hover, a:active {
 .caption {
 	color: #DDDDDD;
 	display: block;
-	font-size: .8rem;
+	font-size: 1rem;
 	line-height: 1rem;
 	font-style: italic;
 	text-align: center;
@@ -255,8 +255,8 @@ a:hover, a:active {
 }
 /* footnote and footer formatting */
 .footnote {
-	font-size: .8rem;
-	line-height: 1.4rem;
+	font-size: 1rem;
+	line-height: 1.2rem;
 	font-weight: 200;
 	text-align: left;
 	margin: 6em 0 0 0;
@@ -264,7 +264,7 @@ a:hover, a:active {
 }
 sup {
 	color: #FF772B;
-	font-size: .7rem;
+	font-size: .8rem;
 	font-weight: 600;
 	line-height: 0; /* removes gap above superscript number */
 }
@@ -292,7 +292,7 @@ a.fnlink:hover {
 }
 footer {
 	color: #EEEEEE;
-	font-size: .8rem;
+	font-size: 1rem;
 	font-weight: 200;
 	text-align: center;
 	padding-bottom: 1rem;
@@ -326,13 +326,13 @@ footer {
 	}
 	.pullquote-left {
 		width: 60%;
-		font-size: 1.2rem;
+		font-size: 1.8rem;
 		text-align: left;
 		margin: 10px 30px 10px -60px;
 	}
 	.pullquote-right {
 		width: 60%;
-		font-size: 1.2rem;
+		font-size: 1.8rem;
 		text-align: right;
 		margin: 10px -60px 10px 30px;
 	}
@@ -353,13 +353,13 @@ footer {
 	}
 	.pullquote-left {
 		width: 100%;
-		font-size: 1rem;
+		font-size: 1.6rem;
 		text-align: left;
 		margin-bottom: 1rem;
 	}
 	.pullquote-right {
 		width: 100%;
-		font-size: 1rem;
+		font-size: 1.6rem;
 		text-align: left;
 		margin-bottom: 1rem;
 	}

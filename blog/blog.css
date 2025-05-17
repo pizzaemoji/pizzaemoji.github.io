@@ -128,7 +128,6 @@ h2 {
 }
 .byline {
 	display: inline-block;
-	text-decoration: none;
 	font-size: 1.2rem;
 	font-weight: 600;
 	text-align: left;
@@ -136,7 +135,6 @@ h2 {
 	border-top: 3px solid #FF772B;
 }
 time {
-	text-decoration: none;
 	font-size: 1rem;
 	line-height: 1rem;
 	font-weight: 100;
@@ -146,7 +144,6 @@ time {
 article {
 	max-width: 700px;
 	width: 90%;
-	text-decoration: none;
 	font-size: 1.4rem;
 	font-weight: 300;
 	line-height: 2.2rem;
@@ -156,7 +153,6 @@ article {
 	text-wrap: pretty;
 }
 h3 {
-	text-decoration: none;
  	font-size: 1em;
 	line-height: 1em;
 	font-weight: 600;
@@ -192,7 +188,6 @@ a:hover, a:active {
 /* margin: position of element padding: space between element and lines */
 .pullquote-left {
 	display: inline;
-	text-decoration: none;
 	float: left;
 	hyphens: none;
 	color: #FF772B;
@@ -208,7 +203,6 @@ a:hover, a:active {
 }
 .pullquote-right {
 	display: inline;
-	text-decoration: none;
 	float: right;
 	hyphens: none;
 	color: #FF772B;
@@ -246,7 +240,6 @@ a:hover, a:active {
 	width: 90%;
 }
 .caption {
-	text-decoration: none;
 	color: #DDDDDD;
 	display: block;
 	font-size: .8em;
@@ -260,7 +253,6 @@ a:hover, a:active {
 }
 /* footnote and footer formatting */
 .footnote {
-	text-decoration: none;
 	font-size: .8em;
 	line-height: 1.4em;
 	font-weight: 200;
@@ -269,7 +261,6 @@ a:hover, a:active {
 	/* padding in @media */
 }
 sup {
-	text-decoration: none;
 	color: #FF772B;
 	font-size: .7em;
 	font-weight: 600;
@@ -315,9 +306,8 @@ footer {
 }
 /* 2025-02-04-a-brief-history-of-spider-man-in-cinema */
 #spidey-proverb {
-	text-decoration: none;
 	color: #EEEEEE;
-	font-size: .9em;
+	font-size: 1em;
 	font-style: italic;
 	font-weight: 100;
 	text-align: center;

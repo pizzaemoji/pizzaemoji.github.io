@@ -37,22 +37,32 @@
 		align-items: center;
 		justify-content: center;
 		flex-direction: column;
-
 	}
 	#logo {
-		width: 44%;
-		margin: 10px 0;
+		width: 100%;
+		margin: 20px 0;
 		padding: 0;
 		border: 0;
 		background-color: inherit;
 	}
 	#name {
 		color: #FF772B;
-		font-size: 8rem;
+		font-size: 4rem;
 		text-align: center;
 		letter-spacing: 0.05em;
 		font-weight: 900;
 	}
+/* Desktop */
+@media (min-width: 800px) {
+#logo {
+		width: 50%;
+		margin: 50px 0;
+}
+#name {
+		font-size: 8rem;
+}
+}
+	
 	</style>
 </head>
 <body>

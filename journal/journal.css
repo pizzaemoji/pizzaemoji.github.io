@@ -97,7 +97,7 @@ a:hover, a:active {
 	display: block;
 	height: 60px;
 	padding: 0;
-	margin: 2em auto;
+	margin: 0 auto 50px auto;
 	border: 0;
 	background-color: inherit;
 }	

@@ -49,7 +49,7 @@ nav a:link, nav a:visited {
 }
 .menu-item .chevron-down {
 	margin-right: 0.25rem;
-	color: #FF772B;
+	color: #FE6000;
 	font-size: 1rem;
 }
 .menu-dropdown {
@@ -71,11 +71,11 @@ nav a:link, nav a:visited {
 }
 .menu-dropdown-item .chevron-right {
 	margin-right: 0.25rem;
-	color: #FF772B;
+	color: #FE6000;
 	font-size: 1rem;
 }
 .this-page {
-	color: #FF772B;
+	color: #FE6000;
 }
 .menu-dropdown-item:hover {
     background-color: #444444; /* highlight menu color */
@@ -133,7 +133,7 @@ h2 {
 	font-weight: 600;
 	text-align: left;
 	padding-top: 2px; /* Puts a little space above border */
-	border-top: 3px solid #FF772B;
+	border-top: 3px solid #FE6000;
 }
 time {
 	font-size: 1rem;
@@ -166,7 +166,7 @@ h3 {
 blockquote {
 	margin: 2rem 2rem 2rem 0rem;
 	padding: 0 0 0 1.5rem;
-	border-left: #FF772B 3px solid;
+	border-left: #FE6000 3px solid;
 }
 #endslice {
 	height: 1rem;
@@ -184,7 +184,7 @@ a:link, a:visited {
 a:hover, a:active {
 	text-decoration: none;
 	color: #EEEEEE;
-	border-color: #FF772B;
+	border-color: #FE6000;
 }
 /* pullquotes and images */
 /* margin: position of element padding: space between element and lines */
@@ -192,7 +192,7 @@ a:hover, a:active {
 	display: inline;
 	float: left;
 	hyphens: none;
-	color: #FF772B;
+	color: #FE6000;
 	font-weight: 100;
 	line-height: 1.8rem;
 	font-style: italic;
@@ -200,8 +200,8 @@ a:hover, a:active {
 	text-transform: uppercase;
 	hyphens: auto;
 	text-wrap: pretty;
-	border-top: #FF772B 1px solid;
-	border-bottom: #FF772B 1px solid;
+	border-top: #FE6000 1px solid;
+	border-bottom: #FE6000 1px solid;
 	padding: 1rem 0 1rem 0;
 	/* width, font-size, text-align, and margin in @media */
 }
@@ -209,7 +209,7 @@ a:hover, a:active {
 	display: inline;
 	float: right;
 	hyphens: none;
-	color: #FF772B;
+	color: #FE6000;
 	font-weight: 100;
 	line-height: 1.8rem;
 	font-style: italic;
@@ -217,8 +217,8 @@ a:hover, a:active {
 	text-transform: uppercase;
 	hyphens: auto;
 	text-wrap: pretty;
-	border-top: #FF772B 1px solid;
-	border-bottom: #FF772B 1px solid;
+	border-top: #FE6000 1px solid;
+	border-bottom: #FE6000 1px solid;
 	padding: 1rem 0 1rem 0;
 	/* width, font-size, text-align, and margin in @media */
 }
@@ -226,8 +226,8 @@ a:hover, a:active {
 	display: inline;
 	float: left;
 	text-align: left;
-	border-top: #FF772B 1px solid;
-	border-bottom: #FF772B 1px solid;
+	border-top: #FE6000 1px solid;
+	border-bottom: #FE6000 1px solid;
 	padding: 15px 0 15px 0;
 	/* width and margin in @media */
 }
@@ -235,8 +235,8 @@ a:hover, a:active {
 	display: inline;
 	float: right;
 	text-align: right;
-	border-top: #FF772B 1px solid;
-	border-bottom: #FF772B 1px solid;
+	border-top: #FE6000 1px solid;
+	border-bottom: #FE6000 1px solid;
 	padding: 15px 0 15px 0;
 	/* width and margin in @media */
 }
@@ -267,7 +267,7 @@ a:hover, a:active {
 	/* padding in @media */
 }
 sup {
-	color: #FF772B;
+	color: #FE6000;
 	font-size: .8rem;
 	font-weight: 600;
 	line-height: 0; /* removes gap above superscript number */

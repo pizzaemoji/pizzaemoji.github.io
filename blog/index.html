@@ -55,11 +55,11 @@ header a:link, header a:visited {
 	text-decoration: none;
 }
 #logo {
+	width: 90%;
 	margin: 0 auto;
 	padding: 0;
 	border: 0;
 	background-color: inherit;
-	/*	width in @media */
 }
 #byline {
 	font-size: 1rem;
@@ -112,16 +112,16 @@ footer {
 	padding-bottom: 1rem;
 }
 /* Desktop & Mobile formatting overrides */
-/* Desktop */
-@media (min-width: 800px) {
+/* Tablet */
+@media (min-width: 600px) {
 	#logo {
 		width: 50%;
 	}
 }
-/* Mobile */
-@media (max-width: 799px) {
+/* Desktop */
+@media (max-width: 1000px) {
 	#logo {
-		width: 90%;
+		width: 50%;
 	}
 }
 	</style>
@@ -130,8 +130,8 @@ footer {
 	<main>
 		<header>
 			<a href="/blog">
-			<img src="/images/slice3d-blog.webp"
-			srcset="/images/slice3d-blog.webp 1x, /images/slice3d-blog@2x.webp 2x"
+			<img src="/images/slice3d-and-name-vert.webp"
+			srcset="/images/slice3d-and-name-vert.webp 1x, /images/slice3d-and-name-vert.webp 2x"
 			id="logo" alt="The Pizza Emoji logo">
 			</a>
 			<div id="byline">by Brandon Butler</div>

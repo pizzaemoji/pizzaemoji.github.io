@@ -28,6 +28,17 @@ nav a:link, nav a:visited {
 	align-items: center;
 	gap: 1rem;
 }
+.menu-container a.menu-item {
+	text-decoration: none;
+	color: #DDDDDD;
+	font-size: 1.6rem;
+	padding: 0.5rem;
+	display: inline-flex;
+	align-items: center;
+}
+.menu-container a.menu-item:hover {
+	color: #FE6000;
+}
 .menu-item {
 	background-color: inherit;
 	padding: 0.5rem;

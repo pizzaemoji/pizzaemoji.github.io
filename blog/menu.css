@@ -28,7 +28,7 @@ nav a:link, nav a:visited {
 	align-items: center;
 	gap: 1rem;
 }
-/* About link formatting */
+/* About formatting */
 .menu-container a.menu-item {
 	text-decoration: none;
 	color: #DDDDDD;
@@ -37,10 +37,6 @@ nav a:link, nav a:visited {
 	display: inline-flex;
 	align-items: center;
 }
-.menu-container a.menu-item:hover {
-	color: #FE6000;
-}
-/* End About */
 /* Features formatting */
 .menu-item {
 	background-color: inherit;
@@ -55,6 +51,11 @@ nav a:link, nav a:visited {
 	margin-right: 0.25rem;
 	color: #FE6000;
 	font-size: 1rem;
+}
+/* Hover color */
+.menu-container a.menu-item:hover,
+.menu-container .menu-item:hover {
+	color: #FE6000;
 }
 /* Menu dropdown formatting */
 .menu-dropdown {

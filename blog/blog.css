@@ -18,7 +18,7 @@ main {
 header {
 	margin: auto;
 	width: 100%;
-	justify-content: center;
+	text-align: center;
 }
 h1 {
 	color: #EEEEEE;

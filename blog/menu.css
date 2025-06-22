@@ -1,0 +1,82 @@
+/* Pizza Emoji Blog Cascading Style Sheet - /blog/nav.css */
+/* Top navigation and menu */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+	margin: 0 auto;
+    padding: 1rem 0;
+	max-width: 1000px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+    background-color: #222222E6;
+	backdrop-filter: blur(5px); /* Applies a 5px blur to the background */
+	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
+    border-bottom: 2px solid #333333;
+}
+nav a:link, nav a:visited {
+	border: none;
+	padding: 0;
+	color: #EEEEEE;
+	text-decoration: none;
+}
+.menu-container {
+	position: relative;
+	display: inline-block;
+}
+.menu-item {
+	background-color: inherit;
+	padding: 0.5rem;
+	font-size: 1.6rem;
+	color: #DDDDDD;
+	display: inline-flex;
+	align-items: center;
+	cursor: pointer;
+}
+.menu-item .chevron-down {
+	margin-right: 0.25rem;
+	color: #FE6000;
+	font-size: 1rem;
+}
+.menu-dropdown {
+	display: none; /* The dropdown menu (hidden by default) */
+	position: absolute;
+	top: 100%;
+	background-color: #333333;
+	border: 1px solid #555555;
+	min-width: 300px;
+	z-index: 100;
+	flex-direction: column;
+}
+.menu-dropdown-item {
+	padding: 0.5rem;
+	color: #EEEEEE;
+	font-size: 1.1rem;
+	text-decoration: none;
+	cursor: pointer;
+}
+.menu-dropdown-item .chevron-right {
+	margin-right: 0.25rem;
+	color: #FE6000;
+	font-size: 1rem;
+}
+.this-page {
+	color: #FE6000;
+}
+.menu-dropdown-item:hover {
+    background-color: #444444; /* highlight menu color */
+}
+.menu-container:hover .menu-dropdown, .menu-dropdown:hover {
+	display: flex; /* Open menu on hover */
+}
+.img-container {
+	display: flex;
+	justify-content: center;
+}
+#logo-mini {
+	width: auto;
+	max-height: 30px;
+	padding-right: 10px;
+}

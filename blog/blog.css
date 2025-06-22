@@ -9,88 +9,6 @@ body {
 	margin-right: auto;
 	margin-left: auto;
 	max-width: 1000px;
-	counter-reset: fn_counter; /* Creates footnote <sup> counter */
-}
-/* Top navigation and menu */
-nav {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-	margin: 0 auto;
-    padding: 1rem 0;
-	max-width: 1000px;
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
-    background-color: #222222E6;
-	backdrop-filter: blur(5px); /* Applies a 5px blur to the background */
-	-webkit-backdrop-filter: blur(5px); /* For Safari compatibility */
-    border-bottom: 2px solid #333333;
-}
-nav a:link, nav a:visited {
-	border: none;
-	padding: 0;
-	color: #EEEEEE;
-	text-decoration: none;
-}
-.menu-container {
-	position: relative;
-	display: inline-block;
-}
-.menu-item {
-	background-color: inherit;
-	padding: 0.5rem;
-	font-size: 1.6rem;
-	color: #DDDDDD;
-	display: inline-flex;
-	align-items: center;
-	cursor: pointer;
-}
-.menu-item .chevron-down {
-	margin-right: 0.25rem;
-	color: #FE6000;
-	font-size: 1rem;
-}
-.menu-dropdown {
-	display: none; /* The dropdown menu (hidden by default) */
-	position: absolute;
-	top: 100%;
-	background-color: #333333;
-	border: 1px solid #555555;
-	min-width: 300px;
-	z-index: 100;
-	flex-direction: column;
-}
-.menu-dropdown-item {
-	padding: 0.5rem;
-	color: #EEEEEE;
-	font-size: 1.1rem;
-	text-decoration: none;
-	cursor: pointer;
-}
-.menu-dropdown-item .chevron-right {
-	margin-right: 0.25rem;
-	color: #FE6000;
-	font-size: 1rem;
-}
-.this-page {
-	color: #FE6000;
-}
-.menu-dropdown-item:hover {
-    background-color: #444444; /* highlight menu color */
-}
-.menu-container:hover .menu-dropdown, .menu-dropdown:hover {
-	display: flex; /* Open menu on hover */
-}
-.img-container {
-	display: flex;
-	justify-content: center;
-}
-#logo-mini {
-	width: auto;
-	max-height: 30px;
-	padding-right: 10px;
 }
 /* Header titles and hero image */
 main {
@@ -117,15 +35,6 @@ h2 {
 	text-align: left;
 	font-style: italic;
 	margin: 0;
-}
-#hero {
-	display: block;
-	background-color: inherit;
-	padding-top: .5rem;
-	padding-bottom: 2rem;
-	margin: auto;
-	border: 0;
-	width: 100%;
 }
 .byline {
 	display: inline-block;
@@ -159,7 +68,7 @@ h3 {
 	line-height: 1.8rem;
 	font-weight: 600;
 	text-align: left;
-	padding-top: 1rem;
+	padding-top: 0;
 	padding-bottom: .5em;
 	margin: 0;
 }
@@ -167,9 +76,6 @@ blockquote {
 	margin: 2rem 2rem 2rem 0rem;
 	padding: 0 0 0 1.5rem;
 	border-left: #FE6000 3px solid;
-}
-#endslice {
-	height: 1rem;
 }
 a {
 	text-decoration: none;
@@ -185,60 +91,6 @@ a:hover, a:active {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-color: #FE6000;
-}
-/* pullquotes and images */
-/* margin: position of element padding: space between element and lines */
-.pullquote-left {
-	display: inline;
-	float: left;
-	hyphens: none;
-	color: #FE6000;
-	font-weight: 100;
-	line-height: 1.8rem;
-	font-style: italic;
-	word-spacing: 25%;
-	text-transform: uppercase;
-	hyphens: auto;
-	text-wrap: pretty;
-	border-top: #FE6000 1px solid;
-	border-bottom: #FE6000 1px solid;
-	padding: 1rem 0 1rem 0;
-	/* width, font-size, text-align, and margin in @media */
-}
-.pullquote-right {
-	display: inline;
-	float: right;
-	hyphens: none;
-	color: #FE6000;
-	font-weight: 100;
-	line-height: 1.8rem;
-	font-style: italic;
-	word-spacing: 25%;
-	text-transform: uppercase;
-	hyphens: auto;
-	text-wrap: pretty;
-	border-top: #FE6000 1px solid;
-	border-bottom: #FE6000 1px solid;
-	padding: 1rem 0 1rem 0;
-	/* width, font-size, text-align, and margin in @media */
-}
-.image-small-left {
-	display: inline;
-	float: left;
-	text-align: left;
-	border-top: #FE6000 1px solid;
-	border-bottom: #FE6000 1px solid;
-	padding: 15px 0 15px 0;
-	/* width and margin in @media */
-}
-.image-small-right {
-	display: inline;
-	float: right;
-	text-align: right;
-	border-top: #FE6000 1px solid;
-	border-bottom: #FE6000 1px solid;
-	padding: 15px 0 15px 0;
-	/* width and margin in @media */
 }
 .image-large {
 	display: block;
@@ -257,43 +109,6 @@ a:hover, a:active {
 	margin-right: auto;	
 	width: 85%;
 }
-/* footnote and footer formatting */
-.footnote {
-	font-size: 1rem;
-	line-height: 1.4rem;
-	font-weight: 200;
-	text-align: left;
-	margin: 6em 0 0 0;
-	/* padding in @media */
-}
-sup {
-	color: #FE6000;
-	font-size: .8rem;
-	font-weight: 600;
-	line-height: 0; /* removes gap above superscript number */
-}
-sup::after {
-	counter-increment: fn_counter; /* Increments footnote counter */
-	content: counter(fn_counter); /* Displays footnote counter */
-}
-ol {
-	padding: 0;
-	margin: 0;
-}
-li {
-	padding: 1rem 0;
-	margin: 0 auto;
-	scroll-margin-top: 120px; /* Scrolls down a bit to accommodate nav overlay */
-}
-a.fnlink:link, a.fnlink:visited {
-	text-decoration: none;
-	border-color: #222222;
-}
-a.fnlink:hover {
-	text-decoration: none;
-	border-color: #222222;
-	cursor: pointer;
-}
 footer {
 	color: #EEEEEE;
 	font-size: 1rem;
@@ -301,75 +116,3 @@ footer {
 	text-align: center;
 	padding-bottom: 1rem;
 }
-/* Special page formatting */
-/* 2024-10-28-ios-the-apple-intelligence-update */
-#apple-intelligence-gradient {
-	background: -webkit-linear-gradient(0deg, #55CBFF 20%, #DF7CFF 40%, #FF796E 60%, #FFAD5B 80%, #FAFF55 100%);
-	-webkit-background-clip: text;
-	-webkit-text-fill-color: transparent;
-}
-/* 2025-02-04-a-brief-history-of-spider-man-in-cinema */
-#spidey-proverb {
-	color: #EEEEEE;
-	font-size: 1rem;
-	font-style: italic;
-	font-weight: 100;
-	text-align: center;
-	padding-top: 2rem;
-}
-/* Desktop & Mobile formatting overrides */
-/* Desktop */
-@media (min-width: 800px) {
-	.image-small-left {
-		width: 300px;
-		margin: 10px 30px 10px -60px;
-	}
-	.image-small-right {
-		width: 300px;
-		margin: 10px -60px 10px 30px;
-	}
-	.pullquote-left {
-		width: 60%;
-		font-size: 1.8rem;
-		text-align: left;
-		margin: 10px 30px 10px -60px;
-	}
-	.pullquote-right {
-		width: 60%;
-		font-size: 1.8rem;
-		text-align: right;
-		margin: 10px -60px 10px 30px;
-	}
-	.footnote {
-		padding-left: 2rem;
-		padding-right: 3rem;
-	}
-}
-/* Mobile */
-@media (max-width: 799px) {
-	.image-small-left {
-		width: 200px;
-		margin: 10px 10px 10px -10px;
-	}
-	.image-small-right {
-		width: 200px;
-		margin: 10px -10px 10px 10px;
-	}
-	.pullquote-left {
-		width: 100%;
-		font-size: 1.6rem;
-		text-align: left;
-		margin-bottom: 1rem;
-	}
-	.pullquote-right {
-		width: 100%;
-		font-size: 1.6rem;
-		text-align: left;
-		margin-bottom: 1rem;
-	}
-	.footnote {
-		padding-left: 1rem;
-		padding-right: 1rem;
-	}
-}
-/* EOF */

@@ -18,7 +18,13 @@ main {
 header {
 	margin: auto;
 	width: 100%;
-	text-align: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+header > * {
+	text-align: left;
+	width: 100%;
 }
 h1 {
 	color: #EEEEEE;

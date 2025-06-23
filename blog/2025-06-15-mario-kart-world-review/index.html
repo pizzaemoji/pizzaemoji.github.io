@@ -154,82 +154,52 @@
 const menuToggle = document.getElementById('menu-toggle');
 const sideMenu = document.getElementById('side-menu');
 const overlay = document.getElementById('overlay');
-let autoCloseTimeout = null;
 
 function toggleMenu() {
 	const isOpen = sideMenu.classList.contains('open');
 	
 	if (isOpen) {
-		closeMenu();
+		sideMenu.classList.remove('open');
+		overlay.classList.remove('show');
+		menuToggle.classList.remove('active');
+		document.body.style.overflow = '';
 	} else {
-		openMenu();
-	}
-}
-
-function openMenu() {
-	sideMenu.classList.add('open');
-	menuToggle.classList.add('active');
-	
-	// Only show overlay and disable scroll on mobile
-	if (window.innerWidth < 800) {
+		sideMenu.classList.add('open');
 		overlay.classList.add('show');
+		menuToggle.classList.add('active');
 		document.body.style.overflow = 'hidden';
 	}
 }
 
-function closeMenu() {
-	sideMenu.classList.remove('open');
-	overlay.classList.remove('show');
-	menuToggle.classList.remove('active');
-	document.body.style.overflow = '';
-}
-
-function cancelAutoClose() {
-	if (autoCloseTimeout) {
-		clearTimeout(autoCloseTimeout);
-		autoCloseTimeout = null;
-		// Remove these listeners since they're no longer needed
-		sideMenu.removeEventListener('mouseenter', cancelAutoClose);
-		menuToggle.removeEventListener('mouseenter', cancelAutoClose);
-	}
-}
-
-// First-time visitor experience (desktop only)
+// Hamburger bounce for first-time visitors (desktop only)
 document.addEventListener('DOMContentLoaded', () => {
 	const menuIntroShown = localStorage.getItem('menuIntroShown');
 	
-	// Only show intro menu on desktop (800px+)
+	// Only bounce on desktop (800px+) for first-time visitors
 	if (!menuIntroShown && window.innerWidth >= 800) {
-		// Bounce the hamburger icon to draw attention
-		setTimeout(() => {
-			menuToggle.classList.add('bounce');
-			// Remove bounce class after animation completes
-			setTimeout(() => {
-				menuToggle.classList.remove('bounce');
-			}, 600);
-		}, 500); // Small delay after page load
-		
-		// Show menu on first visit
-		openMenu();
 		localStorage.setItem('menuIntroShown', 'true');
 		
-		// Set up auto-close after 5 seconds
-		autoCloseTimeout = setTimeout(() => {
-			closeMenu();
-			autoCloseTimeout = null;
-		}, 5000);
+		// First bounce after small delay
+		setTimeout(() => {
+			menuToggle.classList.add('bounce');
+			setTimeout(() => {
+				menuToggle.classList.remove('bounce');
+			}, 800);
+		}, 1000);
 		
-		// Cancel auto-close if user hovers over menu or toggle
-		sideMenu.addEventListener('mouseenter', cancelAutoClose);
-		menuToggle.addEventListener('mouseenter', cancelAutoClose);
+		// Second bounce
+		setTimeout(() => {
+			menuToggle.classList.add('bounce');
+			setTimeout(() => {
+				menuToggle.classList.remove('bounce');
+			}, 800);
+		}, 2000); // 1 second after first bounce ends
 	}
 });
 
-// Event listeners
 menuToggle.addEventListener('click', toggleMenu);
 overlay.addEventListener('click', toggleMenu);
 
-// Close menu when clicking menu items
 const menuItems = document.querySelectorAll('.menu-item');
 menuItems.forEach(item => {
 	item.addEventListener('click', () => {
@@ -237,14 +207,12 @@ menuItems.forEach(item => {
 	});
 });
 
-// Close menu with Escape key
 document.addEventListener('keydown', (e) => {
 	if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
 		toggleMenu();
 	}
 });
 
-// Close menu on mobile when window resizes
 window.addEventListener('resize', () => {
 	if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
 		toggleMenu();

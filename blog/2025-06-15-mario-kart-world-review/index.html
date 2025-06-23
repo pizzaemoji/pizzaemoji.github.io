@@ -151,53 +151,93 @@
 	<p>&copy; 2025 Brandon Butler – <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
 	</footer>
 	<script>
-		const menuToggle = document.getElementById('menu-toggle');
-		const sideMenu = document.getElementById('side-menu');
-		const overlay = document.getElementById('overlay');
+const menuToggle = document.getElementById('menu-toggle');
+const sideMenu = document.getElementById('side-menu');
+const overlay = document.getElementById('overlay');
+let autoCloseTimeout = null;
 
-		const menuIntroShown = localStorage.getItem('menuIntroShown');
+function toggleMenu() {
+	const isOpen = sideMenu.classList.contains('open');
+	
+	if (isOpen) {
+		closeMenu();
+	} else {
+		openMenu();
+	}
+}
 
-		function toggleMenu() {
-			const isOpen = sideMenu.classList.contains('open');
-			
-			if (isOpen) {
-				sideMenu.classList.remove('open');
-				overlay.classList.remove('show');
-				menuToggle.classList.remove('active');
-				document.body.style.overflow = '';
-			} else {
-				sideMenu.classList.add('open');
-				overlay.classList.add('show');
-				menuToggle.classList.add('active');
-				document.body.style.overflow = 'hidden';
-			}
-		}
+function openMenu() {
+	sideMenu.classList.add('open');
+	overlay.classList.add('show');
+	menuToggle.classList.add('active');
+	document.body.style.overflow = 'hidden';
+}
 
-		menuToggle.addEventListener('click', toggleMenu);
-		overlay.addEventListener('click', toggleMenu);
+function closeMenu() {
+	sideMenu.classList.remove('open');
+	overlay.classList.remove('show');
+	menuToggle.classList.remove('active');
+	document.body.style.overflow = '';
+}
 
-		const menuItems = document.querySelectorAll('.menu-item');
-		menuItems.forEach(item => {
-			item.addEventListener('click', () => {
-				setTimeout(toggleMenu, 100);
-			});
-		});
+function cancelAutoClose() {
+	if (autoCloseTimeout) {
+		clearTimeout(autoCloseTimeout);
+		autoCloseTimeout = null;
+		// Remove these listeners since they're no longer needed
+		sideMenu.removeEventListener('mouseenter', cancelAutoClose);
+		menuToggle.removeEventListener('mouseenter', cancelAutoClose);
+	}
+}
 
-		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
-				toggleMenu();
-			}
-		});
-
-		window.addEventListener('resize', () => {
-			if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
-				toggleMenu();
-			}
-		});
+// First-time visitor experience
+document.addEventListener('DOMContentLoaded', () => {
+	const menuIntroShown = localStorage.getItem('menuIntroShown');
+	
+	if (!menuIntroShown) {
+		// Bounce the menu icon
+		menuToggle.classList.add('bounce');
+		// Show menu on first visit
+		openMenu();
+		localStorage.setItem('menuIntroShown', 'true');
 		
-		if (!menuIntroShown) {
-			menuToggle.classList.add('bounce');
-		}
+		// Set up auto-close after 5 seconds
+		autoCloseTimeout = setTimeout(() => {
+			closeMenu();
+			autoCloseTimeout = null;
+		}, 5000);
+		
+		// Cancel auto-close if user hovers over menu or toggle
+		sideMenu.addEventListener('mouseenter', cancelAutoClose);
+		menuToggle.addEventListener('mouseenter', cancelAutoClose);
+	}
+});
+
+// Event listeners
+menuToggle.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu);
+
+// Close menu when clicking menu items
+const menuItems = document.querySelectorAll('.menu-item');
+menuItems.forEach(item => {
+	item.addEventListener('click', () => {
+		setTimeout(toggleMenu, 100);
+	});
+});
+
+// Close menu with Escape key
+document.addEventListener('keydown', (e) => {
+	if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
+		toggleMenu();
+	}
+});
+
+// Close menu on mobile when window resizes
+window.addEventListener('resize', () => {
+	if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
+		toggleMenu();
+	}
+});
 	</script>
 </body>
 </html>

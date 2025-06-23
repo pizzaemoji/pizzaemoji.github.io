@@ -106,21 +106,28 @@ a:hover, a:active {
 	color: #EEEEEE;
 	border-color: #FE6000;
 }
+.image-container {
+  text-align: center;
+  max-width: 90%;
+  margin: 40px auto 0 auto;
+}
 .image-large {
-	display: block;
-	margin: 40px auto 0 auto;
-	width: 90%;
+  display: block;
+  width: 100%; /* Full width of container */
+  height: auto; /* Maintains aspect ratio */
+  margin: 0 auto;
 }
 .caption {
-	color: #DDDDDD;
-	display: block;
-	font-size: 1rem;
-	line-height: 1.4rem;
-	font-style: italic;
-	text-align: center;
-	margin: 0 auto;
-	padding 1rem;
-	width: 70%;
+  color: #DDDDDD;
+  display: block;
+  font-size: 1rem;
+  line-height: 1.4rem;
+  font-style: italic;
+  text-align: center;
+  margin: 1rem auto 0 auto; /* Added top margin for spacing */
+  padding: 1rem; /* Fixed syntax error */
+  width: 78%; /* Proportional to image width (70% of 90% container) */
+  max-width: fit-content; /* Prevents overly long lines */
 }
 footer {
 	color: #EEEEEE;

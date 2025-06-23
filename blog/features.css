@@ -108,7 +108,7 @@ a:hover, a:active {
 }
 .image-large {
 	display: block;
-	margin: 40px auto 0 auto; /* centers, space between image and <p> above */
+	margin: 40px auto 0 auto;
 	width: 90%;
 }
 .caption {
@@ -121,7 +121,7 @@ a:hover, a:active {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 	margin 0 auto;
-	width: 85%;
+	width: 90%;
 }
 footer {
 	color: #EEEEEE;

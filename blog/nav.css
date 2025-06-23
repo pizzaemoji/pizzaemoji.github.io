@@ -51,49 +51,40 @@ nav {
 #menu-toggle.active .hamburger-line:nth-child(3) {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
-
-/* Hamburger bounce and fall with cartoon physics */
-
 /* Single bounce up animation - hamburger jumps up 10px */
 @keyframes bounceUp {
 	0% { transform: translateY(0); }     /* Start at normal position */
 	100% { transform: translateY(-10px); } /* End 10px higher */
 }
-
 /* Bottom line falls 10px from elevated position */
 @keyframes bottomFall {
 	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */
 	100% { transform: translateY(10px); } /* Fall 10px down, fade slightly */
 }
-
 /* Middle line falls 10px from elevated position */
 @keyframes middleFall {
 	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */
 	100% { transform: translateY(10px); } /* Fall 10px down, fade slightly */
 }
-
 /* Top line falls 10px from elevated position */
 @keyframes topFall {
 	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */  
 	100% { transform: translateY(10px); } /* Fall 10px down, fade slightly */
 }
-
 /* Apply bounce animation to entire hamburger */
 #menu-toggle.bounce-up {
 	animation: bounceUp 0.3s ease-out forwards; /* Quick bounce up, stay elevated */
 }
-
 /* Apply individual line falls when hamburger is elevated */
+	/* Takes X seconds to fall, then delays for Y seconds */
 #menu-toggle.bounce-up .hamburger-line:nth-child(3) {
-	animation: bottomFall 0.3s ease-in 0.4s forwards; /* Bottom line falls after 0.5s delay */
+	animation: bottomFall 0.3s ease-in 0.4s forwards;
 }
-
 #menu-toggle.bounce-up .hamburger-line:nth-child(2) {
-	animation: middleFall 0.3s ease-in 0.7s forwards; /* Middle line falls after 0.9s delay */
+	animation: middleFall 0.3s ease-in 0.7s forwards;
 }
-
 #menu-toggle.bounce-up .hamburger-line:nth-child(1) {
-	animation: topFall 0.3s ease-in 1.0s forwards; /* Top line falls after 1.3s delay */
+	animation: topFall 0.3s ease-in 1.0s forwards;
 }
 
 /* Logo */

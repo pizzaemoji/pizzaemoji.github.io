@@ -87,6 +87,7 @@ nav {
 
 /* The cheat - instant counter-rotation (applied via JS at 0.6s) */
 #menu-toggle.flipped {
+	animation: none; /* Kill the bounceAndFlip animation */
 	transform: translateY(-10px) rotate(180deg); /* Instant counter-flip */
 }
 

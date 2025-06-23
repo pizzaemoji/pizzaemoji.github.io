@@ -97,12 +97,6 @@
 			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 		}
 
-		.brand-text {
-			font-size: 1.2rem;
-			font-weight: 600;
-			color: #e0e0e0;
-		}
-
 		/* Clean Side Menu */
 		#side-menu {
 			position: fixed;
@@ -115,7 +109,7 @@
 			backdrop-filter: blur(15px);
 			-webkit-backdrop-filter: blur(15px);
 			padding-top: 80px;
-			padding-bottom: env(safe-area-inset-bottom, 200px);
+			padding-bottom: 100px;
 			transform: translateX(-100%);
 			transition: all 0.4s ease;
 			z-index: 999;
@@ -224,10 +218,6 @@
 		@media (max-width: 768px) {
 			nav {
 				padding: 0 1rem;
-			}
-			
-			.brand-text {
-				display: none;
 			}
 			
 			#side-menu {

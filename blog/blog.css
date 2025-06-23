@@ -1,47 +1,47 @@
 /* Pizza Emoji Blog Cascading Style Sheet - /blog/blog.css */
+* {
+	box-sizing: border-box;
+}
 html {
 	font-size: 100%;
 }
 body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	margin: 0;
+	font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	background-color: #1a1a1a; /* Remember to update theme-color on index! */
 	color: #DDDDDD;
-	background: #222222; /* Remember to update theme-color on index! */
-	margin-right: auto;
-	margin-left: auto;
-	max-width: 1000px;
-}
-/* Header titles and hero image */
+	min-height: 100vh;
 main {
-	padding: 120px 10px 50px 10px;
+	padding: 0px 10px;
 	margin: 0 auto;
 }
 header {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
-	text-align: left; 
+	text-align: left;
+	margin: 140px 0 40px 0;
 }
 h1 {
 	color: #EEEEEE;
 	font-size: 3rem;
 	line-height: 3.2rem;
-	font-weight: 900;
+	font-weight: 600;
 	word-spacing: .05rem;
 	text-align: left;
 	margin: 0;
 }
 h2 {
-	font-size: 2.6rem;
-	line-height: 2.8rem;
-	font-weight: 100;
+	font-size: 2.4rem;
+	line-height: 2.6rem;
+	font-weight: 600;
 	text-align: left;
-	font-style: italic;
 	margin: 0;
 }
 .byline {
 	display: inline-block;
 	font-size: 1.2rem;
-	font-weight: 600;
+	font-weight: 300;
 	text-align: left;
 	padding-top: 2px; /* Puts a little space above border */
 	border-top: 3px solid #FE6000;
@@ -51,6 +51,7 @@ time {
 	font-size: 1rem;
 	line-height: 1rem;
 	font-weight: 100;
+	color: #BBBBBB;
 	text-align: left;
 }
 /* Article and links formatting */
@@ -58,11 +59,8 @@ article {
 	max-width: 724px;
 	width: 90%;
 	font-size: 1.4rem;
-	font-weight: 300;
-	line-height: 2rem;
-	text-align: left;
 	margin: 0 auto;
-	padding: 0;
+	padding-bottom: 20px;
 	hyphens: auto;
 	text-wrap: pretty;
 }
@@ -80,42 +78,49 @@ blockquote {
 	padding: 0 0 0 1.5rem;
 	border-left: #FE6000 3px solid;
 }
-a {
+/* Link Styling */
+article a, footer a {
 	text-decoration: none;
 }
-a:link, a:visited {
+article a:link, article a:visited, footer a:link, footer a:visited {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
 }
-a:hover, a:active {
+article a:hover, article a:active, footer a:hover, footer a:active {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-color: #FE6000;
 }
+/* Images */
+.image-container {
+	text-align: center;
+	max-width: 90%;
+	margin: 40px auto 0 auto;
+}
 .image-large {
 	display: block;
-	margin: 40px auto 0 auto; /* centers, space between image and <p> above */
-	width: 90%;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
 }
 .caption {
 	color: #DDDDDD;
 	display: block;
 	font-size: 1rem;
-	line-height: 1rem;
+	line-height: 1.4rem;
 	font-style: italic;
-	text-align: center;
-	padding-bottom: 1rem;
-	margin-left: auto;
-	margin-right: auto;	
-	width: 85%;
+	margin: 1rem auto 0 auto;
+	padding: 0;
+	width: 78%;
+	max-width: fit-content;
 }
 footer {
 	color: #EEEEEE;
 	font-size: 1rem;
-	font-weight: 200;
 	text-align: center;
+	padding-top: 1rem;
 	padding-bottom: 1rem;
 }

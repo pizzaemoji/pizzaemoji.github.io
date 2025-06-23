@@ -1,23 +1,30 @@
 /* Pizza Emoji Blog Cascading Style Sheet - /blog/features.css */
+* {
+	box-sizing: border-box;
+}
 html {
 	font-size: 100%;
 }
 body {
-	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+	margin: 0;
+	font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	background-color: #1a1a1a; /* Remember to update theme-color on index! */
 	color: #DDDDDD;
-	background: #222222; /* Remember to update theme-color on index! */
+	min-height: 100vh;
+	/*
 	margin-right: auto;
 	margin-left: auto;
 	max-width: 1000px;
+	*/
 	counter-reset: fn_counter; /* Creates footnote <sup> counter */
 }
 /* Header titles and hero image */
 main {
-	padding: 100px 10px 50px 10px;
+	padding: 0px 10px;
 	margin: 0 auto;
 }
 header {
-	margin: auto;
+	margin: 140px 0 40px 0;
 	width: 100%;
 }
 h1 {
@@ -91,48 +98,50 @@ blockquote {
 	padding: 0 0 0 1.5rem;
 	border-left: #FE6000 3px solid;
 }
-a {
+/* Link Styling */
+article a, footer a {
 	text-decoration: none;
 }
-a:link, a:visited {
+article a:link, article a:visited, footer a:link, footer a:visited {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
 }
-a:hover, a:active {
+article a:hover, article a:active, footer a:hover, footer a:active {
 	text-decoration: none;
 	color: #EEEEEE;
 	border-color: #FE6000;
 }
+/* Images */
 .image-container {
-  text-align: center;
-  max-width: 90%;
-  margin: 40px auto 0 auto;
+	text-align: center;
+	max-width: 90%;
+	margin: 40px auto 0 auto;
 }
 .image-large {
-  display: block;
-  width: 100%;
-  height: auto;
-  margin: 0 auto;
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
 }
 .caption {
-  color: #DDDDDD;
-  display: block;
-  font-size: 1rem;
-  line-height: 1.4rem;
-  font-style: italic;
-  margin: 1rem auto 0 auto;
-  padding: 0;
-  width: 78%;
-  max-width: fit-content;
+	color: #DDDDDD;
+	display: block;
+	font-size: 1rem;
+	line-height: 1.4rem;
+	font-style: italic;
+	margin: 1rem auto 0 auto;
+	padding: 0;
+	width: 78%;
+	max-width: fit-content;
 }
 footer {
 	color: #EEEEEE;
 	font-size: 1rem;
-	font-weight: 200;
 	text-align: center;
+	padding-top: 1rem;
 	padding-bottom: 1rem;
 }
 /* Special page formatting */

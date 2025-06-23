@@ -50,6 +50,14 @@ nav {
 #menu-toggle.active .hamburger-line:nth-child(3) {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
+/* Bounce hamburger once on page load */
+@keyframes menuBounce {
+	0%, 100% { transform: translateY(0); }
+	50% { transform: translateY(-4px); }
+}
+#menu-toggle.bounce {
+	animation: menuBounce 0.6s ease forwards;
+}
 /* Logo */
 .logo-container {
 	display: flex;

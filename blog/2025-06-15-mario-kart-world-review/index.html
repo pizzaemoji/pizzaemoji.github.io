@@ -168,9 +168,13 @@ function toggleMenu() {
 
 function openMenu() {
 	sideMenu.classList.add('open');
-	overlay.classList.add('show');
 	menuToggle.classList.add('active');
-	document.body.style.overflow = 'hidden';
+	
+	// Only show overlay and disable scroll on mobile
+	if (window.innerWidth < 800) {
+		overlay.classList.add('show');
+		document.body.style.overflow = 'hidden';
+	}
 }
 
 function closeMenu() {
@@ -190,13 +194,21 @@ function cancelAutoClose() {
 	}
 }
 
-// First-time visitor experience
+// First-time visitor experience (desktop only)
 document.addEventListener('DOMContentLoaded', () => {
 	const menuIntroShown = localStorage.getItem('menuIntroShown');
 	
-	if (!menuIntroShown) {
-		// Bounce the menu icon
-		menuToggle.classList.add('bounce');
+	// Only show intro menu on desktop (800px+)
+	if (!menuIntroShown && window.innerWidth >= 800) {
+		// Bounce the hamburger icon to draw attention
+		setTimeout(() => {
+			menuToggle.classList.add('bounce');
+			// Remove bounce class after animation completes
+			setTimeout(() => {
+				menuToggle.classList.remove('bounce');
+			}, 600);
+		}, 500); // Small delay after page load
+		
 		// Show menu on first visit
 		openMenu();
 		localStorage.setItem('menuIntroShown', 'true');

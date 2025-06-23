@@ -9,16 +9,24 @@
 			box-sizing: border-box;
 		}
 		
+html {
+	font-size: 100%;
+}
+		
 		body {
 			margin: 0;
 			font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-			background-color: #1a1a1a;
+			background-color: #1a1a1a; /* Remember to update theme-color on index! */
 			color: #e0e0e0;
 			line-height: 1.6;
 			min-height: 100vh;
+	/*		
+	margin-right: auto;
+	margin-left: auto;
+	max-width: 1000px;
+	*/
 		}
 
-		/* Clean Navigation */
 		nav {
 			position: fixed;
 			top: 0;
@@ -177,30 +185,117 @@
 		}
 
 		/* Main Content */
-		main {
-			padding: 90px 2rem 2rem;
-			max-width: 800px;
-			margin: 0 auto;
-		}
+/* Pizza Emoji Blog Cascading Style Sheet - /blog/blog.css */
 
-		h1 {
-			color: #FE6000;
-			font-size: 2.5rem;
-			margin-bottom: 1rem;
-			text-align: center;
-		}
-
-		h3 {
-			color: #FE6000;
-			font-size: 1.4rem;
-			margin-bottom: 0.5rem;
-		}
-
-		p {
-			font-size: 1.1rem;
-			margin-bottom: 1.5rem;
-			opacity: 0.9;
-		}
+/* Header titles and hero image */
+main {
+	padding: 120px 10px 50px 10px;
+	margin: 0 auto;
+}
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: left; 
+}
+h1 {
+	color: #EEEEEE;
+	font-size: 3rem;
+	line-height: 3.2rem;
+	font-weight: 900;
+	word-spacing: .05rem;
+	text-align: left;
+	margin: 0;
+}
+h2 {
+	font-size: 2.6rem;
+	line-height: 2.8rem;
+	font-weight: 100;
+	text-align: left;
+	font-style: italic;
+	margin: 0;
+}
+.byline {
+	display: inline-block;
+	font-size: 1.2rem;
+	font-weight: 600;
+	text-align: left;
+	padding-top: 2px; /* Puts a little space above border */
+	border-top: 3px solid #FE6000;
+	margin: 10px;
+}
+time {
+	font-size: 1rem;
+	line-height: 1rem;
+	font-weight: 100;
+	text-align: left;
+}
+/* Article and links formatting */
+article {
+	max-width: 724px;
+	width: 90%;
+	font-size: 1.4rem;
+	font-weight: 300;
+	line-height: 2rem;
+	text-align: left;
+	margin: 0 auto;
+	padding: 0;
+	hyphens: auto;
+	text-wrap: pretty;
+}
+h3 {
+ 	font-size: 1.6rem;
+	line-height: 1.8rem;
+	font-weight: 600;
+	text-align: left;
+	padding-top: 0;
+	padding-bottom: .5em;
+	margin: 0;
+}
+blockquote {
+	margin: 2rem 2rem 2rem 0rem;
+	padding: 0 0 0 1.5rem;
+	border-left: #FE6000 3px solid;
+}
+a {
+	text-decoration: none;
+}
+a:link, a:visited {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 2px 0;
+}
+a:hover, a:active {
+	text-decoration: none;
+	color: #EEEEEE;
+	border-color: #FE6000;
+}
+.image-large {
+	display: block;
+	margin: 40px auto 0 auto; /* centers, space between image and <p> above */
+	width: 90%;
+}
+.caption {
+	color: #DDDDDD;
+	display: block;
+	font-size: 1rem;
+	line-height: 1rem;
+	font-style: italic;
+	text-align: center;
+	padding-bottom: 1rem;
+	margin-left: auto;
+	margin-right: auto;	
+	width: 85%;
+}
+footer {
+	color: #EEEEEE;
+	font-size: 1rem;
+	font-weight: 200;
+	text-align: center;
+	padding-bottom: 1rem;
+}
 
 		/* Glass Article Cards */
 		article {
@@ -218,14 +313,6 @@
 			
 			#side-menu {
 				max-width: 280px;
-			}
-			
-			main {
-				padding: 80px 1rem 1rem;
-			}
-			
-			h1 {
-				font-size: 2rem;
 			}
 			
 			#logo {
@@ -300,27 +387,35 @@
 	<div id="overlay"></div>
 
 	<main>
+		<header>
+			<h1>Blogging</h1>
+			<div class="byline">by Brandon Butler</div>
+		</header>
 		<article>
+		<div><time datetime="2025-06-22 12:00">June 22, 2025</time></div>
 			<h3>Apple</h3>
 			<p>Apple Inc. is one of the most influential technology companies in the world, known for shaping the personal computing, smartphone, and digital media industries. Founded in 1976 by Steve Jobs, Steve Wozniak, and Ronald Wayne, Apple began with the Apple I computer and later revolutionized the tech world with products like the Macintosh, iPod, iPhone, and iPad. Its emphasis on minimalist design, seamless hardware-software integration, and intuitive user interfaces has earned it a loyal customer base and set industry standards. Over time, Apple has expanded into services like iCloud, Apple Music, and the App Store, steadily building an ecosystem that locks users into its platforms.</p>
 			<p>In recent years, Apple has shifted focus toward privacy, health, and sustainability. Features like on-device processing for Siri and Mail, end-to-end encryption, and tools for managing screen time showcase its emphasis on user control and privacy. With hardware like the Apple Watch increasingly geared toward fitness and health tracking—and partnerships in the medical field—Apple is positioning itself as more than just a tech company, but a personal lifestyle brand. Meanwhile, it continues to invest heavily in custom silicon, with its M-series chips now defining the Mac lineup and giving it independence from Intel.</p>
 		</article>
 		<article>
+		<div><time datetime="2025-06-22 12:00">June 20, 2025</time></div>
 			<h3>The Universe</h3>
 			<p>A universe is the totality of all space, time, matter, and energy that exists. It encompasses everything—from the smallest subatomic particles to vast galactic superclusters. Our observable universe spans about 93 billion light-years in diameter, but it may be part of an even larger, possibly infinite, whole. The universe operates under fundamental physical laws, like gravity and electromagnetism, which shape the formation of stars, galaxies, and ultimately life. Modern cosmology suggests it began with the Big Bang roughly 13.8 billion years ago, and theories like inflation and dark energy continue to expand our understanding of its structure and future.</p>
 		</article>
 		<article>
+		<div><time datetime="2025-06-22 12:00">June 11, 2025</time></div>
 			<h3>Disneyland</h3>
 			<p>Disney, founded by Walt and Roy O. Disney in 1923, has evolved from a modest animation studio into one of the world's most powerful media empires. What began with short films like Steamboat Willie grew into a massive brand encompassing film, television, theme parks, and merchandise. Disney's early success came from pushing animation as a serious art form, with Snow White and the Seven Dwarfs (1937) proving that animated features could be commercially and critically successful.</p>
 			<p>Over the decades, Disney expanded aggressively. Acquisitions of Pixar, Marvel, Lucasfilm, and 21st Century Fox brought massive intellectual property under its control, reshaping the entertainment landscape. This strategy turned Disney into a dominant force not only in family entertainment but across pop culture broadly. Disney+ became a major player in the streaming wars, leveraging nostalgia and exclusive IP like The Mandalorian and WandaVision to compete with Netflix and Amazon.</p>
 			<p>Despite its dominance, Disney has faced criticism for homogenizing entertainment, aggressively protecting its copyrights, and diluting creative risk in favor of guaranteed returns. Still, the brand's ability to evolve—from traditional animation to 3D, from cinema to streaming, and from U.S.-centric to global—is a key reason it remains central to the global entertainment industry. Its influence on childhood culture, media consolidation, and theme park innovation is undeniable.</p>
 		</article>
 		<article>
+		<div><time datetime="2025-06-22 12:00">June 1, 2025</time></div>
 			<h3>Welcome to Pizza Emoji</h3>
 			<p>This is the first post of the blog. More to follow!</p>
 			<p>You can also check the side menu for featured articles and other unique content. Thanks for reading!</p>
 		</article>
-	</main>
+	</main>	
 
 	<script>
 		const menuToggle = document.getElementById('menu-toggle');
@@ -365,5 +460,8 @@
 			}
 		});
 	</script>
+	<footer>
+	<p>&copy; 2025 Brandon Butler – <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
+	</footer>
 </body>
 </html>

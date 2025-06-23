@@ -115,12 +115,12 @@ a:hover, a:active {
 	color: #DDDDDD;
 	display: block;
 	font-size: 1rem;
-	line-height: 1rem;
+	line-height: 1.4rem;
 	font-style: italic;
 	text-align: center;
+	padding-top: 1rem;
 	padding-bottom: 1rem;
-	margin-left: auto;
-	margin-right: auto;	
+	margin 0 auto;
 	width: 85%;
 }
 footer {

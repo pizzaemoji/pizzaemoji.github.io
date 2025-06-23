@@ -54,6 +54,7 @@ nav {
 	padding: 0;
 	z-index: 1001;
 	transition: all 0.3s ease;
+	background: inherit;
 }
 /* Hamburger Animation */
 .hamburger-line {
@@ -81,9 +82,8 @@ nav {
 }
 #logo {
 	height: 48px;
-	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
 }
-
+/* Side Menu */
 #side-menu {
 	position: fixed;
 	top: 0;
@@ -102,11 +102,10 @@ nav {
 	overflow-y: auto;
 	border-right: 1px solid rgba(255, 255, 255, 0.1);
 }
-
 #side-menu.open {
 	transform: translateX(0);
 }
-
+/* Blurs out screen when menu is open */
 #overlay {
 	position: fixed;
 	top: 0;
@@ -121,18 +120,15 @@ nav {
 	transition: all 0.3s ease;
 	z-index: 998;
 }
-
 #overlay.show {
 	opacity: 1;
 	visibility: visible;
 }
-
 /* Menu Sections */
 .menu-section {
 	margin-bottom: 2rem;
 	padding: 0 1rem;
 }
-
 .menu-section-title {
 	display: block;
 	padding: 1rem 1.5rem;
@@ -144,7 +140,6 @@ nav {
 	margin-bottom: 0.5rem;
 	background: rgba(0, 0, 0, 0);
 }
-
 .menu-item {
 	display: block;
 	text-decoration: none;
@@ -156,7 +151,6 @@ nav {
 	font-size: 1.2rem;
 	background: rgba(255, 255, 255, 0.05);
 }
-
 .menu-item:hover {
 	background: rgba(254, 96, 0, 0.1);
 	color: #FE6000;

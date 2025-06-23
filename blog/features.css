@@ -113,8 +113,8 @@ a:hover, a:active {
 }
 .image-large {
   display: block;
-  width: 100%; /* Full width of container */
-  height: auto; /* Maintains aspect ratio */
+  width: 100%;
+  height: auto;
   margin: 0 auto;
 }
 .caption {
@@ -123,11 +123,10 @@ a:hover, a:active {
   font-size: 1rem;
   line-height: 1.4rem;
   font-style: italic;
-  text-align: center;
-  margin: 1rem auto 0 auto; /* Added top margin for spacing */
-  padding: 1rem; /* Fixed syntax error */
-  width: 78%; /* Proportional to image width (70% of 90% container) */
-  max-width: fit-content; /* Prevents overly long lines */
+  margin: 1rem auto 0 auto;
+  padding: 0;
+  width: 78%;
+  max-width: fit-content;
 }
 footer {
 	color: #EEEEEE;

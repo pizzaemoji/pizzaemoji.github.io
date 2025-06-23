@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pizza Emoji Blog</title>
+<style>
+	html, body {
+		margin: 0;
+		padding: 0;
+		background: #222;
+		color: #eee;
+		font-family: sans-serif;
+	}
+
+	nav {
+		position: fixed;
+		top: 0;
+		left: 0;
+		right: 0;
+		height: 60px;
+		background: #222222E6;
+		backdrop-filter: blur(5px);
+		display: flex;
+		align-items: center;
+		justify-content: space-between;
+		padding: 0 1rem;
+		border-bottom: 2px solid #333;
+		z-index: 999;
+	}
+
+	#logo {
+		height: 40px;
+	}
+
+	#menu-button {
+		background: none;
+		color: #eee;
+		font-size: 1.4rem;
+		border: none;
+		cursor: pointer;
+	}
+
+	/* Slide-out menu */
+	#side-menu {
+		position: fixed;
+		top: 0;
+		right: -250px;
+		width: 250px;
+		height: 100%;
+		background: #333;
+		color: #eee;
+		display: flex;
+		flex-direction: column;
+		padding: 1rem;
+		transition: right 0.3s ease;
+		z-index: 998;
+	}
+	#side-menu.open {
+		right: 0;
+	}
+
+	#side-menu a {
+		color: #eee;
+		text-decoration: none;
+		margin: 0.5rem 0;
+		font-size: 1.2rem;
+	}
+	#side-menu a:hover {
+		color: #FE6000;
+	}
+
+	main {
+		padding-top: 80px;
+		max-width: 700px;
+		margin: 0 auto;
+		font-size: 1.2rem;
+		line-height: 1.8;
+	}
+
+</style>
+</head>
+<body>
+
+<nav>
+	<a href="/" aria-label="Home"><img src="/images/slice3d-mini.webp" id="logo" alt="Pizza Emoji Logo"></a>
+	<button id="menu-button" aria-label="Open Menu">☰ Menu</button>
+</nav>
+
+<div id="side-menu" aria-hidden="true">
+	<a href="/">Home</a>
+	<a href="/features">Features</a>
+	<a href="/about">About</a>
+	<a href="/contact">Contact</a>
+</div>
+
+<main>
+	<h1>Welcome to Pizza Emoji</h1>
+	<p>Fresh slices of writing, piping hot.</p>
+</main>
+
+<script>
+	document.getElementById('menu-button').onclick = function () {
+		document.getElementById('side-menu').classList.toggle('open');
+	};
+</script>
+
+</body>
+</html>

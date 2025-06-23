@@ -9,7 +9,6 @@ body {
 	font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	background-color: #1a1a1a; /* Remember to update theme-color on index! */
 	color: #DDDDDD;
-	max-width: 1000px;
 	min-height: 100vh;
 	margin: 0;
 	/*
@@ -20,6 +19,7 @@ body {
 }
 /* Header titles and hero image */
 main {
+	max-width: 1000px;
 	padding: 0px 10px;
 	margin: 0 auto;
 }

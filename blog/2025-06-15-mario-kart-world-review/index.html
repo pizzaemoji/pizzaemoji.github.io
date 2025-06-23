@@ -171,19 +171,24 @@ function toggleMenu() {
 	}
 }
 
-// Clean cartoon bounce sequence
+// Clean cartoon bounce sequence with flip
 function triggerCartoonBounce() {
-	// Remove any existing animation class
-	menuToggle.classList.remove('bounce-up');
+	// Remove any existing animation classes
+	menuToggle.classList.remove('bounce-and-flip', 'flipped');
 	
-	// Trigger the bounce and fall sequence
-	menuToggle.classList.add('bounce-up');
+	// Trigger the bounce and flip sequence
+	menuToggle.classList.add('bounce-and-flip');
 	
-	// Remove class after all animations complete (bounce + all falls + pause)
-	// Total time: 0.3s bounce + 1.3s delay + 0.4s top fall = 2s
+	// Apply the "cheat" counter-rotation at exactly 0.6s (when visual flip completes)
 	setTimeout(() => {
-		menuToggle.classList.remove('bounce-up');
-	}, 2000);
+		menuToggle.classList.add('flipped');
+	}, 600); // 0.6 seconds
+	
+	// Remove all classes after complete animation sequence
+	// Total time: 0.6s bounce+flip + 0.3s safety + 0.9s falls = 1.8s
+	setTimeout(() => {
+		menuToggle.classList.remove('bounce-and-flip', 'flipped');
+	}, 1800);
 }
 
 // Hamburger bounce for first-time visitors (desktop only)
@@ -202,7 +207,7 @@ document.addEventListener('DOMContentLoaded', () => {
 		// Second cartoon bounce sequence (after first completes + pause)
 		setTimeout(() => {
 			triggerCartoonBounce();
-		}, 4000);
+		}, 4000); // Increased gap since animation is now 1.8s instead of 2s
 	}
 });
 
@@ -227,13 +232,6 @@ window.addEventListener('resize', () => {
 		toggleMenu();
 	}
 });
-
-// Optional: Add cartoon bounce sequence on hover for fun (uncomment if you want this)
-// menuToggle.addEventListener('mouseenter', () => {
-// 	if (!sideMenu.classList.contains('open')) {
-// 		triggerCartoonBounce();
-// 	}
-// });
 	</script>
 </body>
 </html>

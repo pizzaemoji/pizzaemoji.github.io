@@ -42,49 +42,66 @@ nav {
 	transition: all 0.3s ease;
 	border-radius: 1px;
 }
+
 #menu-toggle.active .hamburger-line:nth-child(1) {
 	transform: rotate(45deg) translate(4px, 4px);
 }
+
 #menu-toggle.active .hamburger-line:nth-child(2) {
 	opacity: 0;
 }
+
 #menu-toggle.active .hamburger-line:nth-child(3) {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
-/* Single bounce up animation - hamburger jumps up 10px */
-@keyframes bounceUp {
-	0% { transform: translateY(0); }     /* Start at normal position */
-	100% { transform: translateY(-10px); } /* End 10px higher */
+
+/* Combined bounce up and visual flip animation */
+@keyframes bounceAndFlip {
+	0% { transform: translateY(0) rotate(0deg); }           /* Start at normal position */
+	50% { transform: translateY(-10px) rotate(0deg); }      /* Peak of bounce, no rotation yet */
+	100% { transform: translateY(-10px) rotate(180deg); }   /* Stay elevated, complete 180deg rotation */
 }
+
 /* Bottom line falls 10px from elevated position */
 @keyframes bottomFall {
 	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */
-	100% { transform: translateY(10px); } /* Fall 10px down, fade slightly */
+	100% { transform: translateY(10px); } /* Fall 10px down */
 }
+
 /* Middle line falls 10px from elevated position */
 @keyframes middleFall {
 	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */
-	100% { transform: translateY(10px); } /* Fall 10px down, fade slightly */
+	100% { transform: translateY(10px); } /* Fall 10px down */
 }
+
 /* Top line falls 10px from elevated position */
 @keyframes topFall {
 	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */  
-	100% { transform: translateY(10px); } /* Fall 10px down, fade slightly */
+	100% { transform: translateY(10px); } /* Fall 10px down */
 }
-/* Apply bounce animation to entire hamburger */
-#menu-toggle.bounce-up {
-	animation: bounceUp 0.3s ease-out forwards; /* Quick bounce up, stay elevated */
+
+/* Apply combined bounce and flip animation to entire hamburger */
+#menu-toggle.bounce-and-flip {
+	animation: bounceAndFlip 0.6s ease-out forwards; /* 0.3s bounce + 0.3s rotate */
 }
-/* Apply individual line falls when hamburger is elevated */
-	/* Takes X seconds to fall, then delays for Y seconds */
-#menu-toggle.bounce-up .hamburger-line:nth-child(3) {
-	animation: bottomFall 0.3s ease-in 0.4s forwards;
+
+/* The cheat - instant counter-rotation (applied via JS at 0.6s) */
+#menu-toggle.flipped {
+	transform: translateY(-10px) rotate(180deg); /* Instant counter-flip */
 }
-#menu-toggle.bounce-up .hamburger-line:nth-child(2) {
-	animation: middleFall 0.3s ease-in 0.7s forwards;
+
+/* Apply individual line falls after safety pause */
+/* Lines fall in DOM order (3,2,1) which appears as bottom-to-top after cheat */
+#menu-toggle.bounce-and-flip .hamburger-line:nth-child(3) {
+	animation: bottomFall 0.3s ease-in 0.9s forwards; /* Start after 0.9s total (0.6s + 0.3s safety) */
 }
-#menu-toggle.bounce-up .hamburger-line:nth-child(1) {
-	animation: topFall 0.3s ease-in 1.0s forwards;
+
+#menu-toggle.bounce-and-flip .hamburger-line:nth-child(2) {
+	animation: middleFall 0.3s ease-in 1.2s forwards; /* 0.9s + 0.3s stagger */
+}
+
+#menu-toggle.bounce-and-flip .hamburger-line:nth-child(1) {
+	animation: topFall 0.3s ease-in 1.5s forwards; /* 0.9s + 0.6s stagger */
 }
 
 /* Logo */

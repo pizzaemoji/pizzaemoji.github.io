@@ -6,15 +6,15 @@ html {
 	font-size: 100%;
 }
 body {
-	margin: 0;
 	font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	background-color: #1a1a1a; /* Remember to update theme-color on index! */
 	color: #DDDDDD;
+	max-width: 1000px;
 	min-height: 100vh;
+	margin: 0;
 	/*
 	margin-right: auto;
 	margin-left: auto;
-	max-width: 1000px;
 	*/
 	counter-reset: fn_counter; /* Creates footnote <sup> counter */
 }

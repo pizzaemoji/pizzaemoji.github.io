@@ -148,5 +148,48 @@
 	<footer>
 	<p>&copy; 2025 Brandon Butler – <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
 	</footer>
+	<script>
+		const menuToggle = document.getElementById('menu-toggle');
+		const sideMenu = document.getElementById('side-menu');
+		const overlay = document.getElementById('overlay');
+
+		function toggleMenu() {
+			const isOpen = sideMenu.classList.contains('open');
+			
+			if (isOpen) {
+				sideMenu.classList.remove('open');
+				overlay.classList.remove('show');
+				menuToggle.classList.remove('active');
+				document.body.style.overflow = '';
+			} else {
+				sideMenu.classList.add('open');
+				overlay.classList.add('show');
+				menuToggle.classList.add('active');
+				document.body.style.overflow = 'hidden';
+			}
+		}
+
+		menuToggle.addEventListener('click', toggleMenu);
+		overlay.addEventListener('click', toggleMenu);
+
+		const menuItems = document.querySelectorAll('.menu-item');
+		menuItems.forEach(item => {
+			item.addEventListener('click', () => {
+				setTimeout(toggleMenu, 100);
+			});
+		});
+
+		document.addEventListener('keydown', (e) => {
+			if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
+				toggleMenu();
+			}
+		});
+
+		window.addEventListener('resize', () => {
+			if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
+				toggleMenu();
+			}
+		});
+	</script>
 </body>
 </html>

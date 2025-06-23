@@ -37,23 +37,6 @@
 	}
 
 	/* Slide-out menu */
-/* Too many bounces
-@keyframes slideBounce {
-	0%    { transform: translateX(-100%); }
-	30%   { transform: translateX(20%); }
-	50%   { transform: translateX(-10%); }
-	65%   { transform: translateX(8%); }
-	80%   { transform: translateX(-4%); }
-	90%   { transform: translateX(2%); }
-	100%  { transform: translateX(0); }
-}
-*/
-@keyframes slideBounce {
-	0%   { transform: translateX(-100%); }
-	60%  { transform: translateX(5%); }   /* slight overshoot */
-	75%  { transform: translateX(-3%); }  /* tiny recoil */
-	100% { transform: translateX(0); }    /* settle in place */
-}
 #side-menu {
 	position: fixed;
 	top: 0; left: 0;
@@ -123,19 +106,29 @@
 </main>
 
 <script>
-	const menuToggle = document.getElementById('menu-toggle');
-	const sideMenu = document.getElementById('side-menu');
-	const overlay = document.getElementById('overlay');
+const menuToggle = document.getElementById('menu-toggle');
+const sideMenu = document.getElementById('side-menu');
+const overlay = document.getElementById('overlay');
 
-	menuToggle.addEventListener('click', () => {
-		sideMenu.classList.toggle('open');
-		overlay.classList.toggle('show');
-	});
+function openMenu() {
+	sideMenu.classList.add('open');
+	overlay.classList.add('show');
+}
 
-	overlay.addEventListener('click', () => {
-		sideMenu.classList.remove('open');
-		overlay.classList.remove('show');
-	});
+function closeMenu() {
+	sideMenu.classList.remove('open');
+	overlay.classList.remove('show');
+}
+
+menuToggle.addEventListener('click', () => {
+	if (sideMenu.classList.contains('open')) {
+		closeMenu();
+	} else {
+		openMenu();
+	}
+});
+
+overlay.addEventListener('click', closeMenu);
 </script>
 
 </body>

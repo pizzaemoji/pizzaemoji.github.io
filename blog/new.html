@@ -52,6 +52,8 @@
 	z-index: 999;
   overflow-y: auto;
   -webkit-overflow-scrolling: touch;
+  -ms-overflow-style: auto;
+  overscroll-behavior: contain;
 }
 #side-menu.open {
   transform: translateX(0);
@@ -164,6 +166,16 @@ menuToggle.addEventListener('click', () => {
 });
 
 overlay.addEventListener('click', closeMenu);
+
+const sideMenu = document.getElementById('side-menu');
+
+sideMenu.addEventListener('touchstart', function (e) {
+  if (sideMenu.scrollTop === 0) {
+    sideMenu.scrollTop = 1;
+  } else if (sideMenu.scrollHeight === sideMenu.scrollTop + sideMenu.offsetHeight) {
+    sideMenu.scrollTop -= 1;
+  }
+});
 </script>
 
 </body>

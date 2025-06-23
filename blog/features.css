@@ -75,6 +75,7 @@ article {
 }
 p {
 	opacity: 0.9;
+	line-height: 1.6;
 }
 h3 {
  	font-size: 1.6rem;

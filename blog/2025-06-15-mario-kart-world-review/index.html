@@ -171,18 +171,19 @@ function toggleMenu() {
 	}
 }
 
-// Cartoon physics bounce and fall sequence
+// Clean cartoon bounce sequence
 function triggerCartoonBounce() {
-	// Remove any existing classes first
-	menuToggle.classList.remove('cartoon-bounce');
+	// Remove any existing animation class
+	menuToggle.classList.remove('bounce-up');
 	
-	// Start the bounce and fall sequence
-	menuToggle.classList.add('cartoon-bounce');
+	// Trigger the bounce and fall sequence
+	menuToggle.classList.add('bounce-up');
 	
-	// Remove class after the full sequence completes
+	// Remove class after all animations complete (bounce + all falls + pause)
+	// Total time: 0.3s bounce + 1.3s delay + 0.4s top fall = 2s
 	setTimeout(() => {
-		menuToggle.classList.remove('cartoon-bounce');
-	}, 4000);
+		menuToggle.classList.remove('bounce-up');
+	}, 2000);
 }
 
 // Hamburger bounce for first-time visitors (desktop only)
@@ -193,10 +194,15 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (!menuIntroShown && window.innerWidth >= 800) {
 		localStorage.setItem('menuIntroShown', 'true');
 		
-		// First bounce with cartoon fall sequence
+		// First cartoon bounce sequence
 		setTimeout(() => {
 			triggerCartoonBounce();
 		}, 1000);
+		
+		// Second cartoon bounce sequence (after first completes + pause)
+		setTimeout(() => {
+			triggerCartoonBounce();
+		}, 4000);
 	}
 });
 

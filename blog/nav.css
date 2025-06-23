@@ -32,7 +32,8 @@ nav {
 	transition: all 0.3s ease;
 	background: rgba(0, 0, 0, 0.0);
 }
-/* Hamburger Animation */
+
+/* Hamburger into X Animation */
 .hamburger-line {
 	width: 18px;
 	height: 2px;
@@ -41,51 +42,60 @@ nav {
 	transition: all 0.3s ease;
 	border-radius: 1px;
 }
-
 #menu-toggle.active .hamburger-line:nth-child(1) {
 	transform: rotate(45deg) translate(4px, 4px);
 }
-
 #menu-toggle.active .hamburger-line:nth-child(2) {
 	opacity: 0;
 }
-
 #menu-toggle.active .hamburger-line:nth-child(3) {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
 
-/* Staggered falling animation - cartoon physics style */
-@keyframes fallFromElevated {
-	0% { transform: translateY(0); opacity: 1; }
-	100% { transform: translateY(8px); opacity: 0.3; }
+/* Hamburger bounce and fall with cartoon physics */
+
+/* Single bounce up animation - hamburger jumps up 10px */
+@keyframes bounceUp {
+	0% { transform: translateY(0); }     /* Start at normal position */
+	100% { transform: translateY(-10px); } /* End 10px higher */
 }
 
-/* Cartoon bounce and fall sequence */
-@keyframes bounceAndFloat {
-	0% { transform: translateY(0); }
-	10% { transform: translateY(-8px); }
-	45% { transform: translateY(-8px); }
-	55% { transform: translateY(-8px); }
-	90% { transform: translateY(-8px); }
-	100% { transform: translateY(0); }
+/* Bottom line falls 10px from elevated position */
+@keyframes bottomFall {
+	0% { transform: translateY(0); opacity: 1; }      /* Start at normal position (relative to bounced hamburger) */
+	100% { transform: translateY(10px); opacity: 0.3; } /* Fall 10px down, fade slightly */
 }
 
-#menu-toggle.cartoon-bounce {
-	animation: bounceAndFloat 4s ease-in-out;
+/* Middle line falls 10px from elevated position */
+@keyframes middleFall {
+	0% { transform: translateY(0); opacity: 1; }      /* Start at normal position (relative to bounced hamburger) */
+	100% { transform: translateY(10px); opacity: 0.3; } /* Fall 10px down, fade slightly */
 }
 
-/* Lines fall while hamburger is bouncing - they fall FROM the elevated position */
-#menu-toggle.cartoon-bounce .hamburger-line:nth-child(3) {
-	animation: fallFromElevated 0.6s ease-in 0.8s, fallFromElevated 0.6s ease-in 2.4s;
+/* Top line falls 10px from elevated position */
+@keyframes topFall {
+	0% { transform: translateY(0); opacity: 1; }      /* Start at normal position (relative to bounced hamburger) */  
+	100% { transform: translateY(10px); opacity: 0.3; } /* Fall 10px down, fade slightly */
 }
 
-#menu-toggle.cartoon-bounce .hamburger-line:nth-child(2) {
-	animation: fallFromElevated 0.6s ease-in 0.9s, fallFromElevated 0.6s ease-in 2.5s;
+/* Apply bounce animation to entire hamburger */
+#menu-toggle.bounce-up {
+	animation: bounceUp 0.3s ease-out forwards; /* Quick bounce up, stay elevated */
 }
 
-#menu-toggle.cartoon-bounce .hamburger-line:nth-child(1) {
-	animation: fallFromElevated 0.6s ease-in 1.0s, fallFromElevated 0.6s ease-in 2.6s;
+/* Apply individual line falls when hamburger is elevated */
+#menu-toggle.bounce-up .hamburger-line:nth-child(3) {
+	animation: bottomFall 0.4s ease-in 0.5s forwards; /* Bottom line falls after 0.5s delay */
 }
+
+#menu-toggle.bounce-up .hamburger-line:nth-child(2) {
+	animation: middleFall 0.4s ease-in 0.9s forwards; /* Middle line falls after 0.9s delay */
+}
+
+#menu-toggle.bounce-up .hamburger-line:nth-child(1) {
+	animation: topFall 0.4s ease-in 1.3s forwards; /* Top line falls after 1.3s delay */
+}
+
 /* Logo */
 .logo-container {
 	display: flex;

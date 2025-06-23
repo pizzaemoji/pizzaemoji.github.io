@@ -17,273 +17,262 @@
             line-height: 1.6;
         }
 
-        /* Header */
-        .header {
+        /* Navigation */
+        nav {
             position: fixed;
             top: 0;
             left: 0;
             right: 0;
-            height: 60px;
-            background: #1a1a1a;
+            height: 70px;
+            background: rgba(34, 34, 34, 0.95);
+            backdrop-filter: blur(10px);
             display: flex;
-            align-items: center;
             justify-content: center;
+            align-items: center;
             border-bottom: 1px solid #333;
             z-index: 1000;
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.3);
         }
 
-        .menu-btn {
+        #menu-toggle {
             position: absolute;
-            left: 1rem;
+            left: 1.5rem;
+            width: 30px;
+            height: 30px;
             background: none;
             border: none;
-            color: #FE6000;
-            font-size: 1.5rem;
             cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background-color 0.2s ease;
-            z-index: 1002;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 0;
+            z-index: 1001;
         }
 
-        .menu-btn:hover {
-            background-color: #333;
+        /* Hamburger Animation */
+        .hamburger-line {
+            width: 25px;
+            height: 3px;
+            background-color: #FE6000;
+            margin: 3px 0;
+            transition: 0.3s ease;
+            border-radius: 2px;
         }
 
-        /* Hamburger icon animation */
-        .menu-btn {
-            position: relative;
+        .hamburger-line:nth-child(1) {
+            transform-origin: center;
         }
 
-        .menu-btn .icon {
-            transition: opacity 0.3s ease;
-            display: block;
+        .hamburger-line:nth-child(2) {
+            transform-origin: center;
         }
 
-        .menu-btn .hamburger {
-            opacity: 1;
+        .hamburger-line:nth-child(3) {
+            transform-origin: center;
         }
 
-        .menu-btn .hamburger.hide {
+        /* X Animation */
+        #menu-toggle.active .hamburger-line:nth-child(1) {
+            transform: rotate(45deg) translate(6px, 6px);
+        }
+
+        #menu-toggle.active .hamburger-line:nth-child(2) {
             opacity: 0;
         }
 
-        .menu-btn .close {
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            opacity: 0;
-            transition: opacity 0.3s ease;
-            z-index: 1003; /* Higher than the button itself */
+        #menu-toggle.active .hamburger-line:nth-child(3) {
+            transform: rotate(-45deg) translate(6px, -6px);
         }
 
-        .menu-btn .close.show {
-            opacity: 1;
-        }
-
-        .logo {
-            height: 40px;
-            width: auto;
+        #logo {
+            height: 50px;
+            margin: 10px;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         /* Side Menu */
-        .side-menu {
+        #side-menu {
             position: fixed;
             top: 0;
             left: 0;
-            width: 280px;
+            width: 100%;
+            max-width: 350px;
             height: 100vh;
-            background: #111;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            padding-top: 90px;
             transform: translateX(-100%);
-            transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-            z-index: 1001;
+            transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            z-index: 999;
             overflow-y: auto;
-            -webkit-overflow-scrolling: touch;
+            box-shadow: 5px 0 25px rgba(0, 0, 0, 0.3);
         }
 
-        .side-menu.open {
+        #side-menu.open {
             transform: translateX(0);
         }
 
-        .menu-header {
-            padding: 2.5rem 1rem 1rem;
-            border-bottom: 1px solid #333;
-            font-weight: 600;
-            color: #FE6000;
-            font-size: 1.1rem;
-        }
-
-        .menu-item {
-            display: block;
-            padding: 1rem;
-            color: #e0e0e0;
-            text-decoration: none;
-            border-bottom: 1px solid #222;
-            transition: all 0.2s ease;
-        }
-
-        .menu-item:hover {
-            background: #222;
-            color: #FE6000;
-            padding-left: 1.5rem;
-        }
-
-        .menu-item:last-child {
-            border-bottom: none;
-        }
-
-        /* Bottom buffer for iOS Safari */
-        .menu-buffer {
-            height: 100px;
-            flex-shrink: 0;
-        }
-
-        /* Close button */
-        .menu-close {
-            position: absolute;
-            top: 10px;
-            right: 1rem;
-            background: none;
-            border: none;
-            color: #FE6000;
-            font-size: 1.5rem;
-            cursor: pointer;
-            padding: 0.5rem;
-            border-radius: 4px;
-            transition: background-color 0.2s ease;
-            z-index: 1005;
-        }
-
-        .menu-close:hover {
-            background-color: #333;
-        }
-
         /* Overlay */
-        .overlay {
+        #overlay {
             position: fixed;
             top: 0;
             left: 0;
-            width: 100vw;
-            height: 100vh;
-            background: rgba(0, 0, 0, 0.5);
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
             opacity: 0;
             visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 1000;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            z-index: 998;
         }
 
-        .overlay.show {
+        #overlay.show {
             opacity: 1;
             visibility: visible;
         }
 
+        /* Menu Items */
+        .menu-section {
+            margin-bottom: 2rem;
+        }
+
+        .menu-section-title {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #FE6000;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-bottom: 2px solid #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .menu-item {
+            display: block;
+            padding: 1rem 1.5rem;
+            color: #e0e0e0;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border-left: 3px solid transparent;
+            font-size: 0.95rem;
+        }
+
+        .menu-item:hover {
+            background: rgba(254, 96, 0, 0.1);
+            color: #FE6000;
+            border-left-color: #FE6000;
+            padding-left: 2rem;
+        }
+
         /* Main Content */
-        .main {
-            padding: 80px 1rem 2rem;
-            max-width: 700px;
+        main {
+            padding: 100px 2rem 2rem;
+            max-width: 800px;
             margin: 0 auto;
         }
 
-        .main h1 {
-            font-size: 2rem;
-            margin-bottom: 1rem;
+        h1 {
             color: #FE6000;
-        }
-
-        .main p {
+            font-size: 2.5rem;
             margin-bottom: 1rem;
-            font-size: 1.1rem;
+            text-align: center;
         }
 
-        /* Responsive */
-        @media (max-width: 480px) {
-            .side-menu {
-                width: 90vw;
+        p {
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            text-align: center;
+            opacity: 0.9;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            #side-menu {
                 max-width: 300px;
             }
             
-            .main {
-                padding: 80px 0.75rem 2rem;
+            main {
+                padding: 90px 1rem 1rem;
             }
             
-            .main h1 {
-                font-size: 1.75rem;
+            h1 {
+                font-size: 2rem;
             }
         }
 
-        /* Smooth scrolling for menu */
-        .side-menu::-webkit-scrollbar {
-            width: 4px;
+        /* Scrollbar Styling */
+        #side-menu::-webkit-scrollbar {
+            width: 6px;
         }
 
-        .side-menu::-webkit-scrollbar-track {
-            background: #111;
+        #side-menu::-webkit-scrollbar-track {
+            background: #1a1a1a;
         }
 
-        .side-menu::-webkit-scrollbar-thumb {
-            background: #333;
-            border-radius: 2px;
+        #side-menu::-webkit-scrollbar-thumb {
+            background: #FE6000;
+            border-radius: 3px;
         }
 
-        .side-menu::-webkit-scrollbar-thumb:hover {
-            background: #555;
+        #side-menu::-webkit-scrollbar-thumb:hover {
+            background: #ff7a2e;
         }
     </style>
 </head>
 <body>
-    <header class="header">
-        <button class="menu-btn" id="menuBtn" aria-label="Toggle menu">
-            <span class="icon hamburger">☰</span>
-            <span class="icon close">✕</span>
+    <nav>
+        <button id="menu-toggle" aria-label="Toggle Menu">
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
+            <div class="hamburger-line"></div>
         </button>
-        <img class="logo" src="/images/slice3d-mini.webp" alt="Pizza Emoji Logo">
-    </header>
-
-    <nav class="side-menu" id="sideMenu">
-        <div class="menu-header">Features</div>
-        <a href="https://pizzaemoji.net/blog/2025-06-15-mario-kart-world-review/" class="menu-item">
-            Mario Kart World Review
-        </a>
-        <a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/" class="menu-item">
-            Letterboxd—A Love Letter
-        </a>
-        <a href="https://pizzaemoji.net/blog/2025-02-04-a-brief-history-of-spider-man-in-cinema/" class="menu-item">
-            A Brief History of Spider-Man in Cinema
-        </a>
-        <a href="https://pizzaemoji.net/blog/2024-10-28-ios-the-apple-intelligence-update/" class="menu-item">
-            iOS 18.1: The Apple Intelligence Update
-        </a>
-        <a href="https://pizzaemoji.net/blog/2020-11-05-iphone-12-pro-pacific-blue-review/" class="menu-item">
-            iPhone 12 Pro Pacific Blue Review
-        </a>
-        <a href="https://pizzaemoji.net/blog/2020-07-25-the-last-of-us-part-ii-review/" class="menu-item">
-            The Last of Us Part II Review
-        </a>
-        <a href="https://pizzaemoji.net/blog/2020-06-17-splash-mountain/" class="menu-item">
-            Splash Mountain
-        </a>
-        <a href="https://pizzaemoji.net/blog/2019-09-01-the-blue-shell/" class="menu-item">
-            The Blue Shell—The Worst Item in Mario Kart
-        </a>
-        <a href="/blog/about/" class="menu-item">About</a>
-        <div class="menu-buffer"></div>
+        <img id="logo" src="/images/slice3d-mini.webp" alt="Pizza Emoji Logo">
     </nav>
 
-    <div class="overlay" id="overlay"></div>
+    <div id="side-menu">
+        <div class="menu-section">
+            <div class="menu-section-title">Featured Articles</div>
+            <a href="https://pizzaemoji.net/blog/2025-06-15-mario-kart-world-review/" class="menu-item">
+                Mario Kart World Review
+            </a>
+            <a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/" class="menu-item">
+                Letterboxd—A Love Letter
+            </a>
+            <a href="https://pizzaemoji.net/blog/2025-02-04-a-brief-history-of-spider-man-in-cinema/" class="menu-item">
+                A Brief History of Spider-Man in Cinema
+            </a>
+            <a href="https://pizzaemoji.net/blog/2024-10-28-ios-the-apple-intelligence-update/" class="menu-item">
+                iOS 18.1: The Apple Intelligence Update
+            </a>
+            <a href="https://pizzaemoji.net/blog/2020-11-05-iphone-12-pro-pacific-blue-review/" class="menu-item">
+                iPhone 12 Pro Pacific Blue Review
+            </a>
+            <a href="https://pizzaemoji.net/blog/2020-07-25-the-last-of-us-part-ii-review/" class="menu-item">
+                The Last of Us Part II Review
+            </a>
+            <a href="https://pizzaemoji.net/blog/2020-06-17-splash-mountain/" class="menu-item">
+                Splash Mountain
+            </a>
+            <a href="https://pizzaemoji.net/blog/2019-09-01-the-blue-shell/" class="menu-item">
+                The Blue Shell—The Worst Item in Mario Kart
+            </a>
+            <a href="/blog/about/" class="menu-item">About</a>
+        </div>
+    </div>
 
-    <main class="main">
+    <div id="overlay"></div>
+
+    <main>
         <h1>Welcome to Pizza Emoji</h1>
-        <p>This is the Pizza Emoji Blog.</p>
-        <p>Explore our featured articles using the menu above.</p>
+        <p>This is the Pizza Emoji Blog, featuring reviews, articles, and thoughts on technology, gaming, and entertainment.</p>
+        <p>Use the menu to explore our featured articles and discover something new.</p>
     </main>
 
     <script>
-        const menuBtn = document.getElementById('menuBtn');
-        const sideMenu = document.getElementById('sideMenu');
+        const menuToggle = document.getElementById('menu-toggle');
+        const sideMenu = document.getElementById('side-menu');
         const overlay = document.getElementById('overlay');
-        const hamburgerIcon = menuBtn.querySelector('.hamburger');
-        const closeIcon = menuBtn.querySelector('.close');
 
         function toggleMenu() {
             const isOpen = sideMenu.classList.contains('open');
@@ -292,27 +281,39 @@
                 // Close menu
                 sideMenu.classList.remove('open');
                 overlay.classList.remove('show');
+                menuToggle.classList.remove('active');
                 document.body.style.overflow = '';
-                // Show hamburger, hide X
-                hamburgerIcon.classList.remove('hide');
-                closeIcon.classList.remove('show');
             } else {
                 // Open menu
                 sideMenu.classList.add('open');
                 overlay.classList.add('show');
+                menuToggle.classList.add('active');
                 document.body.style.overflow = 'hidden';
-                // Hide hamburger, show X
-                hamburgerIcon.classList.add('hide');
-                closeIcon.classList.add('show');
             }
         }
 
-        menuBtn.addEventListener('click', toggleMenu);
+        // Event listeners
+        menuToggle.addEventListener('click', toggleMenu);
         overlay.addEventListener('click', toggleMenu);
+
+        // Close menu when clicking on menu items
+        const menuItems = document.querySelectorAll('.menu-item');
+        menuItems.forEach(item => {
+            item.addEventListener('click', () => {
+                setTimeout(toggleMenu, 100); // Small delay for better UX
+            });
+        });
 
         // Close menu on escape key
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
+                toggleMenu();
+            }
+        });
+
+        // Handle window resize
+        window.addEventListener('resize', () => {
+            if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
                 toggleMenu();
             }
         });

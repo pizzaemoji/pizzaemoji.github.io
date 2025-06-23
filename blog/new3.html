@@ -25,11 +25,11 @@
 			left: 0;
 			right: 0;
 			height: 70px;
-			background: rgba(25, 25, 25, 0.5);
-			backdrop-filter: blur(5px);
-			-webkit-backdrop-filter: blur(5px);
+			background: rgba(25, 25, 25, 0.7);
+			backdrop-filter: blur(10px);
+			-webkit-backdrop-filter: blur(10px);
 			display: flex;
-			justify-content: space-between;
+			justify-content: center;
 			align-items: center;
 			padding: 0 2rem;
 			border-bottom: 1px solid rgba(255, 255, 255, 0.1);
@@ -43,6 +43,8 @@
 		}
 
 		#menu-toggle {
+			position: absolute;
+			left: 2rem;
 			width: 40px;
 			height: 40px;
 			background: rgba(255, 255, 255, 0.05);
@@ -93,6 +95,12 @@
 		#logo {
 			height: 32px;
 			filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+		}
+
+		.brand-text {
+			font-size: 1.2rem;
+			font-weight: 600;
+			color: #e0e0e0;
 		}
 
 		/* Clean Side Menu */
@@ -218,6 +226,10 @@
 				padding: 0 1rem;
 			}
 			
+			.brand-text {
+				display: none;
+			}
+			
 			#side-menu {
 				max-width: 280px;
 			}
@@ -252,15 +264,13 @@
 </head>
 <body>
 	<nav>
-		<div class="nav-left">
-			<button id="menu-toggle" aria-label="Toggle Menu">
-				<div class="hamburger-line"></div>
-				<div class="hamburger-line"></div>
-				<div class="hamburger-line"></div>
-			</button>
-			<div class="logo-container">
-				<img id="logo" src="/images/slice3d-mini.webp" alt="Pizza Emoji Logo">
-			</div>
+		<button id="menu-toggle" aria-label="Toggle Menu">
+			<div class="hamburger-line"></div>
+			<div class="hamburger-line"></div>
+			<div class="hamburger-line"></div>
+		</button>
+		<div class="logo-container">
+			<img id="logo" src="/images/slice3d-mini.webp" alt="Pizza Emoji Logo">
 		</div>
 	</nav>
 

@@ -53,7 +53,7 @@ nav {
 /* Bounce hamburger once on page load */
 @keyframes menuBounce {
 	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-4px); }
+	50% { transform: translateY(-6px); }
 }
 #menu-toggle.bounce {
 	animation: menuBounce 0.9s ease forwards;

@@ -155,6 +155,8 @@
 		const sideMenu = document.getElementById('side-menu');
 		const overlay = document.getElementById('overlay');
 
+		const menuIntroShown = localStorage.getItem('menuIntroShown');
+
 		function toggleMenu() {
 			const isOpen = sideMenu.classList.contains('open');
 			

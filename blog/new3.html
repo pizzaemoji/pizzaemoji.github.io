@@ -6,305 +6,306 @@
     <title>Pizza Emoji Blog</title>
     <style>
         * {
-            box-sizing: border-box;
+	box-sizing: border-box;
         }
-
+	
         body {
-            margin: 0;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
-            background-color: #1a1a1a;
-            color: #e0e0e0;
-            line-height: 1.6;
-            min-height: 100vh;
+	margin: 0;
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", sans-serif;
+	background-color: #1a1a1a;
+	color: #e0e0e0;
+	line-height: 1.6;
+	min-height: 100vh;
         }
 
         /* Clean Navigation */
         nav {
-            position: fixed;
-            top: 0;
-            left: 0;
-            right: 0;
-            height: 70px;
-            background: linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(30, 30, 30, 0.9) 100%);
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0 2rem;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-            z-index: 1000;
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 70px;
+	background: linear-gradient(135deg, rgba(25, 25, 25, 0.9) 0%, rgba(30, 30, 30, 0.9) 100%);
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	padding: 0 2rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	z-index: 1000;
         }
 
         .nav-left {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
+	display: flex;
+	align-items: center;
+	gap: 1rem;
         }
 
         #menu-toggle {
-            width: 40px;
-            height: 40px;
-            background: rgba(255, 255, 255, 0.05);
-            border: none;
-            border-radius: 10px;
-            cursor: pointer;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            padding: 0;
-            z-index: 1001;
-            transition: all 0.3s ease;
+	width: 40px;
+	height: 40px;
+	background: rgba(255, 255, 255, 0.05);
+	border: none;
+	border-radius: 10px;
+	cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	padding: 0;
+	z-index: 1001;
+	transition: all 0.3s ease;
         }
 
         #menu-toggle:hover {
-            background: rgba(255, 255, 255, 0.08);
+	background: rgba(255, 255, 255, 0.08);
         }
 
         /* Hamburger Animation */
         .hamburger-line {
-            width: 18px;
-            height: 2px;
-            background-color: #FE6000;
-            margin: 2px 0;
-            transition: all 0.3s ease;
-            border-radius: 1px;
+	width: 18px;
+	height: 2px;
+	background-color: #FE6000;
+	margin: 2px 0;
+	transition: all 0.3s ease;
+	border-radius: 1px;
         }
 
         #menu-toggle.active .hamburger-line:nth-child(1) {
-            transform: rotate(45deg) translate(4px, 4px);
+	transform: rotate(45deg) translate(4px, 4px);
         }
 
         #menu-toggle.active .hamburger-line:nth-child(2) {
-            opacity: 0;
+	opacity: 0;
         }
 
         #menu-toggle.active .hamburger-line:nth-child(3) {
-            transform: rotate(-45deg) translate(4px, -4px);
+	transform: rotate(-45deg) translate(4px, -4px);
         }
 
         .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 0.75rem;
+	display: flex;
+	align-items: center;
+	gap: 0.75rem;
         }
 
         #logo {
-            height: 32px;
-            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+	height: 32px;
+	filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
         }
 
         .brand-text {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #e0e0e0;
+	font-size: 1.2rem;
+	font-weight: 600;
+	color: #e0e0e0;
         }
 
         /* Clean Side Menu */
         #side-menu {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            max-width: 320px;
-            height: 100vh;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(15px);
-            -webkit-backdrop-filter: blur(15px);
-            padding-top: 90px;
-            transform: translateX(-100%);
-            transition: all 0.4s ease;
-            z-index: 999;
-            overflow-y: auto;
-            border-right: 1px solid rgba(255, 255, 255, 0.1);
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	max-width: 320px;
+	height: 100vh;
+	background: rgba(255, 255, 255, 0.03);
+	backdrop-filter: blur(15px);
+	-webkit-backdrop-filter: blur(15px);
+	padding-top: 90px;
+ 		   padding-bottom: env(safe-area-inset-bottom, 100px);
+	transform: translateX(-100%);
+	transition: all 0.4s ease;
+	z-index: 999;
+	overflow-y: auto;
+	border-right: 1px solid rgba(255, 255, 255, 0.1);
         }
 
         #side-menu.open {
-            transform: translateX(0);
+	transform: translateX(0);
         }
 
         /* Simple Overlay */
         #overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
-            z-index: 998;
+	position: fixed;
+	top: 0;
+	left: 0;
+	width: 100%;
+	height: 100%;
+	background: rgba(0, 0, 0, 0.2);
+	opacity: 0;
+	visibility: hidden;
+	transition: all 0.3s ease;
+	z-index: 998;
         }
 
         #overlay.show {
-            opacity: 1;
-            visibility: visible;
+	opacity: 1;
+	visibility: visible;
         }
 
         /* Menu Sections */
         .menu-section {
-            margin-bottom: 2rem;
-            padding: 0 1rem;
+	margin-bottom: 2rem;
+	padding: 0 1rem;
         }
 
         .menu-section-title {
-            display: block;
-            padding: 1rem 1.5rem;
-            color: #FE6000;
-            font-weight: 600;
-            font-size: 1rem;
-            letter-spacing: 0.5px;
-            margin-bottom: 0.5rem;
-            background: rgba(254, 96, 0, 0.09);
-            border-radius: 10px;
-            border: 1px solid rgba(254, 96, 0, 0.1);
+	display: block;
+	padding: 1rem 1.5rem;
+	color: #FE6000;
+	font-weight: 600;
+	font-size: 1rem;
+	letter-spacing: 0.5px;
+	margin-bottom: 0.5rem;
+	background: rgba(254, 96, 0, 0.09);
+	border-radius: 10px;
+	border: 1px solid rgba(254, 96, 0, 0.1);
         }
 
         /* Clean Menu Items */
         .menu-item {
-            display: block;
-            padding: 0.8rem 1.5rem;
-            margin: 0.3rem 0;
-            color: #e0e0e0;
-            text-decoration: none;
-            transition: all 0.2s ease;
-            border-radius: 8px;
-            font-size: 0.95rem;
-            background: rgba(255, 255, 255, 0.08);
+	display: block;
+	padding: 0.8rem 1.5rem;
+	margin: 0.3rem 0;
+	color: #e0e0e0;
+	text-decoration: none;
+	transition: all 0.2s ease;
+	border-radius: 8px;
+	font-size: 0.95rem;
+	background: rgba(255, 255, 255, 0.08);
         }
 
         .menu-item:hover {
-            background: rgba(254, 96, 0, 0.1);
-            color: #FE6000;
-            transform: translateX(4px);
+	background: rgba(254, 96, 0, 0.1);
+	color: #FE6000;
+	transform: translateX(4px);
         }
 
         /* Main Content */
         main {
-            padding: 90px 2rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
+	padding: 90px 2rem 2rem;
+	max-width: 800px;
+	margin: 0 auto;
         }
 
         h1 {
-            color: #FE6000;
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            text-align: center;
+	color: #FE6000;
+	font-size: 2.5rem;
+	margin-bottom: 1rem;
+	text-align: center;
         }
 
         h3 {
-            color: #FE6000;
-            font-size: 1.4rem;
-            margin-bottom: 0.5rem;
+	color: #FE6000;
+	font-size: 1.4rem;
+	margin-bottom: 0.5rem;
         }
 
         p {
-            font-size: 1.1rem;
-            margin-bottom: 1.5rem;
-            opacity: 0.9;
+	font-size: 1.1rem;
+	margin-bottom: 1.5rem;
+	opacity: 0.9;
         }
 
         /* Glass Article Cards */
         article {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 12px;
-            padding: 2rem;
-            margin-bottom: 2rem;
-            backdrop-filter: blur(10px);
-            -webkit-backdrop-filter: blur(10px);
-            transition: all 0.2s ease;
+	background: rgba(255, 255, 255, 0.05);
+	border: 1px solid rgba(255, 255, 255, 0.1);
+	border-radius: 12px;
+	padding: 2rem;
+	margin-bottom: 2rem;
+	backdrop-filter: blur(10px);
+	-webkit-backdrop-filter: blur(10px);
+	transition: all 0.2s ease;
         }
 
 
 
         /* Responsive Design */
         @media (max-width: 768px) {
-            nav {
-                padding: 0 1rem;
-            }
-            
-            .brand-text {
-                display: none;
-            }
-            
-            #side-menu {
-                max-width: 280px;
-            }
-            
-            main {
-                padding: 80px 1rem 1rem;
-            }
-            
-            h1 {
-                font-size: 2rem;
-            }
+	nav {
+	    padding: 0 1rem;
+	}
+	
+	.brand-text {
+	    display: none;
+	}
+	
+	#side-menu {
+	    max-width: 280px;
+	}
+	
+	main {
+	    padding: 80px 1rem 1rem;
+	}
+	
+	h1 {
+	    font-size: 2rem;
+	}
         }
 
         /* Clean Scrollbar */
         #side-menu::-webkit-scrollbar {
-            width: 6px;
+	width: 6px;
         }
 
         #side-menu::-webkit-scrollbar-track {
-            background: rgba(0, 0, 0, 0.2);
+	background: rgba(0, 0, 0, 0.2);
         }
 
         #side-menu::-webkit-scrollbar-thumb {
-            background: rgba(254, 96, 0, 0.6);
-            border-radius: 3px;
+	background: rgba(254, 96, 0, 0.6);
+	border-radius: 3px;
         }
 
         #side-menu::-webkit-scrollbar-thumb:hover {
-            background: rgba(254, 96, 0, 0.8);
+	background: rgba(254, 96, 0, 0.8);
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-left">
-            <button id="menu-toggle" aria-label="Toggle Menu">
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-                <div class="hamburger-line"></div>
-            </button>
-            <div class="logo-container">
-                <img id="logo" src="/images/slice3d-mini.webp" alt="Pizza Emoji Logo">
-            </div>
+	<button id="menu-toggle" aria-label="Toggle Menu">
+	    <div class="hamburger-line"></div>
+	    <div class="hamburger-line"></div>
+	    <div class="hamburger-line"></div>
+	</button>
+	<div class="logo-container">
+	    <img id="logo" src="/images/slice3d-mini.webp" alt="Pizza Emoji Logo">
+	</div>
         </div>
     </nav>
 
     <div id="side-menu">
         <div class="menu-section">
-            <div class="menu-section-title">Featured Articles</div>
-            <a href="https://pizzaemoji.net/blog/2025-06-15-mario-kart-world-review/" class="menu-item">
-                Mario Kart World Review
-            </a>
-            <a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/" class="menu-item">
-                Letterboxd—A Love Letter
-            </a>
-            <a href="https://pizzaemoji.net/blog/2025-02-04-a-brief-history-of-spider-man-in-cinema/" class="menu-item">
-                A Brief History of Spider-Man in Cinema
-            </a>
-            <a href="https://pizzaemoji.net/blog/2024-10-28-ios-the-apple-intelligence-update/" class="menu-item">
-                iOS 18.1: The Apple Intelligence Update
-            </a>
-            <a href="https://pizzaemoji.net/blog/2020-11-05-iphone-12-pro-pacific-blue-review/" class="menu-item">
-                iPhone 12 Pro Pacific Blue Review
-            </a>
-            <a href="https://pizzaemoji.net/blog/2020-07-25-the-last-of-us-part-ii-review/" class="menu-item">
-                The Last of Us Part II Review
-            </a>
-            <a href="https://pizzaemoji.net/blog/2020-06-17-splash-mountain/" class="menu-item">
-                Splash Mountain
-            </a>
-            <a href="https://pizzaemoji.net/blog/2019-09-01-the-blue-shell/" class="menu-item">
-                The Blue Shell—The Worst Item in Mario Kart
-            </a>
-            <a href="/blog/about/" class="menu-item">About</a>
+	<div class="menu-section-title">Featured Articles</div>
+	<a href="https://pizzaemoji.net/blog/2025-06-15-mario-kart-world-review/" class="menu-item">
+	    Mario Kart World Review
+	</a>
+	<a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/" class="menu-item">
+	    Letterboxd—A Love Letter
+	</a>
+	<a href="https://pizzaemoji.net/blog/2025-02-04-a-brief-history-of-spider-man-in-cinema/" class="menu-item">
+	    A Brief History of Spider-Man in Cinema
+	</a>
+	<a href="https://pizzaemoji.net/blog/2024-10-28-ios-the-apple-intelligence-update/" class="menu-item">
+	    iOS 18.1: The Apple Intelligence Update
+	</a>
+	<a href="https://pizzaemoji.net/blog/2020-11-05-iphone-12-pro-pacific-blue-review/" class="menu-item">
+	    iPhone 12 Pro Pacific Blue Review
+	</a>
+	<a href="https://pizzaemoji.net/blog/2020-07-25-the-last-of-us-part-ii-review/" class="menu-item">
+	    The Last of Us Part II Review
+	</a>
+	<a href="https://pizzaemoji.net/blog/2020-06-17-splash-mountain/" class="menu-item">
+	    Splash Mountain
+	</a>
+	<a href="https://pizzaemoji.net/blog/2019-09-01-the-blue-shell/" class="menu-item">
+	    The Blue Shell—The Worst Item in Mario Kart
+	</a>
+	<a href="/blog/about/" class="menu-item">About</a>
         </div>
     </div>
 
@@ -312,27 +313,27 @@
 
     <main>
         <article>
-            <h3>Apple</h3>
-            <p>Apple Inc. is one of the most influential technology companies in the world, known for shaping the personal computing, smartphone, and digital media industries. Founded in 1976 by Steve Jobs, Steve Wozniak, and Ronald Wayne, Apple began with the Apple I computer and later revolutionized the tech world with products like the Macintosh, iPod, iPhone, and iPad. Its emphasis on minimalist design, seamless hardware-software integration, and intuitive user interfaces has earned it a loyal customer base and set industry standards. Over time, Apple has expanded into services like iCloud, Apple Music, and the App Store, steadily building an ecosystem that locks users into its platforms.
+	<h3>Apple</h3>
+	<p>Apple Inc. is one of the most influential technology companies in the world, known for shaping the personal computing, smartphone, and digital media industries. Founded in 1976 by Steve Jobs, Steve Wozniak, and Ronald Wayne, Apple began with the Apple I computer and later revolutionized the tech world with products like the Macintosh, iPod, iPhone, and iPad. Its emphasis on minimalist design, seamless hardware-software integration, and intuitive user interfaces has earned it a loyal customer base and set industry standards. Over time, Apple has expanded into services like iCloud, Apple Music, and the App Store, steadily building an ecosystem that locks users into its platforms.
 
 In recent years, Apple has shifted focus toward privacy, health, and sustainability. Features like on-device processing for Siri and Mail, end-to-end encryption, and tools for managing screen time showcase its emphasis on user control and privacy. With hardware like the Apple Watch increasingly geared toward fitness and health tracking—and partnerships in the medical field—Apple is positioning itself as more than just a tech company, but a personal lifestyle brand. Meanwhile, it continues to invest heavily in custom silicon, with its M-series chips now defining the Mac lineup and giving it independence from Intel.</p>
         </article>
 	   <article>
-            <h3>Spider-Man</h3>
-            <p>Spider-Man does what a spider can.</p>
+	<h3>Spider-Man</h3>
+	<p>Spider-Man does what a spider can.</p>
         </article>
-                <article>
-            <h3>Disneyland</h3>
-            <p>Disney, founded by Walt and Roy O. Disney in 1923, has evolved from a modest animation studio into one of the world’s most powerful media empires. What began with short films like Steamboat Willie grew into a massive brand encompassing film, television, theme parks, and merchandise. Disney’s early success came from pushing animation as a serious art form, with Snow White and the Seven Dwarfs (1937) proving that animated features could be commercially and critically successful.
+	    <article>
+	<h3>Disneyland</h3>
+	<p>Disney, founded by Walt and Roy O. Disney in 1923, has evolved from a modest animation studio into one of the world’s most powerful media empires. What began with short films like Steamboat Willie grew into a massive brand encompassing film, television, theme parks, and merchandise. Disney’s early success came from pushing animation as a serious art form, with Snow White and the Seven Dwarfs (1937) proving that animated features could be commercially and critically successful.
 <p>
 Over the decades, Disney expanded aggressively. Acquisitions of Pixar, Marvel, Lucasfilm, and 21st Century Fox brought massive intellectual property under its control, reshaping the entertainment landscape. This strategy turned Disney into a dominant force not only in family entertainment but across pop culture broadly. Disney+ became a major player in the streaming wars, leveraging nostalgia and exclusive IP like The Mandalorian and WandaVision to compete with Netflix and Amazon.
 <p>
 Despite its dominance, Disney has faced criticism for homogenizing entertainment, aggressively protecting its copyrights, and diluting creative risk in favor of guaranteed returns. Still, the brand’s ability to evolve—from traditional animation to 3D, from cinema to streaming, and from U.S.-centric to global—is a key reason it remains central to the global entertainment industry. Its influence on childhood culture, media consolidation, and theme park innovation is undeniable.</p>
         </article>
         <article>
-            <h3>Welcome to Pizza Emoji</h3>
-            <p>This is the first post of the blog. More to follow!</p>
-            <p>You can also check the side menu for featured articles and other unique content. Thanks for reading!</p>
+	<h3>Welcome to Pizza Emoji</h3>
+	<p>This is the first post of the blog. More to follow!</p>
+	<p>You can also check the side menu for featured articles and other unique content. Thanks for reading!</p>
         </article>
     </main>
 
@@ -342,19 +343,19 @@ Despite its dominance, Disney has faced criticism for homogenizing entertainment
         const overlay = document.getElementById('overlay');
 
         function toggleMenu() {
-            const isOpen = sideMenu.classList.contains('open');
-            
-            if (isOpen) {
-                sideMenu.classList.remove('open');
-                overlay.classList.remove('show');
-                menuToggle.classList.remove('active');
-                document.body.style.overflow = '';
-            } else {
-                sideMenu.classList.add('open');
-                overlay.classList.add('show');
-                menuToggle.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
+	const isOpen = sideMenu.classList.contains('open');
+	
+	if (isOpen) {
+	    sideMenu.classList.remove('open');
+	    overlay.classList.remove('show');
+	    menuToggle.classList.remove('active');
+	    document.body.style.overflow = '';
+	} else {
+	    sideMenu.classList.add('open');
+	    overlay.classList.add('show');
+	    menuToggle.classList.add('active');
+	    document.body.style.overflow = 'hidden';
+	}
         }
 
         menuToggle.addEventListener('click', toggleMenu);
@@ -362,21 +363,21 @@ Despite its dominance, Disney has faced criticism for homogenizing entertainment
 
         const menuItems = document.querySelectorAll('.menu-item');
         menuItems.forEach(item => {
-            item.addEventListener('click', () => {
-                setTimeout(toggleMenu, 100);
-            });
+	item.addEventListener('click', () => {
+	    setTimeout(toggleMenu, 100);
+	});
         });
 
         document.addEventListener('keydown', (e) => {
-            if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
-                toggleMenu();
-            }
+	if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
+	    toggleMenu();
+	}
         });
 
         window.addEventListener('resize', () => {
-            if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
-                toggleMenu();
-            }
+	if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
+	    toggleMenu();
+	}
         });
     </script>
 </body>

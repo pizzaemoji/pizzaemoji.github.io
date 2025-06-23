@@ -173,17 +173,22 @@ function toggleMenu() {
 
 // Clean cartoon bounce sequence with spin
 function triggerCartoonBounce() {
-	// Remove any existing animation class
-	menuToggle.classList.remove('bounce-and-spin');
+	// Remove any existing animation classes
+	menuToggle.classList.remove('bounce-and-spin', 'elevated', 'lines-fall');
 	
-	// Trigger the bounce and spin sequence
+	// Phase 1: Bounce and spin (0.6s)
 	menuToggle.classList.add('bounce-and-spin');
 	
-	// Remove class after complete animation sequence
-	// Total time: 0.6s bounce+spin + 0.3s safety + 0.9s falls = 1.8s
+	// Phase 2: After bounce+spin completes, keep elevated and start line falls
 	setTimeout(() => {
 		menuToggle.classList.remove('bounce-and-spin');
-	}, 1800);
+		menuToggle.classList.add('elevated', 'lines-fall');
+	}, 600); // 0.6s - right when bounce+spin ends
+	
+	// Phase 3: Clean up after all line falls complete
+	setTimeout(() => {
+		menuToggle.classList.remove('elevated', 'lines-fall');
+	}, 1800); // 0.6s bounce+spin + 1.2s line falls = 1.8s total
 }
 
 // Hamburger bounce for first-time visitors (desktop only)

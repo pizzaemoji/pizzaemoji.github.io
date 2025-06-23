@@ -85,6 +85,8 @@ nav {
 	animation: bounceAndSpin 0.6s ease-out forwards; /* 0.3s bounce + 0.3s spin */
 }
 
+/* Remove the cheat - no longer needed */
+
 /* Apply individual line falls after safety pause */
 /* Lines fall in DOM order (3,2,1) which appears as bottom-to-top after cheat */
 #menu-toggle.bounce-and-flip .hamburger-line:nth-child(3) {

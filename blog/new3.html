@@ -35,13 +35,13 @@ nav {
 	display: flex;
 	justify-content: center;
 	align-items: center;
-	padding: 0 2rem;
+	padding: 0 1rem;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 	z-index: 1000;
 }
 #menu-toggle {
 	position: absolute;
-	left: 2rem;
+	left: .5rem;
 	width: 40px;
 	height: 40px;
 	border: none;
@@ -54,7 +54,7 @@ nav {
 	padding: 0;
 	z-index: 1001;
 	transition: all 0.3s ease;
-	background: inherit;
+	background: rgba(0, 0, 0, 0.0);
 }
 /* Hamburger Animation */
 .hamburger-line {
@@ -81,7 +81,7 @@ nav {
 	margin: 10px;
 }
 #logo {
-	height: 48px;
+	height: 32px;
 }
 /* Side Menu */
 #side-menu {
@@ -89,7 +89,7 @@ nav {
 	top: 0;
 	left: 0;
 	width: 100%;
-	max-width: 360px;
+	max-width: 280px;
 	height: 100vh;
 	background: rgba(255, 255, 255, 0.02);
 	backdrop-filter: blur(10px);
@@ -272,41 +272,31 @@ footer {
 	padding-top: 1rem;
 	padding-bottom: 1rem;
 }
-
-/* Mobile */
-@media (max-width: 768px) {
+/* Desktop */
+@media (min-width: 800px) {
 	nav {
-padding: 0 1rem;
 	}
-	
 	#menu-toggle {
-left: .5rem;
+	left: 2rem;
 	}
-	
 	#side-menu {
-max-width: 280px;
+	max-width: 380px;	
 	}
-	
 	#logo {
-	height: 24px;
+	height: 44px;
 	}
-	
 }
-
 /* Clean Scrollbar */
 #side-menu::-webkit-scrollbar {
 	width: 6px;
 }
-
 #side-menu::-webkit-scrollbar-track {
 	background: rgba(0, 0, 0, 0.2);
 }
-
 #side-menu::-webkit-scrollbar-thumb {
 	background: rgba(254, 96, 0, 0.6);
 	border-radius: 3px;
 }
-
 #side-menu::-webkit-scrollbar-thumb:hover {
 	background: rgba(254, 96, 0, 0.8);
 }

@@ -50,43 +50,40 @@ nav {
 #menu-toggle.active .hamburger-line:nth-child(3) {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
-/* Initial bounce animation */
-@keyframes menuBounce {
-	0%, 100% { transform: translateY(0); }
-	50% { transform: translateY(-6px); }
-}
 /* Staggered falling animation - cartoon physics style */
 @keyframes fallBottom {
-	0% { transform: translateY(0); }
-	100% { transform: translateY(20px); opacity: 0.3; }
+	0% { transform: translateY(0); opacity: 1; }
+	100% { transform: translateY(12px); opacity: 0.2; }
 }
 @keyframes fallMiddle {
-	0% { transform: translateY(0); }
-	100% { transform: translateY(20px); opacity: 0.3; }
+	0% { transform: translateY(0); opacity: 1; }
+	100% { transform: translateY(12px); opacity: 0.2; }
 }
 @keyframes fallTop {
+	0% { transform: translateY(0); opacity: 1; }
+	100% { transform: translateY(12px); opacity: 0.2; }
+}
+/* Cartoon bounce and fall sequence */
+@keyframes bounceAndFloat {
 	0% { transform: translateY(0); }
-	100% { transform: translateY(20px); opacity: 0.3; }
+	10% { transform: translateY(-8px); }
+	50% { transform: translateY(-8px); }
+	60% { transform: translateY(-8px); }
+	90% { transform: translateY(-8px); }
+	100% { transform: translateY(0); }
 }
-#menu-toggle.bounce {
-	animation: menuBounce 0.9s ease forwards;
+#menu-toggle.cartoon-bounce {
+	animation: bounceAndFloat 3.6s ease-in-out;
 }
-/* Cartoon fall sequence - add this class to trigger the effect */
-#menu-toggle.cartoon-fall .hamburger-line:nth-child(3) {
-	animation: fallBottom 0.6s ease-in 0s forwards;
+/* Lines fall while hamburger is bouncing */
+#menu-toggle.cartoon-bounce .hamburger-line:nth-child(3) {
+	animation: fallBottom 0.4s ease-in 0.4s forwards, fallBottom 0.4s ease-in 2.2s forwards;
 }
-#menu-toggle.cartoon-fall .hamburger-line:nth-child(2) {
-	animation: fallMiddle 0.6s ease-in 0.15s forwards;
+#menu-toggle.cartoon-bounce .hamburger-line:nth-child(2) {
+	animation: fallMiddle 0.4s ease-in 0.5s forwards, fallMiddle 0.4s ease-in 2.3s forwards;
 }
-#menu-toggle.cartoon-fall .hamburger-line:nth-child(1) {
-	animation: fallTop 0.6s ease-in 0.3s forwards;
-}
-/* Reset animation - add this class to bring lines back */
-#menu-toggle.reset-fall .hamburger-line {
-	animation: none;
-	transform: translateY(0);
-	opacity: 1;
-	transition: all 0.3s ease;
+#menu-toggle.cartoon-bounce .hamburger-line:nth-child(1) {
+	animation: fallTop 0.4s ease-in 0.6s forwards, fallTop 0.4s ease-in 2.4s forwards;
 }
 /* Logo */
 .logo-container {

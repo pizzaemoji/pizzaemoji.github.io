@@ -171,24 +171,18 @@ function toggleMenu() {
 	}
 }
 
-// Cartoon fall animation function
-function triggerCartoonFall() {
+// Cartoon physics bounce and fall sequence
+function triggerCartoonBounce() {
 	// Remove any existing classes first
-	menuToggle.classList.remove('cartoon-fall', 'reset-fall');
+	menuToggle.classList.remove('cartoon-bounce');
 	
-	// Add the cartoon fall effect
-	menuToggle.classList.add('cartoon-fall');
+	// Start the bounce and fall sequence
+	menuToggle.classList.add('cartoon-bounce');
 	
-	// Reset after animation completes (total time: 0.3s delay + 0.6s animation = 0.9s)
+	// Remove class after the full sequence completes
 	setTimeout(() => {
-		menuToggle.classList.remove('cartoon-fall');
-		menuToggle.classList.add('reset-fall');
-		
-		// Remove reset class after transition
-		setTimeout(() => {
-			menuToggle.classList.remove('reset-fall');
-		}, 300);
-	}, 1000);
+		menuToggle.classList.remove('cartoon-bounce');
+	}, 3800);
 }
 
 // Hamburger bounce for first-time visitors (desktop only)
@@ -199,26 +193,10 @@ document.addEventListener('DOMContentLoaded', () => {
 	if (!menuIntroShown && window.innerWidth >= 800) {
 		localStorage.setItem('menuIntroShown', 'true');
 		
-		// First bounce after small delay
+		// First bounce with cartoon fall sequence
 		setTimeout(() => {
-			menuToggle.classList.add('bounce');
-			setTimeout(() => {
-				menuToggle.classList.remove('bounce');
-			}, 800);
+			triggerCartoonBounce();
 		}, 1000);
-		
-		// Second bounce
-		setTimeout(() => {
-			menuToggle.classList.add('bounce');
-			setTimeout(() => {
-				menuToggle.classList.remove('bounce');
-				
-				// Trigger cartoon fall after second bounce
-				setTimeout(() => {
-					triggerCartoonFall();
-				}, 500);
-			}, 800);
-		}, 2000); // 1 second after first bounce ends
 	}
 });
 
@@ -244,10 +222,10 @@ window.addEventListener('resize', () => {
 	}
 });
 
-// Optional: Add cartoon fall on hover for fun
+// Optional: Add cartoon bounce sequence on hover for fun (uncomment if you want this)
 // menuToggle.addEventListener('mouseenter', () => {
 // 	if (!sideMenu.classList.contains('open')) {
-// 		triggerCartoonFall();
+// 		triggerCartoonBounce();
 // 	}
 // });
 	</script>

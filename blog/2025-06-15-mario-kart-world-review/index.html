@@ -171,6 +171,26 @@ function toggleMenu() {
 	}
 }
 
+// Cartoon fall animation function
+function triggerCartoonFall() {
+	// Remove any existing classes first
+	menuToggle.classList.remove('cartoon-fall', 'reset-fall');
+	
+	// Add the cartoon fall effect
+	menuToggle.classList.add('cartoon-fall');
+	
+	// Reset after animation completes (total time: 0.3s delay + 0.6s animation = 0.9s)
+	setTimeout(() => {
+		menuToggle.classList.remove('cartoon-fall');
+		menuToggle.classList.add('reset-fall');
+		
+		// Remove reset class after transition
+		setTimeout(() => {
+			menuToggle.classList.remove('reset-fall');
+		}, 300);
+	}, 1000);
+}
+
 // Hamburger bounce for first-time visitors (desktop only)
 document.addEventListener('DOMContentLoaded', () => {
 	const menuIntroShown = localStorage.getItem('menuIntroShown');
@@ -192,6 +212,11 @@ document.addEventListener('DOMContentLoaded', () => {
 			menuToggle.classList.add('bounce');
 			setTimeout(() => {
 				menuToggle.classList.remove('bounce');
+				
+				// Trigger cartoon fall after second bounce
+				setTimeout(() => {
+					triggerCartoonFall();
+				}, 500);
 			}, 800);
 		}, 2000); // 1 second after first bounce ends
 	}
@@ -218,6 +243,13 @@ window.addEventListener('resize', () => {
 		toggleMenu();
 	}
 });
+
+// Optional: Add cartoon fall on hover for fun
+// menuToggle.addEventListener('mouseenter', () => {
+// 	if (!sideMenu.classList.contains('open')) {
+// 		triggerCartoonFall();
+// 	}
+// });
 	</script>
 </body>
 </html>

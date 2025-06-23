@@ -37,14 +37,22 @@
 	}
 
 	/* Slide-out menu */
+/* Too many bounces
 @keyframes slideBounce {
 	0%    { transform: translateX(-100%); }
-	30%   { transform: translateX(20%); }   /* OUT - big */
-	50%   { transform: translateX(-10%); }  /* BACK - medium */
-	65%   { transform: translateX(8%); }    /* OUT2 - smaller */
-	80%   { transform: translateX(-4%); }   /* BACK2 - smaller */
-	90%   { transform: translateX(2%); }    /* OUT3 - tiny */
-	100%  { transform: translateX(0); }     /* REST - settled */
+	30%   { transform: translateX(20%); }
+	50%   { transform: translateX(-10%); }
+	65%   { transform: translateX(8%); }
+	80%   { transform: translateX(-4%); }
+	90%   { transform: translateX(2%); }
+	100%  { transform: translateX(0); }
+}
+*/
+@keyframes slideBounce {
+	0%   { transform: translateX(-100%); }
+	60%  { transform: translateX(5%); }   /* slight overshoot */
+	75%  { transform: translateX(-3%); }  /* tiny recoil */
+	100% { transform: translateX(0); }    /* settle in place */
 }
 #side-menu {
 	position: fixed;

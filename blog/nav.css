@@ -55,11 +55,11 @@ nav {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
 
-/* Combined bounce up and visual flip animation */
-@keyframes bounceAndFlip {
+/* Combined bounce up and full spin animation */
+@keyframes bounceAndSpin {
 	0% { transform: translateY(0) rotate(0deg); }           /* Start at normal position */
 	50% { transform: translateY(-10px) rotate(0deg); }      /* Peak of bounce, no rotation yet */
-	100% { transform: translateY(-10px) rotate(180deg); }   /* Stay elevated, complete 180deg rotation */
+	100% { transform: translateY(-10px) rotate(360deg); }   /* Stay elevated, complete full spin */
 }
 
 /* Bottom line falls 10px from elevated position */
@@ -80,15 +80,9 @@ nav {
 	100% { transform: translateY(10px); } /* Fall 10px down */
 }
 
-/* Apply combined bounce and flip animation to entire hamburger */
-#menu-toggle.bounce-and-flip {
-	animation: bounceAndFlip 0.6s ease-out forwards; /* 0.3s bounce + 0.3s rotate */
-}
-
-/* The cheat - instant counter-rotation (applied via JS at 0.6s) */
-#menu-toggle.flipped {
-	animation: none; /* Kill the bounceAndFlip animation */
-	transform: translateY(-10px) rotate(180deg); /* Instant counter-flip */
+/* Apply combined bounce and spin animation to entire hamburger */
+#menu-toggle.bounce-and-spin {
+	animation: bounceAndSpin 0.6s ease-out forwards; /* 0.3s bounce + 0.3s spin */
 }
 
 /* Apply individual line falls after safety pause */

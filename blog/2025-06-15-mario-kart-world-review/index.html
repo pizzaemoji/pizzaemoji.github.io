@@ -171,23 +171,18 @@ function toggleMenu() {
 	}
 }
 
-// Clean cartoon bounce sequence with flip
+// Clean cartoon bounce sequence with spin
 function triggerCartoonBounce() {
-	// Remove any existing animation classes
-	menuToggle.classList.remove('bounce-and-flip', 'flipped');
+	// Remove any existing animation class
+	menuToggle.classList.remove('bounce-and-spin');
 	
-	// Trigger the bounce and flip sequence
-	menuToggle.classList.add('bounce-and-flip');
+	// Trigger the bounce and spin sequence
+	menuToggle.classList.add('bounce-and-spin');
 	
-	// Apply the "cheat" counter-rotation at exactly 0.6s (when visual flip completes)
+	// Remove class after complete animation sequence
+	// Total time: 0.6s bounce+spin + 0.3s safety + 0.9s falls = 1.8s
 	setTimeout(() => {
-		menuToggle.classList.add('flipped');
-	}, 600); // 0.6 seconds
-	
-	// Remove all classes after complete animation sequence
-	// Total time: 0.6s bounce+flip + 0.3s safety + 0.9s falls = 1.8s
-	setTimeout(() => {
-		menuToggle.classList.remove('bounce-and-flip', 'flipped');
+		menuToggle.classList.remove('bounce-and-spin');
 	}, 1800);
 }
 

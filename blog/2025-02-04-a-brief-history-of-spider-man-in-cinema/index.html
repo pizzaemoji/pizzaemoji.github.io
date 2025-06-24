@@ -30,7 +30,7 @@
 </head>
 <body>
 	<nav>
-		<button id="menu-toggle" aria-label="Toggle Menu">
+		<button id="menu-toggle">
 			<div class="hamburger-line"></div>
 			<div class="hamburger-line"></div>
 			<div class="hamburger-line"></div>
@@ -41,7 +41,7 @@
 			alt="The Pizza Emoji logo" id="logo" />
 		</div>
 	</nav>
-	<div id="side-menu" role="dialog" aria-modal="true" aria-label="Site Navigation">
+	<div id="side-menu">
 		<div class="menu-section">
 			<a href="/blog/" class="menu-item">Blogging</a>
 			<div class="menu-section-title">Lastest Article</div>
@@ -437,13 +437,11 @@ const menuToggle = document.getElementById('menu-toggle');
 const sideMenu = document.getElementById('side-menu');
 const overlay = document.getElementById('overlay');
 
-// Variables to track menu state and accessibility
-let lastFocused; // Stores the element that had focus before menu opened
+// Variables to track menu state
 let animationShown = false; // Prevents animation from running multiple times
-let focusableElements = []; // Array of focusable elements within the menu
 
  // Toggles the side menu open/closed state
- // Handles all visual states, focus management, and accessibility
+ // Handles all visual states
 function toggleMenu() {
 	// Check if menu is currently open by looking for 'open' class
 	const isOpen = sideMenu.classList.contains('open');
@@ -454,60 +452,15 @@ function toggleMenu() {
 		overlay.classList.remove('show');
 		menuToggle.classList.remove('active');
 		document.body.style.overflow = ''; // Restore page scrolling
-		
-		// Remove focus trap event listener
-		document.removeEventListener('keydown', trapFocus);
-		
-		// Return focus to the element that was focused before menu opened
-		if (lastFocused) {
-			lastFocused.focus();
-		}
 	} else {
-		// Remember what element had focus before opening menu
-		lastFocused = document.activeElement;
-		
 		// Open the menu
 		sideMenu.classList.add('open');
 		overlay.classList.add('show');
 		menuToggle.classList.add('active');
 		document.body.style.overflow = 'hidden'; // Prevent page scrolling
-		
-		// Find all focusable elements within the menu for accessibility
-		focusableElements = sideMenu.querySelectorAll('a, button, [tabindex="0"]');
-		
-		// Focus the first focusable element in the menu
-		if (focusableElements.length > 0) {
-			focusableElements[0].focus();
-		}
-		
-		// Add focus trap to keep tab navigation within the menu
-		document.addEventListener('keydown', trapFocus);
 	}
 }
 
- // Traps focus within the side menu when it's open
- // Ensures tab navigation stays within the menu for accessibility
-function trapFocus(e) {
-	// Only handle Tab key presses
-	if (e.key !== 'Tab') return;
-	
-	const firstElement = focusableElements[0];
-	const lastElement = focusableElements[focusableElements.length - 1];
-	
-	if (e.shiftKey) {
-		// Shift+Tab: moving backwards through elements
-		if (document.activeElement === firstElement) {
-			e.preventDefault();
-			lastElement.focus(); // Wrap to last element
-		}
-	} else {
-		// Tab: moving forwards through elements
-		if (document.activeElement === lastElement) {
-			e.preventDefault();
-			firstElement.focus(); // Wrap to first element
-		}
-	}
-}
 
  // Adds a cartoon bounce animation to the menu toggle button
  // Animation lasts for 3 seconds
@@ -559,7 +512,7 @@ document.addEventListener('keydown', (e) => {
 
 // Close menu automatically when screen becomes wide enough (responsive behavior)
 window.addEventListener('resize', () => {
-	// Close menu if screen becomes wider than 768px (tablet/desktop view)
+	// Close menu if screen becomes wider than 800 (tablet/desktop view)
 	if (window.innerWidth > 800 && sideMenu.classList.contains('open')) {
 		toggleMenu();
 	}

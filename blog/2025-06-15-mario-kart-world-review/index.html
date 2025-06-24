@@ -172,16 +172,14 @@ function toggleMenu() {
 }
 
 function triggerCartoonBounce() {
-    menuToggle.classList.remove('bounceAndSpin');
-    menuToggle.offsetHeight; // Force reflow
-    menuToggle.classList.add('bounceAndSpin');
+    menuToggle.classList.add('menuDance');
     
     setTimeout(() => {
-        menuToggle.classList.remove('bounceAndSpin');
-    }, 2000);
+        menuToggle.classList.remove('menuDance');
+    }, 3000);
 }
 
-// Hamburger bounce for first-time visitors (desktop only)
+// Menu dance for first-time visitors (desktop only)
 document.addEventListener('DOMContentLoaded', () => {
 	localStorage.removeItem('menuIntroShown'); // **ONLY USED FOR TESTING**
 	const menuIntroShown = localStorage.getItem('menuIntroShown');

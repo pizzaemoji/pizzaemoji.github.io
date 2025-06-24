@@ -51,19 +51,26 @@ nav {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
 /* Keyframes for cartoonBounce animation */
-@keyframes bounceAndSpin {
+@keyframes bounceTwice {
+    0% { transform: translateY(0); } /* Start at 0 */
+    12% { transform: translateY(-12px); } /* Bounce up */
+	24% { transform: translateY(-12px); } /* Hold */
+    36% { transform: translateY(0); } /* Bounce down */
+    48% { transform: translateY(0); } /* Hold */
+	60% { transform: translateY(-12px); } /* Repeat */
+    72% { transform: translateY(-12px); }
+    84% { transform: translateY(0); }
+    100% { transform: translateY(0); } 
+}
+	@keyframes bounceAndSpin {
     0% { transform: translateY(0) rotate(0deg); }
-    15% { transform: translateY(-12px) rotate(0deg); } /* Bounce 12px up */
-	30% { transform: translateY(0) rotate(0deg); }
-    45% { transform: translateY(-12px) rotate(0deg); }
-    60% { transform: translateY(0) rotate(0deg); }
-    75% { transform: translateY(-12px) rotate(0deg); }    
-    100% { transform: translateY(-12px) rotate(360deg); } /* Spin */
+    50% { transform: translateY(-12px) rotate(0deg); } /* Bounce */
+    100% { transform: translateY(-12px) rotate(360deg); } /* Spin at peak */
 }
 /* Bottom line falls from elevated position */
 @keyframes bottomFall {
 	0% { transform: translateY(0); }      /* Start at relative bounce position */
-	100% { transform: translateY(12px); } /* Fall 12px down */
+	100% { transform: translateY(12px); } /* Fall down */
 }
 /* Middle line falls from elevated position */
 @keyframes middleFall {
@@ -78,7 +85,7 @@ nav {
 /* Apply bounce and spin animations */
 /* Animation triggers via JS on first page load */
 #menu-toggle.cartoonBounce {
-	animation: bounceAndSpin 3.5s ease-out forwards;
+	animation: bounceTwice 2s ease-out forwards, bounceAndSpin 1.5s ease-out forwards;
 }
 /* Lines fall in DOM order (3,2,1) which appears as bottom-to-top */
 #menu-toggle.cartoonBounce .hamburger-line:nth-child(3) {

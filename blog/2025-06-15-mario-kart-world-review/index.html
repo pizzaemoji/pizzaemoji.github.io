@@ -183,6 +183,7 @@ function triggerCartoonBounce() {
 
 // Hamburger bounce for first-time visitors (desktop only)
 document.addEventListener('DOMContentLoaded', () => {
+	localStorage.removeItem('menuIntroShown'); // **ONLY USED FOR TESTING**
 	const menuIntroShown = localStorage.getItem('menuIntroShown');
 	
 	// Only bounce on desktop (800px+) for first-time visitors

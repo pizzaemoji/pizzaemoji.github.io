@@ -32,7 +32,6 @@ nav {
 	transition: all 0.3s ease;
 	background: rgba(0, 0, 0, 0.0);
 }
-
 /* Hamburger into X Animation */
 .hamburger-line {
 	width: 18px;
@@ -42,56 +41,38 @@ nav {
 	transition: all 0.3s ease;
 	border-radius: 1px;
 }
-
 #menu-toggle.active .hamburger-line:nth-child(1) {
 	transform: rotate(45deg) translate(4px, 4px);
 }
-
 #menu-toggle.active .hamburger-line:nth-child(2) {
 	opacity: 0;
 }
-
 #menu-toggle.active .hamburger-line:nth-child(3) {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
-
-/*
-@keyframes bounceUp {
-    0% { transform: translateY(0); }
-    100% { transform: translateY(-10px); }
-}
-
-@keyframes spinAround {
-    0% { transform: rotate(0deg); }
-    100% { transform: rotate(360deg); }	
-}
-*/
-
+/* Keyframes for cartoonBounce animation */
 @keyframes bounceAndSpin {
     0% { transform: translateY(0) rotate(0deg); }
     50% { transform: translateY(-10px) rotate(0deg); }
     100% { transform: translateY(-10px) rotate(360deg); }
 }
-	
 /* Bottom line falls 10px from elevated position */
 @keyframes bottomFall {
-	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */
+	0% { transform: translateY(0); }      /* Start at relative bounce position */
 	100% { transform: translateY(10px); } /* Fall 10px down */
 }
-
 /* Middle line falls 10px from elevated position */
 @keyframes middleFall {
-	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */
-	100% { transform: translateY(10px); } /* Fall 10px down */
+	0% { transform: translateY(0); } 
+	100% { transform: translateY(10px); } 
 }
-
 /* Top line falls 10px from elevated position */
 @keyframes topFall {
-	0% { transform: translateY(0); }      /* Start at normal position (relative to bounced hamburger) */  
-	100% { transform: translateY(10px); } /* Fall 10px down */
+	0% { transform: translateY(0); } 
+	100% { transform: translateY(10px); } 
 }
-
 /* Apply bounce and spin animations */
+/* Animation triggers via JS on first page load */
 #menu-toggle.cartoonBounce {
 	animation: bounceAndSpin 1.0s ease-out forwards;
 }
@@ -99,15 +80,12 @@ nav {
 #menu-toggle.cartoonBounce .hamburger-line:nth-child(3) {
 	animation: bottomFall 0.3s ease-in 1.4s forwards;
 }
-
 #menu-toggle.cartoonBounce .hamburger-line:nth-child(2) {
 	animation: middleFall 0.25s ease-in 1.7s forwards;
 }
-
 #menu-toggle.cartoonBounce .hamburger-line:nth-child(1) {
 	animation: topFall 0.2s ease-in 2.0s forwards;
 }
-
 /* Logo */
 .logo-container {
 	display: flex;

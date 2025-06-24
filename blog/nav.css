@@ -93,19 +93,19 @@ nav {
 
 /* Apply bounce and spin animations */
 #menu-toggle.cartoonBounce {
-	animation: bounceAndSpin 0.7s ease-out forwards;
+	animation: bounceAndSpin 1.0s ease-out forwards;
 }
 /* Lines fall in DOM order (3,2,1) which appears as bottom-to-top */
 #menu-toggle.cartoonBounce .hamburger-line:nth-child(3) {
-	animation: bottomFall 0.3s ease-in 1.2s forwards;
+	animation: bottomFall 0.3s ease-in 1.4s forwards;
 }
 
 #menu-toggle.cartoonBounce .hamburger-line:nth-child(2) {
-	animation: middleFall 0.3s ease-in 1.6s forwards;
+	animation: middleFall 0.25s ease-in 1.7s forwards;
 }
 
 #menu-toggle.cartoonBounce .hamburger-line:nth-child(1) {
-	animation: topFall 0.3s ease-in 2.0s forwards;
+	animation: topFall 0.2s ease-in 2.0s forwards;
 }
 
 /* Logo */

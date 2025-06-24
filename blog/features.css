@@ -105,7 +105,7 @@ article a:link, article a:visited, footer a:link, footer a:visited {
 	color: #F0F0F0;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
-	padding: 0 0 2px 0;
+	padding: 0 0 1px 0;
 }
 article a:hover, article a:active, footer a:hover, footer a:active {
 	text-decoration: none;

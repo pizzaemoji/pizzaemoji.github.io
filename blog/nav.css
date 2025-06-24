@@ -53,11 +53,11 @@ nav {
 /* Keyframes for cartoonBounce animation */
 @keyframes bounceSpin {
     0% { transform: translateY(0); } /* Start at 0 */
-	14% { transform: translateY(-12px); } /* Bounce */
-    28% { transform: translateY(0); } /* Set */
-    42% { transform: translateY(-12px); }
-    56% { transform: translateY(0); } 
-    70% { transform: translateY(-12px) rotate(0deg); } /* Bounce */
+	15% { transform: translateY(-12px); } /* Bounce */
+    30% { transform: translateY(0); } /* Set */
+    45% { transform: translateY(-12px); } /* Bounce */
+    60% { transform: translateY(0); } /* Set */
+    75% { transform: translateY(-12px) rotate(0deg); } /* Bounce */
     100% { transform: translateY(-12px) rotate(360deg); } /* Spin at peak */
 }
 /* Bottom line falls from elevated position */

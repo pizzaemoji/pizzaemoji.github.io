@@ -173,23 +173,7 @@ nav {
 	color: #FE6000;
 	transform: translateX(4px);
 }
-/* Desktop */
-@media (min-width: 800px) {
-	nav {
-		height: 100px;
-	}
-	#menu-toggle {
-		left: 2rem;
-	}
-	#side-menu {
-		max-width: 400px;
-		padding-top: 120px;
-	}
-	#logo {
-		height: 50px;
-	}
-}
-/* Clean Scrollbar */
+/* Clean scrollbar */
 #side-menu::-webkit-scrollbar {
 	width: 6px;
 }
@@ -232,5 +216,21 @@ nav {
 	*, *::before, *::after {
 		animation: none !important;
 		transition: none !important;
+	}
+}
+/* Desktop */
+@media (min-width: 800px) {
+	nav {
+		height: 100px;
+	}
+	#menu-toggle {
+		left: 2rem;
+	}
+	#side-menu {
+		max-width: 400px;
+		padding-top: 120px;
+	}
+	#logo {
+		height: 50px;
 	}
 }

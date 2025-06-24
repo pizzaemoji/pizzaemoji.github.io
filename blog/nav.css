@@ -83,13 +83,9 @@ nav {
 	100% { transform: translateY(10px); } /* Fall 10px down */
 }
 
-/* Apply bounce animation */
+/* Apply bounce and spin animations */
 #menu-toggle.menuDance {
-	animation: bounceUp 0.5s ease-out forwards;
-}
-/* Apply spin animation */
-#menu-toggle.menuDance {
-	animation: spinAround 0.5s ease-out forwards;
+	animation: bounceUp 0.5s ease-out forwards, spinAround 0.5s ease-out forwards;
 }
 /* Lines fall in DOM order (3,2,1) which appears as bottom-to-top */
 #menu-toggle.menuDance .hamburger-line:nth-child(3) {

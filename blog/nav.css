@@ -58,7 +58,7 @@ nav {
 /* Combined bounce up and full spin animation */
 @keyframes bounceAndSpin {
 	0% { transform: translateY(0) rotate(0deg); }           /* Start at normal position */
-	50% { transform: translateY(-10px) rotate(0deg); }      /* Peak of bounce, no rotation yet */
+	50% { transform: translateY(-10px) rotate(180deg); }      /* Peak of bounce, no rotation yet */
 	100% { transform: translateY(-10px) rotate(360deg); }   /* Stay elevated, complete full spin */
 }
 
@@ -81,23 +81,20 @@ nav {
 }
 
 /* Apply combined bounce and spin animation to entire hamburger */
-#menu-toggle.bounce-and-spin {
+#menu-toggle.bounceAndSpin {
 	animation: bounceAndSpin 0.6s ease-out forwards; /* 0.3s bounce + 0.3s spin */
 }
 
-/* Remove the cheat - no longer needed */
-
-/* Apply individual line falls after safety pause */
 /* Lines fall in DOM order (3,2,1) which appears as bottom-to-top after cheat */
-#menu-toggle.bounce-and-flip .hamburger-line:nth-child(3) {
+#menu-toggle.bounceAndSpin .hamburger-line:nth-child(3) {
 	animation: bottomFall 0.3s ease-in 0.9s forwards; /* Start after 0.9s total (0.6s + 0.3s safety) */
 }
 
-#menu-toggle.bounce-and-flip .hamburger-line:nth-child(2) {
+#menu-toggle.bounceAndSpin .hamburger-line:nth-child(2) {
 	animation: middleFall 0.3s ease-in 1.2s forwards; /* 0.9s + 0.3s stagger */
 }
 
-#menu-toggle.bounce-and-flip .hamburger-line:nth-child(1) {
+#menu-toggle.bounceAndSpin .hamburger-line:nth-child(1) {
 	animation: topFall 0.3s ease-in 1.5s forwards; /* 0.9s + 0.6s stagger */
 }
 

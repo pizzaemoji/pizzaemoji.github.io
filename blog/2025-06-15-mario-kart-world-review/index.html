@@ -171,24 +171,13 @@ function toggleMenu() {
 	}
 }
 
-// Clean cartoon bounce sequence with spin
 function triggerCartoonBounce() {
-	// Remove any existing animation classes
-	menuToggle.classList.remove('bounce-and-spin', 'elevated', 'lines-fall');
-	
-	// Phase 1: Bounce and spin (0.6s)
-	menuToggle.classList.add('bounce-and-spin');
-	
-	// Phase 2: After bounce+spin completes, keep elevated and start line falls
-	setTimeout(() => {
-		menuToggle.classList.remove('bounce-and-spin');
-		menuToggle.classList.add('elevated', 'lines-fall');
-	}, 600); // 0.6s - right when bounce+spin ends
-	
-	// Phase 3: Clean up after all line falls complete
-	setTimeout(() => {
-		menuToggle.classList.remove('elevated', 'lines-fall');
-	}, 1800); // 0.6s bounce+spin + 1.2s line falls = 1.8s total
+    menuToggle.classList.remove('bounceAndSpin');
+    menuToggle.classList.add('bounceAndSpin');
+    
+    setTimeout(() => {
+        menuToggle.classList.remove('bounceAndSpin');
+    }, 1800); // Total animation time
 }
 
 // Hamburger bounce for first-time visitors (desktop only)
@@ -203,11 +192,6 @@ document.addEventListener('DOMContentLoaded', () => {
 		setTimeout(() => {
 			triggerCartoonBounce();
 		}, 1000);
-		
-		// Second cartoon bounce sequence (after first completes + pause)
-		setTimeout(() => {
-			triggerCartoonBounce();
-		}, 4000); // Increased gap since animation is now 1.8s instead of 2s
 	}
 });
 

@@ -53,15 +53,11 @@ nav {
 /* Keyframes for cartoonBounce animation */
 @keyframes bounceSpin {
     0% { transform: translateY(0); } /* Start at 0 */
-    7% { transform: translateY(-12px); } /* Bounce up */
-	14% { transform: translateY(-12px); } /* Hold */
-    21% { transform: translateY(0); } /* Bounce down */
-    28% { transform: translateY(0); } /* Hold */
-	35% { transform: translateY(-12px); } /* Repeat */
+	14% { transform: translateY(-12px); } /* Bounce */
+    28% { transform: translateY(0); } /* Set */
     42% { transform: translateY(-12px); }
-    49% { transform: translateY(0); }
     56% { transform: translateY(0); } 
-    63% { transform: translateY(-12px) rotate(0deg); } /* Bounce */
+    70% { transform: translateY(-12px) rotate(0deg); } /* Bounce */
     100% { transform: translateY(-12px) rotate(360deg); } /* Spin at peak */
 }
 /* Bottom line falls from elevated position */
@@ -82,7 +78,7 @@ nav {
 /* Apply bounce and spin animations */
 /* Animation triggers via JS on first page load */
 #menu-toggle.cartoonBounce {
-	animation: bounceSpin 3.5s ease-in forwards;
+	animation: bounceSpin 3.5s ease-out forwards;
 }
 /* Lines fall in DOM order (3,2,1) which appears as bottom-to-top */
 #menu-toggle.cartoonBounce .hamburger-line:nth-child(3) {

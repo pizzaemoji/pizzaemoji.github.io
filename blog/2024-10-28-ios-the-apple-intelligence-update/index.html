@@ -129,68 +129,135 @@
 	<p>&copy; 2024 Brandon Butler – <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
 	</footer>
 	<script>
+// Get references to the main menu elements
 const menuToggle = document.getElementById('menu-toggle');
 const sideMenu = document.getElementById('side-menu');
 const overlay = document.getElementById('overlay');
 
+// Variables to track menu state and accessibility
+let lastFocused; // Stores the element that had focus before menu opened
+let animationShown = false; // Prevents animation from running multiple times
+let focusableElements = []; // Array of focusable elements within the menu
+
+ // Toggles the side menu open/closed state
+ // Handles all visual states, focus management, and accessibility
 function toggleMenu() {
+	// Check if menu is currently open by looking for 'open' class
 	const isOpen = sideMenu.classList.contains('open');
 	
 	if (isOpen) {
+		// Close the menu
 		sideMenu.classList.remove('open');
 		overlay.classList.remove('show');
 		menuToggle.classList.remove('active');
-		document.body.style.overflow = '';
+		document.body.style.overflow = ''; // Restore page scrolling
+		
+		// Remove focus trap event listener
+		document.removeEventListener('keydown', trapFocus);
+		
+		// Return focus to the element that was focused before menu opened
+		if (lastFocused) {
+			lastFocused.focus();
+		}
 	} else {
+		// Remember what element had focus before opening menu
+		lastFocused = document.activeElement;
+		
+		// Open the menu
 		sideMenu.classList.add('open');
 		overlay.classList.add('show');
 		menuToggle.classList.add('active');
-		document.body.style.overflow = 'hidden';
+		document.body.style.overflow = 'hidden'; // Prevent page scrolling
+		
+		// Find all focusable elements within the menu for accessibility
+		focusableElements = sideMenu.querySelectorAll('a, button, [tabindex="0"]');
+		
+		// Focus the first focusable element in the menu
+		if (focusableElements.length > 0) {
+			focusableElements[0].focus();
+		}
+		
+		// Add focus trap to keep tab navigation within the menu
+		document.addEventListener('keydown', trapFocus);
 	}
 }
 
+ // Traps focus within the side menu when it's open
+ // Ensures tab navigation stays within the menu for accessibility
+function trapFocus(e) {
+	// Only handle Tab key presses
+	if (e.key !== 'Tab') return;
+	
+	const firstElement = focusableElements[0];
+	const lastElement = focusableElements[focusableElements.length - 1];
+	
+	if (e.shiftKey) {
+		// Shift+Tab: moving backwards through elements
+		if (document.activeElement === firstElement) {
+			e.preventDefault();
+			lastElement.focus(); // Wrap to last element
+		}
+	} else {
+		// Tab: moving forwards through elements
+		if (document.activeElement === lastElement) {
+			e.preventDefault();
+			firstElement.focus(); // Wrap to first element
+		}
+	}
+}
+
+ // Adds a cartoon bounce animation to the menu toggle button
+ // Animation lasts for 3 seconds
 function triggerCartoonBounce() {
     menuToggle.classList.add('cartoonBounce');
     
+    // Remove the animation class after 3 seconds
     setTimeout(() => {
         menuToggle.classList.remove('cartoonBounce');
     }, 3000);
 }
 
-// Menu dance for first-time visitors (desktop only)
+// Initialize menu behavior when page loads
 document.addEventListener('DOMContentLoaded', () => {
-	localStorage.removeItem('menuIntroShown'); // Play animation each page load
-	const menuIntroShown = localStorage.getItem('menuIntroShown');
-	
-	// Only bounce on desktop (800px+) for first-time visitors
-	if (!menuIntroShown && window.innerWidth >= 800) {
-		localStorage.setItem('menuIntroShown', 'true');
+	// Only show bounce animation once and only on larger screens (≥800px)
+	if (!animationShown && window.innerWidth >= 800) {
+		animationShown = true;
 		
-		// First cartoon bounce sequence
+		// Trigger bounce animation 1 second after page load
 		setTimeout(() => {
 			triggerCartoonBounce();
 		}, 1000);
 	}
 });
 
+// Event listeners for menu interactions
+
+// Toggle menu when menu button is clicked
 menuToggle.addEventListener('click', toggleMenu);
+
+// Close menu when overlay (background) is clicked
 overlay.addEventListener('click', toggleMenu);
 
+// Close menu when any menu item is clicked (with small delay)
 const menuItems = document.querySelectorAll('.menu-item');
 menuItems.forEach(item => {
 	item.addEventListener('click', () => {
+		// Small delay allows the click to register before closing menu
 		setTimeout(toggleMenu, 100);
 	});
 });
 
+// Close menu when Escape key is pressed
 document.addEventListener('keydown', (e) => {
 	if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
 		toggleMenu();
 	}
 });
 
+// Close menu automatically when screen becomes wide enough (responsive behavior)
 window.addEventListener('resize', () => {
-	if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
+	// Close menu if screen becomes wider than 768px (tablet/desktop view)
+	if (window.innerWidth > 800 && sideMenu.classList.contains('open')) {
 		toggleMenu();
 	}
 });

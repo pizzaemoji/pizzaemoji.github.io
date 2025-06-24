@@ -113,8 +113,9 @@
 const menuToggle = document.getElementById('menu-toggle');
 const sideMenu = document.getElementById('side-menu');
 const overlay = document.getElementById('overlay');
-let lastFocused; // Track focus
+let lastFocused;
 let animationShown = false;
+let focusableElements = []; // Store focusable elements
 
 function toggleMenu() {
 	const isOpen = sideMenu.classList.contains('open');
@@ -125,12 +126,13 @@ function toggleMenu() {
 		menuToggle.classList.remove('active');
 		document.body.style.overflow = '';
 		
-		// Return focus to where it was before menu opened
+		// Remove focus trap
+		document.removeEventListener('keydown', trapFocus);
+		
 		if (lastFocused) {
 			lastFocused.focus();
 		}
 	} else {
-		// Store current focus before opening menu
 		lastFocused = document.activeElement;
 		
 		sideMenu.classList.add('open');
@@ -138,10 +140,36 @@ function toggleMenu() {
 		menuToggle.classList.add('active');
 		document.body.style.overflow = 'hidden';
 		
-		// Move focus to first menu item
-		const firstMenuItem = sideMenu.querySelector('.menu-item');
-		if (firstMenuItem) {
-			firstMenuItem.focus();
+		// Get all focusable elements in the menu
+		focusableElements = sideMenu.querySelectorAll('a, button, [tabindex="0"]');
+		
+		// Focus first element
+		if (focusableElements.length > 0) {
+			focusableElements[0].focus();
+		}
+		
+		// Add focus trap
+		document.addEventListener('keydown', trapFocus);
+	}
+}
+
+function trapFocus(e) {
+	if (e.key !== 'Tab') return;
+	
+	const firstElement = focusableElements[0];
+	const lastElement = focusableElements[focusableElements.length - 1];
+	
+	if (e.shiftKey) {
+		// Shift + Tab (going backwards)
+		if (document.activeElement === firstElement) {
+			e.preventDefault();
+			lastElement.focus();
+		}
+	} else {
+		// Tab (going forwards)
+		if (document.activeElement === lastElement) {
+			e.preventDefault();
+			firstElement.focus();
 		}
 	}
 }
@@ -154,14 +182,12 @@ function triggerCartoonBounce() {
     }, 3000);
 }
 
-// Menu button cartoonBounce (desktop only)
 document.addEventListener('DOMContentLoaded', () => {
-	// Only bounce once per session on desktop (800px+)
 	if (!animationShown && window.innerWidth >= 800) {
 		animationShown = true;
 		
 		setTimeout(() => {
-			triggerCartoonBounce(); // Still call the function
+			triggerCartoonBounce();
 		}, 1000);
 	}
 });

@@ -131,15 +131,22 @@ function toggleMenu() {
  // Traps focus within the side menu when it's open
  // Ensures tab navigation stays within the menu for accessibility
 function trapFocus(e) {
-	console.log('trapFocus called', e.key); // Debug line
 	// Only handle Tab key presses
 	if (e.key !== 'Tab') return;
 	
-	console.log('focusableElements:', focusableElements.length); // Debug line
-    console.log('activeElement:', document.activeElement); // Debug line
-	
 	const firstElement = focusableElements[0];
 	const lastElement = focusableElements[focusableElements.length - 1];
+	
+	// If focus has escaped to body or outside the menu, redirect it back
+	if (document.activeElement === document.body || !sideMenu.contains(document.activeElement)) {
+		e.preventDefault();
+		if (e.shiftKey) {
+			lastElement.focus(); // Shift+Tab should go to last element
+		} else {
+			firstElement.focus(); // Tab should go to first element
+		}
+		return;
+	}
 	
 	if (e.shiftKey) {
 		// Shift+Tab: moving backwards through elements

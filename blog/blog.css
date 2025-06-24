@@ -69,6 +69,9 @@ p {
 	opacity: 0.9;
 	line-height: 1.6;
 }
+.shortDescription {
+	padding-top: .5em;
+}
 section {
 	padding: 3rem 0 0 0;
 }

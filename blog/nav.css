@@ -150,7 +150,7 @@ nav {
 	text-indent: 1em;
 	letter-spacing: 0.5px;
 	margin-bottom: 0.5rem;
-	background: rgba(0, 0, 0, 0);
+	background: inherit;
 }
 .menu-item {
 	display: block;
@@ -197,4 +197,28 @@ nav {
 }
 #side-menu::-webkit-scrollbar-thumb:hover {
 	background: rgba(254, 96, 0, 0.8);
+}
+/* Reduced transparency alternatives */
+@media (prefers-reduced-transparency: reduce) {
+	nav {
+		background: #222222;
+		backdrop-filter: none;	
+	}
+	#side-menu {
+		background: #181818;
+		backdrop-filter: none;
+	}
+	#overlay {
+		background: #000000;
+		backdrop-filter: none;
+		opacity: 0.5;
+	}
+	.menu-item {
+		background: #1C1C1C;
+		backdrop-filter: none;
+	}
+	.menu-item {
+		background: #2B1C1A;
+		backdrop-filter: none;
+	}
 }

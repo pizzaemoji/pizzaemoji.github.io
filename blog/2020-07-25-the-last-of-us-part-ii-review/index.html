@@ -7,7 +7,7 @@
 	<meta name="pronouns" content="he/him">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Pizza Emoji - A small pictorial symbol that represents a slice of delicious baked dough with tomato sauce, cheese, and various toppings.">
-	<meta name="theme-color" content="#222222">
+	<meta name="theme-color" content="#1A1A1A">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link rel="canonical" href="https://pizzaemoji.net/blog/2020-07-25-the-last-of-us-part-ii-review/">
 	<link rel="shortcut icon" href="/favicon/favicon.ico">
@@ -112,47 +112,71 @@
 	<p>&copy; 2020 Brandon Butler – <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
 	</footer>
 	<script>
-		const menuToggle = document.getElementById('menu-toggle');
-		const sideMenu = document.getElementById('side-menu');
-		const overlay = document.getElementById('overlay');
+const menuToggle = document.getElementById('menu-toggle');
+const sideMenu = document.getElementById('side-menu');
+const overlay = document.getElementById('overlay');
 
-		function toggleMenu() {
-			const isOpen = sideMenu.classList.contains('open');
-			
-			if (isOpen) {
-				sideMenu.classList.remove('open');
-				overlay.classList.remove('show');
-				menuToggle.classList.remove('active');
-				document.body.style.overflow = '';
-			} else {
-				sideMenu.classList.add('open');
-				overlay.classList.add('show');
-				menuToggle.classList.add('active');
-				document.body.style.overflow = 'hidden';
-			}
-		}
+function toggleMenu() {
+	const isOpen = sideMenu.classList.contains('open');
+	
+	if (isOpen) {
+		sideMenu.classList.remove('open');
+		overlay.classList.remove('show');
+		menuToggle.classList.remove('active');
+		document.body.style.overflow = '';
+	} else {
+		sideMenu.classList.add('open');
+		overlay.classList.add('show');
+		menuToggle.classList.add('active');
+		document.body.style.overflow = 'hidden';
+	}
+}
 
-		menuToggle.addEventListener('click', toggleMenu);
-		overlay.addEventListener('click', toggleMenu);
+function triggerCartoonBounce() {
+    menuToggle.classList.add('cartoonBounce');
+    
+    setTimeout(() => {
+        menuToggle.classList.remove('cartoonBounce');
+    }, 3000);
+}
 
-		const menuItems = document.querySelectorAll('.menu-item');
-		menuItems.forEach(item => {
-			item.addEventListener('click', () => {
-				setTimeout(toggleMenu, 100);
-			});
-		});
+// Menu dance for first-time visitors (desktop only)
+document.addEventListener('DOMContentLoaded', () => {
+	localStorage.removeItem('menuIntroShown'); // Play animation each page load
+	const menuIntroShown = localStorage.getItem('menuIntroShown');
+	
+	// Only bounce on desktop (800px+) for first-time visitors
+	if (!menuIntroShown && window.innerWidth >= 800) {
+		localStorage.setItem('menuIntroShown', 'true');
+		
+		// First cartoon bounce sequence
+		setTimeout(() => {
+			triggerCartoonBounce();
+		}, 1000);
+	}
+});
 
-		document.addEventListener('keydown', (e) => {
-			if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
-				toggleMenu();
-			}
-		});
+menuToggle.addEventListener('click', toggleMenu);
+overlay.addEventListener('click', toggleMenu);
 
-		window.addEventListener('resize', () => {
-			if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
-				toggleMenu();
-			}
-		});
+const menuItems = document.querySelectorAll('.menu-item');
+menuItems.forEach(item => {
+	item.addEventListener('click', () => {
+		setTimeout(toggleMenu, 100);
+	});
+});
+
+document.addEventListener('keydown', (e) => {
+	if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
+		toggleMenu();
+	}
+});
+
+window.addEventListener('resize', () => {
+	if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
+		toggleMenu();
+	}
+});
 	</script>
 </body>
 </html>

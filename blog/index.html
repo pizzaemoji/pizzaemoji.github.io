@@ -85,8 +85,10 @@ let lastFocused; // Stores the element that had focus before menu opened
 let animationShown = false; // Prevents animation from running multiple times
 let focusableElements = []; // Array of focusable elements within the menu
 
- // Toggles the side menu open/closed state
- // Handles all visual states, focus management, and accessibility
+/**
+ * Toggles the side menu open/closed state
+ * Handles all visual states, focus management, and accessibility
+ */
 function toggleMenu() {
 	// Check if menu is currently open by looking for 'open' class
 	const isOpen = sideMenu.classList.contains('open');
@@ -115,8 +117,9 @@ function toggleMenu() {
 		menuToggle.classList.add('active');
 		document.body.style.overflow = 'hidden'; // Prevent page scrolling
 		
-		// Find all focusable elements within the menu for accessibility
-		focusableElements = sideMenu.querySelectorAll('a[href], button');
+		// Find all focusable elements within the menu AND include the close button
+		const menuFocusableElements = sideMenu.querySelectorAll('a, button, [tabindex="0"]');
+		focusableElements = [menuToggle, ...menuFocusableElements];
 		
 		// Focus the first focusable element in the menu
 		if (focusableElements.length > 0) {
@@ -128,8 +131,10 @@ function toggleMenu() {
 	}
 }
 
- // Traps focus within the side menu when it's open
- // Ensures tab navigation stays within the menu for accessibility
+/**
+ * Traps focus within the side menu when it's open
+ * Ensures tab navigation stays within the menu for accessibility
+ */
 function trapFocus(e) {
 	// Only handle Tab key presses
 	if (e.key !== 'Tab') return;
@@ -163,8 +168,10 @@ function trapFocus(e) {
 	}
 }
 
- // Adds a cartoon bounce animation to the menu toggle button
- // Animation lasts for 3 seconds
+/**
+ * Adds a cartoon bounce animation to the menu toggle button
+ * Animation lasts for 3 seconds
+ */
 function triggerCartoonBounce() {
     menuToggle.classList.add('cartoonBounce');
     
@@ -214,7 +221,7 @@ document.addEventListener('keydown', (e) => {
 // Close menu automatically when screen becomes wide enough (responsive behavior)
 window.addEventListener('resize', () => {
 	// Close menu if screen becomes wider than 768px (tablet/desktop view)
-	if (window.innerWidth > 800 && sideMenu.classList.contains('open')) {
+	if (window.innerWidth > 768 && sideMenu.classList.contains('open')) {
 		toggleMenu();
 	}
 });

@@ -44,9 +44,9 @@
 	<div id="side-menu" role="dialog" aria-modal="true" aria-label="Site Navigation">
 		<div class="menu-section">
 			<a href="/blog/" class="menu-item">Blogging</a>
-			<div class="menu-section-title" tabindex="0">Lastest Article</div>
+			<div class="menu-section-title">Lastest Article</div>
 			<a href="https://pizzaemoji.net/blog/2025-06-15-mario-kart-world-review/" class="menu-item">Mario Kart World Review</a>
-			<div class="menu-section-title" tabindex="0">Featured Articles</div>
+			<div class="menu-section-title">Featured Articles</div>
 			<a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/" class="menu-item">Letterboxd—A Love Letter</a>
 			<a href="https://pizzaemoji.net/blog/2025-02-04-a-brief-history-of-spider-man-in-cinema/" class="menu-item">A Brief History of Spider-Man in Cinema</a>
 			<a href="https://pizzaemoji.net/blog/2019-09-01-the-blue-shell/" class="menu-item">The Blue Shell—The Worst Item in Mario Kart</a>
@@ -115,7 +115,7 @@ const sideMenu = document.getElementById('side-menu');
 const overlay = document.getElementById('overlay');
 let lastFocused;
 let animationShown = false;
-let focusableElements = []; // Store focusable elements
+let focusableElements = [];
 
 function toggleMenu() {
 	const isOpen = sideMenu.classList.contains('open');
@@ -126,7 +126,6 @@ function toggleMenu() {
 		menuToggle.classList.remove('active');
 		document.body.style.overflow = '';
 		
-		// Remove focus trap
 		document.removeEventListener('keydown', trapFocus);
 		
 		if (lastFocused) {
@@ -140,15 +139,12 @@ function toggleMenu() {
 		menuToggle.classList.add('active');
 		document.body.style.overflow = 'hidden';
 		
-		// Get all focusable elements in the menu
 		focusableElements = sideMenu.querySelectorAll('a, button, [tabindex="0"]');
 		
-		// Focus first element
 		if (focusableElements.length > 0) {
 			focusableElements[0].focus();
 		}
 		
-		// Add focus trap
 		document.addEventListener('keydown', trapFocus);
 	}
 }
@@ -160,13 +156,11 @@ function trapFocus(e) {
 	const lastElement = focusableElements[focusableElements.length - 1];
 	
 	if (e.shiftKey) {
-		// Shift + Tab (going backwards)
 		if (document.activeElement === firstElement) {
 			e.preventDefault();
 			lastElement.focus();
 		}
 	} else {
-		// Tab (going forwards)
 		if (document.activeElement === lastElement) {
 			e.preventDefault();
 			firstElement.focus();

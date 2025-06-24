@@ -69,6 +69,7 @@ nav {
 
 @keyframes bounceAndSpin {
     0% { transform: translateY(0) rotate(0deg); }
+    99% { transform: translateY(-10px) rotate(0deg); }
     100% { transform: translateY(-10px) rotate(360deg); }
 }
 	

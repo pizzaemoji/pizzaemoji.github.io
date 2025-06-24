@@ -173,11 +173,12 @@ function toggleMenu() {
 
 function triggerCartoonBounce() {
     menuToggle.classList.remove('bounceAndSpin');
+    menuToggle.offsetHeight; // Force reflow
     menuToggle.classList.add('bounceAndSpin');
     
     setTimeout(() => {
         menuToggle.classList.remove('bounceAndSpin');
-    }, 1800); // Total animation time
+    }, 1800);
 }
 
 // Hamburger bounce for first-time visitors (desktop only)

@@ -55,11 +55,10 @@ nav {
 	transform: rotate(-45deg) translate(4px, -4px);
 }
 
-/* Combined bounce up and full spin animation */
 @keyframes bounceAndSpin {
-	0% { transform: translateY(0) rotate(0deg); }           /* Start at normal position */
-	50% { transform: translateY(-10px) rotate(180deg); }      /* Peak of bounce, no rotation yet */
-	100% { transform: translateY(-10px) rotate(360deg); }   /* Stay elevated, complete full spin */
+    0% { transform: translateY(0) rotate(0deg); }
+    50% { transform: translateY(-5px) rotate(180deg); }
+    100% { transform: translateY(-10px) rotate(360deg); }
 }
 
 /* Bottom line falls 10px from elevated position */

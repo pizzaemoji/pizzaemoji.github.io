@@ -117,9 +117,8 @@ function toggleMenu() {
 		menuToggle.classList.add('active');
 		document.body.style.overflow = 'hidden'; // Prevent page scrolling
 		
-		// Find all focusable elements within the menu AND include the close button
-		const menuFocusableElements = sideMenu.querySelectorAll('a, button');
-		focusableElements = [menuToggle, ...menuFocusableElements];
+		// Find all focusable elements within the menu for accessibility
+		focusableElements = sideMenu.querySelectorAll('a, button, [tabindex="0"]');
 		
 		// Focus the first focusable element in the menu
 		if (focusableElements.length > 0) {
@@ -136,8 +135,11 @@ function toggleMenu() {
  * Ensures tab navigation stays within the menu for accessibility
  */
 function trapFocus(e) {
-	// Only handle Tab key presses
-	if (e.key !== 'Tab') return;
+	// Only handle Tab key presses AND only when menu is actually open
+	if (e.key !== 'Tab' || !sideMenu.classList.contains('open')) return;
+	
+	// If no focusable elements, don't trap
+	if (focusableElements.length === 0) return;
 	
 	const firstElement = focusableElements[0];
 	const lastElement = focusableElements[focusableElements.length - 1];

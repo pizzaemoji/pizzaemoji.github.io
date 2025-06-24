@@ -41,19 +41,17 @@
 			alt="The Pizza Emoji logo" id="logo" />
 		</div>
 	</nav>
-	<div id="side-menu">
+	<div id="side-menu" role="dialog" aria-modal="true" aria-label="Site Navigation">
 		<div class="menu-section">
 			<a href="/blog/" class="menu-item">Blogging</a>
-			<div class="menu-section-title">Featured Articles</div>
+			<div class="menu-section-title" tabindex="0">Lastest Article</div>
 			<a href="https://pizzaemoji.net/blog/2025-06-15-mario-kart-world-review/" class="menu-item">Mario Kart World Review</a>
+			<div class="menu-section-title" tabindex="0">Featured Articles</div>
 			<a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/" class="menu-item">Letterboxd—A Love Letter</a>
 			<a href="https://pizzaemoji.net/blog/2025-02-04-a-brief-history-of-spider-man-in-cinema/" class="menu-item">A Brief History of Spider-Man in Cinema</a>
-			<a href="https://pizzaemoji.net/blog/2024-10-28-ios-the-apple-intelligence-update/" class="menu-item">iOS 18.1: The Apple Intelligence Update</a>
-			<a href="https://pizzaemoji.net/blog/2020-11-05-iphone-12-pro-pacific-blue-review/" class="menu-item">iPhone 12 Pro Pacific Blue Review</a>
-			<a href="https://pizzaemoji.net/blog/2020-07-25-the-last-of-us-part-ii-review/" class="menu-item">The Last of Us Part II Review</a>
-			<a href="https://pizzaemoji.net/blog/2020-06-17-splash-mountain/" class="menu-item">Splash Mountain</a>
 			<a href="https://pizzaemoji.net/blog/2019-09-01-the-blue-shell/" class="menu-item">The Blue Shell—The Worst Item in Mario Kart</a>
 			<div class="menu-section-title">&nbsp;</div>
+			<a href="/blog/archive/" class="menu-item">Archive</a>			
 			<a href="/blog/about/" class="menu-item">About</a>
 			<a href="/blog/contact/" class="menu-item">Contact</a>
 		</div>
@@ -115,6 +113,8 @@
 const menuToggle = document.getElementById('menu-toggle');
 const sideMenu = document.getElementById('side-menu');
 const overlay = document.getElementById('overlay');
+let lastFocused; // Track focus
+let animationShown = false;
 
 function toggleMenu() {
 	const isOpen = sideMenu.classList.contains('open');
@@ -124,11 +124,25 @@ function toggleMenu() {
 		overlay.classList.remove('show');
 		menuToggle.classList.remove('active');
 		document.body.style.overflow = '';
+		
+		// Return focus to where it was before menu opened
+		if (lastFocused) {
+			lastFocused.focus();
+		}
 	} else {
+		// Store current focus before opening menu
+		lastFocused = document.activeElement;
+		
 		sideMenu.classList.add('open');
 		overlay.classList.add('show');
 		menuToggle.classList.add('active');
 		document.body.style.overflow = 'hidden';
+		
+		// Move focus to first menu item
+		const firstMenuItem = sideMenu.querySelector('.menu-item');
+		if (firstMenuItem) {
+			firstMenuItem.focus();
+		}
 	}
 }
 
@@ -140,18 +154,14 @@ function triggerCartoonBounce() {
     }, 3000);
 }
 
-// Menu dance for first-time visitors (desktop only)
+// Menu button cartoonBounce (desktop only)
 document.addEventListener('DOMContentLoaded', () => {
-	localStorage.removeItem('menuIntroShown'); // Play animation each page load
-	const menuIntroShown = localStorage.getItem('menuIntroShown');
-	
-	// Only bounce on desktop (800px+) for first-time visitors
-	if (!menuIntroShown && window.innerWidth >= 800) {
-		localStorage.setItem('menuIntroShown', 'true');
+	// Only bounce once per session on desktop (800px+)
+	if (!animationShown && window.innerWidth >= 800) {
+		animationShown = true;
 		
-		// First cartoon bounce sequence
 		setTimeout(() => {
-			triggerCartoonBounce();
+			triggerCartoonBounce(); // Still call the function
 		}, 1000);
 	}
 });

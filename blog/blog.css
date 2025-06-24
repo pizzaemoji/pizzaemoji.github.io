@@ -66,6 +66,9 @@ article {
 	hyphens: auto;
 	text-wrap: pretty;
 }
+section {
+	padding: 2rem 0;
+}
 h3 {
  	font-size: 1.6rem;
 	line-height: 1.8rem;

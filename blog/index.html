@@ -118,7 +118,7 @@ function toggleMenu() {
 		document.body.style.overflow = 'hidden'; // Prevent page scrolling
 		
 		// Find all focusable elements within the menu AND include the close button
-		const menuFocusableElements = sideMenu.querySelectorAll('a, button, [tabindex="0"]');
+		const menuFocusableElements = sideMenu.querySelectorAll('a, button');
 		focusableElements = [menuToggle, ...menuFocusableElements];
 		
 		// Focus the first focusable element in the menu

@@ -33,6 +33,7 @@ h1 {
 	margin: 0;
 }
 h2 {
+	color: #EEEEEE;
 	font-size: 2.6rem;
 	line-height: 2.8rem;
 	font-weight: 100;
@@ -100,14 +101,14 @@ article a, footer a {
 }
 article a:link, article a:visited, footer a:link, footer a:visited {
 	text-decoration: none;
-	color: #EEEEEE;
+	color: #f0f0f0;
 	border-width: 0 0 1px 0;
 	border-style: none none solid none;
 	padding: 0 0 2px 0;
 }
 article a:hover, article a:active, footer a:hover, footer a:active {
 	text-decoration: none;
-	color: #EEEEEE;
+	color: #f0f0f0;
 	border-color: #FE6000;
 }
 /* Images */
@@ -123,7 +124,7 @@ article a:hover, article a:active, footer a:hover, footer a:active {
 	margin: 0 auto;
 }
 .caption {
-	color: #DDDDDD;
+	color: #f0f0f0;
 	display: block;
 	font-size: 1rem;
 	line-height: 1.4rem;
@@ -187,11 +188,11 @@ li {
 }
 a.fnlink:link, a.fnlink:visited {
 	text-decoration: none;
-	border-color: #222222;
+	border-color: #f0f0f0;
 }
 a.fnlink:hover {
 	text-decoration: none;
-	border-color: #222222;
+	border-color: #f0f0f0;
 	cursor: pointer;
 }
 /* pullquotes and small images */

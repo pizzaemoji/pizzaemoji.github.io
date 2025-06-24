@@ -2,12 +2,12 @@
 <html lang="en">
 <head>
 	<meta charset="UTF-8">
-	<title>Pizza Emoji: Blogging: Contact</title>
+	<title>Pizza Emoji: Blogging</title>
 	<meta name="author" content="Brandon Butler">
 	<meta name="pronouns" content="he/him">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<meta name="description" content="Pizza Emoji - A small pictorial symbol that represents a slice of delicious baked dough with tomato sauce, cheese, and various toppings.">
-	<meta name="theme-color" content="#222222">
+	<meta name="theme-color" content="#1A1A1A">
 	<meta name="apple-mobile-web-app-capable" content="yes">
 	<link rel="canonical" href="https://pizzaemoji.net/blog/2024-10-28-ios-the-apple-intelligence-update/">
 	<link rel="shortcut icon" href="/favicon/favicon.ico">
@@ -20,8 +20,8 @@
 	 <!-- Open Graph -->
 	<meta property="og:type"        content="website">
 	<meta property="og:url"         content="https://pizzaemoji.net/blog/">
-	<meta property="og:title"       content="Pizza Emoji: Blogging About Whatever">
-	<meta property="og:description" content="Something to read when there's nothing else">
+	<meta property="og:title"       content="Pizza Emoji: Blogging with snacks">
+	<meta property="og:description" content="Unsolicited opinions. Dubious qualifications. Poor impulse control.">
 	<meta property="og:image"       content="https://pizzaemoji.net/images/og-cover.png">
 	<meta property="og:image:type"  content="image/png">
 	<meta property="og:image:width" content="1200">
@@ -29,6 +29,131 @@
 	<meta property="og:image:alt"   content="Pizza Emoji dot Net">
 </head>
 <body>
-<p>Coming soon...
+	<nav>
+		<button id="menu-toggle">
+			<div class="hamburger-line"></div>
+			<div class="hamburger-line"></div>
+			<div class="hamburger-line"></div>
+		</button>
+		<div class="logo-container">
+			<img src="/blog/images/logo-blog.webp"
+			srcset="/blog/images/logo-blog.webp 1x, /blog/images/logo-blog@2x.webp 2x"
+			alt="The Pizza Emoji logo" id="logo" />
+		</div>
+	</nav>
+	<div id="side-menu">
+		<div class="menu-section">
+			<a href="/blog/" class="menu-item">Blogging</a>
+			<div class="menu-section-title">Lastest Article</div>
+			<a href="https://pizzaemoji.net/blog/2025-06-15-mario-kart-world-review/" class="menu-item">Mario Kart World Review</a>
+			<div class="menu-section-title">Featured Articles</div>
+			<a href="https://pizzaemoji.net/blog/2025-04-18-letterboxd-a-love-letterd/" class="menu-item">Letterboxd—A Love Letter</a>
+			<a href="https://pizzaemoji.net/blog/2025-02-04-a-brief-history-of-spider-man-in-cinema/" class="menu-item">A Brief History of Spider-Man in Cinema</a>
+			<a href="https://pizzaemoji.net/blog/2019-09-01-the-blue-shell/" class="menu-item">The Blue Shell—The Worst Item in Mario Kart</a>
+			<div class="menu-section-title">&nbsp;</div>
+			<a href="/blog/archive/" class="menu-item">Archive</a>			
+			<a href="/blog/about/" class="menu-item">About</a>
+			<a href="/blog/contact/" class="menu-item">Contact</a>
+		</div>
+	</div>
+	<div id="overlay"></div>
+	<main>
+		<header>
+			<h1>Contact</h1>
+		</header>
+		<article>
+<p>Coming soon…</p>
+		</article>
+	</main>	
+	<footer>
+	<p>&copy; 2025 Brandon Butler – <a href="https://pizzaemoji.net">pizzaemoji.net</a></p>
+	</footer>
+	<script>
+// Get references to the main menu elements
+const menuToggle = document.getElementById('menu-toggle');
+const sideMenu = document.getElementById('side-menu');
+const overlay = document.getElementById('overlay');
+
+// Variables to track menu state
+let animationShown = false; // Prevents animation from running multiple times
+
+ // Toggles the side menu open/closed state
+ // Handles all visual states
+function toggleMenu() {
+	// Check if menu is currently open by looking for 'open' class
+	const isOpen = sideMenu.classList.contains('open');
+	
+	if (isOpen) {
+		// Close the menu
+		sideMenu.classList.remove('open');
+		overlay.classList.remove('show');
+		menuToggle.classList.remove('active');
+		document.body.style.overflow = ''; // Restore page scrolling
+	} else {
+		// Open the menu
+		sideMenu.classList.add('open');
+		overlay.classList.add('show');
+		menuToggle.classList.add('active');
+		document.body.style.overflow = 'hidden'; // Prevent page scrolling
+	}
+}
+
+
+ // Adds a cartoon bounce animation to the menu toggle button
+ // Animation lasts for 3 seconds
+function triggerCartoonBounce() {
+    menuToggle.classList.add('cartoonBounce');
+    
+    // Remove the animation class after 3 seconds
+    setTimeout(() => {
+        menuToggle.classList.remove('cartoonBounce');
+    }, 3000);
+}
+
+// Initialize menu behavior when page loads
+document.addEventListener('DOMContentLoaded', () => {
+	// Only show bounce animation once and only on larger screens (≥800px)
+	if (!animationShown && window.innerWidth >= 800) {
+		animationShown = true;
+		
+		// Trigger bounce animation 1 second after page load
+		setTimeout(() => {
+			triggerCartoonBounce();
+		}, 1000);
+	}
+});
+
+// Event listeners for menu interactions
+
+// Toggle menu when menu button is clicked
+menuToggle.addEventListener('click', toggleMenu);
+
+// Close menu when overlay (background) is clicked
+overlay.addEventListener('click', toggleMenu);
+
+// Close menu when any menu item is clicked (with small delay)
+const menuItems = document.querySelectorAll('.menu-item');
+menuItems.forEach(item => {
+	item.addEventListener('click', () => {
+		// Small delay allows the click to register before closing menu
+		setTimeout(toggleMenu, 100);
+	});
+});
+
+// Close menu when Escape key is pressed
+document.addEventListener('keydown', (e) => {
+	if (e.key === 'Escape' && sideMenu.classList.contains('open')) {
+		toggleMenu();
+	}
+});
+
+// Close menu automatically when screen becomes wide enough (responsive behavior)
+window.addEventListener('resize', () => {
+	// Close menu if screen becomes wider than 800 (tablet/desktop view)
+	if (window.innerWidth > 800 && sideMenu.classList.contains('open')) {
+		toggleMenu();
+	}
+});
+	</script>
 </body>
 </html>

@@ -53,23 +53,23 @@ nav {
 /* Keyframes for cartoonBounce animation */
 @keyframes bounceAndSpin {
     0% { transform: translateY(0) rotate(0deg); }
-    50% { transform: translateY(-10px) rotate(0deg); }
-    100% { transform: translateY(-10px) rotate(360deg); }
+    50% { transform: translateY(-12px) rotate(0deg); }
+    100% { transform: translateY(-12px) rotate(360deg); }
 }
 /* Bottom line falls 10px from elevated position */
 @keyframes bottomFall {
 	0% { transform: translateY(0); }      /* Start at relative bounce position */
-	100% { transform: translateY(10px); } /* Fall 10px down */
+	100% { transform: translateY(12px); } /* Fall 10px down */
 }
 /* Middle line falls 10px from elevated position */
 @keyframes middleFall {
 	0% { transform: translateY(0); } 
-	100% { transform: translateY(10px); } 
+	100% { transform: translateY(12px); } 
 }
 /* Top line falls 10px from elevated position */
 @keyframes topFall {
 	0% { transform: translateY(0); } 
-	100% { transform: translateY(10px); } 
+	100% { transform: translateY(12px); } 
 }
 /* Apply bounce and spin animations */
 /* Animation triggers via JS on first page load */

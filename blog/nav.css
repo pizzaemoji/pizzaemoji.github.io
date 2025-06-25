@@ -144,7 +144,7 @@ nav {
 /* Menu Sections */
 .menu-section {
 	margin-bottom: 2rem;
-	padding: 0 1rem;
+	padding: 0;
 }
 .menu-section-title {
 	display: block;

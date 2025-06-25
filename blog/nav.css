@@ -162,8 +162,10 @@ nav {
 }
 .menu-section-space {
 	display: block;
-	padding: .5rem;
+	padding: 1rem 0;
 	background: inherit;
+	border-top: 1px solid rgba(255, 255, 255, 0.5);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 .menu-item {
 	display: block;

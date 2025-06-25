@@ -179,7 +179,7 @@ nav {
 }
 .menu-spacer {
 	display: block;
-	padding: 1rem 2rem;
+	padding: .5rem 2rem;
 	background: inherit;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }

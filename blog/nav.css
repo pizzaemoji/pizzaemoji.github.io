@@ -181,7 +181,7 @@ nav {
 }
 .menu-item:hover {
 	color: #FE6000;
-	background: rgba(255, 165, 0, 0.1);
+	background: rgba(255, 165, 0, 0.9);
 	transform: translateX(4px);
 }
 /* Clean scrollbar */

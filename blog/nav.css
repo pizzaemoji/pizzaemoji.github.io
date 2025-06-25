@@ -157,6 +157,12 @@ nav {
 	margin-bottom: 0.5rem;
 	background: inherit;
 }
+.menu-section-space {
+	display: block;
+	padding: .5rem 1.5rem;
+	margin-bottom: 0.5rem;
+	background: inherit;
+}
 .menu-item {
 	display: block;
 	text-decoration: none;

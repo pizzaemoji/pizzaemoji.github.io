@@ -158,9 +158,9 @@ nav {
 	-webkit-backdrop-filter: blur(20px);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
-.menu-item:first-of-type {
+/*.menu-item:first-of-type {
 	border-top: 1px solid rgba(255, 255, 255, 0.5);
-}
+} */
 .menu-title {
 	display: block;
 	text-decoration: none;
@@ -171,6 +171,8 @@ nav {
 	padding: 1rem 2rem;
 	transition: all 0.2s ease;
 	background: inherit;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+
 }
 .menu-feature {
 	text-indent: 2rem;

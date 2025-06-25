@@ -173,34 +173,34 @@ nav {
 	background: rgba(254, 96, 0, 0.1);
 	color: #FE6000;
 	transform: translateX(4px);
-	*/
 }
-.red {
+	*/
+.red:hover {
 	background: rgba(255, 99, 99, 0.1);
 	color: #FF3B3B;
 	transform: translateX(4px);
 }
-.orange {
+.orange:hover {
 	background: rgba(255, 165, 0, 0.1);
 	color: #FF8C1A;
 	transform: translateX(4px);
 }
-.yellow {
+.yellow:hover {
 	background: rgba(255, 255, 102, 0.1);
 	color: #FFD700;
 	transform: translateX(4px);
 }
-.green {
+.green:hover {
 	background: rgba(102, 204, 102, 0.1);
 	color: #32CD32;
 	transform: translateX(4px);
 }
-.blue {
+.blue:hover {
 	background: rgba(100, 149, 237, 0.1);
 	color: #1E90FF;
 	transform: translateX(4px);
 }
-.purple {
+.purple:hover {
 	background: rgba(186, 85, 211, 0.1);
 	color: #BA55D3;
 	transform: translateX(4px);

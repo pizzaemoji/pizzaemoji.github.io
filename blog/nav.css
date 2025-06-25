@@ -170,7 +170,7 @@ nav {
 
 }
 .menu-feature {
-	text-indent: 2rem;
+	text-indent: 1rem;
 }
 .accent-color {
 	background: rgba(255, 165, 0, 0.1);
@@ -235,8 +235,8 @@ nav {
 		left: 2rem;
 	}
 	#side-menu {
-		max-width: 400px;
-		padding-top: 120px;
+		max-width: 450px;
+		padding-top: 110px;
 	}
 	#logo {
 		height: 50px;

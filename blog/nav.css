@@ -175,6 +175,12 @@ nav {
 .menu-feature {
 	text-indent: 2rem;
 }
+.menu-spacer {
+	display: block;
+	padding: 1rem 2rem;
+	background: inherit;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
 .accent-color {
 	background: rgba(255, 165, 0, 0.1);
 	color: #FF8C1A;

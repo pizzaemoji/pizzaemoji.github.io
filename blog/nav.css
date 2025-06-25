@@ -5,7 +5,7 @@ nav {
 	left: 0;
 	right: 0;
 	height: 70px;
-	background: rgba(50, 40, 38, 0.4);
+	background: rgba(44, 40, 38, 0.4);
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	display: flex;
@@ -108,7 +108,7 @@ nav {
 	width: 100%;
 	max-width: 280px;
 	height: 100vh;
-	background: rgba(50, 40, 38, 0.4);
+	background: rgba(44, 40, 38, 0.4);
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	padding-top: 80px;
@@ -153,7 +153,7 @@ nav {
 	letter-spacing: 0.5px;
 	padding: 1rem 2rem;
 	transition: all 0.2s ease;
-	background: rgba(7, 7, 7, 0.4);
+	background: rgba(7, 7, 7, 0.8);
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);

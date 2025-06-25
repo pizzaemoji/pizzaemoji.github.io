@@ -144,35 +144,13 @@ nav {
 /* Menu Sections */
 .menu-section {
 	margin-bottom: 2rem;
-	padding: 0;
-}
-.menu-section-title {
-	display: block;
-	text-decoration: none;
-	color: #F0F0F0;
-	font-size: 1.2rem;
-	text-indent: 2rem;
-	font-weight: 600;
-	letter-spacing: 0.5px;
-	padding: 1rem 0;	
-	background: inherit;
-	border-top: 1px solid rgba(255, 255, 255, 0.5);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-
-}
-.menu-section-space {
-	display: block;
-	padding: 1rem 0;
-	background: inherit;
-	border-top: 1px solid rgba(255, 255, 255, 0.5);
-	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 .menu-item {
 	display: block;
 	text-decoration: none;
 	color: #F0F0F0;
 	font-size: 1.2rem;
-	text-indent: 1rem;
+	text-indent: 2rem;
 	padding: 1rem 0;
 	transition: all 0.2s ease;
 	background: rgba(1, 1, 1, 0.4);
@@ -180,42 +158,21 @@ nav {
 	border-left: none;
 	border-top: 1px solid rgba(255, 255, 255, 0.5);
 	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
-
 }
-/*
-.menu-item:hover {
-	background: rgba(254, 96, 0, 0.1);
-	color: #FE6000;
-	transform: translateX(4px);
+.menu-title {
+	font-weight: 600;
+	letter-spacing: 0.5px;
+	background: inherit;
 }
-*/
-.red {
-	background: rgba(255, 99, 99, 0.1);
-	color: #FF3B3B;
+.menu-feature {
+	text-indent: 3rem;
 }
-.orange {
+.accent-color {
 	background: rgba(255, 165, 0, 0.1);
 	color: #FF8C1A;
-}
-.yellow {
-	background: rgba(255, 255, 102, 0.1);
-	color: #FFD700;
-}
-.green {
-	background: rgba(102, 204, 102, 0.1);
-	color: #32CD32;
-}
-.blue {
-	background: rgba(100, 149, 237, 0.1);
-	color: #1E90FF;
-}
-.purple {
-	background: rgba(186, 85, 211, 0.1);
-	color: #BA55D3;
-}
 .menu-item:hover {
-/*	background: rgba(255, 255, 255, 0.8); */
-	color: #F0F0F0;
+	color: #FE6000;
+	background: rgba(255, 165, 0, 0.1);
 	transform: translateX(4px);
 }
 /* Clean scrollbar */

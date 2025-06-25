@@ -154,11 +154,18 @@ nav {
 	padding: 1rem 0;
 	transition: all 0.2s ease;
 	background: rgba(1, 1, 1, 0.4);
-	border-right: none;
-	border-left: none;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 }
 .menu-title {
+	display: block;
+	text-decoration: none;
+	color: #F0F0F0;
+	font-size: 1.2rem;
+	text-indent: 2rem;
+	padding: 1rem 0;
+	transition: all 0.2s ease;
+	background: rgba(1, 1, 1, 0.4);
+	border-bottom: 1px solid rgba(255, 255, 255, 0.5);
 	font-weight: 600;
 	letter-spacing: 0.5px;
 	background: inherit;
@@ -169,6 +176,7 @@ nav {
 .accent-color {
 	background: rgba(255, 165, 0, 0.1);
 	color: #FF8C1A;
+}
 .menu-item:hover {
 	color: #FE6000;
 	background: rgba(255, 165, 0, 0.1);

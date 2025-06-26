@@ -180,7 +180,7 @@ nav {
 }
 .menu-spacer {
 	display: block;
-	padding: .5rem 2rem;
+	padding: .5rem 1rem;
 	background: inherit;
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
@@ -248,7 +248,7 @@ nav {
 	}
 	#side-menu {
 		max-width: 500px;
-		padding-top: 101px;
+		padding-top: 100px;
 	}
 	#logo {
 		height: 50px;

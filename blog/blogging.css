@@ -39,39 +39,6 @@ h2 {
 	font-weight: 300;
 	margin: 0;
 }
-		.title-container {
-            display: inline-block; /* Container fits content */
-            padding: 30px;
-            border-radius: 8px;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-            margin-right: 20px;
-		}
-		.justified-title {
-            display: inline-block;
-        }
-        .justified-title h1,
-        .justified-title h2 {
-            margin: 0;
-            line-height: 1;
-            white-space: nowrap;
-        }
-
-        .justified-title h1 {
-            text-align: center;
-        }
-
-        .justified-title h2 {
-        	word-spacing: .05em;
-            text-align: justify;
-            text-align-last: justify;
-            width: 100%; /* Matches the width set by h1 */
-        }
-        .justified-title .byline {
-            text-align: center;
-            white-space: nowrap;
-		}
-        
 .byline {
 	display: inline-block;
 	font-size: 1.2rem;

@@ -3,12 +3,14 @@
 	box-sizing: border-box;
 }
 html {
-	font-size: 100%;
+	font-size: 16px;
 }
 body {
 	font-family: "Helvetica Neue", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
 	background-color: #1A1A1A; /* Remember to update theme-color on index! */
 	color: #F0F0F0;
+	font-size: 14px;
+	line-height: 1.5;
 	margin: 0;
 	counter-reset: fn_counter; /* Creates footnote <sup> counter */
 }
@@ -25,18 +27,16 @@ header {
 h1 {
 	color: #EEEEEE;
 	font-size: 3rem;
-	line-height: 3.2rem;
+	line-height: 1;
 	font-weight: 900;
 	word-spacing: .05rem;
-	text-align: left;
 	margin: 0;
 }
 h2 {
 	color: #EEEEEE;
 	font-size: 2.2rem;
-	line-height: 2.4rem;
+	line-height: 1;
 	font-weight: 100;
-	text-align: left;
 	font-style: italic;
 	margin: 0;
 }
@@ -51,15 +51,15 @@ h2 {
 }
 .byline {
 	display: inline-block;
-	font-size: 1.2rem;
+	font-size: 1em;
+	line-height: 1;
 	font-weight: 600;
-	text-align: left;
 	padding-top: 2px; /* Puts a little space above border */
 	border-top: 3px solid #FE6000;
 }
 time {
-	font-size: 1rem;
-	line-height: 1rem;
+	font-size: 1em;
+	line-height: 1;
 	font-weight: 100;
 }
 #endslice {
@@ -69,24 +69,22 @@ time {
 article {
 	max-width: 724px;
 	width: 90%;
-	font-size: 1.4rem;
+	font-size: 1.715em;
+	font-weight: 200;
 	margin: 0 auto;
 	padding: 0;
 	hyphens: auto;
 	text-wrap: pretty;
 }
-p {
-	opacity: 0.9;
-	line-height: 1.6;
-}
 section {
 	padding: 0;
+p {
+	opacity: 0.9;
+}
 }
 h3 {
  	font-size: 1.6rem;
-	line-height: 1.8rem;
 	font-weight: 600;
-	text-align: left;
 	padding-top: 1rem;
 	padding-bottom: .5em;
 	margin: 0;

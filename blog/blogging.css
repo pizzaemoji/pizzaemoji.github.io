@@ -55,7 +55,7 @@ h2 {
 article {
 	max-width: 724px;
 	width: 90%;
-	font-size: 1em;
+	font-size: 1.3em;
 	margin: 0 auto;
 	padding-bottom: 20px;
 	hyphens: auto;
@@ -65,11 +65,10 @@ section {
 	padding: 3rem 0 0 0;
 }
 time {
-	font-size: 1em;
+	font-size: 1.1em;
 	font-weight: 100;
 }
 p {
-	font-size: 1em;
 	opacity: 0.9;
 }
 .shortDescription {

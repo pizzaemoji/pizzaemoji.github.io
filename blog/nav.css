@@ -5,7 +5,7 @@ nav {
 	left: 0;
 	right: 0;
 	height: 70px;
-	background: rgba(24, 26, 30, .05);
+	background: rgba(24, 26, 28, .05);
 	backdrop-filter: blur(20px);
 	-webkit-backdrop-filter: blur(20px);
 	display: flex;

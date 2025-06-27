@@ -54,7 +54,7 @@ h2 {
         .justified-title h2 {
             margin: 0;
             line-height: 1;
-            white-space: nowrap; /* Prevents wrapping */
+            white-space: nowrap;
         }
 
         .justified-title h1 {
@@ -67,11 +67,15 @@ h2 {
             text-align-last: justify;
             width: 100%; /* Matches the width set by h1 */
         }
+        .justified-title .byline {
+            text-align: center;
+            white-space: nowrap;
+
+        
 .byline {
 	display: inline-block;
 	font-size: 1.2rem;
 	font-weight: 300;
-	text-align: center;
 	padding-top: 2px; /* Puts a little space above border */
 	border-top: 3px solid #FE6000;
 	margin: 10px;

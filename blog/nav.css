@@ -149,8 +149,7 @@ nav {
 	display: block;
 	text-decoration: none;
 	color: #F0F0F0;
-	font-size: 1.2rem;
-	letter-spacing: 0.5px;
+	font-size: 1.625rem;
 	padding: 1rem 2rem;
 	transition: all 0.2s ease;
 	background: rgba(7, 7, 7, 0.7);
@@ -177,10 +176,6 @@ nav {
 	background: rgba(88, 38, 0, 0.9);
 	transform: translateX(4px);
 }
-/* .menu-title:hover {
-	display: block;
-	text-decoration: none;	
-} */
 /* Clean scrollbar */
 #side-menu::-webkit-scrollbar {
 	width: 6px;

@@ -37,7 +37,7 @@ h1 {
 h2 {
 	color: #EEEEEE;
 	font-size: 2rem;
-	line-height: 1rem;
+	line-height: 2rem;
 	font-weight: 300;
 	letter-spacing: -0.1rem;
 	word-spacing: -0.1rem;
@@ -65,7 +65,7 @@ section {
 	padding: 3rem 0 0 0;
 }
 time {
-	font-size: 1.1em;
+	font-size: .9em;
 	font-weight: 100;
 }
 p {

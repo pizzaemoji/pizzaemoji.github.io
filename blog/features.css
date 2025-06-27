@@ -51,7 +51,7 @@ h2 {
 }
 .byline {
 	display: inline-block;
-	font-size: 2em;
+	font-size: 1.2em;
 	line-height: 1;
 	font-weight: 600;
 	padding-top: 2px; /* Puts a little space above border */
@@ -260,7 +260,7 @@ a.fnlink:hover {
 		margin: 140px 0 40px 0;
 	}
 	.byline {
-		font-size: 1.1em;
+		font-size: 1.3em;
 	}
 	.image-small-left {
 		width: 300px;

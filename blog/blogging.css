@@ -10,7 +10,7 @@ body {
 	background-color: rgb(38, 40, 45); /* Remember to update theme-color on index! */
 	color: #F0F0F0;
 	font-size: 14px;
-	line-height: 1.5px;
+	line-height: 1.5;
 	margin: 0;
 }
 /* Header content */

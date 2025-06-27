@@ -82,6 +82,7 @@ p {
 }
 .shortDescription {
 	padding-top: .25rem;
+	font-style: italic;
 }
 blockquote {
 	margin: 2rem 2rem 2rem 0rem;

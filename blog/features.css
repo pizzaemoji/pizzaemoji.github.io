@@ -51,14 +51,14 @@ h2 {
 }
 .byline {
 	display: inline-block;
-	font-size: 1.1em;
+	font-size: 1.5em;
 	line-height: 1;
 	font-weight: 600;
 	padding-top: 2px; /* Puts a little space above border */
 	border-top: 3px solid #FE6000;
 }
 time {
-	font-size: 1.1em;
+	font-size: 1.4em;
 	line-height: 1;
 	font-weight: 100;
 }

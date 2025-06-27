@@ -43,7 +43,7 @@ h2 {
 	word-spacing: -0.05rem;
 	margin: 0;
 	border-bottom: 3px solid #FE6000; /* swapped from byline top */
-	padding-bottom: 3px;
+	padding-bottom: 5px;
 }
 .byline {
 	display: inline-block;

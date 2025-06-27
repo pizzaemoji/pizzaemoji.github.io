@@ -29,7 +29,7 @@ header {
 h1 {
 	color: #EEEEEE;
 	font-size: 3rem;
-	/*line-height: 3.2rem;*/
+	line-height: 1rem;
 	font-weight: 600;
 	letter-spacing: 0.2rem;
 	margin: 0;

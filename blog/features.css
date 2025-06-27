@@ -51,7 +51,7 @@ h2 {
 }
 .byline {
 	display: inline-block;
-	font-size: 1.4em;
+	font-size: 2em;
 	line-height: 1;
 	font-weight: 600;
 	padding-top: 2px; /* Puts a little space above border */
@@ -201,7 +201,7 @@ a.fnlink:hover {
 	color: #FE6000;
 	font-size: 2rem;
 	font-weight: 100;
-	line-height: 1;
+	line-height: 1.05;
 	font-style: italic;
 	word-spacing: 25%;
 	text-transform: uppercase;
@@ -221,7 +221,7 @@ a.fnlink:hover {
 	color: #FE6000;
 	font-size: 2rem;
 	font-weight: 100;
-	line-height: 1.1;
+	line-height: 1.05;
 	font-style: italic;
 	word-spacing: 25%;
 	text-transform: uppercase;

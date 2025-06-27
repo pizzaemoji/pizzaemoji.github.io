@@ -51,7 +51,7 @@ h2 {
 }
 .byline {
 	display: inline-block;
-	font-size: 1.2em;
+	font-size: 1.3em;
 	line-height: 1;
 	font-weight: 600;
 	padding-top: 2px; /* Puts a little space above border */
@@ -78,9 +78,9 @@ article {
 }
 section {
 	padding: 0;
+}
 p {
 	opacity: 0.9;
-}
 }
 h3 {
  	font-size: 1.6rem;
@@ -259,9 +259,6 @@ a.fnlink:hover {
 	header {
 		margin: 140px 0 40px 0;
 	}
-	.byline {
-		font-size: 1.3em;
-	}
 	.image-small-left {
 		width: 300px;
 		margin: 10px 30px 10px -60px;
@@ -272,13 +269,11 @@ a.fnlink:hover {
 	}
 	.pullquote-left {
 		width: 60%;
-		font-size: 1.8rem;
 		text-align: left;
 		margin: 10px 30px 10px -60px;
 	}
 	.pullquote-right {
 		width: 60%;
-		font-size: 1.8rem;
 		text-align: right;
 		margin: 10px -60px 10px 30px;
 	}

@@ -43,13 +43,13 @@ h2 {
 	word-spacing: -0.05rem;
 	margin: 0;
 	border-bottom: 3px solid #FE6000; /* swapped from byline top */
-	padding-bottom: 5px;
+	padding-bottom: 2px;
 }
 .byline {
 	display: inline-block;
 	font-size: 1rem;
 	font-weight: 300;
-	margin-top: 3px;
+	margin-top: 1px;
 }
 /* Article and sections formatting */
 article {

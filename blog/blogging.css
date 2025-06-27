@@ -71,7 +71,7 @@ h2 {
 	display: inline-block;
 	font-size: 1.2rem;
 	font-weight: 300;
-	text-align: left;
+	text-align: center;
 	padding-top: 2px; /* Puts a little space above border */
 	border-top: 3px solid #FE6000;
 	margin: 10px;

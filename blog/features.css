@@ -187,9 +187,9 @@ a.fnlink:link, a.fnlink:visited {
 	text-decoration: none;
 	border: none;
 }
-a.fnlink:hover {
+a.fnlink:hover, a.fnlink:active {
 	text-decoration: none;
-	text-color: #F0F0F0;
+	color: #F0F0F0;
 	cursor: pointer;
 }
 /* Pullquotes and Small Images */

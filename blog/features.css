@@ -157,7 +157,7 @@ footer {
 }
 /* Footnotes */
 .footnote {
-	font-size: 1.3rem;
+	font-size: 1.2rem;
 	line-height: 1.5;
 	font-weight: 200;
 	margin-top: 3em;
@@ -278,7 +278,7 @@ a.fnlink:hover {
 		margin: 10px -60px 10px 30px;
 	}
 	.footnote {
-		padding-left: 2rem;
+		padding-left: 3rem;
 		padding-right: 3rem;
 	}
 }

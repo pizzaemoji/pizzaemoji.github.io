@@ -109,6 +109,7 @@ article a:hover, article a:active, footer a:hover, footer a:active {
 	color: #F0F0F0;
 	border-color: #FE6000;
 }
+
 /* Image and Captioning */
 .image-container {
 	text-align: center;
@@ -165,8 +166,8 @@ footer {
 }
 sup {
 	color: #FE6000;
-	font-size: .8rem;
-	font-weight: 600;
+	font-size: 1rem;
+	font-weight: 900;
 	line-height: 0; /* removes gap above superscript number */
 }
 sup::after {
@@ -184,11 +185,11 @@ li {
 }
 a.fnlink:link, a.fnlink:visited {
 	text-decoration: none;
-	border-color: #f0f0f0;
+	border: none;
 }
 a.fnlink:hover {
 	text-decoration: none;
-	border-color: #f0f0f0;
+	text-color: #F0F0F0;
 	cursor: pointer;
 }
 /* Pullquotes and Small Images */

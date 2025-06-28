@@ -73,8 +73,7 @@ time {
 h3 {
  	font-size: 1.5rem;
 	font-weight: 600;
-	padding-top: 0;
-	padding-bottom: .5rem;
+	padding: 0;
 	margin: 0;
 }
 p {

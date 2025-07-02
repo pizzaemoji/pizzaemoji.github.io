@@ -84,7 +84,7 @@ p {
 }
 p.dropcap::first-letter {
 	float: left;
-	font-size: 5rem;
+	font-size: 8rem;
 	font-weight: 900;
 	line-height: 1;
 	padding-right: 0.1em;

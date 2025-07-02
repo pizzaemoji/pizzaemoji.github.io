@@ -89,16 +89,6 @@ p.dropcap::first-letter {
 	line-height: 1;
 	padding-right: 0.1em;
 }
-.dropcap-block {
-	display: flex;
-	align-items: flex-start;
-}
-.dropcap-letter {
-	font-size: 4rem;
-	font-weight: 900;
-	line-height: 1;
-	margin-right: 0.3em;
-}
 h3 {
  	font-size: 1.5rem;
 	font-weight: 600;

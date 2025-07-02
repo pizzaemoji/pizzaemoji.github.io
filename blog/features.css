@@ -120,12 +120,12 @@ article a:hover, article a:active, footer a:hover, footer a:active {
 /* Image and Captioning */
 .image-container {
 	text-align: center;
-	max-width: 90%;
+	max-width: 100%;
 	margin: 40px auto 0 auto;
 }
 .image-large {
 	display: block;
-	width: 100%;
+	width: 90%;
 	height: auto;
 	margin: 0 auto;
 }
@@ -137,7 +137,7 @@ article a:hover, article a:active, footer a:hover, footer a:active {
 	font-style: italic;
 	margin: 1rem auto 0 auto;
 	padding: 0;
-	width: 78%;
+	width: 90%;
 	max-width: fit-content;
 }
 footer {
@@ -249,8 +249,8 @@ a.fnlink:hover, a.fnlink:active {
 	border-top: #FE6000 1px solid;
 	border-bottom: #FE6000 1px solid;
 	padding: 15px 0 15px 0;
-	width: 200px;
-	margin: 10px 10px 10px -10px;
+	width: 150px;
+	margin: 10px 10px 10px -15px;
 }
 .image-small-right {
 	display: inline;
@@ -259,8 +259,8 @@ a.fnlink:hover, a.fnlink:active {
 	border-top: #FE6000 1px solid;
 	border-bottom: #FE6000 1px solid;
 	padding: 15px 0 15px 0;
-	width: 200px;
-	margin: 10px -10px 10px 10px;
+	width: 150px;
+	margin: 10px -15px 10px 10px;
 }
 /* Desktop override */
 @media (min-width: 800px) {

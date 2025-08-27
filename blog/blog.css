@@ -15,12 +15,12 @@ body {
 }
 /* Header content */
 main {
-	margin: 200px 0 40px 0;
+	margin: 200px auto;
 	max-width: 1000px;
 	padding: 0px 10px;
-	margin: 0 auto;
 }
 header {
+	margin-bottom: 40px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

@@ -110,7 +110,7 @@ nav {
 	height: 100vh;
 	background: rgba(20, 20, 20, 0.4);
 	backdrop-filter: blur(20px);
-	-webkit-backdrop-filter: blur(20px);
+/*	-webkit-backdrop-filter: blur(20px); */
 	padding-top: 100px;
 	padding-bottom: 100px;
 	transform: translateX(-100%);
@@ -131,7 +131,7 @@ nav {
 	height: 100%;
 	background: rgba(0, 0, 0, 0.1);
 	backdrop-filter: blur(20px);
-	-webkit-backdrop-filter: blur(20px);
+/*	-webkit-backdrop-filter: blur(20px); */
 	opacity: 0;
 	visibility: hidden;
 	transition: all 0.3s ease;
@@ -155,7 +155,7 @@ nav {
 	transition: all 0.2s ease;
 	background: rgba(7, 7, 7, 0.7);
 	backdrop-filter: blur(20px);
-	-webkit-backdrop-filter: blur(20px);
+/*	-webkit-backdrop-filter: blur(20px); */
 	border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 /* .menu-title {
@@ -224,9 +224,6 @@ nav {
 }
 /* Desktop */
 @media (min-width: 800px) {
-	nav {
-		height: 100px;
-	}
 	#menu-toggle {
 		left: 2rem;
 	}

@@ -15,17 +15,18 @@ body {
 }
 /* Header content */
 main {
-	margin: 0 auto;
 	max-width: 1000px;
+	margin: 0 auto;
 	padding: 0px 10px;
 }
 header {
-	padding-top: 200px;
-	margin-bottom: 40px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
 	text-align: center;
+	margin: 0 auto;
+	padding-top: 200px; /* Safari rendering bug, don't use margin here! */
+	padding-bottom: 50px;
 }
 h1 {
 	color: #EEEEEE;

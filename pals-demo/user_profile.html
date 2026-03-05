@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pals | Mia Fisher</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 dark:bg-zinc-900 antialiased">
+
+    <div class="max-w-md mx-auto h-screen flex flex-col bg-white dark:bg-black shadow-2xl overflow-hidden relative">
+        
+        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50 dark:border-zinc-900">
+            <a href="index.html" class="text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+            </a>
+            <img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+            <div class="flex gap-4 items-center">
+                <button class="text-zinc-800 dark:text-zinc-200 text-2xl font-light">+</button>
+                <button class="text-zinc-800 dark:text-zinc-200">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+                    </svg>
+                </button>
+            </div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto px-8 pt-12 flex flex-col items-center text-center">
+            
+            <div class="relative mb-6">
+                <img src="images/User_Profile.png" alt="Mia Fisher" class="w-40 h-40 rounded-full border-4 border-gray-50 dark:border-zinc-800 object-cover shadow-lg">
+            </div>
+
+            <h1 class="text-3xl font-bold text-zinc-900 dark:text-white mb-1">Mia Fisher</h1>
+            <p class="text-zinc-400 dark:text-zinc-500 font-medium mb-6">she/her</p>
+
+            <div class="max-w-xs">
+                <p class="text-zinc-700 dark:text-zinc-300 text-lg mb-4">
+                    Living in Humboldt with my 🐈
+                </p>
+                <p class="text-zinc-400 dark:text-zinc-600 italic text-sm">
+                    Pal since Jan 2026
+                </p>
+            </div>
+
+            <div class="mt-12 w-full">
+                <a href="settings.html" class="flex items-center justify-between p-4 bg-gray-50 dark:bg-zinc-900 rounded-2xl active:scale-95 transition-transform">
+                    <div class="flex items-center">
+                        <span class="p-2 bg-white dark:bg-zinc-800 rounded-lg mr-3 shadow-sm">⚙️</span>
+                        <span class="font-bold text-zinc-900 dark:text-white">Settings</span>
+                    </div>
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-zinc-400">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
+                    </svg>
+                </a>
+            </div>
+
+        </main>
+    </div>
+
+</body>
+</html>

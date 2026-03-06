@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pals | Settings</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        // 1. Core Engine: Applies the theme based on storage
+        function applyTheme() {
+            const isDark = localStorage.getItem('pals-theme') === 'dark';
+            if (isDark) {
+                document.documentElement.classList.add('dark');
+            } else {
+                document.documentElement.classList.remove('dark');
+            }
+        }
+
+        // 2. Toggle Function: Triggered when the user flips the switch
+        function handleThemeToggle(checkbox) {
+            if (checkbox.checked) {
+                localStorage.setItem('pals-theme', 'dark');
+            } else {
+                localStorage.setItem('pals-theme', 'light');
+            }
+            applyTheme();
+        }
+
+        // 3. Initial Load: Ensures the toggle position matches the current theme
+        window.addEventListener('DOMContentLoaded', () => {
+            const isDark = localStorage.getItem('pals-theme') === 'dark';
+            document.getElementById('darkToggle').checked = isDark;
+            applyTheme();
+        });
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Pals Red Toggle Style */
+        input:checked ~ .bg-toggle { background-color: #EF4444 !important; }
+        input:checked ~ .dot { transform: translateX(1.25rem); }
+    </style>
+</head>
+<body class="bg-gray-100 dark:bg-zinc-900 antialiased transition-colors duration-200">
+
+    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
+        
+        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50 dark:border-zinc-800">
+            <a href="user_profile.html" class="text-zinc-800 dark:text-zinc-200">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+            </a>
+            <div class="w-6"></div>
+        </header>
+
+        <main class="flex-1 overflow-y-auto no-scrollbar px-6 pb-24">
+            <h1 class="text-3xl font-bold text-zinc-900 dark:text-white mt-4 mb-8">Settings</h1>
+
+            <section class="mb-10">
+                <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-4">General Settings</h2>
+                <div class="space-y-6">
+                    <div>
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-zinc-800 dark:text-zinc-200">Join Special Events</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only">
+                                <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-800 rounded-full transition-colors"></div>
+                                <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform"></div>
+                            </label>
+                        </div>
+                        <p class="text-[13px] text-zinc-500 leading-snug">Special Events are opportunities to receive unique digital rewards. No personal information is provided to brands.</p>
+                    </div>
+
+                    <div class="border-t border-gray-100 dark:border-zinc-900 pt-4">
+                        <div class="flex items-center justify-between mb-2">
+                            <span class="text-zinc-800 dark:text-zinc-200">Read Receipts</span>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only">
+                                <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-800 rounded-full transition-colors"></div>
+                                <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform"></div>
+                            </label>
+                        </div>
+                        <p class="text-[13px] text-zinc-500 leading-snug">Turning off read receipts means your Pals can't see when you've read their messages.</p>
+                    </div>
+                </div>
+            </section>
+
+            <section class="mb-10">
+                <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-4">App Appearance</h2>
+                <div class="space-y-4">
+                    <div class="flex items-center justify-between">
+                        <span class="text-zinc-800 dark:text-zinc-200">Use System Appearance</span>
+                        <label class="relative inline-flex items-center cursor-pointer opacity-50">
+                            <input type="checkbox" class="sr-only" disabled>
+                            <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-800 rounded-full transition-colors"></div>
+                            <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform"></div>
+                        </label>
+                    </div>
+
+                    <div class="flex items-center justify-between">
+                        <span class="text-zinc-800 dark:text-zinc-200">Always Use Dark Mode</span>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" id="darkToggle" class="sr-only" onchange="handleThemeToggle(this)">
+                            <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-800 rounded-full transition-colors"></div>
+                            <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform"></div>
+                        </label>
+                    </div>
+
+                    <button class="w-full flex justify-between items-center py-2 text-zinc-800 dark:text-zinc-200">
+                        <span>Change App Icon</span>
+                        <span class="text-zinc-400">›</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="mb-10">
+                <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-4">My Pals Account</h2>
+                <div class="space-y-4">
+                    <button class="w-full flex justify-between items-center text-zinc-800 dark:text-zinc-200">
+                        <span>Change Phone Number</span>
+                        <span class="text-zinc-400">›</span>
+                    </button>
+                    <a href="analytics.html" class="w-full flex justify-between items-center text-zinc-800 dark:text-zinc-200">
+                        <span>Data Analytics</span>
+                        <span class="text-zinc-400">›</span>
+                    </a>
+                    <button class="w-full flex justify-between items-center text-red-500 font-bold">
+                        <span>Delete My Account</span>
+                        <span class="text-zinc-400">›</span>
+                    </button>
+                </div>
+            </section>
+        </main>
+    </div>
+</body>
+</html>

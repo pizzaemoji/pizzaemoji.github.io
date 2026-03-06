@@ -8,14 +8,14 @@
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        /* Pals Red Toggle - Styled but inactive for now */
+        /* Pals Red Toggle - Now fully interactive for the demo */
         input:checked ~ .bg-toggle { background-color: #EF4444 !important; }
         input:checked ~ .dot { transform: translateX(1.25rem); }
     </style>
 </head>
 <body class="bg-gray-100 antialiased">
 
-	<div class="w-full h-dvh flex flex-col bg-white shadow-2xl relative overflow-hidden">
+    <div class="w-full h-dvh flex flex-col bg-white shadow-2xl relative overflow-hidden">
         
         <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50">
             <a href="user_profile.html" class="text-zinc-800">
@@ -36,8 +36,8 @@
                     <div>
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-zinc-800">Join Special Events</span>
-                            <label class="relative inline-flex items-center cursor-default">
-                                <input type="checkbox" class="sr-only" checked disabled>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only">
                                 <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
                                 <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
                             </label>
@@ -48,8 +48,8 @@
                     <div class="border-t border-gray-100 pt-4">
                         <div class="flex items-center justify-between mb-2">
                             <span class="text-zinc-800">Read Receipts</span>
-                            <label class="relative inline-flex items-center cursor-default">
-                                <input type="checkbox" class="sr-only" checked disabled>
+                            <label class="relative inline-flex items-center cursor-pointer">
+                                <input type="checkbox" class="sr-only">
                                 <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
                                 <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
                             </label>
@@ -65,17 +65,17 @@
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
                         <span class="text-zinc-800">Use System Appearance</span>
-                        <label class="relative inline-flex items-center cursor-default">
-                            <input type="checkbox" class="sr-only" disabled>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only">
                             <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
                             <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
                         </label>
                     </div>
 
-                    <div class="flex items-center justify-between opacity-40">
+                    <div class="flex items-center justify-between">
                         <span class="text-zinc-800">Always Use Dark Mode</span>
-                        <label class="relative inline-flex items-center cursor-default">
-                            <input type="checkbox" class="sr-only" disabled>
+                        <label class="relative inline-flex items-center cursor-pointer">
+                            <input type="checkbox" class="sr-only">
                             <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
                             <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
                         </label>
@@ -90,7 +90,7 @@
 
             <section class="mb-10">
                 <h2 class="text-lg font-bold text-zinc-900 mb-4">My Pals Account</h2>
-                <div class="space-y-4">
+                <div class="space-y-6">
                     <button class="w-full flex justify-between items-center text-zinc-800">
                         <span>Change Phone Number</span>
                         <span class="text-zinc-400">›</span>
@@ -104,11 +104,13 @@
                         <span class="text-zinc-400">›</span>
                     </button>
                     
-                    <a href="analytics.html" class="w-full flex justify-between items-center text-zinc-800">
-                        <span>Data Analytics</span>
-                        <span class="text-zinc-400">›</span>
-                    </a>
+                    <div class="space-y-2">
+                        <a href="analytics.html" class="w-full flex justify-between items-center text-zinc-800">
+                            <span>Data Analytics</span>
+                            <span class="text-zinc-400">›</span>
+                        </a>
                         <p class="text-[13px] text-zinc-500 leading-snug">Opt-in here to help make Pals better and earn credits to spend in the shop.</p>
+                    </div>
                     
                     <button class="w-full flex justify-between items-center text-zinc-800">
                         <span>Delete My Account</span>

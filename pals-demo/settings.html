@@ -5,90 +5,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pals | Settings</title>
     <script src="https://cdn.tailwindcss.com"></script>
-	<script>
-    /**
-     * Pals Theme Engine
-     * Prioritizes Light Mode unless user explicitly opts into Dark or System sync.
-     */
-    function applyTheme() {
-        // Retrieve settings from local storage
-        // We use === 'true' to ensure they default to FALSE (Light Mode) if never set.
-        const useSystem = localStorage.getItem('useSystem') === 'true'; 
-        const manualDark = localStorage.getItem('manualDark') === 'true';
-        
-        // Check actual system preference from the browser/OS
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Determination Logic:
-        // 1. If System Sync is ON, follow the OS.
-        // 2. If System Sync is OFF, follow the manual "Always Use Dark Mode" toggle.
-        const shouldBeDark = useSystem ? systemDark : manualDark;
-
-        // Apply or Remove the .dark class to the root <html> element
-        if (shouldBeDark) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-
-        // If we are currently on the Settings page, update the toggle UI to match the data
-        if (document.getElementById('systemToggle')) {
-            updateUIStates(useSystem, manualDark);
-        }
-    }
-
-    function updateUIStates(useSystem, manualDark) {
-        const systemToggle = document.getElementById('systemToggle');
-        const darkToggle = document.getElementById('darkToggle');
-        const darkToggleRow = document.getElementById('darkToggleRow');
-
-        if (systemToggle) systemToggle.checked = useSystem;
-        if (darkToggle) darkToggle.checked = manualDark;
-
-        // Visual feedback: Grey out the manual dark toggle if System Sync is in control
-        if (useSystem) {
-            darkToggleRow.classList.add('opacity-40', 'pointer-events-none');
-        } else {
-            darkToggleRow.classList.remove('opacity-40', 'pointer-events-none');
-        }
-    }
-
-    // Functions called by the toggles on settings.html
-    function toggleSystem(e) {
-        localStorage.setItem('useSystem', e.checked);
-        applyTheme();
-    }
-
-    function toggleManualDark(e) {
-        localStorage.setItem('manualDark', e.checked);
-        applyTheme();
-    }
-
-    // Listen for the user changing their OS theme while the app is already open
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (localStorage.getItem('useSystem') === 'true') applyTheme();
-    });
-
-    // RUN IMMEDIATELY:
-    // 1. Run as soon as script is parsed to prevent "White Flash" in dark mode
-    applyTheme();
-    
-    // 2. Run again once DOM is ready to ensure UI elements (toggles) are synced
-    window.addEventListener('DOMContentLoaded', applyTheme);
-	</script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
-        /* Pals Red Toggle */
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Pals Red Toggle - Styled but inactive for now */
         input:checked ~ .bg-toggle { background-color: #EF4444 !important; }
         input:checked ~ .dot { transform: translateX(1.25rem); }
     </style>
 </head>
 <body class="bg-gray-100 antialiased">
 
-	<div class="max-w-md mx-auto h-screen flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
+    <div class="max-w-md mx-auto h-screen flex flex-col bg-white shadow-2xl relative overflow-hidden">
         
-        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50 dark:border-zinc-800">
-            <a href="user_profile.html" class="text-zinc-800 dark:text-zinc-200">
+        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50">
+            <a href="user_profile.html" class="text-zinc-800">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                 </svg>
@@ -97,30 +27,30 @@
         </header>
 
         <main class="flex-1 overflow-y-auto no-scrollbar px-6 pb-24">
-            <h1 class="text-3xl font-bold text-zinc-900 dark:text-white mt-4 mb-8">Settings</h1>
+            <h1 class="text-3xl font-bold text-zinc-900 mt-4 mb-8">Settings</h1>
 
             <section class="mb-10">
-                <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-4">General Settings</h2>
+                <h2 class="text-lg font-bold text-zinc-900 mb-4">General Settings</h2>
                 
                 <div class="space-y-6">
                     <div>
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-zinc-800 dark:text-zinc-200">Join Special Events</span>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" class="sr-only" checked>
-                                <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-800 rounded-full transition-colors"></div>
+                            <span class="text-zinc-800">Join Special Events</span>
+                            <label class="relative inline-flex items-center cursor-default">
+                                <input type="checkbox" class="sr-only" checked disabled>
+                                <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
                                 <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
                             </label>
                         </div>
                         <p class="text-[13px] text-zinc-500 leading-snug">Special Events are opportunities to receive unique digital rewards. Some Special Events may include sponsored content. No personal information is provided to brands. You may opt-out of Special Events at any time.</p>
                     </div>
 
-                    <div class="border-t border-gray-100 dark:border-zinc-900 pt-4">
+                    <div class="border-t border-gray-100 pt-4">
                         <div class="flex items-center justify-between mb-2">
-                            <span class="text-zinc-800 dark:text-zinc-200">Read Receipts</span>
-                            <label class="relative inline-flex items-center cursor-pointer">
-                                <input type="checkbox" class="sr-only" checked>
-                                <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-800 rounded-full transition-colors"></div>
+                            <span class="text-zinc-800">Read Receipts</span>
+                            <label class="relative inline-flex items-center cursor-default">
+                                <input type="checkbox" class="sr-only" checked disabled>
+                                <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
                                 <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
                             </label>
                         </div>
@@ -130,28 +60,28 @@
             </section>
 
             <section class="mb-10">
-                <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-4">App Appearance</h2>
+                <h2 class="text-lg font-bold text-zinc-900 mb-4">App Appearance</h2>
                 
                 <div class="space-y-4">
                     <div class="flex items-center justify-between">
-                        <span class="text-zinc-800 dark:text-zinc-200">Use System Appearance</span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="systemToggle" class="sr-only" onchange="toggleSystem(this)">
-                            <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-800 rounded-full transition-colors"></div>
+                        <span class="text-zinc-800">Use System Appearance</span>
+                        <label class="relative inline-flex items-center cursor-default">
+                            <input type="checkbox" class="sr-only" disabled>
+                            <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
                             <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
                         </label>
                     </div>
 
-                    <div id="darkToggleRow" class="flex items-center justify-between transition-opacity">
-                        <span class="text-zinc-800 dark:text-zinc-200">Always Use Dark Mode</span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="darkToggle" class="sr-only" onchange="toggleManualDark(this)">
-                            <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-800 rounded-full transition-colors"></div>
+                    <div class="flex items-center justify-between opacity-40">
+                        <span class="text-zinc-800">Always Use Dark Mode</span>
+                        <label class="relative inline-flex items-center cursor-default">
+                            <input type="checkbox" class="sr-only" disabled>
+                            <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
                             <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
                         </label>
                     </div>
 
-                    <button class="w-full flex justify-between items-center py-2 text-zinc-800 dark:text-zinc-200">
+                    <button class="w-full flex justify-between items-center py-2 text-zinc-800">
                         <span>Change App Icon</span>
                         <span class="text-zinc-400">›</span>
                     </button>
@@ -159,21 +89,21 @@
             </section>
 
             <section class="mb-10">
-                <h2 class="text-lg font-bold text-zinc-900 dark:text-white mb-4">My Pals Account</h2>
+                <h2 class="text-lg font-bold text-zinc-900 mb-4">My Pals Account</h2>
                 <div class="space-y-4">
-                    <button class="w-full flex justify-between items-center text-zinc-800 dark:text-zinc-200">
+                    <button class="w-full flex justify-between items-center text-zinc-800">
                         <span>Change Phone Number</span>
                         <span class="text-zinc-400">›</span>
                     </button>
-                    <button class="w-full flex justify-between items-center text-zinc-800 dark:text-zinc-200">
+                    <button class="w-full flex justify-between items-center text-zinc-800">
                         <span>View Hidden Users</span>
                         <span class="text-zinc-400">›</span>
                     </button>
-                    <button class="w-full flex justify-between items-center text-zinc-800 dark:text-zinc-200">
+                    <button class="w-full flex justify-between items-center text-zinc-800">
                         <span>View Blocked Users</span>
                         <span class="text-zinc-400">›</span>
                     </button>
-                    <button class="w-full flex justify-between items-center text-zinc-800 dark:text-zinc-200">
+                    <button class="w-full flex justify-between items-center text-zinc-800">
                         <span>Delete My Account</span>
                         <span class="text-zinc-400">›</span>
                     </button>

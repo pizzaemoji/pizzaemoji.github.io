@@ -6,22 +6,32 @@
     <title>Pals | Settings</title>
     <script src="https://cdn.tailwindcss.com"></script>
 	<script>
+    /**
+     * Pals Theme Engine
+     * Prioritizes Light Mode unless user explicitly opts into Dark or System sync.
+     */
     function applyTheme() {
-        // We now default 'useSystem' to false and 'manualDark' to false
+        // Retrieve settings from local storage
+        // We use === 'true' to ensure they default to FALSE (Light Mode) if never set.
         const useSystem = localStorage.getItem('useSystem') === 'true'; 
         const manualDark = localStorage.getItem('manualDark') === 'true';
+        
+        // Check actual system preference from the browser/OS
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-        // Logic: Only go dark if (System is ON and System is Dark) OR (System is OFF and Manual is Dark)
+        // Determination Logic:
+        // 1. If System Sync is ON, follow the OS.
+        // 2. If System Sync is OFF, follow the manual "Always Use Dark Mode" toggle.
         const shouldBeDark = useSystem ? systemDark : manualDark;
 
+        // Apply or Remove the .dark class to the root <html> element
         if (shouldBeDark) {
             document.documentElement.classList.add('dark');
         } else {
             document.documentElement.classList.remove('dark');
         }
 
-        // Only run this if we are on the actual settings page
+        // If we are currently on the Settings page, update the toggle UI to match the data
         if (document.getElementById('systemToggle')) {
             updateUIStates(useSystem, manualDark);
         }
@@ -32,10 +42,10 @@
         const darkToggle = document.getElementById('darkToggle');
         const darkToggleRow = document.getElementById('darkToggleRow');
 
-        systemToggle.checked = useSystem;
-        darkToggle.checked = manualDark;
+        if (systemToggle) systemToggle.checked = useSystem;
+        if (darkToggle) darkToggle.checked = manualDark;
 
-        // If system is on, "Always Use Dark Mode" is locked out
+        // Visual feedback: Grey out the manual dark toggle if System Sync is in control
         if (useSystem) {
             darkToggleRow.classList.add('opacity-40', 'pointer-events-none');
         } else {
@@ -43,6 +53,7 @@
         }
     }
 
+    // Functions called by the toggles on settings.html
     function toggleSystem(e) {
         localStorage.setItem('useSystem', e.checked);
         applyTheme();
@@ -53,10 +64,16 @@
         applyTheme();
     }
 
+    // Listen for the user changing their OS theme while the app is already open
     window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
         if (localStorage.getItem('useSystem') === 'true') applyTheme();
     });
+
+    // RUN IMMEDIATELY:
+    // 1. Run as soon as script is parsed to prevent "White Flash" in dark mode
+    applyTheme();
     
+    // 2. Run again once DOM is ready to ensure UI elements (toggles) are synced
     window.addEventListener('DOMContentLoaded', applyTheme);
 	</script>
     <style>
@@ -66,9 +83,9 @@
         input:checked ~ .dot { transform: translateX(1.25rem); }
     </style>
 </head>
-<body class="bg-gray-100 dark:bg-zinc-900 antialiased">
+<body class="bg-gray-100 antialiased">
 
-    <div class="max-w-md mx-auto h-screen flex flex-col bg-white dark:bg-black shadow-2xl overflow-hidden relative">
+	<div class="max-w-md mx-auto h-screen flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
         
         <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50 dark:border-zinc-800">
             <a href="user_profile.html" class="text-zinc-800 dark:text-zinc-200">

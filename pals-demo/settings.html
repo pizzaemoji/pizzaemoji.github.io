@@ -5,13 +5,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pals | Settings</title>
     <script src="https://cdn.tailwindcss.com"></script>
-<script>
+	<script>
     function applyTheme() {
-        // Retrieve states, defaulting System to true and Manual Dark to false
-        const useSystem = localStorage.getItem('useSystem') !== 'false'; 
+        // We now default 'useSystem' to false and 'manualDark' to false
+        const useSystem = localStorage.getItem('useSystem') === 'true'; 
         const manualDark = localStorage.getItem('manualDark') === 'true';
         const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
+        // Logic: Only go dark if (System is ON and System is Dark) OR (System is OFF and Manual is Dark)
         const shouldBeDark = useSystem ? systemDark : manualDark;
 
         if (shouldBeDark) {
@@ -20,8 +21,10 @@
             document.documentElement.classList.remove('dark');
         }
 
-        console.log(`Theme Update: System(${useSystem}), ManualDark(${manualDark}), Final(Dark: ${shouldBeDark})`);
-        updateUIStates(useSystem, manualDark);
+        // Only run this if we are on the actual settings page
+        if (document.getElementById('systemToggle')) {
+            updateUIStates(useSystem, manualDark);
+        }
     }
 
     function updateUIStates(useSystem, manualDark) {
@@ -29,10 +32,10 @@
         const darkToggle = document.getElementById('darkToggle');
         const darkToggleRow = document.getElementById('darkToggleRow');
 
-        if (systemToggle) systemToggle.checked = useSystem;
-        if (darkToggle) darkToggle.checked = manualDark;
+        systemToggle.checked = useSystem;
+        darkToggle.checked = manualDark;
 
-        // Visual feedback: Disable manual toggle if system is in control
+        // If system is on, "Always Use Dark Mode" is locked out
         if (useSystem) {
             darkToggleRow.classList.add('opacity-40', 'pointer-events-none');
         } else {
@@ -50,10 +53,12 @@
         applyTheme();
     }
 
-    // Initial load and system listener
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (localStorage.getItem('useSystem') === 'true') applyTheme();
+    });
+    
     window.addEventListener('DOMContentLoaded', applyTheme);
-</script>
+	</script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         /* Pals Red Toggle */

@@ -3,12 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light">
     <title>Pals | Messages</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <style>
         /* Ensuring the scrollbar feels like a native app */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        :root { color-scheme: light; }
     </style>
 </head>
 <body class="bg-gray-100 antialiased">
@@ -24,92 +26,93 @@
         </header>
 
         <nav class="flex border-b border-gray-100 shrink-0">
-            <button class="flex-1 py-3 text-center text-xl font-bold border-b-2 border-red-500 text-red-500">
-                Messages
-            </button>
-            <button class="flex-1 py-3 text-center text-xl font-bold text-gray-400">
-                Moments
-            </button>
+            <button class="flex-1 py-3 text-center text-xl font-bold border-b-2 border-red-500 text-red-500">Messages</button>
+            <button class="flex-1 py-3 text-center text-xl font-bold text-gray-400">Moments</button>
         </nav>
 
-        <main class="flex-1 overflow-y-auto no-scrollbar pb-24">
+        <main class="flex-1 overflow-y-auto no-scrollbar pb-32">
             
-            <div class="flex items-center py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
-                <div class="w-8 flex justify-center shrink-0">
+            <div class="flex items-start py-4 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
+                <div class="w-8 flex justify-center pt-6 shrink-0">
                     <div class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-sm"></div>
                 </div>
-                <img src="images/Emily_Moon_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
-                <div class="ml-4 flex-1 min-w-0">
-                    <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 truncate text-xl">Emily Moon</h2>
-                        <div class="text-right shrink-0">
-                            <div class="text-base text-zinc-400">2:44 PM</div>
-                            <div class="text-sm text-red-500 font-bold uppercase tracking-wider">&nbsp;</div>
-                        </div>
-                    </div> <p class="text-lg text-zinc-500 truncate mt-0.5">See you then 😊</p>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Emily_Moon_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-bold text-zinc-900 text-xl truncate">Emily Moon</h2>
+                    <p class="text-lg text-zinc-500 line-clamp-2 leading-tight">See you then 😊</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400">2:44 PM</span>
+                    <span class="text-[11px] text-red-500 font-black uppercase tracking-wider mt-1">&nbsp;</span>
                 </div>
             </div>
 
-            <div class="flex items-center py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
-                <div class="w-8 flex justify-center shrink-0">
+            <div class="flex items-start py-4 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
+                <div class="w-8 flex justify-center pt-6 shrink-0">
                     <div class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-sm"></div>
                 </div>
-                <div class="w-14 h-14 relative shrink-0">
-                    <img src="images/Jamie_Parker_icon.png" class="w-10 h-10 rounded-full border-2 border-white absolute top-0 left-0 z-10">
-                    <img src="images/Chris_Rodriguez_icon.png" class="w-10 h-10 rounded-full border-2 border-white absolute bottom-0 right-0">
+                <div class="shrink-0 pt-1">
+                    <div class="w-14 h-14 relative shrink-0">
+                        <img src="images/Jamie_Parker_icon.png" class="w-10 h-10 rounded-full border-2 border-white absolute top-0 left-0 z-10">
+                        <img src="images/Chris_Rodriguez_icon.png" class="w-10 h-10 rounded-full border-2 border-white absolute bottom-0 right-0">
+                    </div>
                 </div>
-                <div class="ml-4 flex-1 min-w-0">
-                    <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 truncate text-xl">The Lab Group</h2>
-                        <div class="text-right shrink-0">
-                            <div class="text-base text-zinc-400">1:29 PM</div>
-                            <div class="text-sm text-red-500 font-bold uppercase tracking-wider">&nbsp;</div>
-                        </div>
-                    </div> <p class="text-lg text-zinc-500 truncate mt-0.5">Jamie: Perfect! Can't wait 🥳</p>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-bold text-zinc-900 text-xl truncate">The Lab Group</h2>
+                    <p class="text-lg text-zinc-500 line-clamp-2 leading-tight">Jamie: Perfect! Can't wait 🥳</p>
                 </div>
-            </div>
-
-            <div class="flex items-center py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
-                <div class="w-8 shrink-0"></div> 
-                <img src="images/Mike_Chen_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
-                <div class="ml-4 flex-1 min-w-0">
-                    <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 truncate text-xl">Mike Chen</h2>
-                        <div class="text-right shrink-0">
-                            <div class="text-base text-zinc-400">1:13 PM</div>
-                            <div class="text-sm text-red-500 font-bold uppercase tracking-wider">&nbsp;</div>
-                        </div>
-                    </div> <p class="text-lg text-zinc-500 truncate mt-0.5">Thanks for the help!</p>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400">1:29 PM</span>
+                    <span class="text-[11px] text-red-500 font-black uppercase tracking-wider mt-1">&nbsp;</span>
                 </div>
             </div>
 
-            <div class="flex items-center py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
-                <div class="w-8 flex justify-center shrink-0">
-                    <div class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-sm"></div>
-                </div>
-                <img src="images/Anna_Davis_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
-                <div class="ml-4 flex-1 min-w-0">
-                    <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 truncate text-xl">Anna Davis</h2>
-                        <div class="text-right shrink-0">
-                            <div class="text-base text-zinc-400">11:58 AM</div>
-                            <div class="text-sm text-red-500 font-bold uppercase tracking-wider">&nbsp;</div>
-                        </div>
-                    </div> <p class="text-lg text-zinc-500 truncate mt-0.5">Can you send me that file?</p>
-                </div>
-            </div>
-
-            <div class="flex items-center py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
+            <div class="flex items-start py-4 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
                 <div class="w-8 shrink-0"></div>
-                <img src="images/Alex_Thompson_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
-                <div class="ml-4 flex-1 min-w-0">
-                    <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 truncate text-xl">Alex Thompson</h2>
-                        <div class="text-right shrink-0">
-                            <div class="text-base text-zinc-400">Yesterday</div>
-                            <div class="text-sm text-red-500 font-bold uppercase tracking-wider">Silenced</div>
-                        </div>
-                    </div> <p class="text-lg text-zinc-500 truncate mt-0.5">Let's grab lunch tomorrow</p>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Mike_Chen_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-bold text-zinc-900 text-xl truncate">Mike Chen</h2>
+                    <p class="text-lg text-zinc-500 line-clamp-2 leading-tight">Thanks for the help!</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400">1:13 PM</span>
+                    <span class="text-[11px] text-zinc-400 font-black uppercase tracking-wider mt-1">&nbsp;</span>
+                </div>
+            </div>
+
+            <div class="flex items-start py-4 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
+                <div class="w-8 flex justify-center pt-6 shrink-0">
+                    <div class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-sm"></div>
+                </div>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Anna_Davis_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-bold text-zinc-900 text-xl truncate">Anna Davis</h2>
+                    <p class="text-lg text-zinc-500 line-clamp-2 leading-tight">Can you send me that file?</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400">11:58 AM</span>
+                    <span class="text-[11px] text-red-500 font-black uppercase tracking-wider mt-1">&nbsp;</span>
+                </div>
+            </div>
+
+            <div class="flex items-start py-4 border-b border-gray-50 active:bg-gray-50 cursor-pointer pr-4">
+                <div class="w-8 shrink-0"></div>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Alex_Thompson_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-bold text-zinc-900 text-xl truncate">Alex Thompson</h2>
+                    <p class="text-lg text-zinc-500 line-clamp-2 leading-tight">Let's grab lunch tomorrow.</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 whitespace-nowrap">Yesterday</span>
+                    <span class="text-[11px] text-zinc-400 font-black uppercase tracking-wider mt-1">Silenced</span>
                 </div>
             </div>
 
@@ -117,45 +120,48 @@
                 <span class="text-base font-bold text-zinc-400 uppercase tracking-widest">Disconnected Pals</span>
             </div>
 
-            <div class="flex items-center py-3 opacity-60 grayscale-[0.5] pr-4 border-b border-gray-50">
+            <div class="flex items-start py-4 opacity-60 grayscale-[0.5] pr-4 border-b border-gray-50">
                 <div class="w-8 shrink-0"></div>
-                <img src="images/Violet_Santos_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
-                <div class="ml-4 flex-1 min-w-0">
-                    <div class="flex justify-between items-baseline">
-                        <h2 class="font-medium text-zinc-800 truncate text-xl">Violet Santos</h2>
-                        <span class="text-base text-zinc-400 ml-2">7 months ago</span>
-                    </div>
-                    <p class="text-lg text-zinc-400 truncate mt-0.5">Perfect, I'll see you there</p>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Violet_Santos_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-medium text-zinc-800 text-xl truncate">Violet Santos</h2>
+                    <p class="text-lg text-zinc-400 line-clamp-2 leading-tight">Perfect, I'll see you there</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 whitespace-nowrap">7 mo ago</span>
+                    <span class="text-[11px] text-zinc-400 font-black uppercase tracking-wider mt-1">&nbsp;</span>
                 </div>
             </div>
 
-            <div class="flex items-center py-3 opacity-60 grayscale-[0.5] pr-4 border-b border-gray-50">
+            <div class="flex items-start py-4 opacity-60 grayscale-[0.5] pr-4 border-b border-gray-50">
                 <div class="w-8 shrink-0"></div>
-                <img src="images/Tom_Wilson_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
-                <div class="ml-4 flex-1 min-w-0">
-                    <div class="flex justify-between items-baseline">
-                        <h2 class="font-medium text-zinc-800 truncate text-xl">Tom Wilson</h2>
-                        <div class="text-right">
-                            <div class="text-base text-zinc-400">8 months ago</div>
-                            <div class="text-xs text-zinc-400 font-medium">Chat Ended</div>
-                        </div>
-                    </div>
-                    <p class="text-lg text-zinc-400 truncate mt-0.5">Thanks!</p>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Tom_Wilson_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-medium text-zinc-800 text-xl truncate">Tom Wilson</h2>
+                    <p class="text-lg text-zinc-400 line-clamp-2 leading-tight">Thanks!</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 whitespace-nowrap">8 mo ago</span>
+                    <span class="text-[11px] text-zinc-400 font-black uppercase tracking-wider mt-1">Chat Ended</span>
                 </div>
             </div>
 
-            <div class="flex items-center py-3 opacity-60 grayscale-[0.5] pr-4 border-b border-gray-50">
+            <div class="flex items-start py-4 opacity-60 grayscale-[0.5] pr-4 border-b border-gray-50">
                 <div class="w-8 shrink-0"></div>
-                <img src="images/Ryan_Jones_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
-                <div class="ml-4 flex-1 min-w-0">
-                    <div class="flex justify-between items-baseline">
-                        <h2 class="font-medium text-zinc-800 truncate text-xl">Ryan Jones</h2>
-                        <div class="text-right">
-                            <div class="text-base text-zinc-400">11 months ago</div>
-                            <div class="text-xs text-zinc-400 font-medium">Blocked</div>
-                        </div>
-                    </div>
-                    <p class="text-lg text-zinc-400 truncate mt-0.5">&nbsp;</p>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Ryan_Jones_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-medium text-zinc-800 text-xl truncate">Ryan Jones</h2>
+                    <p class="text-lg text-zinc-400 line-clamp-2 leading-tight">&nbsp;</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 whitespace-nowrap">11 mo ago</span>
+                    <span class="text-[11px] text-zinc-400 font-black uppercase tracking-wider mt-1">Blocked</span>
                 </div>
             </div>
 

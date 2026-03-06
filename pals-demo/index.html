@@ -5,77 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pals | Messages</title>
     <script src="https://cdn.tailwindcss.com"></script>
-	<script>
-    /**
-     * Pals Theme Engine
-     * Prioritizes Light Mode unless user explicitly opts into Dark or System sync.
-     */
-    function applyTheme() {
-        // Retrieve settings from local storage
-        // We use === 'true' to ensure they default to FALSE (Light Mode) if never set.
-        const useSystem = localStorage.getItem('useSystem') === 'true'; 
-        const manualDark = localStorage.getItem('manualDark') === 'true';
-        
-        // Check actual system preference from the browser/OS
-        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-        // Determination Logic:
-        // 1. If System Sync is ON, follow the OS.
-        // 2. If System Sync is OFF, follow the manual "Always Use Dark Mode" toggle.
-        const shouldBeDark = useSystem ? systemDark : manualDark;
-
-        // Apply or Remove the .dark class to the root <html> element
-        if (shouldBeDark) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-
-        // If we are currently on the Settings page, update the toggle UI to match the data
-        if (document.getElementById('systemToggle')) {
-            updateUIStates(useSystem, manualDark);
-        }
-    }
-
-    function updateUIStates(useSystem, manualDark) {
-        const systemToggle = document.getElementById('systemToggle');
-        const darkToggle = document.getElementById('darkToggle');
-        const darkToggleRow = document.getElementById('darkToggleRow');
-
-        if (systemToggle) systemToggle.checked = useSystem;
-        if (darkToggle) darkToggle.checked = manualDark;
-
-        // Visual feedback: Grey out the manual dark toggle if System Sync is in control
-        if (useSystem) {
-            darkToggleRow.classList.add('opacity-40', 'pointer-events-none');
-        } else {
-            darkToggleRow.classList.remove('opacity-40', 'pointer-events-none');
-        }
-    }
-
-    // Functions called by the toggles on settings.html
-    function toggleSystem(e) {
-        localStorage.setItem('useSystem', e.checked);
-        applyTheme();
-    }
-
-    function toggleManualDark(e) {
-        localStorage.setItem('manualDark', e.checked);
-        applyTheme();
-    }
-
-    // Listen for the user changing their OS theme while the app is already open
-    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-        if (localStorage.getItem('useSystem') === 'true') applyTheme();
-    });
-
-    // RUN IMMEDIATELY:
-    // 1. Run as soon as script is parsed to prevent "White Flash" in dark mode
-    applyTheme();
-    
-    // 2. Run again once DOM is ready to ensure UI elements (toggles) are synced
-    window.addEventListener('DOMContentLoaded', applyTheme);
-	</script>
     <style>
         /* Ensuring the scrollbar feels like a native app */
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -84,118 +13,121 @@
 </head>
 <body class="bg-gray-100 antialiased">
 
-	<div class="max-w-md mx-auto h-screen flex flex-col bg-white dark:bg-zinc-950 shadow-2xl relative overflow-hidden">
+    <div class="max-w-md mx-auto h-screen flex flex-col bg-white shadow-2xl relative overflow-hidden">
         
         <header class="flex justify-between items-center px-4 pt-4 pb-2 shrink-0">
-            <div class="w-10"></div> <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
-            <a href="user_profile.html"><img src="images/User_Icon.png" alt="Your Profile" class="w-9 h-9 rounded-full border border-gray-200 dark:border-zinc-800 object-cover"></a>
+            <div class="w-10"></div> 
+            <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
+            <a href="user_profile.html">
+                <img src="images/User_Icon.png" alt="Your Profile" class="w-9 h-9 rounded-full border border-gray-200 object-cover">
+            </a>
         </header>
 
-        <nav class="flex border-b border-gray-100 dark:border-zinc-800 shrink-0">
+        <nav class="flex border-b border-gray-100 shrink-0">
             <button class="flex-1 py-3 text-center text-sm font-bold border-b-2 border-red-500 text-red-500">
                 Messages
             </button>
-            <button class="flex-1 py-3 text-center text-sm font-bold text-gray-400 dark:text-zinc-500">
+            <button class="flex-1 py-3 text-center text-sm font-bold text-gray-400">
                 Moments
             </button>
         </nav>
 
         <main class="flex-1 overflow-y-auto no-scrollbar">
             
-<div class="flex items-center px-4 py-3 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer">
+            <div class="flex items-center px-4 py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer">
                 <div class="relative shrink-0">
                     <img src="images/Emily_Moon_icon.png" class="w-14 h-14 rounded-full object-cover">
-                    <div class="absolute top-1 -left-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white dark:border-black shadow-sm"></div>
+                    <div class="absolute top-1 -left-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white shadow-sm"></div>
                 </div>
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 dark:text-zinc-100 truncate text-base">Emily Moon</h2>
-                        <span class="text-xs text-zinc-400 dark:text-zinc-500 ml-2">2:45 PM</span>
+                        <h2 class="font-bold text-zinc-900 truncate text-base">Emily Moon</h2>
+                        <span class="text-xs text-zinc-400 ml-2">2:45 PM</span>
                     </div>
-                    <p class="text-[15px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5">See you then 😊</p>
+                    <p class="text-[15px] text-zinc-500 truncate mt-0.5">See you then 😊</p>
                 </div>
             </div>
 
-            <div class="flex items-center px-4 py-3 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer">
+            <div class="flex items-center px-4 py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer">
                 <div class="relative shrink-0">
                     <div class="w-14 h-14 relative">
-                        <img src="images/Jamie_Parker_icon.png" class="w-10 h-10 rounded-full border-2 border-white dark:border-black absolute top-0 left-0 z-10">
-                        <img src="images/Chris_Rodriguez_icon.png" class="w-10 h-10 rounded-full border-2 border-white dark:border-black absolute bottom-0 right-0">
+                        <img src="images/Jamie_Parker_icon.png" class="w-10 h-10 rounded-full border-2 border-white absolute top-0 left-0 z-10">
+                        <img src="images/Chris_Rodriguez_icon.png" class="w-10 h-10 rounded-full border-2 border-white absolute bottom-0 right-0">
                     </div>
-                    <div class="absolute top-1 -left-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white dark:border-black z-20"></div>
+                    <div class="absolute top-1 -left-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white z-20"></div>
                 </div>
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 dark:text-zinc-100 truncate text-base">Jamie Parker, Chris Rodriguez</h2>
-                        <span class="text-xs text-zinc-400 dark:text-zinc-500 ml-2">1:45 PM</span>
+                        <h2 class="font-bold text-zinc-900 truncate text-base">Jamie Parker, Chris Rodriguez</h2>
+                        <span class="text-xs text-zinc-400 ml-2">1:45 PM</span>
                     </div>
-                    <p class="text-[15px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5">Jamie: Perfect! Can't wait 🥳</p>
+                    <p class="text-[15px] text-zinc-500 truncate mt-0.5">Jamie: Perfect! Can't wait 🥳</p>
                 </div>
             </div>
 
-            <div class="flex items-center px-4 py-3 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer">
+            <div class="flex items-center px-4 py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer">
                 <img src="images/Mike_Chen_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 dark:text-zinc-100 truncate text-base">Mike Chen</h2>
-                        <span class="text-xs text-zinc-400 dark:text-zinc-500 ml-2">1:30 PM</span>
+                        <h2 class="font-bold text-zinc-900 truncate text-base">Mike Chen</h2>
+                        <span class="text-xs text-zinc-400 ml-2">1:30 PM</span>
                     </div>
-                    <p class="text-[15px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5">Thanks for the help!</p>
+                    <p class="text-[15px] text-zinc-500 truncate mt-0.5">Thanks for the help!</p>
                 </div>
             </div>
 
-            <div class="flex items-center px-4 py-3 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer">
+            <div class="flex items-center px-4 py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer">
                 <div class="relative shrink-0">
                     <img src="images/Anna_Davis_icon.png" class="w-14 h-14 rounded-full object-cover">
-                    <div class="absolute top-1 -left-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white dark:border-black shadow-sm"></div>
+                    <div class="absolute top-1 -left-1 w-3.5 h-3.5 bg-red-500 rounded-full border-2 border-white shadow-sm"></div>
                 </div>
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 dark:text-zinc-100 truncate text-base">Anna Davis</h2>
-                        <span class="text-xs text-zinc-400 dark:text-zinc-500 ml-2">12:15 PM</span>
+                        <h2 class="font-bold text-zinc-900 truncate text-base">Anna Davis</h2>
+                        <span class="text-xs text-zinc-400 ml-2">12:15 PM</span>
                     </div>
-                    <p class="text-[15px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5">Can you send me that file?</p>
+                    <p class="text-[15px] text-zinc-500 truncate mt-0.5">Can you send me that file?</p>
                 </div>
             </div>
 
-            <div class="flex items-center px-4 py-3 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer">
+            <div class="flex items-center px-4 py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer">
                 <img src="images/Alex_Thompson_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 dark:text-zinc-100 truncate text-base">Alex Thompson</h2>
+                        <h2 class="font-bold text-zinc-900 truncate text-base">Alex Thompson</h2>
                         <div class="text-right">
-                            <div class="text-xs text-zinc-400 dark:text-zinc-500">11:20 AM</div>
-                            <div class="text-[10px] text-zinc-400 dark:text-zinc-600 font-medium">Silenced</div>
+                            <div class="text-xs text-zinc-400">11:20 AM</div>
+                            <div class="text-[10px] text-zinc-400 font-medium">Silenced</div>
                         </div>
                     </div>
-                    <p class="text-[15px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5">Let's grab lunch tomorrow</p>
+                    <p class="text-[15px] text-zinc-500 truncate mt-0.5">Let's grab lunch tomorrow</p>
                 </div>
             </div>
 
-            <div class="flex items-center px-4 py-3 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer">
+            <div class="flex items-center px-4 py-3 border-b border-gray-50 active:bg-gray-50 cursor-pointer">
                 <img src="images/Jamie_Parker_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-bold text-zinc-900 dark:text-zinc-100 truncate text-base">Jamie Parker</h2>
-                        <span class="text-xs text-zinc-400 dark:text-zinc-500 ml-2">Yesterday</span>
+                        <h2 class="font-bold text-zinc-900 truncate text-base">Jamie Parker</h2>
+                        <span class="text-xs text-zinc-400 ml-2">Yesterday</span>
                     </div>
-                    <p class="text-[15px] text-zinc-500 dark:text-zinc-400 truncate mt-0.5">There's a new studio downtown I want t...</p>
+                    <p class="text-[15px] text-zinc-500 truncate mt-0.5">There's a new studio downtown I want t...</p>
                 </div>
             </div>
 
-            <div class="bg-gray-50 dark:bg-zinc-900/50 px-4 py-2 border-y border-gray-100 dark:border-zinc-800 flex items-center">
-                <span class="text-[11px] font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Disconnected Pals</span>
-                <span class="ml-1 text-zinc-300 dark:text-zinc-600 cursor-help">ⓘ</span>
+            <div class="bg-gray-50 px-4 py-2 border-y border-gray-100 flex items-center">
+                <span class="text-[11px] font-bold text-zinc-400 uppercase tracking-widest">Disconnected Pals</span>
+                <span class="ml-1 text-zinc-300 cursor-help">ⓘ</span>
             </div>
 
             <div class="flex items-center px-4 py-3 opacity-60 grayscale-[0.5]">
                 <img src="images/Violet_Santos_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-medium text-zinc-800 dark:text-zinc-200 truncate text-base">Violet Santos</h2>
+                        <h2 class="font-medium text-zinc-800 truncate text-base">Violet Santos</h2>
                         <span class="text-xs text-zinc-400 ml-2">7 months ago</span>
                     </div>
-                    <p class="text-[15px] text-zinc-400 dark:text-zinc-500 truncate mt-0.5">Perfect, I'll see you there</p>
+                    <p class="text-[15px] text-zinc-400 truncate mt-0.5">Perfect, I'll see you there</p>
                 </div>
             </div>
 
@@ -203,13 +135,13 @@
                 <img src="images/Tom_Wilson_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-medium text-zinc-800 dark:text-zinc-200 truncate text-base">Tom Wilson</h2>
+                        <h2 class="font-medium text-zinc-800 truncate text-base">Tom Wilson</h2>
                         <div class="text-right">
                             <div class="text-xs text-zinc-400">8 months ago</div>
                             <div class="text-[10px] text-zinc-400 font-medium">Chat Ended</div>
                         </div>
                     </div>
-                    <p class="text-[15px] text-zinc-400 dark:text-zinc-500 truncate mt-0.5">Thanks!</p>
+                    <p class="text-[15px] text-zinc-400 truncate mt-0.5">Thanks!</p>
                 </div>
             </div>
             
@@ -217,47 +149,22 @@
                 <img src="images/Ryan_Jones_icon.png" class="w-14 h-14 rounded-full object-cover shrink-0">
                 <div class="ml-4 flex-1 min-w-0">
                     <div class="flex justify-between items-baseline">
-                        <h2 class="font-medium text-zinc-800 dark:text-zinc-200 truncate text-base">Ryan Jones</h2>
+                        <h2 class="font-medium text-zinc-800 truncate text-base">Ryan Jones</h2>
                         <div class="text-right">
                             <div class="text-xs text-zinc-400">11 months ago</div>
                             <div class="text-[10px] text-zinc-400 font-medium">Blocked</div>
                         </div>
                     </div>
-                    <p class="text-[15px] text-zinc-400 dark:text-zinc-500 truncate mt-0.5">&nbsp;</p>
+                    <p class="text-[15px] text-zinc-400 truncate mt-0.5">&nbsp;</p>
                 </div>
             </div>
 
         </main>
 
-		<div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[360px] z-50">
-			<div class="flex items-center gap-3 px-3 py-3 rounded-[32px] 
-                bg-transparent
-                border-transparent">
+        <div class="absolute bottom-6 left-1/2 -translate-x-1/2 w-[90%] max-w-[360px] z-50">
+            <div class="flex items-center gap-3 px-3 py-3 rounded-[32px] bg-transparent">
         
-        <button class="w-12 h-12 rounded-full flex items-center justify-center 
-                       bg-white/50 dark:bg-zinc-700/40 
-                       backdrop-blur-xl border border-white/40 dark:border-white/10 
-                       shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]
-                       active:scale-90 transition-transform">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-zinc-800 dark:text-zinc-200">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
-                <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5 0 019 0zM18.75 10.5h.008v.008h-.008V10.5z" />
-            </svg>
-        </button>
-
-				<div class="flex-1 flex items-center gap-3 h-12 px-4 rounded-full 
-                    bg-white/50 dark:bg-zinc-700/40 
-                    backdrop-blur-xl border border-white/40 dark:border-white/10 
-                    shadow-[0_8px_32px_0_rgba(0,0,0,0.1)] dark:shadow-[0_8px_32px_0_rgba(0,0,0,0.3)]">
-            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-5 h-5 text-zinc-400">
-                <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z" />
-            </svg>
-            <span class="text-zinc-400 dark:text-zinc-500 font-medium select-none">Search</span>
-				</div>
-			</div>
-		</div>
-		
-    </div>
-
-</body>
-</html>
+                <button class="w-12 h-12 rounded-full flex items-center justify-center bg-white/70 backdrop-blur-xl border border-white shadow-lg active:scale-95 transition-transform">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6 text-zinc-800">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 015.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 002.25 2.25h15A2.25 2.25 0 0021.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 00-1.134-.175 2.31 2.31 0 01-1.64-1.055l-.822-1.316a2.192 2.192 0 00-1.736-1.039 48.774 48.774 0 00-5.232 0 2.192 2.192 0 00-1.736 1.039l-.821 1.316z" />
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 11-9 0 4.5 4.5

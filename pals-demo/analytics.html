@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pals | Analytics</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+        /* Pals Red Toggle */
+        input:checked ~ .bg-toggle { background-color: #EF4444 !important; }
+        input:checked ~ .dot { transform: translateX(1.25rem); }
+    </style>
+</head>
+<body class="bg-gray-100 antialiased">
+
+    <div class="w-full h-dvh flex flex-col bg-white shadow-2xl relative overflow-hidden">
+        
+        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50">
+            <a href="user_profile.html" class="text-zinc-800">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                </svg>
+            </a>
+            <img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+            <div class="w-6"></div> 
+        </header>
+
+        <main class="flex-1 overflow-y-auto px-8 py-10 no-scrollbar">
+            
+            <h1 class="text-4xl font-black text-zinc-900 leading-tight mb-2">
+                Helping Pals<br>Work Better
+            </h1>
+            
+            <p class="text-lg font-bold text-zinc-700 mb-10">
+                Data Analytics in Plain English
+            </p>
+
+            <article class="space-y-10 text-zinc-600 leading-relaxed text-[15px]">
+                
+                <section class="space-y-6">
+                    <div class="space-y-2">
+                        <h2 class="text-2xl text-zinc-950 font-normal">What is this?</h2>
+                        <p>This makes Pals better for you and your Pals. Most apps follow you around the internet to see what you like so they can sell you stuff. Pals doesn't do that. We only look at "The Big Numbers" to make sure the app is running smoothly for everyone.</p>
+                    </div>
+
+                    <div class="space-y-2">
+                        <h2 class="text-2xl text-zinc-950 font-normal">How does it work?</h2>
+                        <p>This is an optional setting that is off by default. If you turn this on, your app sends us a few numbers every day. It’s like a digital headcount. We see that someone sent 10 messages today, but we have no idea that "someone" was you. No names, no messages, no photos—just numbers.</p>
+                    </div>
+
+                    <div class="p-5 bg-zinc-50 rounded-3xl space-y-2 border border-zinc-100">
+                        <h2 class="text-xl text-zinc-950 font-bold">Your Reward</h2>
+                        <p>Since you’re helping Pals work better, we’ll drop <span class="text-red-500 font-bold">0.25 credits</span> into your account every month as a thank you. You can use these for profile customizations in the Shop.</p>
+                    </div>
+                </section>
+
+                <section class="py-6 border-y border-gray-100 flex items-center justify-between">
+                    <div>
+                        <span class="block text-zinc-900 font-bold">Allow Data Analytics</span>
+                        <span class="text-xs text-zinc-400">Opt-in to earn monthly credits</span>
+                    </div>
+                    <label class="relative inline-flex items-center cursor-pointer">
+                        <input type="checkbox" class="sr-only">
+                        <div class="bg-toggle w-11 h-6 bg-gray-200 rounded-full transition-colors"></div>
+                        <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+                    </label>
+                </section>
+
+                <section class="space-y-6">
+                    <h2 class="text-2xl text-zinc-950 font-normal">Data Transparency</h2>
+                    <p>We believe you should know exactly what numbers are leaving your device. All data is sent in numerical form and is not ordered in any meaningful way.</p>
+                    
+                    <div class="grid gap-3">
+                        <div class="p-4 bg-white border border-zinc-100 rounded-2xl shadow-sm">
+                            <span class="text-zinc-900 font-bold block mb-1">Daily App Opens</span>
+                            <span class="text-sm">Reason: To ensure our servers can handle the "Morning Rush."</span>
+                        </div>
+                        <div class="p-4 bg-white border border-zinc-100 rounded-2xl shadow-sm">
+                            <span class="text-zinc-900 font-bold block mb-1">Messages Sent & Received</span>
+                            <span class="text-sm">Reason: To monitor network load and delivery reliability.</span>
+                        </div>
+                        <div class="p-4 bg-white border border-zinc-100 rounded-2xl shadow-sm">
+                            <span class="text-zinc-900 font-bold block mb-1">Photo Activity</span>
+                            <span class="text-sm">Reason: To understand storage needs for encrypted media.</span>
+                        </div>
+                        <div class="p-4 bg-white border border-zinc-100 rounded-2xl shadow-sm">
+                            <span class="text-zinc-900 font-bold block mb-1">Connection Health</span>
+                            <span class="text-sm">Reason: Tracking active vs. disconnected Pals helps us refine the "Natural Fade" algorithm.</span>
+                        </div>
+                    </div>
+                </section>
+
+            </article>
+
+        </main>
+    </div>
+
+</body>
+</html>

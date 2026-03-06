@@ -5,55 +5,55 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Pals | Settings</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Core Theme Engine
-        function applyTheme() {
-            const useSystem = localStorage.getItem('useSystem') !== 'false'; // Default to true
-            const manualDark = localStorage.getItem('manualDark') === 'true';
-            const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+<script>
+    function applyTheme() {
+        // Retrieve states, defaulting System to true and Manual Dark to false
+        const useSystem = localStorage.getItem('useSystem') !== 'false'; 
+        const manualDark = localStorage.getItem('manualDark') === 'true';
+        const systemDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-            if (useSystem) {
-                document.documentElement.classList.toggle('dark', systemDark);
-            } else {
-                document.documentElement.classList.toggle('dark', manualDark);
-            }
-            updateUIStates();
+        const shouldBeDark = useSystem ? systemDark : manualDark;
+
+        if (shouldBeDark) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
 
-        function updateUIStates() {
-            const useSystem = localStorage.getItem('useSystem') !== 'false';
-            const manualDark = localStorage.getItem('manualDark') === 'true';
-            
-            // Sync toggles with saved state
-            document.getElementById('systemToggle').checked = useSystem;
-            document.getElementById('darkToggle').checked = manualDark;
-            
-            // Disable manual toggle if system is in control
-            const darkToggleRow = document.getElementById('darkToggleRow');
-            if (useSystem) {
-                darkToggleRow.style.opacity = "0.4";
-                darkToggleRow.style.pointerEvents = "none";
-            } else {
-                darkToggleRow.style.opacity = "1";
-                darkToggleRow.style.pointerEvents = "auto";
-            }
-        }
+        console.log(`Theme Update: System(${useSystem}), ManualDark(${manualDark}), Final(Dark: ${shouldBeDark})`);
+        updateUIStates(useSystem, manualDark);
+    }
 
-        function toggleSystem(e) {
-            localStorage.setItem('useSystem', e.checked);
-            applyTheme();
-        }
+    function updateUIStates(useSystem, manualDark) {
+        const systemToggle = document.getElementById('systemToggle');
+        const darkToggle = document.getElementById('darkToggle');
+        const darkToggleRow = document.getElementById('darkToggleRow');
 
-        function toggleManualDark(e) {
-            localStorage.setItem('manualDark', e.checked);
-            applyTheme();
-        }
+        if (systemToggle) systemToggle.checked = useSystem;
+        if (darkToggle) darkToggle.checked = manualDark;
 
-        // Listen for system changes while app is open
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
-        
-        window.onload = applyTheme;
-    </script>
+        // Visual feedback: Disable manual toggle if system is in control
+        if (useSystem) {
+            darkToggleRow.classList.add('opacity-40', 'pointer-events-none');
+        } else {
+            darkToggleRow.classList.remove('opacity-40', 'pointer-events-none');
+        }
+    }
+
+    function toggleSystem(e) {
+        localStorage.setItem('useSystem', e.checked);
+        applyTheme();
+    }
+
+    function toggleManualDark(e) {
+        localStorage.setItem('manualDark', e.checked);
+        applyTheme();
+    }
+
+    // Initial load and system listener
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', applyTheme);
+    window.addEventListener('DOMContentLoaded', applyTheme);
+</script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         /* Pals Red Toggle */

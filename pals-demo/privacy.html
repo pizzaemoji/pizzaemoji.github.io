@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Pals | Philosophy and Privacy</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind.config = {
+            darkMode: 'class',
+        }
+
+        function applyTheme() {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+        }
+
+        applyTheme();
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
+        });
+    </script>
     <style>
-        /* Ensuring the scrollbar feels like a native app */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white antialiased">
+<body class="bg-white dark:bg-zinc-950 antialiased transition-colors duration-200">
 
-    <div class="w-full h-dvh flex flex-col bg-white shadow-2xl relative overflow-hidden">
+    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
         
-        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50">
-            <a href="user_profile.html" class="text-zinc-800">
+        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50 dark:border-zinc-900">
+            <a href="user_profile.html" class="text-zinc-800 dark:text-zinc-200">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                 </svg>
@@ -27,58 +45,58 @@
 
         <main class="flex-1 overflow-y-auto px-8 py-10 no-scrollbar">
             
-            <h1 class="text-4xl font-black text-zinc-900 leading-tight mb-8">
+            <h1 class="text-4xl font-black text-zinc-900 dark:text-white leading-tight mb-8">
                 Pals Philosophy<br>and Privacy
             </h1>
 
-            <article class="space-y-10 text-zinc-600 leading-relaxed">
+            <article class="space-y-10 text-zinc-600 dark:text-zinc-400 leading-relaxed">
                 
-                <p class="text-lg">This document was written by humans, for humans. Please read it to see why Pals isn't like the apps you've used before.</p>
+                <p class="text-lg text-zinc-700 dark:text-zinc-300">This document was written by humans, for humans. Please read it to see why Pals isn't like the apps you've used before.</p>
 
                 <section class="space-y-4">
-                    <h2 class="text-2xl text-zinc-950 font-normal">Mindful Design</h2>
+                    <h2 class="text-2xl text-zinc-950 dark:text-zinc-100 font-normal">Mindful Design</h2>
                     <p>Most apps are greedy for your attention. We think that's kind of cringe.</p>
                     <ul class="space-y-3">
-                        <li><span class="text-zinc-900">Live Your Life:</span> It's okay to put us down. You can go outside or read a book. Your messages aren't going anywhere.</li>
-                        <li><span class="text-zinc-900">Quality over Quantity:</span> You can message your Pals as much as you want, but Moments are limited to three per day. This keeps the feed meaningful and prevents you—and your Pals—from feeling overwhelmed.</li>
-                        <li><span class="text-zinc-900">Quiet by Default:</span> We don't obsessively vibrate your phone while you're away. We just assume you're off doing awesome things.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">Live Your Life:</span> It's okay to put us down. You can go outside or read a book. Your messages aren't going anywhere.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">Quality over Quantity:</span> You can message your Pals as much as you want, but Moments are limited to three per day. This keeps the feed meaningful.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">Quiet by Default:</span> We don't obsessively vibrate your phone while you're away. We just assume you're off doing awesome things.</li>
                     </ul>
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="text-2xl text-zinc-950 font-normal">No Spying, No Selling</h2>
+                    <h2 class="text-2xl text-zinc-950 dark:text-zinc-100 font-normal">No Spying, No Selling</h2>
                     <p>We do not spy on you, sell your data, or treat you like the product.</p>
                     <ul class="space-y-3">
-                        <li><span class="text-zinc-900">End-to-End Encryption (E2EE):</span> Your messages and photos are encrypted: only you and your Pals can see them. Your content cannot be seen by us, the government, or anyone else.</li>
-                        <li><span class="text-zinc-900">Zero-Knowledge Architecture:</span> Our server delivers your messages and then immediately forgets them. We don't know what you said, who you said it to, or what your photos look like.</li>
-                        <li><span class="text-zinc-900">You Own Your Life:</span> Your photos and messages belong to you. We have no right to use your life to train AI or sell ads. And we don't track your location or sell your "social graph," either.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">End-to-End Encryption (E2EE):</span> Your messages and photos are encrypted: only you and your Pals can see them.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">Zero-Knowledge Architecture:</span> Our server delivers your messages and then immediately forgets them. We don't know what you said.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">You Own Your Life:</span> Your photos and messages belong to you. We have no right to use your life to train AI or sell ads.</li>
                     </ul>
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="text-2xl text-zinc-950 font-normal">The Natural Fade</h2>
+                    <h2 class="text-2xl text-zinc-950 dark:text-zinc-100 font-normal">The Natural Fade</h2>
                     <p>Relationships change, and your digital footprint should too.</p>
                     <ul class="space-y-3">
-                        <li><span class="text-zinc-900">182-Day Fade:</span> If you haven't messaged your Pal in 6 months, the connection dims. Moments access is revoked until you choose to reconnect.</li>
-                        <li><span class="text-zinc-900">The 1-Year Rule:</span> Pals is a reflection of who you are now, not an archive of your past. We automatically remove messages and media older than 365 days.</li>
-                        <li><span class="text-zinc-900">Honest Deletion:</span> If you leave, your profile leaves with you. We keep your account in a "ghost state" for 72 hours just in case, then we purge your number forever.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">182-Day Fade:</span> If you haven't messaged your Pal in 6 months, the connection dims. Moments access is revoked until you reconnect.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">The 1-Year Rule:</span> Pals is a reflection of who you are now. We automatically remove messages and media older than 365 days.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">Honest Deletion:</span> If you leave, your profile leaves with you. We keep your account in a "ghost state" for 72 hours, then we purge your number forever.</li>
                     </ul>
                 </section>
 
                 <section class="space-y-4">
-                    <h2 class="text-2xl text-zinc-950 font-normal">Control Your Space</h2>
+                    <h2 class="text-2xl text-zinc-950 dark:text-zinc-100 font-normal">Control Your Space</h2>
                     <p>You have the tools to manage your circle without the drama:</p>
-                    <ul class="space-y-3">
-                        <li><span class="text-zinc-900">Silence:</span> Stop the notifications, keep the friend.</li>
-                        <li><span class="text-zinc-900">Hide:</span> Remove a Pal from view until you're ready to talk again.</li>
-                        <li><span class="text-zinc-900">End Chat:</span> A polite closure. It closes the "connection" and keeps your profile private but keeps the chat history.</li>
-                        <li><span class="text-zinc-900">Block:</span> The nuclear option for those who don't take the hint.</li>
+                    <ul class="space-y-3 text-[15px]">
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">Silence:</span> Stop the notifications, keep the friend.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">Hide:</span> Remove a Pal from view until you're ready to talk again.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">End Chat:</span> A polite closure. It closes the connection but keeps the chat history.</li>
+                        <li><span class="text-zinc-900 dark:text-zinc-200 font-bold">Block:</span> The nuclear option for those who don't take the hint.</li>
                     </ul>
                 </section>
                 
-                <section class="space-y-4">
-                    <h2 class="text-2xl text-zinc-950 font-normal">Our Promise</h2>
-                    <p>No Spying. No Selling. No Bots. We are humans, and we promise to treat you with kindness and respect.</p>
+                <section class="py-10 border-t border-gray-50 dark:border-zinc-900">
+                    <h2 class="text-2xl text-zinc-950 dark:text-zinc-100 font-normal mb-4">Our Promise</h2>
+                    <p class="text-zinc-900 dark:text-zinc-300 font-medium italic">No Spying. No Selling. No Bots. We are humans, and we promise to treat you with kindness and respect.</p>
                 </section>
 
             </article>

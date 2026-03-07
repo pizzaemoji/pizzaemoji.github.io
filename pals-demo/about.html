@@ -3,20 +3,38 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
     <title>Pals | About</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind.config = {
+            darkMode: 'class',
+        }
+
+        function applyTheme() {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+        }
+
+        applyTheme();
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
+        });
+    </script>
     <style>
-        /* Ensuring the scrollbar feels like a native app */
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
     </style>
 </head>
-<body class="bg-white antialiased">
+<body class="bg-white dark:bg-zinc-950 antialiased transition-colors duration-200">
 
-	<div class="w-full h-dvh flex flex-col bg-white shadow-2xl relative overflow-hidden">
+    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
         
-        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50">
-            <a href="user_profile.html" class="text-zinc-800">
+        <header class="flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-gray-50 dark:border-zinc-900">
+            <a href="user_profile.html" class="text-zinc-800 dark:text-zinc-200">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
                     <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
                 </svg>
@@ -27,39 +45,39 @@
 
         <main class="flex-1 overflow-y-auto px-8 py-10 no-scrollbar">
             
-            <h1 class="text-4xl font-black text-zinc-900 leading-tight mb-2">
-About Pals
+            <h1 class="text-4xl font-black text-zinc-900 dark:text-white leading-tight mb-2">
+                About Pals
             </h1>
             
-<p class="text-lg font-bold text-zinc-700 mb-8">
-Pals is built for humans, by humans.
-</p>
+            <p class="text-lg font-bold text-zinc-700 dark:text-zinc-400 mb-8">
+                Pals is built for humans, by humans.
+            </p>
 
-            <article class="space-y-6 text-zinc-600 leading-relaxed">
+            <article class="space-y-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-[16px]">
                 
-<p>
-Most apps are designed to be "infinite," fueled by algorithms that feed on your emotions. We think that's exhausting. We intentionally left out the influencers, AI, and ads so there's more room for your life.
-</p>
+                <p>
+                    Most apps are designed to be "infinite," fueled by algorithms that feed on your emotions. We think that's exhausting. We intentionally left out the influencers, AI, and ads so there's more room for your life.
+                </p>
 
-<p>
-<strong class="text-zinc-900">Real-World Connections:</strong> There are no discovery tabs or suggested friends; if you want to find someone, you have to know them in the real world first.
-</p>
+                <p>
+                    <strong class="text-zinc-900 dark:text-zinc-100 font-bold">Real-World Connections:</strong> There are no discovery tabs or suggested friends; if you want to find someone, you have to know them in the real world first.
+                </p>
 
-<p>
-<strong class="text-zinc-900">Fade Away:</strong> Because relationships have seasons, our app is the only one that allows silent conversations to naturally fade away.
-</p>
+                <p>
+                    <strong class="text-zinc-900 dark:text-zinc-100 font-bold">Fade Away:</strong> Because relationships have seasons, our app is the only one that allows silent conversations to naturally fade away.
+                </p>
 
-<p>
-<strong class="text-zinc-900">Privacy without Profit:</strong> We aren't here to collect and sell your data; our technology ensures that even the humans who build the app can’t see your names, messages, or photos.
-</p>
+                <p>
+                    <strong class="text-zinc-900 dark:text-zinc-100 font-bold">Privacy without Profit:</strong> We aren't here to collect and sell your data; our technology ensures that even the humans who build the app can’t see your names, messages, or photos.
+                </p>
 
-<p>
-We're glad you're here.
-</p>
+                <p class="pt-4 text-zinc-900 dark:text-zinc-100 font-medium">
+                    We're glad you're here.
+                </p>
 
             </article>
 
-            <footer class="mt-20 mb-10 text-center text-zinc-400 text-sm font-medium">
+            <footer class="mt-20 mb-10 text-center text-zinc-400 dark:text-zinc-600 text-sm font-medium">
                 Built with ❤️ in California.
             </footer>
 

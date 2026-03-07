@@ -4,45 +4,70 @@
     <title>Pals | Settings</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="color-scheme" content="light dark">
+    <meta name="color-scheme" content="light dark">
     <script src="https://cdn.tailwindcss.com"></script>
-<script>
-    window.tailwind.config = {
-        darkMode: 'class',
-    }
-
-    function applyTheme() {
-        const savedTheme = localStorage.getItem('pals-theme');
-        const isDark = savedTheme === 'dark' || 
-                      (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
         
-        if (isDark) {
-            document.documentElement.classList.add('dark');
-        } else {
-            document.documentElement.classList.remove('dark');
-        }
-    }
+        /* This was missing! This makes the toggle move and change color */
+        input:checked ~ .bg-toggle { background-color: #EF4444 !important; }
+        input:checked ~ .dot { transform: translateX(1.25rem); }
+        input:disabled ~ .bg-toggle { opacity: 0.5; cursor: not-allowed; }
+    </style>
+    <script>
+        window.tailwind.config = { darkMode: 'class' }
 
-    function handleThemeToggle(checkbox) {
-        const newTheme = checkbox.checked ? 'dark' : 'light';
-        localStorage.setItem('pals-theme', newTheme);
+        function applyTheme() {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            let isDark;
+
+            if (useSystem) {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else {
+                isDark = savedTheme === 'dark';
+            }
+
+            document.documentElement.classList.toggle('dark', isDark);
+            
+            // Update UI state if elements exist
+            const darkToggle = document.getElementById('darkToggle');
+            if (darkToggle) darkToggle.disabled = useSystem;
+        }
+
+        function handleThemeToggle(checkbox) {
+            localStorage.setItem('pals-theme', checkbox.checked ? 'dark' : 'light');
+            applyTheme();
+        }
+
+        function handleSystemToggle(checkbox) {
+            localStorage.setItem('pals-use-system', checkbox.checked);
+            applyTheme();
+        }
+
+        // Initialize immediately
         applyTheme();
-    }
 
-    // Run immediately
-    applyTheme();
+        // Sync toggle positions on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
 
-    window.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('pals-theme');
-        const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-        const toggle = document.getElementById('darkToggle');
-        
-        if (toggle) {
-            // Set toggle state based on save or system default
-            toggle.checked = savedTheme === 'dark' || (!savedTheme && systemIsDark);
-        }
-    });
-</script>
+            document.getElementById('systemToggle').checked = useSystem;
+            const darkToggle = document.getElementById('darkToggle');
+            
+            // If using system, the dark toggle reflects system state, otherwise reflects save
+            darkToggle.checked = useSystem ? systemIsDark : (savedTheme === 'dark');
+            darkToggle.disabled = useSystem;
+        });
+
+        // Listen for system changes while the page is open
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
+        });
+    </script>
 </head>
 <body class="bg-white dark:bg-zinc-900 antialiased transition-colors duration-200">
 
@@ -89,19 +114,28 @@
                 </div>
             </section>
 
-            <section class="mb-10">
-                <h2 class="text-lg font-bold mb-4">App Appearance</h2>
-                <div class="space-y-4">
-                    <div class="flex items-center justify-between">
-                        <span class="text-zinc-800 dark:text-zinc-200">Always Use Dark Mode</span>
-                        <label class="relative inline-flex items-center cursor-pointer">
-                            <input type="checkbox" id="darkToggle" class="sr-only" onchange="handleThemeToggle(this)">
-                            <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors"></div>
-                            <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
-                        </label>
-                    </div>
-                </div>
-            </section>
+<section class="mb-10">
+    <h2 class="text-lg font-bold mb-4">App Appearance</h2>
+    <div class="space-y-6">
+        <div class="flex items-center justify-between">
+            <span class="text-zinc-800 dark:text-zinc-200">Match System Settings</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="systemToggle" class="sr-only" onchange="handleSystemToggle(this)">
+                <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors"></div>
+                <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+            </label>
+        </div>
+
+        <div class="flex items-center justify-between opacity-100 transition-opacity" id="manualDarkContainer">
+            <span class="text-zinc-800 dark:text-zinc-200">Always Use Dark Mode</span>
+            <label class="relative inline-flex items-center cursor-pointer">
+                <input type="checkbox" id="darkToggle" class="sr-only" onchange="handleThemeToggle(this)">
+                <div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors"></div>
+                <div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+            </label>
+        </div>
+    </div>
+</section>
 
             <section class="mb-10">
                 <h2 class="text-lg font-bold mb-4">My Pals Account</h2>

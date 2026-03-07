@@ -7,27 +7,49 @@
     <meta name="color-scheme" content="light dark">
     <script src="https://cdn.tailwindcss.com"></script>
 <script>
-    // 1. Configure Tailwind
+    // 1. Configure Tailwind for manual 'class' strategy
+    // Without this, the 'dark:' classes only look at system settings
     window.tailwind.config = {
         darkMode: 'class',
     }
 
-    // 2. Optimized Theme Engine
-    function initTheme() {
+    /**
+     * 2. Theme Engine
+     * This logic determines the correct theme based on your localStorage flags.
+     */
+    function applyTheme() {
+        const useSystem = localStorage.getItem('pals-use-system') === 'true';
         const savedTheme = localStorage.getItem('pals-theme');
-        // Check for saved preference OR system preference if no save exists
-        const isDark = savedTheme === 'dark' || 
-                      (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
         
-        if (isDark) {
-            document.documentElement.classList.add('dark');
+        let isDark;
+
+        if (useSystem) {
+            // Check if the OS (iOS/Android/macOS/Windows) is set to Dark
+            isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
         } else {
-            document.documentElement.classList.remove('dark');
+            // Use the manual preference saved on the settings page
+            isDark = savedTheme === 'dark';
         }
+
+        // Toggle the 'dark' class on the <html> element
+        // This is the core fix: it now adds OR removes the class correctly
+        document.documentElement.classList.toggle('dark', isDark);
     }
 
-    // Run immediately to stop the white/black flash
-    initTheme();
+    // 3. Immediate Execution
+    // This runs before the body loads, preventing the "white flash"
+    applyTheme();
+
+    /**
+     * 4. Real-time System Listener
+     * If the user has "Match System" on, the app will switch themes 
+     * instantly if their phone enters Night Mode while the app is open.
+     */
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (localStorage.getItem('pals-use-system') === 'true') {
+            applyTheme();
+        }
+    });
 </script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }

@@ -1,49 +1,48 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Pals | Settings</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light">
-    <title>Pals | Settings</title>
+	<meta name="color-scheme" content="light dark">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // Force Tailwind to use 'class' strategy instead of system preference
-        tailwind.config = {
-            darkMode: 'class',
-        }
+<script>
+    window.tailwind.config = {
+        darkMode: 'class',
+    }
 
-        function applyTheme() {
-            // Default to 'light' if nothing is saved
-            const savedTheme = localStorage.getItem('pals-theme') || 'light';
-            
-            if (savedTheme === 'dark') {
-                document.documentElement.classList.add('dark');
-            } else {
-                document.documentElement.classList.remove('dark');
-            }
+    function applyTheme() {
+        const savedTheme = localStorage.getItem('pals-theme');
+        const isDark = savedTheme === 'dark' || 
+                      (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
         }
+    }
 
-        function handleThemeToggle(checkbox) {
-            const newTheme = checkbox.checked ? 'dark' : 'light';
-            localStorage.setItem('pals-theme', newTheme);
-            applyTheme();
-        }
-
-        // Run immediately to prevent flash
+    function handleThemeToggle(checkbox) {
+        const newTheme = checkbox.checked ? 'dark' : 'light';
+        localStorage.setItem('pals-theme', newTheme);
         applyTheme();
+    }
 
-        window.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('pals-theme') || 'light';
-            const toggle = document.getElementById('darkToggle');
-            if (toggle) toggle.checked = (savedTheme === 'dark');
-        });
-    </script>
-    <style>
-        .no-scrollbar::-webkit-scrollbar { display: none; }
-        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-        input:checked ~ .bg-toggle { background-color: #EF4444 !important; }
-        input:checked ~ .dot { transform: translateX(1.25rem); }
-    </style>
+    // Run immediately
+    applyTheme();
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('pals-theme');
+        const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const toggle = document.getElementById('darkToggle');
+        
+        if (toggle) {
+            // Set toggle state based on save or system default
+            toggle.checked = savedTheme === 'dark' || (!savedTheme && systemIsDark);
+        }
+    });
+</script>
 </head>
 <body class="bg-white dark:bg-zinc-900 antialiased transition-colors duration-200">
 

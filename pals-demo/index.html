@@ -1,24 +1,34 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <title>Pals | Messages</title>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
-    <title>Pals | Messages</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        // 1. Force Tailwind to use the 'class' strategy for manual toggling
-        tailwind.config = {
-            darkMode: 'class',
-        }
+<script>
+    // 1. Configure Tailwind
+    window.tailwind.config = {
+        darkMode: 'class',
+    }
 
-        // 2. Immediate Theme Check: Prevents the "white flash" on page load
-        (function() {
-            if (localStorage.getItem('pals-theme') === 'dark') {
-                document.documentElement.classList.add('dark');
-            }
-        })();
-    </script>
+    // 2. Optimized Theme Engine
+    function initTheme() {
+        const savedTheme = localStorage.getItem('pals-theme');
+        // Check for saved preference OR system preference if no save exists
+        const isDark = savedTheme === 'dark' || 
+                      (!savedTheme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+        
+        if (isDark) {
+            document.documentElement.classList.add('dark');
+        } else {
+            document.documentElement.classList.remove('dark');
+        }
+    }
+
+    // Run immediately to stop the white/black flash
+    initTheme();
+</script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

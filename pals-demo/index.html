@@ -7,31 +7,23 @@
     <title>Pals | Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
-        // 1. Configure Tailwind for 'class' strategy
         window.tailwind.config = {
             darkMode: 'class',
         }
 
-        // 2. Theme Engine: Prevents the "white flash" and respects system settings
         function applyTheme() {
             const useSystem = localStorage.getItem('pals-use-system') === 'true';
             const savedTheme = localStorage.getItem('pals-theme');
-            let isDark = useSystem 
-                ? window.matchMedia('(prefers-color-scheme: dark)').matches 
-                : savedTheme === 'dark';
-
+            let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
             document.documentElement.classList.toggle('dark', isDark);
         }
 
-        // Run immediately
         applyTheme();
 
-        // 3. System Theme Listener
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
             if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
         });
 
-        // 4. Tab Switcher Logic
         function switchTab(tab) {
             const msgView = document.getElementById('messagesView');
             const momView = document.getElementById('momentsView');
@@ -64,7 +56,7 @@
 
     <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden mx-auto max-w-2xl">
         
-        <header class="flex justify-between items-center px-4 pt-4 pb-2 shrink-0 border-b border-transparent dark:border-zinc-900 bg-white/80 dark:bg-black/80 backdrop-blur-md z-50">
+        <header class="flex justify-between items-center px-4 pt-4 pb-2 shrink-0 bg-white/80 dark:bg-black/80 backdrop-blur-md z-50">
             <div class="w-10"></div> 
             <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain dark:invert">
             <a href="user_profile.html">
@@ -73,8 +65,8 @@
         </header>
 
         <nav class="flex border-b border-gray-100 dark:border-zinc-900 shrink-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md">
-            <button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-3 text-center text-xl font-bold border-b-2 border-red-500 text-red-500 transition-all">Messages</button>
-            <button id="momTab" onclick="switchTab('moments')" class="flex-1 py-3 text-center text-xl font-bold text-zinc-400 dark:text-zinc-500 border-b-2 border-transparent transition-all">Moments</button>
+            <button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-3 text-center text-xl font-bold border-b-2 border-red-500 text-red-500">Messages</button>
+            <button id="momTab" onclick="switchTab('moments')" class="flex-1 py-3 text-center text-xl font-bold text-zinc-400 dark:text-zinc-500 border-b-2 border-transparent">Moments</button>
         </nav>
 
         <main id="messagesView" class="flex-1 overflow-y-auto no-scrollbar pb-32">
@@ -116,6 +108,51 @@
                 </div>
             </div>
 
+            <div class="flex items-start py-4 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer pr-4">
+                <div class="w-8 shrink-0"></div>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Mike_Chen_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-xl truncate">Mike Chen</h2>
+                    <p class="text-lg text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-tight">Thanks for the help!</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 dark:text-zinc-500">1:13 PM</span>
+                </div>
+            </div>
+
+            <div class="flex items-start py-4 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer pr-4">
+                <div class="w-8 flex justify-center pt-6 shrink-0">
+                    <div class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-sm"></div>
+                </div>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Anna_Davis_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-xl truncate">Anna Davis</h2>
+                    <p class="text-lg text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-tight">Can you send me that file?</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 dark:text-zinc-500">11:58 AM</span>
+                </div>
+            </div>
+
+            <div class="flex items-start py-4 border-b border-gray-50 dark:border-zinc-900 active:bg-gray-50 dark:active:bg-zinc-900 cursor-pointer pr-4">
+                <div class="w-8 shrink-0"></div>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Alex_Thompson_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-xl truncate">Alex Thompson</h2>
+                    <p class="text-lg text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-tight">Let's grab lunch tomorrow.</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 dark:text-zinc-500 whitespace-nowrap">Yesterday</span>
+                    <span class="text-[11px] text-zinc-400 dark:text-zinc-600 font-black uppercase tracking-wider mt-1">Silenced</span>
+                </div>
+            </div>
+
             <div class="bg-gray-50 dark:bg-zinc-900/50 px-4 py-2 border-y border-gray-100 dark:border-zinc-800 flex items-center mt-4">
                 <span class="text-xs font-bold text-zinc-400 dark:text-zinc-500 uppercase tracking-widest">Disconnected Pals</span>
             </div>
@@ -137,32 +174,17 @@
         </main>
 
         <main id="momentsView" class="hidden flex-1 overflow-y-auto no-scrollbar pb-32 px-4 pt-6 space-y-10">
-            
             <div class="space-y-3">
                 <div class="flex items-center gap-3">
-                    <img src="images/Emily_Moon_icon.png" class="w-8 h-8 rounded-full border border-gray-100 dark:border-zinc-800">
+                    <img src="images/Emily_Moon_icon.png" class="w-8 h-8 rounded-full">
                     <span class="font-bold text-zinc-900 dark:text-zinc-100">Emily Moon</span>
                     <span class="text-xs text-zinc-400">2h ago</span>
                 </div>
-                <div class="aspect-square w-full rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 shadow-sm border border-gray-50 dark:border-zinc-800">
-                    <img src="images/disneyland_moment.jpg" class="w-full h-full object-cover" alt="Moment Content">
+                <div class="aspect-square w-full rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-gray-50 dark:border-zinc-800">
+                    <img src="images/disneyland_moment.jpg" class="w-full h-full object-cover">
                 </div>
-                <p class="text-zinc-600 dark:text-zinc-400 px-1 leading-snug">
-                    Checking out the vibes before the crowds hit tomorrow! 🏰✨
-                </p>
+                <p class="text-zinc-600 dark:text-zinc-400 px-1 leading-snug">Checking out the vibes before the crowds hit tomorrow! 🏰✨</p>
             </div>
-
-            <div class="space-y-3">
-                <div class="flex items-center gap-3">
-                    <img src="images/Violet_Santos_icon.png" class="w-8 h-8 rounded-full">
-                    <span class="font-bold text-zinc-900 dark:text-zinc-100">Violet Santos</span>
-                    <span class="text-xs text-zinc-400">5h ago</span>
-                </div>
-                <div class="aspect-[4/5] w-full rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 shadow-sm border border-gray-50 dark:border-zinc-800">
-                    <img src="images/humboldt_beach.jpg" class="w-full h-full object-cover" alt="Moment Content">
-                </div>
-            </div>
-
         </main>
 
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] max-w-[500px] z-50">

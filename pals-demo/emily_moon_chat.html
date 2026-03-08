@@ -6,24 +6,35 @@
     <meta name="color-scheme" content="light dark">
     <title>Pals | Chat with Emily</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        window.tailwind.config = {
-            darkMode: 'class',
+<script>
+    window.tailwind.config = {
+        darkMode: 'class',
+    }
+
+    function applyTheme() {
+        const useSystem = localStorage.getItem('pals-use-system') === 'true';
+        const savedTheme = localStorage.getItem('pals-theme');
+        let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
+        document.documentElement.classList.toggle('dark', isDark);
+    }
+
+    // Auto-scroll logic
+    function scrollToBottom() {
+        const chatContainer = document.getElementById('chat-container');
+        if (chatContainer) {
+            chatContainer.scrollTop = chatContainer.scrollHeight;
         }
+    }
 
-        function applyTheme() {
-            const useSystem = localStorage.getItem('pals-use-system') === 'true';
-            const savedTheme = localStorage.getItem('pals-theme');
-            let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
-            document.documentElement.classList.toggle('dark', isDark);
-        }
+    applyTheme();
 
-        applyTheme();
+    window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+        if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
+    });
 
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
-        });
-    </script>
+    // Run when the page is fully loaded
+    window.addEventListener('DOMContentLoaded', scrollToBottom);
+</script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -64,8 +75,7 @@
             <button class="flex-1 py-3 text-center text-sm font-bold text-gray-400 dark:text-zinc-500">Moments</button>
         </nav>
 
-        <main class="flex-1 overflow-y-auto px-4 py-6 no-scrollbar space-y-4">
-
+<main id="chat-container" class="flex-1 overflow-y-auto px-4 py-6 no-scrollbar space-y-4">
             <div class="flex justify-end">
                 <div class="bg-red-500 text-white px-4 py-3 rounded-2xl rounded-tr-none max-w-[80%] text-[15px] shadow-sm">
                     What do you think of this new Pals app?

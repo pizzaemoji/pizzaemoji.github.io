@@ -58,7 +58,7 @@
         
         <header class="flex justify-between items-center px-4 pt-4 pb-2 shrink-0 bg-white/80 dark:bg-black/80 backdrop-blur-md z-50">
             <div class="w-10"></div> 
-            <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain dark:invert">
+            <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
             <a href="user_profile.html">
                 <img src="images/User_Icon.png" alt="Your Profile" class="w-9 h-9 rounded-full border-2 border-red-500 object-cover p-[1px]">
             </a>
@@ -169,22 +169,60 @@
                 <div class="w-24 text-right flex flex-col shrink-0 pt-2">
                     <span class="text-base text-zinc-400 whitespace-nowrap">7 mo ago</span>
                 </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-medium text-zinc-800 dark:text-zinc-200 text-xl truncate">Tom Wilson</h2>
+                    <p class="text-lg text-zinc-400 dark:text-zinc-500 line-clamp-2 leading-tight">Thanks!</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 whitespace-nowrap">8 mo ago</span>
+                    <span class="text-[11px] text-zinc-400 font-black uppercase tracking-wider mt-1">Chat Ended</span>
+                </div>
+            </div>
+
+            <div class="flex items-start py-4 opacity-60 grayscale-[0.5] pr-4 border-b border-gray-50 dark:border-zinc-900">
+                <div class="w-8 shrink-0"></div>
+                <div class="shrink-0 pt-1">
+                    <img src="images/Ryan_Jones_icon.png" class="w-14 h-14 rounded-full object-cover">
+                </div>
+                <div class="ml-4 flex-1 min-w-0 flex flex-col pt-1">
+                    <h2 class="font-medium text-zinc-800 dark:text-zinc-200 text-xl truncate">Ryan Jones</h2>
+                    <p class="text-lg text-zinc-400 dark:text-zinc-500 line-clamp-2 leading-tight">&nbsp;</p>
+                </div>
+                <div class="w-24 text-right flex flex-col shrink-0 pt-2">
+                    <span class="text-base text-zinc-400 whitespace-nowrap">11 mo ago</span>
+                    <span class="text-[11px] text-zinc-400 font-black uppercase tracking-wider mt-1">Blocked</span>
+                </div>
+            </div>
             </div>
 
         </main>
 
         <main id="momentsView" class="hidden flex-1 overflow-y-auto no-scrollbar pb-32 px-4 pt-6 space-y-10">
+        
             <div class="space-y-3">
                 <div class="flex items-center gap-3">
                     <img src="images/Emily_Moon_icon.png" class="w-8 h-8 rounded-full">
-                    <span class="font-bold text-zinc-900 dark:text-zinc-100">Emily Moon</span>
-                    <span class="text-xs text-zinc-400">2h ago</span>
+                    <span class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Emily Moon</span>
+                    <span class="text-base text-zinc-400">28 minutes ago</span>
                 </div>
                 <div class="aspect-square w-full rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-gray-50 dark:border-zinc-800">
-                    <img src="images/disneyland_moment.jpg" class="w-full h-full object-cover">
+                    <img src="images/moments_1.png" class="w-full h-full object-cover">
                 </div>
-                <p class="text-zinc-600 dark:text-zinc-400 px-1 leading-snug">Checking out the vibes before the crowds hit tomorrow! 🏰✨</p>
+                <p class="text-zinc-600 dark:text-zinc-400 px-1 leading-snug">Such a silly cat</p>
             </div>
+            
+            <div class="space-y-3">
+                <div class="flex items-center gap-3">
+                    <img src="images/Jamie_Parker_icon.png" class="w-8 h-8 rounded-full">
+                    <span class="text-xl font-bold text-zinc-900 dark:text-zinc-100">Emily Moon</span>
+                    <span class="text-base text-zinc-400">5 hours ago</span>
+                </div>
+                <div class="aspect-square w-full rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-gray-50 dark:border-zinc-800">
+                    <img src="images/moments_2.png" class="w-full h-full object-cover">
+                </div>
+                <p class="text-zinc-600 dark:text-zinc-400 px-1 leading-snug">This vibe!</p>
+            </div>
+            
         </main>
 
         <div class="absolute bottom-10 left-1/2 -translate-x-1/2 w-[90%] max-w-[500px] z-50">

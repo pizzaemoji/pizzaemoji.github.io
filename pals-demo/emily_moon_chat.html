@@ -30,18 +30,18 @@
                 momView.classList.add('hidden');
                 inputBar.classList.remove('hidden');
                 msgTab.classList.add('border-red-500', 'text-red-500');
-                msgTab.classList.remove('text-gray-400', 'dark:text-zinc-500', 'border-transparent');
+                msgTab.classList.remove('text-gray-400', 'dark:text-zinc-100', 'border-transparent');
                 momTab.classList.remove('border-red-500', 'text-red-500');
-                momTab.classList.add('text-gray-400', 'dark:text-zinc-500', 'border-transparent');
+                momTab.classList.add('text-gray-400', 'dark:text-zinc-100', 'border-transparent');
                 scrollToBottom();
             } else {
                 chatView.classList.add('hidden');
                 momView.classList.remove('hidden');
                 inputBar.classList.add('hidden');
                 momTab.classList.add('border-red-500', 'text-red-500');
-                momTab.classList.remove('text-gray-400', 'dark:text-zinc-500', 'border-transparent');
+                momTab.classList.remove('text-gray-400', 'dark:text-zinc-100', 'border-transparent');
                 msgTab.classList.remove('border-red-500', 'text-red-500');
-                msgTab.classList.add('text-gray-400', 'dark:text-zinc-500', 'border-transparent');
+                msgTab.classList.add('text-gray-400', 'dark:text-zinc-100', 'border-transparent');
             }
         }
 
@@ -91,7 +91,7 @@
 
         <nav class="flex border-b border-gray-100 dark:border-zinc-900 shrink-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md">
             <button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-3 text-center text-xl font-bold border-b-2 border-red-500 text-red-500 transition-all">Messages</button>
-            <button id="momTab" onclick="switchTab('moments')" class="flex-1 py-3 text-center text-xl font-bold text-gray-400 dark:text-zinc-500 border-b-2 border-transparent transition-all">Moments</button>
+            <button id="momTab" onclick="switchTab('moments')" class="flex-1 py-3 text-center text-xl font-bold text-gray-400 dark:text-zinc-100 border-b-2 border-transparent transition-all">Moments</button>
         </nav>
 
         <main id="chat-container" class="flex-1 overflow-y-auto px-4 py-6 no-scrollbar space-y-4">

@@ -34,16 +34,16 @@
                 msgView.classList.remove('hidden');
                 momView.classList.add('hidden');
                 msgTab.classList.add('border-red-500', 'text-red-500');
-                msgTab.classList.remove('text-zinc-400', 'dark:text-zinc-500', 'border-transparent');
+                msgTab.classList.remove('text-zinc-400', 'dark:text-zinc-900', 'border-transparent');
                 momTab.classList.remove('border-red-500', 'text-red-500');
-                momTab.classList.add('text-zinc-400', 'dark:text-zinc-500', 'border-transparent');
+                momTab.classList.add('text-zinc-400', 'dark:text-zinc-900', 'border-transparent');
             } else {
                 msgView.classList.add('hidden');
                 momView.classList.remove('hidden');
                 momTab.classList.add('border-red-500', 'text-red-500');
-                momTab.classList.remove('text-zinc-400', 'dark:text-zinc-500', 'border-transparent');
+                momTab.classList.remove('text-zinc-400', 'dark:text-zinc-900', 'border-transparent');
                 msgTab.classList.remove('border-red-500', 'text-red-500');
-                msgTab.classList.add('text-zinc-400', 'dark:text-zinc-500', 'border-transparent');
+                msgTab.classList.add('text-zinc-400', 'dark:text-zinc-900', 'border-transparent');
             }
         }
     </script>
@@ -66,7 +66,7 @@
 
         <nav class="flex border-b border-gray-100 dark:border-zinc-900 shrink-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md">
             <button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-3 text-center text-xl font-bold border-b-2 border-red-500 text-red-500">Messages</button>
-            <button id="momTab" onclick="switchTab('moments')" class="flex-1 py-3 text-center text-xl font-bold text-zinc-400 dark:text-zinc-500 border-b-2 border-transparent">Moments</button>
+            <button id="momTab" onclick="switchTab('moments')" class="flex-1 py-3 text-center text-xl font-bold text-zinc-400 dark:text-zinc-900 border-b-2 border-transparent">Moments</button>
         </nav>
 
         <main id="messagesView" class="flex-1 overflow-y-auto no-scrollbar pb-32">

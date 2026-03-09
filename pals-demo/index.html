@@ -56,13 +56,19 @@
 
     <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden mx-auto max-w-2xl">
         
-        <header class="flex justify-between items-center px-4 pt-4 pb-2 shrink-0 bg-white/80 dark:bg-black/80 backdrop-blur-md z-50">
-            <div class="w-10"></div> 
-            <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
-            <a href="user_profile.html">
-                <img src="images/User_Icon.png" alt="Your Profile" class="w-9 h-9 rounded-full border-2 border-red-500 object-cover p-[1px]">
-            </a>
-        </header>
+<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 bg-white/80 dark:bg-black/80 backdrop-blur-md z-50 border-b border-zinc-100 dark:border-zinc-900">
+    
+    <div class="w-10"></div> 
+
+    <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
+
+    <div class="w-10 flex justify-end items-center">
+        <a href="user_profile.html" class="active:scale-90 transition-transform shrink-0">
+            <img src="images/User_Icon.png" alt="Your Profile" class="w-9 h-9 rounded-full border-2 border-red-500 object-cover p-[1px]">
+        </a>
+    </div>
+
+</header>
 
         <nav class="flex border-b border-gray-100 dark:border-zinc-900 shrink-0 z-40 bg-white/80 dark:bg-black/80 backdrop-blur-md">
             <button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-3 text-center text-xl font-bold border-b-2 border-red-500 text-red-500">Messages</button>

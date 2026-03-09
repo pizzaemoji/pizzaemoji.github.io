@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Pals | Edit Profile</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind.config = {
+            darkMode: 'class',
+        }
+
+        function applyTheme() {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+        }
+
+        applyTheme();
+
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
+        });
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-white dark:bg-zinc-950 antialiased transition-colors duration-200">
+
+    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
+        
+<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
+    
+    <div class="w-10 flex items-center">
+        <a href="user_profile.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+        </a>
+    </div>
+
+    <img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+
+    <div class="w-10 flex justify-end items-center">
+        </div>
+
+</header>
+
+        <main class="flex-1 overflow-y-auto px-8 py-10 no-scrollbar">
+            
+            <h1 class="text-4xl font-black text-zinc-900 dark:text-white leading-tight mb-2">
+                Edit Profile
+            </h1>
+
+            <article class="space-y-6 text-zinc-600 dark:text-zinc-400 leading-relaxed text-[16px]">
+                
+                <p>
+On this page the user can edit this profile info, like changing their name, pronouns, and mini-description. But this is just a static demo so there's nothing to edit.
+				</p>
+
+            </article>
+
+        </main>
+    </div>
+
+</body>
+</html>

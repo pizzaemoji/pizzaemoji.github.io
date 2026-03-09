@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Pals | Join the Conversation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind.config = { darkMode: 'class' }
+
+        function applyTheme() {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+        }
+        applyTheme();
+
+        function showScreen(screenId) {
+            // Hide all screens
+            document.querySelectorAll('.onboarding-screen').forEach(s => s.classList.add('hidden'));
+            // Show requested screen
+            const target = document.getElementById(screenId);
+            target.classList.remove('hidden');
+            
+            // Special logic for final screen redirect
+            if (screenId === 'screen4') {
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 2000);
+            }
+        }
+    </script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-white dark:bg-zinc-950 antialiased transition-colors duration-200">
+
+    <div class="w-full h-dvh flex flex-col items-center bg-white dark:bg-black shadow-2xl relative overflow-hidden mx-auto max-w-2xl">
+        
+        <div class="w-full bg-red-500/10 dark:bg-red-500/20 border-b border-red-500/20 py-2 text-center shrink-0 z-50">
+            <span class="text-[10px] font-black text-red-500 uppercase tracking-[0.2em]">Onboarding Demo</span>
+        </div>
+
+        <header class="w-full flex justify-center items-center py-6 shrink-0 z-30">
+            <img src="images/Pals_Logo.png" alt="Pals" class="h-8 w-auto dark:invert">
+        </header>
+
+        <main id="screen1" class="onboarding-screen flex-1 w-full overflow-y-auto no-scrollbar px-8 pb-12">
+            <div class="space-y-6">
+                <div class="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-[2rem] border border-zinc-100 dark:border-zinc-800">
+                    <p class="text-zinc-900 dark:text-white text-lg font-bold">Mia Fisher has invited you to join Pals!</p>
+                    <p class="text-zinc-500 dark:text-zinc-400 mt-2 text-base leading-relaxed">
+                        Pals is a private messaging and sharing app built by humans, for humans. No influencers, no bots, and no brands. Just your Pals.
+                    </p>
+                </div>
+
+                <div class="space-y-4">
+                    <label class="block text-zinc-900 dark:text-white font-bold text-base">To join, enter your phone number:</label>
+                    <input type="text" value="707-555-1212" readonly class="w-full py-4 px-6 bg-zinc-100 dark:bg-zinc-900 text-zinc-500 rounded-2xl border-none outline-none font-bold text-lg cursor-not-allowed">
+                    <p class="text-xs text-zinc-400 leading-relaxed italic">
+                        We use your phone number to verify you're human. No one will see it, and we don't sell your data.
+                    </p>
+                </div>
+
+                <div class="space-y-4 pt-4">
+                    <label class="flex items-start gap-3 cursor-pointer group text-base">
+                        <input type="checkbox" checked class="mt-1 accent-red-500 w-5 h-5 rounded">
+                        <span class="text-zinc-600 dark:text-zinc-400">I have read the <span class="text-red-500 underline">End User License Agreement</span></span>
+                    </label>
+                    <label class="flex items-start gap-3 cursor-pointer group text-base">
+                        <input type="checkbox" checked class="mt-1 accent-red-500 w-5 h-5 rounded">
+                        <span class="text-zinc-600 dark:text-zinc-400">I have read the <span class="text-red-500 underline">Privacy Policy</span></span>
+                    </label>
+                </div>
+
+                <button onclick="showScreen('screen2')" class="w-full py-4 bg-red-500 text-white font-bold rounded-2xl shadow-lg active:scale-[0.98] transition-all mt-6">
+                    Continue
+                </button>
+            </div>
+        </main>
+
+        <main id="screen2" class="onboarding-screen hidden flex-1 w-full overflow-y-auto no-scrollbar px-8 pb-12 flex flex-col justify-center">
+            <div class="text-center space-y-8">
+                <div class="space-y-2">
+                    <h2 class="text-2xl font-black text-zinc-900 dark:text-white tracking-tight">Enter the 6-digit code</h2>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-base">We sent a text to 707-555-1212</p>
+                </div>
+
+                <input type="text" value="1 2 3 4 5 6" readonly class="w-full py-6 text-center bg-transparent text-zinc-900 dark:text-white border-b-2 border-red-500 outline-none font-black text-4xl tracking-[0.5em] cursor-not-allowed">
+                
+                <p class="text-sm text-zinc-400">Didn't get the code? <span class="text-red-500 font-bold underline">Re-send it.</span></p>
+
+                <button onclick="showScreen('screen3')" class="w-full py-4 bg-red-500 text-white font-bold rounded-2xl shadow-lg active:scale-[0.98] transition-all">
+                    Verify & Continue
+                </button>
+            </div>
+        </main>
+
+        <main id="screen3" class="onboarding-screen hidden flex-1 w-full overflow-y-auto no-scrollbar px-8 pb-12">
+            <div class="space-y-8">
+                <div class="text-center space-y-2">
+                    <h2 class="text-2xl font-black text-zinc-900 dark:text-white">Welcome to Pals!</h2>
+                    <p class="text-zinc-500 dark:text-zinc-400 text-[15px]">Your name, photos, and messages are all encrypted.</p>
+                </div>
+
+                <div class="flex flex-col items-center gap-4">
+                    <div class="w-32 h-32 rounded-[2.5rem] bg-zinc-100 dark:bg-zinc-900 overflow-hidden relative group border-2 border-zinc-200 dark:border-zinc-800">
+                        <img src="images/onboarder.png" class="w-full h-full object-cover">
+                        <div class="absolute inset-0 bg-black/40 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+                            <span class="text-[10px] text-white font-bold uppercase">Change</span>
+                        </div>
+                    </div>
+                    <span class="text-sm font-bold text-zinc-400">Profile Photo</span>
+                </div>
+
+                <div class="space-y-4">
+                    <label class="block text-zinc-900 dark:text-white font-bold text-base">Enter a name for yourself:</label>
+                    <input type="text" placeholder="e.g. Brandon B." class="w-full py-4 px-6 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white rounded-2xl border border-zinc-100 dark:border-zinc-800 outline-none font-medium focus:ring-2 focus:ring-red-500/20">
+                    <p class="text-xs text-zinc-400 leading-relaxed">
+                        Pals is private. Your name is only shared with people you message. No searchable list of users.
+                    </p>
+                </div>
+
+                <div class="pt-6">
+                    <p class="text-center text-zinc-400 text-sm mb-6">We're glad you're here.</p>
+                    <button onclick="showScreen('screen4')" class="w-full py-4 bg-red-500 text-white font-bold rounded-2xl shadow-xl active:scale-[0.98] transition-all">
+                        Join Pals
+                    </button>
+                </div>
+            </div>
+        </main>
+
+        <main id="screen4" class="onboarding-screen hidden flex-1 w-full flex flex-col items-center justify-center px-8 text-center">
+            <span class="text-red-500 font-serif italic text-6xl mb-4 -rotate-3 block">Hiya, Pal!</span>
+            <div class="flex items-center gap-2 mt-8">
+                <div class="w-2 h-2 bg-red-500 rounded-full animate-bounce"></div>
+                <div class="w-2 h-2 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+                <div class="w-2 h-2 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+            </div>
+        </main>
+        
+    </div>
+</body>
+</html>

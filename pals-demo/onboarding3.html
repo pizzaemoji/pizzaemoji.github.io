@@ -89,7 +89,8 @@
 
                 <input type="text" value="1 2 3 4 5 6" readonly class="w-full py-6 text-center bg-transparent text-zinc-900 dark:text-white border-b-2 border-red-500 outline-none font-black text-4xl tracking-[0.5em] cursor-not-allowed">
                 
-                <p class="text-base text-zinc-400">Didn't get the code? <span class="text-red-500 font-bold underline">Re-send it.</span></p>
+                <p class="text-base text-zinc-400">Didn't get the code? <span class="text-red-500 font-bold underline">Check your number and re-send it.</span></p>
+                <p class="text-base intalics text-zinc-400">Only valid, mobile cellular numbers can receive codes; no landlines or VoIP/virtual numbers are permitted.</p>    
 
                 <button onclick="showScreen('screen3')" class="w-full py-4 bg-red-500 text-white font-bold rounded-2xl shadow-lg active:scale-[0.98] transition-all">
                     Verify & Continue
@@ -98,22 +99,22 @@
         </main>
 
         <main id="screen3" class="onboarding-screen hidden flex-1 w-full overflow-y-auto no-scrollbar px-8 pb-12">
-            <div class="space-y-10">
-                <div class="text-center space-y-2">
-                    <h2 class="text-2xl font-black text-zinc-900 dark:text-white">Welcome to Pals!</h2>
-                    <p class="text-zinc-500 dark:text-zinc-400 text-base">Finish signing up so you can start messaging with Mia!</p>
+           <div class="space-y-6">
+                <div class="bg-zinc-50 dark:bg-zinc-900/50 p-6 rounded-[2rem] border border-zinc-100 dark:border-zinc-800">
+                    <p class="text-zinc-900 dark:text-white text-lg font-bold">One last thing…</p>
+                    <p class="text-zinc-500 dark:text-zinc-400 mt-2 text-base leading-relaxed">From this point on, everything you do on Pals is private and encrypted. The community you're joining is one that includes the people you already know, not strangers on the internet. Go forward with kindness, humility, and friendship.</p>
                 </div>
 
                 <div class="space-y-4">
                     <label class="block text-zinc-900 dark:text-white font-bold text-lg">Enter a name for yourself:</label>
                     <input type="text" placeholder="Name" class="w-full py-4 px-6 bg-zinc-50 dark:bg-zinc-900 text-zinc-900 dark:text-white rounded-2xl border border-zinc-100 dark:border-zinc-800 outline-none font-medium focus:ring-2 focus:ring-red-500/20">
                     <p class="text-[15px] text-zinc-400 leading-relaxed">
-                        We suggest using a name your friends and community will know you by. Pals is entirely private. Your name will only be shared with the people you know. You can change it later, as often as you want.
+                        We suggest using a name your friends and community will know you by. Your name will only be shared with the people you know. You can change it later, and as often as you want.
                     </p>
                 </div>
 
                 <div class="space-y-4">
-                    <label class="block text-zinc-900 dark:text-white font-bold text-lg">Your profile photo:</label>
+                    <label class="block text-zinc-900 dark:text-white font-bold text-lg">Add a profile photo:</label>
                     <div class="flex items-center gap-6">
                         <div class="w-24 h-24 rounded-[2rem] bg-zinc-100 dark:bg-zinc-900 flex items-center justify-center border-2 border-dashed border-zinc-200 dark:border-zinc-800 shrink-0">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" class="w-8 h-8 text-zinc-400">
@@ -121,11 +122,11 @@
                             </svg>
                         </div>
                         <button class="flex-1 py-3 px-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold rounded-xl border border-zinc-200 dark:border-zinc-800 text-sm active:scale-95 transition-transform">
-                            Select a photo
+                        Select a photo
                         </button>
                     </div>
                     <p class="text-[15px] text-zinc-400 leading-relaxed">
-                        Like your name, this will be visible only to the people you know. You can change it as often as you like.
+                        Like your name, this will be shared only with the people you know. You can change it as often as you want.
                     </p>
                 </div>
 

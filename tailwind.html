@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pals | Style Sandbox</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+    </style>
+</head>
+<body class="antialiased no-scrollbar">
+
+    <div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+        
+        <section class="bg-white p-8 space-y-12">
+            <h2 class="text-xs font-black uppercase tracking-[0.3em] text-red-500 mb-8">Light Mode Spectrum</h2>
+
+            <div class="space-y-2">
+                <p class="text-[10px] font-bold text-zinc-400 uppercase">The Zincs</p>
+                <div class="space-y-1">
+                    <div class="p-2 bg-zinc-50 text-zinc-900 text-xs font-medium border border-zinc-200">Zinc 50</div>
+                    <div class="p-2 bg-zinc-100 text-zinc-900 text-xs font-medium">Zinc 100</div>
+                    <div class="p-2 bg-zinc-200 text-zinc-900 text-xs font-medium">Zinc 200</div>
+                    <div class="p-2 bg-zinc-300 text-zinc-900 text-xs font-medium">Zinc 300</div>
+                    <div class="p-2 bg-zinc-400 text-white text-xs font-medium">Zinc 400</div>
+                    <div class="p-2 bg-zinc-500 text-white text-xs font-medium">Zinc 500</div>
+                    <div class="p-2 bg-zinc-600 text-white text-xs font-medium">Zinc 600</div>
+                    <div class="p-2 bg-zinc-700 text-white text-xs font-medium">Zinc 700</div>
+                    <div class="p-2 bg-zinc-800 text-white text-xs font-medium">Zinc 800</div>
+                    <div class="p-2 bg-zinc-900 text-white text-xs font-medium">Zinc 900</div>
+                    <div class="p-2 bg-zinc-950 text-white text-xs font-medium">Zinc 950</div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <p class="text-[10px] font-bold text-zinc-400 uppercase border-b pb-2">Typography Scale</p>
+                <p class="text-xs text-zinc-500">text-xs: The fine print (12px)</p>
+                <p class="text-sm text-zinc-600">text-sm: Standard UI metadata (14px)</p>
+                <p class="text-base text-zinc-900">text-base: Body copy / Primary text (16px)</p>
+                <p class="text-lg font-bold text-zinc-900">text-lg: Small headings (18px)</p>
+                <p class="text-xl font-black text-zinc-900 tracking-tight">text-xl: Primary headings (20px)</p>
+                <p class="text-2xl font-black text-zinc-900 tracking-tighter">text-2xl: Large title (24px)</p>
+                <p class="text-3xl font-black text-zinc-900 tracking-tighter">text-3xl (30px)</p>
+                <p class="text-4xl font-black text-zinc-900 tracking-tighter">text-4xl (36px)</p>
+                <p class="text-5xl font-black text-zinc-900 tracking-tighter">text-5xl (48px)</p>
+            </div>
+        </section>
+
+        <section class="bg-black p-8 space-y-12">
+            <h2 class="text-xs font-black uppercase tracking-[0.3em] text-red-500 mb-8">Dark Mode Spectrum</h2>
+
+            <div class="space-y-2">
+                <p class="text-[10px] font-bold text-zinc-600 uppercase">The Zincs</p>
+                <div class="space-y-1">
+                    <div class="p-2 bg-zinc-950 text-zinc-400 text-xs font-medium border border-zinc-800">Zinc 950 (BG Anchor)</div>
+                    <div class="p-2 bg-zinc-900 text-zinc-300 text-xs font-medium">Zinc 900</div>
+                    <div class="p-2 bg-zinc-800 text-zinc-300 text-xs font-medium">Zinc 800</div>
+                    <div class="p-2 bg-zinc-700 text-zinc-200 text-xs font-medium">Zinc 700</div>
+                    <div class="p-2 bg-zinc-600 text-zinc-100 text-xs font-medium">Zinc 600</div>
+                    <div class="p-2 bg-zinc-500 text-white text-xs font-medium">Zinc 500 (Mid-tone)</div>
+                    <div class="p-2 bg-zinc-400 text-white text-xs font-medium">Zinc 400</div>
+                    <div class="p-2 bg-zinc-300 text-black text-xs font-bold">Zinc 300</div>
+                    <div class="p-2 bg-zinc-200 text-black text-xs font-bold">Zinc 200</div>
+                    <div class="p-2 bg-zinc-100 text-black text-xs font-bold">Zinc 100</div>
+                    <div class="p-2 bg-zinc-50 text-black text-xs font-bold">Zinc 50 (Paper White)</div>
+                </div>
+            </div>
+
+            <div class="space-y-4">
+                <p class="text-[10px] font-bold text-zinc-600 uppercase border-b border-zinc-800 pb-2">Readability Test</p>
+                <p class="text-xs text-zinc-500 italic font-medium">text-xs: Hardest to read on black. Use Zinc-400+.</p>
+                <p class="text-sm text-zinc-400">text-sm: Good for secondary info.</p>
+                <p class="text-base text-zinc-200">text-base: Primary readable text.</p>
+                <p class="text-lg font-bold text-white">text-lg: Bold High-Contrast Heading.</p>
+                <p class="text-2xl font-black text-white tracking-tighter">text-2xl: Title Text</p>
+                <p class="text-5xl font-black text-white tracking-tighter leading-none">text-5xl<br>Impact.</p>
+            </div>
+        </section>
+    </div>
+
+    <div class="w-full bg-zinc-100 dark:bg-zinc-900 p-12 text-center">
+        <p class="text-[10px] font-black uppercase tracking-[0.5em] text-zinc-400 mb-4">Letter Spacing & Line Height</p>
+        <div class="max-w-md mx-auto space-y-8">
+            <p class="text-zinc-800 dark:text-zinc-200 leading-relaxed">
+                leading-relaxed: This is the standard for blog posts or long-form reading. It gives the lines room to breathe so the eye doesn't get lost.
+            </p>
+            <p class="text-zinc-800 dark:text-zinc-200 leading-tight">
+                leading-tight: This is for headlines. It keeps the words grouped together as a single visual unit, preventing the "falling apart" look.
+            </p>
+            <p class="text-red-500 font-black tracking-widest uppercase text-xs">
+                tracking-widest: Great for small, authoritative labels.
+            </p>
+        </div>
+    </div>
+
+</body>
+</html>

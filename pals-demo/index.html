@@ -17,24 +17,38 @@
         }
         applyTheme();
 
-        function switchTab(tab) {
-            const msgView = document.getElementById('messagesView');
-            const momView = document.getElementById('momentsView');
-            const msgTab = document.getElementById('msgTab');
-            const momTab = document.getElementById('momTab');
+function switchTab(tab) {
+    const msgView = document.getElementById('messagesView');
+    const momView = document.getElementById('momentsView');
+    const msgTab = document.getElementById('msgTab');
+    const momTab = document.getElementById('momTab');
 
-            if (tab === 'messages') {
-                msgView.classList.remove('hidden');
-                momView.classList.add('hidden');
-                msgTab.className = "flex-1 py-4 text-center text-xl font-black border-b-2 border-red-500 text-red-500";
-                momTab.className = "flex-1 py-4 text-center text-xl font-bold text-zinc-400 dark:text-zinc-600 border-b-2 border-transparent";
-            } else {
-                msgView.classList.add('hidden');
-                momView.classList.remove('hidden');
-                momTab.className = "flex-1 py-4 text-center text-xl font-black border-b-2 border-red-500 text-red-500";
-                msgTab.className = "flex-1 py-4 text-center text-xl font-bold text-zinc-400 dark:text-zinc-600 border-b-2 border-transparent";
-            }
-        }
+    if (tab === 'messages') {
+        // Toggle Visibility
+        msgView.classList.remove('hidden');
+        momView.classList.add('hidden');
+
+        // Update Messages Tab (Active State)
+        msgTab.classList.add('border-red-500', 'text-red-500', 'font-black');
+        msgTab.classList.remove('border-transparent', 'text-zinc-400', 'dark:text-zinc-600', 'font-bold');
+
+        // Update Moments Tab (Inactive State)
+        momTab.classList.remove('border-red-500', 'text-red-500', 'font-black');
+        momTab.classList.add('border-transparent', 'text-zinc-900', 'dark:text-zinc-100', 'font-bold');
+    } else {
+        // Toggle Visibility
+        msgView.classList.add('hidden');
+        momView.classList.remove('hidden');
+
+        // Update Moments Tab (Active State)
+        momTab.classList.add('border-red-500', 'text-red-500', 'font-black');
+        momTab.classList.remove('border-transparent', 'text-zinc-900', 'dark:text-zinc-100', 'font-bold');
+
+        // Update Messages Tab (Inactive State)
+        msgTab.classList.remove('border-red-500', 'text-red-500', 'font-black');
+        msgTab.classList.add('border-transparent', 'text-zinc-900', 'dark:text-zinc-100', 'font-bold');
+    }
+}
     </script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }

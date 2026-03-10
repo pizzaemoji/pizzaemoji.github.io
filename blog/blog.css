@@ -45,6 +45,13 @@ h2 {
 	font-weight: 500;
 	margin: 0;
 }
+.anchor {
+	color: rgb(38, 40, 45);
+	font-size: 1rem;
+	line-height: 1;
+	font-weight: 300;
+	margin: 0;
+}
 .byline {
 	display: inline-block;
 	font-size: 1rem;

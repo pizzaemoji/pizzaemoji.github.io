@@ -48,8 +48,7 @@ h2 {
 .anchor {
 	color: rgb(38, 40, 45);
 	font-size: 1rem;
-	line-height: 1;
-	font-weight: 300;
+	font-weight: 100;
 	margin: 0;
 }
 .byline {

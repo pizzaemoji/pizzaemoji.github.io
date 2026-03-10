@@ -24,29 +24,29 @@ function switchTab(tab) {
     const momTab = document.getElementById('momTab');
 
     if (tab === 'messages') {
-        // Toggle Visibility
+        // 1. Handle Visibility
         msgView.classList.remove('hidden');
         momView.classList.add('hidden');
 
-        // Update Messages Tab (Active State)
-        msgTab.classList.add('border-red-500', 'text-red-500', 'font-black');
-        msgTab.classList.remove('border-transparent', 'text-zinc-400', 'dark:text-zinc-600', 'font-bold');
+        // 2. Active State: Messages (Red + Underline)
+        msgTab.classList.add('text-red-500', 'border-red-500', 'font-black');
+        msgTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
 
-        // Update Moments Tab (Inactive State)
-        momTab.classList.remove('border-red-500', 'text-red-500', 'font-black');
-        momTab.classList.add('border-transparent', 'text-zinc-900', 'dark:text-zinc-100', 'font-bold');
+        // 3. Inactive State: Moments (Neutral/White + No Underline)
+        momTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+        momTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
     } else {
-        // Toggle Visibility
+        // 1. Handle Visibility
         msgView.classList.add('hidden');
         momView.classList.remove('hidden');
 
-        // Update Moments Tab (Active State)
-        momTab.classList.add('border-red-500', 'text-red-500', 'font-black');
-        momTab.classList.remove('border-transparent', 'text-zinc-900', 'dark:text-zinc-100', 'font-bold');
+        // 2. Active State: Moments (Red + Underline)
+        momTab.classList.add('text-red-500', 'border-red-500', 'font-black');
+        momTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
 
-        // Update Messages Tab (Inactive State)
-        msgTab.classList.remove('border-red-500', 'text-red-500', 'font-black');
-        msgTab.classList.add('border-transparent', 'text-zinc-900', 'dark:text-zinc-100', 'font-bold');
+        // 3. Inactive State: Messages (Neutral/White + No Underline)
+        msgTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+        msgTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
     }
 }
     </script>
@@ -161,8 +161,7 @@ function switchTab(tab) {
 			<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">Absolutely agree. Take care.</p>
         </div>
         <div class="ml-4 text-right shrink-0">
-            <p class="text-sm font-bold text-zinc-400 dark:text-zinc-600">2 months ago</p>
-            <p class="text-[10px] font-black uppercase tracking-widest text-zinc-300 dark:text-zinc-700 mt-1">Silenced</p>
+            <span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">2 months ago</span>
         </div>
     </div>
 

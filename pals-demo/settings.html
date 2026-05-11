@@ -67,6 +67,17 @@
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
             if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
         });
+       
+       // Checkbox settings 
+function checkLimit(checkbox) {
+    const checkboxes = document.querySelectorAll('input[name="interests"]');
+    const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+
+    if (checkedCount > 4) {
+        checkbox.checked = false;
+        alert("You can only select up to 4 options.");
+    }
+}
     </script>
 </head>
 <body class="bg-white dark:bg-zinc-900 antialiased transition-colors duration-200">
@@ -153,7 +164,7 @@
     <div class="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl overflow-hidden">
         
         <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors border-b border-gray-100 dark:border-zinc-900">
-            <input type="radio" name="camera" value="one" class="sr-only" checked>
+            <input type="radio" name="cameraPref" value="rememberLastUsed" class="sr-only" checked>
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">Remember Last Used</span>
             <div class="check-icon hidden text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -163,7 +174,7 @@
         </label>
 
         <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors border-b border-gray-100 dark:border-zinc-900">
-            <input type="radio" name="camera" value="two" class="sr-only">
+            <input type="radio" name="cameraPref" value="preferSelfieCamera" class="sr-only">
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">Prefer Selfie Camera</span>
             <div class="check-icon hidden text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -173,7 +184,7 @@
         </label>
 
         <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors">
-            <input type="radio" name="camera" value="three" class="sr-only">
+            <input type="radio" name="cameraPref" value="preferBackCamera" class="sr-only">
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">Prefer Back Camera</span>
             <div class="check-icon hidden text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -193,7 +204,7 @@
     <div class="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl overflow-hidden">
         
         <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors border-b border-gray-100 dark:border-zinc-900">
-            <input type="radio" name="quickbuttons" value="one" class="sr-only" checked>
+            <input type="checkbox" name="quickButtons" value="camera" class="sr-only" onchange="checkLimit(this)" checked>
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">Camera</span>
             <div class="check-icon hidden text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -203,7 +214,7 @@
         </label>
 
         <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors border-b border-gray-100 dark:border-zinc-900">
-            <input type="radio" name="quickbuttons" value="two" class="sr-only" checked>
+            <input type="checkbox" name="quickButtons" value="search" class="sr-only" onchange="checkLimit(this)" checked>
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">Search</span>
             <div class="check-icon hidden text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -213,7 +224,7 @@
         </label>
 
         <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors">
-            <input type="radio" name="quickbuttons" value="three" class="sr-only">
+            <input type="checkbox" name="quickButtons" value="pomodoroTimer" class="sr-only" onchange="checkLimit(this)">
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">Pomodoro Timer</span>
             <div class="check-icon hidden text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -223,7 +234,7 @@
         </label>
         
         <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors">
-            <input type="radio" name="quickbuttons" value="three" class="sr-only">
+            <input type="checkbox" name="quickButtons" value="pinnedMemories" class="sr-only" onchange="checkLimit(this)">
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">Pinned Memories</span>
             <div class="check-icon hidden text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
@@ -233,7 +244,7 @@
         </label>
         
         <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors">
-            <input type="radio" name="quickbuttons" value="three" class="sr-only">
+            <input type="checkbox" name="quickButtons" value="digitalShop" class="sr-only" onchange="checkLimit(this)">
             <span class="text-zinc-800 dark:text-zinc-200 font-medium">Digital Shop</span>
             <div class="check-icon hidden text-red-500">
                 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">

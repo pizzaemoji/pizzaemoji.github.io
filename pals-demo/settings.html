@@ -253,6 +253,16 @@ function checkLimit(checkbox) {
             </div>
         </label>
 
+        <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors">
+            <input type="checkbox" name="quickButtons" value="addInvite" class="sr-only peer" onchange="checkLimit(this)">
+            <span class="text-zinc-800 dark:text-zinc-200 font-medium">Add/Invite a Pal</span>
+            <div class="check-icon hidden peer-checked:block text-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                    <path fill-rule="evenodd" d="M20.25 7.5l-9 9-4.5-4.5 1.5-1.5 3 3 7.5-7.5 1.5 1.5z" clip-rule="evenodd" />
+                </svg>
+            </div>
+        </label>
+
     </div>
 </section>
 
@@ -269,6 +279,13 @@ function checkLimit(checkbox) {
                 <path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
             </svg>
         </button>
+        
+        <!-- Add/Invite a Pal -->
+		<button class="w-20 h-20 rounded-full bg-red-500 text-white flex items-center justify-center shadow-2xl shadow-red-500/30 border-4 border-white dark:border-zinc-950 active:scale-[0.96] transition-all z-10">
+			<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="3" stroke="currentColor" class="w-10 h-10">
+				<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+			</svg>
+		</button>
 
 		<!-- Memories -->
         <button class="w-12 h-12 rounded-full flex items-center justify-center bg-zinc-200/50 dark:bg-zinc-800/50 backdrop-blur-2xl border border-zinc-900 dark:border-zinc-100 text-zinc-900 dark:text-zinc-100 active:scale-90 transition-transform">

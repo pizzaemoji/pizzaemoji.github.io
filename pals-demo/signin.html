@@ -30,23 +30,38 @@
         }
     </style>
 </head>
-<body class="bg-white dark:bg-zinc-950 antialiased transition-colors duration-200">
 
-    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden mx-auto max-w-2xl">
-        
-        <div class="w-full bg-red-500/10 dark:bg-red-500/20 border-b border-red-500/20 py-2 text-center shrink-0 z-50">
-            <span class="text-[10px] font-black text-red-500 uppercase tracking-[0.2em]">Onboarding Demo</span>
-        </div>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
 
-        <header class="p-6">
-            <a href="onboarding1.html" class="text-zinc-400 hover:text-zinc-900 dark:hover:text-white transition-colors">
-                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                </svg>
-            </a>
-        </header>
+    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
+            
+<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
+    
+    <div class="w-10 flex items-center">
+        <a href="index.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+        </a>
+    </div>
+
+    <img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+
+    <div class="w-10 flex justify-end items-center">
+        <button onclick="toggleMenu()" class="text-zinc-800 dark:text-zinc-200 z-[60] active:scale-90 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+            </svg>
+        </button>
+    </div>
+
+</header>
 
         <main class="flex-1 px-8 pt-4 flex flex-col items-start overflow-y-auto no-scrollbar">
+            
+		<div class="w-full bg-red-500/10 dark:bg-red-500/20 border-b border-red-500/20 py-2 text-center shrink-0 z-50">
+			<span class="text-[10px] font-black text-red-500 uppercase tracking-[0.2em]">Sign-in Demo</span>
+        </div>
             
             <div class="mb-12">
                 <h1 class="text-4xl font-black text-zinc-900 dark:text-zinc-100 mb-4 tracking-tight">

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Pals | Pomodoro</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        window.tailwind.config = { darkMode: 'class' }
+
+        function applyTheme() {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
+            document.documentElement.classList.toggle('dark', isDark);
+        }
+        applyTheme();
+    </script>
+    <style>
+        /* Customizing the native time picker appearance for iOS */
+        input[type="time"]::-webkit-calendar-picker-indicator {
+            display: none;
+        }
+        /* Removes default focus rings for a cleaner feel */
+        input:focus { outline: none; }
+    </style>
+</head>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
+
+    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
+        
+        <header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-50 dark:border-zinc-900">
+            <div class="w-10">
+                <a href="index.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform block">
+                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+                    </svg>
+                </a>
+            </div>
+            <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
+            <div class="w-10"></div> </header>
+
+        <main class="flex-1 px-8 pt-12 flex flex-col items-start">
+            
+            <h1 class="text-3xl font-black text-zinc-900 dark:text-zinc-100 mb-4 tracking-tight">
+                Set pomodoro timer:
+            </h1>
+
+            <p class="text-lg text-zinc-500 dark:text-zinc-400 leading-snug mb-10 max-w-[320px]">
+                This will turn on the pomodoro timer and silence all incoming notifications. You can cancel the timer at any time.
+            </p>
+
+            <div class="w-full flex justify-center mb-12">
+                <div class="relative group">
+                    <input type="time" 
+                           value="00:25"
+                           class="bg-zinc-50 dark:bg-zinc-900 text-6xl font-black text-zinc-900 dark:text-zinc-100 p-8 rounded-[2.5rem] border-2 border-zinc-100 dark:border-zinc-800 text-center active:scale-95 transition-all cursor-pointer">
+                    <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-black uppercase tracking-widest text-zinc-300 dark:text-zinc-700">
+                        Hours : Minutes
+                    </div>
+                </div>
+            </div>
+
+            <div class="w-full mt-auto pb-16">
+                <button class="w-full py-5 rounded-full bg-red-500 text-white text-xl font-black shadow-lg shadow-red-500/20 active:scale-[0.98] transition-all">
+                    Start
+                </button>
+            </div>
+
+        </main>
+
+    </div>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <title>Pals | Camera Settings</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+		input[type="radio"]:checked ~ .check-icon { display: block; }        
+        input:checked ~ .bg-toggle { background-color: #EF4444 !important; }
+        input:checked ~ .dot { transform: translateX(1.25rem); }
+        input:disabled ~ .bg-toggle { opacity: 0.5; cursor: not-allowed; }
+    </style>
+    <script>
+        window.tailwind.config = { darkMode: 'class' }
+
+        function applyTheme() {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            let isDark;
+
+            if (useSystem) {
+                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            } else {
+                isDark = savedTheme === 'dark';
+            }
+
+            document.documentElement.classList.toggle('dark', isDark);
+            
+            // Update UI state if elements exist
+            const darkToggle = document.getElementById('darkToggle');
+            if (darkToggle) darkToggle.disabled = useSystem;
+        }
+
+        function handleThemeToggle(checkbox) {
+            localStorage.setItem('pals-theme', checkbox.checked ? 'dark' : 'light');
+            applyTheme();
+        }
+
+        function handleSystemToggle(checkbox) {
+            localStorage.setItem('pals-use-system', checkbox.checked);
+            applyTheme();
+        }
+
+        // Initialize immediately
+        applyTheme();
+
+        // Sync toggle positions on load
+        window.addEventListener('DOMContentLoaded', () => {
+            const useSystem = localStorage.getItem('pals-use-system') === 'true';
+            const savedTheme = localStorage.getItem('pals-theme');
+            const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+
+            document.getElementById('systemToggle').checked = useSystem;
+            const darkToggle = document.getElementById('darkToggle');
+            
+            // If using system, the dark toggle reflects system state, otherwise reflects save
+            darkToggle.checked = useSystem ? systemIsDark : (savedTheme === 'dark');
+            darkToggle.disabled = useSystem;
+        });
+
+        // Listen for system changes while the page is open
+        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
+            if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
+        });
+       
+       // Checkbox settings 
+function checkLimit(checkbox) {
+    const checkboxes = document.querySelectorAll('input[name="quickButtons"]');
+    const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+
+    // Enforcement: If more than 4 are checked, undo the check
+    if (checkedCount > 4) {
+        checkbox.checked = false;
+        alert("You can only select up to 4 buttons.");
+        return; 
+    }
+
+    // Update visibility
+    const iconId = checkbox.value + "-btn";
+    const targetButton = document.getElementById(iconId);
+    
+    if (targetButton) {
+        if (checkbox.checked) {
+            targetButton.classList.remove('hidden');
+        } else {
+            targetButton.classList.add('hidden');
+        }
+    }
+}
+    </script>
+</head>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
+
+    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
+        
+<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
+    
+    <div class="w-10 flex items-center">
+        <a href="profile.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+                <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+            </svg>
+        </a>
+    </div>
+
+    <img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+
+    <div class="w-10 flex justify-end items-center">
+        </div>
+
+</header>
+
+        <main class="flex-1 overflow-y-auto no-scrollbar px-6 pb-24 text-zinc-900 dark:text-white">
+            <h1 class="text-3xl font-bold mt-4 mb-8">Camera Settings</h1>
+
+<section class="mb-10">
+    <h2 class="text-lg font-bold mb-4">Default Preference</h2>
+        <p class="mt-3 text-[13px] text-zinc-500 px-1 mb-3 leading-snug">
+        Choose how Pals selects the default camera. (This setting has no effect in the demo.)
+    </p>
+    <div class="bg-zinc-50 dark:bg-zinc-800/50 rounded-2xl overflow-hidden">
+        
+        <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors border-b border-gray-100 dark:border-zinc-900">
+            <input type="radio" name="cameraPref" value="rememberLastUsed" class="sr-only" checked>
+            <span class="text-zinc-800 dark:text-zinc-200 font-medium">Remember Last Used</span>
+            <div class="check-icon hidden text-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                    <path fill-rule="evenodd" d="M20.25 7.5l-9 9-4.5-4.5 1.5-1.5 3 3 7.5-7.5 1.5 1.5z" clip-rule="evenodd" />
+                </svg>
+            </div>
+        </label>
+
+        <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors border-b border-gray-100 dark:border-zinc-900">
+            <input type="radio" name="cameraPref" value="preferSelfieCamera" class="sr-only">
+            <span class="text-zinc-800 dark:text-zinc-200 font-medium">Prefer Selfie Camera</span>
+            <div class="check-icon hidden text-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                    <path fill-rule="evenodd" d="M20.25 7.5l-9 9-4.5-4.5 1.5-1.5 3 3 7.5-7.5 1.5 1.5z" clip-rule="evenodd" />
+                </svg>
+            </div>
+        </label>
+
+        <label class="flex items-center justify-between px-5 py-4 cursor-pointer active:bg-gray-100 dark:active:bg-zinc-700 transition-colors">
+            <input type="radio" name="cameraPref" value="preferBackCamera" class="sr-only">
+            <span class="text-zinc-800 dark:text-zinc-200 font-medium">Prefer Back Camera</span>
+            <div class="check-icon hidden text-red-500">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="w-6 h-6">
+                    <path fill-rule="evenodd" d="M20.25 7.5l-9 9-4.5-4.5 1.5-1.5 3 3 7.5-7.5 1.5 1.5z" clip-rule="evenodd" />
+                </svg>
+            </div>
+        </label>
+
+    </div>
+</section>
+
+
+
+
+        </main>
+    </div>
+</body>
+</html>

@@ -6,24 +6,7 @@
     <meta name="color-scheme" content="light dark">
     <title>Pals | Delete Account</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        window.tailwind.config = { darkMode: 'class' }
-
-        function applyTheme() {
-            const useSystem = localStorage.getItem('pals-use-system') === 'true';
-            const savedTheme = localStorage.getItem('pals-theme');
-            let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
-            document.documentElement.classList.toggle('dark', isDark);
-        }
-        applyTheme();
-        
-        function showConfirmation() {
-    const overlay = document.getElementById('confirmationOverlay');
-    overlay.classList.remove('hidden');
-    // Prevents further interaction with the background
-    document.body.style.overflow = 'hidden';
-}
-    </script>
+	<script src="pals.js"></script>
     <style>
         /* Customizing the native time picker appearance for iOS */
         input[type="time"]::-webkit-calendar-picker-indicator {

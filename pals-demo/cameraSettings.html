@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="color-scheme" content="light dark">
     <script src="https://cdn.tailwindcss.com"></script>
+	<script src="pals.js"></script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
@@ -15,84 +16,6 @@
         input:checked ~ .dot { transform: translateX(1.25rem); }
         input:disabled ~ .bg-toggle { opacity: 0.5; cursor: not-allowed; }
     </style>
-    <script>
-        window.tailwind.config = { darkMode: 'class' }
-
-        function applyTheme() {
-            const useSystem = localStorage.getItem('pals-use-system') === 'true';
-            const savedTheme = localStorage.getItem('pals-theme');
-            let isDark;
-
-            if (useSystem) {
-                isDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            } else {
-                isDark = savedTheme === 'dark';
-            }
-
-            document.documentElement.classList.toggle('dark', isDark);
-            
-            // Update UI state if elements exist
-            const darkToggle = document.getElementById('darkToggle');
-            if (darkToggle) darkToggle.disabled = useSystem;
-        }
-
-        function handleThemeToggle(checkbox) {
-            localStorage.setItem('pals-theme', checkbox.checked ? 'dark' : 'light');
-            applyTheme();
-        }
-
-        function handleSystemToggle(checkbox) {
-            localStorage.setItem('pals-use-system', checkbox.checked);
-            applyTheme();
-        }
-
-        // Initialize immediately
-        applyTheme();
-
-        // Sync toggle positions on load
-        window.addEventListener('DOMContentLoaded', () => {
-            const useSystem = localStorage.getItem('pals-use-system') === 'true';
-            const savedTheme = localStorage.getItem('pals-theme');
-            const systemIsDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-
-            document.getElementById('systemToggle').checked = useSystem;
-            const darkToggle = document.getElementById('darkToggle');
-            
-            // If using system, the dark toggle reflects system state, otherwise reflects save
-            darkToggle.checked = useSystem ? systemIsDark : (savedTheme === 'dark');
-            darkToggle.disabled = useSystem;
-        });
-
-        // Listen for system changes while the page is open
-        window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-            if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
-        });
-       
-       // Checkbox settings 
-function checkLimit(checkbox) {
-    const checkboxes = document.querySelectorAll('input[name="quickButtons"]');
-    const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
-
-    // Enforcement: If more than 4 are checked, undo the check
-    if (checkedCount > 4) {
-        checkbox.checked = false;
-        alert("You can only select up to 4 buttons.");
-        return; 
-    }
-
-    // Update visibility
-    const iconId = checkbox.value + "-btn";
-    const targetButton = document.getElementById(iconId);
-    
-    if (targetButton) {
-        if (checkbox.checked) {
-            targetButton.classList.remove('hidden');
-        } else {
-            targetButton.classList.add('hidden');
-        }
-    }
-}
-    </script>
 </head>
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
 

@@ -41,34 +41,105 @@
             <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
             <div class="w-10"></div> </header>
 
-        <main class="flex-1 px-8 pt-12 flex flex-col items-start">
-            
-            <h1 class="text-3xl font-black text-zinc-900 dark:text-zinc-100 mb-4 tracking-tight">
-                Set pomodoro timer:
-            </h1>
+<main class="flex-1 px-8 pt-12 flex flex-col items-start">
+    
+    <h1 class="text-3xl font-black text-zinc-900 dark:text-zinc-100 mb-4 tracking-tight">
+        Set pomodoro duration:
+    </h1>
 
-            <p class="text-lg text-zinc-500 dark:text-zinc-400 leading-snug mb-10 max-w-[320px]">
-                This will turn on the pomodoro timer and silence all incoming notifications. You can cancel the timer at any time.
-            </p>
+    <p class="text-lg text-zinc-500 dark:text-zinc-400 leading-snug mb-10 max-w-[320px]">
+        This will turn on the pomodoro timer and silence all incoming notifications. You can cancel the timer at any time.
+    </p>
 
-            <div class="w-full flex justify-center mb-12">
-                <div class="relative group">
-                    <input type="time" 
-                           value="00:25"
-                           class="bg-zinc-50 dark:bg-zinc-900 text-6xl font-black text-zinc-900 dark:text-zinc-100 p-8 rounded-[2.5rem] border-2 border-zinc-100 dark:border-zinc-800 text-center active:scale-95 transition-all cursor-pointer">
-                    <div class="absolute -bottom-6 left-1/2 -translate-x-1/2 text-xs font-black uppercase tracking-widest text-zinc-300 dark:text-zinc-700">
-                        Hours : Minutes
-                    </div>
-                </div>
-            </div>
+    <div class="w-full flex justify-center items-center gap-4 bg-zinc-50 dark:bg-zinc-900 p-10 rounded-[3rem] border-2 border-zinc-100 dark:border-zinc-800 mb-12">
+        
+        <div class="flex flex-col items-center">
+            <select class="bg-transparent text-5xl font-black text-zinc-900 dark:text-zinc-100 appearance-none cursor-pointer outline-none focus:ring-0">
+                <option value="0">0</option>
+                <option value="1" selected>1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <span class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mt-2">Hours</span>
+        </div>
 
-            <div class="w-full mt-auto pb-16">
-                <button class="w-full py-5 rounded-full bg-red-500 text-white text-xl font-black shadow-lg shadow-red-500/20 active:scale-[0.98] transition-all">
-                    Start
-                </button>
-            </div>
+        <div class="text-4xl font-black text-red-500 pb-6">:</div>
 
-        </main>
+        <div class="flex flex-col items-center">
+            <select class="bg-transparent text-5xl font-black text-zinc-900 dark:text-zinc-100 appearance-none cursor-pointer outline-none focus:ring-0">
+<option value="0" selected>00</option>
+<option value="1">01</option>
+<option value="2">02</option>
+<option value="3">03</option>
+<option value="4">04</option>
+<option value="5">05</option>
+<option value="6">06</option>
+<option value="7">07</option>
+<option value="8">08</option>
+<option value="9">09</option>
+<option value="10">10</option>
+<option value="11">11</option>
+<option value="12">12</option>
+<option value="13">13</option>
+<option value="14">14</option>
+<option value="15">15</option>
+<option value="16">16</option>
+<option value="17">17</option>
+<option value="18">18</option>
+<option value="19">19</option>
+<option value="20">20</option>
+<option value="21">21</option>
+<option value="22">22</option>
+<option value="23">23</option>
+<option value="24">24</option>
+<option value="25">25</option>
+<option value="26">26</option>
+<option value="27">27</option>
+<option value="28">28</option>
+<option value="29">29</option>
+<option value="30">30</option>
+<option value="31">31</option>
+<option value="32">32</option>
+<option value="33">33</option>
+<option value="34">34</option>
+<option value="35">35</option>
+<option value="36">36</option>
+<option value="37">37</option>
+<option value="38">38</option>
+<option value="39">39</option>
+<option value="40">40</option>
+<option value="41">41</option>
+<option value="42">42</option>
+<option value="43">43</option>
+<option value="44">44</option>
+<option value="45">45</option>
+<option value="46">46</option>
+<option value="47">47</option>
+<option value="48">48</option>
+<option value="49">49</option>
+<option value="50">50</option>
+<option value="51">51</option>
+<option value="52">52</option>
+<option value="53">53</option>
+<option value="54">54</option>
+<option value="55">55</option>
+<option value="56">56</option>
+<option value="57">57</option>
+<option value="58">58</option>
+<option value="59">59</option>
+            </select>
+            <span class="text-[10px] font-black uppercase tracking-widest text-zinc-400 mt-2">Minutes</span>
+        </div>
+    </div>
+
+    <div class="w-full mt-auto pb-16">
+        <button class="w-full py-5 rounded-full bg-red-500 text-white text-xl font-black shadow-lg shadow-red-500/20 active:scale-[0.98] transition-all">
+            Start Focus
+        </button>
+    </div>
+
+</main>
 
     </div>
 </body>

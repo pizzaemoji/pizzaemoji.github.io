@@ -25,6 +25,14 @@
         window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
             if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
         });
+        
+        function toggleMenu() {
+            const menu = document.getElementById('settingsMenu');
+            const overlay = document.getElementById('menuOverlay');
+            menu.classList.toggle('translate-x-full');
+            overlay.classList.toggle('opacity-0');
+            overlay.classList.toggle('pointer-events-none');
+        }
     </script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
@@ -61,7 +69,7 @@
 <main class="flex-1 overflow-y-auto no-scrollbar flex flex-col items-center px-8 pt-10 pb-12">
 
     <div class="relative mb-8">
-        <img src="images/User_icon.png" 
+        <img src="images/profile_icon.png" 
              alt="Mia Fisher" 
              class="w-36 h-36 rounded-full border-2 border-zinc-100 dark:border-zinc-800 object-cover">
     </div>
@@ -109,15 +117,17 @@
 
     <div id="settingsMenu" class="absolute top-0 right-0 w-[70%] h-screen bg-white dark:bg-zinc-900 z-[80] translate-x-full transition-transform duration-200 ease-out shadow-2xl">
         <div class="flex flex-col h-full pt-16">
+        
             <div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
-                <a href="edit_profile.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Edit Profile</a>
-                <a href="invite.html" class="block w-full text-left py-3 text-red-500 font-medium active:opacity-50">Invite</a>
-                <a href="shop.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Shop</a>
+                <a href="add.html" class="block w-full text-left py-3 text-red-500 font-medium active:opacity-50">Add a Pal</a>
+                <a href="invite.html" class="block w-full text-left py-3 text-red-500 font-medium active:opacity-50">Invite a Pal</a>
+                <a href="shop.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Digital Shop</a>
                  <a href="memories.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Memories</a>    
                  <a href="pomodoro.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Pomodoro Timer</a>
             </div>
-
+            
             <div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+                <a href="edit_profile.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Edit Profile</a>
                 <a href="settings.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Settings</a>
             </div>
 
@@ -126,20 +136,11 @@
                 <a href="privacy.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Privacy</a>
                 <a href="support.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">App Support</a>
             </div>
-            <div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+            
+            <div class="px-6 py-2">
                 <a href="onboarding1.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Onboarding Demo</a>
             </div>
         </div>
     </div>
-
-    <script>
-        function toggleMenu() {
-            const menu = document.getElementById('settingsMenu');
-            const overlay = document.getElementById('menuOverlay');
-            menu.classList.toggle('translate-x-full');
-            overlay.classList.toggle('opacity-0');
-            overlay.classList.toggle('pointer-events-none');
-        }
-    </script>
 </body>
 </html>

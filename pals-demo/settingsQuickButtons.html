@@ -10,17 +10,13 @@
 	<style>
 		.no-scrollbar::-webkit-scrollbar { display: none; }
 		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-		input[type="radio"]:checked ~ .check-icon { display: block; }
-		input:checked ~ .bg-toggle { background-color: #EF4444 !important; }
-		input:checked ~ .dot { transform: translateX(1.25rem); }
-		input:disabled ~ .bg-toggle { opacity: 0.5; cursor: not-allowed; }
 	</style>
 </head>
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
 	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
 		<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
 			<div class="w-10 flex items-center">
-				<a href="profile.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+				<a href="settings.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
 					</svg>
@@ -169,9 +165,9 @@
 					<div class="flex items-center justify-between mb-2">
 						<span class="text-zinc-800 dark:text-zinc-200">Keep Buttons on Left</span>
 						<label class="relative inline-flex items-center cursor-pointer">
-							<input type="checkbox" class="sr-only">
-							<div class="bg-toggle w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors"></div>
-							<div class="dot absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm"></div>
+							<input type="checkbox" class="sr-only peer">
+							<div class="w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors peer-checked:bg-red-500"></div>
+							<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm peer-checked:translate-x-5"></div>
 						</label>
 					</div>
 					<p class="text-[13px] leading-snug">The buttons are positioned by default on the bottom right of the app window. Turn this setting on to move them to the left. This is best for people who hold their phone primarily with their left hand.</p>

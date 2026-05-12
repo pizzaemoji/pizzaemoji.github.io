@@ -83,6 +83,15 @@ function showConfirmation() {
 	document.body.style.overflow = 'hidden';
 }
 
+// Close menu when clicking outside (Emily Moon Chat)
+window.addEventListener('click', function(e) {
+	const menu = document.getElementById('featureMenu');
+	const plusButton = document.getElementById('plusButton');
+	if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !plusButton.contains(e.target)) {
+		menu.classList.add('hidden');
+	}
+});
+
 // Initialise
 applyTheme();
 

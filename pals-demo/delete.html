@@ -1,105 +1,87 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="color-scheme" content="light dark">
-    <title>Pals | Delete Account</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="color-scheme" content="light dark">
+	<title>Pals | Delete Account</title>
+	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
-    <style>
-        /* Customizing the native time picker appearance for iOS */
-        input[type="time"]::-webkit-calendar-picker-indicator {
-            display: none;
-        }
-        /* Removes default focus rings for a cleaner feel */
-        input:focus { outline: none; }
-    </style>
+	<style>
+		input[type="time"]::-webkit-calendar-picker-indicator { display: none; }
+		input:focus { outline: none; }
+	</style>
 </head>
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
-
-    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
-        
-        <header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-50 dark:border-zinc-900">
-            <div class="w-10">
-                <a href="settings.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform block">
-                    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
-                        <path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
-                    </svg>
-                </a>
-            </div>
-            <img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
-            <div class="w-10"></div> </header>
-
-<main class="flex-1 px-8 pt-12 flex flex-col items-start overflow-y-auto no-scrollbar max-w-2xl mx-auto">
-    
-    <header class="mb-6">
-        <h1 class="text-3xl font-black text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight">
-            Delete Account
-        </h1>
-        <p class="text-zinc-500 dark:text-zinc-400 text-lg">
-            We value your privacy, including your right to leave.
-        </p>
-    </header>
-
-    <div class="w-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-800 rounded-[2rem] p-6 mb-10">
-        <h2 class="text-xl font-black uppercase tracking-widest text-red-500 mb-4">Please read carefully</h2>
-        <ul class="space-y-4 text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
-            <li class="flex gap-3">
-                <span class="shrink-0 text-red-500">•</span>
-                <span>Deleting your account is permanent. All of your data, including messages and photos, will be erased from our servers. <span class="font-bold text-zinc-900 dark:text-zinc-100">This cannot be undone.</span></span>
-            </li>
-            <li class="flex gap-3">
-                <span class="shrink-0 text-red-500">•</span>
-                <span>Digital purchases will be permanently lost.</span>
-            </li>
-            <li class="flex gap-3">
-                <span class="shrink-0 text-red-500">•</span>
-                <span> If you are experiencing trouble with another Pal, or have concerns about your safety, please <a href="#" class="text-red-500 font-bold underline decoration-2 underline-offset-4">reach out</a> to us first. We would like the chance to help before you go.</span>
-            </li>
-            <li class="flex gap-3">
-                <span class="shrink-0 text-red-500">•</span>
-                <span>You will need a Pals invite to sign up again.</span>
-            </li>
-        </ul>
-    </div>
-
-    <div class="w-full mb-8">
-        <label class="block text-lg font-black uppercase tracking-widest text-zinc-400 mb-3 ml-1">
-            Verify your phone number to continue:
-        </label>
-        <input type="tel" placeholder="Enter your phone number" 
-            class="w-full bg-transparent border-b-2 border-zinc-200 dark:border-zinc-800 py-3 text-2xl font-bold text-zinc-900 dark:text-zinc-100 outline-none focus:border-red-500 transition-colors placeholder:text-zinc-200 dark:placeholder:text-zinc-800">
-    </div>
-
-    <div class="w-full mt-auto pb-16">
-		<button onclick="showConfirmation()" class="w-full py-5 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black text-xl font-black active:scale-[0.98] transition-all">
-			Delete Account
-		</button>
-        
-        <button onclick="window.location.href='index.html'" class="w-full py-4 mt-2 text-zinc-700 dark:text-zinc-300 font-bold text-base transition-colors">
-            I changed my mind
-        </button>
-        
-<div id="confirmationOverlay" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md transition-all duration-300">
-    <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] p-8 shadow-2xl border border-zinc-100 dark:border-zinc-800 max-w-sm w-full text-center scale-95 animate-in fade-in zoom-in duration-300">
-
-        <h2 class="text-2xl font-black text-zinc-900 dark:text-zinc-100 mb-4 tracking-tight">Request received</h2>
-        
-        <p class="text-xl text-zinc-800 dark:text-zinc-200 leading-relaxed mb-8">
-            You will receive a text message in about an hour. Tap the link in that message to complete the deletion process.
-        </p>
-
-        <button onclick="window.location.href='onboarding1.html'" class="w-full py-4 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-black active:scale-95 transition-all">
-            Okay
-        </button>
-    </div>
-</div>
-        
-    </div>
-
-</main>
-
-    </div>
+	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
+		<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-50 dark:border-zinc-900">
+			<div class="w-10">
+				<a href="settings.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform block">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+					</svg>
+				</a>
+			</div>
+			<img src="images/Pals_Logo.png" alt="Pals" class="h-7 w-auto object-contain">
+			<div class="w-10"></div>
+		</header>
+		<main class="flex-1 px-8 pt-12 flex flex-col items-start overflow-y-auto no-scrollbar max-w-2xl mx-auto">
+			<header class="mb-6">
+				<h1 class="text-3xl font-black text-zinc-900 dark:text-zinc-100 mb-2 tracking-tight">
+					Delete Account
+				</h1>
+				<p class="text-zinc-500 dark:text-zinc-400 text-lg">
+					We value your privacy, including your right to leave.
+				</p>
+			</header>
+			<div class="w-full bg-zinc-50 dark:bg-zinc-900/50 border border-zinc-100 dark:border-zinc-800 rounded-[2rem] p-6 mb-10">
+				<h2 class="text-xl font-black uppercase tracking-widest text-red-500 mb-4">Please read carefully</h2>
+				<ul class="space-y-4 text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
+					<li class="flex gap-3">
+						<span class="shrink-0 text-red-500">•</span>
+						<span>Deleting your account is permanent. All of your data, including messages and photos, will be erased from our servers. <span class="font-bold text-zinc-900 dark:text-zinc-100">This cannot be undone.</span></span>
+					</li>
+					<li class="flex gap-3">
+						<span class="shrink-0 text-red-500">•</span>
+						<span>Digital purchases will be permanently lost.</span>
+					</li>
+					<li class="flex gap-3">
+						<span class="shrink-0 text-red-500">•</span>
+						<span>If you are experiencing trouble with another Pal, or have concerns about your safety, please <a href="#" class="text-red-500 font-bold underline decoration-2 underline-offset-4">reach out</a> to us first. We would like the chance to help before you go.</span>
+					</li>
+					<li class="flex gap-3">
+						<span class="shrink-0 text-red-500">•</span>
+						<span>You will need a Pals invite to sign up again.</span>
+					</li>
+				</ul>
+			</div>
+			<div class="w-full mb-8">
+				<label class="block text-lg font-black uppercase tracking-widest text-zinc-400 mb-3 ml-1">
+					Verify your phone number to continue:
+				</label>
+				<input type="tel" placeholder="Enter your phone number"
+					class="w-full bg-transparent border-b-2 border-zinc-200 dark:border-zinc-800 py-3 text-2xl font-bold text-zinc-900 dark:text-zinc-100 outline-none focus:border-red-500 transition-colors placeholder:text-zinc-200 dark:placeholder:text-zinc-800">
+			</div>
+			<div class="w-full mt-auto pb-16">
+				<button onclick="showConfirmation()" class="w-full py-5 rounded-full bg-zinc-900 dark:bg-zinc-100 text-white dark:text-black text-xl font-black active:scale-[0.98] transition-all">
+					Delete Account
+				</button>
+				<button onclick="window.location.href='index.html'" class="w-full py-4 mt-2 text-zinc-700 dark:text-zinc-300 font-bold text-base transition-colors">
+					I changed my mind
+				</button>
+				<div id="confirmationOverlay" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md transition-all duration-300">
+					<div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] p-8 shadow-2xl border border-zinc-100 dark:border-zinc-800 max-w-sm w-full text-center">
+						<h2 class="text-2xl font-black text-zinc-900 dark:text-zinc-100 mb-4 tracking-tight">Request received</h2>
+						<p class="text-xl text-zinc-800 dark:text-zinc-200 leading-relaxed mb-8">
+							You will receive a text message in about an hour. Tap the link in that message to complete the deletion process.
+						</p>
+						<button onclick="window.location.href='onboarding1.html'" class="w-full py-4 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-black active:scale-95 transition-all">
+							Okay
+						</button>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
 </body>
 </html>

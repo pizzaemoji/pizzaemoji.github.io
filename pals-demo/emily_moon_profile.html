@@ -6,31 +6,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<meta name="color-scheme" content="light dark">
 	<script src="https://cdn.tailwindcss.com"></script>
-	<script>
-		// 1. Configure Tailwind
-		window.tailwind.config = {
-			darkMode: 'class',
-		}
-		// 2. Theme Engine
-		function applyTheme() {
-			const useSystem = localStorage.getItem('pals-use-system') === 'true';
-			const savedTheme = localStorage.getItem('pals-theme');
-			let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
-			document.documentElement.classList.toggle('dark', isDark);
-		}
-		applyTheme();
-		window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => {
-			if (localStorage.getItem('pals-use-system') === 'true') applyTheme();
-		});
-
-		function toggleMenu() {
-			const menu = document.getElementById('settingsMenu');
-			const overlay = document.getElementById('menuOverlay');
-			menu.classList.toggle('translate-x-full');
-			overlay.classList.toggle('opacity-0');
-			overlay.classList.toggle('pointer-events-none');
-		}
-	</script>
+	<script src="pals.js"></script>
 	<style>
 		.no-scrollbar::-webkit-scrollbar { display: none; }
 		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

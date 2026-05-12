@@ -112,7 +112,16 @@ function showConfirmation() {
 	document.body.style.overflow = 'hidden';
 }
 
-// Close menu when clicking outside (Emily Moon Chat)
+
+// Emily Moon Chat scroll to bottom on load
+const chat = document.getElementById('chat-container');
+	chat.scrollTop = chat.scrollHeight;
+
+// Emily Moon Chat feature menu toggle
+function toggleFeatureMenu() {
+	const menu = document.getElementById('featureMenu');
+	menu.classList.toggle('hidden');
+}
 window.addEventListener('click', function(e) {
 	const menu = document.getElementById('featureMenu');
 	const plusButton = document.getElementById('plusButton');

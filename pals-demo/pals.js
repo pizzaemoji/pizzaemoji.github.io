@@ -32,6 +32,34 @@ function toggleMenu() {
 	overlay.classList.toggle('pointer-events-none');
 }
 
+// Onboarding About Panel
+function toggleAbout() {
+	const panel = document.getElementById('aboutPanel');
+	const overlay = document.getElementById('overlay');
+	panel.classList.toggle('translate-y-full');
+	overlay.classList.toggle('opacity-0');
+	overlay.classList.toggle('pointer-events-none');
+}
+
+// Onboarding 3
+function showScreen(screenId) {
+	document.querySelectorAll('.onboarding-screen').forEach(s => s.classList.add('hidden'));
+	document.getElementById(screenId).classList.remove('hidden');
+
+		if (screenId === 'screen4') {
+			setTimeout(() => {
+			window.location.href = 'index.html';
+		}, 2000);
+	}
+}
+
+// Sign-in page
+function showConfirmation() {
+	const overlay = document.getElementById('confirmationOverlay');
+	overlay.classList.remove('hidden');
+	document.body.style.overflow = 'hidden';
+}
+
 // Quick Button Settings (settings page only)
 function checkLimit(checkbox) {
 	const checkboxes = document.querySelectorAll('input[name="quickButtons"]');

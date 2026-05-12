@@ -21,6 +21,11 @@
 </head>
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
 	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
+		<div class="w-full bg-red-500/10 dark:bg-red-500/20 border-b border-red-500/20 py-2 text-center shrink-0 z-30">
+			<span class="text-[10px] font-black text-red-500 uppercase tracking-[0.2em]">
+				Onboarding Demo
+			</span>
+		</div>
 		<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
 			<div class="w-10 flex items-center">
 				<a href="profile.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
@@ -37,15 +42,18 @@
 			<div class="relative w-64 h-64 flex items-center justify-center mb-10">
 				<div class="absolute inset-0 border-2 border-red-500/20 rounded-full animate-pulse-slow"></div>
 				<div class="absolute inset-4 border-2 border-red-500/10 rounded-full animate-pulse-slow" style="animation-delay: 1s"></div>
-				<div class="z-10 bg-red-500 text-white w-32 h-32 rounded-3xl shadow-2xl flex items-center justify-center">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-12 h-12">
+				<a href="onboarding3.html" class="z-10 bg-red-500 text-white w-44 h-44 rounded-[3rem] shadow-2xl flex flex-col items-center justify-center p-6 active:scale-95 transition-all group">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-12 h-12 mb-2 group-hover:scale-110 transition-transform">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 0 1 0-5.303m5.304 0a3.75 3.75 0 0 1 0 5.303m-7.425 2.122a6.75 6.75 0 0 1 0-9.546m9.547 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.808-3.808-9.982 0-13.79m13.788 0c3.808 3.808 3.808 9.982 0 13.79" />
 					</svg>
-				</div>
+					<span class="text-lg font-black uppercase tracking-[0.2em] text-center leading-tight">
+						Simulate<br>NFC Tap
+					</span>
+				</a>
 			</div>
 			<h2 class="text-2xl font-black text-zinc-900 dark:text-white mb-4">
 				Tap Phones to<br>
-				Invite or Add a Pal
+				Accept Invite and Join Pals
 			</h2>
 			<p class="text-zinc-600 dark:text-zinc-400 mb-12 leading-relaxed">
 				Pals is designed for the people you know in the real world.
@@ -55,22 +63,22 @@
 					How does this work?
 				</button>
 				<button class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold rounded-2xl active:scale-[0.98] transition-transform">
-					Or Show a QR Code
+					Scan a QR Code<br>
+					(Open Camera and Allow Access)
 				</button>
 				<button class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold rounded-2xl active:scale-[0.98] transition-transform">
-					Or Copy a Link<br>
-					(to send over text or email)
+					Or Paste a Link<br>
+					(sent by a Pal)
 				</button>
 			</div>
 		</main>
 		<div id="overlay" onclick="toggleAbout()" class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
 		<div id="aboutPanel" class="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 rounded-t-[3rem] p-10 transform translate-y-full transition-transform duration-500 ease-out z-50 shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
 			<div class="w-12 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full mx-auto mb-8"></div>
-			<h2 class="text-2xl font-black text-zinc-900 dark:text-white mb-4">How to add or invite a Pal</h2>
+			<h2 class="text-2xl font-black text-zinc-900 dark:text-white mb-4">How to accept an invite</h2>
 			<div class="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
-				<p>If you're inviting a person to join Pals, ask them to tap Accept an Invite from the welcome screen. Then tap your phones lightly together.</p>
-				<p>If they're already on Pals, ask them to open the Add or Invite option from the Profile Menu. Then tap your phones lightly together.</p>
-				<p>Or, they can snap a picture of your QR code, or you can send them a link. (But we think tapping is more fun.)</p>
+				<p>You'll need to accept an invite from a current Pal to join. Do this by tapping your phones lightly together, or open the camera to scan a QR code from another person, or paste in an invite link. Then follow the steps to finish joining.</p>
+				<p>We're glad you're here!</p>
 			</div>
 			<button onclick="toggleAbout()" class="mt-10 w-full py-4 border-2 border-zinc-100 dark:border-zinc-800 text-zinc-900 dark:text-white font-bold rounded-2xl">
 				Okay

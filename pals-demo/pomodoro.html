@@ -17,7 +17,7 @@
     </style>
 </head>
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
-	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
+	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
 		<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
 			<div class="w-10 flex items-center">
 				<a href="profile.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
@@ -30,13 +30,13 @@
 			<div class="w-10 flex justify-end items-center">
 			</div>
 		</header>
-		<main class="flex-1 px-8 pt-12 flex flex-col items-start">
-			<h1 class="text-3xl font-black text-zinc-900 dark:text-zinc-100 mb-4 tracking-tight">
-				Set pomodoro duration:
+		<main class="flex-1 overflow-y-auto no-scrollbar px-8 py-8 text-zinc-900 dark:text-zinc-100">
+			<h1 class="text-2xl font-black text-zinc-900 dark:text-zinc-100 leading-tight mb-2">
+				Set pomodoro duration
 			</h1>
-			<p class="text-lg text-zinc-500 dark:text-zinc-400 leading-snug mb-10 max-w-[320px]">
-				This will turn on the pomodoro timer and silence all incoming notifications. You can cancel the timer at any time. (The pomodoro timer is not functional in the demo.)
-			</p>
+			<article class="space-y-10 text-zinc-700 dark:text-zinc-300 leading-relaxed text-lg">
+				This will turn on the pomodoro timer and silence all notifications from Pals. You can cancel the timer at any time. (The pomodoro timer is not functional in the demo.)
+			</article>
 			<div class="w-full flex justify-center items-center gap-4 bg-zinc-50 dark:bg-zinc-900 p-10 rounded-[3rem] border-2 border-zinc-100 dark:border-zinc-800 mb-12">
 				<div class="flex flex-col items-center">
 					<select class="bg-transparent text-5xl font-black text-zinc-900 dark:text-zinc-100 appearance-none cursor-pointer outline-none focus:ring-0">

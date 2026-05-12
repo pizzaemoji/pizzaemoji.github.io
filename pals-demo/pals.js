@@ -23,6 +23,35 @@ function handleSystemToggle(checkbox) {
 	applyTheme();
 }
 
+// Message/Moments Tab Switcher
+function switchTab(tab) {
+	const msgView = document.getElementById('messagesView');
+	const momView = document.getElementById('momentsView');
+	const msgTab = document.getElementById('msgTab');
+	const momTab = document.getElementById('momTab');
+		if (tab === 'messages') {
+		// 1. Handle Visibility
+		msgView.classList.remove('hidden');
+		momView.classList.add('hidden');
+		// 2. Active State: Messages (Red + Underline)
+		msgTab.classList.add('text-red-500', 'border-red-500', 'font-black');
+		msgTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+		// 3. Inactive State: Moments (Neutral/White + No Underline)
+		momTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+		momTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
+	} else {
+	// 1. Handle Visibility
+	msgView.classList.add('hidden');
+	momView.classList.remove('hidden');
+	// 2. Active State: Moments (Red + Underline)
+	momTab.classList.add('text-red-500', 'border-red-500', 'font-black');
+	momTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+	// 3. Inactive State: Messages (Neutral/White + No Underline)
+	msgTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+	msgTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
+	}
+}
+
 // Menu
 function toggleMenu() {
 	const menu = document.getElementById('settingsMenu');

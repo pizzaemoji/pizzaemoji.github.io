@@ -6,44 +6,7 @@
     <meta name="color-scheme" content="light dark">
     <title>Pals | Messages</title>
     <script src="https://cdn.tailwindcss.com"></script>
-	<script>
-		window.tailwind.config = { darkMode: 'class' }
-		function applyTheme() {
-			const useSystem = localStorage.getItem('pals-use-system') === 'true';
-			const savedTheme = localStorage.getItem('pals-theme');
-			let isDark = useSystem ? window.matchMedia('(prefers-color-scheme: dark)').matches : savedTheme === 'dark';
-			document.documentElement.classList.toggle('dark', isDark);
-		}
-		applyTheme();
-
-		function switchTab(tab) {
-			const msgView = document.getElementById('messagesView');
-			const momView = document.getElementById('momentsView');
-			const msgTab = document.getElementById('msgTab');
-			const momTab = document.getElementById('momTab');
-			if (tab === 'messages') {
-				// 1. Handle Visibility
-				msgView.classList.remove('hidden');
-				momView.classList.add('hidden');
-				// 2. Active State: Messages (Red + Underline)
-				msgTab.classList.add('text-red-500', 'border-red-500', 'font-black');
-				msgTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
-				// 3. Inactive State: Moments (Neutral/White + No Underline)
-				momTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
-				momTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
-			} else {
-				// 1. Handle Visibility
-				msgView.classList.add('hidden');
-				momView.classList.remove('hidden');
-				// 2. Active State: Moments (Red + Underline)
-				momTab.classList.add('text-red-500', 'border-red-500', 'font-black');
-				momTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
-				// 3. Inactive State: Messages (Neutral/White + No Underline)
-				msgTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
-				msgTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
-			}
-		}
-	</script>
+	<script src="pals.js"></script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

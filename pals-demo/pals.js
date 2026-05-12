@@ -66,6 +66,7 @@ function toggleAbout() {
 	const panel = document.getElementById('aboutPanel');
 	const overlay = document.getElementById('overlay');
 	panel.classList.toggle('translate-y-full');
+	panel.classList.toggle('shadow-[0_-20px_50px_rgba(0,0,0,0.2)]');
 	overlay.classList.toggle('opacity-0');
 	overlay.classList.toggle('pointer-events-none');
 }
@@ -114,8 +115,10 @@ function showConfirmation() {
 
 
 // Emily Moon Chat scroll to bottom on load
-const chat = document.getElementById('chat-container');
-	chat.scrollTop = chat.scrollHeight;
+document.addEventListener('DOMContentLoaded', () => {
+	const lastMessage = document.querySelector('#chat-container > div:last-child');
+	if (lastMessage) lastMessage.scrollIntoView({ block: 'end' });
+});
 
 // Emily Moon Chat feature menu toggle
 function toggleFeatureMenu() {

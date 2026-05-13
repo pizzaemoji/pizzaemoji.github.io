@@ -23,25 +23,6 @@ function handleSystemToggle(checkbox) {
 	applyTheme();
 }
 
-// Profile Menu
-function toggleMenu() {
-	const menu = document.getElementById('settingsMenu');
-	const overlay = document.getElementById('menuOverlay');
-	menu.classList.toggle('translate-x-full');
-	overlay.classList.toggle('opacity-0');
-	overlay.classList.toggle('pointer-events-none');
-}
-
-// About Panel
-function toggleAbout() {
-	const panel = document.getElementById('aboutPanel');
-	const overlay = document.getElementById('overlay');
-	panel.classList.toggle('translate-y-full');
-	panel.classList.toggle('shadow-[0_-20px_50px_rgba(0,0,0,0.2)]');
-	overlay.classList.toggle('opacity-0');
-	overlay.classList.toggle('pointer-events-none');
-}
-
 // Initialise
 applyTheme();
 
@@ -63,3 +44,22 @@ window.addEventListener('DOMContentLoaded', () => {
 	darkToggle.checked = useSystem ? systemIsDark : savedTheme === 'dark';
 	darkToggle.disabled = useSystem;
 });
+
+// Profile Menu
+function toggleMenu() {
+	const menu = document.getElementById('settingsMenu');
+	const overlay = document.getElementById('menuOverlay');
+	menu.classList.toggle('translate-x-full');
+	overlay.classList.toggle('opacity-0');
+	overlay.classList.toggle('pointer-events-none');
+}
+
+// About Panel (Onboarding1, inviteAdd)
+function toggleAbout() {
+	const panel = document.getElementById('aboutPanel');
+	const overlay = document.getElementById('overlay');
+	panel.classList.toggle('translate-y-full');
+	panel.classList.toggle('shadow-[0_-20px_50px_rgba(0,0,0,0.2)]');
+	overlay.classList.toggle('opacity-0');
+	overlay.classList.toggle('pointer-events-none');
+}

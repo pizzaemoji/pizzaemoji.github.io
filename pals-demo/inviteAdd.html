@@ -97,7 +97,7 @@
 		</main>
 
 		<div id="overlay" onclick="toggleAbout()" class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
-		<div id="aboutPanel" class="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 rounded-t-[3rem] p-10 transform translate-y-full transition-transform duration-500 ease-out z-50 shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
+		<div id="aboutPanel" class="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 rounded-t-[3rem] p-10 transform translate-y-full transition-transform duration-500 ease-out z-50 shadow-[0_-20px_50px_rgba(0,0,0,0)]">
 			<div class="w-12 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full mx-auto mb-8"></div>
 			<h2 class="text-2xl font-black text-zinc-900 dark:text-white mb-4">How to add or invite a Pal</h2>
 			<div class="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
@@ -110,54 +110,5 @@
 			</button>
 		</div>
 	</div>
-	<script>
-		function showSuccess() {
-			document.getElementById('screen-main').classList.add('hidden');
-			document.getElementById('screen-success').classList.remove('hidden');
-			launchConfetti();
-		}
-
-		function showMain() {
-			document.getElementById('screen-success').classList.add('hidden');
-			document.getElementById('screen-main').classList.remove('hidden');
-			document.getElementById('confetti-container').innerHTML = '';
-		}
-
-		function launchConfetti() {
-			const container = document.getElementById('confetti-container');
-			container.innerHTML = '';
-			const colors = ['#EF4444', '#F87171', '#FCA5A5', '#18181b', '#71717a', '#e4e4e7'];
-			const shapes = ['rounded-sm', 'rounded-full', ''];
-			for (let i = 0; i < 60; i++) {
-				const piece = document.createElement('div');
-				const color = colors[Math.floor(Math.random() * colors.length)];
-				const shape = shapes[Math.floor(Math.random() * shapes.length)];
-				const size = Math.random() * 8 + 4;
-				const left = Math.random() * 100;
-				const delay = Math.random() * 2;
-				const duration = Math.random() * 2 + 2;
-				piece.className = `confetti-piece ${shape}`;
-				piece.style.cssText = `
-					left: ${left}%;
-					top: -10px;
-					width: ${size}px;
-					height: ${size}px;
-					background-color: ${color};
-					animation-duration: ${duration}s;
-					animation-delay: ${delay}s;
-				`;
-				container.appendChild(piece);
-			}
-		}
-
-		function toggleAbout() {
-			const panel = document.getElementById('aboutPanel');
-			const overlay = document.getElementById('overlay');
-			panel.classList.toggle('translate-y-full');
-			panel.classList.toggle('shadow-[0_-20px_50px_rgba(0,0,0,0.2)]');
-			overlay.classList.toggle('opacity-0');
-			overlay.classList.toggle('pointer-events-none');
-		}
-	</script>
 </body>
 </html>

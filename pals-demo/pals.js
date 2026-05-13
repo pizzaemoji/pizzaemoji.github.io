@@ -154,3 +154,52 @@ window.addEventListener('DOMContentLoaded', () => {
 	darkToggle.checked = useSystem ? systemIsDark : savedTheme === 'dark';
 	darkToggle.disabled = useSystem;
 });
+
+// Invite or Add a Pal Confetti
+		function showSuccess() {
+			document.getElementById('screen-main').classList.add('hidden');
+			document.getElementById('screen-success').classList.remove('hidden');
+			launchConfetti();
+		}
+
+		function showMain() {
+			document.getElementById('screen-success').classList.add('hidden');
+			document.getElementById('screen-main').classList.remove('hidden');
+			document.getElementById('confetti-container').innerHTML = '';
+		}
+
+		function launchConfetti() {
+			const container = document.getElementById('confetti-container');
+			container.innerHTML = '';
+			const colors = [
+			'#FFADAD', // Bright Pastel Red (Coral)
+			'#FFD6A5', // Bright Pastel Orange (Apricot)
+			'#FDFFB6', // Bright Pastel Yellow (Lemon)
+			'#CAFFBF', // Bright Pastel Green (Mint)
+			'#9BF6FF', // Bright Pastel Blue (Sky)
+			'#BDB2FF'  // Bright Pastel Purple (Lavender)
+			];
+			const shapes = ['rounded-sm', 'rounded-full', ''];
+			for (let i = 0; i < 60; i++) {
+				const piece = document.createElement('div');
+				const color = colors[Math.floor(Math.random() * colors.length)];
+				const shape = shapes[Math.floor(Math.random() * shapes.length)];
+				const size = Math.random() * 8 + 4;
+				const left = Math.random() * 100;
+				const delay = Math.random() * 2;
+				const duration = Math.random() * 2 + 2;
+				piece.className = `confetti-piece ${shape}`;
+				piece.style.cssText = `
+					left: ${left}%;
+					top: -10px;
+					width: ${size}px;
+					height: ${size}px;
+					background-color: ${color};
+					animation-duration: ${duration}s;
+					animation-delay: ${delay}s;
+				`;
+				container.appendChild(piece);
+			}
+		}
+
+//

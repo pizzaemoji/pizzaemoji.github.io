@@ -7,6 +7,19 @@
 	<title>Pals | Join</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
+	<script>
+		// Show Screens
+		function showScreen(screenId) {
+			document.querySelectorAll('.onboarding-screen').forEach(s => s.classList.add('hidden'));
+			document.getElementById(screenId).classList.remove('hidden');
+
+				if (screenId === 'screen4') {
+					setTimeout(() => {
+					window.location.href = 'index.html';
+				}, 2000);
+			}
+		}
+	</script>
 	<style>
 		.no-scrollbar::-webkit-scrollbar { display: none; }
 		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

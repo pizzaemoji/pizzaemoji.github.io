@@ -7,6 +7,22 @@
 	<meta name="color-scheme" content="light dark">
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
+	<script>
+		// Quick Button Settings
+		function checkLimit(checkbox) {
+			const checkboxes = document.querySelectorAll('input[name="quickButtons"]');
+			const checkedCount = Array.from(checkboxes).filter(c => c.checked).length;
+			if (checkedCount > 4) {
+				checkbox.checked = false;
+				alert("You can only select up to 4 buttons.");
+				return;
+			}
+			const targetButton = document.getElementById(checkbox.value + "-btn");
+			if (targetButton) {
+				targetButton.classList.toggle('hidden', !checkbox.checked);
+			}
+		}
+	</script>
 	<style>
 		.no-scrollbar::-webkit-scrollbar { display: none; }
 		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

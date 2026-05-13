@@ -7,6 +7,15 @@
 	<title>Pals | Delete Account</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
+	<script>
+		// Delete confirmation
+		function showConfirmation() {
+			const overlay = document.getElementById('confirmationOverlay');
+			overlay.classList.remove('hidden');
+			// Prevents further interaction with the background
+			document.body.style.overflow = 'hidden';
+		}
+	</script>
 	<style>
 		input[type="time"]::-webkit-calendar-picker-indicator { display: none; }
 		input:focus { outline: none; }

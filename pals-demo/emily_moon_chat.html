@@ -7,6 +7,26 @@
     <title>Pals | Chat with Emily</title>
     <script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
+	<script>
+		// Scroll chat to bottom on load
+		document.addEventListener('DOMContentLoaded', () => {
+		const lastMessage = document.querySelector('#chat-container > div:last-child');
+		if (lastMessage) lastMessage.scrollIntoView({ block: 'end' });
+	});
+
+		// Feature menu toggle
+		function toggleFeatureMenu() {
+			const menu = document.getElementById('featureMenu');
+			menu.classList.toggle('hidden');
+		}
+		window.addEventListener('click', function(e) {
+			const menu = document.getElementById('featureMenu');
+			const plusButton = document.getElementById('plusButton');
+			if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !plusButton.contains(e.target)) {
+				menu.classList.add('hidden');
+			}
+		});
+	</script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

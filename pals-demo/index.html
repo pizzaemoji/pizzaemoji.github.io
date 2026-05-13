@@ -7,6 +7,36 @@
     <title>Pals</title>
     <script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
+	<script>
+		// Message/Moments Tab Switcher
+		function switchTab(tab) {
+			const msgView = document.getElementById('messagesView');
+			const momView = document.getElementById('momentsView');
+			const msgTab = document.getElementById('msgTab');
+			const momTab = document.getElementById('momTab');
+				if (tab === 'messages') {
+				// Visibility
+				msgView.classList.remove('hidden');
+				momView.classList.add('hidden');
+				// Active State: Messages (Red + Underline)
+				msgTab.classList.add('text-red-500', 'border-red-500', 'font-black');
+				msgTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+				// Inactive State: Moments (Neutral/White + No Underline)
+				momTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+				momTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
+			} else {
+			// Visibility
+			msgView.classList.add('hidden');
+			momView.classList.remove('hidden');
+			// Active State: Moments (Red + Underline)
+			momTab.classList.add('text-red-500', 'border-red-500', 'font-black');
+			momTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+			// Inactive State: Messages (Neutral/White + No Underline)
+			msgTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+			msgTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
+			}
+		}
+	</script>
     <style>
         .no-scrollbar::-webkit-scrollbar { display: none; }
         .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

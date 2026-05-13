@@ -7,6 +7,13 @@
 	<title>Pals | Sign In</title>
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
+	<script>
+		function showConfirmation() {
+			const overlay = document.getElementById('confirmationOverlay');
+			overlay.classList.remove('hidden');
+			document.body.style.overflow = 'hidden';
+		}
+	</script>
 	<style>
 		.no-scrollbar::-webkit-scrollbar { display: none; }
 		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }

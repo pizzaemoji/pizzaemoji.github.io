@@ -23,14 +23,12 @@
 		function launchConfetti() {
 			const container = document.getElementById('confetti-container');
 			container.innerHTML = '';
-			const colors = [
-			'#FFADAD', // Bright Pastel Red (Coral)
-			'#FFD6A5', // Bright Pastel Orange (Apricot)
-			'#FDFFB6', // Bright Pastel Yellow (Lemon)
-			'#CAFFBF', // Bright Pastel Green (Mint)
-			'#9BF6FF', // Bright Pastel Blue (Sky)
-			'#BDB2FF'  // Bright Pastel Purple (Lavender)
-			];
+			// Check if the document is currently in dark mode
+			const isDark = document.documentElement.classList.contains('dark');
+			const darkColors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#BDB2FF'];
+			const lightColors = ['#F28B82', '#F7AD8F', '#FCE58E', '#81C995', '#8AB4F8', '#C58AF9'];
+			// Select the set that matches the current theme
+			const colors = isDark ? darkColors : lightColors;
 			const shapes = ['rounded-sm', 'rounded-full', ''];
 			for (let i = 0; i < 60; i++) {
 				const piece = document.createElement('div');
@@ -40,6 +38,7 @@
 				const left = Math.random() * 100;
 				const delay = Math.random() * 2;
 				const duration = Math.random() * 2 + 2;
+
 				piece.className = `confetti-piece ${shape}`;
 				piece.style.cssText = `
 					left: ${left}%;

@@ -47,7 +47,7 @@ window.addEventListener('DOMContentLoaded', () => {
 
 // Profile Menu
 function toggleMenu() {
-	const menu = document.getElementById('settingsMenu');
+	const menu = document.getElementById('profileMenu');
 	const overlay = document.getElementById('menuOverlay');
 	menu.classList.toggle('translate-x-full');
 	overlay.classList.toggle('opacity-0');

@@ -10,13 +10,21 @@
 	<style>
 		.no-scrollbar::-webkit-scrollbar { display: none; }
 		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
-
-		/* Subtle pulse for the NFC area */
 		@keyframes pulse-slow {
 			0%, 100% { opacity: 0.3; transform: scale(1); }
 			50% { opacity: 0.6; transform: scale(1.05); }
 		}
 		.animate-pulse-slow { animation: pulse-slow 3s infinite ease-in-out; }
+		@keyframes confetti-fall {
+			0% { transform: translateY(-10px) rotate(0deg); opacity: 1; }
+			100% { transform: translateY(100vh) rotate(720deg); opacity: 0; }
+		}
+		.confetti-piece {
+			position: absolute;
+			width: 8px;
+			height: 8px;
+			animation: confetti-fall linear forwards;
+		}
 	</style>
 </head>
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
@@ -33,45 +41,68 @@
 			<div class="w-10 flex justify-end items-center">
 			</div>
 		</header>
-		<main class="flex-1 overflow-y-auto no-scrollbar flex flex-col items-center text-center px-8 py-8">
+
+		<!-- Main NFC screen -->
+		<main id="screen-main" class="flex-1 overflow-y-auto no-scrollbar flex flex-col items-center text-center px-8 py-8">
 			<h2 class="text-2xl font-black text-zinc-900 dark:text-zinc-100">
-				Tap Phones<br>
+				Tap Phones
 			</h2>
-			<p class="text-lg font-semibold text-zinc-900 dark:text-zinc-100 mb-4">
-				to Accept Invite and Join Pals
+			<p class="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-12">
+				to Invite or Add Someone to Pals
 			</p>
-			<div class="relative w-64 h-64 flex items-center justify-center mb-10">
+			<div class="relative w-64 h-64 flex items-center justify-center mb-12">
 				<div class="absolute inset-0 border-2 border-red-500/20 rounded-full animate-pulse-slow"></div>
 				<div class="absolute inset-4 border-2 border-red-500/10 rounded-full animate-pulse-slow" style="animation-delay: 1s"></div>
-				<div class="z-10 bg-red-500 text-white w-32 h-32 rounded-3xl shadow-2xl flex items-center justify-center">
+				<button onclick="showSuccess()" class="z-10 bg-red-500 text-white w-32 h-32 rounded-3xl shadow-2xl flex flex-col items-center justify-center active:scale-95 transition-transform">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-12 h-12 mb-2">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 0 1 0-5.303m5.304 0a3.75 3.75 0 0 1 0 5.303m-7.425 2.122a6.75 6.75 0 0 1 0-9.546m9.547 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.808-3.808-9.982 0-13.79m13.788 0c3.808 3.808 3.808 9.982 0 13.79" />
 					</svg>
-				</div>
+					<span class="text-sm font-black uppercase tracking-[0.2em] text-center leading-tight">
+						Simulate<br>NFC Tap
+					</span>
+				</button>
 			</div>
-			<p class="text-zinc-600 dark:text-zinc-400 mb-12 leading-relaxed">
-				Pals is designed for the people you know in the real world.
-			</p>
 			<div class="w-full space-y-4">
-				<button onclick="toggleAbout()" class="w-full py-4 text-zinc-400 dark:text-zinc-600 font-medium text-base">
+				<button class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Show a QR Code
+				</button>
+				<button class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Copy a Code
+				</button>
+				<button onclick="toggleAbout()" class="w-full py-4 text-zinc-500 dark:text-zinc-500 font-medium text-base">
 					How does this work?
-				</button>
-				<button class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold rounded-2xl active:scale-[0.98] transition-transform">
-					Or Show a QR Code
-				</button>
-				<button class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold rounded-2xl active:scale-[0.98] transition-transform">
-					Or Copy a Code<br>
-					(to send over text or email)
 				</button>
 			</div>
 		</main>
+
+		<!-- Success screen -->
+		<main id="screen-success" class="hidden flex-1 w-full flex flex-col items-center justify-center px-8 text-center relative overflow-hidden">
+			<div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
+			<span class="text-red-500 font-serif italic text-6xl mb-2 -rotate-3 block">
+				You've got a<br>new Pal!
+			</span>
+			<div class="flex items-center gap-2 mt-6 mb-16">
+				<div class="w-2 h-2 bg-red-500 rounded-full animate-bounce"></div>
+				<div class="w-2 h-2 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+				<div class="w-2 h-2 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+			</div>
+			<div class="w-full space-y-4">
+				<button onclick="showMain()" class="w-full py-4 bg-red-500 text-white font-black text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Add Another Pal
+				</button>
+				<button onclick="window.location.href='index.html'" class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Return to Messages
+				</button>
+			</div>
+		</main>
+
 		<div id="overlay" onclick="toggleAbout()" class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
 		<div id="aboutPanel" class="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 rounded-t-[3rem] p-10 transform translate-y-full transition-transform duration-500 ease-out z-50 shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
 			<div class="w-12 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full mx-auto mb-8"></div>
 			<h2 class="text-2xl font-black text-zinc-900 dark:text-white mb-4">How to add or invite a Pal</h2>
 			<div class="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
-				<p>If you're inviting a person to join Pals, ask them to tap Accept an Invite from the welcome screen. Then tap your phones lightly together.</p>
-				<p>If they're already on Pals, ask them to open the Add or Invite option from the Profile Menu. Then tap your phones lightly together.</p>
+				<p>If you're inviting a person to join Pals, ask them to tap <strong>Accept an Invite</strong> from the welcome screen. Then tap your phones lightly together.</p>
+				<p>If they're already on Pals, ask them to open the <strong>Add or Invite</strong> page from the Profile Menu. Then tap your phones lightly together.</p>
 				<p>Or, they can snap a picture of your QR code, or you can send them a link. (But we think tapping is more fun.)</p>
 			</div>
 			<button onclick="toggleAbout()" class="mt-10 w-full py-4 border-2 border-zinc-100 dark:border-zinc-800 text-zinc-900 dark:text-white font-bold rounded-2xl">
@@ -79,5 +110,54 @@
 			</button>
 		</div>
 	</div>
+	<script>
+		function showSuccess() {
+			document.getElementById('screen-main').classList.add('hidden');
+			document.getElementById('screen-success').classList.remove('hidden');
+			launchConfetti();
+		}
+
+		function showMain() {
+			document.getElementById('screen-success').classList.add('hidden');
+			document.getElementById('screen-main').classList.remove('hidden');
+			document.getElementById('confetti-container').innerHTML = '';
+		}
+
+		function launchConfetti() {
+			const container = document.getElementById('confetti-container');
+			container.innerHTML = '';
+			const colors = ['#EF4444', '#F87171', '#FCA5A5', '#18181b', '#71717a', '#e4e4e7'];
+			const shapes = ['rounded-sm', 'rounded-full', ''];
+			for (let i = 0; i < 60; i++) {
+				const piece = document.createElement('div');
+				const color = colors[Math.floor(Math.random() * colors.length)];
+				const shape = shapes[Math.floor(Math.random() * shapes.length)];
+				const size = Math.random() * 8 + 4;
+				const left = Math.random() * 100;
+				const delay = Math.random() * 2;
+				const duration = Math.random() * 2 + 2;
+				piece.className = `confetti-piece ${shape}`;
+				piece.style.cssText = `
+					left: ${left}%;
+					top: -10px;
+					width: ${size}px;
+					height: ${size}px;
+					background-color: ${color};
+					animation-duration: ${duration}s;
+					animation-delay: ${delay}s;
+				`;
+				container.appendChild(piece);
+			}
+		}
+
+		function toggleAbout() {
+			const panel = document.getElementById('aboutPanel');
+			const overlay = document.getElementById('overlay');
+			panel.classList.toggle('translate-y-full');
+			panel.classList.toggle('shadow-[0_-20px_50px_rgba(0,0,0,0.2)]');
+			overlay.classList.toggle('opacity-0');
+			overlay.classList.toggle('pointer-events-none');
+		}
+	</script>
 </body>
 </html>

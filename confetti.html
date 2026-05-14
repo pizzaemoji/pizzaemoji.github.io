@@ -66,16 +66,16 @@
 	</style>
 </head>
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
-	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden">
-		<!-- Main Confetti! Content -->
-		<main class="flex-1 w-full flex flex-col items-center justify-center px-8 text-center relative overflow-hidden">
-			<div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
-			<div class="w-full space-y-4">
-				<button onclick="launchConfetti()" class="py-4 bg-green-500 text-white font-black text-2lg rounded-2xl active:scale-[0.95] transition-transform">
-					Confetti!
-				</button>
-			</div>
-		</main>
-	</div>
+    <div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden">
+        <main class="flex-1 w-full relative">
+            <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
+            
+            <div class="absolute top-[80%] left-0 w-full px-8 -translate-y-1/2">
+                <button onclick="launchConfetti()" class="w-full py-4 bg-green-500 text-white font-black drop-shadow-lg text-2xl rounded-2xl active:scale-95 transition-transform">
+                    Confetti!
+                </button>
+            </div>
+        </main>
+    </div>
 </body>
 </html>

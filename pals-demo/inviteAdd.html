@@ -43,14 +43,14 @@ function launchConfetti() {
         `;
         container.appendChild(el);
 
-        const angle = Math.random() * Math.PI * 2;
-        const speed = Math.random() * 12 + 4;
+		const speed = Math.random() * 6 + 2;
+		const angle = (Math.random() * Math.PI) - Math.PI;
         pieces.push({
             el,
             x: 0,
             y: 0,
             vx: Math.cos(angle) * speed,
-            vy: Math.sin(angle) * speed - 6,
+            vy: Math.sin(angle) * speed,
             gravity: 0.3,
             rotation: Math.random() * 360,
             rotationSpeed: (Math.random() - 0.5) * 10

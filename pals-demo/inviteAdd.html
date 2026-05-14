@@ -32,18 +32,16 @@ function launchConfetti() {
     for (let i = 0; i < 80; i++) {
         const el = document.createElement('div');
         const size = Math.random() * 8 + 4;
-        el.style.cssText = `
-            position: absolute;
-            width: ${size}px;
-            height: ${size}px;
-            background-color: ${colors[Math.floor(Math.random() * colors.length)]};
-            border-radius: ${Math.random() > 0.5 ? '50%' : '2px'};
-            left: 50%;
-            top: 50%;
-        `;
+el.style.cssText = `
+    position: absolute;
+    width: ${Math.random() * 4 + 2}px;
+    height: ${Math.random() * 12 + 6}px;
+    background-color: ...
+    border-radius: 1px;
+`;
         container.appendChild(el);
 
-	const speed = Math.random() * 8 + 4;
+	const speed = Math.random() * 10 + 4;
 	const spread = Math.PI / 9; // ~20° either side
 	const angle = (Math.PI / 2) + (Math.random() * spread * 2) - spread;
 	pieces.push({

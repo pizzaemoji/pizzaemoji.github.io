@@ -7,17 +7,10 @@
 	<script src="https://cdn.tailwindcss.com"></script>
 	<script>
 function launchConfetti() {
-    const container = document.getElementById('confetti-container');
-    // 1. REMOVED: container.innerHTML = ''; (This allows additive bursts)
+	const container = document.getElementById('confetti-container');
+	const colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#BDB2FF'];
+	const pieces = [];
 
-    const isDark = document.documentElement.classList.contains('dark');
-    const colors = isDark
-        ? ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#BDB2FF']
-        : ['#F28B82', '#F7AD8F', '#FCE58E', '#81C995', '#8AB4F8', '#C58AF9'];
-    
-    const pieces = [];
-
-    // Create a new batch of 160 pieces
     for (let i = 0; i < 160; i++) {
         const el = document.createElement('div');
         el.style.cssText = `
@@ -27,7 +20,7 @@ function launchConfetti() {
             background-color: ${colors[Math.floor(Math.random() * colors.length)]};
             border-radius: 1px;
             left: 50%;
-            top: 0; /* Changed from 50% since container is already positioned at 80% */
+            top: 80%;
         `;
         container.appendChild(el);
 
@@ -81,7 +74,7 @@ function launchConfetti() {
 <body class="bg-black antialiased transition-colors duration-200">
     <div class="w-full h-dvh flex flex-col relative overflow-hidden">
         <main class="flex-1 w-full relative">
-            <div id="confetti-container" class="absolute top-[60%] inset-0 pointer-events-none"></div>
+            <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
             <div class="absolute top-[80%] left-0 right-0 flex justify-center -translate-y-1/2">
                 <button onclick="launchConfetti()" class="px-8 py-4 bg-green-500 text-white font-black drop-shadow-lg text-2xl rounded-2xl active:scale-95 transition-transform">
                     Confetti!

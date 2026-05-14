@@ -85,11 +85,32 @@ function launchConfetti() {
 
 @keyframes rainbow-flow {
     0% { background-position: 0% 50%; }
-    100% { background-position: 100% 50%; } 
+    50% { background-position: 100% 50%; }
+    100% { background-position: 0% 50%; }
+}
+
+@keyframes pulse-pop {
+    0%, 100% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.06);
+    }
 }
 
 .animate-rainbow {
-    animation: rainbow-flow 6s linear infinite;
+    background-size: 300% auto;
+    animation:
+        rainbow-flow 4s linear infinite,
+        pulse-pop 2s ease-in-out infinite;
+
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+
+    filter:
+        drop-shadow(0 0 4px rgba(255,255,255,0.35))
+        drop-shadow(0 0 12px rgba(255,100,255,0.25));
 }
 	</style>
 </head>
@@ -111,9 +132,15 @@ function launchConfetti() {
 					<span class="text-2xl">
 						🎉
 					</span>
-					<span class="font-black bg-clip-text text-transparent animate-rainbow bg-[length:400%_100%] bg-gradient-to-r from-red-500 via-orange-500 via-yellow-500 via-green-500 via-blue-500 to-indigo-500">
-						Confetti!
-					</span>
+<span class="font-black tracking-tight text-3xl animate-rainbow
+bg-gradient-to-r
+from-pink-500
+via-yellow-400
+via-green-400
+via-cyan-400
+to-purple-500">
+    Confetti!
+</span>
 				</button>
             </div>
         </main>

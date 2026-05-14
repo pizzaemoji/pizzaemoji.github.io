@@ -31,15 +31,15 @@ function launchConfetti() {
 
     for (let i = 0; i < 80; i++) {
         const el = document.createElement('div');
-el.style.cssText = `
-    position: absolute;
-    width: ${Math.random() * 4 + 2}px;
-    height: ${Math.random() * 12 + 6}px;
-    background-color: ${colors[Math.floor(Math.random() * colors.length)]};
-    border-radius: 1px;
-    left: 50%;
-    top: 50%;
-`;
+			el.style.cssText = `
+  			  position: absolute;
+  			  width: ${Math.random() * 4 + 2}px;
+  			  height: ${Math.random() * 12 + 6}px;
+ 			   background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+ 			   border-radius: 1px;
+ 			   left: 50%;
+ 			   top: 50%;
+			`;
         container.appendChild(el);
 
 	const speed = Math.random() * 10 + 4;

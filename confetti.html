@@ -92,13 +92,17 @@ function launchConfetti() {
     }
 }
 
-@keyframes little-pulse {
+@keyframes pulse {
     0%, 100% {
         transform: scale(1);
     }
     50% {
         transform: scale(1.08);
     }
+}
+
+.animate-pulse {
+	   animation: pulse 2s ease-in-out infinite;
 }
 
 .animate-rainbow {
@@ -124,9 +128,7 @@ function launchConfetti() {
     font-weight: 900;
 display: inline-block;
 
-    animation: rainbow-slide 3s linear infinite,
-     	       little-pulse 2s ease-in-out infinite;
-
+    animation: rainbow-slide 3s linear infinite;
 
     filter:
         drop-shadow(0 0 2px rgba(255,255,255,0.4))
@@ -139,14 +141,24 @@ display: inline-block;
         <main class="flex-1 w-full relative">
             <div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
             <div class="absolute top-[90%] left-0 right-0 flex justify-center -translate-y-1/2">
-				<button onclick="launchConfetti()" class="px-8 py-4 bg-white text-2xl rounded-2xl active:scale-95 transition-transform touch-action-manipulation">
-					<span class="text-2xl">
-						🎉
-					</span>
-					<span class="font-black text-3xl tracking-tight animate-rainbow">
-						Confetti!
-					</span>
-				</button>
+<button
+    onclick="launchConfetti()"
+    class="flex items-center gap-3
+    px-10 py-4
+    rounded-2xl
+    border-2 border-white
+    bg-black
+    active:scale-95
+    transition-all duration-200
+    shadow-lg shadow-white/10
+    hover:shadow-white/20"
+>
+    <span class="text-3xl animate-pulse">🎉</span>
+
+    <span class="animate-rainbow animate-pulse inline-block text-3xl font-black tracking-tight">
+        Confetti!
+    </span>
+</button>
             </div>
         </main>
     </div>

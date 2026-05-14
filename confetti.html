@@ -128,7 +128,9 @@ function launchConfetti() {
     font-weight: 900;
 display: inline-block;
 
-    animation: rainbow-slide 3s linear infinite;
+animation:
+    rainbow-slide 3s linear infinite,
+    pulse 2s ease-in-out infinite;
 
     filter:
         drop-shadow(0 0 2px rgba(255,255,255,0.4))
@@ -155,7 +157,7 @@ display: inline-block;
 >
     <span class="text-3xl animate-pulse">🎉</span>
 
-    <span class="animate-rainbow animate-pulse inline-block text-3xl font-black tracking-tight">
+    <span class="animate-rainbow inline-block text-3xl font-black tracking-tight">
         Confetti!
     </span>
 </button>

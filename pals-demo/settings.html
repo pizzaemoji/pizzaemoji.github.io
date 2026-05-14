@@ -74,10 +74,10 @@
 				<div class="space-y-4">
 					<div class="flex items-center justify-between">
 						<span class="text-zinc-800 dark:text-zinc-200 text-lg font-normal">
-							Always Use Dark Mode
+							Always Match System Appearance
 						</span>
 						<label class="relative inline-flex items-center cursor-pointer">
-							<input type="checkbox" id="darkToggle" class="sr-only peer" onchange="handleThemeToggle(this)">
+							<input type="checkbox" id="systemToggle" class="sr-only peer" onchange="handleSystemToggle(this)">
 							<div class="w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors peer-checked:bg-red-500"></div>
 							<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm peer-checked:translate-x-5"></div>
 						</label>
@@ -88,12 +88,12 @@
 				<div class="space-y-4">
 					<div class="flex items-center justify-between">
 						<span class="text-zinc-800 dark:text-zinc-200 text-lg font-normal">
-							Always Match System Appearance
+							Always Use Dark Mode
 						</span>
 						<label class="relative inline-flex items-center cursor-pointer">
-							<input type="checkbox" id="systemToggle" class="sr-only peer" onchange="handleSystemToggle(this)">
-							<div class="w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors peer-checked:bg-red-500"></div>
-							<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm peer-checked:translate-x-5"></div>
+							<input type="checkbox" id="darkToggle" class="sr-only peer" onchange="handleThemeToggle(this)">
+							<div class="w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors peer-checked:bg-red-500 peer-disabled:opacity-50"></div>
+							<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm peer-checked:translate-x-5 peer-disabled:cursor-not-allowed"></div>
 						</label>
 					</div>
 					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">

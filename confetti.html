@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="color-scheme" content="light dark">
+	<title>Pizza Emoji | Confetti!</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script>
+		function showSuccess() {
+			document.getElementById('screen-main').classList.add('hidden');
+			document.getElementById('screen-success').classList.remove('hidden');
+			launchConfetti();
+		}
+
+		function showMain() {
+			document.getElementById('screen-success').classList.add('hidden');
+			document.getElementById('screen-main').classList.remove('hidden');
+			document.getElementById('confetti-container').innerHTML = '';
+		}
+
+		function launchConfetti() {
+			const container = document.getElementById('confetti-container');
+			container.innerHTML = '';
+			const isDark = document.documentElement.classList.contains('dark');
+			const colors = isDark
+				? ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#BDB2FF']
+				: ['#F28B82', '#F7AD8F', '#FCE58E', '#81C995', '#8AB4F8', '#C58AF9'];
+			const pieces = [];
+
+			for (let i = 0; i < 120; i++) {
+				const el = document.createElement('div');
+				el.style.cssText = `
+					position: absolute;
+					width: ${Math.random() * 4 + 2}px;
+					height: ${Math.random() * 12 + 6}px;
+					background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+					border-radius: 1px;
+					left: 50%;
+					top: 50%;
+				`;
+				container.appendChild(el);
+
+				const speed = Math.random() * 10 + 4;
+				const spread = Math.PI / 9;
+				const angle = (Math.PI / 2) + (Math.random() * spread * 2) - spread;
+				pieces.push({
+					el,
+					x: 0,
+					y: 0,
+					vx: Math.cos(angle) * speed,
+					vy: -Math.sin(angle) * speed,
+					gravity: Math.random() * 0.3 + 0.1,
+					rotation: Math.random() * 360,
+					rotationSpeed: (Math.random() - 0.5) * 10
+				});
+			}
+
+			function animate() {
+				let alive = false;
+				pieces.forEach(p => {
+					p.vy += p.gravity;
+					p.x += p.vx;
+					p.y += p.vy;
+					p.rotation += p.rotationSpeed;
+					p.el.style.transform = `translate(${p.x}px, ${p.y}px) rotate(${p.rotation}deg)`;
+					if (p.y < window.innerHeight) alive = true;
+				});
+				if (alive) requestAnimationFrame(animate);
+			}
+
+			requestAnimationFrame(animate);
+		}
+	</script>
+	<style>
+		.no-scrollbar::-webkit-scrollbar { display: none; }
+		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+	</style>
+</head>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
+	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
+		<!-- Main Confetti! Content -->
+		<main class="hidden flex-1 w-full flex flex-col items-center justify-center px-8 text-center relative overflow-hidden">
+			<div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
+			<span class="text-red-500 font-serif italic text-6xl mb-2 -rotate-3 block">
+			</span>
+			<div class="w-full space-y-4">
+				<button onclick="showSuccess()" class="w-full py-4 bg-red-500 text-white font-black text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Confetti!
+				</button>
+			</div>
+		</main>
+	</div>
+</body>
+</html>

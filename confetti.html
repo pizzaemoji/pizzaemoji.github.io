@@ -92,19 +92,6 @@ function launchConfetti() {
     }
 }
 
-@keyframes pulse {
-    0%, 100% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.08);
-    }
-}
-
-.animate-pulse {
-	   animation: pulse 2s ease-in-out infinite;
-}
-
 .animate-rainbow {
     background-image: linear-gradient(
         90deg,
@@ -128,9 +115,7 @@ function launchConfetti() {
     font-weight: 900;
 display: inline-block;
 
-animation:
-    rainbow-slide 3s linear infinite,
-    pulse 2s ease-in-out infinite;
+animation: rainbow-slide 3s linear infinite;
 
     filter:
         drop-shadow(0 0 2px rgba(255,255,255,0.4))
@@ -155,7 +140,7 @@ animation:
     shadow-lg shadow-white/10
     hover:shadow-white/20"
 >
-    <span class="text-3xl animate-pulse">🎉</span>
+    <span class="text-3xl">🎉</span>
 
     <span class="animate-rainbow inline-block text-3xl font-black tracking-tight">
         Confetti!

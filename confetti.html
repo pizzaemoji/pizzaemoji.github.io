@@ -20,11 +20,11 @@ function launchConfetti() {
             background-color: ${colors[Math.floor(Math.random() * colors.length)]};
             border-radius: 1px;
             left: 50%;
-            top: 80%;
+            top: 70%;
         `;
         container.appendChild(el);
 
-        const speed = Math.random() * 12 + 4;
+        const speed = Math.random() * 16 + 4;
         const spread = Math.PI / 4; // Widened spread for a better "burst" feel
         const angle = (Math.PI / 2) + (Math.random() * spread * 2) - spread;
         

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Pals | Brandon Butler</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="color-scheme" content="light dark">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="pals.js"></script>
+	<style>
+		.no-scrollbar::-webkit-scrollbar { display: none; }
+		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+	</style>
+</head>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
+	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black shadow-2xl relative overflow-hidden">
+		<header class="w-full flex justify-between items-center px-6 pt-6 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
+			<div class="w-10 flex items-center">
+				<a href="brandon_butler_chat.html" class="text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+					</svg>
+				</a>
+			</div>
+			<img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+			<div class="w-10 flex justify-end items-center">
+				<button onclick="toggleMenu()" class="text-zinc-800 dark:text-zinc-200 z-[60] active:scale-90 transition-transform">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+				</button>
+			</div>
+		</header>
+		<main class="flex-1 overflow-y-auto no-scrollbar flex flex-col items-start px-8 pt-10 pb-12">
+			<div class="w-full flex items-center justify-between mb-8">
+				<div class="flex items-center gap-5">
+					<img src="images/Brandon_Butler_icon.png"
+						alt="Brandon Butler"
+						class="w-20 h-20 rounded-full border-2 border-zinc-100 dark:border-zinc-800 object-cover">
+					<div class="flex flex-col justify-center">
+						<h1 class="text-4xl font-black text-zinc-900 dark:text-zinc-100 leading-none">
+							Brandon Butler
+						</h1>
+						<p class="text-base text-zinc-500 dark:text-zinc-400 mt-1">
+							he / him
+						</p>
+					</div>
+				</div>
+				<div class="text-7xl select-none">
+					🦔
+				</div>
+			</div>
+			<div class="w-full space-y-6">
+				<p class="text-zinc-500 dark:text-zinc-500 text-sm font-medium uppercase tracking-wider">
+					Pal since Jan 2026
+				</p>
+				<p class="text-zinc-800 dark:text-zinc-200 text-lg max-w-[300px] leading-snug">
+					I made this!
+				</p>
+			</div>
+		</main>
+		<div id="menuOverlay" onclick="toggleMenu()" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-[70] opacity-0 pointer-events-none transition-opacity duration-200"></div>
+		<div id="profileMenu" class="absolute top-0 right-0 w-[70%] h-screen bg-white dark:bg-zinc-900 z-[80] translate-x-full transition-transform duration-200 ease-out shadow-2xl">
+			<div class="flex flex-col h-full pt-8">
+				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+					<div class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Add a Note</div>
+				</div>
+				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+					<div class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Silence Brandon Butler</div>
+					<div class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Block Brandon Butler</div>
+					<div class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Report Brandon Butler</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

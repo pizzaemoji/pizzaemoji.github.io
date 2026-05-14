@@ -10,7 +10,8 @@ function launchConfetti() {
 	const container = document.getElementById('confetti-container');
 	const colors = ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#BDB2FF'];
 	const pieces = [];
-
+	
+	// Set number of confetti pieces
     for (let i = 0; i < 160; i++) {
         const el = document.createElement('div');
         el.style.cssText = `
@@ -24,8 +25,9 @@ function launchConfetti() {
         `;
         container.appendChild(el);
 
+		// Set physics of confetti burst
         const speed = Math.random() * 16 + 4;
-        const spread = Math.PI / 4; // Widened spread for a better "burst" feel
+        const spread = Math.PI / 6; // 10=tight, 1=wide
         const angle = (Math.PI / 2) + (Math.random() * spread * 2) - spread;
         
         pieces.push({

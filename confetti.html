@@ -83,13 +83,13 @@ function launchConfetti() {
 		.no-scrollbar::-webkit-scrollbar { display: none; }
 		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
 
-@keyframes gradient-flow {
+@keyframes rainbow-flow {
     0% { background-position: 0% 50%; }
-    100% { background-position: 200% 50%; }
+    100% { background-position: 133% 50%; } 
 }
 
-.animate-gradient-flow {
-    animation: gradient-flow 3s linear infinite;
+.animate-rainbow {
+    animation: rainbow-flow 6s linear infinite;
 }
 	</style>
 </head>
@@ -107,11 +107,11 @@ function launchConfetti() {
 					</span>
 				</button>
 				<p></p>
-				<button onclick="launchConfetti()" class="px-8 py-4 bg-white shadow-xl text-2xl rounded-2xl active:scale-95 transition-transform touch-action-manipulation overflow-hidden">
+				<button onclick="launchConfetti()" class="px-8 py-4 bg-white text-2xl rounded-2xl active:scale-95 transition-transform touch-action-manipulation">
 					<span class="text-2xl">
 						🎉
 					</span>
-					<span class="font-black bg-gradient-to-r from-[#FF6685] via-[#FFB366] via-[#FFF066] via-[#66FF84] via-[#66E0FF] via-[#A366FF] to-[#FF6685] bg-[length:400%_auto] animate-gradient-flow bg-clip-text text-transparent">
+					<span class="font-black bg-clip-text text-transparent animate-rainbow bg-[length:400%_100%] bg-gradient-to-r from-[#6366f1] via-[#3b82f6] via-[#22c55e] via-[#eab308] via-[#f97316] via-[#ef4444] to-[#6366f1]">
 						Confetti!
 					</span>
 				</button>

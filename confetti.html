@@ -71,6 +71,10 @@
 		}
 		requestAnimationFrame(animate);
 	}
+	
+	document.addEventListener('touchend', (e) => {
+	e.preventDefault();
+	}, { passive: false });
 	</script>
 	<style>
 		body {

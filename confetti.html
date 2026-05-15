@@ -84,6 +84,7 @@
 			position: absolute;
 			inset: 0;
 			pointer-events: none;
+			overflow: hidden;
 		}
 
 		#button-container {
@@ -108,7 +109,7 @@
 		}
 
 		#confetti-button:active {
-			/* scale: 0.95; */
+			scale: 0.95;
 		}
 		
 		@keyframes rainbow-slide {
@@ -130,7 +131,7 @@
 			animation: rainbow-slide 3s linear infinite;
 			filter:
 				drop-shadow(0 0 2px rgba(255,255,255,0.4))
-			/*	drop-shadow(0 0 8px rgba(255,255,255,0.2)); */
+				drop-shadow(0 0 8px rgba(255,255,255,0.2));
 		}
 	</style>
 </head>

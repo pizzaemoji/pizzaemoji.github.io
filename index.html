@@ -26,60 +26,32 @@
 	<meta property="og:image:height"content="630">
 	<meta property="og:image:alt"   content="Pizza Emoji dot Net">
 	<style>
-	body {
-		background-color: rgb(38, 40, 45);
-		width: 100%;
-		height: 100svh;
-		margin: 0;
-	}
-	#pizzaemoji {
-		display: flex;
-		align-items: center;
-		justify-content: center;
-		flex-direction: column;
-		gap: 50px;
-		height: 100svh;
-	}
-	#logo {
-		width: 80%;
-		margin: 0;
-		padding: 0;
-		border: 0;
-		background-color: inherit;
-	}
-	#name {
-		width: 80%;
-		margin: 0;
-		padding: 0;
-		border: 0;
-		background-color: inherit;
-	}
-	#blog {
-		blog: hidden;
-	}
-/* Tablet */
-@media (min-width: 600px) {
-	#logo {
-		width: 60%;
-	}
-	#name {
-		width: 60%;
-	}
-}
-/* Desktop */
-@media (min-width: 1000px) {
-	#logo {
-		width: 40%;
-	}
-	#name {
-		width: 40%;
-	}
-}
+		body {
+			background-color: rgb(38, 40, 45);
+			height: 100svh;
+			margin: 0;
+		}
+		#pizza {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 100svh;
+		}
+		#logo {
+			width: 80%;
+		}
+		@media (min-width: 640px)  { #logo { width: 60%; } }
+		@media (min-width: 1024px) { #logo { width: 40%; } }
 	</style>
 </head>
 <body>
-	<div id="pizzaemoji">
-		<img src="/images/pizzaemoji_slice3d.webp" srcset="/images/pizzaemoji_slice3d.webp 1x, /images/pizzaemoji_slice3d@2x.webp 2x" id="logo" alt="The Pizza Emoji Slice Logo in 3D">	
+	<div id="pizza">
+		<img
+			src="/images/pizzaemoji_slice3d.webp"
+			srcset="/images/pizzaemoji_slice3d.webp 1x, /images/pizzaemoji_slice3d@2x.webp 2x"
+			alt="The Pizza Emoji Slice Logo in 3D"
+			id="logo"
+		>
 	</div>
 </body>
 <!-- Thanks for viewing my source. :) -->

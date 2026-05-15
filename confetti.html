@@ -86,15 +86,14 @@
 			pointer-events: none;
 		}
 
-		#button-container {
-			position: absolute;
-			top: 90%;
-			left: 0;
-			right: 0;
-			display: flex;
-			justify-content: center;
-			transform: translateY(-50%);
-		}
+#button-container {
+	position: absolute;
+	inset: 0;
+	display: flex;
+	justify-content: center;
+	align-items: flex-end;
+	padding-bottom: 10dvh;
+}
 
 		#confetti-button {
 			display: flex;
@@ -109,7 +108,7 @@
 		}
 
 		#confetti-button:active {
-			transform: scale(0.95);
+			scale: 0.95;
 		}
 		
 		@keyframes rainbow-slide {

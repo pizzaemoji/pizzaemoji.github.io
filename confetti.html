@@ -72,9 +72,11 @@
 		requestAnimationFrame(animate);
 	}
 	
-	document.getElementById('confetti-button').addEventListener('touchend', (e) => {
-		e.preventDefault();
-		launchConfetti();
+	document.addEventListener('DOMContentLoaded', () => {
+		document.getElementById('confetti-button').addEventListener('touchend', (e) => {
+			e.preventDefault();
+			launchConfetti();
+		});
 	});
 	</script>
 	<style>

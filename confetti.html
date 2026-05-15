@@ -71,15 +71,12 @@
 		}
 		requestAnimationFrame(animate);
 	}
-	
-	document.addEventListener('DOMContentLoaded', () => {
-		document.getElementById('confetti-button').addEventListener('touchend', (e) => {
-			e.preventDefault();
-			launchConfetti();
-		});
-	});
 	</script>
 	<style>
+		* {
+			touch-action: pan-x pan-y;
+		}
+
 		body {
 			background-color: black;
 			overflow: hidden;
@@ -145,7 +142,7 @@
 <body>
 	<div id="confetti-container"></div>
 	<div id="button-container">
-		<button id="confetti-button">
+		<button id="confetti-button" onclick="launchConfetti()">
 			<span>🎉 </span>
 			<span class="animate-rainbow">Confetti!</span>
 		</button>

@@ -1,0 +1,1569 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>The Quiet Forest</title>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,600;1,400&family=Source+Serif+4:ital,wght@0,300;0,400;1,300&display=swap');
+
+:root {
+  --green-deep: #1a2e1a;
+  --green-mid: #2d4a2d;
+  --green-light: #4a7a4a;
+  --green-pale: #7aaa7a;
+  --amber: #c8a96e;
+  --amber-dim: rgba(200,169,110,0.5);
+  --cream: #f0e8d8;
+  --spotted: #5a8f5a;
+  --spotted-bg: rgba(90,143,90,0.35);
+  --nothing: #e8e8e8;
+  --nothing-bg: rgba(232,232,232,0.32);
+  --cell-border: rgba(200,169,110,0.18);
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
+
+html, body {
+  width: 100%; height: 100%;
+  overflow: hidden;
+  background: var(--green-deep);
+  font-family: 'Source Serif 4', Georgia, serif;
+  color: var(--cream);
+  touch-action: none;
+}
+
+/* ── SCREENS ── */
+.screen {
+  position: fixed; inset: 0;
+  display: flex; flex-direction: column;
+  align-items: center; justify-content: center;
+  transition: opacity 0.35s ease, transform 0.35s ease;
+}
+.screen.hidden { opacity: 0; pointer-events: none; transform: scale(0.97); }
+
+/* ── WELCOME ── */
+#screen-welcome {
+  background:
+    radial-gradient(ellipse at 30% 30%, rgba(52,78,40,0.7) 0%, transparent 60%),
+    radial-gradient(ellipse at 70% 70%, rgba(20,40,20,0.9) 0%, transparent 60%),
+    var(--green-deep);
+  gap: 28px;
+}
+#screen-welcome h1 {
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: clamp(1.8rem, 8vw, 2.6rem);
+  color: var(--amber);
+  text-align: center;
+  letter-spacing: 0.04em;
+  text-shadow: 0 2px 20px rgba(0,0,0,0.6);
+  line-height: 1.2;
+  padding: 0 24px;
+}
+#screen-welcome .tagline {
+  font-style: italic;
+  color: var(--green-pale);
+  font-size: 0.85rem;
+  letter-spacing: 0.1em;
+}
+.btn-primary {
+  background: var(--amber);
+  color: var(--green-deep);
+  border: none;
+  padding: 14px 40px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1rem;
+  letter-spacing: 0.1em;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+  -webkit-appearance: none;
+}
+.btn-primary:active { transform: scale(0.97); background: #b8942e; }
+
+.tree-deco {
+  font-size: 4rem;
+  line-height: 1;
+  margin-bottom: -8px;
+}
+
+.btn-how {
+  background: transparent;
+  border: 1px solid rgba(200,169,110,0.35);
+  color: rgba(200,169,110,0.75);
+  padding: 10px 32px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+  cursor: pointer;
+  margin-top: -8px;
+  -webkit-appearance: none;
+  transition: background 0.2s, color 0.2s;
+}
+.btn-how:active { background: rgba(200,169,110,0.1); color: var(--amber); }
+
+/* ── HOW TO PLAY ── */
+#screen-how {
+  background:
+    radial-gradient(ellipse at 30% 20%, rgba(52,78,40,0.6) 0%, transparent 55%),
+    var(--green-deep);
+  justify-content: flex-start;
+  align-items: stretch;
+}
+.how-scroll {
+  width: 100%;
+  height: 100%;
+  overflow-y: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.how-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 24px 40px;
+  gap: 0;
+  max-width: 480px;
+  margin: 0 auto;
+}
+.how-back {
+  align-self: flex-start;
+  color: var(--amber-dim);
+  font-size: 0.8rem;
+  cursor: pointer;
+  padding: 4px 0 16px;
+  letter-spacing: 0.04em;
+}
+.how-back:active { color: var(--amber); }
+.how-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--amber);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  margin-bottom: 20px;
+  text-align: center;
+}
+.how-section {
+  width: 100%;
+  margin-bottom: 22px;
+}
+.how-section-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--amber);
+  font-size: 0.8rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 7px;
+  opacity: 0.85;
+}
+.how-section p {
+  color: var(--cream);
+  font-size: 0.82rem;
+  line-height: 1.65;
+}
+.how-example {
+  color: var(--amber);
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.how-responses {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: 10px;
+}
+.how-response {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  color: var(--cream);
+  font-size: 0.82rem;
+  line-height: 1.55;
+}
+.how-response-dot {
+  width: 14px; height: 14px;
+  border-radius: 2px;
+  flex-shrink: 0;
+  margin-top: 3px;
+  border: 1px solid rgba(200,169,110,0.3);
+}
+.how-response-dot.green { background: rgba(90,143,90,0.5); border-color: rgba(90,143,90,0.6); }
+.how-response-dot.white { background: rgba(232,232,232,0.32); }
+.how-response-icon {
+  font-size: 1rem;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+.how-animals {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  margin-top: 6px;
+}
+.how-animal-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.how-animal-name {
+  color: var(--cream);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.8rem;
+  width: 110px;
+  flex-shrink: 0;
+}
+.how-animal-blocks {
+  color: var(--amber);
+  letter-spacing: 2px;
+  font-size: 0.85rem;
+}
+.how-animal-sz {
+  color: var(--green-pale);
+  font-size: 0.65rem;
+  font-style: italic;
+  margin-left: auto;
+}
+
+/* ── PLAYERS ── */
+#screen-players {
+  background: var(--green-deep);
+  gap: 0;
+  padding: 32px 24px;
+}
+#screen-players h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--amber);
+  font-size: 1.3rem;
+  margin-bottom: 8px;
+  letter-spacing: 0.04em;
+}
+#screen-players p {
+  color: var(--green-pale);
+  font-size: 0.8rem;
+  font-style: italic;
+  margin-bottom: 32px;
+}
+.player-field {
+  width: 100%;
+  max-width: 320px;
+  margin-bottom: 20px;
+}
+.player-field label {
+  display: block;
+  color: var(--amber-dim);
+  font-size: 0.7rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+.player-field input {
+  width: 100%;
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 4px;
+  color: var(--cream);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 1.1rem;
+  padding: 12px 14px;
+  outline: none;
+  -webkit-appearance: none;
+}
+.player-field input:focus { border-color: var(--amber); }
+#screen-players .btn-primary { margin-top: 12px; }
+
+/* ── SETUP ── */
+#screen-setup {
+  background: var(--green-deep);
+  justify-content: flex-start;
+  padding: 0;
+  overflow: hidden;
+}
+.setup-header {
+  width: 100%;
+  padding: 12px 16px 8px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-shrink: 0;
+}
+.setup-header h2 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--amber);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+.setup-header .player-badge {
+  background: rgba(200,169,110,0.15);
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 20px;
+  padding: 4px 12px;
+  color: var(--amber);
+  font-size: 0.75rem;
+}
+.btn-start {
+  background: var(--spotted);
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.85rem;
+  letter-spacing: 0.08em;
+  border-radius: 4px;
+  cursor: pointer;
+  font-weight: 600;
+  transition: background 0.2s, transform 0.1s;
+  -webkit-appearance: none;
+}
+.btn-start:disabled {
+  background: rgba(90,143,90,0.3);
+  color: rgba(255,255,255,0.3);
+  cursor: default;
+}
+.btn-start:not(:disabled):active { transform: scale(0.97); }
+
+/* ── GRID ── */
+.grid-container {
+  display: flex;
+  flex-shrink: 0;
+  padding: 0 10px;
+}
+.row-labels {
+  display: flex;
+  flex-direction: column;
+  padding-top: 22px; /* col label height */
+}
+.row-label {
+  display: flex; align-items: center; justify-content: flex-end;
+  padding-right: 5px;
+  color: var(--amber);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  flex-shrink: 0;
+}
+.grid-area { display: flex; flex-direction: column; }
+.col-labels-row {
+  display: flex;
+}
+.col-label {
+  display: flex; align-items: center; justify-content: center;
+  color: var(--amber);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.6rem;
+  font-weight: 600;
+  height: 22px;
+  flex-shrink: 0;
+}
+.grid {
+  display: grid;
+  border: 1px solid rgba(200,169,110,0.25);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.cell {
+  border-right: 1px solid var(--cell-border);
+  border-bottom: 1px solid var(--cell-border);
+  background: rgba(15,35,15,0.6);
+  position: relative;
+  cursor: pointer;
+  transition: background 0.12s;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.cell:active { background: rgba(200,169,110,0.15); }
+
+/* animal coloring in setup */
+.cell.occupied {
+  background: rgba(200,169,110,0.22);
+  border-color: rgba(200,169,110,0.3);
+}
+.cell.occupied.selected-animal {
+  background: rgba(200,169,110,0.38);
+}
+.cell.highlight { background: rgba(200,169,110,0.18); }
+
+/* search grid states */
+.cell.spotted {
+  background: var(--spotted-bg);
+}
+.cell.spotted::after {
+  content: '✓';
+  color: var(--spotted);
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.cell.nothing {
+  background: var(--nothing-bg);
+}
+.cell.nothing::after {
+  content: '·';
+  color: rgba(30,50,30,0.6);
+  font-size: 1.6em;
+  line-height: 0;
+  padding-top: 2px;
+}
+
+/* my forest — show animals as colored blocks */
+.cell.my-animal {
+  background: rgba(200,169,110,0.22);
+  border-color: rgba(200,169,110,0.38);
+}
+.cell.my-animal.found {
+  background: var(--spotted-bg);
+  border-color: rgba(90,143,90,0.5);
+}
+.cell.my-animal.found::after {
+  content: '✓';
+  color: var(--spotted);
+  font-size: 0.8em;
+  font-weight: bold;
+}
+
+/* animal label on first cell */
+.cell-label {
+  position: absolute;
+  font-size: 0.38rem;
+  color: rgba(200,169,110,0.9);
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  pointer-events: none;
+  font-family: 'Source Serif 4', Georgia, serif;
+  overflow: hidden;
+  max-width: 100%;
+  padding: 0 1px;
+}
+
+/* ── ANIMAL TRAY ── */
+.animal-tray {
+  flex: 1;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  padding: 8px 10px 10px;
+  gap: 6px;
+}
+.tray-title {
+  color: var(--amber-dim);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+.animals-row {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+.animal-chip {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(255,255,255,0.05);
+  border: 1px solid rgba(200,169,110,0.25);
+  border-radius: 4px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: background 0.15s, border-color 0.15s;
+  -webkit-appearance: none;
+  user-select: none;
+}
+.animal-chip.active {
+  background: rgba(200,169,110,0.2);
+  border-color: var(--amber);
+}
+.animal-chip.placed {
+  opacity: 0.45;
+  cursor: default;
+}
+.animal-chip-name {
+  color: var(--cream);
+  font-size: 0.72rem;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.animal-chip-size {
+  color: var(--amber-dim);
+  font-size: 0.6rem;
+}
+.tray-actions {
+  display: flex;
+  gap: 8px;
+  margin-top: 2px;
+}
+.btn-secondary {
+  background: transparent;
+  border: 1px solid rgba(200,169,110,0.35);
+  color: var(--amber);
+  padding: 8px 16px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.75rem;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  transition: background 0.15s;
+}
+.btn-secondary:active { background: rgba(200,169,110,0.1); }
+
+/* ── GAME SCREEN ── */
+#screen-game {
+  background: var(--green-deep);
+  justify-content: flex-start;
+  overflow: hidden;
+  padding: 0;
+}
+.game-scroll-container {
+  width: 100%;
+  height: calc(100% - 52px); /* leave room for bottom bar */
+  overflow: hidden;
+  position: relative;
+}
+/* Two panels stacked, snap-scroll via JS */
+.game-panels {
+  width: 100%;
+  height: 200%; /* two viewports */
+  display: flex;
+  flex-direction: column;
+  will-change: transform;
+  transition: transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+.game-panel {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+#panel-search {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(30,60,30,0.5) 0%, transparent 70%),
+    #162416;
+}
+#panel-mine {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(40,70,30,0.4) 0%, transparent 70%),
+    #1a2e1a;
+}
+
+/* ── GAME PANELS ── */
+.game-panel {
+  height: 50%;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  flex-shrink: 0;
+  overflow: hidden;
+  position: relative;
+}
+#panel-search {
+  background:
+    radial-gradient(ellipse at 50% 0%, rgba(30,60,30,0.5) 0%, transparent 70%),
+    #162416;
+  justify-content: flex-start;
+}
+#panel-mine {
+  background:
+    radial-gradient(ellipse at 50% 100%, rgba(40,70,30,0.4) 0%, transparent 70%),
+    #1a2e1a;
+  justify-content: flex-end;
+}
+
+/* shared panel section spacing */
+.panel-header {
+  width: 100%;
+  padding: 10px 14px 8px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  flex-shrink: 0;
+}
+.panel-title {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--amber);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+}
+.panel-subtitle {
+  color: var(--green-pale);
+  font-size: 0.65rem;
+  font-style: italic;
+  margin-top: 2px;
+}
+
+/* swipe hints — in normal flow, not absolute */
+.swipe-hint {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1px;
+  padding: 6px 0 8px;
+  color: rgba(200,169,110,0.45);
+  font-size: 0.6rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  animation: pulse-hint 2.5s ease-in-out infinite;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+.swipe-hint-arrow { font-size: 0.75rem; }
+@keyframes pulse-hint {
+  0%,100% { opacity: 0.45; }
+  50%      { opacity: 0.9; }
+}
+
+/* mine panel bottom label — matches panel-header padding */
+.mine-panel-label {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--amber);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-align: center;
+  width: 100%;
+  padding: 8px 14px 10px;
+  flex-shrink: 0;
+}
+
+/* bottom bar */
+.game-bottom-bar {
+  position: fixed;
+  bottom: 0; left: 0; right: 0;
+  height: 52px;
+  background: rgba(20,36,20,0.95);
+  border-top: 1px solid rgba(200,169,110,0.15);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 16px;
+  backdrop-filter: blur(8px);
+  z-index: 100;
+}
+.bar-label {
+  color: var(--amber-dim);
+  font-size: 0.65rem;
+  font-style: italic;
+}
+.btn-newgame {
+  background: transparent;
+  border: 1px solid rgba(200,169,110,0.35);
+  color: var(--amber);
+  padding: 7px 16px;
+  font-family: 'Source Serif 4', Georgia, serif;
+  font-size: 0.7rem;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-appearance: none;
+}
+.btn-newgame:active { background: rgba(200,169,110,0.1); }
+
+/* ── SIDE DRAWER ── */
+.drawer-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.5);
+  z-index: 200;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s;
+}
+.drawer-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.drawer {
+  position: fixed;
+  top: 0; right: 0; bottom: 0;
+  width: min(280px, 80vw);
+  background: #1e341e;
+  border-left: 1px solid rgba(200,169,110,0.2);
+  z-index: 201;
+  transform: translateX(100%);
+  transition: transform 0.28s cubic-bezier(0.25,0.46,0.45,0.94);
+  display: flex;
+  flex-direction: column;
+  padding: 48px 20px 24px;
+  gap: 20px;
+}
+.drawer.open { transform: translateX(0); }
+.drawer h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--amber);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+}
+.drawer-animal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.drawer-blocks {
+  display: flex;
+  gap: 2px;
+}
+.drawer-block {
+  width: 14px;
+  height: 14px;
+  background: rgba(200,169,110,0.3);
+  border: 1px solid rgba(200,169,110,0.5);
+  border-radius: 2px;
+}
+.drawer-animal-name {
+  color: var(--cream);
+  font-size: 0.85rem;
+  font-family: 'Playfair Display', Georgia, serif;
+}
+.drawer-animal-size {
+  color: var(--green-pale);
+  font-size: 0.65rem;
+  font-style: italic;
+  margin-left: auto;
+}
+.drawer-note {
+  color: var(--green-pale);
+  font-size: 0.65rem;
+  font-style: italic;
+  line-height: 1.5;
+  border-top: 1px solid rgba(200,169,110,0.15);
+  padding-top: 12px;
+}
+.btn-drawer-close {
+  position: absolute;
+  top: 14px; right: 14px;
+  background: transparent;
+  border: none;
+  color: var(--amber-dim);
+  font-size: 1.2rem;
+  cursor: pointer;
+  padding: 4px 8px;
+}
+
+/* remove drawer btn style from bar, reuse btn-drawer-open */
+.btn-drawer-open {
+  background: transparent;
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 4px;
+  color: var(--amber);
+  font-size: 0.7rem;
+  padding: 7px 14px;
+  cursor: pointer;
+  -webkit-appearance: none;
+  letter-spacing: 0.05em;
+  font-family: 'Source Serif 4', Georgia, serif;
+}
+
+/* ── MODAL / CONFIRM ── */
+.modal-overlay {
+  position: fixed; inset: 0;
+  background: rgba(0,0,0,0.7);
+  z-index: 300;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.2s;
+}
+.modal-overlay.open {
+  opacity: 1;
+  pointer-events: all;
+}
+.modal {
+  background: #1e341e;
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 8px;
+  padding: 28px 24px;
+  width: min(300px, 85vw);
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  align-items: center;
+  text-align: center;
+}
+.modal h3 {
+  font-family: 'Playfair Display', Georgia, serif;
+  color: var(--amber);
+  font-size: 1.1rem;
+}
+.modal p {
+  color: var(--green-pale);
+  font-size: 0.8rem;
+  line-height: 1.5;
+}
+.modal-buttons {
+  display: flex;
+  gap: 10px;
+  margin-top: 4px;
+}
+</style>
+</head>
+<body>
+
+<!-- ══ WELCOME ══ -->
+<div class="screen" id="screen-welcome">
+  <div class="tree-deco">🌲</div>
+  <h1>The Quiet<br>Forest</h1>
+  <p class="tagline">a wildlife spotting game</p>
+  <button class="btn-primary" id="btn-play">Play</button>
+  <button class="btn-how" id="btn-how">How to Play</button>
+</div>
+
+<!-- ══ HOW TO PLAY ══ -->
+<div class="screen hidden" id="screen-how">
+  <div class="how-scroll">
+    <div class="how-content">
+      <div class="how-back" id="btn-how-back">← Back</div>
+      <h2 class="how-title">How to Play</h2>
+
+      <div class="how-section">
+        <div class="how-section-title">The idea</div>
+        <p>Each player hides a set of animals somewhere in their forest. Take turns calling out grid squares, trying to find your friend's animals before they find yours. The first player to spot every animal in their friend's forest wins.</p>
+      </div>
+
+      <div class="how-section">
+        <div class="how-section-title">Setup</div>
+        <p>Each player opens the app on their own phone. Enter names, then place your animals secretly on your grid — your friend shouldn't see your screen. When all five are hidden, tap Start Game.</p>
+      </div>
+
+      <div class="how-section">
+        <div class="how-section-title">Taking turns</div>
+        <p>Decide who goes first. On your turn, call out a grid square to your friend — like <span class="how-example">"C7"</span> or <span class="how-example">"F4"</span>. Your friend checks their forest and responds:</p>
+        <div class="how-responses">
+          <div class="how-response">
+            <span class="how-response-dot green"></span>
+            <div><strong>Spotted</strong> — there's an animal in that square. Mark it green on your search grid.</div>
+          </div>
+          <div class="how-response">
+            <span class="how-response-dot white"></span>
+            <div><strong>Nothing there</strong> — that square is empty. Mark it with a dot so you don't call it again.</div>
+          </div>
+        </div>
+        <p style="margin-top:10px">Then your friend takes their turn and calls out a square to you. Check your forest grid and call back what you see.</p>
+      </div>
+
+      <div class="how-section">
+        <div class="how-section-title">Your two boards</div>
+        <p>Swipe up and down to move between your two grids:</p>
+        <div class="how-responses">
+          <div class="how-response">
+            <span class="how-response-icon">🔍</span>
+            <div><strong>Top board</strong> — your friend's forest. This is where you track your guesses.</div>
+          </div>
+          <div class="how-response">
+            <span class="how-response-icon">🌲</span>
+            <div><strong>Bottom board</strong> — your own forest. Tap your animal squares green when your friend spots them, so you know what they've found.</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="how-section">
+        <div class="how-section-title">Winning</div>
+        <p>When you've spotted every square of every animal in your friend's forest, call it out — <span class="how-example">"I've found everything in your forest!"</span> They verify, and you win.</p>
+      </div>
+
+      <div class="how-section">
+        <div class="how-section-title">The animals</div>
+        <div class="how-animals">
+          <div class="how-animal-row"><span class="how-animal-name">Squirrel</span><span class="how-animal-blocks">□□</span><span class="how-animal-sz">2 squares</span></div>
+          <div class="how-animal-row"><span class="how-animal-name">Gray Fox</span><span class="how-animal-blocks">□□□</span><span class="how-animal-sz">3 squares</span></div>
+          <div class="how-animal-row"><span class="how-animal-name">Raccoon</span><span class="how-animal-blocks">□□□</span><span class="how-animal-sz">3 squares</span></div>
+          <div class="how-animal-row"><span class="how-animal-name">Deer</span><span class="how-animal-blocks">□□□□</span><span class="how-animal-sz">4 squares</span></div>
+          <div class="how-animal-row"><span class="how-animal-name">Mountain Lion</span><span class="how-animal-blocks">□□□□□</span><span class="how-animal-sz">5 squares</span></div>
+        </div>
+        <p style="margin-top:8px">Animals can be placed horizontally or vertically. Tap a placed animal on the setup grid to rotate it.</p>
+      </div>
+
+      <button class="btn-primary" style="margin-top:8px;margin-bottom:4px" id="btn-how-play">Let's Play →</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PLAYERS ══ -->
+<div class="screen hidden" id="screen-players">
+  <h2>Who's playing?</h2>
+  <p>You can change these or just continue</p>
+  <div class="player-field">
+    <label>Player 1</label>
+    <input type="text" id="input-p1" value="Me" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+  </div>
+  <div class="player-field">
+    <label>Player 2</label>
+    <input type="text" id="input-p2" value="My Friend" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+  </div>
+  <button class="btn-primary" id="btn-continue">Continue →</button>
+</div>
+
+<!-- ══ SETUP ══ -->
+<div class="screen hidden" id="screen-setup">
+  <div class="setup-header">
+    <div>
+      <div class="setup-header h2" style="font-family:'Playfair Display',Georgia,serif;color:var(--amber);font-size:0.95rem;letter-spacing:0.05em;">Hide your animals</div>
+      <div style="color:var(--green-pale);font-size:0.65rem;font-style:italic;" id="setup-player-label"></div>
+    </div>
+    <button class="btn-start" id="btn-start-game" disabled>Start Game →</button>
+  </div>
+  <div class="grid-container" id="setup-grid-container">
+    <!-- built by JS -->
+  </div>
+  <div class="animal-tray">
+    <div class="tray-title">Tap an animal, then tap the grid to place it</div>
+    <div class="animals-row" id="animals-row"></div>
+    <div class="tray-actions">
+      <button class="btn-secondary" id="btn-clear-board">Clear Board</button>
+    </div>
+  </div>
+</div>
+
+<!-- ══ GAME ══ -->
+<div class="screen hidden" id="screen-game">
+  <div class="game-scroll-container" id="game-scroll">
+    <div class="game-panels" id="game-panels">
+
+      <!-- Panel 0: SEARCH (opponent's forest) -->
+      <div class="game-panel" id="panel-search">
+        <div class="panel-header">
+          <div class="panel-title" id="search-panel-title"></div>
+          <div class="panel-subtitle">Call out a square — mark the response</div>
+        </div>
+        <div class="grid-container" id="search-grid-container"></div>
+        <div class="swipe-hint">
+          <span class="swipe-hint-arrow">↓</span>
+          <span id="search-hint-label">my forest</span>
+        </div>
+      </div>
+
+      <!-- Panel 1: MY FOREST -->
+      <div class="game-panel" id="panel-mine">
+        <div class="swipe-hint">
+          <span id="mine-hint-label">my friend's forest</span>
+          <span class="swipe-hint-arrow">↑</span>
+        </div>
+        <div class="grid-container" id="mine-grid-container"></div>
+        <div class="mine-panel-label" id="mine-panel-label"></div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="game-bottom-bar">
+    <button class="btn-newgame" id="btn-new-game">New Game</button>
+    <button class="btn-drawer-open" id="btn-drawer-open">Animals ▸</button>
+  </div>
+</div>
+
+<!-- ══ DRAWER ══ -->
+<div class="drawer-overlay" id="drawer-overlay"></div>
+<div class="drawer" id="drawer">
+  <button class="btn-drawer-close" id="btn-drawer-close">✕</button>
+  <h3>Animals</h3>
+  <div id="drawer-list"></div>
+  <div class="drawer-note">Each player chooses which 5 animals to hide. You don't know your opponent's lineup — figure it out from the grid!</div>
+</div>
+
+<!-- ══ CONFIRM MODAL ══ -->
+<div class="modal-overlay" id="modal-overlay">
+  <div class="modal">
+    <h3>Leave the forest?</h3>
+    <p>This will end the current game and return to the title screen.</p>
+    <div class="modal-buttons">
+      <button class="btn-secondary" id="modal-cancel">Stay</button>
+      <button class="btn-primary" id="modal-confirm">New Game</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ══════════════════════════════
+//  CONFIG
+// ══════════════════════════════
+const COLS = ['A','B','C','D','E','F','G','H'];
+const ROWS = ['1','2','3','4','5','6','7','8','9','10','11','12'];
+const NCOLS = COLS.length;   // 8
+const NROWS = ROWS.length;   // 12
+
+const ANIMALS = [
+  { id: 'squirrel',  name: 'Squirrel',     size: 2 },
+  { id: 'fox',       name: 'Gray Fox',      size: 3 },
+  { id: 'raccoon',   name: 'Raccoon',       size: 3 },
+  { id: 'deer',      name: 'Deer',          size: 4 },
+  { id: 'lion',      name: 'Mountain Lion', size: 5 },
+];
+
+// ══════════════════════════════
+//  STATE
+// ══════════════════════════════
+let p1Name = 'Me', p2Name = 'My Friend';
+
+// setup state (only p1 sets up their own board)
+let setupPhase = 0;
+let setupBoards = [null, null];
+let currentSetupBoard = {};
+let selectedAnimalId = null;
+
+// game state
+let searchGrid = {};   // "A1" -> 0|1|2  (0=empty,1=nothing,2=spotted)
+let myForestGrid = {}; // "A1" -> animalId|null (from placed animals)
+let foundCells = {};   // "A1" -> true if friend spotted it
+let emptyMarks = {};   // "A1" -> true if marked nothing on empty cell in my forest
+
+let currentPanel = 0; // 0=search, 1=mine
+
+// ══════════════════════════════
+//  CELL SIZE (computed once)
+// ══════════════════════════════
+const ROW_LABEL_W = 26;
+const COL_LABEL_H = 20;
+
+function computeCellSize() {
+  const avail = Math.min(window.innerWidth - 20, 500);
+  return Math.floor((avail - ROW_LABEL_W) / NCOLS);
+}
+let CELL = computeCellSize();
+
+// ══════════════════════════════
+//  SCREEN TRANSITIONS
+// ══════════════════════════════
+function showScreen(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.add('hidden'));
+  document.getElementById(id).classList.remove('hidden');
+}
+
+// ══════════════════════════════
+//  BUILD GRID (returns container element)
+// ══════════════════════════════
+function buildGrid(containerId, onCellClick) {
+  const container = document.getElementById(containerId);
+  container.innerHTML = '';
+  container.style.display = 'flex';
+  container.style.flexDirection = 'row';
+  container.style.alignItems = 'flex-start';
+
+  // Row labels column
+  const rowLabels = document.createElement('div');
+  rowLabels.style.display = 'flex';
+  rowLabels.style.flexDirection = 'column';
+  rowLabels.style.paddingTop = COL_LABEL_H + 'px';
+  rowLabels.style.width = ROW_LABEL_W + 'px';
+  rowLabels.style.flexShrink = '0';
+
+  ROWS.forEach(r => {
+    const el = document.createElement('div');
+    el.className = 'row-label';
+    el.style.height = CELL + 'px';
+    el.style.width = ROW_LABEL_W + 'px';
+    el.textContent = r;
+    rowLabels.appendChild(el);
+  });
+
+  // Grid area
+  const gridArea = document.createElement('div');
+  gridArea.className = 'grid-area';
+
+  // Col labels
+  const colRow = document.createElement('div');
+  colRow.className = 'col-labels-row';
+  COLS.forEach(c => {
+    const el = document.createElement('div');
+    el.className = 'col-label';
+    el.style.width = CELL + 'px';
+    el.textContent = c;
+    colRow.appendChild(el);
+  });
+  gridArea.appendChild(colRow);
+
+  // Grid
+  const grid = document.createElement('div');
+  grid.className = 'grid';
+  grid.style.gridTemplateColumns = `repeat(${NCOLS}, ${CELL}px)`;
+  grid.style.width = (CELL * NCOLS) + 'px';
+
+  ROWS.forEach(r => {
+    COLS.forEach(c => {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      cell.style.width = CELL + 'px';
+      cell.style.height = CELL + 'px';
+      cell.dataset.col = c;
+      cell.dataset.row = r;
+      cell.dataset.id = c + r;
+      if (onCellClick) cell.addEventListener('click', () => onCellClick(c, r, cell));
+      grid.appendChild(cell);
+    });
+  });
+
+  gridArea.appendChild(grid);
+  container.appendChild(rowLabels);
+  container.appendChild(gridArea);
+
+  return grid;
+}
+
+function getCell(gridEl, col, row) {
+  return gridEl.querySelector(`[data-col="${col}"][data-row="${row}"]`);
+}
+
+// ══════════════════════════════
+//  ROTATION LOGIC
+// ══════════════════════════════
+// dir: 0=right, 1=down, 2=left, 3=up
+// anchor = top-left-most cell
+function getCells(anchorCol, anchorRow, size, dir) {
+  const ci = COLS.indexOf(anchorCol);
+  const ri = ROWS.indexOf(anchorRow);
+  const cells = [];
+  for (let i = 0; i < size; i++) {
+    let c, r;
+    if (dir === 0)      { c = ci + i; r = ri; }
+    else if (dir === 1) { c = ci;     r = ri + i; }
+    else if (dir === 2) { c = ci - i; r = ri; }
+    else                { c = ci;     r = ri - i; }
+    if (c < 0 || c >= NCOLS || r < 0 || r >= NROWS) return null;
+    cells.push({ col: COLS[c], row: ROWS[r] });
+  }
+  return cells;
+}
+
+function nextValidDir(anchorCol, anchorRow, size, currentDir, occupiedFn) {
+  for (let i = 1; i <= 4; i++) {
+    const dir = (currentDir + i) % 4;
+    const cells = getCells(anchorCol, anchorRow, size, dir);
+    if (!cells) continue;
+    // check for overlap with other animals
+    const blocked = cells.some(({col,row}) => {
+      const id = col+row;
+      return occupiedFn(id);
+    });
+    if (!blocked) return { dir, cells };
+  }
+  return null;
+}
+
+// ══════════════════════════════
+//  SETUP SCREEN
+// ══════════════════════════════
+let setupGrid = null;
+
+function initSetup(phase) {
+  setupPhase = phase;
+  currentSetupBoard = {};
+  selectedAnimalId = null;
+
+  document.getElementById('setup-player-label').textContent =
+    p1Name + ' — hide your animals before passing to ' + p2Name;
+  document.getElementById('btn-start-game').disabled = true;
+
+  setupGrid = buildGrid('setup-grid-container', onSetupCellClick);
+
+  buildAnimalTray();
+  checkSetupComplete();
+}
+
+function buildAnimalTray() {
+  const row = document.getElementById('animals-row');
+  row.innerHTML = '';
+  ANIMALS.forEach(a => {
+    const chip = document.createElement('div');
+    const isPlaced = !!currentSetupBoard[a.id];
+    chip.className = 'animal-chip' + (isPlaced ? ' placed' : '');
+    chip.dataset.aid = a.id;
+    chip.innerHTML = `<span class="animal-chip-name">${a.name}</span><span class="animal-chip-size">${a.size}</span>`;
+    chip.addEventListener('click', () => {
+      if (currentSetupBoard[a.id]) {
+        // re-tapping a placed animal removes it
+        delete currentSetupBoard[a.id];
+        selectedAnimalId = null;
+        renderSetupBoard();
+        buildAnimalTray();
+        checkSetupComplete();
+      } else {
+        selectAnimal(a.id);
+      }
+    });
+    row.appendChild(chip);
+  });
+}
+
+function selectAnimal(id) {
+  if (currentSetupBoard[id]) return;
+  selectedAnimalId = id;
+  document.querySelectorAll('.animal-chip').forEach(c => {
+    c.classList.toggle('active', c.dataset.aid === id);
+  });
+}
+
+function onSetupCellClick(col, row, cellEl) {
+  // If clicking an already-placed animal cell — rotate it
+  const clickedId = cellOccupiedBy(col + row);
+  if (clickedId) {
+    rotateAnimal(clickedId);
+    return;
+  }
+  if (!selectedAnimalId) return;
+  if (currentSetupBoard[selectedAnimalId]) return;
+
+  const animal = ANIMALS.find(a => a.id === selectedAnimalId);
+  // try dir 0 first, then find valid
+  let placed = false;
+  for (let dir = 0; dir < 4; dir++) {
+    const cells = getCells(col, row, animal.size, dir);
+    if (!cells) continue;
+    const blocked = cells.some(({col:c,row:r}) => cellOccupiedBy(c+r));
+    if (!blocked) {
+      placeAnimal(selectedAnimalId, col, row, dir, cells);
+      placed = true;
+      break;
+    }
+  }
+  if (!placed) {
+    // flash red briefly
+    cellEl.style.background = 'rgba(200,60,60,0.3)';
+    setTimeout(() => cellEl.style.background = '', 300);
+  }
+}
+
+function cellOccupiedBy(cellId) {
+  for (const [aid, data] of Object.entries(currentSetupBoard)) {
+    if (data.cells.some(c => c.col+c.row === cellId)) return aid;
+  }
+  return null;
+}
+
+function placeAnimal(animalId, anchorCol, anchorRow, dir, cells) {
+  currentSetupBoard[animalId] = { anchorCol, anchorRow, dir, cells };
+  renderSetupBoard();
+  selectedAnimalId = null;
+  document.querySelectorAll('.animal-chip').forEach(c => c.classList.remove('active'));
+  buildAnimalTray();
+  checkSetupComplete();
+}
+
+function rotateAnimal(animalId) {
+  const data = currentSetupBoard[animalId];
+  const animal = ANIMALS.find(a => a.id === animalId);
+  const result = nextValidDir(data.anchorCol, data.anchorRow, animal.size, data.dir, (id) => {
+    // don't count this animal's own cells as blocking
+    const ownCells = data.cells.map(c => c.col+c.row);
+    if (ownCells.includes(id)) return false;
+    return !!cellOccupiedBy(id);
+  });
+  if (!result) return;
+  currentSetupBoard[animalId] = {
+    anchorCol: data.anchorCol,
+    anchorRow: data.anchorRow,
+    dir: result.dir,
+    cells: result.cells
+  };
+  renderSetupBoard();
+}
+
+function renderSetupBoard() {
+  // clear all
+  setupGrid.querySelectorAll('.cell').forEach(c => {
+    c.className = 'cell';
+    c.innerHTML = '';
+  });
+  // draw animals
+  Object.entries(currentSetupBoard).forEach(([aid, data]) => {
+    const animal = ANIMALS.find(a => a.id === aid);
+    // Find the visually first cell (leftmost for horizontal, topmost for vertical)
+    const isVertical = data.dir === 1 || data.dir === 3;
+    const sorted = [...data.cells].sort((a, b) => {
+      if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
+      return COLS.indexOf(a.col) - COLS.indexOf(b.col);
+    });
+    data.cells.forEach((c) => {
+      const cell = getCell(setupGrid, c.col, c.row);
+      if (!cell) return;
+      cell.classList.add('occupied');
+      if (c.col === sorted[0].col && c.row === sorted[0].row) {
+        const lbl = document.createElement('div');
+        lbl.className = 'cell-label';
+        lbl.textContent = animal.name;
+        cell.appendChild(lbl);
+      }
+    });
+  });
+}
+
+function checkSetupComplete() {
+  const allPlaced = ANIMALS.every(a => currentSetupBoard[a.id]);
+  document.getElementById('btn-start-game').disabled = !allPlaced;
+}
+
+document.getElementById('btn-clear-board').addEventListener('click', () => {
+  currentSetupBoard = {};
+  selectedAnimalId = null;
+  renderSetupBoard();
+  buildAnimalTray();
+  checkSetupComplete();
+});
+
+document.getElementById('btn-start-game').addEventListener('click', () => {
+  setupBoards[0] = JSON.parse(JSON.stringify(currentSetupBoard));
+  startGame();
+});
+
+// ══════════════════════════════
+//  GAME
+// ══════════════════════════════
+let searchGridEl = null;
+let mineGridEl = null;
+
+function startGame() {
+  searchGrid = {};
+  foundCells = {};
+  emptyMarks = {};
+
+  // Build my forest grid from p1's board (setupBoards[0])
+  myForestGrid = {};
+  Object.entries(setupBoards[0]).forEach(([aid, data]) => {
+    data.cells.forEach(c => { myForestGrid[c.col+c.row] = aid; });
+  });
+
+  document.getElementById('search-panel-title').textContent = p2Name + "'s Forest";
+  document.getElementById('search-hint-label').textContent = p1Name + "'s forest";
+  document.getElementById('mine-hint-label').textContent = p2Name + "'s forest";
+  document.getElementById('mine-panel-label').textContent = p1Name + "'s Forest";
+
+  searchGridEl = buildGrid('search-grid-container', onSearchCellClick);
+  mineGridEl   = buildGrid('mine-grid-container', onMineCellClick);
+
+  renderMyForest();
+  showScreen('screen-game');
+  snapToPanel(0, false);
+}
+
+function onSearchCellClick(col, row) {
+  const id = col + row;
+  const state = searchGrid[id] || 0;
+  // 0=empty → 1=nothing(white dot) → 2=spotted(green check) → 0=clear
+  const next = (state + 1) % 3;
+  if (next === 0) {
+    delete searchGrid[id];
+  } else {
+    searchGrid[id] = next;
+  }
+  renderSearchGrid();
+}
+
+function renderSearchGrid() {
+  searchGridEl.querySelectorAll('.cell').forEach(c => {
+    const id = c.dataset.id;
+    const state = searchGrid[id] || 0;
+    c.className = 'cell';
+    c.innerHTML = '';
+    if (state === 1) c.classList.add('nothing');
+    else if (state === 2) c.classList.add('spotted');
+  });
+}
+
+function onMineCellClick(col, row) {
+  const id = col + row;
+  const isAnimal = !!myForestGrid[id];
+  if (isAnimal) {
+    // toggle spotted on animal cells
+    foundCells[id] = !foundCells[id];
+  } else {
+    // toggle nothing-there on empty cells
+    emptyMarks[id] = !emptyMarks[id];
+  }
+  renderMyForest();
+}
+
+function renderMyForest() {
+  // Build a map of animalId -> sorted cells for labeling
+  const animalCells = {}; // animalId -> sorted cell list
+  Object.entries(setupBoards[0]).forEach(([aid, data]) => {
+    const isVertical = data.dir === 1 || data.dir === 3;
+    const sorted = [...data.cells].sort((a, b) => {
+      if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
+      return COLS.indexOf(a.col) - COLS.indexOf(b.col);
+    });
+    animalCells[aid] = sorted;
+  });
+
+  mineGridEl.querySelectorAll('.cell').forEach(c => {
+    const id = c.dataset.id;
+    const col = c.dataset.col;
+    const row = c.dataset.row;
+    c.className = 'cell';
+    c.innerHTML = '';
+    const aid = myForestGrid[id];
+    if (aid) {
+      c.classList.add('my-animal');
+      if (foundCells[id]) c.classList.add('found');
+      // label on visually first cell
+      const sorted = animalCells[aid];
+      if (sorted && sorted[0].col === col && sorted[0].row === row) {
+        const lbl = document.createElement('div');
+        lbl.className = 'cell-label';
+        lbl.textContent = ANIMALS.find(a => a.id === aid)?.name || '';
+        c.appendChild(lbl);
+      }
+    } else if (emptyMarks[id]) {
+      c.classList.add('nothing');
+    }
+  });
+}
+
+// ══════════════════════════════
+//  SNAP SCROLL
+// ══════════════════════════════
+const panels = document.getElementById('game-panels');
+let panelH = 0;
+let touchStartY = 0;
+let touchDeltaY = 0;
+let isSwiping = false;
+
+function snapToPanel(index, animate = true) {
+  currentPanel = index;
+  const scrollEl = document.getElementById('game-scroll');
+  panelH = scrollEl.getBoundingClientRect().height;
+  if (!animate) {
+    panels.style.transition = 'none';
+    panels.style.transform = `translateY(${-index * panelH}px)`;
+    panels.offsetHeight;
+    panels.style.transition = 'transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+  } else {
+    panels.style.transition = 'transform 0.32s cubic-bezier(0.25, 0.46, 0.45, 0.94)';
+    panels.style.transform = `translateY(${-index * panelH}px)`;
+  }
+}
+
+const scroll = document.getElementById('game-scroll');
+
+scroll.addEventListener('touchstart', e => {
+  touchStartY = e.touches[0].clientY;
+  touchDeltaY = 0;
+  isSwiping = true;
+  panels.style.transition = 'none';
+}, { passive: true });
+
+scroll.addEventListener('touchmove', e => {
+  if (!isSwiping) return;
+  e.preventDefault();
+  touchDeltaY = e.touches[0].clientY - touchStartY;
+  const scrollEl = document.getElementById('game-scroll');
+  panelH = scrollEl.getBoundingClientRect().height;
+  const baseY = -currentPanel * panelH;
+  const clampedDelta = Math.max(-panelH * 0.7, Math.min(panelH * 0.7, touchDeltaY));
+  panels.style.transform = `translateY(${baseY + clampedDelta}px)`;
+}, { passive: false });
+
+scroll.addEventListener('touchend', () => {
+  if (!isSwiping) return;
+  isSwiping = false;
+  const threshold = 50;
+  if (touchDeltaY < -threshold && currentPanel === 0) {
+    snapToPanel(1);
+  } else if (touchDeltaY > threshold && currentPanel === 1) {
+    snapToPanel(0);
+  } else {
+    snapToPanel(currentPanel);
+  }
+}, { passive: true });
+
+// ══════════════════════════════
+//  DRAWER
+// ══════════════════════════════
+function buildDrawer() {
+  const list = document.getElementById('drawer-list');
+  list.innerHTML = '';
+  list.style.display = 'flex';
+  list.style.flexDirection = 'column';
+  list.style.gap = '14px';
+  ANIMALS.forEach(a => {
+    const row = document.createElement('div');
+    row.className = 'drawer-animal';
+    const blocks = document.createElement('div');
+    blocks.className = 'drawer-blocks';
+    for (let i = 0; i < a.size; i++) {
+      const b = document.createElement('div');
+      b.className = 'drawer-block';
+      blocks.appendChild(b);
+    }
+    const name = document.createElement('span');
+    name.className = 'drawer-animal-name';
+    name.textContent = a.name;
+    const size = document.createElement('span');
+    size.className = 'drawer-animal-size';
+    size.textContent = a.size + ' squares';
+    row.appendChild(blocks);
+    row.appendChild(name);
+    row.appendChild(size);
+    list.appendChild(row);
+  });
+}
+
+function openDrawer() {
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+}
+function closeDrawer() {
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+}
+
+document.getElementById('drawer-overlay').addEventListener('click', closeDrawer);
+document.getElementById('btn-drawer-close').addEventListener('click', closeDrawer);
+document.getElementById('btn-drawer-open').addEventListener('click', openDrawer);
+
+buildDrawer();
+
+// ══════════════════════════════
+//  MODAL
+// ══════════════════════════════
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+document.getElementById('btn-new-game').addEventListener('click', openModal);
+document.getElementById('modal-cancel').addEventListener('click', closeModal);
+document.getElementById('modal-confirm').addEventListener('click', () => {
+  closeModal();
+  showScreen('screen-welcome');
+});
+
+// ══════════════════════════════
+//  NAV FLOW
+// ══════════════════════════════
+document.getElementById('btn-play').addEventListener('click', () => {
+  showScreen('screen-players');
+});
+
+document.getElementById('btn-how').addEventListener('click', () => {
+  showScreen('screen-how');
+});
+
+document.getElementById('btn-how-back').addEventListener('click', () => {
+  showScreen('screen-welcome');
+});
+
+document.getElementById('btn-how-play').addEventListener('click', () => {
+  showScreen('screen-players');
+});
+
+document.getElementById('btn-continue').addEventListener('click', () => {
+  p1Name = document.getElementById('input-p1').value.trim() || 'Me';
+  p2Name = document.getElementById('input-p2').value.trim() || 'My Friend';
+  showScreen('screen-setup');
+  initSetup(0);
+});
+
+// resize
+window.addEventListener('resize', () => {
+  CELL = computeCellSize();
+  if (!document.getElementById('screen-game').classList.contains('hidden')) {
+    snapToPanel(currentPanel, false);
+  }
+});
+</script>
+</body>
+</html>

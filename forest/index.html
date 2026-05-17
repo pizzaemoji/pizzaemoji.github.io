@@ -413,9 +413,6 @@ html, body {
 /* animal coloring in setup */
 .cell.occupied {
   background: rgba(200,169,110,0.22);
-  border-right: 1px solid rgba(200,169,110,0.55);
-  border-bottom: 1px solid rgba(200,169,110,0.55);
-  box-shadow: inset 0 0 0 1px rgba(200,169,110,0.45);
 }
 .cell.occupied.selected-animal {
   background: rgba(200,169,110,0.38);
@@ -447,7 +444,6 @@ html, body {
 .cell.my-animal {
   background: rgba(200,169,110,0.22);
   border-color: rgba(200,169,110,0.38);
-  box-shadow: inset 0 0 0 1px rgba(200,169,110,0.4);
 }
 .cell.my-animal.found {
   background: var(--spotted-bg);
@@ -845,19 +841,24 @@ html, body {
   <div class="how-scroll">
     <div class="how-content">
       <div class="how-back" id="btn-whats-new-back">← Back</div>
-      <h2 class="how-title">What's New</h2>
+      <h2 class="how-title">Version 0.1</h2>
+      <p style="color:var(--green-pale);font-size:0.72rem;font-style:italic;text-align:center;margin-top:-14px;margin-bottom:20px;">Released May 16th, 2026</p>
+
       <div class="how-section">
-        <div class="how-section-title">v0.1 — First playable build</div>
-        <p>The Quiet Forest is just getting started. This first version includes the full core game loop — animal placement, the two-board swipe, spotted and nothing-there marking, and the animal reference drawer.</p>
+        <div class="how-section-title">What's New</div>
+        <p>— Everything! First playable version of the game.</p>
       </div>
+
       <div class="how-section">
-        <div class="how-section-title">Coming eventually</div>
-        <p>Irregular animal shapes (a bear that isn't just a straight line). More animals to choose from. Maybe sound. Maybe a Bigfoot.</p>
+        <div class="how-section-title">Known Bugs</div>
+        <p>— The Mobile Safari address bar can get in the way of the game board. We highly suggest adding the game to your home screen as a Web App.</p>
       </div>
+
       <div class="how-section">
-        <div class="how-section-title">Known quirks</div>
-        <p>Best experienced as a home screen web app — add to home screen in Safari or Chrome for a full-screen experience with no browser chrome in the way.</p>
+        <div class="how-section-title">What's Next</div>
+        <p>— Graphics<br>— Irregular animal shapes<br>— More animal variety to choose from</p>
       </div>
+
     </div>
   </div>
 </div>
@@ -1313,20 +1314,50 @@ function renderSetupBoard() {
   setupGrid.querySelectorAll('.cell').forEach(c => {
     c.className = 'cell';
     c.innerHTML = '';
+    c.style.borderTop = '';
+    c.style.borderRight = '';
+    c.style.borderBottom = '';
+    c.style.borderLeft = '';
   });
+
+  // Build a lookup: cellId -> animalId
+  const cellOwner = {};
+  Object.entries(currentSetupBoard).forEach(([aid, data]) => {
+    data.cells.forEach(c => { cellOwner[c.col + c.row] = aid; });
+  });
+
+  const EDGE   = '2px solid rgba(200,169,110,0.85)'; // perimeter
+  const INNER  = '1px solid rgba(200,169,110,0.15)'; // shared edge between cells of same animal
+
   // draw animals
   Object.entries(currentSetupBoard).forEach(([aid, data]) => {
     const animal = ANIMALS.find(a => a.id === aid);
-    // Find the visually first cell (leftmost for horizontal, topmost for vertical)
     const isVertical = data.dir === 1 || data.dir === 3;
     const sorted = [...data.cells].sort((a, b) => {
       if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
       return COLS.indexOf(a.col) - COLS.indexOf(b.col);
     });
+
     data.cells.forEach((c) => {
       const cell = getCell(setupGrid, c.col, c.row);
       if (!cell) return;
       cell.classList.add('occupied');
+
+      const ci = COLS.indexOf(c.col);
+      const ri = ROWS.indexOf(c.row);
+
+      // For each edge, check if the neighbor belongs to the same animal
+      const upId    = ri > 0           ? COLS[ci] + ROWS[ri-1] : null;
+      const downId  = ri < NROWS-1     ? COLS[ci] + ROWS[ri+1] : null;
+      const leftId  = ci > 0           ? COLS[ci-1] + ROWS[ri] : null;
+      const rightId = ci < NCOLS-1     ? COLS[ci+1] + ROWS[ri] : null;
+
+      cell.style.borderTop    = (cellOwner[upId]    === aid) ? INNER : EDGE;
+      cell.style.borderBottom = (cellOwner[downId]  === aid) ? INNER : EDGE;
+      cell.style.borderLeft   = (cellOwner[leftId]  === aid) ? INNER : EDGE;
+      cell.style.borderRight  = (cellOwner[rightId] === aid) ? INNER : EDGE;
+
+      // label on visually first cell
       if (c.col === sorted[0].col && c.row === sorted[0].row) {
         const lbl = document.createElement('div');
         lbl.className = 'cell-label';

@@ -78,7 +78,8 @@ html, body {
   background: var(--amber);
   color: var(--green-deep);
   border: none;
-  padding: 14px 40px;
+  padding: 14px 20px;
+  width: 200px;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 1rem;
   letter-spacing: 0.1em;
@@ -100,7 +101,8 @@ html, body {
   background: transparent;
   border: 1px solid rgba(200,169,110,0.35);
   color: rgba(200,169,110,0.75);
-  padding: 10px 32px;
+  padding: 10px 20px;
+  width: 200px;
   font-family: 'Playfair Display', Georgia, serif;
   font-size: 0.85rem;
   letter-spacing: 0.08em;
@@ -288,7 +290,7 @@ html, body {
 }
 .setup-header {
   width: 100%;
-  padding: 8px 12px 6px;
+  padding: 6px 12px 4px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -882,11 +884,11 @@ html, body {
   <p>You can change these or just continue</p>
   <div class="player-field">
     <label>Player 1</label>
-    <input type="text" id="input-p1" value="Me" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input type="text" id="input-p1" value="Muir" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
   </div>
   <div class="player-field">
     <label>Player 2</label>
-    <input type="text" id="input-p2" value="My Friend" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
+    <input type="text" id="input-p2" value="Ansel" maxlength="20" autocomplete="off" autocorrect="off" spellcheck="false">
   </div>
   <button class="btn-primary" id="btn-continue">Continue →</button>
 </div>
@@ -894,10 +896,7 @@ html, body {
 <!-- ══ SETUP ══ -->
 <div class="screen hidden" id="screen-setup">
   <div class="setup-header">
-    <div>
-      <div class="setup-header h2" style="font-family:'Playfair Display',Georgia,serif;color:var(--amber);font-size:0.95rem;letter-spacing:0.05em;">Hide your animals</div>
-      <div style="color:var(--green-pale);font-size:0.65rem;font-style:italic;" id="setup-player-label"></div>
-    </div>
+    <div style="font-family:'Playfair Display',Georgia,serif;color:var(--amber);font-size:0.95rem;letter-spacing:0.05em;">Hide your animals</div>
     <button class="btn-start" id="btn-start-game" disabled>Start →</button>
   </div>
   <div class="grid-container" id="setup-grid-container">
@@ -989,7 +988,7 @@ const ANIMALS = [
 // ══════════════════════════════
 //  STATE
 // ══════════════════════════════
-let p1Name = 'Me', p2Name = 'My Friend';
+let p1Name = 'Muir', p2Name = 'Ansel';
 
 // setup state (only p1 sets up their own board)
 let setupPhase = 0;
@@ -1011,9 +1010,10 @@ let currentPanel = 0; // 0=search, 1=mine
 const ROW_LABEL_W = 26;
 const COL_LABEL_H = 20;
 
-function computeCellSize() {
-  const avail = Math.min(window.innerWidth - 20, 500);
-  return Math.floor((avail - ROW_LABEL_W) / NCOLS);
+function computeCellSize(hasLabels = true) {
+  const avail = Math.min(window.innerWidth - 16, 500);
+  const labelW = hasLabels ? ROW_LABEL_W : 0;
+  return Math.floor((avail - labelW) / NCOLS);
 }
 let CELL = computeCellSize();
 
@@ -1028,7 +1028,7 @@ function showScreen(id) {
 // ══════════════════════════════
 //  BUILD GRID (returns container element)
 // ══════════════════════════════
-function buildGrid(containerId, onCellClick) {
+function buildGrid(containerId, onCellClick, showLabels = true) {
   const container = document.getElementById(containerId);
   container.innerHTML = '';
   container.style.display = 'flex';
@@ -1039,34 +1039,38 @@ function buildGrid(containerId, onCellClick) {
   const rowLabels = document.createElement('div');
   rowLabels.style.display = 'flex';
   rowLabels.style.flexDirection = 'column';
-  rowLabels.style.paddingTop = COL_LABEL_H + 'px';
-  rowLabels.style.width = ROW_LABEL_W + 'px';
+  rowLabels.style.paddingTop = (showLabels ? COL_LABEL_H : 0) + 'px';
+  rowLabels.style.width = (showLabels ? ROW_LABEL_W : 0) + 'px';
   rowLabels.style.flexShrink = '0';
 
-  ROWS.forEach(r => {
-    const el = document.createElement('div');
-    el.className = 'row-label';
-    el.style.height = CELL + 'px';
-    el.style.width = ROW_LABEL_W + 'px';
-    el.textContent = r;
-    rowLabels.appendChild(el);
-  });
+  if (showLabels) {
+    ROWS.forEach(r => {
+      const el = document.createElement('div');
+      el.className = 'row-label';
+      el.style.height = CELL + 'px';
+      el.style.width = ROW_LABEL_W + 'px';
+      el.textContent = r;
+      rowLabels.appendChild(el);
+    });
+  }
 
   // Grid area
   const gridArea = document.createElement('div');
   gridArea.className = 'grid-area';
 
   // Col labels
-  const colRow = document.createElement('div');
-  colRow.className = 'col-labels-row';
-  COLS.forEach(c => {
-    const el = document.createElement('div');
-    el.className = 'col-label';
-    el.style.width = CELL + 'px';
-    el.textContent = c;
-    colRow.appendChild(el);
-  });
-  gridArea.appendChild(colRow);
+  if (showLabels) {
+    const colRow = document.createElement('div');
+    colRow.className = 'col-labels-row';
+    COLS.forEach(c => {
+      const el = document.createElement('div');
+      el.className = 'col-label';
+      el.style.width = CELL + 'px';
+      el.textContent = c;
+      colRow.appendChild(el);
+    });
+    gridArea.appendChild(colRow);
+  }
 
   // Grid
   const grid = document.createElement('div');
@@ -1145,12 +1149,9 @@ function initSetup(phase) {
   currentSetupBoard = {};
   selectedAnimalId = null;
 
-  document.getElementById('setup-player-label').textContent =
-    p1Name + ' — place your animals on the board';
   document.getElementById('btn-start-game').disabled = true;
-
-  setupGrid = buildGrid('setup-grid-container', onSetupCellClick);
-
+  CELL = computeCellSize(false); // no labels during setup — use full width
+  setupGrid = buildGrid('setup-grid-container', onSetupCellClick, false);
   buildAnimalTray();
   checkSetupComplete();
 }
@@ -1322,6 +1323,7 @@ function startGame() {
   document.getElementById('mine-hint-label').textContent = p2Name + "'s forest";
   document.getElementById('mine-panel-label').textContent = p1Name + "'s Forest";
 
+  CELL = computeCellSize(true); // game grids have row/col labels
   searchGridEl = buildGrid('search-grid-container', onSearchCellClick);
   mineGridEl   = buildGrid('mine-grid-container', onMineCellClick);
 

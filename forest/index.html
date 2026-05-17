@@ -39,7 +39,6 @@ html, body {
 @supports (height: 100dvh) {
   html, body { height: 100dvh; }
   .screen { height: 100dvh; }
-  .game-scroll-container { height: calc(100dvh - 52px); }
 }
 
 /* ── SCREENS ── */
@@ -521,14 +520,17 @@ html, body {
 }
 .game-scroll-container {
   width: 100%;
-  height: calc(100% - 52px); /* leave room for bottom bar */
+  height: 100%;
   overflow: hidden;
   position: relative;
+}
+@supports (height: 100dvh) {
+  .game-scroll-container { height: 100dvh; }
 }
 /* Two panels stacked, snap-scroll via JS */
 .game-panels {
   width: 100%;
-  height: 200%; /* two viewports */
+  height: 200%;
   display: flex;
   flex-direction: column;
   will-change: transform;
@@ -540,51 +542,26 @@ html, body {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: center; /* centered — works on all screen sizes */
   flex-shrink: 0;
   overflow: hidden;
   position: relative;
 }
 #panel-search {
   background:
-    radial-gradient(ellipse at 50% 0%, rgba(30,60,30,0.5) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 30%, rgba(30,60,30,0.5) 0%, transparent 70%),
     #162416;
 }
 #panel-mine {
   background:
-    radial-gradient(ellipse at 50% 100%, rgba(40,70,30,0.4) 0%, transparent 70%),
+    radial-gradient(ellipse at 50% 70%, rgba(40,70,30,0.4) 0%, transparent 70%),
     #1a2e1a;
-}
-
-/* ── GAME PANELS ── */
-.game-panel {
-  height: 50%;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  flex-shrink: 0;
-  overflow: hidden;
-  position: relative;
-}
-#panel-search {
-  background:
-    radial-gradient(ellipse at 50% 0%, rgba(30,60,30,0.5) 0%, transparent 70%),
-    #162416;
-  justify-content: flex-start;
-}
-#panel-mine {
-  background:
-    radial-gradient(ellipse at 50% 100%, rgba(40,70,30,0.4) 0%, transparent 70%),
-    #1a2e1a;
-  justify-content: flex-end;
 }
 
 /* shared panel section spacing */
 .panel-header {
   width: 100%;
-  padding: 10px 14px 8px;
+  padding: 6px 14px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -599,34 +576,34 @@ html, body {
 }
 .panel-subtitle {
   color: var(--green-pale);
-  font-size: 0.65rem;
+  font-size: 0.62rem;
   font-style: italic;
-  margin-top: 2px;
+  margin-top: 1px;
 }
 
-/* swipe hints — in normal flow, not absolute */
+/* swipe hints — in normal flow */
 .swipe-hint {
   width: 100%;
   display: flex;
   flex-direction: column;
   align-items: center;
   gap: 1px;
-  padding: 6px 0 8px;
+  padding: 4px 0 5px;
   color: rgba(200,169,110,0.45);
-  font-size: 0.6rem;
+  font-size: 0.58rem;
   letter-spacing: 0.08em;
   text-transform: uppercase;
   animation: pulse-hint 2.5s ease-in-out infinite;
   pointer-events: none;
   flex-shrink: 0;
 }
-.swipe-hint-arrow { font-size: 0.75rem; }
+.swipe-hint-arrow { font-size: 0.7rem; }
 @keyframes pulse-hint {
   0%,100% { opacity: 0.45; }
   50%      { opacity: 0.9; }
 }
 
-/* mine panel bottom label — matches panel-header padding */
+/* mine panel bottom label */
 .mine-panel-label {
   font-family: 'Playfair Display', Georgia, serif;
   color: var(--amber);
@@ -634,41 +611,50 @@ html, body {
   letter-spacing: 0.05em;
   text-align: center;
   width: 100%;
-  padding: 8px 14px 10px;
+  padding: 4px 14px 6px;
   flex-shrink: 0;
 }
 
-/* bottom bar */
-.game-bottom-bar {
+/* tree button — fixed top-right */
+.btn-tree {
   position: fixed;
-  bottom: 0; left: 0; right: 0;
-  height: 52px;
-  background: rgba(20,36,20,0.95);
-  border-top: 1px solid rgba(200,169,110,0.15);
+  top: 10px;
+  right: 12px;
+  width: 38px;
+  height: 38px;
+  background: rgba(20,40,20,0.75);
+  border: 1px solid rgba(200,169,110,0.3);
+  border-radius: 8px;
+  font-size: 1.2rem;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 0 16px;
-  backdrop-filter: blur(8px);
-  z-index: 100;
+  justify-content: center;
+  cursor: pointer;
+  z-index: 150;
+  backdrop-filter: blur(6px);
+  -webkit-backdrop-filter: blur(6px);
+  transition: background 0.15s;
+  line-height: 1;
 }
-.bar-label {
-  color: var(--amber-dim);
-  font-size: 0.65rem;
-  font-style: italic;
-}
-.btn-newgame {
+.btn-tree:active { background: rgba(200,169,110,0.2); }
+
+/* drawer new game button */
+.btn-drawer-newgame {
   background: transparent;
   border: 1px solid rgba(200,169,110,0.35);
   color: var(--amber);
-  padding: 7px 16px;
-  font-family: 'Source Serif 4', Georgia, serif;
-  font-size: 0.7rem;
+  padding: 10px 16px;
+  font-family: 'Playfair Display', Georgia, serif;
+  font-size: 0.8rem;
+  letter-spacing: 0.06em;
   border-radius: 4px;
   cursor: pointer;
   -webkit-appearance: none;
+  transition: background 0.15s;
+  width: 100%;
+  text-align: center;
 }
-.btn-newgame:active { background: rgba(200,169,110,0.1); }
+.btn-drawer-newgame:active { background: rgba(200,169,110,0.1); }
 
 /* ── SIDE DRAWER ── */
 .drawer-overlay {
@@ -957,10 +943,8 @@ html, body {
     </div>
   </div>
 
-  <div class="game-bottom-bar">
-    <button class="btn-newgame" id="btn-new-game">New Game</button>
-    <button class="btn-drawer-open" id="btn-drawer-open">Animals ▸</button>
-  </div>
+  <!-- Tree button — opens drawer -->
+  <button class="btn-tree" id="btn-tree">🌲</button>
 </div>
 
 <!-- ══ DRAWER ══ -->
@@ -969,7 +953,8 @@ html, body {
   <button class="btn-drawer-close" id="btn-drawer-close">✕</button>
   <h3>Animals</h3>
   <div id="drawer-list"></div>
-  <div class="drawer-note">Each player chooses which 5 animals to hide. You don't know your opponent's lineup — figure it out from the grid!</div>
+  <div class="drawer-note">Each player hides their own animals on their own phone. You don't know your opponent's lineup — figure it out from the grid!</div>
+  <button class="btn-drawer-newgame" id="btn-new-game">New Game</button>
 </div>
 
 <!-- ══ CONFIRM MODAL ══ -->
@@ -1518,7 +1503,7 @@ function closeDrawer() {
 
 document.getElementById('drawer-overlay').addEventListener('click', closeDrawer);
 document.getElementById('btn-drawer-close').addEventListener('click', closeDrawer);
-document.getElementById('btn-drawer-open').addEventListener('click', openDrawer);
+document.getElementById('btn-tree').addEventListener('click', openDrawer);
 
 buildDrawer();
 
@@ -1531,7 +1516,10 @@ function openModal() {
 function closeModal() {
   document.getElementById('modal-overlay').classList.remove('open');
 }
-document.getElementById('btn-new-game').addEventListener('click', openModal);
+document.getElementById('btn-new-game').addEventListener('click', () => {
+  closeDrawer();
+  openModal();
+});
 document.getElementById('modal-cancel').addEventListener('click', closeModal);
 document.getElementById('modal-confirm').addEventListener('click', () => {
   closeModal();

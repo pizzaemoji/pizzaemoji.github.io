@@ -308,6 +308,8 @@ html, body {
   justify-content: flex-start;
   padding: 0;
   overflow: hidden;
+  height: 100vh;
+  height: 100dvh;
 }
 .setup-header {
   width: 100%;
@@ -355,8 +357,13 @@ html, body {
 /* ── GRID ── */
 .grid-container {
   display: flex;
-  flex-shrink: 0;
+  flex-shrink: 1; /* allow shrinking in setup if needed */
+  min-height: 0;
   padding: 0 8px;
+}
+/* game panels need the grid to not shrink */
+.game-panel .grid-container {
+  flex-shrink: 0;
 }
 .row-labels {
   display: flex;
@@ -406,7 +413,9 @@ html, body {
 /* animal coloring in setup */
 .cell.occupied {
   background: rgba(200,169,110,0.22);
-  border-color: rgba(200,169,110,0.3);
+  border-right: 1px solid rgba(200,169,110,0.55);
+  border-bottom: 1px solid rgba(200,169,110,0.55);
+  box-shadow: inset 0 0 0 1px rgba(200,169,110,0.45);
 }
 .cell.occupied.selected-animal {
   background: rgba(200,169,110,0.38);
@@ -438,6 +447,7 @@ html, body {
 .cell.my-animal {
   background: rgba(200,169,110,0.22);
   border-color: rgba(200,169,110,0.38);
+  box-shadow: inset 0 0 0 1px rgba(200,169,110,0.4);
 }
 .cell.my-animal.found {
   background: var(--spotted-bg);
@@ -466,12 +476,12 @@ html, body {
 
 /* ── ANIMAL TRAY ── */
 .animal-tray {
-  flex: 1;
+  flex-shrink: 0; /* never let the tray get crushed — grid shrinks instead */
   width: 100%;
   display: flex;
   flex-direction: column;
-  overflow: hidden;
-  padding: 6px 10px 8px;
+  overflow: visible;
+  padding: 6px 10px 10px;
   gap: 5px;
 }
 .tray-title {

@@ -822,6 +822,9 @@ html, body {
   gap: 10px;
   margin-top: 4px;
 }
+.modal-buttons button {
+  flex: 1;
+}
 </style>
 </head>
 <body>
@@ -961,7 +964,8 @@ html, body {
     <div class="tray-title">Tap an animal, then tap the grid to place it</div>
     <div class="animals-row" id="animals-row"></div>
     <div class="tray-actions">
-      <button class="btn-secondary" id="btn-clear-board">Clear Board</button>
+      <button class="btn-secondary" id="btn-clear-board">Clear</button>
+      <button class="btn-secondary" id="btn-random-board">Random</button>
     </div>
   </div>
 </div>
@@ -1380,6 +1384,54 @@ document.getElementById('btn-clear-board').addEventListener('click', () => {
   buildAnimalTray();
   checkSetupComplete();
 });
+
+function randomizePlacement() {
+  currentSetupBoard = {};
+  selectedAnimalId = null;
+
+  // Shuffle helper
+  function shuffle(arr) {
+    const a = [...arr];
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
+  // All possible cells
+  const allCells = [];
+  ROWS.forEach(r => COLS.forEach(c => allCells.push({ col: c, row: r })));
+
+  // Place each animal in random order
+  const animalOrder = shuffle([...ANIMALS]);
+
+  for (const animal of animalOrder) {
+    const cellOrder = shuffle(allCells);
+    const dirOrder = shuffle([0, 1, 2, 3]);
+    let placed = false;
+
+    for (const { col, row } of cellOrder) {
+      for (const dir of dirOrder) {
+        const cells = getCells(col, row, animal.size, dir);
+        if (!cells) continue;
+        const blocked = cells.some(({ col: c, row: r }) => cellOccupiedBy(c + r));
+        if (!blocked) {
+          currentSetupBoard[animal.id] = { anchorCol: col, anchorRow: row, dir, cells };
+          placed = true;
+          break;
+        }
+      }
+      if (placed) break;
+    }
+  }
+
+  renderSetupBoard();
+  buildAnimalTray();
+  checkSetupComplete();
+}
+
+document.getElementById('btn-random-board').addEventListener('click', randomizePlacement);
 
 document.getElementById('btn-start-game').addEventListener('click', () => {
   setupBoards[0] = JSON.parse(JSON.stringify(currentSetupBoard));

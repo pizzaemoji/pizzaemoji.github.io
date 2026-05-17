@@ -114,6 +114,27 @@ html, body {
 }
 .btn-how:active { background: rgba(200,169,110,0.1); color: var(--amber); }
 
+.version-link {
+  color: rgba(200,169,110,0.3);
+  font-size: 0.62rem;
+  font-family: 'Source Serif 4', Georgia, serif;
+  letter-spacing: 0.12em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  cursor: pointer;
+  margin-top: -10px;
+  transition: color 0.2s;
+}
+.version-link:active { color: rgba(200,169,110,0.65); }
+
+#screen-whats-new {
+  background:
+    radial-gradient(ellipse at 70% 20%, rgba(40,65,30,0.5) 0%, transparent 55%),
+    var(--green-deep);
+  justify-content: flex-start;
+  align-items: stretch;
+}
+
 /* ── HOW TO PLAY ── */
 #screen-how {
   background:
@@ -806,6 +827,29 @@ html, body {
   <p class="tagline">a wildlife spotting game</p>
   <button class="btn-primary" id="btn-play">Play</button>
   <button class="btn-how" id="btn-how">How to Play</button>
+  <span class="version-link" id="btn-whats-new">v0.1</span>
+</div>
+
+<!-- ══ WHAT'S NEW ══ -->
+<div class="screen hidden" id="screen-whats-new">
+  <div class="how-scroll">
+    <div class="how-content">
+      <div class="how-back" id="btn-whats-new-back">← Back</div>
+      <h2 class="how-title">What's New</h2>
+      <div class="how-section">
+        <div class="how-section-title">v0.1 — First playable build</div>
+        <p>The Quiet Forest is just getting started. This first version includes the full core game loop — animal placement, the two-board swipe, spotted and nothing-there marking, and the animal reference drawer.</p>
+      </div>
+      <div class="how-section">
+        <div class="how-section-title">Coming eventually</div>
+        <p>Irregular animal shapes (a bear that isn't just a straight line). More animals to choose from. Maybe sound. Maybe a Bigfoot.</p>
+      </div>
+      <div class="how-section">
+        <div class="how-section-title">Known quirks</div>
+        <p>Best experienced as a home screen web app — add to home screen in Safari or Chrome for a full-screen experience with no browser chrome in the way.</p>
+      </div>
+    </div>
+  </div>
 </div>
 
 <!-- ══ HOW TO PLAY ══ -->
@@ -1150,7 +1194,7 @@ function initSetup(phase) {
   selectedAnimalId = null;
 
   document.getElementById('btn-start-game').disabled = true;
-  CELL = computeCellSize(false); // no labels during setup — use full width
+  CELL = computeCellSize(true); // same size as game grid — label width reserved even though hidden
   setupGrid = buildGrid('setup-grid-container', onSetupCellClick, false);
   buildAnimalTray();
   checkSetupComplete();
@@ -1539,7 +1583,15 @@ document.getElementById('btn-how').addEventListener('click', () => {
   showScreen('screen-how');
 });
 
+document.getElementById('btn-whats-new').addEventListener('click', () => {
+  showScreen('screen-whats-new');
+});
+
 document.getElementById('btn-how-back').addEventListener('click', () => {
+  showScreen('screen-welcome');
+});
+
+document.getElementById('btn-whats-new-back').addEventListener('click', () => {
   showScreen('screen-welcome');
 });
 

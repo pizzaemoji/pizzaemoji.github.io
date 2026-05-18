@@ -25,13 +25,22 @@
 
 * { box-sizing: border-box; margin: 0; padding: 0; -webkit-tap-highlight-color: transparent; }
 
+html {
+  background: var(--green-deep);
+}
 html, body {
   width: 100%; height: 100%;
   overflow: hidden;
-  background: var(--green-deep);
   font-family: 'Source Serif 4', Georgia, serif;
   color: var(--cream);
   touch-action: none;
+}
+body {
+  max-width: 480px;
+  margin: 0 auto;
+  background: var(--green-deep);
+  position: relative;
+  box-shadow: 0 0 60px rgba(0,0,0,0.6); /* subtle desktop frame shadow */
 }
 
 /* Safari URL bar fix — use dynamic viewport height where supported */
@@ -42,10 +51,11 @@ html, body {
 
 /* ── SCREENS ── */
 .screen {
-  position: fixed; inset: 0;
+  position: absolute; inset: 0;
   display: flex; flex-direction: column;
   align-items: center; justify-content: center;
   transition: opacity 0.35s ease, transform 0.35s ease;
+  overflow: hidden;
 }
 .screen.hidden { opacity: 0; pointer-events: none; transform: scale(0.97); }
 
@@ -696,9 +706,9 @@ html, body {
   flex-shrink: 0;
 }
 
-/* tree button — fixed top-right */
+/* tree button — absolute top-right within body */
 .btn-tree {
-  position: fixed;
+  position: absolute;
   top: 10px;
   right: 12px;
   width: 38px;
@@ -739,7 +749,7 @@ html, body {
 
 /* ── SIDE DRAWER ── */
 .drawer-overlay {
-  position: fixed; inset: 0;
+  position: absolute; inset: 0;
   background: rgba(0,0,0,0.5);
   z-index: 200;
   opacity: 0;
@@ -751,9 +761,9 @@ html, body {
   pointer-events: all;
 }
 .drawer {
-  position: fixed;
+  position: absolute;
   top: 0; right: 0; bottom: 0;
-  width: min(280px, 80vw);
+  width: min(280px, 80%);
   background: #1e341e;
   border-left: 1px solid rgba(200,169,110,0.2);
   z-index: 201;
@@ -833,7 +843,7 @@ html, body {
 
 /* ── MODAL / CONFIRM ── */
 .modal-overlay {
-  position: fixed; inset: 0;
+  position: absolute; inset: 0;
   background: rgba(0,0,0,0.7);
   z-index: 300;
   display: flex;
@@ -1850,6 +1860,23 @@ scroll.addEventListener('touchend', () => {
     snapToPanel(currentPanel);
   }
 }, { passive: true });
+
+// Desktop: trackpad two-finger swipe and mouse wheel
+let wheelLocked = false;
+scroll.addEventListener('wheel', e => {
+  e.preventDefault();
+  if (wheelLocked) return;
+  const threshold = 30; // deltaY needed to trigger a snap
+  if (e.deltaY > threshold && currentPanel === 0) {
+    snapToPanel(1);
+    wheelLocked = true;
+    setTimeout(() => { wheelLocked = false; }, 600);
+  } else if (e.deltaY < -threshold && currentPanel === 1) {
+    snapToPanel(0);
+    wheelLocked = true;
+    setTimeout(() => { wheelLocked = false; }, 600);
+  }
+}, { passive: false });
 
 // ══════════════════════════════
 //  DRAWER

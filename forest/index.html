@@ -18,7 +18,7 @@
   --amber-dim: rgba(200,169,110,0.5);
   --cream: #f0e8d8;
   --spotted-color: #aaff44;    /* neon lime — pops against forest greens */
-  --spotted-bg: rgba(170,255,68,0.25);
+  --spotted-bg: rgba(170,255,68,0.45); /* extra bright overlay */
   --nothing-bg: rgba(0,0,0,0.55);   /* dark dim overlay for misses */
   --cell-border: rgba(200,169,110,0.18);
 }
@@ -1087,11 +1087,11 @@ const NCOLS = COLS.length;   // 8
 const NROWS = ROWS.length;   // 12
 
 const ANIMALS = [
-  { id: 'squirrel', name: 'Squirrel',      size: 2, img: { h: 'animals/squirrel-h.png', v: 'animals/squirrel-v.png' } },
-  { id: 'fox',      name: 'Gray Fox',       size: 3, img: { h: 'animals/fox-h.png',      v: 'animals/fox-v.png'      } },
-  { id: 'raccoon',  name: 'Raccoon',        size: 3, img: null },
-  { id: 'deer',     name: 'Deer',           size: 4, img: null },
-  { id: 'lion',     name: 'Mountain Lion',  size: 5, img: null },
+  { id: 'squirrel', name: 'Squirrel',      size: 2, img: 'animals/squirrel-h.png' },
+  { id: 'fox',      name: 'Gray Fox',       size: 3, img: 'animals/fox-h.png'      },
+  { id: 'raccoon',  name: 'Raccoon',        size: 3, img: 'animals/raccoon-h.png'  },
+  { id: 'deer',     name: 'Deer',           size: 4, img: 'animals/deer-h.png'     },
+  { id: 'lion',     name: 'Mountain Lion',  size: 5, img: 'animals/mountainlion-h.png' },
 ];
 
 const BACKGROUNDS = [
@@ -1112,21 +1112,16 @@ function pickBackgrounds() {
   bgMine   = shuffled[1] || shuffled[0];
 }
 
-// Returns the correct image src for an animal given its direction
-// dir: 0=right(h), 1=down(v), 2=left(h mirrored), 3=up(v mirrored)
-function animalImgSrc(animal, dir) {
-  if (!animal.img) return null;
-  const isVertical = dir === 1 || dir === 3;
-  return isVertical ? animal.img.v : animal.img.h;
-}
-
-// dir 2 = horizontal but facing left → mirror horizontally
-// dir 3 = vertical but facing up → mirror vertically
-function animalImgTransform(dir) {
-  if (dir === 2) return 'scaleX(-1)';
-  if (dir === 3) return 'scaleY(-1)';
-  return 'none';
-}
+// Images all face LEFT by default (dir 2).
+// Rotation per direction:
+//   dir 2 = left  (default, no transform)
+//   dir 1 = down  (rotate 90deg clockwise,  anchor = top cell)
+//   dir 0 = right (rotate 180deg,            anchor = rightmost cell)
+//   dir 3 = up    (rotate 270deg clockwise,  anchor = bottom cell)
+//
+// The image is always sized to cover all animal cells.
+// Anchor is the visually-first cell in each direction.
+// We use CSS rotation around the image center, then translate into position.
 
 // ══════════════════════════════
 //  STATE
@@ -1399,8 +1394,8 @@ function rotateAnimal(animalId) {
 
 // Shared helper — applies perimeter outline borders to a set of animal cells on a grid element
 function applyAnimalBorders(gridEl, boardData) {
-  const EDGE  = '2px solid rgba(200,169,110,0.85)';
-  const INNER = '1px solid rgba(200,169,110,0.15)';
+  const EDGE  = '2px solid rgba(255,220,60,0.95)'; // bright yellow, visible over images
+  const INNER = '1px solid rgba(255,220,60,0.12)'; // faint inside same animal
 
   // Build cellOwner lookup
   const cellOwner = {};
@@ -1431,40 +1426,87 @@ function renderAnimalImage(gridEl, aid, data) {
   const animal = ANIMALS.find(a => a.id === aid);
   if (!animal?.img) return;
 
-  const src = animalImgSrc(animal, data.dir);
-  const isVertical = data.dir === 1 || data.dir === 3;
+  // Natural image dimensions: horizontal, facing left
+  // W = size * CELL (long axis), H = CELL (short axis)
+  const naturalW = CELL * animal.size;
+  const naturalH = CELL;
 
-  const sorted = [...data.cells].sort((a, b) => {
-    if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
-    return COLS.indexOf(a.col) - COLS.indexOf(b.col);
-  });
+  // For rotated directions the rendered width/height swap
+  const isVertical = data.dir === 1 || data.dir === 3;
+  const renderedW = isVertical ? naturalH : naturalW; // css width we set on img
+  const renderedH = isVertical ? naturalW : naturalH;
+
+  // Find anchor cell — changes per direction so image rotates into correct position
+  // dir 2 (left):  anchor = leftmost  cell → image extends right  ✓ natural
+  // dir 0 (right): anchor = rightmost cell → image extends left   (180deg)
+  // dir 1 (down):  anchor = topmost   cell → image extends down   (90deg)
+  // dir 3 (up):    anchor = bottommost cell → image extends up    (270deg)
+  let sorted;
+  switch (data.dir) {
+    case 0: sorted = [...data.cells].sort((a,b) => COLS.indexOf(b.col) - COLS.indexOf(a.col)); break; // rightmost first
+    case 1: sorted = [...data.cells].sort((a,b) => ROWS.indexOf(a.row) - ROWS.indexOf(b.row)); break; // topmost first
+    case 2: sorted = [...data.cells].sort((a,b) => COLS.indexOf(a.col) - COLS.indexOf(b.col)); break; // leftmost first
+    case 3: sorted = [...data.cells].sort((a,b) => ROWS.indexOf(b.row) - ROWS.indexOf(a.row)); break; // bottommost first
+  }
 
   const anchorCell = getCell(gridEl, sorted[0].col, sorted[0].row);
   if (!anchorCell) return;
 
-  const imgW = isVertical ? CELL                    : CELL * animal.size;
-  const imgH = isVertical ? CELL * animal.size       : CELL;
+  // CSS rotation degrees — image faces left naturally, rotate clockwise to each direction
+  // dir 2 = left  = 0deg   (no rotation needed)
+  // dir 1 = down  = 90deg  (rotate right, animal faces down)
+  // dir 0 = right = 180deg (flip around, animal faces right)
+  // dir 3 = up    = 270deg (rotate left, animal faces up)
+  const rotateDeg = { 0: 180, 1: 90, 2: 0, 3: 270 }[data.dir];
 
+  // When rotated 90 or 270, the img element is still naturalW × naturalH in DOM space,
+  // but visually it's rotatedW × rotatedH. We set the DOM size to natural, rotate around
+  // center, then shift so the top-left of the visual result aligns to anchor cell top-left.
   const img = document.createElement('img');
-  img.src = src;
+  img.src = animal.img;
+  img.draggable = false;
   img.style.position = 'absolute';
-  img.style.top = '0';
-  img.style.left = '0';
-  img.style.width  = imgW + 'px';
-  img.style.height = imgH + 'px';
   img.style.pointerEvents = 'none';
   img.style.zIndex = '2';
   img.style.objectFit = 'fill';
 
-  // For mirrored directions, offset the image back into position after flipping
-  // dir 2 = horizontal left: image would flip off to the left, shift it right by full width
-  // dir 3 = vertical up: image would flip off upward, shift it down by full height
-  if (data.dir === 2) {
-    img.style.transform = 'scaleX(-1)';
-    img.style.left = (-imgW + CELL) + 'px'; // shift right so flipped image lands on cells
-  } else if (data.dir === 3) {
-    img.style.transform = 'scaleY(-1)';
-    img.style.top = (-imgH + CELL) + 'px'; // shift down so flipped image lands on cells
+  if (rotateDeg === 0) {
+    // Straightforward — natural orientation, extends right from anchor
+    img.style.width  = naturalW + 'px';
+    img.style.height = naturalH + 'px';
+    img.style.top  = '0';
+    img.style.left = '0';
+    img.style.transform = 'none';
+  } else if (rotateDeg === 180) {
+    // Extends left from anchor (rightmost cell) — just flip horizontally
+    img.style.width  = naturalW + 'px';
+    img.style.height = naturalH + 'px';
+    img.style.top  = '0';
+    img.style.left = (-(naturalW - CELL)) + 'px';
+    img.style.transform = 'scaleX(-1)'; // flip so animal faces right
+  } else if (rotateDeg === 90) {
+    // Vertical, facing down. Anchor = topmost cell.
+    // DOM size stays natural (wide), rotate 90deg around top-left,
+    // then translate to align: after 90deg rotation around (0,0):
+    //   point (x,y) → (y, -x)  so top-right of image goes to top-left of visual
+    // Easier: rotate around center, then nudge.
+    img.style.width  = naturalW + 'px';
+    img.style.height = naturalH + 'px';
+    img.style.top  = '0';
+    img.style.left = '0';
+    img.style.transformOrigin = 'top left';
+    img.style.transform = `rotate(90deg) translateY(-${naturalH}px)`;
+    // After rotate(90) tl-origin: visual top-left is at DOM (0, naturalH).
+    // translateY(-naturalH) pulls it back to (0,0). Result: image fills downward.
+  } else if (rotateDeg === 270) {
+    // Vertical, facing up. Anchor = bottommost cell.
+    // Rotate 270deg (or -90deg) around top-left origin, then adjust.
+    img.style.width  = naturalW + 'px';
+    img.style.height = naturalH + 'px';
+    img.style.top  = (-(naturalW - CELL)) + 'px'; // image extends upward from anchor
+    img.style.left = '0';
+    img.style.transformOrigin = 'top left';
+    img.style.transform = `rotate(-90deg) translateX(-${naturalW}px)`;
   }
 
   anchorCell.style.overflow = 'visible';

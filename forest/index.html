@@ -1444,7 +1444,8 @@ function applyAnimalBorders(gridEl, boardData) {
 // Images:
 //   -h.png faces LEFT  → dir 2 natural, dir 0 = scaleX(-1)
 //   -v.png faces UP    → dir 3 natural, dir 1 = scaleY(-1)
-// Width = CELL * size, height = natural aspect ratio, centered vertically.
+// Horizontal: width = CELL * size, height = natural aspect ratio, centered vertically.
+// Vertical:   width = natural aspect ratio, height = CELL * size, centered horizontally.
 
 function renderAnimalImage(gridEl, aid, data) {
   const animal = ANIMALS.find(a => a.id === aid);
@@ -1452,11 +1453,26 @@ function renderAnimalImage(gridEl, aid, data) {
 
   const isVertical = data.dir === 1 || data.dir === 3;
   const src = isVertical ? animal.img.v : animal.img.h;
-  const fixedW = CELL * animal.size;
 
   const probe = new Image();
-  probe.onload  = () => placeAnimalImg(gridEl, aid, data, src, fixedW, (probe.naturalHeight / probe.naturalWidth) * fixedW);
-  probe.onerror = () => placeAnimalImg(gridEl, aid, data, src, fixedW, CELL);
+  probe.onload = () => {
+    let imgW, imgH;
+    if (!isVertical) {
+      // Horizontal: fix width to cell span, derive height from aspect ratio
+      imgW = CELL * animal.size;
+      imgH = (probe.naturalHeight / probe.naturalWidth) * imgW;
+    } else {
+      // Vertical: fix height to cell span, derive width from aspect ratio
+      imgH = CELL * animal.size;
+      imgW = (probe.naturalWidth / probe.naturalHeight) * imgH;
+    }
+    placeAnimalImg(gridEl, aid, data, src, imgW, imgH);
+  };
+  probe.onerror = () => {
+    const imgW = !isVertical ? CELL * animal.size : CELL;
+    const imgH = !isVertical ? CELL : CELL * animal.size;
+    placeAnimalImg(gridEl, aid, data, src, imgW, imgH);
+  };
   probe.src = src;
 }
 
@@ -1478,19 +1494,24 @@ function placeAnimalImg(gridEl, aid, data, src, imgW, imgH) {
   img.src = src;
   img.className = 'animal-img';
   img.draggable = false;
-  img.style.cssText = `
-    position:absolute; pointer-events:none; z-index:2;
-    object-fit:fill; width:${imgW}px; height:${imgH}px; left:0;
-  `;
+  img.style.position = 'absolute';
+  img.style.pointerEvents = 'none';
+  img.style.zIndex = '2';
+  img.style.objectFit = 'fill';
+  img.style.width  = imgW + 'px';
+  img.style.height = imgH + 'px';
 
-  // Center vertically over the cell span
-  const cellSpan = CELL * animal.size;
-  img.style.top = ((cellSpan - imgH) / 2) + 'px';
-
-  // Four cases — mirrors only, no rotation math
-  if      (data.dir === 0) img.style.transform = 'scaleX(-1)'; // h, faces right
-  else if (data.dir === 1) img.style.transform = 'scaleY(-1)'; // v, flip to face up
-  else                     img.style.transform = 'none';        // dirs 2 & 3 natural
+  if (!isVertical) {
+    // Center vertically over single cell row height
+    img.style.top  = ((CELL - imgH) / 2) + 'px';
+    img.style.left = '0';
+    img.style.transform = data.dir === 0 ? 'scaleX(-1)' : 'none';
+  } else {
+    // Center horizontally over single cell column width
+    img.style.top  = '0';
+    img.style.left = ((CELL - imgW) / 2) + 'px';
+    img.style.transform = data.dir === 1 ? 'scaleY(-1)' : 'none';
+  }
 
   anchorCell.style.overflow = 'visible';
   anchorCell.appendChild(img);

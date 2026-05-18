@@ -17,10 +17,9 @@
   --amber: #c8a96e;
   --amber-dim: rgba(200,169,110,0.5);
   --cream: #f0e8d8;
-  --spotted: #5a8f5a;
-  --spotted-bg: rgba(90,143,90,0.35);
-  --nothing: #e8e8e8;
-  --nothing-bg: rgba(232,232,232,0.32);
+  --spotted-color: #aaff44;    /* neon lime — pops against forest greens */
+  --spotted-bg: rgba(170,255,68,0.25);
+  --nothing-bg: rgba(0,0,0,0.55);   /* dark dim overlay for misses */
   --cell-border: rgba(200,169,110,0.18);
 }
 
@@ -218,7 +217,7 @@ html, body {
   margin-top: 3px;
   border: 1px solid rgba(200,169,110,0.3);
 }
-.how-response-dot.green { background: rgba(90,143,90,0.5); border-color: rgba(90,143,90,0.6); }
+.how-response-dot.green { background: rgba(170,255,68,0.4); border-color: rgba(170,255,68,0.6); }
 .how-response-dot.white { background: rgba(232,232,232,0.32); }
 .how-response-icon {
   font-size: 1rem;
@@ -419,41 +418,92 @@ html, body {
 }
 .cell.highlight { background: rgba(200,169,110,0.18); }
 
-/* search grid states */
-.cell.spotted {
+.cell {
+  border-right: 1px solid var(--cell-border);
+  border-bottom: 1px solid var(--cell-border);
+  background: rgba(0,0,0,0.08); /* nearly transparent — background shows through */
+  position: relative;
+  cursor: pointer;
+  transition: background 0.12s;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.cell:active { background: rgba(200,169,110,0.15); }
+
+/* animal coloring in setup */
+.cell.occupied {
+  background: rgba(200,169,110,0.18);
+}
+.cell.occupied.selected-animal {
+  background: rgba(200,169,110,0.38);
+}
+.cell.highlight { background: rgba(200,169,110,0.18); }
+
+/* search grid and my-forest shared mark styles
+   ::before sits ABOVE the animal image (z-index: 3) */
+.cell.spotted::before,
+.cell.nothing::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  pointer-events: none;
+}
+.cell.spotted::before {
   background: var(--spotted-bg);
+}
+.cell.nothing::before {
+  background: var(--nothing-bg);
+}
+
+/* checkmark and dot sit above everything */
+.cell.spotted::after,
+.cell.nothing::after {
+  position: absolute;
+  z-index: 4;
+  pointer-events: none;
+  line-height: 1;
 }
 .cell.spotted::after {
   content: '✓';
-  color: var(--spotted);
-  font-size: 0.8em;
-  font-weight: bold;
-}
-.cell.nothing {
-  background: var(--nothing-bg);
+  color: var(--spotted-color);
+  font-size: 0.85em;
+  font-weight: 900;
+  text-shadow: 0 0 6px rgba(170,255,68,0.7);
 }
 .cell.nothing::after {
   content: '·';
-  color: rgba(30,50,30,0.6);
+  color: rgba(255,255,255,0.5);
   font-size: 1.6em;
-  line-height: 0;
-  padding-top: 2px;
+  margin-top: -2px;
 }
 
-/* my forest — show animals as colored blocks */
+/* my forest — animals nearly transparent so background shows */
 .cell.my-animal {
-  background: rgba(200,169,110,0.22);
+  background: rgba(200,169,110,0.1);
   border-color: rgba(200,169,110,0.38);
 }
 .cell.my-animal.found {
+  border-color: rgba(170,255,68,0.5);
+}
+.cell.my-animal.found::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  z-index: 3;
   background: var(--spotted-bg);
-  border-color: rgba(90,143,90,0.5);
+  pointer-events: none;
 }
 .cell.my-animal.found::after {
   content: '✓';
-  color: var(--spotted);
-  font-size: 0.8em;
-  font-weight: bold;
+  position: absolute;
+  z-index: 4;
+  color: var(--spotted-color);
+  font-size: 0.85em;
+  font-weight: 900;
+  text-shadow: 0 0 6px rgba(170,255,68,0.7);
+  pointer-events: none;
+  line-height: 1;
 }
 
 /* animal label on first cell */
@@ -887,7 +937,7 @@ html, body {
         <div class="how-section-title">Taking turns</div>
         <p>Decide who goes first. On your turn, call out a grid square to your friend — like <span class="how-example">"C7"</span> or <span class="how-example">"F4"</span>. Your friend checks their forest and responds:</p>
         <div class="how-responses">
-          <div class="how-response">
+        <div class="how-response">
             <span class="how-response-dot green"></span>
             <div><strong>Spotted</strong> — there's an animal in that square. Mark it green on your search grid.</div>
           </div>
@@ -1382,10 +1432,8 @@ function renderAnimalImage(gridEl, aid, data) {
   if (!animal?.img) return;
 
   const src = animalImgSrc(animal, data.dir);
-  const transform = animalImgTransform(data.dir);
   const isVertical = data.dir === 1 || data.dir === 3;
 
-  // Find anchor cell (visually first)
   const sorted = [...data.cells].sort((a, b) => {
     if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
     return COLS.indexOf(a.col) - COLS.indexOf(b.col);
@@ -1394,18 +1442,31 @@ function renderAnimalImage(gridEl, aid, data) {
   const anchorCell = getCell(gridEl, sorted[0].col, sorted[0].row);
   if (!anchorCell) return;
 
+  const imgW = isVertical ? CELL                    : CELL * animal.size;
+  const imgH = isVertical ? CELL * animal.size       : CELL;
+
   const img = document.createElement('img');
   img.src = src;
   img.style.position = 'absolute';
   img.style.top = '0';
   img.style.left = '0';
-  img.style.width  = isVertical ? '100%'                       : (CELL * animal.size) + 'px';
-  img.style.height = isVertical ? (CELL * animal.size) + 'px'  : '100%';
-  img.style.transform = transform;
-  img.style.transformOrigin = 'top left';
+  img.style.width  = imgW + 'px';
+  img.style.height = imgH + 'px';
   img.style.pointerEvents = 'none';
   img.style.zIndex = '2';
   img.style.objectFit = 'fill';
+
+  // For mirrored directions, offset the image back into position after flipping
+  // dir 2 = horizontal left: image would flip off to the left, shift it right by full width
+  // dir 3 = vertical up: image would flip off upward, shift it down by full height
+  if (data.dir === 2) {
+    img.style.transform = 'scaleX(-1)';
+    img.style.left = (-imgW + CELL) + 'px'; // shift right so flipped image lands on cells
+  } else if (data.dir === 3) {
+    img.style.transform = 'scaleY(-1)';
+    img.style.top = (-imgH + CELL) + 'px'; // shift down so flipped image lands on cells
+  }
+
   anchorCell.style.overflow = 'visible';
   anchorCell.appendChild(img);
 }

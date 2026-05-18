@@ -356,9 +356,11 @@ html, body {
 /* ── GRID ── */
 .grid-container {
   display: flex;
-  flex-shrink: 1; /* allow shrinking in setup if needed */
+  flex-shrink: 1;
   min-height: 0;
   padding: 0 8px;
+  justify-content: center; /* center the grid+labels within available width */
+  width: 100%;
 }
 /* game panels need the grid to not shrink */
 .game-panel .grid-container {
@@ -374,8 +376,8 @@ html, body {
   padding-right: 5px;
   color: var(--amber);
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 0.6rem;
-  font-weight: 600;
+  font-size: 0.85rem;
+  font-weight: 400;
   flex-shrink: 0;
 }
 .grid-area { display: flex; flex-direction: column; }
@@ -386,9 +388,9 @@ html, body {
   display: flex; align-items: center; justify-content: center;
   color: var(--amber);
   font-family: 'Playfair Display', Georgia, serif;
-  font-size: 0.6rem;
-  font-weight: 600;
-  height: 22px;
+  font-size: 0.85rem;
+  font-weight: 400;
+  height: 26px;
   flex-shrink: 0;
 }
 .grid {
@@ -1120,6 +1122,10 @@ const BACKGROUNDS = [
   'backgrounds/redwood-3.png',
   'backgrounds/redwood-4.png',
   'backgrounds/redwood-5.png',
+  'backgrounds/redwood-6.png',
+  'backgrounds/redwood-7.png',
+  'backgrounds/redwood-8.png',
+  'backgrounds/redwood-9.png',
 ];
 
 // Randomly pick two different backgrounds (one per panel)
@@ -1165,8 +1171,8 @@ let currentPanel = 0; // 0=search, 1=mine
 // ══════════════════════════════
 //  CELL SIZE (computed once)
 // ══════════════════════════════
-const ROW_LABEL_W = 26;
-const COL_LABEL_H = 20;
+const ROW_LABEL_W = 34;
+const COL_LABEL_H = 26;
 
 function computeCellSize(hasLabels = true) {
   const avail = Math.min(window.innerWidth - 16, 500);
@@ -1358,9 +1364,11 @@ function onSetupCellClick(col, row, cellEl) {
   if (currentSetupBoard[selectedAnimalId]) return;
 
   const animal = ANIMALS.find(a => a.id === selectedAnimalId);
-  // try dir 0 first, then find valid
+  // Try dir 2 (left) first — matches animal image default facing direction
+  // Then try remaining dirs in order: 2, 3, 0, 1
+  const dirOrder = [2, 3, 0, 1];
   let placed = false;
-  for (let dir = 0; dir < 4; dir++) {
+  for (const dir of dirOrder) {
     const cells = getCells(col, row, animal.size, dir);
     if (!cells) continue;
     const blocked = cells.some(({col:c,row:r}) => cellOccupiedBy(c+r));

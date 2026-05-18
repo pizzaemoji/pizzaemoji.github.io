@@ -1122,6 +1122,7 @@ body {
   <h3>Animals</h3>
   <div id="drawer-list"></div>
   <div class="drawer-note">Each player hides their own animals on their own phone. You don't know your opponent's lineup — figure it out from the grid!</div>
+  <button class="btn-drawer-newgame" id="btn-drawer-how">How to Play</button>
   <button class="btn-drawer-newgame" id="btn-new-game">New Game</button>
 </div>
 
@@ -1873,4 +1874,165 @@ scroll.addEventListener('touchmove', e => {
   panelH = scrollEl.getBoundingClientRect().height;
   const baseY = -currentPanel * panelH;
   const clampedDelta = Math.max(-panelH * 0.7, Math.min(panelH * 0.7, touchDeltaY));
-  panels.style.
+  panels.style.transform = `translateY(${baseY + clampedDelta}px)`;
+}, { passive: false });
+
+scroll.addEventListener('touchend', () => {
+  if (!isSwiping) return;
+  isSwiping = false;
+  const threshold = 50;
+  if (touchDeltaY < -threshold && currentPanel === 0) {
+    snapToPanel(1);
+  } else if (touchDeltaY > threshold && currentPanel === 1) {
+    snapToPanel(0);
+  } else {
+    snapToPanel(currentPanel);
+  }
+}, { passive: true });
+
+// Desktop: trackpad two-finger swipe and mouse wheel
+let wheelLocked = false;
+scroll.addEventListener('wheel', e => {
+  e.preventDefault();
+  if (wheelLocked) return;
+  const threshold = 30; // deltaY needed to trigger a snap
+  if (e.deltaY > threshold && currentPanel === 0) {
+    snapToPanel(1);
+    wheelLocked = true;
+    setTimeout(() => { wheelLocked = false; }, 600);
+  } else if (e.deltaY < -threshold && currentPanel === 1) {
+    snapToPanel(0);
+    wheelLocked = true;
+    setTimeout(() => { wheelLocked = false; }, 600);
+  }
+}, { passive: false });
+
+// ══════════════════════════════
+//  DRAWER
+// ══════════════════════════════
+function buildDrawer() {
+  const list = document.getElementById('drawer-list');
+  list.innerHTML = '';
+  list.style.display = 'flex';
+  list.style.flexDirection = 'column';
+  list.style.gap = '14px';
+  ANIMALS.forEach(a => {
+    const row = document.createElement('div');
+    row.className = 'drawer-animal';
+    const blocks = document.createElement('div');
+    blocks.className = 'drawer-blocks';
+    for (let i = 0; i < a.size; i++) {
+      const b = document.createElement('div');
+      b.className = 'drawer-block';
+      blocks.appendChild(b);
+    }
+    const name = document.createElement('span');
+    name.className = 'drawer-animal-name';
+    name.textContent = a.name;
+    const size = document.createElement('span');
+    size.className = 'drawer-animal-size';
+    size.textContent = a.size + ' squares';
+    row.appendChild(blocks);
+    row.appendChild(name);
+    row.appendChild(size);
+    list.appendChild(row);
+  });
+}
+
+function openDrawer() {
+  document.getElementById('drawer-overlay').classList.add('open');
+  document.getElementById('drawer').classList.add('open');
+}
+function closeDrawer() {
+  document.getElementById('drawer-overlay').classList.remove('open');
+  document.getElementById('drawer').classList.remove('open');
+}
+
+document.getElementById('drawer-overlay').addEventListener('click', closeDrawer);
+document.getElementById('btn-drawer-close').addEventListener('click', closeDrawer);
+document.getElementById('btn-tree').addEventListener('click', openDrawer);
+
+buildDrawer();
+
+// ══════════════════════════════
+//  MODAL
+// ══════════════════════════════
+function openModal() {
+  document.getElementById('modal-overlay').classList.add('open');
+}
+function closeModal() {
+  document.getElementById('modal-overlay').classList.remove('open');
+}
+document.getElementById('btn-new-game').addEventListener('click', () => {
+  closeDrawer();
+  openModal();
+});
+document.getElementById('modal-cancel').addEventListener('click', closeModal);
+document.getElementById('modal-confirm').addEventListener('click', () => {
+  closeModal();
+  showScreen('screen-welcome');
+});
+
+// ══════════════════════════════
+//  NAV FLOW
+// ══════════════════════════════
+let previousScreen = 'screen-welcome'; // track where we came from before how to play
+
+function showHowTo() {
+  const current = document.querySelector('.screen:not(.hidden)');
+  if (current && current.id !== 'screen-how') {
+    previousScreen = current.id;
+  }
+  // Update bottom button label based on context
+  const btn = document.getElementById('btn-how-play');
+  const inGame = previousScreen === 'screen-game' || previousScreen === 'screen-setup';
+  btn.textContent = inGame ? '← Back to Game' : "Let's Play →";
+  closeDrawer();
+  showScreen('screen-how');
+}
+
+document.getElementById('btn-play').addEventListener('click', () => {
+  showScreen('screen-players');
+});
+
+document.getElementById('btn-how').addEventListener('click', showHowTo);
+document.getElementById('btn-drawer-how').addEventListener('click', showHowTo);
+
+document.getElementById('btn-whats-new').addEventListener('click', () => {
+  showScreen('screen-whats-new');
+});
+
+document.getElementById('btn-how-back').addEventListener('click', () => {
+  showScreen(previousScreen);
+});
+
+document.getElementById('btn-whats-new-back').addEventListener('click', () => {
+  showScreen('screen-welcome');
+});
+
+// "Let's Play" — return to previous screen if mid-game, otherwise go to players
+document.getElementById('btn-how-play').addEventListener('click', () => {
+  if (previousScreen === 'screen-welcome' || previousScreen === 'screen-players') {
+    showScreen('screen-players');
+  } else {
+    showScreen(previousScreen);
+  }
+});
+
+document.getElementById('btn-continue').addEventListener('click', () => {
+  p1Name = document.getElementById('input-p1').value.trim() || 'Me';
+  p2Name = document.getElementById('input-p2').value.trim() || 'My Friend';
+  showScreen('screen-setup');
+  initSetup(0);
+});
+
+// resize
+window.addEventListener('resize', () => {
+  CELL = computeCellSize();
+  if (!document.getElementById('screen-game').classList.contains('hidden')) {
+    snapToPanel(currentPanel, false);
+  }
+});
+</script>
+</body>
+</html>

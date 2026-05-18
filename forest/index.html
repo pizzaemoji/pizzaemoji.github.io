@@ -395,7 +395,7 @@ html, body {
   display: grid;
   border: 1px solid rgba(200,169,110,0.25);
   border-radius: 3px;
-  overflow: hidden;
+  overflow: hidden; /* clips animal images that spill outside grid */
 }
 .cell {
   border-right: 1px solid var(--cell-border);
@@ -1426,87 +1426,99 @@ function renderAnimalImage(gridEl, aid, data) {
   const animal = ANIMALS.find(a => a.id === aid);
   if (!animal?.img) return;
 
-  // Natural image dimensions: horizontal, facing left
-  // W = size * CELL (long axis), H = CELL (short axis)
-  const naturalW = CELL * animal.size;
-  const naturalH = CELL;
+  // Width is fixed: CELL * size (the hitbox width)
+  const fixedW = CELL * animal.size;
 
-  // For rotated directions the rendered width/height swap
-  const isVertical = data.dir === 1 || data.dir === 3;
-  const renderedW = isVertical ? naturalH : naturalW; // css width we set on img
-  const renderedH = isVertical ? naturalW : naturalH;
+  // We need the natural aspect ratio to compute height.
+  // Load image to measure, then place it.
+  const probe = new Image();
+  probe.onload = () => {
+    const aspectH = (probe.naturalHeight / probe.naturalWidth) * fixedW;
+    placeAnimalImg(gridEl, aid, data, fixedW, aspectH);
+  };
+  probe.onerror = () => {
+    // Fallback: use CELL height if image fails
+    placeAnimalImg(gridEl, aid, data, fixedW, CELL);
+  };
+  probe.src = animal.img;
+}
 
-  // Find anchor cell — changes per direction so image rotates into correct position
-  // dir 2 (left):  anchor = leftmost  cell → image extends right  ✓ natural
-  // dir 0 (right): anchor = rightmost cell → image extends left   (180deg)
-  // dir 1 (down):  anchor = topmost   cell → image extends down   (90deg)
-  // dir 3 (up):    anchor = bottommost cell → image extends up    (270deg)
+function placeAnimalImg(gridEl, aid, data, imgW, imgH) {
+  const animal = ANIMALS.find(a => a.id === aid);
+
+  // Anchor selection per direction (same logic as before)
   let sorted;
   switch (data.dir) {
-    case 0: sorted = [...data.cells].sort((a,b) => COLS.indexOf(b.col) - COLS.indexOf(a.col)); break; // rightmost first
-    case 1: sorted = [...data.cells].sort((a,b) => ROWS.indexOf(a.row) - ROWS.indexOf(b.row)); break; // topmost first
-    case 2: sorted = [...data.cells].sort((a,b) => COLS.indexOf(a.col) - COLS.indexOf(b.col)); break; // leftmost first
-    case 3: sorted = [...data.cells].sort((a,b) => ROWS.indexOf(b.row) - ROWS.indexOf(a.row)); break; // bottommost first
+    case 0: sorted = [...data.cells].sort((a,b) => COLS.indexOf(b.col) - COLS.indexOf(a.col)); break; // rightmost
+    case 1: sorted = [...data.cells].sort((a,b) => ROWS.indexOf(a.row) - ROWS.indexOf(b.row)); break; // topmost
+    case 2: sorted = [...data.cells].sort((a,b) => COLS.indexOf(a.col) - COLS.indexOf(b.col)); break; // leftmost
+    case 3: sorted = [...data.cells].sort((a,b) => ROWS.indexOf(b.row) - ROWS.indexOf(a.row)); break; // bottommost
   }
 
   const anchorCell = getCell(gridEl, sorted[0].col, sorted[0].row);
   if (!anchorCell) return;
 
-  // CSS rotation degrees — image faces left naturally, rotate clockwise to each direction
-  // dir 2 = left  = 0deg   (no rotation needed)
-  // dir 1 = down  = 90deg  (rotate right, animal faces down)
-  // dir 0 = right = 180deg (flip around, animal faces right)
-  // dir 3 = up    = 270deg (rotate left, animal faces up)
-  const rotateDeg = { 0: 180, 1: 90, 2: 0, 3: 270 }[data.dir];
+  // Remove any previous img on this anchor cell
+  anchorCell.querySelectorAll('img.animal-img').forEach(e => e.remove());
 
-  // When rotated 90 or 270, the img element is still naturalW × naturalH in DOM space,
-  // but visually it's rotatedW × rotatedH. We set the DOM size to natural, rotate around
-  // center, then shift so the top-left of the visual result aligns to anchor cell top-left.
   const img = document.createElement('img');
   img.src = animal.img;
+  img.className = 'animal-img';
   img.draggable = false;
   img.style.position = 'absolute';
   img.style.pointerEvents = 'none';
   img.style.zIndex = '2';
   img.style.objectFit = 'fill';
+  img.style.width  = imgW + 'px';
+  img.style.height = imgH + 'px';
 
-  if (rotateDeg === 0) {
-    // Straightforward — natural orientation, extends right from anchor
-    img.style.width  = naturalW + 'px';
-    img.style.height = naturalH + 'px';
-    img.style.top  = '0';
+  // Horizontal directions (left/right) — image is naturalW wide, centered vertically over 1 row
+  // Vertical directions (up/down) — image is rotated: natural width becomes visual height
+  const isVertical = data.dir === 1 || data.dir === 3;
+
+  if (!isVertical) {
+    // Center vertically: spill equally above and below the single cell row
+    const topOffset = (CELL - imgH) / 2;
+    img.style.top  = topOffset + 'px';
     img.style.left = '0';
-    img.style.transform = 'none';
-  } else if (rotateDeg === 180) {
-    // Extends left from anchor (rightmost cell) — just flip horizontally
-    img.style.width  = naturalW + 'px';
-    img.style.height = naturalH + 'px';
-    img.style.top  = '0';
-    img.style.left = (-(naturalW - CELL)) + 'px';
-    img.style.transform = 'scaleX(-1)'; // flip so animal faces right
-  } else if (rotateDeg === 90) {
-    // Vertical, facing down. Anchor = topmost cell.
-    // DOM size stays natural (wide), rotate 90deg around top-left,
-    // then translate to align: after 90deg rotation around (0,0):
-    //   point (x,y) → (y, -x)  so top-right of image goes to top-left of visual
-    // Easier: rotate around center, then nudge.
-    img.style.width  = naturalW + 'px';
-    img.style.height = naturalH + 'px';
-    img.style.top  = '0';
-    img.style.left = '0';
+
+    if (data.dir === 0) {
+      // Facing right: mirror horizontally, extend leftward from rightmost cell
+      img.style.left = (-(imgW - CELL)) + 'px';
+      img.style.transform = 'scaleX(-1)';
+    }
+    // dir 2 (left): no transform, extends rightward — default
+
+  } else {
+    // Vertical placement: rotate image 90 or 270 degrees
+    // Natural image: W=imgW, H=imgH — but visually after rotation: W=imgH, H=imgW
+    // We want visual width = CELL, visual height = imgW (the animal's span)
+    // Scale so visual width fits CELL: scale = CELL / imgH
+    const scale = CELL / imgH;
+    const visualH = imgW * scale; // how tall the animal appears after scaling
+    const scaledImgW = imgW * scale;
+    const scaledImgH = imgH * scale; // = CELL
+
+    // Center visual height over the cells span
+    const cellSpan = CELL * animal.size;
+    const topOffset = (cellSpan - visualH) / 2;
+
+    img.style.width  = imgW + 'px';
+    img.style.height = imgH + 'px';
     img.style.transformOrigin = 'top left';
-    img.style.transform = `rotate(90deg) translateY(-${naturalH}px)`;
-    // After rotate(90) tl-origin: visual top-left is at DOM (0, naturalH).
-    // translateY(-naturalH) pulls it back to (0,0). Result: image fills downward.
-  } else if (rotateDeg === 270) {
-    // Vertical, facing up. Anchor = bottommost cell.
-    // Rotate 270deg (or -90deg) around top-left origin, then adjust.
-    img.style.width  = naturalW + 'px';
-    img.style.height = naturalH + 'px';
-    img.style.top  = (-(naturalW - CELL)) + 'px'; // image extends upward from anchor
-    img.style.left = '0';
-    img.style.transformOrigin = 'top left';
-    img.style.transform = `rotate(-90deg) translateX(-${naturalW}px)`;
+
+    if (data.dir === 1) {
+      // Down — but we flip so animal faces UP (scaleY(-1) + rotate)
+      // rotate(-90deg) makes animal face up, then translate into position
+      img.style.top  = topOffset + 'px';
+      img.style.left = '0';
+      img.style.transform = `rotate(-90deg) scaleY(-1) translateX(-${imgH}px) scale(${scale})`;
+    } else {
+      // Up (dir 3) — anchor is bottommost, extends upward, faces up naturally
+      img.style.top  = topOffset + 'px';
+      img.style.left = '0';
+      img.style.transform = `rotate(-90deg) translateX(-${imgH}px) scale(${scale})`;
+    }
   }
 
   anchorCell.style.overflow = 'visible';

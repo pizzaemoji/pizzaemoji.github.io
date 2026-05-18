@@ -1270,18 +1270,23 @@ function getCell(gridEl, col, row) {
 // ══════════════════════════════
 //  ROTATION LOGIC
 // ══════════════════════════════
-// dir: 0=right, 1=down, 2=left, 3=up
-// anchor = top-left-most cell
+// anchor = HEAD cell (always where the player tapped)
+// dir = direction the animal FACES
+//   dir 2 = faces left  → body extends rightward  (ci + i)
+//   dir 0 = faces right → body extends leftward   (ci - i)
+//   dir 1 = faces down  → body extends upward     (ri - i)
+//   dir 3 = faces up    → body extends downward   (ri + i)
+// i=0 is always the head cell (anchor), i=1..size-1 is body/tail
 function getCells(anchorCol, anchorRow, size, dir) {
   const ci = COLS.indexOf(anchorCol);
   const ri = ROWS.indexOf(anchorRow);
   const cells = [];
   for (let i = 0; i < size; i++) {
     let c, r;
-    if (dir === 0)      { c = ci + i; r = ri; }
-    else if (dir === 1) { c = ci;     r = ri + i; }
-    else if (dir === 2) { c = ci - i; r = ri; }
-    else                { c = ci;     r = ri - i; }
+    if      (dir === 2) { c = ci + i; r = ri; }      // faces left,  body goes right
+    else if (dir === 0) { c = ci - i; r = ri; }      // faces right, body goes left
+    else if (dir === 1) { c = ci;     r = ri - i; }  // faces down,  body goes up
+    else                { c = ci;     r = ri + i; }  // faces up,    body goes down
     if (c < 0 || c >= NCOLS || r < 0 || r >= NROWS) return null;
     cells.push({ col: COLS[c], row: ROWS[r] });
   }
@@ -1488,15 +1493,10 @@ function placeAnimalImg(gridEl, aid, data, src, imgW, imgH) {
   const animal = ANIMALS.find(a => a.id === aid);
   const isVertical = data.dir === 1 || data.dir === 3;
 
-  // Anchor = topmost for vertical, leftmost for horizontal
-  const sorted = [...data.cells].sort((a, b) => {
-    if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
-    return COLS.indexOf(a.col) - COLS.indexOf(b.col);
-  });
-
-  const anchorCell = getCell(gridEl, sorted[0].col, sorted[0].row);
-  if (!anchorCell) return;
-  anchorCell.querySelectorAll('img.animal-img').forEach(e => e.remove());
+  // Always attach image to the HEAD cell (anchorCol/anchorRow = where player tapped)
+  const headCell = getCell(gridEl, data.anchorCol, data.anchorRow);
+  if (!headCell) return;
+  headCell.querySelectorAll('img.animal-img').forEach(e => e.remove());
 
   const img = document.createElement('img');
   img.src = src;
@@ -1509,20 +1509,47 @@ function placeAnimalImg(gridEl, aid, data, src, imgW, imgH) {
   img.style.width  = imgW + 'px';
   img.style.height = imgH + 'px';
 
+  // Image positioning and transforms:
+  //
+  // dir 2 (faces left):  -h.png natural. Head=left edge. Body extends right.
+  //   img.left=0, no flip needed.
+  //
+  // dir 0 (faces right): -h.png scaleX(-1). Head=right edge of image.
+  //   After flip, right edge becomes left edge in screen space.
+  //   So we shift left by -(imgW - CELL) so the flipped head lands on anchor.
+  //
+  // dir 3 (faces up):    -v.png natural. Head=top edge. Body extends downward.
+  //   img.top=0, no flip needed.
+  //
+  // dir 1 (faces down):  -v.png scaleY(-1). Head=bottom edge of image.
+  //   After flip, shift up by -(imgH - CELL) so head lands on anchor.
+
   if (!isVertical) {
-    // Center vertically over single cell row height
-    img.style.top  = ((CELL - imgH) / 2) + 'px';
-    img.style.left = '0';
-    img.style.transform = data.dir === 0 ? 'scaleX(-1)' : 'none';
+    img.style.top = ((CELL - imgH) / 2) + 'px'; // center vertically over row
+    if (data.dir === 2) {
+      // Faces left — natural, body goes right from head
+      img.style.left = '0';
+      img.style.transform = 'none';
+    } else {
+      // Faces right — mirror, body goes left from head
+      img.style.left = (-(imgW - CELL)) + 'px';
+      img.style.transform = 'scaleX(-1)';
+    }
   } else {
-    // Center horizontally over single cell column width
-    img.style.top  = '0';
-    img.style.left = ((CELL - imgW) / 2) + 'px';
-    img.style.transform = data.dir === 1 ? 'scaleY(-1)' : 'none';
+    img.style.left = ((CELL - imgW) / 2) + 'px'; // center horizontally over column
+    if (data.dir === 3) {
+      // Faces up — natural, body goes down from head
+      img.style.top = '0';
+      img.style.transform = 'none';
+    } else {
+      // Faces down — mirror, body goes up from head
+      img.style.top = (-(imgH - CELL)) + 'px';
+      img.style.transform = 'scaleY(-1)';
+    }
   }
 
-  anchorCell.style.overflow = 'visible';
-  anchorCell.appendChild(img);
+  headCell.style.overflow = 'visible';
+  headCell.appendChild(img);
 }
 
 function renderSetupBoard() {

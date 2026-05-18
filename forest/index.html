@@ -1037,12 +1037,46 @@ const NCOLS = COLS.length;   // 8
 const NROWS = ROWS.length;   // 12
 
 const ANIMALS = [
-  { id: 'squirrel',  name: 'Squirrel',     size: 2 },
-  { id: 'fox',       name: 'Gray Fox',      size: 3 },
-  { id: 'raccoon',   name: 'Raccoon',       size: 3 },
-  { id: 'deer',      name: 'Deer',          size: 4 },
-  { id: 'lion',      name: 'Mountain Lion', size: 5 },
+  { id: 'squirrel', name: 'Squirrel',      size: 2, img: { h: 'animals/squirrel-h.png', v: 'animals/squirrel-v.png' } },
+  { id: 'fox',      name: 'Gray Fox',       size: 3, img: { h: 'animals/fox-h.png',      v: 'animals/fox-v.png'      } },
+  { id: 'raccoon',  name: 'Raccoon',        size: 3, img: null },
+  { id: 'deer',     name: 'Deer',           size: 4, img: null },
+  { id: 'lion',     name: 'Mountain Lion',  size: 5, img: null },
 ];
+
+const BACKGROUNDS = [
+  'backgrounds/redwood-1.png',
+  'backgrounds/redwood-2.png',
+  'backgrounds/redwood-3.png',
+  'backgrounds/redwood-4.png',
+  'backgrounds/redwood-5.png',
+];
+
+// Randomly pick two different backgrounds (one per panel)
+let bgSearch = BACKGROUNDS[0];
+let bgMine   = BACKGROUNDS[1];
+
+function pickBackgrounds() {
+  const shuffled = [...BACKGROUNDS].sort(() => Math.random() - 0.5);
+  bgSearch = shuffled[0];
+  bgMine   = shuffled[1] || shuffled[0];
+}
+
+// Returns the correct image src for an animal given its direction
+// dir: 0=right(h), 1=down(v), 2=left(h mirrored), 3=up(v mirrored)
+function animalImgSrc(animal, dir) {
+  if (!animal.img) return null;
+  const isVertical = dir === 1 || dir === 3;
+  return isVertical ? animal.img.v : animal.img.h;
+}
+
+// dir 2 = horizontal but facing left → mirror horizontally
+// dir 3 = vertical but facing up → mirror vertically
+function animalImgTransform(dir) {
+  if (dir === 2) return 'scaleX(-1)';
+  if (dir === 3) return 'scaleY(-1)';
+  return 'none';
+}
 
 // ══════════════════════════════
 //  STATE
@@ -1313,27 +1347,89 @@ function rotateAnimal(animalId) {
   renderSetupBoard();
 }
 
-function renderSetupBoard() {
-  // clear all
-  setupGrid.querySelectorAll('.cell').forEach(c => {
-    c.className = 'cell';
-    c.innerHTML = '';
-    c.style.borderTop = '';
-    c.style.borderRight = '';
-    c.style.borderBottom = '';
-    c.style.borderLeft = '';
-  });
+// Shared helper — applies perimeter outline borders to a set of animal cells on a grid element
+function applyAnimalBorders(gridEl, boardData) {
+  const EDGE  = '2px solid rgba(200,169,110,0.85)';
+  const INNER = '1px solid rgba(200,169,110,0.15)';
 
-  // Build a lookup: cellId -> animalId
+  // Build cellOwner lookup
   const cellOwner = {};
-  Object.entries(currentSetupBoard).forEach(([aid, data]) => {
+  Object.entries(boardData).forEach(([aid, data]) => {
     data.cells.forEach(c => { cellOwner[c.col + c.row] = aid; });
   });
 
-  const EDGE   = '2px solid rgba(200,169,110,0.85)'; // perimeter
-  const INNER  = '1px solid rgba(200,169,110,0.15)'; // shared edge between cells of same animal
+  Object.entries(boardData).forEach(([aid, data]) => {
+    data.cells.forEach((c) => {
+      const cell = getCell(gridEl, c.col, c.row);
+      if (!cell) return;
+      const ci = COLS.indexOf(c.col);
+      const ri = ROWS.indexOf(c.row);
+      const upId    = ri > 0       ? COLS[ci] + ROWS[ri-1] : null;
+      const downId  = ri < NROWS-1 ? COLS[ci] + ROWS[ri+1] : null;
+      const leftId  = ci > 0       ? COLS[ci-1] + ROWS[ri] : null;
+      const rightId = ci < NCOLS-1 ? COLS[ci+1] + ROWS[ri] : null;
+      cell.style.borderTop    = (cellOwner[upId]    === aid) ? INNER : EDGE;
+      cell.style.borderBottom = (cellOwner[downId]  === aid) ? INNER : EDGE;
+      cell.style.borderLeft   = (cellOwner[leftId]  === aid) ? INNER : EDGE;
+      cell.style.borderRight  = (cellOwner[rightId] === aid) ? INNER : EDGE;
+    });
+  });
+}
 
-  // draw animals
+// Place an animal image spanning all its cells using a positioned img over the anchor cell
+function renderAnimalImage(gridEl, aid, data) {
+  const animal = ANIMALS.find(a => a.id === aid);
+  if (!animal?.img) return;
+
+  const src = animalImgSrc(animal, data.dir);
+  const transform = animalImgTransform(data.dir);
+  const isVertical = data.dir === 1 || data.dir === 3;
+
+  // Find anchor cell (visually first)
+  const sorted = [...data.cells].sort((a, b) => {
+    if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
+    return COLS.indexOf(a.col) - COLS.indexOf(b.col);
+  });
+
+  const anchorCell = getCell(gridEl, sorted[0].col, sorted[0].row);
+  if (!anchorCell) return;
+
+  const img = document.createElement('img');
+  img.src = src;
+  img.style.position = 'absolute';
+  img.style.top = '0';
+  img.style.left = '0';
+  img.style.width  = isVertical ? '100%'                       : (CELL * animal.size) + 'px';
+  img.style.height = isVertical ? (CELL * animal.size) + 'px'  : '100%';
+  img.style.transform = transform;
+  img.style.transformOrigin = 'top left';
+  img.style.pointerEvents = 'none';
+  img.style.zIndex = '2';
+  img.style.objectFit = 'fill';
+  anchorCell.style.overflow = 'visible';
+  anchorCell.appendChild(img);
+}
+
+function renderSetupBoard() {
+  setupGrid.querySelectorAll('.cell').forEach(c => {
+    c.className = 'cell';
+    c.innerHTML = '';
+    c.style.borderTop = c.style.borderRight = c.style.borderBottom = c.style.borderLeft = '';
+    c.style.overflow = '';
+  });
+
+  // Mark occupied
+  Object.entries(currentSetupBoard).forEach(([aid, data]) => {
+    data.cells.forEach(c => {
+      const cell = getCell(setupGrid, c.col, c.row);
+      if (cell) cell.classList.add('occupied');
+    });
+  });
+
+  // Apply perimeter borders
+  applyAnimalBorders(setupGrid, currentSetupBoard);
+
+  // Draw labels and images
   Object.entries(currentSetupBoard).forEach(([aid, data]) => {
     const animal = ANIMALS.find(a => a.id === aid);
     const isVertical = data.dir === 1 || data.dir === 3;
@@ -1342,33 +1438,67 @@ function renderSetupBoard() {
       return COLS.indexOf(a.col) - COLS.indexOf(b.col);
     });
 
-    data.cells.forEach((c) => {
-      const cell = getCell(setupGrid, c.col, c.row);
-      if (!cell) return;
-      cell.classList.add('occupied');
-
-      const ci = COLS.indexOf(c.col);
-      const ri = ROWS.indexOf(c.row);
-
-      // For each edge, check if the neighbor belongs to the same animal
-      const upId    = ri > 0           ? COLS[ci] + ROWS[ri-1] : null;
-      const downId  = ri < NROWS-1     ? COLS[ci] + ROWS[ri+1] : null;
-      const leftId  = ci > 0           ? COLS[ci-1] + ROWS[ri] : null;
-      const rightId = ci < NCOLS-1     ? COLS[ci+1] + ROWS[ri] : null;
-
-      cell.style.borderTop    = (cellOwner[upId]    === aid) ? INNER : EDGE;
-      cell.style.borderBottom = (cellOwner[downId]  === aid) ? INNER : EDGE;
-      cell.style.borderLeft   = (cellOwner[leftId]  === aid) ? INNER : EDGE;
-      cell.style.borderRight  = (cellOwner[rightId] === aid) ? INNER : EDGE;
-
-      // label on visually first cell
-      if (c.col === sorted[0].col && c.row === sorted[0].row) {
+    if (animal.img) {
+      renderAnimalImage(setupGrid, aid, data);
+    } else {
+      // fallback text label
+      const firstCell = getCell(setupGrid, sorted[0].col, sorted[0].row);
+      if (firstCell) {
         const lbl = document.createElement('div');
         lbl.className = 'cell-label';
         lbl.textContent = animal.name;
-        cell.appendChild(lbl);
+        firstCell.appendChild(lbl);
       }
+    }
+  });
+}
+
+function renderMyForest() {
+  // Build sorted cell map for each animal
+  const animalCells = {};
+  Object.entries(setupBoards[0]).forEach(([aid, data]) => {
+    const isVertical = data.dir === 1 || data.dir === 3;
+    const sorted = [...data.cells].sort((a, b) => {
+      if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
+      return COLS.indexOf(a.col) - COLS.indexOf(b.col);
     });
+    animalCells[aid] = sorted;
+  });
+
+  mineGridEl.querySelectorAll('.cell').forEach(c => {
+    const id = c.dataset.id;
+    c.className = 'cell';
+    c.innerHTML = '';
+    c.style.borderTop = c.style.borderRight = c.style.borderBottom = c.style.borderLeft = '';
+    c.style.overflow = '';
+    const aid = myForestGrid[id];
+    if (aid) {
+      c.classList.add('my-animal');
+      if (foundCells[id]) c.classList.add('found');
+    } else if (emptyMarks[id]) {
+      c.classList.add('nothing');
+    }
+  });
+
+  // Apply perimeter borders to my forest
+  applyAnimalBorders(mineGridEl, setupBoards[0]);
+
+  // Draw images / labels
+  Object.entries(setupBoards[0]).forEach(([aid, data]) => {
+    const animal = ANIMALS.find(a => a.id === aid);
+    if (animal.img) {
+      renderAnimalImage(mineGridEl, aid, data);
+    } else {
+      const isVertical = data.dir === 1 || data.dir === 3;
+      const sorted = animalCells[aid];
+      const firstCell = getCell(mineGridEl, sorted[0].col, sorted[0].row);
+      if (firstCell) {
+        const lbl = document.createElement('div');
+        lbl.className = 'cell-label';
+        lbl.textContent = animal.name;
+        firstCell.appendChild(lbl);
+      }
+    }
   });
 }
 
@@ -1449,6 +1579,8 @@ function startGame() {
   foundCells = {};
   emptyMarks = {};
 
+  pickBackgrounds();
+
   // Build my forest grid from p1's board (setupBoards[0])
   myForestGrid = {};
   Object.entries(setupBoards[0]).forEach(([aid, data]) => {
@@ -1460,13 +1592,27 @@ function startGame() {
   document.getElementById('mine-hint-label').textContent = p2Name + "'s forest";
   document.getElementById('mine-panel-label').textContent = p1Name + "'s Forest";
 
-  CELL = computeCellSize(true); // game grids have row/col labels
+  CELL = computeCellSize(true);
   searchGridEl = buildGrid('search-grid-container', onSearchCellClick);
   mineGridEl   = buildGrid('mine-grid-container', onMineCellClick);
+
+  // Apply backgrounds inside grid area only
+  applyGridBackground('search-grid-container', bgSearch);
+  applyGridBackground('mine-grid-container',   bgMine);
 
   renderMyForest();
   showScreen('screen-game');
   snapToPanel(0, false);
+}
+
+function applyGridBackground(containerId, imgSrc) {
+  const container = document.getElementById(containerId);
+  const gridEl = container.querySelector('.grid');
+  if (!gridEl) return;
+  gridEl.style.backgroundImage = `url('${imgSrc}')`;
+  gridEl.style.backgroundSize  = '100% 100%';
+  gridEl.style.backgroundRepeat = 'no-repeat';
+  gridEl.style.backgroundPosition = 'center';
 }
 
 function onSearchCellClick(col, row) {
@@ -1504,42 +1650,6 @@ function onMineCellClick(col, row) {
     emptyMarks[id] = !emptyMarks[id];
   }
   renderMyForest();
-}
-
-function renderMyForest() {
-  // Build a map of animalId -> sorted cells for labeling
-  const animalCells = {}; // animalId -> sorted cell list
-  Object.entries(setupBoards[0]).forEach(([aid, data]) => {
-    const isVertical = data.dir === 1 || data.dir === 3;
-    const sorted = [...data.cells].sort((a, b) => {
-      if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
-      return COLS.indexOf(a.col) - COLS.indexOf(b.col);
-    });
-    animalCells[aid] = sorted;
-  });
-
-  mineGridEl.querySelectorAll('.cell').forEach(c => {
-    const id = c.dataset.id;
-    const col = c.dataset.col;
-    const row = c.dataset.row;
-    c.className = 'cell';
-    c.innerHTML = '';
-    const aid = myForestGrid[id];
-    if (aid) {
-      c.classList.add('my-animal');
-      if (foundCells[id]) c.classList.add('found');
-      // label on visually first cell
-      const sorted = animalCells[aid];
-      if (sorted && sorted[0].col === col && sorted[0].row === row) {
-        const lbl = document.createElement('div');
-        lbl.className = 'cell-label';
-        lbl.textContent = ANIMALS.find(a => a.id === aid)?.name || '';
-        c.appendChild(lbl);
-      }
-    } else if (emptyMarks[id]) {
-      c.classList.add('nothing');
-    }
-  });
 }
 
 // ══════════════════════════════

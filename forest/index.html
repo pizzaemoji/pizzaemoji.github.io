@@ -886,7 +886,7 @@ html, body {
   <p class="tagline">a wildlife spotting game</p>
   <button class="btn-primary" id="btn-play">Play</button>
   <button class="btn-how" id="btn-how">How to Play</button>
-  <span class="version-link" id="btn-whats-new">v0.1</span>
+  <span class="version-link" id="btn-whats-new">v0.2</span>
 </div>
 
 <!-- ══ WHAT'S NEW ══ -->
@@ -894,8 +894,28 @@ html, body {
   <div class="how-scroll">
     <div class="how-content">
       <div class="how-back" id="btn-whats-new-back">← Back</div>
-      <h2 class="how-title">Version 0.1</h2>
-      <p style="color:var(--green-pale);font-size:0.72rem;font-style:italic;text-align:center;margin-top:-14px;margin-bottom:20px;">Released May 16th, 2026</p>
+      <h2 class="how-title">Version 0.2</h2>
+      <p style="color:var(--green-pale);font-size:0.72rem;font-style:italic;text-align:center;margin-top:-14px;margin-bottom:20px;">Released May 18th, 2026</p>
+
+      <div class="how-section">
+        <div class="how-section-title">What's New</div>
+        <p>— Graphics. There are Redwood forest backgrounds and animal images.<br>— Improved colors for "animal sighted" and "nothing there" boxes.<br>— Other minor gameplay tweaks and bug fixes.</p>
+      </div>
+
+      <div class="how-section">
+        <div class="how-section-title">Known Bugs</div>
+        <p>— The Mobile Safari address bar can get in the way of the game board. We highly suggest adding the game to your home screen as a Web App.</p>
+      </div>
+
+      <div class="how-section">
+        <div class="how-section-title">What's Next</div>
+        <p>— Irregular animal shapes<br>— More animal variety to choose from</p>
+      </div>
+
+      <div style="border-top:1px solid rgba(200,169,110,0.15);margin:8px 0 16px;"></div>
+
+      <h2 class="how-title" style="font-size:1rem;">Version 0.1</h2>
+      <p style="color:var(--green-pale);font-size:0.72rem;font-style:italic;text-align:center;margin-top:-10px;margin-bottom:16px;">Released May 16th, 2026</p>
 
       <div class="how-section">
         <div class="how-section-title">What's New</div>
@@ -1087,11 +1107,11 @@ const NCOLS = COLS.length;   // 8
 const NROWS = ROWS.length;   // 12
 
 const ANIMALS = [
-  { id: 'squirrel', name: 'Squirrel',      size: 2, img: 'animals/squirrel-h.png' },
-  { id: 'fox',      name: 'Gray Fox',       size: 3, img: 'animals/fox-h.png'      },
-  { id: 'raccoon',  name: 'Raccoon',        size: 3, img: 'animals/raccoon-h.png'  },
-  { id: 'deer',     name: 'Deer',           size: 4, img: 'animals/deer-h.png'     },
-  { id: 'lion',     name: 'Mountain Lion',  size: 5, img: 'animals/mountainlion-h.png' },
+  { id: 'squirrel', name: 'Squirrel',      size: 2, img: { h: 'animals/squirrel-h.png', v: 'animals/squirrel-v.png' } },
+  { id: 'fox',      name: 'Gray Fox',       size: 3, img: { h: 'animals/fox-h.png',      v: 'animals/fox-v.png'      } },
+  { id: 'raccoon',  name: 'Raccoon',        size: 3, img: { h: 'animals/raccoon-h.png',  v: 'animals/raccoon-v.png'  } },
+  { id: 'deer',     name: 'Deer',           size: 4, img: { h: 'animals/deer-h.png',     v: 'animals/deer-v.png'     } },
+  { id: 'lion',     name: 'Mountain Lion',  size: 5, img: { h: 'animals/mountainlion-h.png', v: 'animals/mountainlion-v.png' } },
 ];
 
 const BACKGROUNDS = [
@@ -1421,105 +1441,56 @@ function applyAnimalBorders(gridEl, boardData) {
   });
 }
 
-// Place an animal image spanning all its cells using a positioned img over the anchor cell
+// Images:
+//   -h.png faces LEFT  → dir 2 natural, dir 0 = scaleX(-1)
+//   -v.png faces UP    → dir 3 natural, dir 1 = scaleY(-1)
+// Width = CELL * size, height = natural aspect ratio, centered vertically.
+
 function renderAnimalImage(gridEl, aid, data) {
   const animal = ANIMALS.find(a => a.id === aid);
   if (!animal?.img) return;
 
-  // Width is fixed: CELL * size (the hitbox width)
+  const isVertical = data.dir === 1 || data.dir === 3;
+  const src = isVertical ? animal.img.v : animal.img.h;
   const fixedW = CELL * animal.size;
 
-  // We need the natural aspect ratio to compute height.
-  // Load image to measure, then place it.
   const probe = new Image();
-  probe.onload = () => {
-    const aspectH = (probe.naturalHeight / probe.naturalWidth) * fixedW;
-    placeAnimalImg(gridEl, aid, data, fixedW, aspectH);
-  };
-  probe.onerror = () => {
-    // Fallback: use CELL height if image fails
-    placeAnimalImg(gridEl, aid, data, fixedW, CELL);
-  };
-  probe.src = animal.img;
+  probe.onload  = () => placeAnimalImg(gridEl, aid, data, src, fixedW, (probe.naturalHeight / probe.naturalWidth) * fixedW);
+  probe.onerror = () => placeAnimalImg(gridEl, aid, data, src, fixedW, CELL);
+  probe.src = src;
 }
 
-function placeAnimalImg(gridEl, aid, data, imgW, imgH) {
+function placeAnimalImg(gridEl, aid, data, src, imgW, imgH) {
   const animal = ANIMALS.find(a => a.id === aid);
+  const isVertical = data.dir === 1 || data.dir === 3;
 
-  // Anchor selection per direction (same logic as before)
-  let sorted;
-  switch (data.dir) {
-    case 0: sorted = [...data.cells].sort((a,b) => COLS.indexOf(b.col) - COLS.indexOf(a.col)); break; // rightmost
-    case 1: sorted = [...data.cells].sort((a,b) => ROWS.indexOf(a.row) - ROWS.indexOf(b.row)); break; // topmost
-    case 2: sorted = [...data.cells].sort((a,b) => COLS.indexOf(a.col) - COLS.indexOf(b.col)); break; // leftmost
-    case 3: sorted = [...data.cells].sort((a,b) => ROWS.indexOf(b.row) - ROWS.indexOf(a.row)); break; // bottommost
-  }
+  // Anchor = topmost for vertical, leftmost for horizontal
+  const sorted = [...data.cells].sort((a, b) => {
+    if (isVertical) return ROWS.indexOf(a.row) - ROWS.indexOf(b.row);
+    return COLS.indexOf(a.col) - COLS.indexOf(b.col);
+  });
 
   const anchorCell = getCell(gridEl, sorted[0].col, sorted[0].row);
   if (!anchorCell) return;
-
-  // Remove any previous img on this anchor cell
   anchorCell.querySelectorAll('img.animal-img').forEach(e => e.remove());
 
   const img = document.createElement('img');
-  img.src = animal.img;
+  img.src = src;
   img.className = 'animal-img';
   img.draggable = false;
-  img.style.position = 'absolute';
-  img.style.pointerEvents = 'none';
-  img.style.zIndex = '2';
-  img.style.objectFit = 'fill';
-  img.style.width  = imgW + 'px';
-  img.style.height = imgH + 'px';
+  img.style.cssText = `
+    position:absolute; pointer-events:none; z-index:2;
+    object-fit:fill; width:${imgW}px; height:${imgH}px; left:0;
+  `;
 
-  // Horizontal directions (left/right) — image is naturalW wide, centered vertically over 1 row
-  // Vertical directions (up/down) — image is rotated: natural width becomes visual height
-  const isVertical = data.dir === 1 || data.dir === 3;
+  // Center vertically over the cell span
+  const cellSpan = CELL * animal.size;
+  img.style.top = ((cellSpan - imgH) / 2) + 'px';
 
-  if (!isVertical) {
-    // Center vertically: spill equally above and below the single cell row
-    const topOffset = (CELL - imgH) / 2;
-    img.style.top  = topOffset + 'px';
-    img.style.left = '0';
-
-    if (data.dir === 0) {
-      // Facing right: mirror horizontally, extend leftward from rightmost cell
-      img.style.left = (-(imgW - CELL)) + 'px';
-      img.style.transform = 'scaleX(-1)';
-    }
-    // dir 2 (left): no transform, extends rightward — default
-
-  } else {
-    // Vertical placement: rotate image 90 or 270 degrees
-    // Natural image: W=imgW, H=imgH — but visually after rotation: W=imgH, H=imgW
-    // We want visual width = CELL, visual height = imgW (the animal's span)
-    // Scale so visual width fits CELL: scale = CELL / imgH
-    const scale = CELL / imgH;
-    const visualH = imgW * scale; // how tall the animal appears after scaling
-    const scaledImgW = imgW * scale;
-    const scaledImgH = imgH * scale; // = CELL
-
-    // Center visual height over the cells span
-    const cellSpan = CELL * animal.size;
-    const topOffset = (cellSpan - visualH) / 2;
-
-    img.style.width  = imgW + 'px';
-    img.style.height = imgH + 'px';
-    img.style.transformOrigin = 'top left';
-
-    if (data.dir === 1) {
-      // Down — but we flip so animal faces UP (scaleY(-1) + rotate)
-      // rotate(-90deg) makes animal face up, then translate into position
-      img.style.top  = topOffset + 'px';
-      img.style.left = '0';
-      img.style.transform = `rotate(-90deg) scaleY(-1) translateX(-${imgH}px) scale(${scale})`;
-    } else {
-      // Up (dir 3) — anchor is bottommost, extends upward, faces up naturally
-      img.style.top  = topOffset + 'px';
-      img.style.left = '0';
-      img.style.transform = `rotate(-90deg) translateX(-${imgH}px) scale(${scale})`;
-    }
-  }
+  // Four cases — mirrors only, no rotation math
+  if      (data.dir === 0) img.style.transform = 'scaleX(-1)'; // h, faces right
+  else if (data.dir === 1) img.style.transform = 'scaleY(-1)'; // v, flip to face up
+  else                     img.style.transform = 'none';        // dirs 2 & 3 natural
 
   anchorCell.style.overflow = 'visible';
   anchorCell.appendChild(img);

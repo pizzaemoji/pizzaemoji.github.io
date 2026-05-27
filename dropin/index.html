@@ -186,10 +186,6 @@
     filter: brightness(0.38);
     transition: filter 0.08s ease-in;
   }
-  .token.win-normal {
-    filter: brightness(1);
-    transition: filter 0.12s ease-out;
-  }
 
   .token.dropping {
     animation: drop var(--drop-duration,.4s) cubic-bezier(0.22,0.61,0.36,1) forwards;
@@ -559,25 +555,22 @@ function startChase(cells, player) {
     return getCell(rc[0],rc[1]).querySelector('.token');
   });
 
-  var current = 0;
-  var stepMs  = 340; // time each token stays dark
+  var dimmed  = 0;       // index of the one dimmed token
+  var stepMs  = 320;     // how long each position holds
 
-  // light up first token immediately
-  toks[0].classList.add('win-chase');
+  // dim the first token to start
+  toks[dimmed].classList.add('win-chase');
 
   chaseInterval = setInterval(function() {
-    // darken current, restore previous
-    var prev = (current + toks.length - 1) % toks.length;
-    toks[prev].classList.remove('win-chase');
-    toks[prev].classList.add('win-normal');
-    // small timeout so the transition out starts before next one snaps in
-    setTimeout(function(p){ toks[p].classList.remove('win-normal'); }(prev), 300);
-
-    current = (current + 1) % toks.length;
-    toks[current].classList.add('win-chase');
+    // restore the currently dimmed token
+    toks[dimmed].classList.remove('win-chase');
+    // advance to next
+    dimmed = (dimmed + 1) % toks.length;
+    // dim the new one
+    toks[dimmed].classList.add('win-chase');
   }, stepMs);
 
-  // show banner and continue button after one full pass (4 steps)
+  // show banner and continue after one full pass
   setTimeout(function() {
     showWinState(player);
   }, stepMs * toks.length + 80);

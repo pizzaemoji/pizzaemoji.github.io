@@ -8,7 +8,6 @@
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-
   html, body { height: 100%; }
 
   body {
@@ -24,11 +23,8 @@
   .screen { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 520px; padding: 0 16px; }
   .screen.active { display: flex; }
 
-  #welcomeScreen {
-    min-height: 100vh;
-    justify-content: center;
-    gap: 0;
-  }
+  /* WELCOME */
+  #welcomeScreen { min-height: 100vh; justify-content: center; }
 
   .welcome-eyebrow {
     font-family: 'Lora', serif;
@@ -66,21 +62,22 @@
     animation: tokenFall linear infinite;
     will-change: transform;
   }
-  .falling-token.pink { background: #f48fb1; }
+  .falling-token.pink  { background: #f48fb1; }
   .falling-token.green { background: #a5d6a7; }
 
   @keyframes tokenFall {
     0%   { transform: translateY(0); opacity: 0; }
     8%   { opacity: var(--token-opacity); }
     88%  { opacity: var(--token-opacity); }
-    100% { transform: translateY(calc(var(--stage-h, 260px) + 80px + var(--token-size))); opacity: 0; }
+    100% { transform: translateY(calc(260px + 80px + var(--token-size))); opacity: 0; }
   }
 
+  /* Buttons */
   .btn-main {
-    background: #f48fb1;
+    background: #e8c97a;
     border: none;
     border-radius: 16px;
-    color: #fff;
+    color: #2c3640;
     font-family: 'Nunito', sans-serif;
     font-size: 20px;
     font-weight: 800;
@@ -89,12 +86,13 @@
     transition: transform 0.1s, background 0.15s;
     position: relative;
     z-index: 2;
-    margin-bottom: 48px;
   }
-  .btn-main:hover { background: #e57ca0; transform: scale(1.02); }
+  .btn-main:hover { background: #dbb95e; transform: scale(1.02); }
   .btn-main:active { transform: scale(0.98); }
   .btn-main:disabled { opacity: 0.4; cursor: default; transform: none; }
+  #welcomeScreen .btn-main { margin-bottom: 48px; }
 
+  /* SHARE */
   #shareScreen { padding-top: 32px; padding-bottom: 40px; min-height: 100vh; justify-content: center; }
 
   .share-header {
@@ -156,39 +154,70 @@
     background: transparent; min-width: 100px;
   }
   .color-choice:hover { background: #1e2a33; }
-  .color-choice.selected-pink { border-color: #f48fb1; background: #1e2a33; }
+  .color-choice.selected-pink  { border-color: #f48fb1; background: #1e2a33; }
   .color-choice.selected-green { border-color: #a5d6a7; background: #1e2a33; }
   .choice-dot { width: 52px; height: 52px; border-radius: 50%; position: relative; }
-  .choice-dot.pink { background: #f48fb1; }
+  .choice-dot.pink  { background: #f48fb1; }
   .choice-dot.green { background: #a5d6a7; }
   .choice-dot .check {
     display: none; position: absolute; inset: 0;
     align-items: center; justify-content: center;
     font-size: 22px; color: rgba(0,0,0,0.3); font-weight: 800;
   }
-  .color-choice.selected-pink .choice-dot.pink .check,
+  .color-choice.selected-pink  .choice-dot.pink  .check,
   .color-choice.selected-green .choice-dot.green .check { display: flex; }
   .choice-name { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 700; color: #8fa0b0; }
-  .color-choice.selected-pink .choice-name { color: #f48fb1; }
+  .color-choice.selected-pink  .choice-name { color: #f48fb1; }
   .color-choice.selected-green .choice-name { color: #a5d6a7; }
 
-  #gameScreen { padding-top: 24px; padding-bottom: 32px; min-height: 100vh; justify-content: center; }
+  /* GAME */
+  #gameScreen {
+    padding-top: 0;
+    padding-bottom: 0;
+    min-height: 100vh;
+    justify-content: space-between;
+  }
+
+  .game-header {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding-top: 24px;
+    min-height: 80px;
+    justify-content: center;
+  }
 
   .game-title-btn {
     font-family: 'Lora', serif; font-size: 22px; font-weight: 600;
-    color: #7a9aaa; cursor: pointer; margin-bottom: 8px;
+    color: #7a9aaa; cursor: pointer; margin-bottom: 6px;
     background: none; border: none; padding: 0;
   }
   .game-title-btn:hover { color: #a0bfcc; }
 
   .turn-banner {
-    font-size: 18px; font-weight: 700; color: #f0ebe0;
-    margin-bottom: 16px; min-height: 28px; text-align: center;
+    font-size: 20px; font-weight: 800; color: #f0ebe0;
+    min-height: 30px; text-align: center;
+    transition: opacity 0.2s;
+  }
+  .turn-banner.win-banner {
+    font-size: 28px;
+    font-family: 'Lora', serif;
+    font-weight: 700;
   }
   .turn-dot {
-    display: inline-block; width: 16px; height: 16px;
+    display: inline-block; width: 18px; height: 18px;
     border-radius: 50%; vertical-align: middle;
-    margin-right: 6px; position: relative; top: -1px;
+    margin-right: 7px; position: relative; top: -2px;
+  }
+
+  .board-area {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex: 1;
+    padding: 8px 0;
   }
 
   .board-wrap {
@@ -199,13 +228,11 @@
     position: relative;
     width: 100%;
   }
-
   .grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
     gap: 7px;
   }
-
   .cell {
     aspect-ratio: 1;
     border-radius: 50%;
@@ -214,25 +241,20 @@
     position: relative;
     transition: background 0.1s;
   }
-  .cell:hover { background: #1a2530; }
+  .cell:hover  { background: #1a2530; }
   .cell.no-hover { cursor: default; }
   .cell.no-hover:hover { background: #243040; }
 
-  .token {
-    position: absolute;
-    inset: 0;
-    border-radius: 50%;
-  }
-  .token.pink { background: #f48fb1; }
+  .token { position: absolute; inset: 0; border-radius: 50%; }
+  .token.pink  { background: #f48fb1; }
   .token.green { background: #a5d6a7; }
 
   .token.win {
-    box-shadow: 0 0 0 3px #f0ebe0;
     animation: winPulse 1s ease-in-out infinite;
   }
   @keyframes winPulse {
     0%, 100% { box-shadow: 0 0 0 3px #f0ebe0; }
-    50%       { box-shadow: 0 0 0 5px #f0ebe0, 0 0 12px rgba(240,235,224,0.4); }
+    50%       { box-shadow: 0 0 0 6px #f0ebe0, 0 0 14px rgba(240,235,224,0.5); }
   }
 
   .token.dropping {
@@ -243,25 +265,20 @@
     to   { transform: translateY(0); }
   }
 
-  .token.pending-pink {
-    animation: pendingPink 1.1s ease-in-out infinite;
-  }
-  .token.pending-green {
-    animation: pendingGreen 1.1s ease-in-out infinite;
-  }
+  .token.pending-pink  { animation: pendingPink  1.1s ease-in-out infinite; }
+  .token.pending-green { animation: pendingGreen 1.1s ease-in-out infinite; }
   @keyframes pendingPink {
     0%, 100% { box-shadow: 0 0 0 0px rgba(244,143,177,0); }
-    50%       { box-shadow: 0 0 0 6px rgba(244,143,177,0.45); }
+    50%       { box-shadow: 0 0 0 6px rgba(244,143,177,0.5); }
   }
   @keyframes pendingGreen {
     0%, 100% { box-shadow: 0 0 0 0px rgba(165,214,167,0); }
-    50%       { box-shadow: 0 0 0 6px rgba(165,214,167,0.45); }
+    50%       { box-shadow: 0 0 0 6px rgba(165,214,167,0.5); }
   }
 
   .flash-canvas {
     position: absolute;
     pointer-events: none;
-    border-radius: 50%;
   }
 
   .preview-token {
@@ -269,36 +286,39 @@
     border-radius: 50%;
     opacity: 0.35;
     pointer-events: none;
-    top: -62px;
   }
-  .preview-token.pink { background: #f48fb1; }
+  .preview-token.pink  { background: #f48fb1; }
   .preview-token.green { background: #a5d6a7; }
 
-  .confirm-area {
-    min-height: 68px;
+  .game-footer {
+    width: 100%;
+    min-height: 88px;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-top: 14px;
+    padding-bottom: 32px;
+    padding-top: 8px;
   }
+
   .confirm-btn {
-    background: #f0ebe0;
+    background: #e8c97a;
     border: none; border-radius: 14px;
     color: #2c3640;
     font-family: 'Nunito', sans-serif;
     font-size: 18px; font-weight: 800;
-    padding: 13px 40px;
+    padding: 15px 44px;
     cursor: pointer;
     transition: transform 0.1s, background 0.15s;
     animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
   @keyframes popIn {
     from { transform: scale(0.7); opacity: 0; }
-    to   { transform: scale(1); opacity: 1; }
+    to   { transform: scale(1);   opacity: 1; }
   }
-  .confirm-btn:hover { background: #fff; }
+  .confirm-btn:hover  { background: #dbb95e; }
   .confirm-btn:active { transform: scale(0.97); }
 
+  /* MODAL */
   .modal-backdrop {
     display: none; position: fixed; inset: 0;
     background: rgba(20,30,38,0.88);
@@ -311,18 +331,20 @@
     max-width: 320px; width: 90%; border: 1px solid #3d5060;
   }
   .modal-win-dot { width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 18px; }
-  .modal-title { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; color: #f0ebe0; margin-bottom: 6px; }
-  .modal-sub { font-family: 'Lora', serif; font-style: italic; font-size: 16px; color: #7a9aaa; margin-bottom: 26px; }
-  .modal-q { font-size: 18px; font-weight: 700; color: #f0ebe0; margin-bottom: 18px; }
+  .modal-title {
+    font-family: 'Lora', serif; font-size: 30px; font-weight: 700;
+    color: #f0ebe0; margin-bottom: 28px;
+  }
+  .modal-q { font-size: 22px; font-weight: 800; color: #f0ebe0; margin-bottom: 22px; }
   .modal-btns { display: flex; gap: 14px; justify-content: center; }
   .modal-btn {
     border: none; border-radius: 12px;
     font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 700;
-    padding: 12px 30px; cursor: pointer; transition: transform 0.1s;
+    padding: 13px 32px; cursor: pointer; transition: transform 0.1s;
   }
   .modal-btn:active { transform: scale(0.97); }
-  .modal-btn.yes { background: #f48fb1; color: #fff; }
-  .modal-btn.yes:hover { background: #e57ca0; }
+  .modal-btn.yes { background: #e8c97a; color: #2c3640; }
+  .modal-btn.yes:hover { background: #dbb95e; }
   .modal-btn.no  { background: #3d5060; color: #f0ebe0; }
   .modal-btn.no:hover { background: #4a606e; }
 </style>
@@ -363,13 +385,19 @@
 
 <!-- GAME -->
 <div class="screen" id="gameScreen">
-  <button class="game-title-btn" onclick="goHome()">Drop In</button>
-  <div class="turn-banner" id="turnBanner"></div>
-  <div class="board-wrap" id="boardWrap">
-    <div class="preview-token" id="previewToken" style="display:none"></div>
-    <div class="grid" id="grid"></div>
+  <div class="game-header">
+    <button class="game-title-btn" onclick="goHome()">Drop In</button>
+    <div class="turn-banner" id="turnBanner"></div>
   </div>
-  <div class="confirm-area" id="confirmArea"></div>
+
+  <div class="board-area">
+    <div class="board-wrap" id="boardWrap">
+      <div class="preview-token" id="previewToken" style="display:none"></div>
+      <div class="grid" id="grid"></div>
+    </div>
+  </div>
+
+  <div class="game-footer" id="gameFooter"></div>
 </div>
 
 <!-- MODAL -->
@@ -377,11 +405,10 @@
   <div class="modal">
     <div class="modal-win-dot" id="modalDot"></div>
     <div class="modal-title" id="modalTitle"></div>
-    <div class="modal-sub" id="modalSub"></div>
     <div class="modal-q">Play again?</div>
     <div class="modal-btns">
       <button class="modal-btn yes" onclick="newRound()">Yes!</button>
-      <button class="modal-btn no" onclick="goHome()">No thanks</button>
+      <button class="modal-btn no"  onclick="goHome()">No thanks</button>
     </div>
   </div>
 </div>
@@ -390,167 +417,189 @@
 const ROWS = 6, COLS = 7;
 let board, currentPlayer, pendingCol, pendingRow, isAnimating, gameOver;
 let player1Color = null;
-const COLOR_HEX = { pink: '#f48fb1', green: '#a5d6a7' };
-const GAME_LINK = 'pizzaemoji.net/four&id=g7x2k9';
+const COLOR_HEX  = { pink: '#f48fb1', green: '#a5d6a7' };
+const COLOR_NAME = { pink: 'Pink',    green: 'Green'   };
+const GAME_LINK  = 'pizzaemoji.net/four&id=g7x2k9';
 
+/* ── Rain ─────────────────────────────────── */
 (function buildRain() {
   const stage = document.getElementById('rainStage');
   const tokens = [
-    { size:38, color:'pink',  left:0.08, dur:7.2,  delay:0    },
-    { size:22, color:'green', left:0.18, dur:9.8,  delay:-3.1 },
-    { size:48, color:'pink',  left:0.30, dur:11.4, delay:-1.7 },
-    { size:16, color:'green', left:0.42, dur:8.6,  delay:-5.4 },
-    { size:32, color:'pink',  left:0.53, dur:10.2, delay:-2.9 },
-    { size:26, color:'green', left:0.63, dur:7.8,  delay:-4.6 },
-    { size:44, color:'green', left:0.73, dur:12.1, delay:-0.8 },
-    { size:18, color:'pink',  left:0.82, dur:9.0,  delay:-6.2 },
-    { size:30, color:'green', left:0.91, dur:8.3,  delay:-3.8 },
-    { size:20, color:'pink',  left:0.24, dur:13.0, delay:-7.1 },
-    { size:36, color:'green', left:0.47, dur:10.7, delay:-1.3 },
-    { size:14, color:'pink',  left:0.68, dur:8.9,  delay:-5.0 },
-    { size:28, color:'pink',  left:0.57, dur:11.8, delay:-8.3 },
-    { size:42, color:'green', left:0.13, dur:14.2, delay:-2.2 },
+    {size:38,color:'pink', left:0.08,dur:7.2, delay:0   },
+    {size:22,color:'green',left:0.18,dur:9.8, delay:-3.1},
+    {size:48,color:'pink', left:0.30,dur:11.4,delay:-1.7},
+    {size:16,color:'green',left:0.42,dur:8.6, delay:-5.4},
+    {size:32,color:'pink', left:0.53,dur:10.2,delay:-2.9},
+    {size:26,color:'green',left:0.63,dur:7.8, delay:-4.6},
+    {size:44,color:'green',left:0.73,dur:12.1,delay:-0.8},
+    {size:18,color:'pink', left:0.82,dur:9.0, delay:-6.2},
+    {size:30,color:'green',left:0.91,dur:8.3, delay:-3.8},
+    {size:20,color:'pink', left:0.24,dur:13.0,delay:-7.1},
+    {size:36,color:'green',left:0.47,dur:10.7,delay:-1.3},
+    {size:14,color:'pink', left:0.68,dur:8.9, delay:-5.0},
+    {size:28,color:'pink', left:0.57,dur:11.8,delay:-8.3},
+    {size:42,color:'green',left:0.13,dur:14.2,delay:-2.2},
   ];
-  tokens.forEach(t => {
+  tokens.forEach(function(t) {
     const el = document.createElement('div');
     el.className = 'falling-token ' + t.color;
     const opacity = 0.18 + (t.size / 48) * 0.42;
-    el.style.cssText = 'width:'+t.size+'px;height:'+t.size+'px;left:calc('+( t.left*100)+'% - '+(t.size/2)+'px);animation-duration:'+t.dur+'s;animation-delay:'+t.delay+'s;--token-opacity:'+opacity.toFixed(2)+';--token-size:'+t.size+'px;';
+    el.style.cssText = 'width:'+t.size+'px;height:'+t.size+'px;left:calc('+(t.left*100)+'% - '+(t.size/2)+'px);animation-duration:'+t.dur+'s;animation-delay:'+t.delay+'s;--token-opacity:'+opacity.toFixed(2)+';--token-size:'+t.size+'px;';
     stage.appendChild(el);
   });
 })();
 
+/* ── Nav ──────────────────────────────────── */
 function show(id) {
-  ['welcomeScreen','shareScreen','gameScreen'].forEach(s =>
-    document.getElementById(s).classList.toggle('active', s === id));
+  ['welcomeScreen','shareScreen','gameScreen'].forEach(function(s) {
+    document.getElementById(s).classList.toggle('active', s === id);
+  });
 }
 function goHome() { document.getElementById('modal').classList.remove('open'); show('welcomeScreen'); }
 function goToShare() {
   player1Color = null;
-  document.getElementById('choicePink').className = 'color-choice';
+  document.getElementById('choicePink').className  = 'color-choice';
   document.getElementById('choiceGreen').className = 'color-choice';
-  document.getElementById('letsPlayBtn').disabled = true;
+  document.getElementById('letsPlayBtn').disabled  = true;
   show('shareScreen');
 }
 function selectColor(color) {
   player1Color = color;
-  document.getElementById('choicePink').className = 'color-choice' + (color==='pink' ? ' selected-pink' : '');
+  document.getElementById('choicePink').className  = 'color-choice' + (color==='pink'  ? ' selected-pink'  : '');
   document.getElementById('choiceGreen').className = 'color-choice' + (color==='green' ? ' selected-green' : '');
-  document.getElementById('letsPlayBtn').disabled = false;
+  document.getElementById('letsPlayBtn').disabled  = false;
 }
-function getPlayerColor(p) { return p===1 ? player1Color : (player1Color==='pink' ? 'green' : 'pink'); }
-function getPlayerName(p) { var c=getPlayerColor(p); return 'Player '+p+' ('+(c[0].toUpperCase()+c.slice(1))+')'; }
 
+/* ── Player helpers ───────────────────────── */
+function getPlayerColor(p) { return p===1 ? player1Color : (player1Color==='pink' ? 'green' : 'pink'); }
+function getPlayerColorName(p) { return COLOR_NAME[getPlayerColor(p)]; }
+
+/* ── Game ─────────────────────────────────── */
 function startGame() {
   if (!player1Color) return;
-  board = Array.from({length:ROWS},function(){return Array(COLS).fill(0);});
+  board = Array.from({length:ROWS}, function(){ return Array(COLS).fill(0); });
   currentPlayer=1; pendingCol=null; pendingRow=null; isAnimating=false; gameOver=false;
   document.getElementById('modal').classList.remove('open');
   show('gameScreen');
-  renderBoard(); updateBanner(); clearConfirm(); hidePreview();
+  renderBoard(); updateBanner(); setFooter('empty'); hidePreview();
 }
 function newRound() { startGame(); }
 
 function renderBoard() {
-  var grid = document.getElementById('grid');
+  const grid = document.getElementById('grid');
   grid.innerHTML = '';
-  for (var r=0; r<ROWS; r++) {
-    for (var c=0; c<COLS; c++) {
-      var cell = document.createElement('div');
+  for (let r=0; r<ROWS; r++) {
+    for (let c=0; c<COLS; c++) {
+      const cell = document.createElement('div');
       cell.className = 'cell';
       if (board[r][c]) {
-        var tok = document.createElement('div');
+        const tok = document.createElement('div');
         tok.className = 'token ' + getPlayerColor(board[r][c]);
         cell.appendChild(tok);
       }
-      cell.addEventListener('click', (function(col){return function(){onCellClick(col);};})(c));
+      cell.addEventListener('click',      (function(col){return function(){onCellClick(col);};})(c));
       cell.addEventListener('mouseenter', (function(col){return function(){showPreview(col);};})(c));
       cell.addEventListener('mouseleave', hidePreview);
       grid.appendChild(cell);
     }
   }
-  var firstCell = grid.children[0];
+  const firstCell = grid.children[0];
   if (firstCell) {
-    var sz = firstCell.offsetWidth || 54;
-    var prev = document.getElementById('previewToken');
-    prev.style.width = sz + 'px';
+    const sz = firstCell.offsetWidth || 54;
+    const prev = document.getElementById('previewToken');
+    prev.style.width  = sz + 'px';
     prev.style.height = sz + 'px';
-    prev.style.top = -(sz + 8) + 'px';
+    prev.style.top    = -(sz + 8) + 'px';
   }
 }
 
 function getCell(r,c) { return document.getElementById('grid').children[r*COLS+c]; }
 function getDropRow(col) {
-  for (var r=ROWS-1; r>=0; r--) { if (!board[r][col]) return r; }
+  for (let r=ROWS-1; r>=0; r--) { if (!board[r][col]) return r; }
   return -1;
 }
 
+/* ── Tap to place ─────────────────────────── */
 function onCellClick(col) {
   if (isAnimating || gameOver) return;
-  var row = getDropRow(col);
+  const row = getDropRow(col);
   if (row===-1) return;
   if (pendingCol===col) return;
   if (pendingCol!==null) removePendingToken();
+
   pendingCol = col;
   pendingRow = row;
   board[row][col] = currentPlayer;
-  var cell = getCell(row, col);
-  var tok = document.createElement('div');
-  var color = getPlayerColor(currentPlayer);
+
+  const cell  = getCell(row, col);
+  const color = getPlayerColor(currentPlayer);
+  const tok   = document.createElement('div');
   tok.className = 'token ' + color;
   tok.id = 'pending-token';
-  var boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
-  var dropFrom = -(boardTop + cell.offsetWidth + 16);
-  var duration = Math.min(0.18 + Math.abs(dropFrom) / 1600, 0.55);
-  tok.style.setProperty('--drop-from', dropFrom + 'px');
-  tok.style.setProperty('--drop-duration', duration + 's');
+
+  const boardTop  = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
+  const dropFrom  = -(boardTop + cell.offsetWidth + 16);
+  const duration  = Math.min(0.18 + Math.abs(dropFrom) / 1600, 0.55);
+  tok.style.setProperty('--drop-from',     dropFrom + 'px');
+  tok.style.setProperty('--drop-duration', duration  + 's');
   tok.classList.add('dropping');
   isAnimating = true;
   cell.classList.add('no-hover');
   cell.appendChild(tok);
+
   setTimeout(function() {
     isAnimating = false;
     tok.classList.remove('dropping');
     tok.classList.add('pending-' + color);
-    showConfirm();
+    setFooter('confirm');
   }, duration * 1000 + 30);
 }
 
 function removePendingToken() {
-  var old = document.getElementById('pending-token');
+  const old = document.getElementById('pending-token');
   if (old) {
     if (pendingRow!==null && pendingCol!==null) board[pendingRow][pendingCol] = 0;
     old.remove();
-    if (pendingCol!==null) getCell(pendingRow, pendingCol).classList.remove('no-hover');
+    getCell(pendingRow, pendingCol).classList.remove('no-hover');
   }
   pendingCol = null; pendingRow = null;
-  clearConfirm();
+  setFooter('empty');
 }
 
-var outsideClickActive = false;
-function showConfirm() {
-  var area = document.getElementById('confirmArea');
-  area.innerHTML = '';
-  var btn = document.createElement('button');
-  btn.className = 'confirm-btn';
-  btn.textContent = 'Confirm Move';
-  btn.onclick = confirmMove;
-  area.appendChild(btn);
-  setTimeout(function() {
-    document.addEventListener('click', onOutsideClick, {capture:true});
-    outsideClickActive = false;
-  }, 60);
+/* ── Footer states ────────────────────────── */
+function setFooter(state) {
+  const footer = document.getElementById('gameFooter');
+  footer.innerHTML = '';
+  if (state === 'confirm') {
+    const btn = document.createElement('button');
+    btn.className   = 'confirm-btn';
+    btn.textContent = 'Confirm Move';
+    btn.onclick     = confirmMove;
+    footer.appendChild(btn);
+    setTimeout(function() {
+      document.addEventListener('click', onOutsideClick, {capture:true});
+      outsideClickActive = false;
+    }, 60);
+  } else if (state === 'continue') {
+    const btn = document.createElement('button');
+    btn.className   = 'confirm-btn';
+    btn.textContent = 'Continue';
+    btn.onclick     = showNewGameModal;
+    footer.appendChild(btn);
+  }
+  // 'empty' → nothing
 }
 
+/* ── Outside click cancels pending ───────── */
+let outsideClickActive = false;
 function onOutsideClick(e) {
   if (!outsideClickActive) { outsideClickActive = true; return; }
-  var area = document.getElementById('confirmArea');
-  var btn = area.querySelector('.confirm-btn');
+  const footer = document.getElementById('gameFooter');
+  const btn    = footer.querySelector('.confirm-btn');
   if (btn && btn.contains(e.target)) return;
   if (document.getElementById('grid').contains(e.target)) return;
   cancelPending();
 }
-
 function cancelPending() {
   removePendingToken();
   document.removeEventListener('click', onOutsideClick, {capture:true});
@@ -558,146 +607,201 @@ function cancelPending() {
   hidePreview();
 }
 
-function clearConfirm() {
-  document.getElementById('confirmArea').innerHTML = '';
-  document.removeEventListener('click', onOutsideClick, {capture:true});
-  outsideClickActive = false;
-}
-
+/* ── Confirm move ─────────────────────────── */
 function confirmMove() {
   if (isAnimating || gameOver || pendingCol===null) return;
-  var col = pendingCol, row = pendingRow;
-  clearConfirm();
+  const col = pendingCol, row = pendingRow;
   document.removeEventListener('click', onOutsideClick, {capture:true});
-  var tok = document.getElementById('pending-token');
+  outsideClickActive = false;
+
+  const tok   = document.getElementById('pending-token');
   if (!tok) return;
-  var color = getPlayerColor(currentPlayer);
+  const color = getPlayerColor(currentPlayer);
   tok.classList.remove('pending-' + color);
   tok.removeAttribute('id');
   tok.style.boxShadow = '';
-  var cell = getCell(row, col);
+
+  const cell = getCell(row, col);
   fireFlash(cell, color);
   pendingCol = null; pendingRow = null;
+  setFooter('empty');
   hidePreview();
+
   setTimeout(function() {
-    var win = checkWin(row, col);
-    if (win) { highlightWin(win); setTimeout(function(){showWinModal(currentPlayer);}, 500); }
-    else if (checkDraw()) { setTimeout(showDrawModal, 300); }
-    else { currentPlayer = currentPlayer===1 ? 2 : 1; updateBanner(); }
+    const win = checkWin(row, col);
+    if (win) {
+      highlightWin(win);
+      setTimeout(function() { showWinState(currentPlayer); }, 400);
+    } else if (checkDraw()) {
+      setTimeout(showDrawState, 300);
+    } else {
+      currentPlayer = currentPlayer===1 ? 2 : 1;
+      updateBanner();
+    }
   }, 120);
 }
 
+/* ── Win / draw states ────────────────────── */
+function showWinState(player) {
+  gameOver = true;
+  const color     = getPlayerColor(player);
+  const colorName = getPlayerColorName(player);
+  const hex       = COLOR_HEX[color];
+
+  // Update banner to "[Color] Wins"
+  const banner = document.getElementById('turnBanner');
+  banner.className = 'turn-banner win-banner';
+  banner.innerHTML = '<span class="turn-dot" style="background:'+hex+'"></span>'+colorName+' Wins!';
+
+  // Disable all cells
+  const cells = document.getElementById('grid').querySelectorAll('.cell');
+  cells.forEach(function(c) { c.classList.add('no-hover'); c.style.cursor='default'; });
+
+  setFooter('continue');
+}
+
+function showDrawState() {
+  gameOver = true;
+  const banner = document.getElementById('turnBanner');
+  banner.className = 'turn-banner win-banner';
+  banner.innerHTML = "It's a draw!";
+  const cells = document.getElementById('grid').querySelectorAll('.cell');
+  cells.forEach(function(c) { c.classList.add('no-hover'); c.style.cursor='default'; });
+  setFooter('continue');
+}
+
+function showNewGameModal() {
+  document.getElementById('modal').classList.add('open');
+}
+
+/* ── Flash animation ─────────────────────── */
 function fireFlash(cell, color) {
-  var hex = COLOR_HEX[color];
-  var sz = cell.offsetWidth;
-  var lineLen = sz * 0.6;
-  var lineW = Math.max(2, sz * 0.055);
-  var canvasSz = sz * 3;
-  var canvas = document.createElement('canvas');
-  canvas.width = canvasSz;
+  const hex      = COLOR_HEX[color];
+  const sz       = cell.offsetWidth;
+  const lineLen  = sz * 0.6;
+  const lineW    = Math.max(2, sz * 0.055);
+  const canvasSz = sz * 3;
+
+  const canvas = document.createElement('canvas');
+  canvas.width  = canvasSz;
   canvas.height = canvasSz;
   canvas.className = 'flash-canvas';
-  canvas.style.width = canvasSz + 'px';
+  canvas.style.width  = canvasSz + 'px';
   canvas.style.height = canvasSz + 'px';
-  canvas.style.left = -sz + 'px';
-  canvas.style.top = -sz + 'px';
+  canvas.style.left   = -sz + 'px';
+  canvas.style.top    = -sz + 'px';
   canvas.style.zIndex = 10;
   cell.appendChild(canvas);
-  var ctx = canvas.getContext('2d');
-  var cx = canvasSz / 2, cy = canvasSz / 2;
-  var numLines = 8;
-  var startDist = sz * 0.58;
-  var start = null;
-  var totalDur = 380;
+
+  const ctx       = canvas.getContext('2d');
+  const cx = canvasSz/2, cy = canvasSz/2;
+  const numLines  = 8;
+  const startDist = sz * 0.58;
+  const totalDur  = 380;
+  let start = null;
+
   function frame(ts) {
     if (!start) start = ts;
-    var t = Math.min((ts - start) / totalDur, 1);
-    var ease = 1 - Math.pow(1 - t, 2);
-    var opacity = t < 0.5 ? 1 : 1 - ((t - 0.5) / 0.5);
+    const t    = Math.min((ts - start) / totalDur, 1);
+    const ease = 1 - Math.pow(1 - t, 2);
+    const opacity = t < 0.5 ? 1 : 1 - ((t - 0.5) / 0.5);
     ctx.clearRect(0, 0, canvasSz, canvasSz);
     ctx.strokeStyle = hex;
-    ctx.lineWidth = lineW;
-    ctx.lineCap = 'round';
+    ctx.lineWidth   = lineW;
+    ctx.lineCap     = 'round';
     ctx.globalAlpha = opacity * 0.9;
-    for (var i = 0; i < numLines; i++) {
-      var angle = (i / numLines) * Math.PI * 2;
-      var dist = startDist + ease * lineLen;
-      var x1 = cx + Math.cos(angle) * (startDist + ease * lineLen * 0.2);
-      var y1 = cy + Math.sin(angle) * (startDist + ease * lineLen * 0.2);
-      var x2 = cx + Math.cos(angle) * dist;
-      var y2 = cy + Math.sin(angle) * dist;
-      ctx.beginPath();
-      ctx.moveTo(x1, y1);
-      ctx.lineTo(x2, y2);
-      ctx.stroke();
+    for (let i=0; i<numLines; i++) {
+      const angle = (i / numLines) * Math.PI * 2;
+      const dist  = startDist + ease * lineLen;
+      const x1 = cx + Math.cos(angle) * (startDist + ease * lineLen * 0.2);
+      const y1 = cy + Math.sin(angle) * (startDist + ease * lineLen * 0.2);
+      const x2 = cx + Math.cos(angle) * dist;
+      const y2 = cy + Math.sin(angle) * dist;
+      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
     }
     if (t < 1) { requestAnimationFrame(frame); } else { canvas.remove(); }
   }
   requestAnimationFrame(frame);
 }
 
+/* ── Preview ghost ───────────────────────── */
 function showPreview(col) {
   if (isAnimating || gameOver || pendingCol!==null) return;
-  var row = getDropRow(col);
+  const row = getDropRow(col);
   if (row===-1) return;
-  var cell = document.getElementById('grid').children[row * COLS + col];
-  var cellRect = cell.getBoundingClientRect();
-  var wrapRect = document.getElementById('boardWrap').getBoundingClientRect();
-  var sz = cell.offsetWidth;
-  var prev = document.getElementById('previewToken');
-  prev.className = 'preview-token ' + getPlayerColor(currentPlayer);
-  prev.style.width = sz + 'px';
+  const cell     = document.getElementById('grid').children[row*COLS+col];
+  const cellRect = cell.getBoundingClientRect();
+  const wrapRect = document.getElementById('boardWrap').getBoundingClientRect();
+  const sz       = cell.offsetWidth;
+  const prev     = document.getElementById('previewToken');
+  prev.className    = 'preview-token ' + getPlayerColor(currentPlayer);
+  prev.style.width  = sz + 'px';
   prev.style.height = sz + 'px';
-  prev.style.top = -(sz + 8) + 'px';
-  prev.style.left = (cellRect.left - wrapRect.left + 14) + 'px';
+  prev.style.top    = -(sz + 8) + 'px';
+  prev.style.left   = (cellRect.left - wrapRect.left + 14) + 'px';
   prev.style.display = 'block';
 }
 function hidePreview() { document.getElementById('previewToken').style.display = 'none'; }
 
+/* ── Win detection ───────────────────────── */
 function checkWin(row, col) {
-  var dirs = [[0,1],[1,0],[1,1],[1,-1]];
-  var p = board[row][col];
-  for (var d=0; d<dirs.length; d++) {
-    var dr=dirs[d][0], dc=dirs[d][1];
-    var cells = [[row,col]];
-    for (var i=1;i<4;i++) { var r=row+dr*i,c=col+dc*i; if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p) break; cells.push([r,c]); }
-    for (var i=1;i<4;i++) { var r=row-dr*i,c=col-dc*i; if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p) break; cells.push([r,c]); }
+  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
+  const p    = board[row][col];
+  for (let d=0; d<dirs.length; d++) {
+    const dr=dirs[d][0], dc=dirs[d][1];
+    let cells = [[row,col]];
+    for (let i=1;i<4;i++){const r=row+dr*i,c=col+dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
+    for (let i=1;i<4;i++){const r=row-dr*i,c=col-dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
     if (cells.length>=4) return cells.slice(0,4);
   }
   return null;
 }
 function checkDraw() { return board[0].every(function(v){return v!==0;}); }
 function highlightWin(cells) {
-  gameOver = true;
   cells.forEach(function(rc) {
-    var tok = getCell(rc[0],rc[1]).querySelector('.token');
+    const tok = getCell(rc[0],rc[1]).querySelector('.token');
     if (tok) tok.classList.add('win');
   });
 }
+
+/* ── Turn banner ─────────────────────────── */
 function updateBanner() {
-  var color = COLOR_HEX[getPlayerColor(currentPlayer)];
-  document.getElementById('turnBanner').innerHTML =
-    '<span class="turn-dot" style="background:'+color+'"></span>'+getPlayerName(currentPlayer)+"'s turn";
+  const color = COLOR_HEX[getPlayerColor(currentPlayer)];
+  const name  = getPlayerColorName(currentPlayer);
+  const banner = document.getElementById('turnBanner');
+  banner.className = 'turn-banner';
+  banner.innerHTML = '<span class="turn-dot" style="background:'+color+'"></span>'+name+"'s turn";
 }
-function showWinModal(player) {
-  document.getElementById('modalDot').style.background = COLOR_HEX[getPlayerColor(player)];
-  document.getElementById('modalTitle').textContent = getPlayerName(player) + ' wins!';
-  document.getElementById('modalSub').textContent = 'Well played.';
+
+/* ── Modal ───────────────────────────────── */
+// Modal title is set from win/draw state when Continue is tapped
+function showNewGameModal() {
+  // Populate modal from current game state
+  const wasGameOver = gameOver;
+  // Find winner color from banner text (simplest approach)
+  const banner = document.getElementById('turnBanner');
+  const winnerMatch = banner.textContent.match(/^(\w+) Wins/);
+  if (winnerMatch) {
+    const winnerName = winnerMatch[1]; // "Pink" or "Green"
+    const color = winnerName.toLowerCase();
+    document.getElementById('modalDot').style.background = COLOR_HEX[color] || '#7a9aaa';
+    document.getElementById('modalTitle').textContent = winnerName + ' Wins!';
+  } else {
+    document.getElementById('modalDot').style.background = '#7a9aaa';
+    document.getElementById('modalTitle').textContent = "It's a Draw!";
+  }
   document.getElementById('modal').classList.add('open');
 }
-function showDrawModal() {
-  gameOver = true;
-  document.getElementById('modalDot').style.background = '#7a9aaa';
-  document.getElementById('modalTitle').textContent = "It's a draw!";
-  document.getElementById('modalSub').textContent = 'Nobody wins this time.';
-  document.getElementById('modal').classList.add('open');
-}
+
+/* ── Copy link ───────────────────────────── */
 function copyLink() {
-  var btn = document.getElementById('copyBtn');
+  const btn = document.getElementById('copyBtn');
   navigator.clipboard.writeText(GAME_LINK).catch(function(){});
   btn.textContent = 'Copied!'; btn.classList.add('copied');
   setTimeout(function(){ btn.textContent = 'Copy Link'; btn.classList.remove('copied'); }, 2000);
 }
+
+/* ── Cancel on board bg click ────────────── */
 document.getElementById('boardWrap').addEventListener('click', function(e) {
   if (pendingCol!==null && !e.target.closest('.cell')) cancelPending();
 });

@@ -8,23 +8,25 @@
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; }
+  html, body { height: 100%; overflow: hidden; }
 
   body {
     font-family: 'Nunito', sans-serif;
     background: #2c3640;
-    min-height: 100vh;
+    height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 0;
   }
 
   .screen { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 520px; padding: 0 16px; }
   .screen.active { display: flex; }
 
   /* WELCOME */
-  #welcomeScreen { min-height: 100vh; justify-content: center; }
+  #welcomeScreen {
+    height: 100vh;
+    justify-content: center;
+  }
 
   .welcome-eyebrow {
     font-family: 'Lora', serif;
@@ -43,14 +45,13 @@
     letter-spacing: -2px;
     text-align: center;
     line-height: 1;
-    margin-bottom: 0;
   }
 
   .token-rain-stage {
     position: relative;
     width: 100%;
     flex: 1;
-    min-height: 160px;
+    min-height: 120px;
     max-height: 260px;
     overflow: hidden;
   }
@@ -72,7 +73,6 @@
     100% { transform: translateY(calc(260px + 80px + var(--token-size))); opacity: 0; }
   }
 
-  /* Buttons */
   .btn-main {
     background: #e8c97a;
     border: none;
@@ -86,6 +86,7 @@
     transition: transform 0.1s, background 0.15s;
     position: relative;
     z-index: 2;
+    flex-shrink: 0;
   }
   .btn-main:hover { background: #dbb95e; transform: scale(1.02); }
   .btn-main:active { transform: scale(0.98); }
@@ -93,7 +94,13 @@
   #welcomeScreen .btn-main { margin-bottom: 48px; }
 
   /* SHARE */
-  #shareScreen { padding-top: 32px; padding-bottom: 40px; min-height: 100vh; justify-content: center; }
+  #shareScreen {
+    height: 100vh;
+    justify-content: center;
+    overflow-y: auto;
+    padding-top: 32px;
+    padding-bottom: 40px;
+  }
 
   .share-header {
     font-family: 'Nunito', sans-serif;
@@ -170,12 +177,13 @@
   .color-choice.selected-pink  .choice-name { color: #f48fb1; }
   .color-choice.selected-green .choice-name { color: #a5d6a7; }
 
-  /* GAME */
+  /* GAME — strict viewport fit */
   #gameScreen {
-    padding-top: 0;
-    padding-bottom: 0;
-    min-height: 100vh;
+    height: 100vh;
     justify-content: space-between;
+    padding-top: 16px;
+    padding-bottom: 16px;
+    gap: 0;
   }
 
   .game-header {
@@ -183,56 +191,58 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    padding-top: 24px;
-    min-height: 80px;
-    justify-content: center;
+    flex-shrink: 0;
+    padding-bottom: 8px;
   }
 
   .game-title-btn {
-    font-family: 'Lora', serif; font-size: 22px; font-weight: 600;
-    color: #7a9aaa; cursor: pointer; margin-bottom: 6px;
+    font-family: 'Lora', serif; font-size: 20px; font-weight: 600;
+    color: #7a9aaa; cursor: pointer; margin-bottom: 4px;
     background: none; border: none; padding: 0;
   }
   .game-title-btn:hover { color: #a0bfcc; }
 
   .turn-banner {
-    font-size: 20px; font-weight: 800; color: #f0ebe0;
-    min-height: 30px; text-align: center;
-    transition: opacity 0.2s;
+    font-size: 19px; font-weight: 800; color: #f0ebe0;
+    min-height: 26px; text-align: center;
   }
   .turn-banner.win-banner {
-    font-size: 28px;
+    font-size: 26px;
     font-family: 'Lora', serif;
     font-weight: 700;
   }
   .turn-dot {
-    display: inline-block; width: 18px; height: 18px;
+    display: inline-block; width: 16px; height: 16px;
     border-radius: 50%; vertical-align: middle;
-    margin-right: 7px; position: relative; top: -2px;
+    margin-right: 6px; position: relative; top: -2px;
   }
 
+  /* Board fills remaining space, never overflows */
   .board-area {
     width: 100%;
+    flex: 1;
     display: flex;
     align-items: center;
     justify-content: center;
-    flex: 1;
-    padding: 8px 0;
+    min-height: 0;
+    padding: 4px 0;
   }
 
   .board-wrap {
     background: #3d4e5c;
     border-radius: 20px;
-    padding: 14px;
+    padding: 10px;
     box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
     position: relative;
     width: 100%;
   }
+
   .grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 7px;
+    gap: 6px;
   }
+
   .cell {
     aspect-ratio: 1;
     border-radius: 50%;
@@ -249,9 +259,7 @@
   .token.pink  { background: #f48fb1; }
   .token.green { background: #a5d6a7; }
 
-  .token.win {
-    animation: winPulse 1s ease-in-out infinite;
-  }
+  .token.win { animation: winPulse 1s ease-in-out infinite; }
   @keyframes winPulse {
     0%, 100% { box-shadow: 0 0 0 3px #f0ebe0; }
     50%       { box-shadow: 0 0 0 6px #f0ebe0, 0 0 14px rgba(240,235,224,0.5); }
@@ -276,10 +284,7 @@
     50%       { box-shadow: 0 0 0 6px rgba(165,214,167,0.5); }
   }
 
-  .flash-canvas {
-    position: absolute;
-    pointer-events: none;
-  }
+  .flash-canvas { position: absolute; pointer-events: none; }
 
   .preview-token {
     position: absolute;
@@ -290,14 +295,14 @@
   .preview-token.pink  { background: #f48fb1; }
   .preview-token.green { background: #a5d6a7; }
 
+  /* Footer — fixed height, always visible */
   .game-footer {
     width: 100%;
-    min-height: 88px;
+    height: 60px;
+    flex-shrink: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding-bottom: 32px;
-    padding-top: 8px;
   }
 
   .confirm-btn {
@@ -306,7 +311,7 @@
     color: #2c3640;
     font-family: 'Nunito', sans-serif;
     font-size: 18px; font-weight: 800;
-    padding: 15px 44px;
+    padding: 13px 44px;
     cursor: pointer;
     transition: transform 0.1s, background 0.15s;
     animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
@@ -418,7 +423,7 @@ const ROWS = 6, COLS = 7;
 let board, currentPlayer, pendingCol, pendingRow, isAnimating, gameOver;
 let player1Color = null;
 const COLOR_HEX  = { pink: '#f48fb1', green: '#a5d6a7' };
-const COLOR_NAME = { pink: 'Pink',    green: 'Green'   };
+const COLOR_NAME = { pink: 'Pink', green: 'Green' };
 const GAME_LINK  = 'pizzaemoji.net/four&id=g7x2k9';
 
 /* ── Rain ─────────────────────────────────── */
@@ -471,7 +476,7 @@ function selectColor(color) {
 }
 
 /* ── Player helpers ───────────────────────── */
-function getPlayerColor(p) { return p===1 ? player1Color : (player1Color==='pink' ? 'green' : 'pink'); }
+function getPlayerColor(p)     { return p===1 ? player1Color : (player1Color==='pink' ? 'green' : 'pink'); }
 function getPlayerColorName(p) { return COLOR_NAME[getPlayerColor(p)]; }
 
 /* ── Game ─────────────────────────────────── */
@@ -503,14 +508,18 @@ function renderBoard() {
       grid.appendChild(cell);
     }
   }
+  updatePreviewSize();
+}
+
+function updatePreviewSize() {
+  const grid = document.getElementById('grid');
   const firstCell = grid.children[0];
-  if (firstCell) {
-    const sz = firstCell.offsetWidth || 54;
-    const prev = document.getElementById('previewToken');
-    prev.style.width  = sz + 'px';
-    prev.style.height = sz + 'px';
-    prev.style.top    = -(sz + 8) + 'px';
-  }
+  if (!firstCell) return;
+  const sz = firstCell.offsetWidth || 54;
+  const prev = document.getElementById('previewToken');
+  prev.style.width  = sz + 'px';
+  prev.style.height = sz + 'px';
+  prev.style.top    = -(sz + 8) + 'px';
 }
 
 function getCell(r,c) { return document.getElementById('grid').children[r*COLS+c]; }
@@ -527,8 +536,7 @@ function onCellClick(col) {
   if (pendingCol===col) return;
   if (pendingCol!==null) removePendingToken();
 
-  pendingCol = col;
-  pendingRow = row;
+  pendingCol = col; pendingRow = row;
   board[row][col] = currentPlayer;
 
   const cell  = getCell(row, col);
@@ -537,9 +545,9 @@ function onCellClick(col) {
   tok.className = 'token ' + color;
   tok.id = 'pending-token';
 
-  const boardTop  = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
-  const dropFrom  = -(boardTop + cell.offsetWidth + 16);
-  const duration  = Math.min(0.18 + Math.abs(dropFrom) / 1600, 0.55);
+  const boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
+  const dropFrom = -(boardTop + cell.offsetWidth + 16);
+  const duration = Math.min(0.18 + Math.abs(dropFrom) / 1600, 0.55);
   tok.style.setProperty('--drop-from',     dropFrom + 'px');
   tok.style.setProperty('--drop-duration', duration  + 's');
   tok.classList.add('dropping');
@@ -558,7 +566,7 @@ function onCellClick(col) {
 function removePendingToken() {
   const old = document.getElementById('pending-token');
   if (old) {
-    if (pendingRow!==null && pendingCol!==null) board[pendingRow][pendingCol] = 0;
+    board[pendingRow][pendingCol] = 0;
     old.remove();
     getCell(pendingRow, pendingCol).classList.remove('no-hover');
   }
@@ -587,10 +595,8 @@ function setFooter(state) {
     btn.onclick     = showNewGameModal;
     footer.appendChild(btn);
   }
-  // 'empty' → nothing
 }
 
-/* ── Outside click cancels pending ───────── */
 let outsideClickActive = false;
 function onOutsideClick(e) {
   if (!outsideClickActive) { outsideClickActive = true; return; }
@@ -607,19 +613,18 @@ function cancelPending() {
   hidePreview();
 }
 
-/* ── Confirm move ─────────────────────────── */
+/* ── Confirm ──────────────────────────────── */
 function confirmMove() {
   if (isAnimating || gameOver || pendingCol===null) return;
   const col = pendingCol, row = pendingRow;
   document.removeEventListener('click', onOutsideClick, {capture:true});
   outsideClickActive = false;
 
-  const tok   = document.getElementById('pending-token');
+  const tok = document.getElementById('pending-token');
   if (!tok) return;
   const color = getPlayerColor(currentPlayer);
   tok.classList.remove('pending-' + color);
   tok.removeAttribute('id');
-  tok.style.boxShadow = '';
 
   const cell = getCell(row, col);
   fireFlash(cell, color);
@@ -641,50 +646,50 @@ function confirmMove() {
   }, 120);
 }
 
-/* ── Win / draw states ────────────────────── */
+/* ── Win / draw display ───────────────────── */
 function showWinState(player) {
   gameOver = true;
-  const color     = getPlayerColor(player);
-  const colorName = getPlayerColorName(player);
-  const hex       = COLOR_HEX[color];
-
-  // Update banner to "[Color] Wins"
+  const color = getPlayerColor(player);
+  const hex   = COLOR_HEX[color];
   const banner = document.getElementById('turnBanner');
   banner.className = 'turn-banner win-banner';
-  banner.innerHTML = '<span class="turn-dot" style="background:'+hex+'"></span>'+colorName+' Wins!';
-
-  // Disable all cells
-  const cells = document.getElementById('grid').querySelectorAll('.cell');
-  cells.forEach(function(c) { c.classList.add('no-hover'); c.style.cursor='default'; });
-
+  banner.innerHTML = '<span class="turn-dot" style="background:'+hex+'"></span>'+COLOR_NAME[color]+' Wins!';
+  document.getElementById('grid').querySelectorAll('.cell').forEach(function(c) {
+    c.classList.add('no-hover'); c.style.cursor='default';
+  });
   setFooter('continue');
 }
-
 function showDrawState() {
   gameOver = true;
   const banner = document.getElementById('turnBanner');
   banner.className = 'turn-banner win-banner';
-  banner.innerHTML = "It's a draw!";
-  const cells = document.getElementById('grid').querySelectorAll('.cell');
-  cells.forEach(function(c) { c.classList.add('no-hover'); c.style.cursor='default'; });
+  banner.textContent = "It's a draw!";
+  document.getElementById('grid').querySelectorAll('.cell').forEach(function(c) {
+    c.classList.add('no-hover'); c.style.cursor='default';
+  });
   setFooter('continue');
 }
-
 function showNewGameModal() {
+  const banner = document.getElementById('turnBanner');
+  const winnerMatch = banner.textContent.match(/^(\w+) Wins/);
+  if (winnerMatch) {
+    const color = winnerMatch[1].toLowerCase();
+    document.getElementById('modalDot').style.background = COLOR_HEX[color] || '#7a9aaa';
+    document.getElementById('modalTitle').textContent = winnerMatch[1] + ' Wins!';
+  } else {
+    document.getElementById('modalDot').style.background = '#7a9aaa';
+    document.getElementById('modalTitle').textContent = "It's a Draw!";
+  }
   document.getElementById('modal').classList.add('open');
 }
 
-/* ── Flash animation ─────────────────────── */
+/* ── Flash ────────────────────────────────── */
 function fireFlash(cell, color) {
   const hex      = COLOR_HEX[color];
   const sz       = cell.offsetWidth;
-  const lineLen  = sz * 0.6;
-  const lineW    = Math.max(2, sz * 0.055);
   const canvasSz = sz * 3;
-
-  const canvas = document.createElement('canvas');
-  canvas.width  = canvasSz;
-  canvas.height = canvasSz;
+  const canvas   = document.createElement('canvas');
+  canvas.width = canvas.height = canvasSz;
   canvas.className = 'flash-canvas';
   canvas.style.width  = canvasSz + 'px';
   canvas.style.height = canvasSz + 'px';
@@ -692,39 +697,31 @@ function fireFlash(cell, color) {
   canvas.style.top    = -sz + 'px';
   canvas.style.zIndex = 10;
   cell.appendChild(canvas);
-
-  const ctx       = canvas.getContext('2d');
+  const ctx = canvas.getContext('2d');
   const cx = canvasSz/2, cy = canvasSz/2;
-  const numLines  = 8;
-  const startDist = sz * 0.58;
-  const totalDur  = 380;
+  const startDist = sz * 0.58, lineLen = sz * 0.6, lineW = Math.max(2, sz*0.055);
   let start = null;
-
   function frame(ts) {
     if (!start) start = ts;
-    const t    = Math.min((ts - start) / totalDur, 1);
-    const ease = 1 - Math.pow(1 - t, 2);
-    const opacity = t < 0.5 ? 1 : 1 - ((t - 0.5) / 0.5);
-    ctx.clearRect(0, 0, canvasSz, canvasSz);
-    ctx.strokeStyle = hex;
-    ctx.lineWidth   = lineW;
-    ctx.lineCap     = 'round';
-    ctx.globalAlpha = opacity * 0.9;
-    for (let i=0; i<numLines; i++) {
-      const angle = (i / numLines) * Math.PI * 2;
-      const dist  = startDist + ease * lineLen;
-      const x1 = cx + Math.cos(angle) * (startDist + ease * lineLen * 0.2);
-      const y1 = cy + Math.sin(angle) * (startDist + ease * lineLen * 0.2);
-      const x2 = cx + Math.cos(angle) * dist;
-      const y2 = cy + Math.sin(angle) * dist;
-      ctx.beginPath(); ctx.moveTo(x1,y1); ctx.lineTo(x2,y2); ctx.stroke();
+    const t    = Math.min((ts-start)/380, 1);
+    const ease = 1 - Math.pow(1-t, 2);
+    const opacity = t < 0.5 ? 1 : 1 - ((t-0.5)/0.5);
+    ctx.clearRect(0,0,canvasSz,canvasSz);
+    ctx.strokeStyle = hex; ctx.lineWidth = lineW; ctx.lineCap = 'round'; ctx.globalAlpha = opacity*0.9;
+    for (let i=0;i<8;i++) {
+      const a  = (i/8)*Math.PI*2;
+      const d  = startDist + ease*lineLen;
+      ctx.beginPath();
+      ctx.moveTo(cx+Math.cos(a)*(startDist+ease*lineLen*0.2), cy+Math.sin(a)*(startDist+ease*lineLen*0.2));
+      ctx.lineTo(cx+Math.cos(a)*d, cy+Math.sin(a)*d);
+      ctx.stroke();
     }
-    if (t < 1) { requestAnimationFrame(frame); } else { canvas.remove(); }
+    if (t<1) { requestAnimationFrame(frame); } else { canvas.remove(); }
   }
   requestAnimationFrame(frame);
 }
 
-/* ── Preview ghost ───────────────────────── */
+/* ── Preview ──────────────────────────────── */
 function showPreview(col) {
   if (isAnimating || gameOver || pendingCol!==null) return;
   const row = getDropRow(col);
@@ -737,34 +734,28 @@ function showPreview(col) {
   prev.className    = 'preview-token ' + getPlayerColor(currentPlayer);
   prev.style.width  = sz + 'px';
   prev.style.height = sz + 'px';
-  prev.style.top    = -(sz + 8) + 'px';
-  prev.style.left   = (cellRect.left - wrapRect.left + 14) + 'px';
+  prev.style.top    = -(sz+8) + 'px';
+  prev.style.left   = (cellRect.left - wrapRect.left + 10) + 'px';
   prev.style.display = 'block';
 }
 function hidePreview() { document.getElementById('previewToken').style.display = 'none'; }
 
-/* ── Win detection ───────────────────────── */
+/* ── Win detection ────────────────────────── */
 function checkWin(row, col) {
-  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
-  const p    = board[row][col];
-  for (let d=0; d<dirs.length; d++) {
+  const dirs = [[0,1],[1,0],[1,1],[1,-1]], p = board[row][col];
+  for (let d=0;d<dirs.length;d++) {
     const dr=dirs[d][0], dc=dirs[d][1];
-    let cells = [[row,col]];
-    for (let i=1;i<4;i++){const r=row+dr*i,c=col+dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
-    for (let i=1;i<4;i++){const r=row-dr*i,c=col-dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
-    if (cells.length>=4) return cells.slice(0,4);
+    let cells=[[row,col]];
+    for(let i=1;i<4;i++){const r=row+dr*i,c=col+dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
+    for(let i=1;i<4;i++){const r=row-dr*i,c=col-dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
+    if(cells.length>=4) return cells.slice(0,4);
   }
   return null;
 }
 function checkDraw() { return board[0].every(function(v){return v!==0;}); }
 function highlightWin(cells) {
-  cells.forEach(function(rc) {
-    const tok = getCell(rc[0],rc[1]).querySelector('.token');
-    if (tok) tok.classList.add('win');
-  });
+  cells.forEach(function(rc){ const t=getCell(rc[0],rc[1]).querySelector('.token'); if(t) t.classList.add('win'); });
 }
-
-/* ── Turn banner ─────────────────────────── */
 function updateBanner() {
   const color = COLOR_HEX[getPlayerColor(currentPlayer)];
   const name  = getPlayerColorName(currentPlayer);
@@ -773,35 +764,14 @@ function updateBanner() {
   banner.innerHTML = '<span class="turn-dot" style="background:'+color+'"></span>'+name+"'s turn";
 }
 
-/* ── Modal ───────────────────────────────── */
-// Modal title is set from win/draw state when Continue is tapped
-function showNewGameModal() {
-  // Populate modal from current game state
-  const wasGameOver = gameOver;
-  // Find winner color from banner text (simplest approach)
-  const banner = document.getElementById('turnBanner');
-  const winnerMatch = banner.textContent.match(/^(\w+) Wins/);
-  if (winnerMatch) {
-    const winnerName = winnerMatch[1]; // "Pink" or "Green"
-    const color = winnerName.toLowerCase();
-    document.getElementById('modalDot').style.background = COLOR_HEX[color] || '#7a9aaa';
-    document.getElementById('modalTitle').textContent = winnerName + ' Wins!';
-  } else {
-    document.getElementById('modalDot').style.background = '#7a9aaa';
-    document.getElementById('modalTitle').textContent = "It's a Draw!";
-  }
-  document.getElementById('modal').classList.add('open');
-}
-
-/* ── Copy link ───────────────────────────── */
+/* ── Copy link ────────────────────────────── */
 function copyLink() {
   const btn = document.getElementById('copyBtn');
   navigator.clipboard.writeText(GAME_LINK).catch(function(){});
   btn.textContent = 'Copied!'; btn.classList.add('copied');
-  setTimeout(function(){ btn.textContent = 'Copy Link'; btn.classList.remove('copied'); }, 2000);
+  setTimeout(function(){ btn.textContent='Copy Link'; btn.classList.remove('copied'); }, 2000);
 }
 
-/* ── Cancel on board bg click ────────────── */
 document.getElementById('boardWrap').addEventListener('click', function(e) {
   if (pendingCol!==null && !e.target.closest('.cell')) cancelPending();
 });

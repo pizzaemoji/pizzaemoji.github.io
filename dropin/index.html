@@ -138,7 +138,6 @@
     border-radius: 50%; vertical-align: middle; margin-right: 7px; position: relative; top: -2px;
   }
 
-  /* Board */
   .board-wrap {
     background: #3d4e5c; border-radius: 18px; padding: 10px;
     box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
@@ -154,7 +153,7 @@
   .cell.no-hover { cursor: default; }
   .cell.no-hover:active { background: #243040; }
 
-  .token { position: absolute; inset: 0; border-radius: 50%; transition: filter 0.15s; }
+  .token { position: absolute; inset: 0; border-radius: 50%; }
   .token.pink  { background: #f48fb1; }
   .token.green { background: #a5d6a7; }
 
@@ -182,10 +181,14 @@
     50%      { box-shadow: inset 0 0 0 2px  rgba(30,110,55,0.15); }
   }
 
-  /* Win tap — JS adds this class sequentially, darkens token */
-  .token.win-tap {
-    filter: brightness(0.45);
-    transition: filter 0.12s ease-in;
+  /* Win chasing light — JS toggles this class on one token at a time */
+  .token.win-chase {
+    filter: brightness(0.38);
+    transition: filter 0.08s ease-in;
+  }
+  .token.win-normal {
+    filter: brightness(1);
+    transition: filter 0.12s ease-out;
   }
 
   .token.dropping {
@@ -198,7 +201,6 @@
 
   .flash-canvas { position: absolute; pointer-events: none; }
 
-  /* Confirm button directly under board */
   .confirm-wrap {
     width: 100%; display: flex; align-items: center; justify-content: center;
     height: 56px; flex-shrink: 0; margin-top: 10px;
@@ -304,6 +306,7 @@ const ROWS = 6, COLS = 7;
 let board, currentPlayer, pendingCol, pendingRow, isAnimating, gameOver;
 let player1Color = null;
 let lastMoveRow = null, lastMoveCol = null;
+let chaseInterval = null;
 
 const COLOR_HEX  = { pink: '#f48fb1', green: '#a5d6a7' };
 const COLOR_NAME = { pink: 'Pink', green: 'Green' };
@@ -354,7 +357,11 @@ function show(id) {
   });
   setVH();
 }
-function goHome() { document.getElementById('modal').classList.remove('open'); show('welcomeScreen'); }
+function goHome() {
+  stopChase();
+  document.getElementById('modal').classList.remove('open');
+  show('welcomeScreen');
+}
 function goToShare() {
   player1Color = null;
   document.getElementById('choicePink').className  = 'color-choice';
@@ -376,6 +383,7 @@ function getPlayerColorName(p) { return COLOR_NAME[getPlayerColor(p)]; }
 /* ── Game init ────────────────────────────── */
 function startGame() {
   if (!player1Color) return;
+  stopChase();
   board = Array.from({length:ROWS}, function(){ return Array(COLS).fill(0); });
   currentPlayer=1; pendingCol=null; pendingRow=null;
   isAnimating=false; gameOver=false;
@@ -401,8 +409,7 @@ function renderBoard() {
         }
         cell.appendChild(tok);
       }
-      cell.addEventListener('click',      (function(col){return function(){onCellClick(col);};})(c));
-      cell.addEventListener('mouseenter', (function(col){return function(){};})(c));
+      cell.addEventListener('click', (function(col){return function(){onCellClick(col);};})(c));
       grid.appendChild(cell);
     }
   }
@@ -525,7 +532,11 @@ function confirmMove() {
   setTimeout(function() {
     var win = checkWin(movedRow, movedCol);
     if (win) {
-      animateWinTaps(win, movedPlayer);
+      gameOver = true;
+      document.getElementById('grid').querySelectorAll('.cell').forEach(function(c) {
+        c.classList.add('no-hover'); c.style.cursor='default';
+      });
+      startChase(win, movedPlayer);
     } else if (checkDraw()) {
       setTimeout(showDrawState, 300);
     } else {
@@ -539,32 +550,44 @@ function confirmMove() {
   }, 120);
 }
 
-/* ── Win tap animation — one two three four ─
-   Each token darkens in sequence, then they
-   all stay dark and the win state shows.
+/* ── Chasing lights win effect ───────────────
+   One token darkens at a time, loops forever
+   until Continue is tapped.
 ─────────────────────────────────────────── */
-function animateWinTaps(cells, player) {
-  gameOver = true;
-  var tapDelay = 320; // ms between each tap
-  var holdDark = 180; // how long each stays dark before next taps
-
-  // disable board interaction
-  document.getElementById('grid').querySelectorAll('.cell').forEach(function(c) {
-    c.classList.add('no-hover'); c.style.cursor='default';
+function startChase(cells, player) {
+  var toks = cells.map(function(rc) {
+    return getCell(rc[0],rc[1]).querySelector('.token');
   });
 
-  cells.forEach(function(rc, i) {
-    setTimeout(function() {
-      var tok = getCell(rc[0],rc[1]).querySelector('.token');
-      if (tok) tok.classList.add('win-tap');
-    }, i * tapDelay);
-  });
+  var current = 0;
+  var stepMs  = 340; // time each token stays dark
 
-  // after all four have tapped, show win state
-  var totalTime = (cells.length - 1) * tapDelay + holdDark + 200;
+  // light up first token immediately
+  toks[0].classList.add('win-chase');
+
+  chaseInterval = setInterval(function() {
+    // darken current, restore previous
+    var prev = (current + toks.length - 1) % toks.length;
+    toks[prev].classList.remove('win-chase');
+    toks[prev].classList.add('win-normal');
+    // small timeout so the transition out starts before next one snaps in
+    setTimeout(function(p){ toks[p].classList.remove('win-normal'); }(prev), 300);
+
+    current = (current + 1) % toks.length;
+    toks[current].classList.add('win-chase');
+  }, stepMs);
+
+  // show banner and continue button after one full pass (4 steps)
   setTimeout(function() {
     showWinState(player);
-  }, totalTime);
+  }, stepMs * toks.length + 80);
+}
+
+function stopChase() {
+  if (chaseInterval !== null) {
+    clearInterval(chaseInterval);
+    chaseInterval = null;
+  }
 }
 
 /* ── Win / draw display ───────────────────── */
@@ -586,6 +609,7 @@ function showDrawState() {
   setConfirm('continue');
 }
 function showNewGameModal() {
+  stopChase();
   var banner=document.getElementById('turnBanner');
   var m=banner.textContent.match(/^(\w+) Wins/);
   if (m) {

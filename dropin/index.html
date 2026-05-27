@@ -266,6 +266,14 @@
   .modal-win-dot { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px; }
   .modal-title { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; color: #f0ebe0; margin-bottom: 24px; }
   .modal-q { font-size: 22px; font-weight: 800; color: #f0ebe0; margin-bottom: 20px; }
+  .modal-waiting {
+    font-family: 'Lora', serif; font-style: italic;
+    font-size: 16px; color: #7a9aaa; margin-bottom: 20px; text-align: center;
+  }
+  .modal-left {
+    font-size: 17px; font-weight: 700; color: #8fa0b0;
+    margin-bottom: 20px; text-align: center;
+  }
   .modal-btns { display: flex; gap: 12px; justify-content: center; }
   .modal-btn {
     border: none; border-radius: 12px; font-family: 'Nunito', sans-serif;
@@ -283,7 +291,7 @@
 <div class="screen active" id="welcomeScreen">
   <div style="margin-bottom:8px;">
     <div class="welcome-eyebrow">a game for two</div>
-    <div class="welcome-title">Drop In 3.0</div>
+    <div class="welcome-title">Drop In</div>
   </div>
   <div class="token-rain-stage" id="rainStage"></div>
   <button class="btn-main" id="btnNewGame">New Game</button>
@@ -344,11 +352,7 @@
   <div class="modal">
     <div class="modal-win-dot" id="modalDot"></div>
     <div class="modal-title" id="modalTitle"></div>
-    <div class="modal-q">Play again?</div>
-    <div class="modal-btns">
-      <button class="modal-btn yes" id="btnPlayAgain">Yes!</button>
-      <button class="modal-btn no"  id="btnNoThanks">No thanks</button>
-    </div>
+    <div id="modalBody"></div>
   </div>
 </div>
 
@@ -377,7 +381,7 @@ const COLOR_HEX  = { pink: '#f48fb1', green: '#a5d6a7' };
 const COLOR_NAME = { pink: 'Pink',    green: 'Green'   };
 
 /* ── State ────────────────────────────────── */
-let gameId = null, myRole = null, myColor = null, opponentColor = null;
+let gameId = null, myRole = null, myColor = null, opponentColor = null, winnerColor = null;
 let board = [], currentTurn = null, gameOver = false;
 let pendingCol = null, pendingRow = null, isAnimating = false;
 let lastMoveRow = null, lastMoveCol = null;
@@ -419,8 +423,7 @@ document.getElementById('letsPlayBtn')  .addEventListener('click', onPlayer1Read
 document.getElementById('copyBtn')      .addEventListener('click', () => copyLink('copyBtn'));
 document.getElementById('waitingCopyBtn').addEventListener('click', () => copyLink('waitingCopyBtn'));
 document.getElementById('btnHome')      .addEventListener('click', goHome);
-document.getElementById('btnPlayAgain') .addEventListener('click', onPlayAgain);
-document.getElementById('btnNoThanks')  .addEventListener('click', goHome);
+
 document.getElementById('choicePink')   .addEventListener('click', () => selectColor('pink'));
 document.getElementById('choiceGreen')  .addEventListener('click', () => selectColor('green'));
 document.getElementById('boardWrap')    .addEventListener('click', e => {
@@ -472,6 +475,8 @@ async function onNewGame() {
     player2Color: null,
     status:       'waiting',
     lastMove:     null,
+    player1Rematch: null,
+    player2Rematch: null,
     createdAt:    serverTimestamp()
   });
   document.getElementById('shareLinkUrl').textContent = gameUrl();
@@ -541,7 +546,13 @@ function handleGameState(data) {
   }
   // Already in game
   if (onGame) {
-    // Play Again reset — board is empty and it's player1's turn again
+    // Rematch votes updated
+    const modalOpen = document.getElementById('modal').classList.contains('open');
+    if (data.status === 'done' && (data.player1Rematch || data.player2Rematch)) {
+      handleRematchVotes(data);
+      return;
+    }
+    // Play Again confirmed by both — reset
     if (data.status === 'active' && gameOver) {
       opponentColor = myRole === 'player1' ? data.player2Color : data.player1Color;
       startGameUI(data);
@@ -589,7 +600,8 @@ function syncFromFirestore(data) {
       const win = checkWin(changedRow, changedCol);
       if (win) {
         gameOver=true; disableBoard();
-        startChase(win, myTurn() ? myRole : (myRole==='player1'?'player2':'player1'));
+        const opponentRole = myRole==='player1' ? 'player2' : 'player1';
+        startChase(win, opponentRole);
       } else if (checkDraw()) {
         showDrawState();
       } else {
@@ -814,14 +826,14 @@ function stopChase() {
 
 /* ── Win / draw ───────────────────────────── */
 function showWinState(winnerRole) {
-  const color  = winnerRole===myRole ? myColor : opponentColor;
+  winnerColor = winnerRole===myRole ? myColor : opponentColor;
   const banner = document.getElementById('turnBanner');
   banner.className='turn-banner win-banner';
-  banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[color]}"></span>${COLOR_NAME[color]} Wins!`;
+  banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[winnerColor]}"></span>${COLOR_NAME[winnerColor]} Wins!`;
   setConfirm('continue');
 }
 function showDrawState() {
-  gameOver=true; disableBoard();
+  gameOver=true; winnerColor=null; disableBoard();
   const banner=document.getElementById('turnBanner');
   banner.className='turn-banner win-banner';
   banner.textContent="It's a draw!";
@@ -829,33 +841,139 @@ function showDrawState() {
 }
 function showNewGameModal() {
   stopChase();
-  const banner = document.getElementById('turnBanner');
-  const m = banner.textContent.match(/(\w+) Wins/);
-  if (m) {
-    const color = m[1].toLowerCase();
-    document.getElementById('modalDot').style.background   = COLOR_HEX[color] || '#7a9aaa';
-    document.getElementById('modalTitle').textContent      = COLOR_NAME[color] + ' Wins!';
+  const dot   = document.getElementById('modalDot');
+  const title = document.getElementById('modalTitle');
+  if (winnerColor) {
+    dot.style.background = COLOR_HEX[winnerColor];
+    title.textContent    = COLOR_NAME[winnerColor] + ' Wins!';
   } else {
-    document.getElementById('modalDot').style.background   = '#7a9aaa';
-    document.getElementById('modalTitle').textContent      = "It's a Draw!";
+    dot.style.background = '#7a9aaa';
+    title.textContent    = "It's a Draw!";
   }
+  setModalState('ask');
   document.getElementById('modal').classList.add('open');
 }
 
-async function onPlayAgain() {
-  stopChase();
-  document.getElementById('modal').classList.remove('open');
-  // Full reset — player1 goes first, colors re-chosen on share screen
-  // Keep same gameId so the link still works
-  await updateDoc(gameRef(), {
-    board:        emptyBoard(),
-    currentTurn:  'player1',
-    player1Color: myRole === 'player1' ? myColor : opponentColor,
-    player2Color: myRole === 'player2' ? myColor : opponentColor,
-    lastMove:     null,
-    status:       'active'
-  });
-  // listener fires handleGameState → startGameUI on both devices
+// modalState: 'ask' | 'waiting' | 'left' | 'gone'
+function setModalState(state) {
+  const body        = document.getElementById('modalBody');
+  const oppName     = COLOR_NAME[opponentColor] || 'Opponent';
+  body.innerHTML    = '';
+
+  if (state === 'ask') {
+    const q    = document.createElement('div');
+    q.className = 'modal-q';
+    q.textContent = 'Play again?';
+    const btns = document.createElement('div');
+    btns.className = 'modal-btns';
+    const yes  = document.createElement('button');
+    yes.className = 'modal-btn yes';
+    yes.textContent = 'Yes!';
+    yes.addEventListener('click', onPlayAgainYes);
+    const no   = document.createElement('button');
+    no.className = 'modal-btn no';
+    no.textContent = 'No thanks';
+    no.addEventListener('click', onPlayAgainNo);
+    btns.appendChild(yes);
+    btns.appendChild(no);
+    body.appendChild(q);
+    body.appendChild(btns);
+
+  } else if (state === 'waiting') {
+    const msg  = document.createElement('div');
+    msg.className = 'modal-waiting';
+    msg.textContent = `Waiting for ${oppName}…`;
+    body.appendChild(msg);
+
+  } else if (state === 'left') {
+    // opponent said No
+    const msg  = document.createElement('div');
+    msg.className = 'modal-left';
+    msg.textContent = `${oppName} isn't up for another round.`;
+    const ok   = document.createElement('button');
+    ok.className = 'modal-btn no';
+    ok.style.marginTop = '4px';
+    ok.textContent = 'OK';
+    ok.addEventListener('click', goHome);
+    body.appendChild(msg);
+    body.appendChild(ok);
+
+  } else if (state === 'gone') {
+    // opponent went home without answering
+    const msg  = document.createElement('div');
+    msg.className = 'modal-left';
+    msg.textContent = `${oppName} left the game.`;
+    const ok   = document.createElement('button');
+    ok.className = 'modal-btn no';
+    ok.style.marginTop = '4px';
+    ok.textContent = 'OK';
+    ok.addEventListener('click', goHome);
+    body.appendChild(msg);
+    body.appendChild(ok);
+  }
+}
+
+async function onPlayAgainYes() {
+  // Write my vote to Firestore
+  const myVoteField = myRole + 'Rematch';
+  await updateDoc(gameRef(), { [myVoteField]: 'yes' });
+  setModalState('waiting');
+}
+
+async function onPlayAgainNo() {
+  const myVoteField = myRole + 'Rematch';
+  await updateDoc(gameRef(), { [myVoteField]: 'no' });
+  goHome();
+}
+
+// Called from Firestore listener when rematch votes change
+function handleRematchVotes(data) {
+  const p1vote = data.player1Rematch;
+  const p2vote = data.player2Rematch;
+  const myVote = myRole === 'player1' ? p1vote : p2vote;
+  const oppVote= myRole === 'player1' ? p2vote : p1vote;
+
+  // If both said yes → start new game
+  if (p1vote === 'yes' && p2vote === 'yes') {
+    document.getElementById('modal').classList.remove('open');
+    updateDoc(gameRef(), {
+      board:          emptyBoard(),
+      currentTurn:    'player1',
+      lastMove:       null,
+      status:         'active',
+      player1Rematch: null,
+      player2Rematch: null
+    });
+    return;
+  }
+
+  // If I already voted yes and opponent said no
+  if (myVote === 'yes' && oppVote === 'no') {
+    setModalState('left');
+    return;
+  }
+
+  // If opponent said no and I haven't voted yet
+  if (oppVote === 'no' && !myVote) {
+    // Show modal with opponent left message immediately
+    document.getElementById('modal').classList.add('open');
+    const dot   = document.getElementById('modalDot');
+    const title = document.getElementById('modalTitle');
+    if (winnerColor) {
+      dot.style.background = COLOR_HEX[winnerColor];
+      title.textContent    = COLOR_NAME[winnerColor] + ' Wins!';
+    } else {
+      dot.style.background = '#7a9aaa';
+      title.textContent    = "It's a Draw!";
+    }
+    setModalState('left');
+    return;
+  }
+
+  // If I voted yes and opponent hasn't answered yet — keep showing waiting
+  if (myVote === 'yes' && !oppVote) {
+    setModalState('waiting');
+  }
 }
 
 /* ── Go home ──────────────────────────────── */

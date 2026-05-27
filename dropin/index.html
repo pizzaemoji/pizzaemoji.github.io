@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+<meta http-equiv="Pragma" content="no-cache">
+<meta http-equiv="Expires" content="0">
 <title>Drop In</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
@@ -280,7 +283,7 @@
 <div class="screen active" id="welcomeScreen">
   <div style="margin-bottom:8px;">
     <div class="welcome-eyebrow">a game for two</div>
-    <div class="welcome-title">Drop In</div>
+    <div class="welcome-title">Drop In 3.0</div>
   </div>
   <div class="token-rain-stage" id="rainStage"></div>
   <button class="btn-main" id="btnNewGame">New Game</button>
@@ -352,7 +355,8 @@
 <script type="module">
 import { initializeApp }                          from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js';
 import { getFirestore, doc, setDoc, getDoc,
-         updateDoc, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js';
+         updateDoc, onSnapshot, serverTimestamp,
+         initializeFirestore, persistentLocalCache } from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js';
 
 /* ── Firebase ─────────────────────────────── */
 const app = initializeApp({
@@ -363,7 +367,9 @@ const app = initializeApp({
   messagingSenderId: "801313491683",
   appId:             "1:801313491683:web:05a9561e8c9a6f62fb13d6"
 });
-const db = getFirestore(app);
+// experimentalForceLongPolling is more reliable on mobile Safari
+// which aggressively kills WebSocket connections in the background
+const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 
 /* ── Constants ────────────────────────────── */
 const ROWS = 6, COLS = 7;
@@ -521,17 +527,28 @@ function handleGameState(data) {
   const onWaiting = document.getElementById('waitingScreen').classList.contains('active');
   const onGame    = document.getElementById('gameScreen').classList.contains('active');
 
+  // Player 1 waiting: player 2 just joined
   if (data.status === 'active' && onWaiting) {
     opponentColor = myRole === 'player1' ? data.player2Color : data.player1Color;
     startGameUI(data);
     return;
   }
+  // Player 2 arriving fresh from link
   if (data.status === 'active' && !onGame && !onWaiting) {
     opponentColor = myRole === 'player1' ? data.player2Color : data.player1Color;
     startGameUI(data);
     return;
   }
-  if (onGame) syncFromFirestore(data);
+  // Already in game
+  if (onGame) {
+    // Play Again reset — board is empty and it's player1's turn again
+    if (data.status === 'active' && gameOver) {
+      opponentColor = myRole === 'player1' ? data.player2Color : data.player1Color;
+      startGameUI(data);
+      return;
+    }
+    syncFromFirestore(data);
+  }
 }
 
 /* ── Build game UI from Firestore state ───── */
@@ -800,7 +817,7 @@ function showWinState(winnerRole) {
   const color  = winnerRole===myRole ? myColor : opponentColor;
   const banner = document.getElementById('turnBanner');
   banner.className='turn-banner win-banner';
-  banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[color]}"></span>${winnerRole===myRole ? 'You win!' : COLOR_NAME[color]+' wins!'}`;
+  banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[color]}"></span>${COLOR_NAME[color]} Wins!`;
   setConfirm('continue');
 }
 function showDrawState() {
@@ -812,24 +829,33 @@ function showDrawState() {
 }
 function showNewGameModal() {
   stopChase();
-  const banner=document.getElementById('turnBanner');
-  const isYou = banner.textContent.includes('You win');
-  const m     = banner.textContent.match(/(\w+) wins/i);
-  document.getElementById('modalDot').style.background = isYou ? COLOR_HEX[myColor] : (m ? COLOR_HEX[m[1].toLowerCase()]||'#7a9aaa' : '#7a9aaa');
-  document.getElementById('modalTitle').textContent    = isYou ? 'You win!'           : (m ? COLOR_NAME[m[1].toLowerCase()]||"It's a Draw!" : "It's a Draw!");
+  const banner = document.getElementById('turnBanner');
+  const m = banner.textContent.match(/(\w+) Wins/);
+  if (m) {
+    const color = m[1].toLowerCase();
+    document.getElementById('modalDot').style.background   = COLOR_HEX[color] || '#7a9aaa';
+    document.getElementById('modalTitle').textContent      = COLOR_NAME[color] + ' Wins!';
+  } else {
+    document.getElementById('modalDot').style.background   = '#7a9aaa';
+    document.getElementById('modalTitle').textContent      = "It's a Draw!";
+  }
   document.getElementById('modal').classList.add('open');
 }
 
-/* ── Play again ───────────────────────────── */
 async function onPlayAgain() {
   stopChase();
   document.getElementById('modal').classList.remove('open');
+  // Full reset — player1 goes first, colors re-chosen on share screen
+  // Keep same gameId so the link still works
   await updateDoc(gameRef(), {
-    board:       emptyBoard(),
-    currentTurn: 'player1',
-    lastMove:    null,
-    status:      'active'
+    board:        emptyBoard(),
+    currentTurn:  'player1',
+    player1Color: myRole === 'player1' ? myColor : opponentColor,
+    player2Color: myRole === 'player2' ? myColor : opponentColor,
+    lastMove:     null,
+    status:       'active'
   });
+  // listener fires handleGameState → startGameUI on both devices
 }
 
 /* ── Go home ──────────────────────────────── */

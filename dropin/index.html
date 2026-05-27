@@ -22,7 +22,6 @@
   .screen { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 520px; }
   .screen.active { display: flex; }
 
-  /* WELCOME */
   .welcome-eyebrow {
     font-family: 'Lora', serif;
     font-style: italic;
@@ -38,66 +37,34 @@
     font-weight: 700;
     color: #f0ebe0;
     letter-spacing: -1px;
-    margin-bottom: 4px;
+    margin-bottom: 0;
     text-align: center;
     line-height: 1;
   }
-  .welcome-tagline {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 17px;
-    color: #7a9aaa;
-    margin-bottom: 44px;
-    text-align: center;
+
+  .token-rain-stage {
+    position: relative;
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    margin: 0;
   }
 
-  .rain-divider {
-    display: flex;
-    gap: 10px;
-    margin-bottom: 36px;
-    opacity: 0.35;
+  .falling-token {
+    position: absolute;
+    border-radius: 50%;
+    top: -80px;
+    animation: tokenFall linear infinite;
+    will-change: transform;
   }
-  .raindrop {
-    width: 3px;
-    border-radius: 2px;
-    background: #a5d6a7;
-    animation: rainfall linear infinite;
-  }
-  .raindrop:nth-child(1) { height: 18px; animation-duration: 1.6s; animation-delay: 0s; }
-  .raindrop:nth-child(2) { height: 12px; animation-duration: 1.9s; animation-delay: 0.3s; background: #f48fb1; }
-  .raindrop:nth-child(3) { height: 22px; animation-duration: 1.4s; animation-delay: 0.7s; }
-  .raindrop:nth-child(4) { height: 14px; animation-duration: 2.1s; animation-delay: 0.1s; background: #f48fb1; }
-  .raindrop:nth-child(5) { height: 19px; animation-duration: 1.7s; animation-delay: 0.5s; }
-  .raindrop:nth-child(6) { height: 10px; animation-duration: 1.5s; animation-delay: 0.9s; background: #f48fb1; }
-  .raindrop:nth-child(7) { height: 24px; animation-duration: 1.8s; animation-delay: 0.2s; }
-  @keyframes rainfall {
-    0%   { transform: translateY(-30px); opacity: 0; }
-    20%  { opacity: 1; }
-    80%  { opacity: 1; }
-    100% { transform: translateY(40px); opacity: 0; }
-  }
+  .falling-token.pink { background: #f48fb1; }
+  .falling-token.green { background: #a5d6a7; }
 
-  .player-dots {
-    display: flex;
-    gap: 28px;
-    margin-bottom: 48px;
-    align-items: center;
-  }
-  .dot-label { display: flex; flex-direction: column; align-items: center; gap: 10px; }
-  .dot { width: 52px; height: 52px; border-radius: 50%; }
-  .dot.pink { background: #f48fb1; }
-  .dot.green { background: #a5d6a7; }
-  .dot-name {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 14px;
-    color: #7a9aaa;
-  }
-  .vs-text {
-    font-family: 'Lora', serif;
-    font-size: 20px;
-    font-weight: 600;
-    color: #445566;
+  @keyframes tokenFall {
+    0%   { transform: translateY(0); opacity: 0; }
+    8%   { opacity: var(--token-opacity); }
+    88%  { opacity: var(--token-opacity); }
+    100% { transform: translateY(calc(180px + 80px + var(--token-size))); opacity: 0; }
   }
 
   .btn-main {
@@ -111,57 +78,40 @@
     padding: 16px 52px;
     cursor: pointer;
     transition: transform 0.1s, background 0.15s;
+    position: relative;
+    z-index: 2;
+    margin-top: 0;
   }
   .btn-main:hover { background: #e57ca0; transform: scale(1.02); }
   .btn-main:active { transform: scale(0.98); }
+  .btn-main:disabled { opacity: 0.4; cursor: default; transform: none; }
 
-  /* SHARE SCREEN */
-  .share-eyebrow {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 15px;
-    color: #8fa0b0;
-    margin-bottom: 6px;
-    text-align: center;
-  }
-  .share-title {
-    font-family: 'Lora', serif;
-    font-size: 28px;
+  /* SHARE */
+  .share-header {
+    font-family: 'Nunito', sans-serif;
+    font-size: 19px;
     font-weight: 700;
     color: #f0ebe0;
-    margin-bottom: 6px;
     text-align: center;
-  }
-  .share-sub {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 16px;
-    color: #7a9aaa;
-    margin-bottom: 36px;
-    text-align: center;
+    margin-bottom: 24px;
+    line-height: 1.4;
+    padding: 0 8px;
   }
 
   .game-link-box {
     background: #1e2a33;
     border-radius: 16px;
-    padding: 24px 28px;
-    margin-bottom: 20px;
+    padding: 22px 24px;
+    margin-bottom: 32px;
     width: 100%;
     text-align: center;
     border: 1px solid #2d3e4a;
   }
-  .game-link-label {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 13px;
-    color: #7a9aaa;
-    margin-bottom: 10px;
-  }
   .game-link-url {
-    font-size: 20px;
+    font-size: 19px;
     font-weight: 700;
     color: #f0ebe0;
-    margin-bottom: 18px;
+    margin-bottom: 16px;
     word-break: break-all;
     line-height: 1.3;
   }
@@ -180,40 +130,63 @@
   .copy-btn:hover { background: #3d5060; }
   .copy-btn.copied { color: #f48fb1; }
 
-  .share-note {
-    font-family: 'Lora', serif;
-    font-style: italic;
-    font-size: 14px;
-    color: #556677;
-    margin-bottom: 36px;
+  .color-label {
+    font-family: 'Nunito', sans-serif;
+    font-size: 19px;
+    font-weight: 700;
+    color: #f0ebe0;
     text-align: center;
-    line-height: 1.6;
-    padding: 0 8px;
+    margin-bottom: 20px;
   }
-
-  .share-btns {
+  .color-choices {
+    display: flex;
+    gap: 24px;
+    margin-bottom: 36px;
+    justify-content: center;
+  }
+  .color-choice {
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 14px;
-    width: 100%;
-  }
-
-  .btn-close {
-    background: transparent;
-    border: 1.5px solid #3d5060;
-    border-radius: 14px;
-    color: #8fa0b0;
-    font-family: 'Nunito', sans-serif;
-    font-size: 17px;
-    font-weight: 700;
-    padding: 13px 40px;
+    gap: 10px;
     cursor: pointer;
-    transition: background 0.15s, color 0.15s;
-    width: 100%;
-    max-width: 280px;
+    padding: 14px 20px;
+    border-radius: 16px;
+    border: 2.5px solid transparent;
+    transition: border-color 0.15s, background 0.15s;
+    background: transparent;
+    min-width: 100px;
   }
-  .btn-close:hover { background: #3d5060; color: #f0ebe0; }
+  .color-choice:hover { background: #1e2a33; }
+  .color-choice.selected-pink { border-color: #f48fb1; background: #1e2a33; }
+  .color-choice.selected-green { border-color: #a5d6a7; background: #1e2a33; }
+  .choice-dot {
+    width: 52px; height: 52px;
+    border-radius: 50%;
+    position: relative;
+  }
+  .choice-dot.pink { background: #f48fb1; }
+  .choice-dot.green { background: #a5d6a7; }
+  .choice-dot .check {
+    display: none;
+    position: absolute;
+    inset: 0;
+    align-items: center;
+    justify-content: center;
+    font-size: 22px;
+    color: rgba(0,0,0,0.3);
+    font-weight: 800;
+  }
+  .color-choice.selected-pink .choice-dot.pink .check,
+  .color-choice.selected-green .choice-dot.green .check { display: flex; }
+  .choice-name {
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    color: #8fa0b0;
+  }
+  .color-choice.selected-pink .choice-name { color: #f48fb1; }
+  .color-choice.selected-green .choice-name { color: #a5d6a7; }
 
   /* GAME */
   .game-title-btn {
@@ -228,7 +201,6 @@
     padding: 0;
   }
   .game-title-btn:hover { color: #a0bfcc; }
-
   .turn-banner {
     font-size: 18px;
     font-weight: 700;
@@ -246,7 +218,6 @@
     position: relative;
     top: -1px;
   }
-
   .board-wrap {
     background: #e8e2d4;
     border-radius: 20px;
@@ -270,7 +241,6 @@
   .cell:hover { background: #3a4a58; }
   .cell.no-hover { cursor: default; }
   .cell.no-hover:hover { background: #2c3640; }
-
   .token {
     position: absolute;
     width: 54px; height: 54px;
@@ -287,7 +257,6 @@
     from { transform: translateY(var(--drop-from)); }
     to   { transform: translateY(0); }
   }
-
   .preview-token {
     position: absolute;
     width: 54px; height: 54px;
@@ -298,7 +267,6 @@
   }
   .preview-token.pink { background: #f48fb1; }
   .preview-token.green { background: #a5d6a7; }
-
   .confirm-area {
     min-height: 72px;
     display: flex;
@@ -326,7 +294,6 @@
   .confirm-btn:hover { background: #fff; }
   .confirm-btn:active { transform: scale(0.97); }
 
-  /* WIN MODAL */
   .modal-backdrop {
     display: none;
     position: fixed;
@@ -346,11 +313,7 @@
     width: 90%;
     border: 1px solid #3d5060;
   }
-  .modal-win-dot {
-    width: 68px; height: 68px;
-    border-radius: 50%;
-    margin: 0 auto 18px;
-  }
+  .modal-win-dot { width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 18px; }
   .modal-title {
     font-family: 'Lora', serif;
     font-size: 28px;
@@ -365,12 +328,7 @@
     color: #7a9aaa;
     margin-bottom: 26px;
   }
-  .modal-q {
-    font-size: 18px;
-    font-weight: 700;
-    color: #f0ebe0;
-    margin-bottom: 18px;
-  }
+  .modal-q { font-size: 18px; font-weight: 700; color: #f0ebe0; margin-bottom: 18px; }
   .modal-btns { display: flex; gap: 14px; justify-content: center; }
   .modal-btn {
     border: none;
@@ -395,59 +353,42 @@
 <div class="screen active" id="welcomeScreen">
   <div class="welcome-eyebrow">a game for two</div>
   <div class="welcome-title">Drop In</div>
-  <div class="welcome-tagline">best played on a rainy afternoon</div>
 
-  <div class="rain-divider">
-    <div class="raindrop"></div><div class="raindrop"></div><div class="raindrop"></div>
-    <div class="raindrop"></div><div class="raindrop"></div><div class="raindrop"></div>
-    <div class="raindrop"></div>
-  </div>
-
-  <div class="player-dots">
-    <div class="dot-label">
-      <div class="dot pink"></div>
-      <span class="dot-name">Player 1</span>
-    </div>
-    <span class="vs-text">vs</span>
-    <div class="dot-label">
-      <div class="dot green"></div>
-      <span class="dot-name">Player 2</span>
-    </div>
-  </div>
+  <div class="token-rain-stage" id="rainStage"></div>
 
   <button class="btn-main" onclick="goToShare()">New Game</button>
 </div>
 
 <!-- SHARE -->
 <div class="screen" id="shareScreen">
-  <div class="share-eyebrow">Drop In</div>
-  <div class="share-title">Invite your person</div>
-  <div class="share-sub">send them this link to play together</div>
-
+  <div class="welcome-eyebrow" style="margin-bottom:20px;">Drop In</div>
+  <p class="share-header">Invite a friend to join your game<br>using the link below:</p>
   <div class="game-link-box">
-    <div class="game-link-label">game link</div>
     <div class="game-link-url" id="shareLinkUrl">pizzaemoji.net/four&id=g7x2k9</div>
     <button class="copy-btn" id="copyBtn" onclick="copyLink()">Copy Link</button>
   </div>
-
-  <p class="share-note">This link stays the same if you both want to play again — no need to share it twice.</p>
-
-  <div class="share-btns">
-    <button class="btn-main" onclick="startGame()" style="width:100%;max-width:280px;">Let's play</button>
-    <button class="btn-close" onclick="goHome()">Maybe later</button>
+  <div class="color-label">Choose your color</div>
+  <div class="color-choices">
+    <div class="color-choice" id="choicePink" onclick="selectColor('pink')">
+      <div class="choice-dot pink"><div class="check">✓</div></div>
+      <span class="choice-name">Pink</span>
+    </div>
+    <div class="color-choice" id="choiceGreen" onclick="selectColor('green')">
+      <div class="choice-dot green"><div class="check">✓</div></div>
+      <span class="choice-name">Green</span>
+    </div>
   </div>
+  <button class="btn-main" id="letsPlayBtn" onclick="startGame()" disabled>Let's Play</button>
 </div>
 
 <!-- GAME -->
 <div class="screen" id="gameScreen">
   <button class="game-title-btn" onclick="goHome()">Drop In</button>
   <div class="turn-banner" id="turnBanner"></div>
-
   <div class="board-wrap" id="boardWrap">
     <div class="preview-token" id="previewToken" style="display:none"></div>
     <div class="grid" id="grid"></div>
   </div>
-
   <div class="confirm-area" id="confirmArea"></div>
 </div>
 
@@ -468,16 +409,52 @@
 <script>
 const ROWS = 6, COLS = 7;
 let board, currentPlayer, pendingCol, isAnimating, gameOver;
-const COLORS = { 1: 'pink', 2: 'green' };
-const NAMES  = { 1: 'Player 1 (Pink)', 2: 'Player 2 (Green)' };
-const HEX    = { 1: '#f48fb1', 2: '#a5d6a7' };
-
+let player1Color = null;
+const COLOR_HEX = { pink: '#f48fb1', green: '#a5d6a7' };
 const GAME_LINK = 'pizzaemoji.net/four&id=g7x2k9';
 
-function show(id) {
-  ['welcomeScreen','shareScreen','gameScreen'].forEach(s => {
-    document.getElementById(s).classList.toggle('active', s === id);
+// Token rain
+(function buildRain() {
+  const stage = document.getElementById('rainStage');
+  const stageW = 460;
+
+  const tokens = [
+    { size: 38, color: 'pink',  left: 0.08, dur: 7.2,  delay: 0    },
+    { size: 22, color: 'green', left: 0.18, dur: 9.8,  delay: -3.1 },
+    { size: 48, color: 'pink',  left: 0.30, dur: 11.4, delay: -1.7 },
+    { size: 16, color: 'green', left: 0.42, dur: 8.6,  delay: -5.4 },
+    { size: 32, color: 'pink',  left: 0.53, dur: 10.2, delay: -2.9 },
+    { size: 26, color: 'green', left: 0.63, dur: 7.8,  delay: -4.6 },
+    { size: 44, color: 'green', left: 0.73, dur: 12.1, delay: -0.8 },
+    { size: 18, color: 'pink',  left: 0.82, dur: 9.0,  delay: -6.2 },
+    { size: 30, color: 'green', left: 0.91, dur: 8.3,  delay: -3.8 },
+    { size: 20, color: 'pink',  left: 0.24, dur: 13.0, delay: -7.1 },
+    { size: 36, color: 'green', left: 0.47, dur: 10.7, delay: -1.3 },
+    { size: 14, color: 'pink',  left: 0.68, dur: 8.9,  delay: -5.0 },
+    { size: 28, color: 'pink',  left: 0.57, dur: 11.8, delay: -8.3 },
+    { size: 42, color: 'green', left: 0.13, dur: 14.2, delay: -2.2 },
+  ];
+
+  tokens.forEach(t => {
+    const el = document.createElement('div');
+    el.className = 'falling-token ' + t.color;
+    const opacity = 0.18 + (t.size / 48) * 0.42;
+    el.style.cssText = `
+      width: ${t.size}px;
+      height: ${t.size}px;
+      left: calc(${t.left * 100}% - ${t.size / 2}px);
+      animation-duration: ${t.dur}s;
+      animation-delay: ${t.delay}s;
+      --token-opacity: ${opacity.toFixed(2)};
+      --token-size: ${t.size}px;
+    `;
+    stage.appendChild(el);
   });
+})();
+
+function show(id) {
+  ['welcomeScreen','shareScreen','gameScreen'].forEach(s =>
+    document.getElementById(s).classList.toggle('active', s === id));
 }
 
 function goHome() {
@@ -486,11 +463,32 @@ function goHome() {
 }
 
 function goToShare() {
-  document.getElementById('shareLinkUrl').textContent = GAME_LINK;
+  player1Color = null;
+  document.getElementById('choicePink').className = 'color-choice';
+  document.getElementById('choiceGreen').className = 'color-choice';
+  document.getElementById('letsPlayBtn').disabled = true;
   show('shareScreen');
 }
 
+function selectColor(color) {
+  player1Color = color;
+  document.getElementById('choicePink').className = 'color-choice' + (color === 'pink' ? ' selected-pink' : '');
+  document.getElementById('choiceGreen').className = 'color-choice' + (color === 'green' ? ' selected-green' : '');
+  document.getElementById('letsPlayBtn').disabled = false;
+}
+
+function getPlayerColor(player) {
+  if (player === 1) return player1Color;
+  return player1Color === 'pink' ? 'green' : 'pink';
+}
+
+function getPlayerName(player) {
+  const c = getPlayerColor(player);
+  return 'Player ' + player + ' (' + c.charAt(0).toUpperCase() + c.slice(1) + ')';
+}
+
 function startGame() {
+  if (!player1Color) return;
   board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
   currentPlayer = 1; pendingCol = null; isAnimating = false; gameOver = false;
   document.getElementById('modal').classList.remove('open');
@@ -498,9 +496,7 @@ function startGame() {
   renderBoard(); updateBanner(); clearConfirm(); hidePreview();
 }
 
-function newRound() {
-  startGame();
-}
+function newRound() { startGame(); }
 
 function renderBoard() {
   const grid = document.getElementById('grid');
@@ -511,7 +507,7 @@ function renderBoard() {
       cell.className = 'cell';
       if (board[r][c]) {
         const tok = document.createElement('div');
-        tok.className = 'token ' + COLORS[board[r][c]];
+        tok.className = 'token ' + getPlayerColor(board[r][c]);
         cell.appendChild(tok);
       }
       cell.addEventListener('click', () => onCellClick(c));
@@ -542,7 +538,7 @@ function onCellClick(col) {
 function animatePending(col, row) {
   const cell = getCell(row, col);
   const token = document.createElement('div');
-  token.className = 'token ' + COLORS[currentPlayer];
+  token.className = 'token ' + getPlayerColor(currentPlayer);
   token.id = 'pending-token';
   const boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
   const dropFrom = -(boardTop + 80);
@@ -610,7 +606,7 @@ function confirmMove(col, row) {
   hidePreview();
   const cell = getCell(row, col);
   const token = document.createElement('div');
-  token.className = 'token ' + COLORS[currentPlayer];
+  token.className = 'token ' + getPlayerColor(currentPlayer);
   const boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
   const dropFrom = -(boardTop + 80);
   const duration = Math.min(0.2 + Math.abs(dropFrom) / 1600, 0.6);
@@ -635,7 +631,7 @@ function showPreview(col) {
   const cellRect = cell.getBoundingClientRect();
   const wrapRect = document.getElementById('boardWrap').getBoundingClientRect();
   const prev = document.getElementById('previewToken');
-  prev.className = 'preview-token ' + COLORS[currentPlayer];
+  prev.className = 'preview-token ' + getPlayerColor(currentPlayer);
   prev.style.left = (cellRect.left - wrapRect.left + 14) + 'px';
   prev.style.display = 'block';
 }
@@ -673,13 +669,14 @@ function highlightWin(cells) {
 }
 
 function updateBanner() {
+  const color = COLOR_HEX[getPlayerColor(currentPlayer)];
   document.getElementById('turnBanner').innerHTML =
-    `<span class="turn-dot" style="background:${HEX[currentPlayer]}"></span>${NAMES[currentPlayer]}'s turn`;
+    `<span class="turn-dot" style="background:${color}"></span>${getPlayerName(currentPlayer)}'s turn`;
 }
 
 function showWinModal(player) {
-  document.getElementById('modalDot').style.background = HEX[player];
-  document.getElementById('modalTitle').textContent = NAMES[player] + ' wins!';
+  document.getElementById('modalDot').style.background = COLOR_HEX[getPlayerColor(player)];
+  document.getElementById('modalTitle').textContent = getPlayerName(player) + ' wins!';
   document.getElementById('modalSub').textContent = 'Well played.';
   document.getElementById('modal').classList.add('open');
 }

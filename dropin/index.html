@@ -1,0 +1,708 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Drop In</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #2c3640;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+
+  .screen { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 520px; }
+  .screen.active { display: flex; }
+
+  /* WELCOME */
+  .welcome-eyebrow {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #8fa0b0;
+    letter-spacing: 0.5px;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .welcome-title {
+    font-family: 'Lora', serif;
+    font-size: 64px;
+    font-weight: 700;
+    color: #f0ebe0;
+    letter-spacing: -1px;
+    margin-bottom: 4px;
+    text-align: center;
+    line-height: 1;
+  }
+  .welcome-tagline {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 17px;
+    color: #7a9aaa;
+    margin-bottom: 44px;
+    text-align: center;
+  }
+
+  .rain-divider {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 36px;
+    opacity: 0.35;
+  }
+  .raindrop {
+    width: 3px;
+    border-radius: 2px;
+    background: #a5d6a7;
+    animation: rainfall linear infinite;
+  }
+  .raindrop:nth-child(1) { height: 18px; animation-duration: 1.6s; animation-delay: 0s; }
+  .raindrop:nth-child(2) { height: 12px; animation-duration: 1.9s; animation-delay: 0.3s; background: #f48fb1; }
+  .raindrop:nth-child(3) { height: 22px; animation-duration: 1.4s; animation-delay: 0.7s; }
+  .raindrop:nth-child(4) { height: 14px; animation-duration: 2.1s; animation-delay: 0.1s; background: #f48fb1; }
+  .raindrop:nth-child(5) { height: 19px; animation-duration: 1.7s; animation-delay: 0.5s; }
+  .raindrop:nth-child(6) { height: 10px; animation-duration: 1.5s; animation-delay: 0.9s; background: #f48fb1; }
+  .raindrop:nth-child(7) { height: 24px; animation-duration: 1.8s; animation-delay: 0.2s; }
+  @keyframes rainfall {
+    0%   { transform: translateY(-30px); opacity: 0; }
+    20%  { opacity: 1; }
+    80%  { opacity: 1; }
+    100% { transform: translateY(40px); opacity: 0; }
+  }
+
+  .player-dots {
+    display: flex;
+    gap: 28px;
+    margin-bottom: 48px;
+    align-items: center;
+  }
+  .dot-label { display: flex; flex-direction: column; align-items: center; gap: 10px; }
+  .dot { width: 52px; height: 52px; border-radius: 50%; }
+  .dot.pink { background: #f48fb1; }
+  .dot.green { background: #a5d6a7; }
+  .dot-name {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #7a9aaa;
+  }
+  .vs-text {
+    font-family: 'Lora', serif;
+    font-size: 20px;
+    font-weight: 600;
+    color: #445566;
+  }
+
+  .btn-main {
+    background: #f48fb1;
+    border: none;
+    border-radius: 16px;
+    color: #fff;
+    font-family: 'Nunito', sans-serif;
+    font-size: 20px;
+    font-weight: 800;
+    padding: 16px 52px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.15s;
+  }
+  .btn-main:hover { background: #e57ca0; transform: scale(1.02); }
+  .btn-main:active { transform: scale(0.98); }
+
+  /* SHARE SCREEN */
+  .share-eyebrow {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 15px;
+    color: #8fa0b0;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .share-title {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f0ebe0;
+    margin-bottom: 6px;
+    text-align: center;
+  }
+  .share-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #7a9aaa;
+    margin-bottom: 36px;
+    text-align: center;
+  }
+
+  .game-link-box {
+    background: #1e2a33;
+    border-radius: 16px;
+    padding: 24px 28px;
+    margin-bottom: 20px;
+    width: 100%;
+    text-align: center;
+    border: 1px solid #2d3e4a;
+  }
+  .game-link-label {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 13px;
+    color: #7a9aaa;
+    margin-bottom: 10px;
+  }
+  .game-link-url {
+    font-size: 20px;
+    font-weight: 700;
+    color: #f0ebe0;
+    margin-bottom: 18px;
+    word-break: break-all;
+    line-height: 1.3;
+  }
+  .copy-btn {
+    background: #2c3640;
+    border: 1.5px solid #3d5060;
+    border-radius: 10px;
+    color: #a5d6a7;
+    font-family: 'Nunito', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    padding: 10px 24px;
+    cursor: pointer;
+    transition: background 0.15s;
+  }
+  .copy-btn:hover { background: #3d5060; }
+  .copy-btn.copied { color: #f48fb1; }
+
+  .share-note {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 14px;
+    color: #556677;
+    margin-bottom: 36px;
+    text-align: center;
+    line-height: 1.6;
+    padding: 0 8px;
+  }
+
+  .share-btns {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    width: 100%;
+  }
+
+  .btn-close {
+    background: transparent;
+    border: 1.5px solid #3d5060;
+    border-radius: 14px;
+    color: #8fa0b0;
+    font-family: 'Nunito', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 13px 40px;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s;
+    width: 100%;
+    max-width: 280px;
+  }
+  .btn-close:hover { background: #3d5060; color: #f0ebe0; }
+
+  /* GAME */
+  .game-title-btn {
+    font-family: 'Lora', serif;
+    font-size: 22px;
+    font-weight: 600;
+    color: #7a9aaa;
+    cursor: pointer;
+    margin-bottom: 6px;
+    background: none;
+    border: none;
+    padding: 0;
+  }
+  .game-title-btn:hover { color: #a0bfcc; }
+
+  .turn-banner {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f0ebe0;
+    margin-bottom: 16px;
+    min-height: 28px;
+    text-align: center;
+  }
+  .turn-dot {
+    display: inline-block;
+    width: 16px; height: 16px;
+    border-radius: 50%;
+    vertical-align: middle;
+    margin-right: 6px;
+    position: relative;
+    top: -1px;
+  }
+
+  .board-wrap {
+    background: #e8e2d4;
+    border-radius: 20px;
+    padding: 14px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35);
+    position: relative;
+  }
+  .grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 8px;
+  }
+  .cell {
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    background: #2c3640;
+    cursor: pointer;
+    position: relative;
+    transition: background 0.1s;
+  }
+  .cell:hover { background: #3a4a58; }
+  .cell.no-hover { cursor: default; }
+  .cell.no-hover:hover { background: #2c3640; }
+
+  .token {
+    position: absolute;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    top: 0; left: 0;
+  }
+  .token.pink { background: #f48fb1; }
+  .token.green { background: #a5d6a7; }
+  .token.win { box-shadow: 0 0 0 4px #f0ebe0; }
+  .token.dropping {
+    animation: drop var(--drop-duration, 0.4s) cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+  }
+  @keyframes drop {
+    from { transform: translateY(var(--drop-from)); }
+    to   { transform: translateY(0); }
+  }
+
+  .preview-token {
+    position: absolute;
+    width: 54px; height: 54px;
+    border-radius: 50%;
+    opacity: 0.45;
+    pointer-events: none;
+    top: -70px;
+  }
+  .preview-token.pink { background: #f48fb1; }
+  .preview-token.green { background: #a5d6a7; }
+
+  .confirm-area {
+    min-height: 72px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 16px;
+  }
+  .confirm-btn {
+    background: #f0ebe0;
+    border: none;
+    border-radius: 14px;
+    color: #2c3640;
+    font-family: 'Nunito', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 13px 40px;
+    cursor: pointer;
+    transition: transform 0.1s, background 0.15s;
+    animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+  }
+  @keyframes popIn {
+    from { transform: scale(0.7); opacity: 0; }
+    to   { transform: scale(1); opacity: 1; }
+  }
+  .confirm-btn:hover { background: #fff; }
+  .confirm-btn:active { transform: scale(0.97); }
+
+  /* WIN MODAL */
+  .modal-backdrop {
+    display: none;
+    position: fixed;
+    inset: 0;
+    background: rgba(20,30,38,0.88);
+    align-items: center;
+    justify-content: center;
+    z-index: 100;
+  }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: #2c3640;
+    border-radius: 24px;
+    padding: 36px 40px;
+    text-align: center;
+    max-width: 340px;
+    width: 90%;
+    border: 1px solid #3d5060;
+  }
+  .modal-win-dot {
+    width: 68px; height: 68px;
+    border-radius: 50%;
+    margin: 0 auto 18px;
+  }
+  .modal-title {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-weight: 700;
+    color: #f0ebe0;
+    margin-bottom: 6px;
+  }
+  .modal-sub {
+    font-family: 'Lora', serif;
+    font-style: italic;
+    font-size: 16px;
+    color: #7a9aaa;
+    margin-bottom: 26px;
+  }
+  .modal-q {
+    font-size: 18px;
+    font-weight: 700;
+    color: #f0ebe0;
+    margin-bottom: 18px;
+  }
+  .modal-btns { display: flex; gap: 14px; justify-content: center; }
+  .modal-btn {
+    border: none;
+    border-radius: 12px;
+    font-family: 'Nunito', sans-serif;
+    font-size: 17px;
+    font-weight: 700;
+    padding: 12px 30px;
+    cursor: pointer;
+    transition: transform 0.1s;
+  }
+  .modal-btn:active { transform: scale(0.97); }
+  .modal-btn.yes { background: #f48fb1; color: #fff; }
+  .modal-btn.yes:hover { background: #e57ca0; }
+  .modal-btn.no  { background: #3d5060; color: #f0ebe0; }
+  .modal-btn.no:hover { background: #4a606e; }
+</style>
+</head>
+<body>
+
+<!-- WELCOME -->
+<div class="screen active" id="welcomeScreen">
+  <div class="welcome-eyebrow">a game for two</div>
+  <div class="welcome-title">Drop In</div>
+  <div class="welcome-tagline">best played on a rainy afternoon</div>
+
+  <div class="rain-divider">
+    <div class="raindrop"></div><div class="raindrop"></div><div class="raindrop"></div>
+    <div class="raindrop"></div><div class="raindrop"></div><div class="raindrop"></div>
+    <div class="raindrop"></div>
+  </div>
+
+  <div class="player-dots">
+    <div class="dot-label">
+      <div class="dot pink"></div>
+      <span class="dot-name">Player 1</span>
+    </div>
+    <span class="vs-text">vs</span>
+    <div class="dot-label">
+      <div class="dot green"></div>
+      <span class="dot-name">Player 2</span>
+    </div>
+  </div>
+
+  <button class="btn-main" onclick="goToShare()">New Game</button>
+</div>
+
+<!-- SHARE -->
+<div class="screen" id="shareScreen">
+  <div class="share-eyebrow">Drop In</div>
+  <div class="share-title">Invite your person</div>
+  <div class="share-sub">send them this link to play together</div>
+
+  <div class="game-link-box">
+    <div class="game-link-label">game link</div>
+    <div class="game-link-url" id="shareLinkUrl">pizzaemoji.net/four&id=g7x2k9</div>
+    <button class="copy-btn" id="copyBtn" onclick="copyLink()">Copy Link</button>
+  </div>
+
+  <p class="share-note">This link stays the same if you both want to play again — no need to share it twice.</p>
+
+  <div class="share-btns">
+    <button class="btn-main" onclick="startGame()" style="width:100%;max-width:280px;">Let's play</button>
+    <button class="btn-close" onclick="goHome()">Maybe later</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div class="screen" id="gameScreen">
+  <button class="game-title-btn" onclick="goHome()">Drop In</button>
+  <div class="turn-banner" id="turnBanner"></div>
+
+  <div class="board-wrap" id="boardWrap">
+    <div class="preview-token" id="previewToken" style="display:none"></div>
+    <div class="grid" id="grid"></div>
+  </div>
+
+  <div class="confirm-area" id="confirmArea"></div>
+</div>
+
+<!-- WIN MODAL -->
+<div class="modal-backdrop" id="modal">
+  <div class="modal">
+    <div class="modal-win-dot" id="modalDot"></div>
+    <div class="modal-title" id="modalTitle"></div>
+    <div class="modal-sub" id="modalSub"></div>
+    <div class="modal-q">Play again?</div>
+    <div class="modal-btns">
+      <button class="modal-btn yes" onclick="newRound()">Yes!</button>
+      <button class="modal-btn no" onclick="goHome()">No thanks</button>
+    </div>
+  </div>
+</div>
+
+<script>
+const ROWS = 6, COLS = 7;
+let board, currentPlayer, pendingCol, isAnimating, gameOver;
+const COLORS = { 1: 'pink', 2: 'green' };
+const NAMES  = { 1: 'Player 1 (Pink)', 2: 'Player 2 (Green)' };
+const HEX    = { 1: '#f48fb1', 2: '#a5d6a7' };
+
+const GAME_LINK = 'pizzaemoji.net/four&id=g7x2k9';
+
+function show(id) {
+  ['welcomeScreen','shareScreen','gameScreen'].forEach(s => {
+    document.getElementById(s).classList.toggle('active', s === id);
+  });
+}
+
+function goHome() {
+  document.getElementById('modal').classList.remove('open');
+  show('welcomeScreen');
+}
+
+function goToShare() {
+  document.getElementById('shareLinkUrl').textContent = GAME_LINK;
+  show('shareScreen');
+}
+
+function startGame() {
+  board = Array.from({ length: ROWS }, () => Array(COLS).fill(0));
+  currentPlayer = 1; pendingCol = null; isAnimating = false; gameOver = false;
+  document.getElementById('modal').classList.remove('open');
+  show('gameScreen');
+  renderBoard(); updateBanner(); clearConfirm(); hidePreview();
+}
+
+function newRound() {
+  startGame();
+}
+
+function renderBoard() {
+  const grid = document.getElementById('grid');
+  grid.innerHTML = '';
+  for (let r = 0; r < ROWS; r++) {
+    for (let c = 0; c < COLS; c++) {
+      const cell = document.createElement('div');
+      cell.className = 'cell';
+      if (board[r][c]) {
+        const tok = document.createElement('div');
+        tok.className = 'token ' + COLORS[board[r][c]];
+        cell.appendChild(tok);
+      }
+      cell.addEventListener('click', () => onCellClick(c));
+      cell.addEventListener('mouseenter', () => showPreview(c));
+      cell.addEventListener('mouseleave', hidePreview);
+      grid.appendChild(cell);
+    }
+  }
+}
+
+function getCell(r, c) { return document.getElementById('grid').children[r * COLS + c]; }
+function getDropRow(col) {
+  for (let r = ROWS - 1; r >= 0; r--) { if (!board[r][col]) return r; }
+  return -1;
+}
+
+function onCellClick(col) {
+  if (isAnimating || gameOver) return;
+  const row = getDropRow(col);
+  if (row === -1) return;
+  if (pendingCol === col) return;
+  if (pendingCol !== null) removePendingToken();
+  pendingCol = col;
+  showConfirm(col, row);
+  animatePending(col, row);
+}
+
+function animatePending(col, row) {
+  const cell = getCell(row, col);
+  const token = document.createElement('div');
+  token.className = 'token ' + COLORS[currentPlayer];
+  token.id = 'pending-token';
+  const boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
+  const dropFrom = -(boardTop + 80);
+  const duration = Math.min(0.18 + Math.abs(dropFrom) / 1800, 0.55);
+  token.style.setProperty('--drop-from', dropFrom + 'px');
+  token.style.setProperty('--drop-duration', duration + 's');
+  token.classList.add('dropping');
+  cell.classList.add('no-hover');
+  cell.appendChild(token);
+}
+
+function removePendingToken() {
+  const old = document.getElementById('pending-token');
+  if (old) old.remove();
+  if (pendingCol !== null) {
+    const row = getDropRow(pendingCol);
+    if (row !== -1) getCell(row, pendingCol).classList.remove('no-hover');
+  }
+  pendingCol = null;
+  clearConfirm();
+}
+
+let outsideClickActive = false;
+function showConfirm(col, row) {
+  const area = document.getElementById('confirmArea');
+  area.innerHTML = '';
+  const btn = document.createElement('button');
+  btn.className = 'confirm-btn';
+  btn.textContent = 'Confirm Move';
+  btn.onclick = () => confirmMove(col, row);
+  area.appendChild(btn);
+  setTimeout(() => { document.addEventListener('click', onOutsideClick, { capture: true }); }, 50);
+}
+
+function onOutsideClick(e) {
+  if (!outsideClickActive) { outsideClickActive = true; return; }
+  const area = document.getElementById('confirmArea');
+  const btn = area.querySelector('.confirm-btn');
+  if (btn && btn.contains(e.target)) return;
+  if (document.getElementById('grid').contains(e.target)) return;
+  cancelPending();
+}
+
+function cancelPending() {
+  removePendingToken();
+  document.removeEventListener('click', onOutsideClick, { capture: true });
+  outsideClickActive = false;
+  hidePreview();
+}
+
+function clearConfirm() {
+  document.getElementById('confirmArea').innerHTML = '';
+  document.removeEventListener('click', onOutsideClick, { capture: true });
+  outsideClickActive = false;
+}
+
+function confirmMove(col, row) {
+  if (isAnimating || gameOver) return;
+  clearConfirm();
+  const pendingTok = document.getElementById('pending-token');
+  if (pendingTok) pendingTok.remove();
+  isAnimating = true;
+  board[row][col] = currentPlayer;
+  pendingCol = null;
+  hidePreview();
+  const cell = getCell(row, col);
+  const token = document.createElement('div');
+  token.className = 'token ' + COLORS[currentPlayer];
+  const boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
+  const dropFrom = -(boardTop + 80);
+  const duration = Math.min(0.2 + Math.abs(dropFrom) / 1600, 0.6);
+  token.style.setProperty('--drop-from', dropFrom + 'px');
+  token.style.setProperty('--drop-duration', duration + 's');
+  token.classList.add('dropping');
+  cell.appendChild(token);
+  setTimeout(() => {
+    isAnimating = false;
+    const win = checkWin(row, col);
+    if (win) { highlightWin(win); setTimeout(() => showWinModal(currentPlayer), 600); }
+    else if (checkDraw()) { setTimeout(() => showDrawModal(), 400); }
+    else { currentPlayer = currentPlayer === 1 ? 2 : 1; updateBanner(); }
+  }, duration * 1000 + 50);
+}
+
+function showPreview(col) {
+  if (isAnimating || gameOver || pendingCol !== null) return;
+  const row = getDropRow(col);
+  if (row === -1) return;
+  const cell = document.getElementById('grid').children[row * COLS + col];
+  const cellRect = cell.getBoundingClientRect();
+  const wrapRect = document.getElementById('boardWrap').getBoundingClientRect();
+  const prev = document.getElementById('previewToken');
+  prev.className = 'preview-token ' + COLORS[currentPlayer];
+  prev.style.left = (cellRect.left - wrapRect.left + 14) + 'px';
+  prev.style.display = 'block';
+}
+
+function hidePreview() { document.getElementById('previewToken').style.display = 'none'; }
+
+function checkWin(row, col) {
+  const dirs = [[0,1],[1,0],[1,1],[1,-1]];
+  const p = board[row][col];
+  for (const [dr, dc] of dirs) {
+    let cells = [[row, col]];
+    for (let i = 1; i < 4; i++) {
+      const r = row+dr*i, c = col+dc*i;
+      if (r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p) break;
+      cells.push([r,c]);
+    }
+    for (let i = 1; i < 4; i++) {
+      const r = row-dr*i, c = col-dc*i;
+      if (r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p) break;
+      cells.push([r,c]);
+    }
+    if (cells.length >= 4) return cells.slice(0,4);
+  }
+  return null;
+}
+
+function checkDraw() { return board[0].every(v => v !== 0); }
+
+function highlightWin(cells) {
+  gameOver = true;
+  cells.forEach(([r,c]) => {
+    const tok = getCell(r,c).querySelector('.token');
+    if (tok) tok.classList.add('win');
+  });
+}
+
+function updateBanner() {
+  document.getElementById('turnBanner').innerHTML =
+    `<span class="turn-dot" style="background:${HEX[currentPlayer]}"></span>${NAMES[currentPlayer]}'s turn`;
+}
+
+function showWinModal(player) {
+  document.getElementById('modalDot').style.background = HEX[player];
+  document.getElementById('modalTitle').textContent = NAMES[player] + ' wins!';
+  document.getElementById('modalSub').textContent = 'Well played.';
+  document.getElementById('modal').classList.add('open');
+}
+
+function showDrawModal() {
+  gameOver = true;
+  document.getElementById('modalDot').style.background = '#7a9aaa';
+  document.getElementById('modalTitle').textContent = "It's a draw!";
+  document.getElementById('modalSub').textContent = 'Nobody wins this time.';
+  document.getElementById('modal').classList.add('open');
+}
+
+function copyLink() {
+  const btn = document.getElementById('copyBtn');
+  navigator.clipboard.writeText(GAME_LINK).catch(()=>{});
+  btn.textContent = 'Copied!';
+  btn.classList.add('copied');
+  setTimeout(() => { btn.textContent = 'Copy Link'; btn.classList.remove('copied'); }, 2000);
+}
+
+document.getElementById('boardWrap').addEventListener('click', (e) => {
+  if (pendingCol !== null && !e.target.closest('.cell')) cancelPending();
+});
+</script>
+</body>
+</html>

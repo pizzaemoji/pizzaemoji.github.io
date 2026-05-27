@@ -485,6 +485,7 @@ async function onNewGame() {
     lastMove:     null,
     player1Rematch: null,
     player2Rematch: null,
+    loserRole:    null,
     createdAt:    serverTimestamp()
   });
   document.getElementById('shareLinkUrl').textContent = gameUrl();
@@ -786,7 +787,8 @@ async function confirmMove() {
     board:       flatBoard(),
     currentTurn: nextTurn,
     lastMove:    { row: movedRow, col: movedCol },
-    status:      (win||draw) ? 'done' : 'active'
+    status:      (win||draw) ? 'done' : 'active',
+    loserRole:   win ? (myRole==='player1' ? 'player2' : 'player1') : null
   });
 
   setConfirm('empty');
@@ -946,9 +948,10 @@ function handleRematchVotes(data) {
     document.getElementById('modal').classList.remove('open');
     updateDoc(gameRef(), {
       board:          emptyBoard(),
-      currentTurn:    'player1',
+      currentTurn:    data.loserRole || 'player1',
       lastMove:       null,
       status:         'active',
+      loserRole:      null,
       player1Rematch: null,
       player2Rematch: null
     });

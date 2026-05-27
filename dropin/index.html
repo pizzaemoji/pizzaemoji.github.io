@@ -2,29 +2,42 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>Drop In</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
 
   * { box-sizing: border-box; margin: 0; padding: 0; }
-  html, body { height: 100%; overflow: hidden; }
+
+  html {
+    height: -webkit-fill-available;
+  }
 
   body {
     font-family: 'Nunito', sans-serif;
     background: #2c3640;
-    height: 100vh;
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
   }
 
-  .screen { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 520px; padding: 0 16px; }
+  .screen {
+    display: none;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    max-width: 520px;
+    padding: 0 16px;
+  }
   .screen.active { display: flex; }
 
   /* WELCOME */
   #welcomeScreen {
     height: 100vh;
+    height: -webkit-fill-available;
     justify-content: center;
   }
 
@@ -51,7 +64,7 @@
     position: relative;
     width: 100%;
     flex: 1;
-    min-height: 120px;
+    min-height: 80px;
     max-height: 260px;
     overflow: hidden;
   }
@@ -84,22 +97,22 @@
     padding: 16px 52px;
     cursor: pointer;
     transition: transform 0.1s, background 0.15s;
-    position: relative;
-    z-index: 2;
     flex-shrink: 0;
   }
   .btn-main:hover { background: #dbb95e; transform: scale(1.02); }
   .btn-main:active { transform: scale(0.98); }
   .btn-main:disabled { opacity: 0.4; cursor: default; transform: none; }
-  #welcomeScreen .btn-main { margin-bottom: 48px; }
+  #welcomeScreen .btn-main { margin-bottom: env(safe-area-inset-bottom, 32px); margin-bottom: max(env(safe-area-inset-bottom), 32px); }
 
   /* SHARE */
   #shareScreen {
     height: 100vh;
+    height: -webkit-fill-available;
     justify-content: center;
     overflow-y: auto;
     padding-top: 32px;
-    padding-bottom: 40px;
+    padding-bottom: 32px;
+    gap: 0;
   }
 
   .share-header {
@@ -115,17 +128,17 @@
   .game-link-box {
     background: #1e2a33;
     border-radius: 16px;
-    padding: 22px 24px;
-    margin-bottom: 32px;
+    padding: 20px 24px;
+    margin-bottom: 28px;
     width: 100%;
     text-align: center;
     border: 1px solid #2d3e4a;
   }
   .game-link-url {
-    font-size: 19px;
+    font-size: 18px;
     font-weight: 700;
     color: #f0ebe0;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     word-break: break-all;
     line-height: 1.3;
   }
@@ -150,20 +163,20 @@
     font-weight: 700;
     color: #f0ebe0;
     text-align: center;
-    margin-bottom: 20px;
+    margin-bottom: 18px;
   }
-  .color-choices { display: flex; gap: 24px; margin-bottom: 36px; justify-content: center; }
+  .color-choices { display: flex; gap: 20px; margin-bottom: 28px; justify-content: center; }
   .color-choice {
     display: flex; flex-direction: column; align-items: center; gap: 10px;
-    cursor: pointer; padding: 14px 20px; border-radius: 16px;
+    cursor: pointer; padding: 12px 18px; border-radius: 16px;
     border: 2.5px solid transparent;
     transition: border-color 0.15s, background 0.15s;
-    background: transparent; min-width: 100px;
+    background: transparent; min-width: 90px;
   }
   .color-choice:hover { background: #1e2a33; }
   .color-choice.selected-pink  { border-color: #f48fb1; background: #1e2a33; }
   .color-choice.selected-green { border-color: #a5d6a7; background: #1e2a33; }
-  .choice-dot { width: 52px; height: 52px; border-radius: 50%; position: relative; }
+  .choice-dot { width: 48px; height: 48px; border-radius: 50%; position: relative; }
   .choice-dot.pink  { background: #f48fb1; }
   .choice-dot.green { background: #a5d6a7; }
   .choice-dot .check {
@@ -177,60 +190,66 @@
   .color-choice.selected-pink  .choice-name { color: #f48fb1; }
   .color-choice.selected-green .choice-name { color: #a5d6a7; }
 
-  /* GAME — strict viewport fit */
+  /* ── GAME SCREEN ──────────────────────────────────────────────
+     Uses a fixed-height column layout that never overflows.
+     JS will set the exact pixel height after measuring safe areas.
+  ─────────────────────────────────────────────────────────────── */
   #gameScreen {
+    /* fallback; JS overrides with measured value */
     height: 100vh;
+    height: -webkit-fill-available;
     justify-content: space-between;
-    padding-top: 16px;
-    padding-bottom: 16px;
-    gap: 0;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    gap: 6px;
+    overflow: hidden;
   }
 
   .game-header {
     width: 100%;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
-    flex-shrink: 0;
-    padding-bottom: 8px;
+    gap: 2px;
   }
 
   .game-title-btn {
-    font-family: 'Lora', serif; font-size: 20px; font-weight: 600;
-    color: #7a9aaa; cursor: pointer; margin-bottom: 4px;
+    font-family: 'Lora', serif; font-size: 19px; font-weight: 600;
+    color: #7a9aaa; cursor: pointer;
     background: none; border: none; padding: 0;
+    flex-shrink: 0;
   }
   .game-title-btn:hover { color: #a0bfcc; }
 
   .turn-banner {
-    font-size: 19px; font-weight: 800; color: #f0ebe0;
-    min-height: 26px; text-align: center;
+    font-size: 18px; font-weight: 800; color: #f0ebe0;
+    text-align: center; flex-shrink: 0;
   }
   .turn-banner.win-banner {
-    font-size: 26px;
+    font-size: 24px;
     font-family: 'Lora', serif;
     font-weight: 700;
   }
   .turn-dot {
-    display: inline-block; width: 16px; height: 16px;
+    display: inline-block; width: 15px; height: 15px;
     border-radius: 50%; vertical-align: middle;
-    margin-right: 6px; position: relative; top: -2px;
+    margin-right: 6px; position: relative; top: -1px;
   }
 
-  /* Board fills remaining space, never overflows */
+  /* Board area: flex-grows to fill leftover space */
   .board-area {
     width: 100%;
-    flex: 1;
+    flex: 1 1 0;
+    min-height: 0;
     display: flex;
     align-items: center;
     justify-content: center;
-    min-height: 0;
-    padding: 4px 0;
   }
 
   .board-wrap {
     background: #3d4e5c;
-    border-radius: 20px;
+    border-radius: 18px;
     padding: 10px;
     box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
     position: relative;
@@ -240,7 +259,7 @@
   .grid {
     display: grid;
     grid-template-columns: repeat(7, 1fr);
-    gap: 6px;
+    gap: 5px;
   }
 
   .cell {
@@ -261,12 +280,12 @@
 
   .token.win { animation: winPulse 1s ease-in-out infinite; }
   @keyframes winPulse {
-    0%, 100% { box-shadow: 0 0 0 3px #f0ebe0; }
-    50%       { box-shadow: 0 0 0 6px #f0ebe0, 0 0 14px rgba(240,235,224,0.5); }
+    0%,100% { box-shadow: 0 0 0 3px #f0ebe0; }
+    50%      { box-shadow: 0 0 0 6px #f0ebe0, 0 0 14px rgba(240,235,224,0.5); }
   }
 
   .token.dropping {
-    animation: drop var(--drop-duration, 0.4s) cubic-bezier(0.22, 0.61, 0.36, 1) forwards;
+    animation: drop var(--drop-duration,.4s) cubic-bezier(0.22,0.61,0.36,1) forwards;
   }
   @keyframes drop {
     from { transform: translateY(var(--drop-from)); }
@@ -276,29 +295,27 @@
   .token.pending-pink  { animation: pendingPink  1.1s ease-in-out infinite; }
   .token.pending-green { animation: pendingGreen 1.1s ease-in-out infinite; }
   @keyframes pendingPink {
-    0%, 100% { box-shadow: 0 0 0 0px rgba(244,143,177,0); }
-    50%       { box-shadow: 0 0 0 6px rgba(244,143,177,0.5); }
+    0%,100% { box-shadow: 0 0 0 0px rgba(244,143,177,0); }
+    50%      { box-shadow: 0 0 0 6px rgba(244,143,177,0.5); }
   }
   @keyframes pendingGreen {
-    0%, 100% { box-shadow: 0 0 0 0px rgba(165,214,167,0); }
-    50%       { box-shadow: 0 0 0 6px rgba(165,214,167,0.5); }
+    0%,100% { box-shadow: 0 0 0 0px rgba(165,214,167,0); }
+    50%      { box-shadow: 0 0 0 6px rgba(165,214,167,0.5); }
   }
 
   .flash-canvas { position: absolute; pointer-events: none; }
 
   .preview-token {
-    position: absolute;
-    border-radius: 50%;
-    opacity: 0.35;
-    pointer-events: none;
+    position: absolute; border-radius: 50%;
+    opacity: 0.35; pointer-events: none;
   }
   .preview-token.pink  { background: #f48fb1; }
   .preview-token.green { background: #a5d6a7; }
 
-  /* Footer — fixed height, always visible */
+  /* Footer: fixed height, always present */
   .game-footer {
     width: 100%;
-    height: 60px;
+    height: 56px;
     flex-shrink: 0;
     display: flex;
     align-items: center;
@@ -314,14 +331,15 @@
     padding: 13px 44px;
     cursor: pointer;
     transition: transform 0.1s, background 0.15s;
-    animation: popIn 0.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    animation: popIn 0.18s cubic-bezier(0.175,0.885,0.32,1.275);
+    /* Make tap target large for iOS */
+    -webkit-tap-highlight-color: transparent;
   }
   @keyframes popIn {
-    from { transform: scale(0.7); opacity: 0; }
-    to   { transform: scale(1);   opacity: 1; }
+    from { transform: scale(0.75); opacity: 0; }
+    to   { transform: scale(1);    opacity: 1; }
   }
-  .confirm-btn:hover  { background: #dbb95e; }
-  .confirm-btn:active { transform: scale(0.97); }
+  .confirm-btn:active { transform: scale(0.97); background: #dbb95e; }
 
   /* MODAL */
   .modal-backdrop {
@@ -332,26 +350,22 @@
   .modal-backdrop.open { display: flex; }
   .modal {
     background: #2c3640; border-radius: 24px;
-    padding: 36px 40px; text-align: center;
-    max-width: 320px; width: 90%; border: 1px solid #3d5060;
+    padding: 32px 36px; text-align: center;
+    max-width: 300px; width: 88%; border: 1px solid #3d5060;
   }
-  .modal-win-dot { width: 68px; height: 68px; border-radius: 50%; margin: 0 auto 18px; }
-  .modal-title {
-    font-family: 'Lora', serif; font-size: 30px; font-weight: 700;
-    color: #f0ebe0; margin-bottom: 28px;
-  }
-  .modal-q { font-size: 22px; font-weight: 800; color: #f0ebe0; margin-bottom: 22px; }
-  .modal-btns { display: flex; gap: 14px; justify-content: center; }
+  .modal-win-dot { width: 60px; height: 60px; border-radius: 50%; margin: 0 auto 16px; }
+  .modal-title { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; color: #f0ebe0; margin-bottom: 24px; }
+  .modal-q { font-size: 22px; font-weight: 800; color: #f0ebe0; margin-bottom: 20px; }
+  .modal-btns { display: flex; gap: 12px; justify-content: center; }
   .modal-btn {
     border: none; border-radius: 12px;
     font-family: 'Nunito', sans-serif; font-size: 17px; font-weight: 700;
-    padding: 13px 32px; cursor: pointer; transition: transform 0.1s;
+    padding: 13px 28px; cursor: pointer; transition: transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
   }
   .modal-btn:active { transform: scale(0.97); }
   .modal-btn.yes { background: #e8c97a; color: #2c3640; }
-  .modal-btn.yes:hover { background: #dbb95e; }
   .modal-btn.no  { background: #3d5060; color: #f0ebe0; }
-  .modal-btn.no:hover { background: #4a606e; }
 </style>
 </head>
 <body>
@@ -368,10 +382,10 @@
 
 <!-- SHARE -->
 <div class="screen" id="shareScreen">
-  <div class="welcome-eyebrow" style="margin-bottom:20px;">Drop In</div>
+  <div class="welcome-eyebrow" style="margin-bottom:16px;">Drop In</div>
   <p class="share-header">Invite a friend to join your game<br>using the link below:</p>
   <div class="game-link-box">
-    <div class="game-link-url">pizzaemoji.net/four&id=g7x2k9</div>
+    <div class="game-link-url">pizzaemoji.net/four&amp;id=g7x2k9</div>
     <button class="copy-btn" id="copyBtn" onclick="copyLink()">Copy Link</button>
   </div>
   <div class="color-label">Choose your color</div>
@@ -394,14 +408,12 @@
     <button class="game-title-btn" onclick="goHome()">Drop In</button>
     <div class="turn-banner" id="turnBanner"></div>
   </div>
-
   <div class="board-area">
     <div class="board-wrap" id="boardWrap">
       <div class="preview-token" id="previewToken" style="display:none"></div>
       <div class="grid" id="grid"></div>
     </div>
   </div>
-
   <div class="game-footer" id="gameFooter"></div>
 </div>
 
@@ -426,10 +438,23 @@ const COLOR_HEX  = { pink: '#f48fb1', green: '#a5d6a7' };
 const COLOR_NAME = { pink: 'Pink', green: 'Green' };
 const GAME_LINK  = 'pizzaemoji.net/four&id=g7x2k9';
 
+/* ── Fix iOS viewport height ─────────────────
+   Sets a CSS var --vh that excludes Safari chrome.
+   We use this to size the game screen precisely.
+─────────────────────────────────────────────── */
+function setVH() {
+  var vh = window.innerHeight;
+  document.getElementById('gameScreen').style.height = vh + 'px';
+  document.getElementById('welcomeScreen').style.height = vh + 'px';
+  document.getElementById('shareScreen').style.height = vh + 'px';
+}
+setVH();
+window.addEventListener('resize', setVH);
+
 /* ── Rain ─────────────────────────────────── */
 (function buildRain() {
-  const stage = document.getElementById('rainStage');
-  const tokens = [
+  var stage = document.getElementById('rainStage');
+  var tokens = [
     {size:38,color:'pink', left:0.08,dur:7.2, delay:0   },
     {size:22,color:'green',left:0.18,dur:9.8, delay:-3.1},
     {size:48,color:'pink', left:0.30,dur:11.4,delay:-1.7},
@@ -446,9 +471,9 @@ const GAME_LINK  = 'pizzaemoji.net/four&id=g7x2k9';
     {size:42,color:'green',left:0.13,dur:14.2,delay:-2.2},
   ];
   tokens.forEach(function(t) {
-    const el = document.createElement('div');
+    var el = document.createElement('div');
     el.className = 'falling-token ' + t.color;
-    const opacity = 0.18 + (t.size / 48) * 0.42;
+    var opacity = 0.18 + (t.size / 48) * 0.42;
     el.style.cssText = 'width:'+t.size+'px;height:'+t.size+'px;left:calc('+(t.left*100)+'% - '+(t.size/2)+'px);animation-duration:'+t.dur+'s;animation-delay:'+t.delay+'s;--token-opacity:'+opacity.toFixed(2)+';--token-size:'+t.size+'px;';
     stage.appendChild(el);
   });
@@ -459,8 +484,12 @@ function show(id) {
   ['welcomeScreen','shareScreen','gameScreen'].forEach(function(s) {
     document.getElementById(s).classList.toggle('active', s === id);
   });
+  setVH();
 }
-function goHome() { document.getElementById('modal').classList.remove('open'); show('welcomeScreen'); }
+function goHome() {
+  document.getElementById('modal').classList.remove('open');
+  show('welcomeScreen');
+}
 function goToShare() {
   player1Color = null;
   document.getElementById('choicePink').className  = 'color-choice';
@@ -479,26 +508,29 @@ function selectColor(color) {
 function getPlayerColor(p)     { return p===1 ? player1Color : (player1Color==='pink' ? 'green' : 'pink'); }
 function getPlayerColorName(p) { return COLOR_NAME[getPlayerColor(p)]; }
 
-/* ── Game ─────────────────────────────────── */
+/* ── Game init ────────────────────────────── */
 function startGame() {
   if (!player1Color) return;
   board = Array.from({length:ROWS}, function(){ return Array(COLS).fill(0); });
   currentPlayer=1; pendingCol=null; pendingRow=null; isAnimating=false; gameOver=false;
   document.getElementById('modal').classList.remove('open');
   show('gameScreen');
-  renderBoard(); updateBanner(); setFooter('empty'); hidePreview();
+  renderBoard();
+  updateBanner();
+  setFooter('empty');
+  hidePreview();
 }
 function newRound() { startGame(); }
 
 function renderBoard() {
-  const grid = document.getElementById('grid');
+  var grid = document.getElementById('grid');
   grid.innerHTML = '';
-  for (let r=0; r<ROWS; r++) {
-    for (let c=0; c<COLS; c++) {
-      const cell = document.createElement('div');
+  for (var r=0; r<ROWS; r++) {
+    for (var c=0; c<COLS; c++) {
+      var cell = document.createElement('div');
       cell.className = 'cell';
       if (board[r][c]) {
-        const tok = document.createElement('div');
+        var tok = document.createElement('div');
         tok.className = 'token ' + getPlayerColor(board[r][c]);
         cell.appendChild(tok);
       }
@@ -508,30 +540,18 @@ function renderBoard() {
       grid.appendChild(cell);
     }
   }
-  updatePreviewSize();
-}
-
-function updatePreviewSize() {
-  const grid = document.getElementById('grid');
-  const firstCell = grid.children[0];
-  if (!firstCell) return;
-  const sz = firstCell.offsetWidth || 54;
-  const prev = document.getElementById('previewToken');
-  prev.style.width  = sz + 'px';
-  prev.style.height = sz + 'px';
-  prev.style.top    = -(sz + 8) + 'px';
 }
 
 function getCell(r,c) { return document.getElementById('grid').children[r*COLS+c]; }
 function getDropRow(col) {
-  for (let r=ROWS-1; r>=0; r--) { if (!board[r][col]) return r; }
+  for (var r=ROWS-1; r>=0; r--) { if (!board[r][col]) return r; }
   return -1;
 }
 
 /* ── Tap to place ─────────────────────────── */
 function onCellClick(col) {
   if (isAnimating || gameOver) return;
-  const row = getDropRow(col);
+  var row = getDropRow(col);
   if (row===-1) return;
   if (pendingCol===col) return;
   if (pendingCol!==null) removePendingToken();
@@ -539,15 +559,15 @@ function onCellClick(col) {
   pendingCol = col; pendingRow = row;
   board[row][col] = currentPlayer;
 
-  const cell  = getCell(row, col);
-  const color = getPlayerColor(currentPlayer);
-  const tok   = document.createElement('div');
+  var cell  = getCell(row, col);
+  var color = getPlayerColor(currentPlayer);
+  var tok   = document.createElement('div');
   tok.className = 'token ' + color;
   tok.id = 'pending-token';
 
-  const boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
-  const dropFrom = -(boardTop + cell.offsetWidth + 16);
-  const duration = Math.min(0.18 + Math.abs(dropFrom) / 1600, 0.55);
+  var boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
+  var dropFrom = -(boardTop + cell.offsetWidth + 16);
+  var duration = Math.min(0.18 + Math.abs(dropFrom) / 1600, 0.55);
   tok.style.setProperty('--drop-from',     dropFrom + 'px');
   tok.style.setProperty('--drop-duration', duration  + 's');
   tok.classList.add('dropping');
@@ -564,7 +584,7 @@ function onCellClick(col) {
 }
 
 function removePendingToken() {
-  const old = document.getElementById('pending-token');
+  var old = document.getElementById('pending-token');
   if (old) {
     board[pendingRow][pendingCol] = 0;
     old.remove();
@@ -576,10 +596,10 @@ function removePendingToken() {
 
 /* ── Footer states ────────────────────────── */
 function setFooter(state) {
-  const footer = document.getElementById('gameFooter');
+  var footer = document.getElementById('gameFooter');
   footer.innerHTML = '';
   if (state === 'confirm') {
-    const btn = document.createElement('button');
+    var btn = document.createElement('button');
     btn.className   = 'confirm-btn';
     btn.textContent = 'Confirm Move';
     btn.onclick     = confirmMove;
@@ -587,9 +607,9 @@ function setFooter(state) {
     setTimeout(function() {
       document.addEventListener('click', onOutsideClick, {capture:true});
       outsideClickActive = false;
-    }, 60);
+    }, 80);
   } else if (state === 'continue') {
-    const btn = document.createElement('button');
+    var btn = document.createElement('button');
     btn.className   = 'confirm-btn';
     btn.textContent = 'Continue';
     btn.onclick     = showNewGameModal;
@@ -597,11 +617,11 @@ function setFooter(state) {
   }
 }
 
-let outsideClickActive = false;
+var outsideClickActive = false;
 function onOutsideClick(e) {
   if (!outsideClickActive) { outsideClickActive = true; return; }
-  const footer = document.getElementById('gameFooter');
-  const btn    = footer.querySelector('.confirm-btn');
+  var footer = document.getElementById('gameFooter');
+  var btn    = footer.querySelector('.confirm-btn');
   if (btn && btn.contains(e.target)) return;
   if (document.getElementById('grid').contains(e.target)) return;
   cancelPending();
@@ -616,24 +636,24 @@ function cancelPending() {
 /* ── Confirm ──────────────────────────────── */
 function confirmMove() {
   if (isAnimating || gameOver || pendingCol===null) return;
-  const col = pendingCol, row = pendingRow;
+  var col = pendingCol, row = pendingRow;
   document.removeEventListener('click', onOutsideClick, {capture:true});
   outsideClickActive = false;
 
-  const tok = document.getElementById('pending-token');
+  var tok = document.getElementById('pending-token');
   if (!tok) return;
-  const color = getPlayerColor(currentPlayer);
+  var color = getPlayerColor(currentPlayer);
   tok.classList.remove('pending-' + color);
   tok.removeAttribute('id');
 
-  const cell = getCell(row, col);
+  var cell = getCell(row, col);
   fireFlash(cell, color);
   pendingCol = null; pendingRow = null;
   setFooter('empty');
   hidePreview();
 
   setTimeout(function() {
-    const win = checkWin(row, col);
+    var win = checkWin(row, col);
     if (win) {
       highlightWin(win);
       setTimeout(function() { showWinState(currentPlayer); }, 400);
@@ -646,12 +666,12 @@ function confirmMove() {
   }, 120);
 }
 
-/* ── Win / draw display ───────────────────── */
+/* ── Win / draw ───────────────────────────── */
 function showWinState(player) {
   gameOver = true;
-  const color = getPlayerColor(player);
-  const hex   = COLOR_HEX[color];
-  const banner = document.getElementById('turnBanner');
+  var color = getPlayerColor(player);
+  var hex   = COLOR_HEX[color];
+  var banner = document.getElementById('turnBanner');
   banner.className = 'turn-banner win-banner';
   banner.innerHTML = '<span class="turn-dot" style="background:'+hex+'"></span>'+COLOR_NAME[color]+' Wins!';
   document.getElementById('grid').querySelectorAll('.cell').forEach(function(c) {
@@ -661,7 +681,7 @@ function showWinState(player) {
 }
 function showDrawState() {
   gameOver = true;
-  const banner = document.getElementById('turnBanner');
+  var banner = document.getElementById('turnBanner');
   banner.className = 'turn-banner win-banner';
   banner.textContent = "It's a draw!";
   document.getElementById('grid').querySelectorAll('.cell').forEach(function(c) {
@@ -670,12 +690,12 @@ function showDrawState() {
   setFooter('continue');
 }
 function showNewGameModal() {
-  const banner = document.getElementById('turnBanner');
-  const winnerMatch = banner.textContent.match(/^(\w+) Wins/);
-  if (winnerMatch) {
-    const color = winnerMatch[1].toLowerCase();
+  var banner = document.getElementById('turnBanner');
+  var m = banner.textContent.match(/^(\w+) Wins/);
+  if (m) {
+    var color = m[1].toLowerCase();
     document.getElementById('modalDot').style.background = COLOR_HEX[color] || '#7a9aaa';
-    document.getElementById('modalTitle').textContent = winnerMatch[1] + ' Wins!';
+    document.getElementById('modalTitle').textContent = m[1] + ' Wins!';
   } else {
     document.getElementById('modalDot').style.background = '#7a9aaa';
     document.getElementById('modalTitle').textContent = "It's a Draw!";
@@ -685,52 +705,47 @@ function showNewGameModal() {
 
 /* ── Flash ────────────────────────────────── */
 function fireFlash(cell, color) {
-  const hex      = COLOR_HEX[color];
-  const sz       = cell.offsetWidth;
-  const canvasSz = sz * 3;
-  const canvas   = document.createElement('canvas');
-  canvas.width = canvas.height = canvasSz;
+  var hex = COLOR_HEX[color];
+  var sz  = cell.offsetWidth;
+  var csz = sz * 3;
+  var canvas = document.createElement('canvas');
+  canvas.width = canvas.height = csz;
   canvas.className = 'flash-canvas';
-  canvas.style.width  = canvasSz + 'px';
-  canvas.style.height = canvasSz + 'px';
-  canvas.style.left   = -sz + 'px';
-  canvas.style.top    = -sz + 'px';
-  canvas.style.zIndex = 10;
+  canvas.style.cssText = 'width:'+csz+'px;height:'+csz+'px;left:'+-sz+'px;top:'+-sz+'px;z-index:10;';
   cell.appendChild(canvas);
-  const ctx = canvas.getContext('2d');
-  const cx = canvasSz/2, cy = canvasSz/2;
-  const startDist = sz * 0.58, lineLen = sz * 0.6, lineW = Math.max(2, sz*0.055);
-  let start = null;
+  var ctx = canvas.getContext('2d');
+  var cx = csz/2, cy = csz/2;
+  var sd = sz*0.58, ll = sz*0.6, lw = Math.max(2,sz*0.055);
+  var start = null;
   function frame(ts) {
     if (!start) start = ts;
-    const t    = Math.min((ts-start)/380, 1);
-    const ease = 1 - Math.pow(1-t, 2);
-    const opacity = t < 0.5 ? 1 : 1 - ((t-0.5)/0.5);
-    ctx.clearRect(0,0,canvasSz,canvasSz);
-    ctx.strokeStyle = hex; ctx.lineWidth = lineW; ctx.lineCap = 'round'; ctx.globalAlpha = opacity*0.9;
-    for (let i=0;i<8;i++) {
-      const a  = (i/8)*Math.PI*2;
-      const d  = startDist + ease*lineLen;
+    var t = Math.min((ts-start)/380,1);
+    var ease = 1-Math.pow(1-t,2);
+    var op = t<0.5 ? 1 : 1-((t-0.5)/0.5);
+    ctx.clearRect(0,0,csz,csz);
+    ctx.strokeStyle=hex; ctx.lineWidth=lw; ctx.lineCap='round'; ctx.globalAlpha=op*0.9;
+    for(var i=0;i<8;i++){
+      var a=(i/8)*Math.PI*2, d=sd+ease*ll;
       ctx.beginPath();
-      ctx.moveTo(cx+Math.cos(a)*(startDist+ease*lineLen*0.2), cy+Math.sin(a)*(startDist+ease*lineLen*0.2));
-      ctx.lineTo(cx+Math.cos(a)*d, cy+Math.sin(a)*d);
+      ctx.moveTo(cx+Math.cos(a)*(sd+ease*ll*0.2),cy+Math.sin(a)*(sd+ease*ll*0.2));
+      ctx.lineTo(cx+Math.cos(a)*d,cy+Math.sin(a)*d);
       ctx.stroke();
     }
-    if (t<1) { requestAnimationFrame(frame); } else { canvas.remove(); }
+    if(t<1){requestAnimationFrame(frame);}else{canvas.remove();}
   }
   requestAnimationFrame(frame);
 }
 
-/* ── Preview ──────────────────────────────── */
+/* ── Preview ghost ───────────────────────── */
 function showPreview(col) {
   if (isAnimating || gameOver || pendingCol!==null) return;
-  const row = getDropRow(col);
+  var row = getDropRow(col);
   if (row===-1) return;
-  const cell     = document.getElementById('grid').children[row*COLS+col];
-  const cellRect = cell.getBoundingClientRect();
-  const wrapRect = document.getElementById('boardWrap').getBoundingClientRect();
-  const sz       = cell.offsetWidth;
-  const prev     = document.getElementById('previewToken');
+  var cell     = document.getElementById('grid').children[row*COLS+col];
+  var cellRect = cell.getBoundingClientRect();
+  var wrapRect = document.getElementById('boardWrap').getBoundingClientRect();
+  var sz       = cell.offsetWidth;
+  var prev     = document.getElementById('previewToken');
   prev.className    = 'preview-token ' + getPlayerColor(currentPlayer);
   prev.style.width  = sz + 'px';
   prev.style.height = sz + 'px';
@@ -742,34 +757,33 @@ function hidePreview() { document.getElementById('previewToken').style.display =
 
 /* ── Win detection ────────────────────────── */
 function checkWin(row, col) {
-  const dirs = [[0,1],[1,0],[1,1],[1,-1]], p = board[row][col];
-  for (let d=0;d<dirs.length;d++) {
-    const dr=dirs[d][0], dc=dirs[d][1];
-    let cells=[[row,col]];
-    for(let i=1;i<4;i++){const r=row+dr*i,c=col+dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
-    for(let i=1;i<4;i++){const r=row-dr*i,c=col-dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
-    if(cells.length>=4) return cells.slice(0,4);
+  var dirs=[[0,1],[1,0],[1,1],[1,-1]], p=board[row][col];
+  for(var d=0;d<dirs.length;d++){
+    var dr=dirs[d][0],dc=dirs[d][1],cells=[[row,col]];
+    for(var i=1;i<4;i++){var r=row+dr*i,c=col+dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
+    for(var i=1;i<4;i++){var r=row-dr*i,c=col-dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
+    if(cells.length>=4)return cells.slice(0,4);
   }
   return null;
 }
 function checkDraw() { return board[0].every(function(v){return v!==0;}); }
 function highlightWin(cells) {
-  cells.forEach(function(rc){ const t=getCell(rc[0],rc[1]).querySelector('.token'); if(t) t.classList.add('win'); });
+  cells.forEach(function(rc){var t=getCell(rc[0],rc[1]).querySelector('.token');if(t)t.classList.add('win');});
 }
+
 function updateBanner() {
-  const color = COLOR_HEX[getPlayerColor(currentPlayer)];
-  const name  = getPlayerColorName(currentPlayer);
-  const banner = document.getElementById('turnBanner');
+  var color = COLOR_HEX[getPlayerColor(currentPlayer)];
+  var name  = getPlayerColorName(currentPlayer);
+  var banner = document.getElementById('turnBanner');
   banner.className = 'turn-banner';
   banner.innerHTML = '<span class="turn-dot" style="background:'+color+'"></span>'+name+"'s turn";
 }
 
-/* ── Copy link ────────────────────────────── */
 function copyLink() {
-  const btn = document.getElementById('copyBtn');
+  var btn = document.getElementById('copyBtn');
   navigator.clipboard.writeText(GAME_LINK).catch(function(){});
-  btn.textContent = 'Copied!'; btn.classList.add('copied');
-  setTimeout(function(){ btn.textContent='Copy Link'; btn.classList.remove('copied'); }, 2000);
+  btn.textContent='Copied!'; btn.classList.add('copied');
+  setTimeout(function(){btn.textContent='Copy Link';btn.classList.remove('copied');},2000);
 }
 
 document.getElementById('boardWrap').addEventListener('click', function(e) {

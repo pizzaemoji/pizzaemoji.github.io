@@ -382,7 +382,9 @@ const myTurn  = () => currentTurn === myRole;
 const uid     = () => Math.random().toString(36).slice(2, 9);
 const gameRef = () => doc(db, 'games', gameId);
 const gameUrl = () => location.origin + location.pathname + '?game=' + gameId;
-const emptyBoard = () => Array.from({length:ROWS}, () => Array(COLS).fill(0));
+const emptyBoard  = () => Array(ROWS * COLS).fill(0);
+const flatBoard   = () => board.reduce((a, r) => a.concat(r), []);
+const unflatBoard = flat => Array.from({length:ROWS}, (_, r) => flat.slice(r*COLS, r*COLS+COLS));
 
 /* ── iOS viewport ─────────────────────────── */
 function setVH() {
@@ -534,7 +536,7 @@ function handleGameState(data) {
 
 /* ── Build game UI from Firestore state ───── */
 function startGameUI(data) {
-  board       = data.board.map(r => r.slice());
+  board       = unflatBoard(data.board);
   currentTurn = data.currentTurn;
   gameOver    = false;
   lastMoveRow = data.lastMove ? data.lastMove.row : null;
@@ -551,7 +553,7 @@ function startGameUI(data) {
 /* ── Sync opponent move ───────────────────── */
 function syncFromFirestore(data) {
   if (isAnimating) return;
-  const newBoard = data.board.map(r => r.slice());
+  const newBoard = unflatBoard(data.board);
   currentTurn = data.currentTurn;
 
   let changedRow = null, changedCol = null;
@@ -744,7 +746,7 @@ async function confirmMove() {
   const nextTurn = myRole==='player1' ? 'player2' : 'player1';
 
   await updateDoc(gameRef(), {
-    board:       board.map(r => r.slice()),
+    board:       flatBoard(),
     currentTurn: nextTurn,
     lastMove:    { row: movedRow, col: movedCol },
     status:      (win||draw) ? 'done' : 'active'

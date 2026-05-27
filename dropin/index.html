@@ -87,6 +87,7 @@
     color: #a5d6a7; font-family: 'Nunito', sans-serif;
     font-size: 15px; font-weight: 700; padding: 10px 24px;
     cursor: pointer; transition: background 0.15s;
+    -webkit-tap-highlight-color: transparent;
   }
   .copy-btn:active { background: #3d5060; }
   .copy-btn.copied { color: #f48fb1; }
@@ -100,6 +101,7 @@
     cursor: pointer; padding: 12px 18px; border-radius: 16px;
     border: 2.5px solid transparent; transition: border-color 0.15s, background 0.15s;
     background: transparent; min-width: 90px;
+    -webkit-tap-highlight-color: transparent;
   }
   .color-choice:active { background: #1e2a33; }
   .color-choice.selected-pink  { border-color: #f48fb1; background: #1e2a33; }
@@ -119,9 +121,7 @@
   .color-choice.selected-green .choice-name { color: #a5d6a7; }
 
   /* WAITING */
-  #waitingScreen {
-    height: 100vh; height: -webkit-fill-available; justify-content: center; gap: 0;
-  }
+  #waitingScreen { height: 100vh; height: -webkit-fill-available; justify-content: center; gap: 0; }
   .waiting-title {
     font-family: 'Lora', serif; font-size: 28px; font-weight: 700;
     color: #f0ebe0; text-align: center; margin-bottom: 12px;
@@ -145,14 +145,13 @@
   }
   .waiting-link-box {
     background: #1e2a33; border-radius: 16px; padding: 20px 24px;
-    margin-bottom: 20px; width: 100%; text-align: center; border: 1px solid #2d3e4a;
+    width: 100%; text-align: center; border: 1px solid #2d3e4a;
   }
 
   /* GAME */
   #gameScreen {
     height: 100vh; height: -webkit-fill-available;
-    justify-content: center;
-    padding-top: 20px; padding-bottom: 20px;
+    justify-content: center; padding-top: 20px; padding-bottom: 20px;
     gap: 0; overflow: hidden;
   }
   .game-title-btn {
@@ -243,7 +242,6 @@
   }
   .confirm-btn:active { transform: scale(0.97); background: #dbb95e; }
 
-  /* not-your-turn banner */
   .waiting-turn {
     font-family: 'Lora', serif; font-style: italic;
     font-size: 16px; color: #7a9aaa; text-align: center;
@@ -282,36 +280,36 @@
 <div class="screen active" id="welcomeScreen">
   <div style="margin-bottom:8px;">
     <div class="welcome-eyebrow">a game for two</div>
-    <div class="welcome-title">Drop In 2.0</div>
+    <div class="welcome-title">Drop In</div>
   </div>
   <div class="token-rain-stage" id="rainStage"></div>
-  <button class="btn-main" onclick="onNewGame()">New Game</button>
+  <button class="btn-main" id="btnNewGame">New Game</button>
 </div>
 
-<!-- SHARE / COLOR PICK (Player 1) -->
+<!-- SHARE / COLOR PICK -->
 <div class="screen" id="shareScreen">
   <div class="welcome-eyebrow" style="margin-bottom:16px;">Drop In</div>
   <p class="share-header">Invite a friend to join your game<br>using the link below:</p>
   <div class="game-link-box">
     <div class="game-link-label">game link</div>
     <div class="game-link-url" id="shareLinkUrl">generating…</div>
-    <button class="copy-btn" id="copyBtn" onclick="copyLink()">Copy Link</button>
+    <button class="copy-btn" id="copyBtn">Copy Link</button>
   </div>
   <div class="color-label">Choose your color</div>
   <div class="color-choices">
-    <div class="color-choice" id="choicePink" onclick="selectColor('pink')">
+    <div class="color-choice" id="choicePink">
       <div class="choice-dot pink"><div class="check">&#10003;</div></div>
       <span class="choice-name">Pink</span>
     </div>
-    <div class="color-choice" id="choiceGreen" onclick="selectColor('green')">
+    <div class="color-choice" id="choiceGreen">
       <div class="choice-dot green"><div class="check">&#10003;</div></div>
       <span class="choice-name">Green</span>
     </div>
   </div>
-  <button class="btn-main" id="letsPlayBtn" onclick="onPlayer1Ready()" disabled>Let's Play</button>
+  <button class="btn-main" id="letsPlayBtn" disabled>Let's Play</button>
 </div>
 
-<!-- WAITING FOR OPPONENT -->
+<!-- WAITING -->
 <div class="screen" id="waitingScreen">
   <div class="welcome-eyebrow" style="margin-bottom:20px;">Drop In</div>
   <div class="waiting-title">Waiting for your friend…</div>
@@ -324,13 +322,13 @@
   <div class="waiting-link-box">
     <div class="game-link-label">game link</div>
     <div class="game-link-url" id="waitingLinkUrl"></div>
-    <button class="copy-btn" id="waitingCopyBtn" onclick="copyLinkFromWaiting()">Copy Link</button>
+    <button class="copy-btn" id="waitingCopyBtn">Copy Link</button>
   </div>
 </div>
 
 <!-- GAME -->
 <div class="screen" id="gameScreen">
-  <button class="game-title-btn" onclick="goHome()">Drop In</button>
+  <button class="game-title-btn" id="btnHome">Drop In</button>
   <div class="turn-banner" id="turnBanner"></div>
   <div class="board-wrap" id="boardWrap">
     <div class="grid" id="grid"></div>
@@ -345,8 +343,8 @@
     <div class="modal-title" id="modalTitle"></div>
     <div class="modal-q">Play again?</div>
     <div class="modal-btns">
-      <button class="modal-btn yes" onclick="onPlayAgain()">Yes!</button>
-      <button class="modal-btn no"  onclick="goHome()">No thanks</button>
+      <button class="modal-btn yes" id="btnPlayAgain">Yes!</button>
+      <button class="modal-btn no"  id="btnNoThanks">No thanks</button>
     </div>
   </div>
 </div>
@@ -356,17 +354,16 @@ import { initializeApp }                          from 'https://www.gstatic.com/
 import { getFirestore, doc, setDoc, getDoc,
          updateDoc, onSnapshot, serverTimestamp } from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js';
 
-/* ── Firebase init ────────────────────────── */
-const firebaseConfig = {
+/* ── Firebase ─────────────────────────────── */
+const app = initializeApp({
   apiKey:            "AIzaSyB9j5E9e4t2_-1QhEqoeQkT7paE8UzVAG4",
   authDomain:        "drop-in-game.firebaseapp.com",
   projectId:         "drop-in-game",
   storageBucket:     "drop-in-game.firebasestorage.app",
   messagingSenderId: "801313491683",
   appId:             "1:801313491683:web:05a9561e8c9a6f62fb13d6"
-};
-const app = initializeApp(firebaseConfig);
-const db  = getFirestore(app);
+});
+const db = getFirestore(app);
 
 /* ── Constants ────────────────────────────── */
 const ROWS = 6, COLS = 7;
@@ -374,53 +371,58 @@ const COLOR_HEX  = { pink: '#f48fb1', green: '#a5d6a7' };
 const COLOR_NAME = { pink: 'Pink',    green: 'Green'   };
 
 /* ── State ────────────────────────────────── */
-let gameId       = null;   // Firestore doc ID
-let myRole       = null;   // 'player1' | 'player2'
-let myColor      = null;   // 'pink' | 'green'
-let opponentColor= null;
-let board        = [];
-let currentTurn  = null;   // 'player1' | 'player2'
-let gameOver     = false;
-let pendingCol   = null;
-let pendingRow   = null;
-let isAnimating  = false;
-let lastMoveRow  = null;
-let lastMoveCol  = null;
-let chaseInterval= null;
-let unsubscribe  = null;   // Firestore listener teardown
+let gameId = null, myRole = null, myColor = null, opponentColor = null;
+let board = [], currentTurn = null, gameOver = false;
+let pendingCol = null, pendingRow = null, isAnimating = false;
+let lastMoveRow = null, lastMoveCol = null;
+let chaseInterval = null, unsubscribe = null;
 
 /* ── Helpers ──────────────────────────────── */
-function myTurn()    { return currentTurn === myRole; }
-function uid()       { return Math.random().toString(36).slice(2,9); }
-function gameRef()   { return doc(db, 'games', gameId); }
-function gameUrl()   { return window.location.origin + window.location.pathname + '?game=' + gameId; }
+const myTurn  = () => currentTurn === myRole;
+const uid     = () => Math.random().toString(36).slice(2, 9);
+const gameRef = () => doc(db, 'games', gameId);
+const gameUrl = () => location.origin + location.pathname + '?game=' + gameId;
+const emptyBoard = () => Array.from({length:ROWS}, () => Array(COLS).fill(0));
 
-function emptyBoard() {
-  return Array.from({length:ROWS}, function(){ return Array(COLS).fill(0); });
-}
-
-/* ── iOS viewport fix ─────────────────────── */
+/* ── iOS viewport ─────────────────────────── */
 function setVH() {
-  var h = window.innerHeight + 'px';
-  ['welcomeScreen','shareScreen','waitingScreen','gameScreen'].forEach(function(id){
+  const h = window.innerHeight + 'px';
+  ['welcomeScreen','shareScreen','waitingScreen','gameScreen'].forEach(id => {
     document.getElementById(id).style.height = h;
   });
 }
 setVH();
 window.addEventListener('resize', setVH);
 
-/* ── Screen nav ───────────────────────────── */
+/* ── Show screen ──────────────────────────── */
 function show(id) {
-  ['welcomeScreen','shareScreen','waitingScreen','gameScreen'].forEach(function(s){
-    document.getElementById(s).classList.toggle('active', s===id);
+  ['welcomeScreen','shareScreen','waitingScreen','gameScreen'].forEach(s => {
+    document.getElementById(s).classList.toggle('active', s === id);
   });
   setVH();
 }
 
+/* ── Wire up all static buttons ──────────────
+   No onclick attributes in HTML — all listeners
+   attached here inside the module scope.
+─────────────────────────────────────────────── */
+document.getElementById('btnNewGame')    .addEventListener('click', onNewGame);
+document.getElementById('letsPlayBtn')  .addEventListener('click', onPlayer1Ready);
+document.getElementById('copyBtn')      .addEventListener('click', () => copyLink('copyBtn'));
+document.getElementById('waitingCopyBtn').addEventListener('click', () => copyLink('waitingCopyBtn'));
+document.getElementById('btnHome')      .addEventListener('click', goHome);
+document.getElementById('btnPlayAgain') .addEventListener('click', onPlayAgain);
+document.getElementById('btnNoThanks')  .addEventListener('click', goHome);
+document.getElementById('choicePink')   .addEventListener('click', () => selectColor('pink'));
+document.getElementById('choiceGreen')  .addEventListener('click', () => selectColor('green'));
+document.getElementById('boardWrap')    .addEventListener('click', e => {
+  if (pendingCol !== null && !e.target.closest('.cell')) cancelPending();
+});
+
 /* ── Rain ─────────────────────────────────── */
 (function buildRain() {
-  var stage = document.getElementById('rainStage');
-  var tokens = [
+  const stage = document.getElementById('rainStage');
+  const tokens = [
     {size:38,color:'pink', left:0.08,dur:7.2, delay:0   },
     {size:22,color:'green',left:0.18,dur:9.8, delay:-3.1},
     {size:48,color:'pink', left:0.30,dur:11.4,delay:-1.7},
@@ -436,167 +438,139 @@ function show(id) {
     {size:28,color:'pink', left:0.57,dur:11.8,delay:-8.3},
     {size:42,color:'green',left:0.13,dur:14.2,delay:-2.2},
   ];
-  tokens.forEach(function(t) {
-    var el = document.createElement('div');
+  tokens.forEach(t => {
+    const el = document.createElement('div');
     el.className = 'falling-token ' + t.color;
-    var op = 0.18 + (t.size/48)*0.42;
-    el.style.cssText = 'width:'+t.size+'px;height:'+t.size+'px;left:calc('+(t.left*100)+'% - '+(t.size/2)+'px);animation-duration:'+t.dur+'s;animation-delay:'+t.delay+'s;--token-opacity:'+op.toFixed(2)+';--token-size:'+t.size+'px;';
+    const op = 0.18 + (t.size/48)*0.42;
+    el.style.cssText = `width:${t.size}px;height:${t.size}px;left:calc(${t.left*100}% - ${t.size/2}px);animation-duration:${t.dur}s;animation-delay:${t.delay}s;--token-opacity:${op.toFixed(2)};--token-size:${t.size}px;`;
     stage.appendChild(el);
   });
 })();
 
-/* ── On page load — check for ?game= param ── */
+/* ── Check for join link on load ─────────── */
 (function checkJoinLink() {
-  var params = new URLSearchParams(window.location.search);
-  var gid    = params.get('game');
+  const gid = new URLSearchParams(location.search).get('game');
   if (gid) joinGame(gid);
 })();
 
-/* ── Player 1: create new game ────────────── */
-window.onNewGame = async function() {
+/* ── Player 1: new game ───────────────────── */
+async function onNewGame() {
   gameId = uid();
   myRole = 'player1';
-
   await setDoc(gameRef(), {
-    board:       emptyBoard(),
-    currentTurn: 'player1',
+    board:        emptyBoard(),
+    currentTurn:  'player1',
     player1Color: null,
     player2Color: null,
-    status:      'waiting',   // waiting | active | done
-    lastMove:    null,
-    createdAt:   serverTimestamp()
+    status:       'waiting',
+    lastMove:     null,
+    createdAt:    serverTimestamp()
   });
-
   document.getElementById('shareLinkUrl').textContent = gameUrl();
   document.getElementById('choicePink').className  = 'color-choice';
   document.getElementById('choiceGreen').className = 'color-choice';
   document.getElementById('letsPlayBtn').disabled  = true;
   myColor = null;
   show('shareScreen');
-};
+}
 
-/* ── Player 1: color selection ────────────── */
-window.selectColor = function(color) {
+/* ── Player 1: pick color ─────────────────── */
+function selectColor(color) {
   myColor = color;
-  document.getElementById('choicePink').className  = 'color-choice'+(color==='pink'  ? ' selected-pink'  : '');
-  document.getElementById('choiceGreen').className = 'color-choice'+(color==='green' ? ' selected-green' : '');
+  document.getElementById('choicePink').className  = 'color-choice' + (color==='pink'  ? ' selected-pink'  : '');
+  document.getElementById('choiceGreen').className = 'color-choice' + (color==='green' ? ' selected-green' : '');
   document.getElementById('letsPlayBtn').disabled  = false;
-};
+}
 
-/* ── Player 1: ready — write color, wait ──── */
-window.onPlayer1Ready = async function() {
+/* ── Player 1: ready ──────────────────────── */
+async function onPlayer1Ready() {
   if (!myColor) return;
   opponentColor = myColor === 'pink' ? 'green' : 'pink';
   await updateDoc(gameRef(), { player1Color: myColor });
   document.getElementById('waitingLinkUrl').textContent = gameUrl();
   show('waitingScreen');
   listenForGame();
-};
+}
 
-/* ── Player 2: join via link ──────────────── */
+/* ── Player 2: join ───────────────────────── */
 async function joinGame(gid) {
   gameId = gid;
   myRole = 'player2';
-
-  var snap = await getDoc(gameRef());
+  const snap = await getDoc(gameRef());
   if (!snap.exists()) { alert('Game not found. Ask your friend for a new link.'); return; }
-
-  var data = snap.data();
-  if (data.status === 'done') {
-    // game finished — just watch
-  }
-
-  // Player 2 gets the remaining color
+  const data = snap.data();
   myColor       = data.player1Color === 'pink' ? 'green' : 'pink';
   opponentColor = data.player1Color;
-
-  await updateDoc(gameRef(), {
-    player2Color: myColor,
-    status: 'active'
-  });
-
+  await updateDoc(gameRef(), { player2Color: myColor, status: 'active' });
   listenForGame();
 }
 
-/* ── Firestore real-time listener ─────────── */
+/* ── Firestore listener ───────────────────── */
 function listenForGame() {
   if (unsubscribe) unsubscribe();
-  unsubscribe = onSnapshot(gameRef(), function(snap) {
+  unsubscribe = onSnapshot(gameRef(), snap => {
     if (!snap.exists()) return;
-    var data = snap.data();
-    handleGameState(data);
+    handleGameState(snap.data());
   });
 }
 
-/* ── React to Firestore state changes ──────── */
+/* ── React to state changes ───────────────── */
 function handleGameState(data) {
-  // Player 1 waiting: player 2 just joined → start game
-  if (data.status === 'active' && document.getElementById('waitingScreen').classList.contains('active')) {
+  const onWaiting = document.getElementById('waitingScreen').classList.contains('active');
+  const onGame    = document.getElementById('gameScreen').classList.contains('active');
+
+  if (data.status === 'active' && onWaiting) {
     opponentColor = myRole === 'player1' ? data.player2Color : data.player1Color;
     startGameUI(data);
     return;
   }
-
-  // Already in game — sync opponent's move
-  if (document.getElementById('gameScreen').classList.contains('active')) {
-    syncFromFirestore(data);
-  }
-
-  // Player 2 arriving fresh
-  if (data.status === 'active' && !document.getElementById('gameScreen').classList.contains('active')
-      && !document.getElementById('waitingScreen').classList.contains('active')) {
+  if (data.status === 'active' && !onGame && !onWaiting) {
     opponentColor = myRole === 'player1' ? data.player2Color : data.player1Color;
     startGameUI(data);
+    return;
   }
+  if (onGame) syncFromFirestore(data);
 }
 
-/* ── Start game UI from Firestore state ────── */
+/* ── Build game UI from Firestore state ───── */
 function startGameUI(data) {
-  board        = data.board.map(function(r){ return r.slice(); });
-  currentTurn  = data.currentTurn;
-  gameOver     = false;
-  lastMoveRow  = data.lastMove ? data.lastMove.row : null;
-  lastMoveCol  = data.lastMove ? data.lastMove.col : null;
-  pendingCol   = null; pendingRow = null; isAnimating = false;
+  board       = data.board.map(r => r.slice());
+  currentTurn = data.currentTurn;
+  gameOver    = false;
+  lastMoveRow = data.lastMove ? data.lastMove.row : null;
+  lastMoveCol = data.lastMove ? data.lastMove.col : null;
+  pendingCol  = null; pendingRow = null; isAnimating = false;
   stopChase();
   document.getElementById('modal').classList.remove('open');
   show('gameScreen');
   renderBoard();
   updateBanner();
-  setConfirm('empty');
+  setConfirm(myTurn() ? 'empty' : 'waiting');
 }
 
-/* ── Sync opponent move from Firestore ─────── */
+/* ── Sync opponent move ───────────────────── */
 function syncFromFirestore(data) {
-  if (isAnimating) return; // wait for our own animation to finish
+  if (isAnimating) return;
+  const newBoard = data.board.map(r => r.slice());
+  currentTurn = data.currentTurn;
 
-  var newBoard = data.board.map(function(r){ return r.slice(); });
-  currentTurn  = data.currentTurn;
-
-  // find what changed
-  var changedRow = null, changedCol = null;
-  for (var r = 0; r < ROWS; r++) {
-    for (var c = 0; c < COLS; c++) {
-      if (newBoard[r][c] !== board[r][c]) { changedRow = r; changedCol = c; }
-    }
-  }
+  let changedRow = null, changedCol = null;
+  for (let r=0; r<ROWS; r++)
+    for (let c=0; c<COLS; c++)
+      if (newBoard[r][c] !== board[r][c]) { changedRow=r; changedCol=c; }
 
   board = newBoard;
 
-  if (changedRow !== null && data.currentTurn === myRole) {
-    // opponent just moved — animate their drop
-    animateOpponentDrop(changedRow, changedCol, function() {
+  if (changedRow !== null && myTurn()) {
+    animateOpponentDrop(changedRow, changedCol, () => {
       clearLastMoveMarker();
-      lastMoveRow = changedRow; lastMoveCol = changedCol;
-      var tok = getCell(changedRow, changedCol).querySelector('.token');
-      if (tok) tok.classList.add('last-' + opponentColor);
-
-      // check win/draw after opponent move
-      var win = checkWin(changedRow, changedCol);
+      lastMoveRow=changedRow; lastMoveCol=changedCol;
+      const tok = getCell(changedRow,changedCol).querySelector('.token');
+      if (tok) tok.classList.add('last-'+opponentColor);
+      const win = checkWin(changedRow, changedCol);
       if (win) {
-        gameOver = true;
-        disableBoard();
-        startChase(win, data.currentTurn === 'player1' ? 'player2' : 'player1');
+        gameOver=true; disableBoard();
+        startChase(win, myTurn() ? myRole : (myRole==='player1'?'player2':'player1'));
       } else if (checkDraw()) {
         showDrawState();
       } else {
@@ -604,75 +578,68 @@ function syncFromFirestore(data) {
         setConfirm('empty');
       }
     });
-  } else if (data.status === 'done') {
-    // game reset — restart UI
+  } else if (data.status === 'done' && !gameOver) {
     startGameUI(data);
-  } else {
-    updateBanner();
   }
 }
 
-/* ── Animate opponent's token dropping in ─── */
+/* ── Animate opponent token drop ──────────── */
 function animateOpponentDrop(row, col, callback) {
   isAnimating = true;
-  renderBoard(); // draw board without the changed cell token first
-  // temporarily remove the token so we can animate it in
-  var cell = getCell(row, col);
-  var existingTok = cell.querySelector('.token');
-  if (existingTok) existingTok.remove();
+  renderBoard();
+  const cell = getCell(row, col);
+  const existing = cell.querySelector('.token');
+  if (existing) existing.remove();
 
-  var color = opponentColor;
-  var tok   = document.createElement('div');
-  tok.className = 'token ' + color;
-
-  var boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
-  var dropFrom = -(boardTop + cell.offsetWidth + 16);
-  var duration = Math.min(0.18 + Math.abs(dropFrom)/1600, 0.55);
+  const tok = document.createElement('div');
+  tok.className = 'token ' + opponentColor;
+  const boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
+  const dropFrom = -(boardTop + cell.offsetWidth + 16);
+  const duration = Math.min(0.18 + Math.abs(dropFrom)/1600, 0.55);
   tok.style.setProperty('--drop-from', dropFrom+'px');
   tok.style.setProperty('--drop-duration', duration+'s');
   tok.classList.add('dropping');
   cell.appendChild(tok);
 
-  setTimeout(function() {
+  setTimeout(() => {
     isAnimating = false;
     tok.classList.remove('dropping');
     if (callback) callback();
   }, duration*1000+30);
 }
 
-/* ── Render board from state ──────────────── */
+/* ── Render board ─────────────────────────── */
 function renderBoard() {
-  var grid = document.getElementById('grid');
+  const grid = document.getElementById('grid');
   grid.innerHTML = '';
-  for (var r=0; r<ROWS; r++) {
-    for (var c=0; c<COLS; c++) {
-      var cell = document.createElement('div');
+  for (let r=0; r<ROWS; r++) {
+    for (let c=0; c<COLS; c++) {
+      const cell = document.createElement('div');
       cell.className = 'cell';
       if (board[r][c]) {
-        var color = board[r][c] === 1 ? myColor : opponentColor;
-        var tok = document.createElement('div');
+        const color = board[r][c] === 1 ? (myRole==='player1' ? myColor : opponentColor)
+                                        : (myRole==='player2' ? myColor : opponentColor);
+        const tok = document.createElement('div');
         tok.className = 'token ' + color;
         if (r===lastMoveRow && c===lastMoveCol) tok.classList.add('last-'+opponentColor);
         cell.appendChild(tok);
       }
-      cell.addEventListener('click', (function(col){ return function(){ onCellClick(col); }; })(c));
+      cell.addEventListener('click', (col => () => onCellClick(col))(c));
       grid.appendChild(cell);
     }
   }
 }
 
-function getCell(r,c) { return document.getElementById('grid').children[r*COLS+c]; }
-function getDropRow(col) {
-  for (var r=ROWS-1; r>=0; r--) { if (!board[r][col]) return r; }
-  return -1;
-}
+const getCell    = (r,c) => document.getElementById('grid').children[r*COLS+c];
+const getDropRow = col   => { for (let r=ROWS-1;r>=0;r--) if (!board[r][col]) return r; return -1; };
+
 function clearLastMoveMarker() {
   if (lastMoveRow===null) return;
-  var tok = getCell(lastMoveRow,lastMoveCol).querySelector('.token');
+  const tok = getCell(lastMoveRow,lastMoveCol).querySelector('.token');
   if (tok) tok.classList.remove('last-pink','last-green');
 }
 function disableBoard() {
-  document.getElementById('grid').querySelectorAll('.cell').forEach(function(c){
+  document.getElementById('grid').querySelectorAll('.cell').forEach(c => {
     c.classList.add('no-hover'); c.style.cursor='default';
   });
 }
@@ -680,22 +647,22 @@ function disableBoard() {
 /* ── Tap to place ─────────────────────────── */
 function onCellClick(col) {
   if (isAnimating || gameOver || !myTurn()) return;
-  var row = getDropRow(col);
+  const row = getDropRow(col);
   if (row===-1) return;
   if (pendingCol===col) return;
   if (pendingCol!==null) removePendingToken();
 
   pendingCol=col; pendingRow=row;
-  board[row][col] = myRole === 'player1' ? 1 : 2;
+  board[row][col] = myRole==='player1' ? 1 : 2;
 
-  var cell  = getCell(row, col);
-  var tok   = document.createElement('div');
+  const cell = getCell(row, col);
+  const tok  = document.createElement('div');
   tok.className = 'token ' + myColor;
   tok.id = 'pending-token';
 
-  var boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
-  var dropFrom = -(boardTop + cell.offsetWidth + 16);
-  var duration = Math.min(0.18 + Math.abs(dropFrom)/1600, 0.55);
+  const boardTop = cell.getBoundingClientRect().top - document.getElementById('boardWrap').getBoundingClientRect().top;
+  const dropFrom = -(boardTop + cell.offsetWidth + 16);
+  const duration = Math.min(0.18 + Math.abs(dropFrom)/1600, 0.55);
   tok.style.setProperty('--drop-from', dropFrom+'px');
   tok.style.setProperty('--drop-duration', duration+'s');
   tok.classList.add('dropping');
@@ -703,7 +670,7 @@ function onCellClick(col) {
   cell.classList.add('no-hover');
   cell.appendChild(tok);
 
-  setTimeout(function() {
+  setTimeout(() => {
     isAnimating = false;
     tok.classList.remove('dropping');
     tok.classList.add('pending-'+myColor);
@@ -712,47 +679,40 @@ function onCellClick(col) {
 }
 
 function removePendingToken() {
-  var old = document.getElementById('pending-token');
-  if (old) {
-    board[pendingRow][pendingCol] = 0;
-    old.remove();
-    getCell(pendingRow,pendingCol).classList.remove('no-hover');
-  }
+  const old = document.getElementById('pending-token');
+  if (old) { board[pendingRow][pendingCol]=0; old.remove(); getCell(pendingRow,pendingCol).classList.remove('no-hover'); }
   pendingCol=null; pendingRow=null;
   setConfirm('empty');
 }
 
 /* ── Confirm area ─────────────────────────── */
 function setConfirm(state) {
-  var wrap = document.getElementById('confirmWrap');
+  const wrap = document.getElementById('confirmWrap');
   wrap.innerHTML = '';
   if (state==='confirm') {
-    var btn = document.createElement('button');
+    const btn = document.createElement('button');
     btn.className='confirm-btn'; btn.textContent='Confirm Move';
-    btn.onclick=confirmMove;
+    btn.addEventListener('click', confirmMove);
     wrap.appendChild(btn);
-    setTimeout(function(){
-      document.addEventListener('click', onOutsideClick, {capture:true});
-      outsideClickActive=false;
-    }, 80);
+    setTimeout(() => { document.addEventListener('click', onOutsideClick, {capture:true}); outsideClickActive=false; }, 80);
   } else if (state==='continue') {
-    var btn = document.createElement('button');
+    const btn = document.createElement('button');
     btn.className='confirm-btn'; btn.textContent='Continue';
-    btn.onclick=showNewGameModal;
+    btn.addEventListener('click', showNewGameModal);
     wrap.appendChild(btn);
   } else if (state==='waiting') {
-    var msg = document.createElement('div');
+    const msg = document.createElement('div');
     msg.className='waiting-turn';
-    msg.textContent = "Waiting for " + COLOR_NAME[opponentColor] + "'s move…";
+    msg.textContent = `Waiting for ${COLOR_NAME[opponentColor]}'s move…`;
     wrap.appendChild(msg);
   }
 }
 
-var outsideClickActive = false;
+let outsideClickActive = false;
 function onOutsideClick(e) {
   if (!outsideClickActive) { outsideClickActive=true; return; }
-  var wrap = document.getElementById('confirmWrap');
-  var btn  = wrap.querySelector('.confirm-btn');
+  const wrap = document.getElementById('confirmWrap');
+  const btn  = wrap.querySelector('.confirm-btn');
   if (btn && btn.contains(e.target)) return;
   if (document.getElementById('grid').contains(e.target)) return;
   cancelPending();
@@ -766,40 +726,34 @@ function cancelPending() {
 /* ── Confirm and write to Firestore ─────────── */
 async function confirmMove() {
   if (isAnimating||gameOver||pendingCol===null) return;
-  var col=pendingCol, row=pendingRow;
+  const col=pendingCol, row=pendingRow;
   document.removeEventListener('click', onOutsideClick, {capture:true});
   outsideClickActive=false;
 
-  var tok = document.getElementById('pending-token');
+  const tok = document.getElementById('pending-token');
   if (!tok) return;
   tok.classList.remove('pending-'+myColor);
   tok.removeAttribute('id');
-
   fireFlash(getCell(row,col), myColor);
 
-  var movedRow=row, movedCol=col;
+  const movedRow=row, movedCol=col;
   pendingCol=null; pendingRow=null;
 
-  // check win/draw locally first
-  var win  = checkWin(movedRow, movedCol);
-  var draw = !win && checkDraw();
+  const win  = checkWin(movedRow, movedCol);
+  const draw = !win && checkDraw();
+  const nextTurn = myRole==='player1' ? 'player2' : 'player1';
 
-  var nextTurn = myRole==='player1' ? 'player2' : 'player1';
-  var newStatus = (win || draw) ? 'done' : 'active';
-
-  // write to Firestore
   await updateDoc(gameRef(), {
-    board:       board.map(function(r){ return r.slice(); }),
+    board:       board.map(r => r.slice()),
     currentTurn: nextTurn,
     lastMove:    { row: movedRow, col: movedCol },
-    status:      newStatus
+    status:      (win||draw) ? 'done' : 'active'
   });
 
   setConfirm('empty');
 
   if (win) {
-    gameOver = true;
-    disableBoard();
+    gameOver=true; disableBoard();
     startChase(win, myRole);
   } else if (draw) {
     showDrawState();
@@ -814,70 +768,58 @@ async function confirmMove() {
 
 /* ── Banner ───────────────────────────────── */
 function updateBanner() {
-  var banner = document.getElementById('turnBanner');
+  const banner = document.getElementById('turnBanner');
   banner.className = 'turn-banner';
   if (myTurn()) {
-    banner.innerHTML = '<span class="turn-dot" style="background:'+COLOR_HEX[myColor]+'"></span>Your turn';
+    banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[myColor]}"></span>Your turn`;
   } else {
-    banner.innerHTML = '<span class="turn-dot" style="background:'+COLOR_HEX[opponentColor]+'"></span>'+COLOR_NAME[opponentColor]+"'s turn";
+    banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[opponentColor]}"></span>${COLOR_NAME[opponentColor]}'s turn`;
   }
 }
 
-/* ── Win chasing lights ───────────────────── */
+/* ── Chasing lights ───────────────────────── */
 function startChase(cells, winnerRole) {
-  var toks = cells.map(function(rc){ return getCell(rc[0],rc[1]).querySelector('.token'); });
-  var dimmed = 0;
+  const toks = cells.map(rc => getCell(rc[0],rc[1]).querySelector('.token'));
+  let dimmed = 0;
   toks[dimmed].classList.add('win-chase');
-  chaseInterval = setInterval(function() {
+  chaseInterval = setInterval(() => {
     toks[dimmed].classList.remove('win-chase');
     dimmed = (dimmed+1) % toks.length;
     toks[dimmed].classList.add('win-chase');
   }, 520);
-  setTimeout(function() {
-    showWinState(winnerRole);
-  }, 520 * toks.length + 80);
+  setTimeout(() => showWinState(winnerRole), 520*toks.length+80);
 }
 function stopChase() {
   if (chaseInterval!==null) { clearInterval(chaseInterval); chaseInterval=null; }
 }
 
-/* ── Win / draw / modal ───────────────────── */
+/* ── Win / draw ───────────────────────────── */
 function showWinState(winnerRole) {
-  var color = winnerRole===myRole ? myColor : opponentColor;
-  var hex   = COLOR_HEX[color];
-  var banner= document.getElementById('turnBanner');
+  const color  = winnerRole===myRole ? myColor : opponentColor;
+  const banner = document.getElementById('turnBanner');
   banner.className='turn-banner win-banner';
-  var label = winnerRole===myRole ? 'You win!' : COLOR_NAME[color]+' wins!';
-  banner.innerHTML='<span class="turn-dot" style="background:'+hex+'"></span>'+label;
+  banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[color]}"></span>${winnerRole===myRole ? 'You win!' : COLOR_NAME[color]+' wins!'}`;
   setConfirm('continue');
 }
 function showDrawState() {
   gameOver=true; disableBoard();
-  var banner=document.getElementById('turnBanner');
+  const banner=document.getElementById('turnBanner');
   banner.className='turn-banner win-banner';
   banner.textContent="It's a draw!";
   setConfirm('continue');
 }
 function showNewGameModal() {
   stopChase();
-  var banner=document.getElementById('turnBanner');
-  var m=banner.textContent.match(/(\w+) wins/i);
-  if (banner.textContent.includes('You win')) {
-    document.getElementById('modalDot').style.background=COLOR_HEX[myColor];
-    document.getElementById('modalTitle').textContent='You win!';
-  } else if (m) {
-    var color=m[1].toLowerCase();
-    document.getElementById('modalDot').style.background=COLOR_HEX[color]||'#7a9aaa';
-    document.getElementById('modalTitle').textContent=COLOR_NAME[color]+' wins!';
-  } else {
-    document.getElementById('modalDot').style.background='#7a9aaa';
-    document.getElementById('modalTitle').textContent="It's a Draw!";
-  }
+  const banner=document.getElementById('turnBanner');
+  const isYou = banner.textContent.includes('You win');
+  const m     = banner.textContent.match(/(\w+) wins/i);
+  document.getElementById('modalDot').style.background = isYou ? COLOR_HEX[myColor] : (m ? COLOR_HEX[m[1].toLowerCase()]||'#7a9aaa' : '#7a9aaa');
+  document.getElementById('modalTitle').textContent    = isYou ? 'You win!'           : (m ? COLOR_NAME[m[1].toLowerCase()]||"It's a Draw!" : "It's a Draw!");
   document.getElementById('modal').classList.add('open');
 }
 
-/* ── Play again — reset same game doc ───────── */
-window.onPlayAgain = async function() {
+/* ── Play again ───────────────────────────── */
+async function onPlayAgain() {
   stopChase();
   document.getElementById('modal').classList.remove('open');
   await updateDoc(gameRef(), {
@@ -886,78 +828,67 @@ window.onPlayAgain = async function() {
     lastMove:    null,
     status:      'active'
   });
-  // listener will fire and call handleGameState → startGameUI
-};
+}
 
 /* ── Go home ──────────────────────────────── */
-window.goHome = function() {
+function goHome() {
   stopChase();
   if (unsubscribe) { unsubscribe(); unsubscribe=null; }
   gameId=null; myRole=null; myColor=null; opponentColor=null;
   document.getElementById('modal').classList.remove('open');
   show('welcomeScreen');
-  // clear ?game= from URL without reload
-  window.history.replaceState({}, '', window.location.pathname);
-};
+  history.replaceState({}, '', location.pathname);
+}
 
-/* ── Copy helpers ─────────────────────────── */
-window.copyLink = function() {
-  var btn=document.getElementById('copyBtn');
-  navigator.clipboard.writeText(gameUrl()).catch(function(){});
+/* ── Copy link ────────────────────────────── */
+function copyLink(btnId) {
+  const btn = document.getElementById(btnId);
+  navigator.clipboard.writeText(gameUrl()).catch(()=>{});
   btn.textContent='Copied!'; btn.classList.add('copied');
-  setTimeout(function(){btn.textContent='Copy Link';btn.classList.remove('copied');},2000);
-};
-window.copyLinkFromWaiting = function() {
-  var btn=document.getElementById('waitingCopyBtn');
-  navigator.clipboard.writeText(gameUrl()).catch(function(){});
-  btn.textContent='Copied!'; btn.classList.add('copied');
-  setTimeout(function(){btn.textContent='Copy Link';btn.classList.remove('copied');},2000);
-};
+  setTimeout(()=>{ btn.textContent='Copy Link'; btn.classList.remove('copied'); }, 2000);
+}
 
-/* ── Flash ────────────────────────────────── */
+/* ── Flash animation ──────────────────────── */
 function fireFlash(cell, color) {
-  var hex=COLOR_HEX[color], sz=cell.offsetWidth, csz=sz*3;
-  var canvas=document.createElement('canvas');
+  const hex=COLOR_HEX[color], sz=cell.offsetWidth, csz=sz*3;
+  const canvas=document.createElement('canvas');
   canvas.width=canvas.height=csz; canvas.className='flash-canvas';
-  canvas.style.cssText='width:'+csz+'px;height:'+csz+'px;left:'+-sz+'px;top:'+-sz+'px;z-index:10;';
+  canvas.style.cssText=`width:${csz}px;height:${csz}px;left:${-sz}px;top:${-sz}px;z-index:10;`;
   cell.appendChild(canvas);
-  var ctx=canvas.getContext('2d');
-  var cx=csz/2,cy=csz/2,sd=sz*0.58,ll=sz*0.6,lw=Math.max(2,sz*0.055);
-  var start=null;
-  function frame(ts){
+  const ctx=canvas.getContext('2d');
+  const cx=csz/2,cy=csz/2,sd=sz*0.58,ll=sz*0.6,lw=Math.max(2,sz*0.055);
+  let start=null;
+  const frame=ts=>{
     if(!start)start=ts;
-    var t=Math.min((ts-start)/380,1);
-    var ease=1-Math.pow(1-t,2),op=t<0.5?1:1-((t-0.5)/0.5);
+    const t=Math.min((ts-start)/380,1);
+    const ease=1-Math.pow(1-t,2),op=t<0.5?1:1-((t-0.5)/0.5);
     ctx.clearRect(0,0,csz,csz);
     ctx.strokeStyle=hex;ctx.lineWidth=lw;ctx.lineCap='round';ctx.globalAlpha=op*0.9;
-    for(var i=0;i<8;i++){
-      var a=(i/8)*Math.PI*2,d=sd+ease*ll;
+    for(let i=0;i<8;i++){
+      const a=(i/8)*Math.PI*2,d=sd+ease*ll;
       ctx.beginPath();
       ctx.moveTo(cx+Math.cos(a)*(sd+ease*ll*0.2),cy+Math.sin(a)*(sd+ease*ll*0.2));
       ctx.lineTo(cx+Math.cos(a)*d,cy+Math.sin(a)*d);
       ctx.stroke();
     }
-    if(t<1){requestAnimationFrame(frame);}else{canvas.remove();}
-  }
+    t<1?requestAnimationFrame(frame):canvas.remove();
+  };
   requestAnimationFrame(frame);
 }
 
 /* ── Win detection ────────────────────────── */
-function checkWin(row,col){
-  var dirs=[[0,1],[1,0],[1,1],[1,-1]],p=board[row][col];
-  for(var d=0;d<dirs.length;d++){
-    var dr=dirs[d][0],dc=dirs[d][1],cells=[[row,col]];
-    for(var i=1;i<4;i++){var r=row+dr*i,c=col+dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
-    for(var i=1;i<4;i++){var r=row-dr*i,c=col-dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
+function checkWin(row,col) {
+  const dirs=[[0,1],[1,0],[1,1],[1,-1]], p=board[row][col];
+  for(const [dr,dc] of dirs){
+    const cells=[[row,col]];
+    for(let i=1;i<4;i++){const r=row+dr*i,c=col+dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
+    for(let i=1;i<4;i++){const r=row-dr*i,c=col-dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
     if(cells.length>=4)return cells.slice(0,4);
   }
   return null;
 }
-function checkDraw(){ return board[0].every(function(v){return v!==0;}); }
+function checkDraw(){ return board[0].every(v=>v!==0); }
 
-document.getElementById('boardWrap').addEventListener('click',function(e){
-  if(pendingCol!==null&&!e.target.closest('.cell'))cancelPending();
-});
 </script>
 </body>
 </html>

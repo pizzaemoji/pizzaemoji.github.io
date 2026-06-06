@@ -77,6 +77,13 @@ function getTip() {
 function trySwing() {
   if (state.won) { restartGame(); return; }
   const tip = getTip();
+
+  // velocity direction of the tip at this moment (tangent to current rotation)
+  // tangent = perpendicular to wand, in direction of rotation
+  const wandAngle = state.angle;
+  const tipVx = -Math.sin(wandAngle) * state.dir;
+  const tipVy =  Math.cos(wandAngle) * state.dir;
+
   let closest = null, closestDist = Infinity;
   for (const d of dots) {
     if (d === state.pivotDot) continue;
@@ -87,9 +94,21 @@ function trySwing() {
       closestDist = dist;
     }
   }
+
   if (closest) {
-    const dx = tip.x - closest.x, dy = tip.y - closest.y;
-    state.angle = Math.atan2(dy, dx);
+    // new wand vector: from new pivot to tip
+    const newWandX = tip.x - closest.x;
+    const newWandY = tip.y - closest.y;
+    const newAngle = Math.atan2(newWandY, newWandX);
+
+    // cross product of new wand vector and tip velocity
+    // positive = tip moving counterclockwise around new pivot
+    // negative = clockwise
+    const cross = newWandX * tipVy - newWandY * tipVx;
+    const newDir = cross > 0 ? 1 : -1;
+
+    state.angle = newAngle;
+    state.dir *= -1;
     state.pivotDot = closest;
     state.visited.add(closest);
     if (closest === goalDot) state.won = true;

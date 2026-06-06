@@ -1,0 +1,234 @@
+
+<style>
+  #game-wrap { display: flex; flex-direction: column; align-items: center; padding: 1.5rem 0; gap: 1rem; }
+  #game-canvas { border: 0.5px solid var(--color-border-tertiary); border-radius: var(--border-radius-lg); background: #0a0a12; cursor: pointer; touch-action: none; }
+  #status { font-size: 15px; color: var(--color-text-secondary); min-height: 24px; letter-spacing: 0.02em; }
+  #restart-btn { display: none; padding: 6px 20px; font-size: 14px; border-radius: var(--border-radius-md); background: transparent; border: 0.5px solid var(--color-border-secondary); color: var(--color-text-primary); cursor: pointer; }
+  #restart-btn:hover { background: var(--color-background-secondary); }
+  #hint { font-size: 13px; color: var(--color-text-tertiary); }
+</style>
+<div id="game-wrap">
+  <h2 class="sr-only">Spin Doctor web demo — swing your wand from dot to dot to reach the goal</h2>
+  <canvas id="game-canvas" width="280" height="440"></canvas>
+  <div id="status">tap or press space to swing</div>
+  <button id="restart-btn" onclick="restartGame()">restart</button>
+  <div id="hint">tap anywhere · space bar · avoid walls</div>
+</div>
+<script>
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+const statusEl = document.getElementById('status');
+const restartBtn = document.getElementById('restart-btn');
+
+const W = 280, H = 440;
+const COLS = 3, ROWS = 5;
+const PAD_X = 60, PAD_Y = 55;
+const CELL_X = (W - PAD_X * 2) / (COLS - 1);
+const CELL_Y = (H - PAD_Y * 2) / (ROWS - 1);
+const DOT_R = 7;
+const CATCH_R = 28;
+const WAND_LEN = 38;
+
+function getDotPos(col, row) {
+  return {
+    x: PAD_X + col * CELL_X,
+    y: PAD_Y + row * CELL_Y
+  };
+}
+
+const dots = [];
+for (let r = 0; r < ROWS; r++) {
+  for (let c = 0; c < COLS; c++) {
+    dots.push({ col: c, row: r, ...getDotPos(c, r) });
+  }
+}
+
+const goalDot = dots.find(d => d.col === 1 && d.row === 0);
+const startDot = dots.find(d => d.col === 1 && d.row === 4);
+
+let state = {};
+let animId;
+let pulseT = 0;
+
+function restartGame() {
+  cancelAnimationFrame(animId);
+  state = {
+    phase: 'playing',
+    pivotDot: startDot,
+    angle: -Math.PI / 2,
+    dir: 1,
+    speed: 0.045,
+    shattered: false,
+    won: false,
+    shatterParticles: [],
+    visitedDots: new Set([startDot])
+  };
+  statusEl.textContent = 'tap or press space to swing';
+  restartBtn.style.display = 'none';
+  pulseT = 0;
+  loop();
+}
+
+function trySwing() {
+  if (state.shattered || state.won) return;
+  const tip = getTip();
+  let closest = null;
+  let closestDist = Infinity;
+  for (const d of dots) {
+    if (d === state.pivotDot) continue;
+    const dx = tip.x - d.x, dy = tip.y - d.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+    if (dist < CATCH_R && dist < closestDist) {
+      closest = d;
+      closestDist = dist;
+    }
+  }
+  if (closest) {
+    state.visitedDots.add(closest);
+    const dx = tip.x - closest.x, dy = tip.y - closest.y;
+    state.angle = Math.atan2(dy, dx);
+    state.pivotDot = closest;
+    if (closest === goalDot) {
+      state.won = true;
+      statusEl.textContent = 'you made it!';
+      restartBtn.style.display = 'inline-block';
+    }
+  }
+}
+
+function getTip() {
+  return {
+    x: state.pivotDot.x + Math.cos(state.angle) * WAND_LEN,
+    y: state.pivotDot.y + Math.sin(state.angle) * WAND_LEN
+  };
+}
+
+function checkWallCollision() {
+  const tip = getTip();
+  const margin = 6;
+  return tip.x < margin || tip.x > W - margin || tip.y < margin || tip.y > H - margin;
+}
+
+function shatter() {
+  state.shattered = true;
+  const tip = getTip();
+  state.shatterParticles = [];
+  for (let i = 0; i < 18; i++) {
+    const a = (Math.PI * 2 * i) / 18 + Math.random() * 0.3;
+    const spd = 1.5 + Math.random() * 2.5;
+    state.shatterParticles.push({
+      x: tip.x, y: tip.y,
+      vx: Math.cos(a) * spd, vy: Math.sin(a) * spd,
+      life: 1.0,
+      len: 4 + Math.random() * 8
+    });
+  }
+  statusEl.textContent = 'shattered — try again';
+  restartBtn.style.display = 'inline-block';
+}
+
+function update() {
+  if (state.shattered || state.won) {
+    if (state.shatterParticles) {
+      state.shatterParticles.forEach(p => {
+        p.x += p.vx; p.y += p.vy;
+        p.vy += 0.08;
+        p.life -= 0.025;
+      });
+      state.shatterParticles = state.shatterParticles.filter(p => p.life > 0);
+    }
+    return;
+  }
+  state.angle += state.speed * state.dir;
+  if (checkWallCollision()) shatter();
+  pulseT += 0.05;
+}
+
+function draw() {
+  ctx.clearRect(0, 0, W, H);
+
+  ctx.fillStyle = '#0a0a12';
+  ctx.fillRect(0, 0, W, H);
+
+  for (const d of dots) {
+    const isGoal = d === goalDot;
+    const isPivot = d === state.pivotDot;
+    const isVisited = state.visitedDots && state.visitedDots.has(d);
+
+    if (isGoal) {
+      const pulse = 0.5 + 0.5 * Math.sin(pulseT);
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, DOT_R + 6 + pulse * 5, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,160,${0.08 + 0.07 * pulse})`;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, DOT_R + 2, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(255,255,180,${0.25 + 0.15 * pulse})`;
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, DOT_R, 0, Math.PI * 2);
+      ctx.fillStyle = '#ffffa0';
+      ctx.fill();
+    } else {
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, DOT_R, 0, Math.PI * 2);
+      ctx.fillStyle = isPivot ? '#7fa8e8' : isVisited ? '#3a5a8a' : '#1e2a4a';
+      ctx.fill();
+      ctx.beginPath();
+      ctx.arc(d.x, d.y, DOT_R, 0, Math.PI * 2);
+      ctx.strokeStyle = isPivot ? '#aaccff' : '#2a3e6a';
+      ctx.lineWidth = 1;
+      ctx.stroke();
+    }
+  }
+
+  if (!state.shattered && !state.won) {
+    const tip = getTip();
+    ctx.beginPath();
+    ctx.moveTo(state.pivotDot.x, state.pivotDot.y);
+    ctx.lineTo(tip.x, tip.y);
+    ctx.strokeStyle = '#d0e8ff';
+    ctx.lineWidth = 2.5;
+    ctx.lineCap = 'round';
+    ctx.stroke();
+    ctx.beginPath();
+    ctx.arc(tip.x, tip.y, 4, 0, Math.PI * 2);
+    ctx.fillStyle = '#ffffff';
+    ctx.fill();
+  }
+
+  if (state.won && !state.shattered) {
+    const p = state.pivotDot;
+    const pulse = 0.5 + 0.5 * Math.sin(pulseT * 2);
+    ctx.beginPath();
+    ctx.arc(p.x, p.y, DOT_R + 8 + pulse * 6, 0, Math.PI * 2);
+    ctx.fillStyle = `rgba(255,255,120,${0.12 + 0.1 * pulse})`;
+    ctx.fill();
+  }
+
+  if (state.shatterParticles) {
+    state.shatterParticles.forEach(p => {
+      ctx.save();
+      ctx.globalAlpha = p.life;
+      ctx.beginPath();
+      ctx.moveTo(p.x, p.y);
+      ctx.lineTo(p.x + Math.cos(p.vx) * p.len, p.y + Math.sin(p.vy) * p.len);
+      ctx.strokeStyle = '#aad0ff';
+      ctx.lineWidth = 1.5;
+      ctx.stroke();
+      ctx.restore();
+    });
+  }
+}
+
+function loop() {
+  update();
+  draw();
+  animId = requestAnimationFrame(loop);
+}
+
+canvas.addEventListener('pointerdown', trySwing);
+document.addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); trySwing(); } });
+
+restartGame();
+</script>

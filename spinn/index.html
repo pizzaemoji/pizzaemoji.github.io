@@ -96,16 +96,12 @@ function trySwing() {
   }
 
   if (closest) {
-    // new wand vector: from new pivot to tip
-    const newWandX = tip.x - closest.x;
-    const newWandY = tip.y - closest.y;
-    const newAngle = Math.atan2(newWandY, newWandX);
+    // use the mathematically exact tip position, not the screen-sampled one
+    const exactTipX = state.pivotDot.x + Math.cos(state.angle) * WAND_LEN;
+    const exactTipY = state.pivotDot.y + Math.sin(state.angle) * WAND_LEN;
 
-    // cross product of new wand vector and tip velocity
-    // positive = tip moving counterclockwise around new pivot
-    // negative = clockwise
-    const cross = newWandX * tipVy - newWandY * tipVx;
-    const newDir = cross > 0 ? 1 : -1;
+    // derive new angle purely from geometry — no positional snap
+    const newAngle = Math.atan2(exactTipY - closest.y, exactTipX - closest.x);
 
     state.angle = newAngle;
     state.dir *= -1;

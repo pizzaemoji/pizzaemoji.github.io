@@ -61,6 +61,7 @@ function restartGame() {
     dir: 1,
     speed: 0.032,
     won: false,
+    held: false,
     visited: new Set()
   };
   state.visited.add(startDot);
@@ -76,33 +77,23 @@ function getTip() {
 
 function trySwing() {
   if (state.won) { restartGame(); return; }
-  const tip = getTip();
 
-  // velocity direction of the tip at this moment (tangent to current rotation)
-  // tangent = perpendicular to wand, in direction of rotation
-  const wandAngle = state.angle;
-  const tipVx = -Math.sin(wandAngle) * state.dir;
-  const tipVy =  Math.cos(wandAngle) * state.dir;
+  const exactTipX = state.pivotDot.x + Math.cos(state.angle) * WAND_LEN;
+  const exactTipY = state.pivotDot.y + Math.sin(state.angle) * WAND_LEN;
 
   let closest = null, closestDist = Infinity;
   for (const d of dots) {
     if (d === state.pivotDot) continue;
-    const dx = tip.x - d.x, dy = tip.y - d.y;
+    const dx = exactTipX - d.x, dy = exactTipY - d.y;
     const dist = Math.sqrt(dx * dx + dy * dy);
-    if (dist < CATCH_R && dist < closestDist) {
+    if (dist < 2.5 && dist < closestDist) {
       closest = d;
       closestDist = dist;
     }
   }
 
   if (closest) {
-    // use the mathematically exact tip position, not the screen-sampled one
-    const exactTipX = state.pivotDot.x + Math.cos(state.angle) * WAND_LEN;
-    const exactTipY = state.pivotDot.y + Math.sin(state.angle) * WAND_LEN;
-
-    // derive new angle purely from geometry — no positional snap
     const newAngle = Math.atan2(exactTipY - closest.y, exactTipX - closest.x);
-
     state.angle = newAngle;
     state.dir *= -1;
     state.pivotDot = closest;
@@ -115,6 +106,7 @@ function update() {
   pulseT += 0.05;
   if (state.won) return;
   state.angle += state.speed * state.dir;
+  if (state.held) trySwing();
 }
 
 function draw() {
@@ -192,10 +184,11 @@ function loop() {
 }
 
 window.addEventListener('resize', () => { resize(); restartGame(); });
-canvas.addEventListener('pointerdown', e => { e.preventDefault(); trySwing(); });
-document.addEventListener('keydown', e => {
-  if (e.code === 'Space') { e.preventDefault(); trySwing(); }
-});
+canvas.addEventListener('pointerdown', e => { e.preventDefault(); if (state.won) { restartGame(); return; } state.held = true; });
+canvas.addEventListener('pointerup',   e => { e.preventDefault(); state.held = false; });
+canvas.addEventListener('pointerleave',e => { state.held = false; });
+document.addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); if (state.won) { restartGame(); return; } state.held = true; } });
+document.addEventListener('keyup',   e => { if (e.code === 'Space') { e.preventDefault(); state.held = false; } });
 
 resize();
 restartGame();

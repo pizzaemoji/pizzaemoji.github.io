@@ -17,36 +17,37 @@ const canvas = document.getElementById('c');
 const ctx = canvas.getContext('2d');
 
 const COLS = 3, ROWS = 5;
-let W, H, PAD_X, PAD_Y, CELL_X, CELL_Y, WAND_LEN, CATCH_R, DOT_R;
+const WAND_LEN = 80;   // fixed px — dot spacing equals this
+const CELL = WAND_LEN; // dots are exactly WAND_LEN apart
+const DOT_R = 8;
+const SPEED = 0.038;   // radians per frame
 
-function resize() {
-  W = canvas.width  = window.innerWidth;
-  H = canvas.height = window.innerHeight;
-  PAD_X  = W * 0.22;
-  PAD_Y  = H * 0.10;
-  CELL_X = (W - PAD_X * 2) / (COLS - 1);
-  CELL_Y = (H - PAD_Y * 2) / (ROWS - 1);
-  WAND_LEN = Math.min(CELL_X, CELL_Y) * 0.92;
-  CATCH_R  = WAND_LEN * 0.35;
-  DOT_R    = Math.max(7, W * 0.022);
-  buildDots();
-}
+let W, H, dots, goalDot, startDot;
 
-let dots = [], goalDot, startDot;
+function buildGrid() {
+  const gridW = (COLS - 1) * CELL;
+  const gridH = (ROWS - 1) * CELL;
+  const originX = (W - gridW) / 2;
+  const originY = (H - gridH) / 2;
 
-function buildDots() {
   dots = [];
   for (let r = 0; r < ROWS; r++) {
     for (let c = 0; c < COLS; c++) {
       dots.push({
         col: c, row: r,
-        x: PAD_X + c * CELL_X,
-        y: PAD_Y + r * CELL_Y
+        x: originX + c * CELL,
+        y: originY + r * CELL
       });
     }
   }
   goalDot  = dots.find(d => d.col === 1 && d.row === 0);
   startDot = dots.find(d => d.col === 1 && d.row === 4);
+}
+
+function resize() {
+  W = canvas.width  = window.innerWidth;
+  H = canvas.height = window.innerHeight;
+  buildGrid();
 }
 
 let state = {};
@@ -59,54 +60,64 @@ function restartGame() {
     pivotDot: startDot,
     angle: -Math.PI / 2,
     dir: 1,
-    speed: 0.032,
     won: false,
     held: false,
-    visited: new Set()
+    visited: new Set([startDot])
   };
-  state.visited.add(startDot);
   loop();
 }
 
-function getTip() {
+function getTip(angle) {
+  const a = angle !== undefined ? angle : state.angle;
   return {
-    x: state.pivotDot.x + Math.cos(state.angle) * WAND_LEN,
-    y: state.pivotDot.y + Math.sin(state.angle) * WAND_LEN
+    x: state.pivotDot.x + Math.cos(a) * WAND_LEN,
+    y: state.pivotDot.y + Math.sin(a) * WAND_LEN
   };
 }
 
-function trySwing() {
-  if (state.won) { restartGame(); return; }
-
-  const exactTipX = state.pivotDot.x + Math.cos(state.angle) * WAND_LEN;
-  const exactTipY = state.pivotDot.y + Math.sin(state.angle) * WAND_LEN;
-
-  let closest = null, closestDist = Infinity;
-  for (const d of dots) {
-    if (d === state.pivotDot) continue;
-    const dx = exactTipX - d.x, dy = exactTipY - d.y;
-    const dist = Math.sqrt(dx * dx + dy * dy);
-    if (dist < 2.5 && dist < closestDist) {
-      closest = d;
-      closestDist = dist;
+// Check if the tip swept past a dot between prevAngle and nextAngle
+// by testing multiple substeps along the arc this frame
+function checkSweep(prevAngle, nextAngle) {
+  const STEPS = 8;
+  for (let i = 0; i <= STEPS; i++) {
+    const a = prevAngle + (nextAngle - prevAngle) * (i / STEPS);
+    const tx = state.pivotDot.x + Math.cos(a) * WAND_LEN;
+    const ty = state.pivotDot.y + Math.sin(a) * WAND_LEN;
+    for (const d of dots) {
+      if (d === state.pivotDot) continue;
+      const dx = tx - d.x, dy = ty - d.y;
+      if (Math.sqrt(dx * dx + dy * dy) < 6) {
+        return { dot: d, angle: a };
+      }
     }
   }
-
-  if (closest) {
-    const newAngle = Math.atan2(exactTipY - closest.y, exactTipX - closest.x);
-    state.angle = newAngle;
-    state.dir *= -1;
-    state.pivotDot = closest;
-    state.visited.add(closest);
-    if (closest === goalDot) state.won = true;
-  }
+  return null;
 }
 
 function update() {
   pulseT += 0.05;
   if (state.won) return;
-  state.angle += state.speed * state.dir;
-  if (state.held) trySwing();
+
+  const prevAngle = state.angle;
+  const nextAngle = state.angle + SPEED * state.dir;
+
+  if (state.held) {
+    const hit = checkSweep(prevAngle, nextAngle);
+    if (hit) {
+      const newAngle = Math.atan2(
+        state.pivotDot.y + Math.sin(hit.angle) * WAND_LEN - hit.dot.y,
+        state.pivotDot.x + Math.cos(hit.angle) * WAND_LEN - hit.dot.x
+      );
+      state.angle = newAngle;
+      state.dir *= -1;
+      state.pivotDot = hit.dot;
+      state.visited.add(hit.dot);
+      if (hit.dot === goalDot) state.won = true;
+      return;
+    }
+  }
+
+  state.angle = nextAngle;
 }
 
 function draw() {
@@ -146,20 +157,19 @@ function draw() {
     }
   }
 
-  if (!state.won) {
-    const tip = getTip();
-    ctx.beginPath();
-    ctx.moveTo(state.pivotDot.x, state.pivotDot.y);
-    ctx.lineTo(tip.x, tip.y);
-    ctx.strokeStyle = '#c8e0ff';
-    ctx.lineWidth = 3;
-    ctx.lineCap = 'round';
-    ctx.stroke();
-    ctx.beginPath();
-    ctx.arc(tip.x, tip.y, 5, 0, Math.PI * 2);
-    ctx.fillStyle = '#ffffff';
-    ctx.fill();
-  }
+  const tip = getTip();
+  ctx.beginPath();
+  ctx.moveTo(state.pivotDot.x, state.pivotDot.y);
+  ctx.lineTo(tip.x, tip.y);
+  ctx.strokeStyle = state.won ? 'rgba(200,220,255,0)' : '#c8e0ff';
+  ctx.lineWidth = 3;
+  ctx.lineCap = 'round';
+  ctx.stroke();
+
+  ctx.beginPath();
+  ctx.arc(tip.x, tip.y, 5, 0, Math.PI * 2);
+  ctx.fillStyle = state.won ? 'transparent' : '#ffffff';
+  ctx.fill();
 
   if (state.won) {
     const pulse = 0.5 + 0.5 * Math.sin(pulseT * 3);
@@ -184,11 +194,25 @@ function loop() {
 }
 
 window.addEventListener('resize', () => { resize(); restartGame(); });
-canvas.addEventListener('pointerdown', e => { e.preventDefault(); if (state.won) { restartGame(); return; } state.held = true; });
-canvas.addEventListener('pointerup',   e => { e.preventDefault(); state.held = false; });
-canvas.addEventListener('pointerleave',e => { state.held = false; });
-document.addEventListener('keydown', e => { if (e.code === 'Space') { e.preventDefault(); if (state.won) { restartGame(); return; } state.held = true; } });
-document.addEventListener('keyup',   e => { if (e.code === 'Space') { e.preventDefault(); state.held = false; } });
+
+canvas.addEventListener('pointerdown', e => {
+  e.preventDefault();
+  if (state.won) { restartGame(); return; }
+  state.held = true;
+});
+canvas.addEventListener('pointerup',    e => { e.preventDefault(); state.held = false; });
+canvas.addEventListener('pointerleave', e => { state.held = false; });
+
+document.addEventListener('keydown', e => {
+  if (e.code === 'Space') {
+    e.preventDefault();
+    if (state.won) { restartGame(); return; }
+    state.held = true;
+  }
+});
+document.addEventListener('keyup', e => {
+  if (e.code === 'Space') { e.preventDefault(); state.held = false; }
+});
 
 resize();
 restartGame();

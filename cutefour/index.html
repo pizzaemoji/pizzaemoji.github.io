@@ -57,7 +57,7 @@
     position: absolute; border-radius: 50%; top: -80px;
     animation: tokenFall linear infinite; will-change: transform;
   }
-  .falling-token.pink  { background: #c5b3e6; }
+  .falling-token.purple  { background: #c5b3e6; }
   .falling-token.green { background: #a5d6a7; }
   @keyframes tokenFall {
     0%   { transform: translateY(0); opacity: 0; }
@@ -121,20 +121,20 @@
     -webkit-tap-highlight-color: transparent;
   }
   .color-choice:active { background: #1e2a33; }
-  .color-choice.selected-pink  { border-color: #c5b3e6; background: #1e2a33; }
+  .color-choice.selected-purple  { border-color: #c5b3e6; background: #1e2a33; }
   .color-choice.selected-green { border-color: #a5d6a7; background: #1e2a33; }
   .choice-dot { width: 48px; height: 48px; border-radius: 50%; position: relative; }
-  .choice-dot.pink  { background: #c5b3e6; }
+  .choice-dot.purple { background: #c5b3e6; }
   .choice-dot.green { background: #a5d6a7; }
   .choice-dot .check {
     display: none; position: absolute; inset: 0;
     align-items: center; justify-content: center;
     font-size: 22px; color: rgba(0,0,0,0.3); font-weight: 800;
   }
-  .color-choice.selected-pink  .choice-dot.pink  .check,
+  .color-choice.selected-purple .choice-dot.purple .check,
   .color-choice.selected-green .choice-dot.green .check { display: flex; }
   .choice-name { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 700; color: #8fa0b0; }
-  .color-choice.selected-pink  .choice-name { color: #c5b3e6; }
+  .color-choice.selected-purple  .choice-name { color: #c5b3e6; }
   .color-choice.selected-green .choice-name { color: #a5d6a7; }
 
   /* WAITING */
@@ -204,12 +204,12 @@
   .cell.no-hover:active { background: #243040; }
 
   .token { position: absolute; inset: 0; border-radius: 50%; }
-  .token.pink  { background: #c5b3e6; }
+  .token.purple  { background: #c5b3e6; }
   .token.green { background: #a5d6a7; }
 
-  .token.pending-pink  { animation: pendingPink  1.1s ease-in-out infinite; }
+  .token.pending-purple  { animation: pendingPurple  1.1s ease-in-out infinite; }
   .token.pending-green { animation: pendingGreen 1.1s ease-in-out infinite; }
-  @keyframes pendingPink {
+  @keyframes pendingPurple {
     0%,100% { box-shadow: 0 0 0 0px rgba(244,143,177,0); }
     50%      { box-shadow: 0 0 0 6px rgba(244,143,177,0.55); }
   }
@@ -218,9 +218,9 @@
     50%      { box-shadow: 0 0 0 6px rgba(165,214,167,0.55); }
   }
 
-  .token.last-pink  { animation: lastPink  1.6s ease-in-out infinite; }
+  .token.last-purple  { animation: lastPurple  1.6s ease-in-out infinite; }
   .token.last-green { animation: lastGreen 1.6s ease-in-out infinite; }
-  @keyframes lastPink {
+  @keyframes lastPurple {
     0%,100% { box-shadow: inset 0 0 0 10px rgba(140,30,70,0.55); }
     50%      { box-shadow: inset 0 0 0 2px  rgba(140,30,70,0.15); }
   }
@@ -322,9 +322,9 @@
   </div>
   <div class="color-label">Choose your color</div>
   <div class="color-choices">
-    <div class="color-choice" id="choicePink">
-      <div class="choice-dot pink"><div class="check">&#10003;</div></div>
-      <span class="choice-name">Pink</span>
+    <div class="color-choice" id="choicePurple">
+      <div class="choice-dot purple"><div class="check">&#10003;</div></div>
+      <span class="choice-name">Purple</span>
     </div>
     <div class="color-choice" id="choiceGreen">
       <div class="choice-dot green"><div class="check">&#10003;</div></div>
@@ -391,8 +391,8 @@ const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 
 /* ── Constants ────────────────────────────── */
 const ROWS = 6, COLS = 7;
-const COLOR_HEX  = { pink: '#c5b3e6', green: '#a5d6a7' };
-const COLOR_NAME = { pink: 'Pink',    green: 'Green'   };
+const COLOR_HEX  = { purple: '#c5b3e6', green: '#a5d6a7' };
+const COLOR_NAME = { purple: 'Purple', green: 'Green' };
 
 /* ── State ────────────────────────────────── */
 let gameId = null, myRole = null, myColor = null, opponentColor = null, winnerColor = null;
@@ -438,7 +438,7 @@ document.getElementById('copyBtn')      .addEventListener('click', () => copyLin
 document.getElementById('waitingCopyBtn').addEventListener('click', () => copyLink('waitingCopyBtn'));
 document.getElementById('btnHome')      .addEventListener('click', goHome);
 
-document.getElementById('choicePink')   .addEventListener('click', () => selectColor('pink'));
+document.getElementById('choicePurple')   .addEventListener('click', () => selectColor('purple'));
 document.getElementById('choiceGreen')  .addEventListener('click', () => selectColor('green'));
 document.getElementById('boardWrap')    .addEventListener('click', e => {
   if (pendingCol !== null && !e.target.closest('.cell')) cancelPending();
@@ -448,19 +448,19 @@ document.getElementById('boardWrap')    .addEventListener('click', e => {
 (function buildRain() {
   const stage = document.getElementById('rainStage');
   const tokens = [
-    {size:38,color:'pink', left:0.08,dur:7.2, delay:0   },
+    {size:38,color:'purple', left:0.08,dur:7.2, delay:0   },
     {size:22,color:'green',left:0.18,dur:9.8, delay:-3.1},
-    {size:48,color:'pink', left:0.30,dur:11.4,delay:-1.7},
+    {size:48,color:'purple', left:0.30,dur:11.4,delay:-1.7},
     {size:16,color:'green',left:0.42,dur:8.6, delay:-5.4},
-    {size:32,color:'pink', left:0.53,dur:10.2,delay:-2.9},
+    {size:32,color:'purple', left:0.53,dur:10.2,delay:-2.9},
     {size:26,color:'green',left:0.63,dur:7.8, delay:-4.6},
     {size:44,color:'green',left:0.73,dur:12.1,delay:-0.8},
-    {size:18,color:'pink', left:0.82,dur:9.0, delay:-6.2},
+    {size:18,color:'purple', left:0.82,dur:9.0, delay:-6.2},
     {size:30,color:'green',left:0.91,dur:8.3, delay:-3.8},
-    {size:20,color:'pink', left:0.24,dur:13.0,delay:-7.1},
+    {size:20,color:'purple', left:0.24,dur:13.0,delay:-7.1},
     {size:36,color:'green',left:0.47,dur:10.7,delay:-1.3},
-    {size:14,color:'pink', left:0.68,dur:8.9, delay:-5.0},
-    {size:28,color:'pink', left:0.57,dur:11.8,delay:-8.3},
+    {size:14,color:'purple', left:0.68,dur:8.9, delay:-5.0},
+    {size:28,color:'purple', left:0.57,dur:11.8,delay:-8.3},
     {size:42,color:'green',left:0.13,dur:14.2,delay:-2.2},
   ];
   tokens.forEach(t => {
@@ -495,7 +495,7 @@ async function onNewGame() {
     createdAt:    serverTimestamp()
   });
   document.getElementById('shareLinkUrl').textContent = gameUrl();
-  document.getElementById('choicePink').className  = 'color-choice';
+  document.getElementById('choicePurple').className  = 'color-choice';
   document.getElementById('choiceGreen').className = 'color-choice';
   document.getElementById('letsPlayBtn').disabled  = true;
   myColor = null;
@@ -505,15 +505,15 @@ async function onNewGame() {
 /* ── Player 1: pick color ─────────────────── */
 function selectColor(color) {
   myColor = color;
-  document.getElementById('choicePink').className  = 'color-choice' + (color==='pink'  ? ' selected-pink'  : '');
-  document.getElementById('choiceGreen').className = 'color-choice' + (color==='green' ? ' selected-green' : '');
+  document.getElementById('choicePurple').className  = 'color-choice' + (color==='purple' ? ' selected-purple' : '');
+  document.getElementById('choiceGreen').className = 'color-choice' + (color==='green'  ? ' selected-green'  : '');
   document.getElementById('letsPlayBtn').disabled  = false;
 }
 
 /* ── Player 1: ready ──────────────────────── */
 async function onPlayer1Ready() {
   if (!myColor) return;
-  opponentColor = myColor === 'pink' ? 'green' : 'pink';
+  opponentColor = myColor === 'purple' ? 'green' : 'purple';
   await updateDoc(gameRef(), { player1Color: myColor });
   document.getElementById('waitingLinkUrl').textContent = gameUrl();
   show('waitingScreen');
@@ -527,7 +527,7 @@ async function joinGame(gid) {
   const snap = await getDoc(gameRef());
   if (!snap.exists()) { alert('Game not found. Ask your friend for a new link.'); return; }
   const data = snap.data();
-  myColor       = data.player1Color === 'pink' ? 'green' : 'pink';
+  myColor       = data.player1Color === 'purple' ? 'green' : 'purple';
   opponentColor = data.player1Color;
   await updateDoc(gameRef(), { player2Color: myColor, status: 'active' });
   listenForGame();
@@ -682,7 +682,7 @@ const getDropRow = col   => { for (let r=ROWS-1;r>=0;r--) if (!board[r][col]) re
 function clearLastMoveMarker() {
   if (lastMoveRow===null) return;
   const tok = getCell(lastMoveRow,lastMoveCol).querySelector('.token');
-  if (tok) tok.classList.remove('last-pink','last-green');
+  if (tok) tok.classList.remove('last-purple','last-green');
 }
 function disableBoard() {
   document.getElementById('grid').querySelectorAll('.cell').forEach(c => {

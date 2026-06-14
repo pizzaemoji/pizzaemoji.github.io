@@ -7,13 +7,19 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="apple-touch-icon.svg">
+<link rel="apple-touch-icon" href="https://pizzaemoji.net/cutefour/cute-four-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Cute Four">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pizzaemoji.net/cutefour/">
 <meta property="og:title" content="Cute Four">
 <meta property="og:description" content="A game for two.">
-<meta property="og:image" content="apple-touch-icon.svg">
+<meta property="og:image" content="https://pizzaemoji.net/cutefour/cute-four-icon.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pizzaemoji.net/cutefour/cute-four-icon.png">
 <title>Cute Four</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
@@ -51,7 +57,7 @@
     position: absolute; border-radius: 50%; top: -80px;
     animation: tokenFall linear infinite; will-change: transform;
   }
-  .falling-token.pink  { background: #f48fb1; }
+  .falling-token.pink  { background: #c5b3e6; }
   .falling-token.green { background: #a5d6a7; }
   @keyframes tokenFall {
     0%   { transform: translateY(0); opacity: 0; }
@@ -101,7 +107,7 @@
     -webkit-tap-highlight-color: transparent;
   }
   .copy-btn:active { background: #3d5060; }
-  .copy-btn.copied { color: #f48fb1; }
+  .copy-btn.copied { color: #c5b3e6; }
   .color-label {
     font-family: 'Nunito', sans-serif; font-size: 19px; font-weight: 700;
     color: #f0ebe0; text-align: center; margin-bottom: 18px;
@@ -115,10 +121,10 @@
     -webkit-tap-highlight-color: transparent;
   }
   .color-choice:active { background: #1e2a33; }
-  .color-choice.selected-pink  { border-color: #f48fb1; background: #1e2a33; }
+  .color-choice.selected-pink  { border-color: #c5b3e6; background: #1e2a33; }
   .color-choice.selected-green { border-color: #a5d6a7; background: #1e2a33; }
   .choice-dot { width: 48px; height: 48px; border-radius: 50%; position: relative; }
-  .choice-dot.pink  { background: #f48fb1; }
+  .choice-dot.pink  { background: #c5b3e6; }
   .choice-dot.green { background: #a5d6a7; }
   .choice-dot .check {
     display: none; position: absolute; inset: 0;
@@ -128,7 +134,7 @@
   .color-choice.selected-pink  .choice-dot.pink  .check,
   .color-choice.selected-green .choice-dot.green .check { display: flex; }
   .choice-name { font-family: 'Nunito', sans-serif; font-size: 15px; font-weight: 700; color: #8fa0b0; }
-  .color-choice.selected-pink  .choice-name { color: #f48fb1; }
+  .color-choice.selected-pink  .choice-name { color: #c5b3e6; }
   .color-choice.selected-green .choice-name { color: #a5d6a7; }
 
   /* WAITING */
@@ -198,7 +204,7 @@
   .cell.no-hover:active { background: #243040; }
 
   .token { position: absolute; inset: 0; border-radius: 50%; }
-  .token.pink  { background: #f48fb1; }
+  .token.pink  { background: #c5b3e6; }
   .token.green { background: #a5d6a7; }
 
   .token.pending-pink  { animation: pendingPink  1.1s ease-in-out infinite; }
@@ -385,7 +391,7 @@ const db = initializeFirestore(app, { experimentalForceLongPolling: true });
 
 /* ── Constants ────────────────────────────── */
 const ROWS = 6, COLS = 7;
-const COLOR_HEX  = { pink: '#f48fb1', green: '#a5d6a7' };
+const COLOR_HEX  = { pink: '#c5b3e6', green: '#a5d6a7' };
 const COLOR_NAME = { pink: 'Pink',    green: 'Green'   };
 
 /* ── State ────────────────────────────────── */

@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<title>Capitals</title>
+<title>Flippin'</title>
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -168,7 +168,7 @@ body.dark .best { color: #666; }
 }
 
 .tile-back::after {
-  content: 'C';
+  content: 'F';
   font-family: Georgia, "Times New Roman", serif;
   font-weight: 200;
   font-size: 2.2em;
@@ -323,7 +323,7 @@ body.dark .win-best  { color: #666; }
   <div class="header">
     <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
     <div class="header-center">
-      <h1>Capitals</h1>
+      <h1>Flippin'</h1>
       <div class="score" id="score">0 flips &nbsp;·&nbsp; 0 matches</div>
     </div>
     <div class="best" id="bestDisplay"></div>
@@ -451,7 +451,7 @@ function launchConfetti(tile) {
 
 // Dark mode
 const darkToggle = document.getElementById('darkToggle');
-let isDark = localStorage.getItem('capitals-dark') === '1';
+let isDark = localStorage.getItem('flippin-dark') === '1';
 function applyDark() {
   document.body.classList.toggle('dark', isDark);
   darkToggle.textContent = isDark ? '☀️' : '🌙';
@@ -459,16 +459,16 @@ function applyDark() {
 applyDark();
 darkToggle.addEventListener('click', () => {
   isDark = !isDark;
-  localStorage.setItem('capitals-dark', isDark ? '1' : '0');
+  localStorage.setItem('flippin-dark', isDark ? '1' : '0');
   applyDark();
 });
 
 // Best score
-function getBest() { return parseInt(localStorage.getItem('capitals-best') || '0'); }
+function getBest() { return parseInt(localStorage.getItem('flippin-best') || '0'); }
 function setBest(flips) {
   const current = getBest();
   if (!current || flips < current) {
-    localStorage.setItem('capitals-best', flips);
+    localStorage.setItem('flippin-best', flips);
     return true;
   }
   return false;

@@ -97,9 +97,7 @@ body.dark .score { color: #999; }
   flex-shrink: 0;
 }
 
-body.dark .dark-toggle {
-  border-color: #555;
-}
+body.dark .dark-toggle { border-color: #555; }
 
 .best {
   font-family: Georgia, "Times New Roman", serif;
@@ -244,41 +242,47 @@ body.dark .tile.capital .tile-front {
   word-break: normal;
 }
 
-.tile.state .tile-name  { color: #0C447C; }
+.tile.state .tile-name   { color: #0C447C; }
 .tile.capital .tile-name { color: #3C3489; }
 
-body.dark .tile.state .tile-name  { color: #85B7EB; }
+body.dark .tile.state .tile-name   { color: #85B7EB; }
 body.dark .tile.capital .tile-name { color: #AFA9EC; }
 
-.action-btn {
-  margin-top: 12px;
+/* --- Zoom pill --- */
+.zoom-pill {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  color: #fff;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 15px;
+  font-size: 28px;
   font-weight: 700;
-  letter-spacing: 0.04em;
-  color: #1a1a1a;
-  background: #f9f7f4;
-  border: 1.5px solid #1a1a1a;
-  border-radius: 8px;
-  padding: 10px 36px;
-  cursor: pointer;
+  letter-spacing: 0.03em;
+  padding: 18px 40px;
+  border-radius: 999px;
+  white-space: nowrap;
+  z-index: 500;
   opacity: 0;
   pointer-events: none;
-  transition: opacity 0.2s ease;
-  flex-shrink: 0;
+  transition: opacity 0.1s ease;
+  max-width: 90vw;
+  text-align: center;
+  white-space: normal;
 }
 
-body.dark .action-btn {
-  color: #f0ede8;
-  background: #1a1a1a;
-  border-color: #f0ede8;
-}
-
-.action-btn.visible {
+.zoom-pill.visible {
   opacity: 1;
   pointer-events: auto;
 }
 
+body.dark .zoom-pill {
+  background: #ddd;
+  color: #111;
+}
+
+/* --- Win overlay --- */
 .win-overlay {
   display: none;
   position: fixed;
@@ -291,13 +295,9 @@ body.dark .action-btn {
   background: #f9f7f4;
 }
 
-body.dark .win-overlay {
-  background: #1a1a1a;
-}
+body.dark .win-overlay { background: #1a1a1a; }
 
-.win-overlay.visible {
-  display: flex;
-}
+.win-overlay.visible { display: flex; }
 
 .win-title {
   font-family: Georgia, "Times New Roman", serif;
@@ -325,13 +325,34 @@ body.dark .win-overlay {
 
 body.dark .win-score { color: #999; }
 body.dark .win-best  { color: #666; }
+
+.action-btn {
+  margin-top: 12px;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #1a1a1a;
+  background: #f9f7f4;
+  border: 1.5px solid #1a1a1a;
+  border-radius: 8px;
+  padding: 10px 36px;
+  cursor: pointer;
+}
+
+body.dark .action-btn {
+  color: #f0ede8;
+  background: #1a1a1a;
+  border-color: #f0ede8;
+}
 </style>
 </head>
 <body>
 
 <div id="confetti-container"></div>
+<div class="zoom-pill" id="zoomPill"></div>
 
-<div class="game-wrap">
+<div class="game-wrap" id="gameWrap">
   <div class="header">
     <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
     <div class="header-center">
@@ -342,68 +363,67 @@ body.dark .win-best  { color: #666; }
     <div class="best" id="bestDisplay"></div>
   </div>
   <div class="grid" id="grid"></div>
-  <button class="action-btn" id="actionBtn">Continue</button>
 </div>
 
 <div class="win-overlay" id="winOverlay">
   <div class="win-title">All matched!</div>
   <div class="win-score" id="winScore"></div>
   <div class="win-best" id="winBest"></div>
-  <button class="action-btn visible" id="playAgainBtn">Play Again</button>
+  <button class="action-btn" id="playAgainBtn">Play Again</button>
 </div>
 
 <script>
 const ALL_PAIRS = [
-  { state: 'Alabama',        capital: 'Montgomery'    },
-  { state: 'Alaska',         capital: 'Juneau'        },
-  { state: 'Arizona',        capital: 'Phoenix'       },
-  { state: 'Arkansas',       capital: 'Little Rock'   },
-  { state: 'California',     capital: 'Sacramento'    },
-  { state: 'Colorado',       capital: 'Denver'        },
-  { state: 'Connecticut',    capital: 'Hartford'      },
-  { state: 'Delaware',       capital: 'Dover'         },
-  { state: 'Florida',        capital: 'Tallahassee'   },
-  { state: 'Georgia',        capital: 'Atlanta'       },
-  { state: 'Hawaii',         capital: 'Honolulu'      },
-  { state: 'Idaho',          capital: 'Boise'         },
-  { state: 'Illinois',       capital: 'Springfield'   },
-  { state: 'Indiana',        capital: 'Indianapolis'  },
-  { state: 'Iowa',           capital: 'Des Moines'    },
-  { state: 'Kansas',         capital: 'Topeka'        },
-  { state: 'Kentucky',       capital: 'Frankfort'     },
-  { state: 'Louisiana',      capital: 'Baton Rouge'   },
-  { state: 'Maine',          capital: 'Augusta'       },
-  { state: 'Maryland',       capital: 'Annapolis'     },
-  { state: 'Massachusetts',  capital: 'Boston'        },
-  { state: 'Michigan',       capital: 'Lansing'       },
-  { state: 'Minnesota',      capital: 'Saint Paul'    },
-  { state: 'Mississippi',    capital: 'Jackson'       },
-  { state: 'Missouri',       capital: 'Jefferson City'},
-  { state: 'Montana',        capital: 'Helena'        },
-  { state: 'Nebraska',       capital: 'Lincoln'       },
-  { state: 'Nevada',         capital: 'Carson City'   },
-  { state: 'New Hampshire',  capital: 'Concord'       },
-  { state: 'New Jersey',     capital: 'Trenton'       },
-  { state: 'New Mexico',     capital: 'Santa Fe'      },
-  { state: 'New York',       capital: 'Albany'        },
-  { state: 'North Carolina', capital: 'Raleigh'       },
-  { state: 'North Dakota',   capital: 'Bismarck'      },
-  { state: 'Ohio',           capital: 'Columbus'      },
-  { state: 'Oklahoma',       capital: 'Oklahoma City' },
-  { state: 'Oregon',         capital: 'Salem'         },
-  { state: 'Pennsylvania',   capital: 'Harrisburg'    },
-  { state: 'Rhode Island',   capital: 'Providence'    },
-  { state: 'South Carolina', capital: 'Columbia'      },
-  { state: 'South Dakota',   capital: 'Pierre'        },
-  { state: 'Tennessee',      capital: 'Nashville'     },
-  { state: 'Texas',          capital: 'Austin'        },
-  { state: 'Utah',           capital: 'Salt Lake City'},
-  { state: 'Vermont',        capital: 'Montpelier'    },
-  { state: 'Virginia',       capital: 'Richmond'      },
-  { state: 'Washington',     capital: 'Olympia'       },
-  { state: 'West Virginia',  capital: 'Charleston'    },
-  { state: 'Wisconsin',      capital: 'Madison'       },
-  { state: 'Wyoming',        capital: 'Cheyenne'      },
+  { state: 'Alabama',        capital: 'Montgomery'     },
+  { state: 'Alaska',         capital: 'Juneau'         },
+  { state: 'Arizona',        capital: 'Phoenix'        },
+  { state: 'Arkansas',       capital: 'Little Rock'    },
+  { state: 'California',     capital: 'Sacramento'     },
+  { state: 'Colorado',       capital: 'Denver'         },
+  { state: 'Connecticut',    capital: 'Hartford'       },
+  { state: 'Delaware',       capital: 'Dover'          },
+  { state: 'Florida',        capital: 'Tallahassee'    },
+  { state: 'Georgia',        capital: 'Atlanta'        },
+  { state: 'Hawaii',         capital: 'Honolulu'       },
+  { state: 'Idaho',          capital: 'Boise'          },
+  { state: 'Illinois',       capital: 'Springfield'    },
+  { state: 'Indiana',        capital: 'Indianapolis'   },
+  { state: 'Iowa',           capital: 'Des Moines'     },
+  { state: 'Kansas',         capital: 'Topeka'         },
+  { state: 'Kentucky',       capital: 'Frankfort'      },
+  { state: 'Louisiana',      capital: 'Baton Rouge'    },
+  { state: 'Maine',          capital: 'Augusta'        },
+  { state: 'Maryland',       capital: 'Annapolis'      },
+  { state: 'Massachusetts',  capital: 'Boston'         },
+  { state: 'Michigan',       capital: 'Lansing'        },
+  { state: 'Minnesota',      capital: 'Saint Paul'     },
+  { state: 'Mississippi',    capital: 'Jackson'        },
+  { state: 'Missouri',       capital: 'Jefferson City' },
+  { state: 'Montana',        capital: 'Helena'         },
+  { state: 'Nebraska',       capital: 'Lincoln'        },
+  { state: 'Nevada',         capital: 'Carson City'    },
+  { state: 'New Hampshire',  capital: 'Concord'        },
+  { state: 'New Jersey',     capital: 'Trenton'        },
+  { state: 'New Mexico',     capital: 'Santa Fe'       },
+  { state: 'New York',       capital: 'Albany'         },
+  { state: 'North Carolina', capital: 'Raleigh'        },
+  { state: 'North Dakota',   capital: 'Bismarck'       },
+  { state: 'Ohio',           capital: 'Columbus'       },
+  { state: 'Oklahoma',       capital: 'Oklahoma City'  },
+  { state: 'Oregon',         capital: 'Salem'          },
+  { state: 'Pennsylvania',   capital: 'Harrisburg'     },
+  { state: 'Rhode Island',   capital: 'Providence'     },
+  { state: 'South Carolina', capital: 'Columbia'       },
+  { state: 'South Dakota',   capital: 'Pierre'         },
+  { state: 'Tennessee',      capital: 'Nashville'      },
+  { state: 'Texas',          capital: 'Austin'         },
+  { state: 'Utah',           capital: 'Salt Lake City' },
+  { state: 'Vermont',        capital: 'Montpelier'     },
+  { state: 'Virginia',       capital: 'Richmond'       },
+  { state: 'Washington',     capital: 'Olympia'        },
+  { state: 'West Virginia',  capital: 'Charleston'     },
+  { state: 'Wisconsin',      capital: 'Madison'        },
+  { state: 'Wyoming',        capital: 'Cheyenne'       },
 ];
 
 const blankSVG = `<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
@@ -493,15 +513,31 @@ function updateBestDisplay() {
   el.style.whiteSpace = 'pre';
 }
 
+// Zoom pill
+const zoomPill = document.getElementById('zoomPill');
+let pillVisible = false;
+
+function showPill(text) {
+  zoomPill.textContent = text;
+  zoomPill.classList.add('visible');
+  pillVisible = true;
+}
+
+function hidePill() {
+  zoomPill.classList.remove('visible');
+  pillVisible = false;
+}
+
 // Game state
+// boardState: 'idle' | 'one-up' | 'two-up-mismatch'
 let flippedTiles = [];
 let locked = false;
 let matches = 0;
 let flips = 0;
 let activePairs = [];
+let boardState = 'idle';
 
 const grid = document.getElementById('grid');
-const actionBtn = document.getElementById('actionBtn');
 const scoreEl = document.getElementById('score');
 const winOverlay = document.getElementById('winOverlay');
 const winScore = document.getElementById('winScore');
@@ -525,7 +561,8 @@ function buildBoard() {
   locked = false;
   matches = 0;
   flips = 0;
-  actionBtn.classList.remove('visible');
+  boardState = 'idle';
+  hidePill();
   winOverlay.classList.remove('visible');
   updateScore();
   updateBestDisplay();
@@ -542,6 +579,7 @@ function buildBoard() {
     const tile = document.createElement('div');
     tile.className = `tile ${data.type}`;
     tile.dataset.pairId = data.pairId;
+    tile.dataset.name = data.name;
 
     const inner = document.createElement('div');
     inner.className = 'tile-inner';
@@ -558,22 +596,53 @@ function buildBoard() {
     inner.appendChild(back);
     inner.appendChild(front);
     tile.appendChild(inner);
-    tile.addEventListener('click', () => handleTap(tile));
+    tile.addEventListener('click', (e) => { e.stopPropagation(); handleTileTap(tile); });
     grid.appendChild(tile);
   });
 }
 
-function handleTap(tile) {
+// Board-level tap: dismisses pill or flips back mismatched tiles
+document.getElementById('gameWrap').addEventListener('click', () => {
+  if (pillVisible) {
+    hidePill();
+    return;
+  }
+  if (boardState === 'two-up-mismatch') {
+    flippedTiles.forEach(t => t.classList.remove('flipped'));
+    flippedTiles = [];
+    locked = false;
+    boardState = 'idle';
+  }
+});
+
+function handleTileTap(tile) {
+  // If pill is showing, any tap dismisses it first
+  if (pillVisible) {
+    hidePill();
+    return;
+  }
+
+  // If two mismatched tiles are up, board tap handles it — ignore tile taps
+  if (boardState === 'two-up-mismatch') return;
+
   if (locked) return;
-  if (tile.classList.contains('flipped')) return;
   if (tile.classList.contains('cleared')) return;
 
+  // Tile is face-up → zoom
+  if (tile.classList.contains('flipped')) {
+    showPill(tile.dataset.name);
+    return;
+  }
+
+  // Tile is face-down → flip it
   tile.classList.add('flipped');
   flips++;
   updateScore();
   flippedTiles.push(tile);
 
-  if (flippedTiles.length === 2) {
+  if (flippedTiles.length === 1) {
+    boardState = 'one-up';
+  } else if (flippedTiles.length === 2) {
     locked = true;
     checkMatch();
   }
@@ -597,6 +666,7 @@ function checkMatch() {
         updateScore();
         flippedTiles = [];
         locked = false;
+        boardState = 'idle';
 
         if (matches === activePairs.length) {
           setTimeout(() => {
@@ -609,19 +679,12 @@ function checkMatch() {
       }, 350);
     }, 400);
   } else {
-    actionBtn.classList.add('visible');
+    boardState = 'two-up-mismatch';
+    locked = false; // allow zoom taps on face-up tiles while waiting
   }
 }
 
-actionBtn.addEventListener('click', () => {
-  flippedTiles.forEach(t => t.classList.remove('flipped'));
-  flippedTiles = [];
-  locked = false;
-  actionBtn.classList.remove('visible');
-});
-
 playAgainBtn.addEventListener('click', buildBoard);
-
 buildBoard();
 </script>
 </body>

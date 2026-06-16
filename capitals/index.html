@@ -1,7 +1,6 @@
 
 <style>
 * { box-sizing: border-box; margin: 0; padding: 0; }
-body { background: transparent; }
 .game-wrap {
   width: 380px;
   max-width: 100%;
@@ -40,7 +39,6 @@ body { background: transparent; }
   justify-content: center;
   padding: 4px;
   cursor: pointer;
-  position: relative;
 }
 .tile.state {
   background: #E6F1FB;
@@ -51,12 +49,12 @@ body { background: transparent; }
   border-color: #9FE1CB;
 }
 .tile svg {
-  width: 55%;
-  height: 55%;
+  width: 50%;
+  height: 40%;
   display: block;
 }
 .tile-name {
-  font-size: 10px;
+  font-size: 14px;
   font-weight: 500;
   color: var(--color-text-primary);
   text-align: center;
@@ -68,13 +66,8 @@ body { background: transparent; }
   -webkit-line-clamp: 2;
   -webkit-box-orient: vertical;
 }
-.tile.capital .tile-name {
-  font-size: 10px;
-  color: #085041;
-}
-.tile.state .tile-name {
-  color: #0C447C;
-}
+.tile.capital .tile-name { color: #085041; }
+.tile.state .tile-name { color: #0C447C; }
 </style>
 
 <div class="game-wrap">
@@ -122,7 +115,7 @@ shuffled.forEach(tile => {
   if (tile.type === 'state') {
     el.innerHTML = blankSVG + `<div class="tile-name">${tile.name}</div>`;
   } else {
-    el.innerHTML = `<div class="tile-name" style="font-size:11px; margin-top:0;">${tile.name}</div>`;
+    el.innerHTML = `<div class="tile-name" style="margin-top:0;">${tile.name}</div>`;
   }
   grid.appendChild(el);
 });

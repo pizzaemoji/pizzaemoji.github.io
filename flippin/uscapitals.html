@@ -32,6 +32,58 @@ body.dark {
   z-index: 999;
 }
 
+/* Full-screen overlay: catches any tap when two mismatched tiles are up */
+#mismatch-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 100;
+  cursor: pointer;
+}
+
+#mismatch-overlay.active { display: block; }
+
+/* Full-screen overlay: catches any tap when pill is showing */
+#pill-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 400;
+  cursor: pointer;
+}
+
+#pill-overlay.active { display: block; }
+
+/* Zoom pill sits above pill-overlay so it's visible */
+.zoom-pill {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background: #333;
+  color: #fff;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  padding: 18px 40px;
+  border-radius: 999px;
+  z-index: 500;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.1s ease;
+  max-width: 90vw;
+  text-align: center;
+  white-space: normal;
+}
+
+.zoom-pill.visible { opacity: 1; }
+
+body.dark .zoom-pill {
+  background: #ddd;
+  color: #111;
+}
+
 .game-wrap {
   width: 100%;
   height: 100%;
@@ -40,6 +92,8 @@ body.dark {
   align-items: center;
   justify-content: center;
   padding: 12px;
+  position: relative;
+  z-index: 10;
 }
 
 .header {
@@ -116,14 +170,23 @@ body.dark .best { color: #666; }
   gap: 6px;
   width: 100%;
   max-width: 420px;
+  position: relative;
 }
 
+/* Face-down tiles sit at z 10 (inherited from game-wrap) */
 .tile {
   aspect-ratio: 1 / 1;
   min-width: 0;
   cursor: pointer;
   perspective: 600px;
   -webkit-perspective: 600px;
+  position: relative;
+  z-index: 10;
+}
+
+/* Face-up tiles jump above the mismatch overlay */
+.tile.flipped {
+  z-index: 110;
 }
 
 .tile.cleared {
@@ -248,41 +311,7 @@ body.dark .tile.capital .tile-front {
 body.dark .tile.state .tile-name   { color: #85B7EB; }
 body.dark .tile.capital .tile-name { color: #AFA9EC; }
 
-/* --- Zoom pill --- */
-.zoom-pill {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #333;
-  color: #fff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  padding: 18px 40px;
-  border-radius: 999px;
-  white-space: nowrap;
-  z-index: 500;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.1s ease;
-  max-width: 90vw;
-  text-align: center;
-  white-space: normal;
-}
-
-.zoom-pill.visible {
-  opacity: 1;
-  pointer-events: auto;
-}
-
-body.dark .zoom-pill {
-  background: #ddd;
-  color: #111;
-}
-
-/* --- Win overlay --- */
+/* Win overlay */
 .win-overlay {
   display: none;
   position: fixed;
@@ -291,12 +320,11 @@ body.dark .zoom-pill {
   align-items: center;
   justify-content: center;
   gap: 12px;
-  z-index: 100;
+  z-index: 600;
   background: #f9f7f4;
 }
 
 body.dark .win-overlay { background: #1a1a1a; }
-
 .win-overlay.visible { display: flex; }
 
 .win-title {
@@ -352,7 +380,13 @@ body.dark .action-btn {
 <div id="confetti-container"></div>
 <div class="zoom-pill" id="zoomPill"></div>
 
-<div class="game-wrap" id="gameWrap">
+<!-- Layer 100: catches tap when two mismatched tiles are face-up -->
+<div id="mismatch-overlay"></div>
+
+<!-- Layer 400: catches tap when zoom pill is showing -->
+<div id="pill-overlay"></div>
+
+<div class="game-wrap">
   <div class="header">
     <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
     <div class="header-center">
@@ -438,44 +472,22 @@ function launchConfetti(tile) {
   const originX = rect.left + rect.width / 2;
   const originY = rect.top + rect.height / 2;
   const pieces = [];
-
   for (let i = 0; i < 40; i++) {
     const el = document.createElement('div');
-    el.style.cssText = `
-      position:absolute;
-      width:${Math.random()*4+2}px;
-      height:${Math.random()*10+5}px;
-      background-color:${confettiColors[Math.floor(Math.random()*confettiColors.length)]};
-      border-radius:1px;
-      left:${originX}px;
-      top:${originY}px;
-    `;
+    el.style.cssText = `position:absolute;width:${Math.random()*4+2}px;height:${Math.random()*10+5}px;background-color:${confettiColors[Math.floor(Math.random()*confettiColors.length)]};border-radius:1px;left:${originX}px;top:${originY}px;`;
     confettiContainer.appendChild(el);
     const speed = Math.random() * 5 + 2;
     const angle = Math.PI + (Math.random() * Math.PI);
-    pieces.push({
-      el, x:0, y:0,
-      vx: Math.cos(angle)*speed,
-      vy: Math.sin(angle)*speed,
-      gravity: Math.random()*0.1+0.07,
-      rotation: Math.random()*360,
-      rotationSpeed: (Math.random()-0.5)*10
-    });
+    pieces.push({ el, x:0, y:0, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed, gravity:Math.random()*0.1+0.07, rotation:Math.random()*360, rotationSpeed:(Math.random()-0.5)*10 });
   }
-
   function animate() {
     let alive = false;
     pieces.forEach(p => {
       if (p.y < window.innerHeight) {
-        p.vy += p.gravity;
-        p.x += p.vx;
-        p.y += p.vy;
-        p.rotation += p.rotationSpeed;
+        p.vy += p.gravity; p.x += p.vx; p.y += p.vy; p.rotation += p.rotationSpeed;
         p.el.style.transform = `translate(${p.x}px,${p.y}px) rotate(${p.rotation}deg)`;
         alive = true;
-      } else if (p.el.parentNode) {
-        p.el.remove();
-      }
+      } else if (p.el.parentNode) { p.el.remove(); }
     });
     if (alive) requestAnimationFrame(animate);
   }
@@ -500,10 +512,7 @@ darkToggle.addEventListener('click', () => {
 function getBest() { return parseInt(localStorage.getItem('flippin-best-us') || '0'); }
 function setBest(flips) {
   const current = getBest();
-  if (!current || flips < current) {
-    localStorage.setItem('flippin-best-us', flips);
-    return true;
-  }
+  if (!current || flips < current) { localStorage.setItem('flippin-best-us', flips); return true; }
   return false;
 }
 function updateBestDisplay() {
@@ -513,46 +522,53 @@ function updateBestDisplay() {
   el.style.whiteSpace = 'pre';
 }
 
-// Zoom pill
-const zoomPill = document.getElementById('zoomPill');
-let pillVisible = false;
+// Overlays
+const mismatchOverlay = document.getElementById('mismatch-overlay');
+const pillOverlay     = document.getElementById('pill-overlay');
+const zoomPill        = document.getElementById('zoomPill');
+
+function showMismatchOverlay() { mismatchOverlay.classList.add('active'); }
+function hideMismatchOverlay() { mismatchOverlay.classList.remove('active'); }
 
 function showPill(text) {
   zoomPill.textContent = text;
   zoomPill.classList.add('visible');
-  pillVisible = true;
+  pillOverlay.classList.add('active');
 }
-
 function hidePill() {
   zoomPill.classList.remove('visible');
-  pillVisible = false;
+  pillOverlay.classList.remove('active');
 }
 
+// Pill overlay tap → dismiss pill only
+pillOverlay.addEventListener('click', hidePill);
+
+// Mismatch overlay tap → flip tiles back
+mismatchOverlay.addEventListener('click', () => {
+  flippedTiles.forEach(t => t.classList.remove('flipped'));
+  flippedTiles = [];
+  locked = false;
+  hideMismatchOverlay();
+});
+
 // Game state
-// boardState: 'idle' | 'one-up' | 'two-up-mismatch'
 let flippedTiles = [];
 let locked = false;
 let matches = 0;
 let flips = 0;
 let activePairs = [];
-let boardState = 'idle';
 
-const grid = document.getElementById('grid');
-const scoreEl = document.getElementById('score');
-const winOverlay = document.getElementById('winOverlay');
-const winScore = document.getElementById('winScore');
-const winBest = document.getElementById('winBest');
+const grid        = document.getElementById('grid');
+const scoreEl     = document.getElementById('score');
+const winOverlay  = document.getElementById('winOverlay');
+const winScore    = document.getElementById('winScore');
+const winBest     = document.getElementById('winBest');
 const playAgainBtn = document.getElementById('playAgainBtn');
 
 function updateScore() {
-  const flipLabel = flips === 1 ? '1 flip' : `${flips} flips`;
-  const matchLabel = matches === 1 ? '1 match' : `${matches} matches`;
+  const flipLabel  = flips === 1   ? '1 flip'   : `${flips} flips`;
+  const matchLabel = matches === 1 ? '1 match'  : `${matches} matches`;
   scoreEl.textContent = `${flipLabel} · ${matchLabel}`;
-}
-
-function pickPairs() {
-  const shuffled = [...ALL_PAIRS].sort(() => Math.random() - 0.5);
-  return shuffled.slice(0, 10);
 }
 
 function buildBoard() {
@@ -561,13 +577,14 @@ function buildBoard() {
   locked = false;
   matches = 0;
   flips = 0;
-  boardState = 'idle';
   hidePill();
+  hideMismatchOverlay();
   winOverlay.classList.remove('visible');
   updateScore();
   updateBestDisplay();
 
-  activePairs = pickPairs();
+  activePairs = [...ALL_PAIRS].sort(() => Math.random() - 0.5).slice(0, 10);
+
   const tileData = [];
   activePairs.forEach((pair, i) => {
     tileData.push({ type: 'state',   name: pair.state,   pairId: i });
@@ -579,7 +596,7 @@ function buildBoard() {
     const tile = document.createElement('div');
     tile.className = `tile ${data.type}`;
     tile.dataset.pairId = data.pairId;
-    tile.dataset.name = data.name;
+    tile.dataset.name   = data.name;
 
     const inner = document.createElement('div');
     inner.className = 'tile-inner';
@@ -596,53 +613,28 @@ function buildBoard() {
     inner.appendChild(back);
     inner.appendChild(front);
     tile.appendChild(inner);
-    tile.addEventListener('click', (e) => { e.stopPropagation(); handleTileTap(tile); });
+    tile.addEventListener('click', () => handleTileTap(tile));
     grid.appendChild(tile);
   });
 }
 
-// Board-level tap: dismisses pill or flips back mismatched tiles
-document.getElementById('gameWrap').addEventListener('click', () => {
-  if (pillVisible) {
-    hidePill();
-    return;
-  }
-  if (boardState === 'two-up-mismatch') {
-    flippedTiles.forEach(t => t.classList.remove('flipped'));
-    flippedTiles = [];
-    locked = false;
-    boardState = 'idle';
-  }
-});
-
 function handleTileTap(tile) {
-  // If pill is showing, any tap dismisses it first
-  if (pillVisible) {
-    hidePill();
-    return;
-  }
-
-  // If two mismatched tiles are up, board tap handles it — ignore tile taps
-  if (boardState === 'two-up-mismatch') return;
-
   if (locked) return;
   if (tile.classList.contains('cleared')) return;
 
-  // Tile is face-up → zoom
+  // Face-up tile → zoom
   if (tile.classList.contains('flipped')) {
     showPill(tile.dataset.name);
     return;
   }
 
-  // Tile is face-down → flip it
+  // Face-down tile → flip
   tile.classList.add('flipped');
   flips++;
   updateScore();
   flippedTiles.push(tile);
 
-  if (flippedTiles.length === 1) {
-    boardState = 'one-up';
-  } else if (flippedTiles.length === 2) {
+  if (flippedTiles.length === 2) {
     locked = true;
     checkMatch();
   }
@@ -666,21 +658,22 @@ function checkMatch() {
         updateScore();
         flippedTiles = [];
         locked = false;
-        boardState = 'idle';
 
         if (matches === activePairs.length) {
           setTimeout(() => {
             const isNewBest = setBest(flips);
             winScore.textContent = `${flips} flips · ${matches} matches`;
-            winBest.textContent = isNewBest ? '🎉 New best!' : `Best: ${getBest()} flips`;
+            winBest.textContent  = isNewBest ? '🎉 New best!' : `Best: ${getBest()} flips`;
             winOverlay.classList.add('visible');
           }, 300);
         }
       }, 350);
     }, 400);
   } else {
-    boardState = 'two-up-mismatch';
-    locked = false; // allow zoom taps on face-up tiles while waiting
+    // Show mismatch overlay — player taps anywhere to continue
+    // Face-up tiles are z 110, above overlay at z 100, so zoom still works
+    locked = false;
+    showMismatchOverlay();
   }
 }
 

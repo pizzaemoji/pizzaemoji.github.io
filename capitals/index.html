@@ -60,6 +60,7 @@ html, body {
   min-width: 0;
   cursor: pointer;
   perspective: 600px;
+  -webkit-perspective: 600px;
 }
 
 .tile-inner {
@@ -67,7 +68,10 @@ html, body {
   height: 100%;
   position: relative;
   transform-style: preserve-3d;
+  -webkit-transform-style: preserve-3d;
   transition: transform 0.4s ease;
+  -webkit-transition: -webkit-transform 0.4s ease;
+  will-change: transform;
   border-radius: 8px;
 }
 

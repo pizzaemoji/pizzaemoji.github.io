@@ -1,0 +1,129 @@
+
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body { background: transparent; }
+.game-wrap {
+  width: 380px;
+  max-width: 100%;
+  padding: 10px;
+  font-family: var(--font-sans);
+}
+.header {
+  text-align: center;
+  margin-bottom: 10px;
+}
+.header h1 {
+  font-size: 20px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+.header p {
+  font-size: 12px;
+  color: var(--color-text-secondary);
+  margin-top: 2px;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 6px;
+}
+.tile {
+  aspect-ratio: 1 / 1;
+  background: var(--color-background-secondary);
+  border: 0.5px solid var(--color-border-tertiary);
+  border-radius: var(--border-radius-md);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  cursor: pointer;
+  position: relative;
+}
+.tile.state {
+  background: #E6F1FB;
+  border-color: #B5D4F4;
+}
+.tile.capital {
+  background: #E1F5EE;
+  border-color: #9FE1CB;
+}
+.tile svg {
+  width: 55%;
+  height: 55%;
+  display: block;
+}
+.tile-name {
+  font-size: 10px;
+  font-weight: 500;
+  color: var(--color-text-primary);
+  text-align: center;
+  line-height: 1.2;
+  margin-top: 3px;
+  width: 100%;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+.tile.capital .tile-name {
+  font-size: 10px;
+  color: #085041;
+}
+.tile.state .tile-name {
+  color: #0C447C;
+}
+</style>
+
+<div class="game-wrap">
+  <div class="header">
+    <h1>Capitals</h1>
+    <p>Match each state to its capital</p>
+  </div>
+  <div class="grid" id="grid"></div>
+</div>
+
+<script>
+const tiles = [
+  { type: 'state', name: 'California' },
+  { type: 'capital', name: 'Sacramento' },
+  { type: 'state', name: 'Mississippi' },
+  { type: 'capital', name: 'Jackson' },
+  { type: 'state', name: 'Texas' },
+  { type: 'capital', name: 'Austin' },
+  { type: 'state', name: 'New Hampshire' },
+  { type: 'capital', name: 'Concord' },
+  { type: 'state', name: 'Nevada' },
+  { type: 'capital', name: 'Carson City' },
+  { type: 'state', name: 'Pennsylvania' },
+  { type: 'capital', name: 'Harrisburg' },
+  { type: 'state', name: 'Massachusetts' },
+  { type: 'capital', name: 'Boston' },
+  { type: 'state', name: 'North Carolina' },
+  { type: 'capital', name: 'Raleigh' },
+  { type: 'state', name: 'Oklahoma' },
+  { type: 'capital', name: 'Oklahoma City' },
+  { type: 'state', name: 'Rhode Island' },
+  { type: 'capital', name: 'Providence' },
+];
+
+const shuffled = tiles.sort(() => Math.random() - 0.5);
+const grid = document.getElementById('grid');
+
+const blankSVG = `<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="8" width="44" height="44" rx="4" fill="none" stroke="#B5D4F4" stroke-width="1.5" stroke-dasharray="4 3"/>
+</svg>`;
+
+shuffled.forEach(tile => {
+  const el = document.createElement('div');
+  el.className = `tile ${tile.type}`;
+  if (tile.type === 'state') {
+    el.innerHTML = blankSVG + `<div class="tile-name">${tile.name}</div>`;
+  } else {
+    el.innerHTML = `<div class="tile-name" style="font-size:11px; margin-top:0;">${tile.name}</div>`;
+  }
+  grid.appendChild(el);
+});
+</script>

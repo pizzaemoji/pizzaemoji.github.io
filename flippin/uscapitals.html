@@ -32,7 +32,7 @@ body.dark {
   z-index: 999;
 }
 
-/* Full-screen overlay: catches any tap when two mismatched tiles are up */
+/* Mismatch overlay: catches tap to flip tiles back */
 #mismatch-overlay {
   display: none;
   position: fixed;
@@ -42,47 +42,6 @@ body.dark {
 }
 
 #mismatch-overlay.active { display: block; }
-
-/* Full-screen overlay: catches any tap when pill is showing */
-#pill-overlay {
-  display: none;
-  position: fixed;
-  inset: 0;
-  z-index: 400;
-  cursor: pointer;
-}
-
-#pill-overlay.active { display: block; }
-
-/* Zoom pill sits above pill-overlay so it's visible */
-.zoom-pill {
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  background: #333;
-  color: #fff;
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 28px;
-  font-weight: 700;
-  letter-spacing: 0.03em;
-  padding: 18px 40px;
-  border-radius: 999px;
-  z-index: 500;
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.1s ease;
-  max-width: 90vw;
-  text-align: center;
-  white-space: normal;
-}
-
-.zoom-pill.visible { opacity: 1; }
-
-body.dark .zoom-pill {
-  background: #ddd;
-  color: #111;
-}
 
 .game-wrap {
   width: 100%;
@@ -173,7 +132,6 @@ body.dark .best { color: #666; }
   position: relative;
 }
 
-/* Face-down tiles sit at z 10 (inherited from game-wrap) */
 .tile {
   aspect-ratio: 1 / 1;
   min-width: 0;
@@ -184,10 +142,7 @@ body.dark .best { color: #666; }
   z-index: 10;
 }
 
-/* Face-up tiles jump above the mismatch overlay */
-.tile.flipped {
-  z-index: 110;
-}
+.tile.flipped { z-index: 110; }
 
 .tile.cleared {
   visibility: hidden;
@@ -311,6 +266,36 @@ body.dark .tile.capital .tile-front {
 body.dark .tile.state .tile-name   { color: #85B7EB; }
 body.dark .tile.capital .tile-name { color: #AFA9EC; }
 
+/* Name display zone */
+.name-display {
+  width: 100%;
+  max-width: 420px;
+  min-height: 64px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  margin-top: 10px;
+  flex-shrink: 0;
+}
+
+.name-label {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: 0.03em;
+  text-align: center;
+  color: #1a1a1a;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  line-height: 1.3;
+}
+
+.name-label.visible { opacity: 1; }
+
+body.dark .name-label { color: #f0ede8; }
+
 /* Win overlay */
 .win-overlay {
   display: none;
@@ -378,13 +363,7 @@ body.dark .action-btn {
 <body>
 
 <div id="confetti-container"></div>
-<div class="zoom-pill" id="zoomPill"></div>
-
-<!-- Layer 100: catches tap when two mismatched tiles are face-up -->
 <div id="mismatch-overlay"></div>
-
-<!-- Layer 400: catches tap when zoom pill is showing -->
-<div id="pill-overlay"></div>
 
 <div class="game-wrap">
   <div class="header">
@@ -397,6 +376,10 @@ body.dark .action-btn {
     <div class="best" id="bestDisplay"></div>
   </div>
   <div class="grid" id="grid"></div>
+  <div class="name-display">
+    <div class="name-label" id="nameA"></div>
+    <div class="name-label" id="nameB"></div>
+  </div>
 </div>
 
 <div class="win-overlay" id="winOverlay">
@@ -522,33 +505,40 @@ function updateBestDisplay() {
   el.style.whiteSpace = 'pre';
 }
 
-// Overlays
+// Name display
+const nameA = document.getElementById('nameA');
+const nameB = document.getElementById('nameB');
+
+function showName(slot, text) {
+  const el = slot === 0 ? nameA : nameB;
+  el.textContent = text;
+  requestAnimationFrame(() => el.classList.add('visible'));
+}
+
+function clearNames() {
+  nameA.classList.remove('visible');
+  nameB.classList.remove('visible');
+  // Clear text after fade
+  setTimeout(() => {
+    nameA.textContent = '';
+    nameB.textContent = '';
+  }, 400);
+}
+
+// Mismatch overlay
 const mismatchOverlay = document.getElementById('mismatch-overlay');
-const pillOverlay     = document.getElementById('pill-overlay');
-const zoomPill        = document.getElementById('zoomPill');
 
 function showMismatchOverlay() { mismatchOverlay.classList.add('active'); }
-function hideMismatchOverlay() { mismatchOverlay.classList.remove('active'); }
-
-function showPill(text) {
-  zoomPill.textContent = text;
-  zoomPill.classList.add('visible');
-  pillOverlay.classList.add('active');
-}
-function hidePill() {
-  zoomPill.classList.remove('visible');
-  pillOverlay.classList.remove('active');
+function hideMismatchOverlay() {
+  mismatchOverlay.classList.remove('active');
 }
 
-// Pill overlay tap → dismiss pill only
-pillOverlay.addEventListener('click', hidePill);
-
-// Mismatch overlay tap → flip tiles back
 mismatchOverlay.addEventListener('click', () => {
   flippedTiles.forEach(t => t.classList.remove('flipped'));
   flippedTiles = [];
   locked = false;
   hideMismatchOverlay();
+  clearNames();
 });
 
 // Game state
@@ -558,16 +548,16 @@ let matches = 0;
 let flips = 0;
 let activePairs = [];
 
-const grid        = document.getElementById('grid');
-const scoreEl     = document.getElementById('score');
-const winOverlay  = document.getElementById('winOverlay');
-const winScore    = document.getElementById('winScore');
-const winBest     = document.getElementById('winBest');
+const grid         = document.getElementById('grid');
+const scoreEl      = document.getElementById('score');
+const winOverlay   = document.getElementById('winOverlay');
+const winScore     = document.getElementById('winScore');
+const winBest      = document.getElementById('winBest');
 const playAgainBtn = document.getElementById('playAgainBtn');
 
 function updateScore() {
-  const flipLabel  = flips === 1   ? '1 flip'   : `${flips} flips`;
-  const matchLabel = matches === 1 ? '1 match'  : `${matches} matches`;
+  const flipLabel  = flips === 1   ? '1 flip'  : `${flips} flips`;
+  const matchLabel = matches === 1 ? '1 match' : `${matches} matches`;
   scoreEl.textContent = `${flipLabel} · ${matchLabel}`;
 }
 
@@ -577,8 +567,8 @@ function buildBoard() {
   locked = false;
   matches = 0;
   flips = 0;
-  hidePill();
   hideMismatchOverlay();
+  clearNames();
   winOverlay.classList.remove('visible');
   updateScore();
   updateBestDisplay();
@@ -621,18 +611,16 @@ function buildBoard() {
 function handleTileTap(tile) {
   if (locked) return;
   if (tile.classList.contains('cleared')) return;
+  if (tile.classList.contains('flipped')) return; // already up, do nothing extra
 
-  // Face-up tile → zoom
-  if (tile.classList.contains('flipped')) {
-    showPill(tile.dataset.name);
-    return;
-  }
-
-  // Face-down tile → flip
+  // Flip face-down tile
   tile.classList.add('flipped');
   flips++;
   updateScore();
   flippedTiles.push(tile);
+
+  // Show name in display zone
+  showName(flippedTiles.length - 1, tile.dataset.name);
 
   if (flippedTiles.length === 2) {
     locked = true;
@@ -645,10 +633,12 @@ function checkMatch() {
   const isMatch = a.dataset.pairId === b.dataset.pairId;
 
   if (isMatch) {
+    // Let the player breathe and read the names for 900ms before anything happens
     setTimeout(() => {
       launchConfetti(b);
       a.classList.add('matched');
       b.classList.add('matched');
+      clearNames();
       setTimeout(() => {
         a.classList.add('cleared');
         b.classList.add('cleared');
@@ -668,10 +658,9 @@ function checkMatch() {
           }, 300);
         }
       }, 350);
-    }, 400);
+    }, 900);
   } else {
-    // Show mismatch overlay — player taps anywhere to continue
-    // Face-up tiles are z 110, above overlay at z 100, so zoom still works
+    // Mismatch: show overlay so tap anywhere flips back
     locked = false;
     showMismatchOverlay();
   }

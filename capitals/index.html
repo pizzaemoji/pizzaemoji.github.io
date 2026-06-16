@@ -54,26 +54,60 @@ html, body {
   max-width: 420px;
 }
 
+/* --- Tile shell --- */
 .tile {
   aspect-ratio: 1 / 1;
+  min-width: 0;
+  cursor: pointer;
+  perspective: 600px;
+}
+
+.tile-inner {
+  width: 100%;
+  height: 100%;
+  position: relative;
+  transform-style: preserve-3d;
+  transition: transform 0.4s ease;
   border-radius: 8px;
+}
+
+.tile.flipped .tile-inner {
+  transform: rotateY(180deg);
+}
+
+/* --- Back face (red) --- */
+.tile-back,
+.tile-front {
+  position: absolute;
+  inset: 0;
+  border-radius: 8px;
+  backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 4px;
-  cursor: pointer;
-  min-width: 0;
 }
 
-.tile.state {
+.tile-back {
+  background: #F9A8A8;
+  border: 0.5px solid #E24B4A;
+}
+
+/* --- Front face --- */
+.tile-front {
+  transform: rotateY(180deg);
+}
+
+.tile.state .tile-front {
   background: #E6F1FB;
   border: 0.5px solid #B5D4F4;
 }
 
-.tile.capital {
-  background: #E1F5EE;
-  border: 0.5px solid #9FE1CB;
+.tile.capital .tile-front {
+  background: #EEEDFE;
+  border: 0.5px solid #AFA9EC;
 }
 
 .tile svg {
@@ -92,13 +126,12 @@ html, body {
   line-height: 1.2;
   margin-top: 3px;
   width: 100%;
-  hyphens: auto;
   overflow-wrap: break-word;
-  word-break: break-word;
+  word-break: normal;
 }
 
-.tile.state .tile-name { color: #0C447C; }
-.tile.capital .tile-name { color: #085041; }
+.tile.state .tile-name  { color: #0C447C; }
+.tile.capital .tile-name { color: #3C3489; }
 </style>
 </head>
 <body>
@@ -145,11 +178,27 @@ const blankSVG = `<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
 shuffled.forEach(tile => {
   const el = document.createElement('div');
   el.className = `tile ${tile.type}`;
+
+  const front = document.createElement('div');
+  front.className = 'tile-front';
+
   if (tile.type === 'state') {
-    el.innerHTML = blankSVG + `<div class="tile-name">${tile.name}</div>`;
+    front.innerHTML = blankSVG + `<div class="tile-name">${tile.name}</div>`;
   } else {
-    el.innerHTML = `<div class="tile-name" style="margin-top:0;">${tile.name}</div>`;
+    front.innerHTML = `<div class="tile-name">${tile.name}</div>`;
   }
+
+  const back = document.createElement('div');
+  back.className = 'tile-back';
+
+  const inner = document.createElement('div');
+  inner.className = 'tile-inner';
+  inner.appendChild(back);
+  inner.appendChild(front);
+  el.appendChild(inner);
+
+  el.addEventListener('click', () => el.classList.toggle('flipped'));
+
   grid.appendChild(el);
 });
 </script>

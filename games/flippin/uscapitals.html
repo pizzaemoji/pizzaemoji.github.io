@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="flippin.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="https://pizzaemoji.net/games/flippin/flippin-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Flippin'">
+<meta name="theme-color" content="#922020">
+<title>Flippin'</title>
+</head>
+<body>
+
+<div id="confetti-container"></div>
+<div id="mismatch-overlay"></div>
+
+<div class="game-wrap">
+  <div class="header">
+    <button class="dark-toggle" id="darkToggle" aria-label="Toggle dark mode">🌙</button>
+    <div class="header-center">
+      <h1>Flippin'</h1>
+      <div class="subtitle">US Capitals</div>
+      <div class="score" id="score">0 flips &nbsp;·&nbsp; 0 matches</div>
+    </div>
+    <div class="best" id="bestDisplay"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="name-display">
+    <div class="name-label" id="nameA"></div>
+    <div class="name-label" id="nameB"></div>
+  </div>
+</div>
+
+<div class="win-overlay" id="winOverlay">
+  <div class="win-title">All matched!</div>
+  <div class="win-score" id="winScore"></div>
+  <div class="win-best" id="winBest"></div>
+  <button class="action-btn" id="playAgainBtn">Play Again</button>
+</div>
+
+<script>
+const ALL_PAIRS = [
+  { state: 'Alabama',        capital: 'Montgomery'     },
+  { state: 'Alaska',         capital: 'Juneau'         },
+  { state: 'Arizona',        capital: 'Phoenix'        },
+  { state: 'Arkansas',       capital: 'Little Rock'    },
+  { state: 'California',     capital: 'Sacramento'     },
+  { state: 'Colorado',       capital: 'Denver'         },
+  { state: 'Connecticut',    capital: 'Hartford'       },
+  { state: 'Delaware',       capital: 'Dover'          },
+  { state: 'Florida',        capital: 'Tallahassee'    },
+  { state: 'Georgia',        capital: 'Atlanta'        },
+  { state: 'Hawaii',         capital: 'Honolulu'       },
+  { state: 'Idaho',          capital: 'Boise'          },
+  { state: 'Illinois',       capital: 'Springfield'    },
+  { state: 'Indiana',        capital: 'Indianapolis'   },
+  { state: 'Iowa',           capital: 'Des Moines'     },
+  { state: 'Kansas',         capital: 'Topeka'         },
+  { state: 'Kentucky',       capital: 'Frankfort'      },
+  { state: 'Louisiana',      capital: 'Baton Rouge'    },
+  { state: 'Maine',          capital: 'Augusta'        },
+  { state: 'Maryland',       capital: 'Annapolis'      },
+  { state: 'Massachusetts',  capital: 'Boston'         },
+  { state: 'Michigan',       capital: 'Lansing'        },
+  { state: 'Minnesota',      capital: 'Saint Paul'     },
+  { state: 'Mississippi',    capital: 'Jackson'        },
+  { state: 'Missouri',       capital: 'Jefferson City' },
+  { state: 'Montana',        capital: 'Helena'         },
+  { state: 'Nebraska',       capital: 'Lincoln'        },
+  { state: 'Nevada',         capital: 'Carson City'    },
+  { state: 'New Hampshire',  capital: 'Concord'        },
+  { state: 'New Jersey',     capital: 'Trenton'        },
+  { state: 'New Mexico',     capital: 'Santa Fe'       },
+  { state: 'New York',       capital: 'Albany'         },
+  { state: 'North Carolina', capital: 'Raleigh'        },
+  { state: 'North Dakota',   capital: 'Bismarck'       },
+  { state: 'Ohio',           capital: 'Columbus'       },
+  { state: 'Oklahoma',       capital: 'Oklahoma City'  },
+  { state: 'Oregon',         capital: 'Salem'          },
+  { state: 'Pennsylvania',   capital: 'Harrisburg'     },
+  { state: 'Rhode Island',   capital: 'Providence'     },
+  { state: 'South Carolina', capital: 'Columbia'       },
+  { state: 'South Dakota',   capital: 'Pierre'         },
+  { state: 'Tennessee',      capital: 'Nashville'      },
+  { state: 'Texas',          capital: 'Austin'         },
+  { state: 'Utah',           capital: 'Salt Lake City' },
+  { state: 'Vermont',        capital: 'Montpelier'     },
+  { state: 'Virginia',       capital: 'Richmond'       },
+  { state: 'Washington',     capital: 'Olympia'        },
+  { state: 'West Virginia',  capital: 'Charleston'     },
+  { state: 'Wisconsin',      capital: 'Madison'        },
+  { state: 'Wyoming',        capital: 'Cheyenne'       },
+];
+
+const blankSVG = `<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="8" width="44" height="44" rx="4" fill="none" stroke="#B5D4F4" stroke-width="1.5" stroke-dasharray="4 3"/>
+</svg>`;
+
+const confettiColors = ['#FF6685','#FFB366','#FFF066','#66FF84','#66E0FF','#A366FF'];
+const confettiContainer = document.getElementById('confetti-container');
+
+function launchConfetti(tile) {
+  const rect = tile.getBoundingClientRect();
+  const originX = rect.left + rect.width / 2;
+  const originY = rect.top + rect.height / 2;
+  const pieces = [];
+  for (let i = 0; i < 40; i++) {
+    const el = document.createElement('div');
+    el.style.cssText = `position:absolute;width:${Math.random()*4+2}px;height:${Math.random()*10+5}px;background-color:${confettiColors[Math.floor(Math.random()*confettiColors.length)]};border-radius:1px;left:${originX}px;top:${originY}px;`;
+    confettiContainer.appendChild(el);
+    const speed = Math.random() * 5 + 2;
+    const angle = Math.PI + (Math.random() * Math.PI);
+    pieces.push({ el, x:0, y:0, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed, gravity:Math.random()*0.1+0.07, rotation:Math.random()*360, rotationSpeed:(Math.random()-0.5)*10 });
+  }
+  function animate() {
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.y < window.innerHeight) {
+        p.vy += p.gravity; p.x += p.vx; p.y += p.vy; p.rotation += p.rotationSpeed;
+        p.el.style.transform = `translate(${p.x}px,${p.y}px) rotate(${p.rotation}deg)`;
+        alive = true;
+      } else if (p.el.parentNode) { p.el.remove(); }
+    });
+    if (alive) requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+// Dark mode
+const darkToggle = document.getElementById('darkToggle');
+let isDark = localStorage.getItem('flippin-dark') === '1';
+function applyDark() {
+  document.body.classList.toggle('dark', isDark);
+  darkToggle.textContent = isDark ? '☀️' : '🌙';
+}
+applyDark();
+darkToggle.addEventListener('click', () => {
+  isDark = !isDark;
+  localStorage.setItem('flippin-dark', isDark ? '1' : '0');
+  applyDark();
+});
+
+// Best score
+function getBest() { return parseInt(localStorage.getItem('flippin-best-us') || '0'); }
+function setBest(flips) {
+  const current = getBest();
+  if (!current || flips < current) { localStorage.setItem('flippin-best-us', flips); return true; }
+  return false;
+}
+function updateBestDisplay() {
+  const best = getBest();
+  const el = document.getElementById('bestDisplay');
+  el.textContent = best ? `best\n${best} flips` : '';
+  el.style.whiteSpace = 'pre';
+}
+
+// Name display
+const nameA = document.getElementById('nameA');
+const nameB = document.getElementById('nameB');
+
+function showName(slot, text) {
+  const el = slot === 0 ? nameA : nameB;
+  el.textContent = text;
+  requestAnimationFrame(() => el.classList.add('visible'));
+}
+
+function clearNames() {
+  nameA.classList.remove('visible');
+  nameB.classList.remove('visible');
+  // Clear text after fade
+  setTimeout(() => {
+    nameA.textContent = '';
+    nameB.textContent = '';
+  }, 400);
+}
+
+// Mismatch overlay
+const mismatchOverlay = document.getElementById('mismatch-overlay');
+
+function showMismatchOverlay() { mismatchOverlay.classList.add('active'); }
+function hideMismatchOverlay() {
+  mismatchOverlay.classList.remove('active');
+}
+
+mismatchOverlay.addEventListener('click', () => {
+  flippedTiles.forEach(t => t.classList.remove('flipped'));
+  flippedTiles = [];
+  locked = false;
+  hideMismatchOverlay();
+  clearNames();
+});
+
+// Game state
+let flippedTiles = [];
+let locked = false;
+let matches = 0;
+let flips = 0;
+let activePairs = [];
+
+const grid         = document.getElementById('grid');
+const scoreEl      = document.getElementById('score');
+const winOverlay   = document.getElementById('winOverlay');
+const winScore     = document.getElementById('winScore');
+const winBest      = document.getElementById('winBest');
+const playAgainBtn = document.getElementById('playAgainBtn');
+
+function updateScore() {
+  const flipLabel  = flips === 1   ? '1 flip'  : `${flips} flips`;
+  const matchLabel = matches === 1 ? '1 match' : `${matches} matches`;
+  scoreEl.textContent = `${flipLabel} · ${matchLabel}`;
+}
+
+function buildBoard() {
+  grid.innerHTML = '';
+  flippedTiles = [];
+  locked = false;
+  matches = 0;
+  flips = 0;
+  hideMismatchOverlay();
+  clearNames();
+  winOverlay.classList.remove('visible');
+  updateScore();
+  updateBestDisplay();
+
+  activePairs = [...ALL_PAIRS].sort(() => Math.random() - 0.5).slice(0, 10);
+
+  const tileData = [];
+  activePairs.forEach((pair, i) => {
+    tileData.push({ type: 'state',   name: pair.state,   pairId: i });
+    tileData.push({ type: 'capital', name: pair.capital, pairId: i });
+  });
+  tileData.sort(() => Math.random() - 0.5);
+
+  tileData.forEach((data) => {
+    const tile = document.createElement('div');
+    tile.className = `tile ${data.type === 'state' ? 'primary' : 'secondary'}`;
+    tile.dataset.pairId = data.pairId;
+    tile.dataset.name   = data.name;
+
+    const inner = document.createElement('div');
+    inner.className = 'tile-inner';
+
+    const back = document.createElement('div');
+    back.className = 'tile-back';
+
+    const front = document.createElement('div');
+    front.className = 'tile-front';
+    front.innerHTML = data.type === 'state'
+      ? blankSVG + `<div class="tile-name">${data.name}</div>`
+      : `<div class="tile-name">${data.name}</div>`;
+
+    inner.appendChild(back);
+    inner.appendChild(front);
+    tile.appendChild(inner);
+    tile.addEventListener('click', () => handleTileTap(tile));
+    grid.appendChild(tile);
+  });
+}
+
+function handleTileTap(tile) {
+  if (locked) return;
+  if (tile.classList.contains('cleared')) return;
+  if (tile.classList.contains('flipped')) return; // already up, do nothing extra
+
+  // Flip face-down tile
+  tile.classList.add('flipped');
+  flips++;
+  updateScore();
+  flippedTiles.push(tile);
+
+  // Show name in display zone
+  showName(flippedTiles.length - 1, tile.dataset.name);
+
+  if (flippedTiles.length === 2) {
+    locked = true;
+    checkMatch();
+  }
+}
+
+function checkMatch() {
+  const [a, b] = flippedTiles;
+  const isMatch = a.dataset.pairId === b.dataset.pairId;
+
+  if (isMatch) {
+    // Let the player breathe and read the names for 900ms before anything happens
+    setTimeout(() => {
+      launchConfetti(b);
+      a.classList.add('matched');
+      b.classList.add('matched');
+      clearNames();
+      setTimeout(() => {
+        a.classList.add('cleared');
+        b.classList.add('cleared');
+        a.classList.remove('matched');
+        b.classList.remove('matched');
+        matches++;
+        updateScore();
+        flippedTiles = [];
+        locked = false;
+
+        if (matches === activePairs.length) {
+          setTimeout(() => {
+            const isNewBest = setBest(flips);
+            winScore.textContent = `${flips} flips · ${matches} matches`;
+            winBest.textContent  = isNewBest ? '🎉 New best!' : `Best: ${getBest()} flips`;
+            winOverlay.classList.add('visible');
+          }, 300);
+        }
+      }, 350);
+    }, 900);
+  } else {
+    // Mismatch: show overlay so tap anywhere flips back
+    locked = false;
+    showMismatchOverlay();
+  }
+}
+
+playAgainBtn.addEventListener('click', buildBoard);
+buildBoard();
+</script>
+</body>
+</html>

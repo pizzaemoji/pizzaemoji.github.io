@@ -4,12 +4,6 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="flippin.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-<link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="https://pizzaemoji.net/games/flippin/flippin-icon.png">
-<meta name="apple-mobile-web-app-capable" content="yes">
-<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="Flippin'">
-<meta name="theme-color" content="#922020">
 <title>Flippin'</title>
 </head>
 <body>
@@ -19,6 +13,7 @@
 
 <div class="game-wrap">
   <div class="header">
+    <div style="min-width:60px"></div>
     <div class="header-center">
       <h1>Flippin'</h1>
       <div class="subtitle">US Capitals</div>
@@ -128,19 +123,6 @@ function launchConfetti(tile) {
   requestAnimationFrame(animate);
 }
 
-// Dark mode
-const darkToggle = document.getElementById('darkToggle');
-let isDark = localStorage.getItem('flippin-dark') === '1';
-function applyDark() {
-  document.body.classList.toggle('dark', isDark);
-  darkToggle.textContent = isDark ? '☀️' : '🌙';
-}
-applyDark();
-darkToggle.addEventListener('click', () => {
-  isDark = !isDark;
-  localStorage.setItem('flippin-dark', isDark ? '1' : '0');
-  applyDark();
-});
 
 // Best score
 function getBest() { return parseInt(localStorage.getItem('flippin-best-us') || '0'); }

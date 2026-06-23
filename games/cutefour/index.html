@@ -7,12 +7,20 @@
 <meta http-equiv="Pragma" content="no-cache">
 <meta http-equiv="Expires" content="0">
 <link rel="icon" type="image/svg+xml" href="favicon.svg">
-<link rel="apple-touch-icon" href="https://pizzaemoji.net/games/cutefour/cutefour-icon.png">
+<link rel="apple-touch-icon" href="https://pizzaemoji.net/cutefour/cute-four-icon.png">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="CuteFour">
-<meta name="theme-color" content="#2c3640">
-<title>CuteFour</title>
+<meta name="apple-mobile-web-app-title" content="Cute Four">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pizzaemoji.net/cutefour/">
+<meta property="og:title" content="Cute Four">
+<meta property="og:description" content="A game for two.">
+<meta property="og:image" content="https://pizzaemoji.net/cutefour/cute-four-icon.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pizzaemoji.net/cutefour/cute-four-icon.png">
+<title>Cute Four</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
 
@@ -289,6 +297,33 @@
   .modal-btn:active { opacity: 0.85; }
   .modal-btn.yes { background: #e8c97a; color: #2c3640; }
   .modal-btn.no  { background: #3d5060; color: #f0ebe0; }
+
+  /* ---- Pizza Emoji Games branding ---- */
+  .branding {
+    position: fixed;
+    bottom: 30px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-family: Georgia, "Times New Roman", serif;
+    font-size: 1rem;
+    font-weight: 400;
+    color: #F5F0E8;
+    letter-spacing: 0.02em;
+  }
+  #smallslice {
+    height: 1rem;
+    vertical-align: middle;
+    margin-left: 2px;
+  }
+  /* ---- Branding link ---- */
+  .branding-link {
+    color: inherit;
+    text-decoration: none;
+  }
+  .branding-link:active {
+    opacity: 0.7;
+  }
 </style>
 </head>
 <body>
@@ -297,7 +332,7 @@
 <div class="screen active" id="welcomeScreen">
   <div style="margin-bottom:8px;">
     <div class="welcome-eyebrow">a game for two</div>
-    <div class="welcome-title">CuteFour</div>
+    <div class="welcome-title">Cute Four</div>
   </div>
   <div class="token-rain-stage" id="rainStage"></div>
   <button class="btn-main" id="btnNewGame">New Game</button>
@@ -305,7 +340,7 @@
 
 <!-- SHARE / COLOR PICK -->
 <div class="screen" id="shareScreen">
-  <div class="welcome-eyebrow" style="margin-bottom:16px;">CuteFour</div>
+  <div class="welcome-eyebrow" style="margin-bottom:16px;">Cute Four</div>
   <p class="share-header">Invite a friend to join your game<br>using the link below:</p>
   <div class="game-link-box">
     <div class="game-link-label">game link</div>
@@ -345,7 +380,7 @@
 
 <!-- GAME -->
 <div class="screen" id="gameScreen">
-  <button class="game-title-btn" id="btnHome">CuteFour</button>
+  <button class="game-title-btn" id="btnHome">Cute Four</button>
   <div class="turn-banner" id="turnBanner"></div>
   <div class="board-wrap" id="boardWrap">
     <div class="grid" id="grid"></div>
@@ -1045,5 +1080,6 @@ function checkWin(row,col) {
 function checkDraw(){ return board[0].every(v=>v!==0); }
 
 </script>
+<p class="branding"><a href="https://pizzaemoji.net/games" class="branding-link"><img src="/games/smallslice.webp" id="smallslice" alt="Small Slice icon"> Pizza Emoji Games</a></p>
 </body>
 </html>

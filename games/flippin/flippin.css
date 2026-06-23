@@ -402,3 +402,14 @@ body {
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
+
+/* ---- Win subtitle ---- */
+.win-subtitle {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-weight: 200;
+  letter-spacing: 0.08em;
+  color: #A09888;
+  text-transform: uppercase;
+  margin-top: -6px;
+}

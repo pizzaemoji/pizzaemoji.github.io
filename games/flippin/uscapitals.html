@@ -4,6 +4,12 @@
 <meta charset="UTF-8">
 <link rel="stylesheet" href="flippin.css">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="https://pizzaemoji.net/games/flippin/flippin-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Flippin'">
+<meta name="theme-color" content="#922020">
 <title>Flippin'</title>
 </head>
 <body>
@@ -30,6 +36,7 @@
 
 <div class="win-overlay" id="winOverlay">
   <div class="win-title">All matched!</div>
+  <div class="win-subtitle" id="winSubtitle"></div>
   <div class="win-score" id="winScore"></div>
   <div class="win-best" id="winBest"></div>
   <button class="action-btn" id="playAgainBtn">Play Again</button>
@@ -285,6 +292,7 @@ function checkMatch() {
         if (matches === activePairs.length) {
           setTimeout(() => {
             const isNewBest = setBest(flips);
+            document.getElementById('winSubtitle').textContent = document.querySelector('.subtitle').textContent;
             winScore.textContent = `${flips} flips · ${matches} matches`;
             winBest.textContent  = isNewBest ? '🎉 New best!' : `Best: ${getBest()} flips`;
             winOverlay.classList.add('visible');

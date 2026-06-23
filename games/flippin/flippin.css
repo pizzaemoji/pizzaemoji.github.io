@@ -352,17 +352,14 @@ body {
 .index-btn:active { background: #6B1818; }
 
 .version {
-  position: fixed;
-  bottom: 16px;
-  left: 0;
-  right: 0;
-  text-align: center;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 11px;
   font-weight: 200;
-  color: #A09888;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  color: #5A5048;
+  letter-spacing: 0.06em;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  text-align: center;
 }
 
 /* ---- Win overlay ---- */
@@ -427,4 +424,38 @@ body {
   font-weight: 200;
   color: #A09888;
   letter-spacing: 0.02em;
+}
+
+/* ---- Secondary action button (All Games) ---- */
+.action-btn-secondary {
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 14px;
+  font-weight: 400;
+  letter-spacing: 0.04em;
+  color: #A09888;
+  background: transparent;
+  border: none;
+  text-decoration: none;
+  cursor: pointer;
+  padding: 4px 0;
+}
+
+/* ---- Pizza Emoji Games branding ---- */
+.branding {
+  position: fixed;
+  bottom: 30px;
+  left: 0;
+  right: 0;
+  text-align: center;
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 1rem;
+  font-weight: 400;
+  color: #F5F0E8;
+  letter-spacing: 0.02em;
+}
+
+#smallslice {
+  height: 1rem;
+  vertical-align: middle;
+  margin-left: 2px;
 }

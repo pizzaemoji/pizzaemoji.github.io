@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Tailwind | Font Cheat Sheet</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<style>
+		.no-scrollbar::-webkit-scrollbar { display: none; }
+		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+	</style>
+</head>
+<body class="antialiased no-scrollbar">
+	<div class="grid grid-cols-1 md:grid-cols-2 min-h-screen">
+
+		<section class="bg-white p-12 space-y-16">
+			<div>
+				<h2 class="text-black font-mono text-xs mb-8 border-b border-zinc-100 pb-2 uppercase tracking-widest">White Canvas: Zinc Text Scale</h2>
+				<div class="space-y-2">
+					<p class="text-zinc-50">text-zinc-50: The Ghost</p>
+					<p class="text-zinc-100">text-zinc-100: Barely there</p>
+					<p class="text-zinc-200">text-zinc-200: Low contrast</p>
+					<p class="text-zinc-300">text-zinc-300: Still light</p>
+					<p class="text-zinc-400">text-zinc-400: Accessible-ish</p>
+					<p class="text-zinc-500">text-zinc-500: Standard muted</p>
+					<p class="text-zinc-600">text-zinc-600: Readable secondary</p>
+					<p class="text-zinc-700">text-zinc-700: Strong body</p>
+					<p class="text-zinc-800">text-zinc-800: Deep gray</p>
+					<p class="text-zinc-900">text-zinc-900: Near black</p>
+					<p class="text-zinc-950">text-zinc-950: Rich black</p>
+				</div>
+			</div>
+			<div>
+				<h2 class="text-black font-mono text-xs mb-8 border-b border-zinc-100 pb-2 uppercase tracking-widest">White Canvas: Font Size Scale</h2>
+				<div class="space-y-4">
+					<p class="text-xs text-black">text-xs (12px)</p>
+					<p class="text-sm text-black">text-sm (14px)</p>
+					<p class="text-base text-black">text-base (16px)</p>
+					<p class="text-lg text-black">text-lg (18px)</p>
+					<p class="text-xl text-black">text-xl (20px)</p>
+					<p class="text-2xl text-black">text-2xl (24px)</p>
+					<p class="text-3xl text-black">text-3xl (30px)</p>
+					<p class="text-4xl text-black">text-4xl (36px)</p>
+					<p class="text-5xl text-black">text-5xl (48px)</p>
+				</div>
+			</div>
+			<div>
+				<h2 class="text-black font-mono text-xs mb-8 border-b border-zinc-100 pb-2 uppercase tracking-widest">White Canvas: Font Weight & Style</h2>
+				<div class="space-y-4 text-black">
+					<p class="font-thin">font-thin (100): The lightest whisper</p>
+					<p class="font-extralight">font-extralight (200): Barely weighted</p>
+					<p class="font-light">font-light (300): Editorial light</p>
+					<p class="font-normal">font-normal (400): Browser default</p>
+					<p class="font-medium">font-medium (500): Slightly confident</p>
+					<p class="font-semibold">font-semibold (600): Getting serious</p>
+					<p class="font-bold">font-bold (700): Bold and clear</p>
+					<p class="font-extrabold">font-extrabold (800): Loud</p>
+					<p class="font-black">font-black (900): Maximum weight</p>
+					<div class="border-t border-zinc-100 pt-4 mt-4 space-y-4">
+						<p class="italic">italic: Emphasis and style</p>
+						<p class="not-italic">not-italic: Resets italic</p>
+						<p class="underline">underline: Classic link style</p>
+						<p class="underline decoration-2">decoration-2: Thicker underline</p>
+						<p class="underline decoration-dotted">decoration-dotted: Dotted underline</p>
+						<p class="underline decoration-wavy">decoration-wavy: Wavy underline</p>
+						<p class="underline underline-offset-4">underline-offset-4: Lifted underline</p>
+						<p class="line-through">line-through: Strikethrough</p>
+						<p class="no-underline">no-underline: Removes underline</p>
+						<p class="uppercase tracking-widest text-sm">uppercase + tracking-widest: Label style</p>
+						<p class="lowercase">lowercase: Forces lowercase</p>
+						<p class="capitalize">capitalize: Capitalizes Each Word</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+		<section class="bg-black p-12 space-y-16">
+			<div>
+				<h2 class="text-white font-mono text-xs mb-8 border-b border-zinc-900 pb-2 uppercase tracking-widest">Black Canvas: Zinc Text Scale</h2>
+				<div class="space-y-2">
+					<p class="text-zinc-950">text-zinc-950: Invisible</p>
+					<p class="text-zinc-900">text-zinc-900: Shadow text</p>
+					<p class="text-zinc-800">text-zinc-800: Dark secondary</p>
+					<p class="text-zinc-700">text-zinc-700: Visible secondary</p>
+					<p class="text-zinc-600">text-zinc-600: Muted gray</p>
+					<p class="text-zinc-500">text-zinc-500: Mid gray</p>
+					<p class="text-zinc-400">text-zinc-400: High contrast gray</p>
+					<p class="text-zinc-300">text-zinc-300: Bright gray</p>
+					<p class="text-zinc-200">text-zinc-200: Soft white</p>
+					<p class="text-zinc-100">text-zinc-100: Off white</p>
+					<p class="text-zinc-50">text-zinc-50: Purest white</p>
+				</div>
+			</div>
+			<div>
+				<h2 class="text-white font-mono text-xs mb-8 border-b border-zinc-900 pb-2 uppercase tracking-widest">Black Canvas: Font Size Scale</h2>
+				<div class="space-y-4">
+					<p class="text-xs text-white">text-xs (12px)</p>
+					<p class="text-sm text-white">text-sm (14px)</p>
+					<p class="text-base text-white">text-base (16px)</p>
+					<p class="text-lg text-white">text-lg (18px)</p>
+					<p class="text-xl text-white">text-xl (20px)</p>
+					<p class="text-2xl text-white">text-2xl (24px)</p>
+					<p class="text-3xl text-white">text-3xl (30px)</p>
+					<p class="text-4xl text-white">text-4xl (36px)</p>
+					<p class="text-5xl text-white">text-5xl (48px)</p>
+				</div>
+			</div>
+			<div>
+				<h2 class="text-white font-mono text-xs mb-8 border-b border-zinc-900 pb-2 uppercase tracking-widest">Black Canvas: Font Weight & Style</h2>
+				<div class="space-y-4 text-white">
+					<p class="font-thin">font-thin (100): The lightest whisper</p>
+					<p class="font-extralight">font-extralight (200): Barely weighted</p>
+					<p class="font-light">font-light (300): Editorial light</p>
+					<p class="font-normal">font-normal (400): Browser default</p>
+					<p class="font-medium">font-medium (500): Slightly confident</p>
+					<p class="font-semibold">font-semibold (600): Getting serious</p>
+					<p class="font-bold">font-bold (700): Bold and clear</p>
+					<p class="font-extrabold">font-extrabold (800): Loud</p>
+					<p class="font-black">font-black (900): Maximum weight</p>
+					<div class="border-t border-zinc-900 pt-4 mt-4 space-y-4">
+						<p class="italic">italic: Emphasis and style</p>
+						<p class="not-italic">not-italic: Resets italic</p>
+						<p class="underline">underline: Classic link style</p>
+						<p class="underline decoration-2">decoration-2: Thicker underline</p>
+						<p class="underline decoration-dotted">decoration-dotted: Dotted underline</p>
+						<p class="underline decoration-wavy">decoration-wavy: Wavy underline</p>
+						<p class="underline underline-offset-4">underline-offset-4: Lifted underline</p>
+						<p class="line-through">line-through: Strikethrough</p>
+						<p class="no-underline">no-underline: Removes underline</p>
+						<p class="uppercase tracking-widest text-sm">uppercase + tracking-widest: Label style</p>
+						<p class="lowercase">lowercase: Forces lowercase</p>
+						<p class="capitalize">capitalize: Capitalizes Each Word</p>
+					</div>
+				</div>
+			</div>
+		</section>
+
+	</div>
+</body>
+</html>

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Pals | Jamie Parker</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="color-scheme" content="light dark">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="pals.js"></script>
+	<style>
+		.no-scrollbar::-webkit-scrollbar { display: none; }
+		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+	</style>
+</head>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
+	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
+		<header class="w-full flex justify-between items-center px-4 pt-4 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
+			<a href="chat_jamie_parker.html" class="w-10 text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+				</svg>
+			</a>
+			<img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+			<div class="w-10 flex justify-end items-center">
+				<button onclick="toggleMenu()" class="text-zinc-800 dark:text-zinc-200 z-[60] active:scale-90 transition-transform">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+				</button>
+			</div>
+		</header>
+		<main class="flex-1 overflow-y-auto no-scrollbar flex flex-col items-start px-4 pt-4 pb-10">
+			<div class="w-full px-4 py-4 bg-zinc-50 dark:bg-zinc-900/50 rounded-3xl">
+				<div class="w-full mb-4">
+					<img src="images/icon_jamie_parker.png" alt="Jamie Parker" class="w-20 h-20 rounded-full border-2 border-zinc-100 dark:border-zinc-800 object-cover">
+				</div>
+				<div class="w-full mb-6">
+					<h1 class="text-4xl font-black text-zinc-900 dark:text-zinc-100 leading-none mb-3">
+						Jamie Parker
+					</h1>
+					<div class="flex items-center justify-between">
+						<p class="text-xs font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+							She / Her
+						</p>
+						<p class="text-xs font-black uppercase tracking-widest text-zinc-400 dark:text-zinc-500">
+							Pal since Feb 2026
+						</p>
+					</div>
+				</div>
+				<div class="w-full px-4 py-6 rounded-3xl">
+					<p class="text-zinc-800 dark:text-zinc-200 text-lg leading-snug text-center">
+					Coffee first, questions later. Music nerd. Probably at the record store.
+					</p>
+				</div>
+			</div>
+		</main>
+		<div id="menuOverlay" onclick="toggleMenu()" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-[70] opacity-0 pointer-events-none transition-opacity duration-200"></div>
+		<div id="profileMenu" class="absolute top-0 right-0 w-[70%] h-screen bg-white dark:bg-zinc-900 z-[80] translate-x-full transition-transform duration-200 ease-out shadow-2xl">
+			<div class="flex flex-col h-full pt-8">
+				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+					<a href="emily_moon_note.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Add a Note</a>
+				</div>
+				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+					<div class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Silence Jamie Parker</div>
+					<div class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Block Jamie Parker</div>
+					<div class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">Report Jamie Parker</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

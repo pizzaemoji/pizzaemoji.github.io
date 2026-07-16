@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+	<link rel="shortcut icon" href="images/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+    <title>Pals</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+	<script src="pals.js"></script>
+	<script>
+		// Message/Moments Tab Switcher
+		function switchTab(tab) {
+			const msgView = document.getElementById('messagesView');
+			const momView = document.getElementById('momentsView');
+			const msgTab = document.getElementById('msgTab');
+			const momTab = document.getElementById('momTab');
+				if (tab === 'messages') {
+				// Visibility
+				msgView.classList.remove('hidden');
+				momView.classList.add('hidden');
+				// Active State: Messages (Red + Underline)
+				msgTab.classList.add('text-red-500', 'border-red-500', 'font-black');
+				msgTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+				// Inactive State: Moments (Neutral/White + No Underline)
+				momTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+				momTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
+			} else {
+			// Visibility
+			msgView.classList.add('hidden');
+			momView.classList.remove('hidden');
+			// Active State: Moments (Red + Underline)
+			momTab.classList.add('text-red-500', 'border-red-500', 'font-black');
+			momTab.classList.remove('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+			// Inactive State: Messages (Neutral/White + No Underline)
+			msgTab.classList.add('text-zinc-900', 'dark:text-zinc-100', 'border-transparent', 'font-bold');
+			msgTab.classList.remove('text-red-500', 'border-red-500', 'font-black');
+			}
+		}
+	</script>
+    <style>
+        .no-scrollbar::-webkit-scrollbar { display: none; }
+        .no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+    </style>
+</head>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
+	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
+		<header class="w-full flex justify-between items-center px-6 pt-3 pb-3 shrink-0 bg-white/90 dark:bg-black/90 backdrop-blur-md z-50 border-b border-zinc-50 dark:border-zinc-900">
+			<div class="w-12">
+			</div>
+			<img src="images/Pals_Logo.png" alt="Pals" class="h-8 w-auto object-contain">
+			<div class="w-12 flex justify-end items-center">
+				<a href="profile.html" class="active:scale-90 transition-transform shrink-0">
+					<img src="images/icon.png" alt="Profile" class="w-10 h-10 rounded-full border-2 border-red-500 object-cover p-[1px] bg-white dark:bg-zinc-900">
+				</a>
+			</div>
+		</header>
+		<nav class="flex border-b border-zinc-50 dark:border-zinc-900 shrink-0 z-40">
+			<button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-4 text-center text-xl font-black border-b-2 border-red-500 text-red-500">
+				Messages
+			</button>
+			<button id="momTab" onclick="switchTab('moments')" class="flex-1 py-4 text-center text-xl font-bold text-zinc-900 dark:text-zinc-100 border-b-2 border-transparent">
+				Moments
+			</button>
+		</nav>
+		<main id="messagesView" class="flex-1 overflow-y-auto no-scrollbar pb-20">
+			<a href="chat_emily_moon.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors no-underline block">
+				<div class="w-2 shrink-0">
+					<div class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.4)]">
+					</div>
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_emily_moon.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-black text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Emily Moon
+					</h2>
+					<p class="text-base text-zinc-700 dark:text-zinc-400 line-clamp-2 leading-snug">
+						See you then 😊
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						2:44 PM
+					</span>
+				</div>
+			</a>
+			<div class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors">
+				<div class="w-2 shrink-0">
+					<div class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.4)]">
+					</div>
+				</div>
+				<div class="ml-4 shrink-0 relative w-14 h-14">
+					<img src="images/icon_jamie_parker.png" class="w-10 h-10 rounded-full border-2 border-white dark:border-black absolute top-0 left-0 z-10">
+					<img src="images/icon_casey_rodriguez.png" class="w-10 h-10 rounded-full border-2 border-white dark:border-black absolute bottom-0 right-0">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-black text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						The Lab Group
+					</h2>
+					<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">
+						Perfect nice job
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						1:27 PM
+					</span>
+				</div>
+			</div>
+			<a href="chat_anna_davis.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors">
+				<div class="w-2 shrink-0">
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_anna_davis.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Anna Davis
+					</h2>
+					<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">
+						lol real
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						11:58 AM
+					</span>
+				</div>
+			</a>
+			<a href="chat_owen_corgan.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors">
+				<div class="w-2 shrink-0">
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_owen_corgan.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Owen Corgan
+					</h2>
+					<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">
+						sorry on call all weekend
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						11:23 AM
+					</span>
+				</div>
+			</a>
+			<a href="chat_jamie_parker.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors">
+				<div class="w-2 shrink-0">
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_jamie_parker.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Jamie Parker
+					</h2>
+					<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">
+						lol ok 💀
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						9:15 AM
+					</span>
+				</div>
+			</a>
+			<a href="chat_brandon_butler.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors no-underline block">
+				<div class="w-2 shrink-0">
+					<div class="w-2.5 h-2.5 bg-red-500 rounded-full shadow-[0_0_10px_rgba(239,68,68,0.4)]">
+					</div>
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_brandon_butler.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-black text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Brandon Butler
+					</h2>
+					<p class="text-base text-zinc-700 dark:text-zinc-400 line-clamp-2 leading-snug">
+						Oh hi, thanks for trying my app!
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						1:49 AM
+					</span>
+				</div>
+			</a>
+			<a href="chat_veronica_santos.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors">
+				<div class="w-2 shrink-0">
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_veronica_santos.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Veronica Santos
+					</h2>
+					<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">
+						thanks yes we will celebrate 💅
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						Yesterday
+					</span>
+				</div>
+			</a>
+			<a href="chat_ben_thompson.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors">
+				<div class="w-2 shrink-0">
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_ben_thompson.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Ben Thompson
+					</h2>
+					<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">
+						Plenty left
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						2 months ago
+					</span>
+				</div>
+			</a>
+			<a href="chat_dylan_brown.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors">
+				<div class="w-2 shrink-0">
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_dylan_brown.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Dylan Brown
+					</h2>
+					<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">
+						Deal
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						6 months
+					</span>
+				</div>
+			</a>
+			<a href="chat_tom_wilson.html" class="flex items-center py-4 px-4 border-b border-zinc-50 dark:border-zinc-900 active:bg-zinc-50 dark:active:bg-zinc-900/50 transition-colors">
+				<div class="w-2 shrink-0">
+				</div>
+				<div class="ml-4 shrink-0">
+					<img src="images/icon_tom_wilson.png" class="w-14 h-14 rounded-full object-cover border border-zinc-100 dark:border-zinc-800">
+				</div>
+				<div class="ml-4 flex-1 min-w-0">
+					<h2 class="font-bold text-zinc-900 dark:text-zinc-100 text-lg tracking-tight">
+						Tom Wilson
+					</h2>
+					<p class="text-base text-zinc-500 dark:text-zinc-400 line-clamp-2 leading-snug">
+						🤷
+					</p>
+				</div>
+				<div class="ml-4 text-right shrink-0">
+					<span class="text-sm font-bold text-zinc-400 dark:text-zinc-600">
+						Over a year ago
+					</span>
+				</div>
+			</a>
+		</main>
+		<main id="momentsView" class="hidden flex-1 overflow-y-auto no-scrollbar pb-20 px-4 pt-6 space-y-10">
+			<div class="space-y-3">
+				<div class="flex items-center justify-between w-full mb-3">
+					<div class="flex items-center gap-3">
+						<img src="images/icon_emily_moon.png" class="w-8 h-8 rounded-full border border-zinc-100 dark:border-zinc-800">
+						<span class="font-bold text-zinc-900 dark:text-zinc-100">
+							Emily Moon
+						</span>
+					</div>
+					<span class="text-xs text-zinc-400 font-medium">
+						28m ago
+					</span>
+				</div>
+				<div class="aspect-square w-full rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-50 dark:border-zinc-800">
+					<img src="images/moments_1.png" class="w-full h-full object-cover">
+				</div>
+				<p class="text-zinc-600 dark:text-zinc-400 px-1 leading-snug">
+					The road I travel
+				</p>
+			</div>
+			<div class="space-y-3">
+				<div class="flex items-center justify-between w-full mb-3">
+					<div class="flex items-center gap-3">
+						<img src="images/icon_jamie_parker.png" class="w-8 h-8 rounded-full border border-zinc-100 dark:border-zinc-800">
+						<span class="font-bold text-zinc-900 dark:text-zinc-100">
+							Jamie Parker
+						</span>
+					</div>
+					<span class="text-xs text-zinc-400 font-medium">
+						2h ago
+					</span>
+				</div>
+				<div class="aspect-square w-full rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-50 dark:border-zinc-800">
+					<img src="images/moments_2.png" class="w-full h-full object-cover">
+				</div>
+				<p class="text-zinc-600 dark:text-zinc-400 px-1 leading-snug">
+					Beautiful vibes
+				</p>
+			</div>
+			<div class="space-y-3">
+				<div class="flex items-center justify-between w-full mb-3">
+					<div class="flex items-center gap-3">
+						<img src="images/icon_owen_corgan.png" class="w-8 h-8 rounded-full border border-zinc-100 dark:border-zinc-800">
+						<span class="font-bold text-zinc-900 dark:text-zinc-100">
+							Owen Corgan
+						</span>
+					</div>
+					<span class="text-xs text-zinc-400 font-medium">
+						6h ago
+					</span>
+				</div>
+				<div class="aspect-square w-full rounded-3xl overflow-hidden bg-zinc-100 dark:bg-zinc-900 border border-zinc-50 dark:border-zinc-800">
+					<img src="images/moments_3.png" class="w-full h-full object-cover">
+				</div>
+				<p class="text-zinc-600 dark:text-zinc-400 px-1 leading-snug">
+					City lights never get old. I love this skyline.
+				</p>
+			</div>
+		</main>
+		<div class="absolute bottom-8 right-12 z-50 flex flex-row gap-3 items-end">
+			<!-- Search Button -->
+			<button class="w-16 h-16 rounded-full flex items-center justify-center bg-zinc-300/50 dark:bg-zinc-700/50 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 active:scale-90 transition-transform">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-10 h-10">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+				</svg>
+			</button>
+			<!-- Camera Button -->
+			<button class="w-16 h-16 rounded-full flex items-center justify-center border border-zinc-200 dark:border-zinc-800 bg-red-500 text-white active:scale-90 transition-transform">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-10 h-10">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M6.827 6.175A2.31 2.31 0 0 1 5.186 7.23c-.38.054-.757.112-1.134.175C2.999 7.58 2.25 8.507 2.25 9.574V18a2.25 2.25 0 0 0 2.25 2.25h15A2.25 2.25 0 0 0 21.75 18V9.574c0-1.067-.75-1.994-1.802-2.169a47.865 47.865 0 0 0-1.134-.175 2.31 2.31 0 0 1-1.64-1.055l-.822-1.316a2.192 2.192 0 0 0-1.736-1.039 48.774 48.774 0 0 0-5.232 0 2.192 2.192 0 0 0-1.736 1.039l-.821 1.316Z" />
+					<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5z" />
+				</svg>
+			</button>
+		</div>
+	</div>
+</body>
+</html>

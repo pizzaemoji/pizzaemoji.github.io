@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>🎉 Confetti!</title>
+	<meta name="author" content="Brandon Butler">
+	<meta name="pronouns" content="he/him">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+	<meta name="description" content="Pizza Emoji - A small pictorial symbol that represents a slice of delicious baked dough with tomato sauce, cheese, and various toppings.">
+	<meta name="theme-color" content="#000000">
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<link rel="canonical" href="https://pizzaemoji.net/">
+	<link rel="shortcut icon" href="/favicon/favicon.ico">
+	<link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" href="/favicon/favicon-96x96.png" sizes="96x96">
+	<link rel="icon" type="image/svg+xml" href="/favicon/favicon.svg">
+	<link rel="manifest" href="/favicon/site.webmanifest">
+	<script>
+	function launchConfetti() {
+		const container = document.getElementById('confetti-container');
+		const colors = ['#FF6685', '#FFB366', '#FFF066', '#66FF84', '#66E0FF', '#A366FF'];
+		const pieces = [];
+
+		// Set number of confetti pieces
+		for (let i = 0; i < 160; i++) {
+			const el = document.createElement('div');
+			el.style.cssText = `
+				position: absolute;
+				width: ${Math.random() * 4 + 2}px;
+				height: ${Math.random() * 12 + 6}px;
+				background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+				border-radius: 1px;
+				left: 50%;
+				top: 80%;
+			`;
+			container.appendChild(el);
+
+			// Set physics of confetti burst
+			const speed = Math.random() * 16 + 4;
+			const spread = Math.PI / 6; // 10=tight, 1=wide
+			const angle = (Math.PI / 2) + (Math.random() * spread * 2) - spread;
+
+			pieces.push({
+				el,
+				x: 0,
+				y: 0,
+				vx: Math.cos(angle) * speed,
+				vy: -Math.sin(angle) * speed,
+				gravity: Math.random() * 0.2 + 0.15,
+				rotation: Math.random() * 360,
+				rotationSpeed: (Math.random() - 0.5) * 10
+			});
+		}
+
+	    // Local animation loop for THIS specific burst
+		function animate() {
+			let alive = false;
+			pieces.forEach(p => {
+				if (p.y < window.innerHeight) {
+					p.vy += p.gravity;
+					p.x += p.vx;
+					p.y += p.vy;
+					p.rotation += p.rotationSpeed;
+					p.el.style.transform = `translate(${p.x}px, ${p.y}px) rotate(${p.rotation}deg)`;
+					alive = true;
+				} else if (p.el.parentNode) {
+					p.el.remove();
+				}
+			});
+			if (alive) requestAnimationFrame(animate);
+		}
+		requestAnimationFrame(animate);
+	}
+	</script>
+	<style>
+		body {
+			background-color: black;
+			overflow: hidden;
+			height: 100dvh;
+			margin: 0;
+		}
+
+		#confetti-container {
+			position: absolute;
+			inset: 0;
+			pointer-events: none;
+			overflow: hidden;
+		}
+
+		#button-container {
+			position: absolute;
+			inset: 0;
+			display: flex;
+			justify-content: center;
+			align-items: flex-end;
+			padding-bottom: 10dvh;
+		}
+
+		#confetti-button {
+			display: flex;
+			align-items: center;
+			gap: 12px;
+			padding: 16px 40px;
+			border-radius: 16px;
+			border: 2px solid white;
+			background-color: black;
+			cursor: pointer;
+			font-size: 1.875rem;
+			touch-action: manipulation;
+			user-select: none;
+			-webkit-user-select: none;
+		}
+
+		#confetti-button:active {
+			scale: 0.95;
+		}
+		
+		@keyframes rainbow-slide {
+			0%   { background-position: 0% center; }
+			100% { background-position: 200% center; }
+		}
+
+		.animate-rainbow {
+			background-image: linear-gradient(
+				90deg, #FF6685, #FFB366, #FFF066, #66FF84, #66E0FF, #A366FF, #FF6685
+			);
+			background-size: 200% auto;
+			-webkit-background-clip: text;
+			background-clip: text;
+			color: transparent;
+			letter-spacing: -0.03em;
+			font-weight: 900;
+			display: inline-block;
+			animation: rainbow-slide 3s linear infinite;
+			filter:
+				drop-shadow(0 0 2px rgba(255,255,255,0.4))
+				drop-shadow(0 0 8px rgba(255,255,255,0.2));
+		}
+	</style>
+</head>
+<body>
+	<div id="confetti-container"></div>
+	<div id="button-container">
+		<button id="confetti-button" onclick="launchConfetti()">
+			<span>🎉 </span>
+			<span class="animate-rainbow">Confetti!</span>
+		</button>
+	</div>
+</body>
+</html>

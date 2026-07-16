@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<title>Pals | Settings</title>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="color-scheme" content="light dark">
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="pals.js"></script>
+	<style>
+		.no-scrollbar::-webkit-scrollbar { display: none; }
+		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+	</style>
+</head>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
+	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
+		<header class="w-full flex justify-between items-center px-4 pt-4 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
+			<a href="profile.html" class="w-10 text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+				</svg>
+			</a>
+			<img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+			<div class="w-10 flex justify-end items-center">
+			</div>
+		</header>
+		<main class="flex-1 overflow-y-auto no-scrollbar px-8 py-8 text-zinc-900 dark:text-zinc-100">
+			<h1 class="text-3xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight mb-6">
+				Settings
+			</h1>
+			<section class="space-y-8 mb-20">
+				<div class="space-y-2">
+					<p class="text-zinc-900 dark:text-zinc-100 text-xl font-bold">
+						General Settings
+					</p>
+				</div>
+				<div class="space-y-4">
+					<div class="flex items-center justify-between">
+						<span class="text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+							Join Special Events
+						</span>
+						<label class="relative inline-flex items-center cursor-pointer">
+							<input type="checkbox" class="sr-only peer">
+							<div class="w-11 h-6 bg-gray-300 dark:bg-zinc-700 rounded-full transition-colors peer-checked:bg-red-500"></div>
+							<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm peer-checked:translate-x-5"></div>
+						</label>
+					</div>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">Special Events are opportunities to receive unique digital rewards. Some Special Events may include sponsored content. No personal information is shared with Special Event Hosts. You may opt-in and opt-out of Special Events at any time.
+					</p>
+				</div>
+				<div class="space-y-4">
+					<div class="flex items-center justify-between">
+						<span class="text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+							Read Receipts
+						</span>
+						<label class="relative inline-flex items-center cursor-pointer">
+							<input type="checkbox" class="sr-only peer">
+							<div class="w-11 h-6 bg-gray-300 dark:bg-zinc-700 rounded-full transition-colors peer-checked:bg-red-500"></div>
+							<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm peer-checked:translate-x-5"></div>
+						</label>
+					</div>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">If you turn off read receipts, your Pals can't see when you've read their messages, but you also won't be able to see when they've read yours.
+					</p>
+				</div>
+			</section>
+			<section class="space-y-8 mb-20">
+				<div class="space-y-2">
+					<p class="text-zinc-900 dark:text-zinc-100 text-xl font-bold">
+						App Appearance
+					</p>
+				</div>
+				<div class="space-y-4">
+					<div class="flex items-center justify-between">
+						<span class="text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+							Always Match System Appearance
+						</span>
+						<label class="relative inline-flex items-center cursor-pointer">
+							<input type="checkbox" id="systemToggle" class="sr-only peer" onchange="handleSystemToggle(this)">
+							<div class="w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors peer-checked:bg-red-500"></div>
+							<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm peer-checked:translate-x-5"></div>
+						</label>
+					</div>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+					</p>
+				</div>
+				<div class="space-y-4">
+					<div class="flex items-center justify-between">
+						<span class="text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+							Always Use Dark Mode
+						</span>
+						<label class="relative inline-flex items-center cursor-pointer">
+							<input type="checkbox" id="darkToggle" class="sr-only peer" onchange="handleThemeToggle(this)">
+							<div class="w-11 h-6 bg-gray-200 dark:bg-zinc-700 rounded-full transition-colors peer-checked:bg-red-500 peer-disabled:opacity-50"></div>
+							<div class="absolute left-0.5 top-0.5 bg-white w-5 h-5 rounded-full transition-transform shadow-sm peer-checked:translate-x-5 peer-disabled:cursor-not-allowed"></div>
+						</label>
+					</div>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+					</p>
+				</div>
+				<div class="space-y-4">
+					<button onclick="window.location.href='settingsCamera.html'" class="w-full flex items-center justify-between h-6 text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+						<span>Camera Settings</span>
+						<span class="text-zinc-400">›</span>
+					</button>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+					</p>
+				</div>
+				<div class="space-y-4">
+					<button onclick="window.location.href='settingsQuickButtons.html'" class="w-full flex items-center justify-between h-6 text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+						<span>Quick Button Settings</span>
+						<span class="text-zinc-400">›</span>
+					</button>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+					</p>
+				</div>
+			</section>
+			
+			
+			<section class="space-y-8 mb-20">
+				<div class="space-y-2">
+					<p class="text-zinc-900 dark:text-zinc-100 text-xl font-bold">
+						My Pals Account
+					</p>
+				</div>
+				<div class="space-y-4">
+					<button class="w-full flex items-center justify-between h-6 text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+						<span>Change Phone Number (Disabled)</span>
+						<span class="text-zinc-400">›</span>
+					</button>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+					</p>
+				</div>
+				<div class="space-y-4">
+					<button class="w-full flex items-center justify-between h-6 text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+						<span>View Hidden Users (Disabled)</span>
+						<span class="text-zinc-400">›</span>
+					</button>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+					</p>
+				</div>
+				<div class="space-y-4">
+					<button class="w-full flex items-center justify-between h-6 text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+						<span>View Blocked Users (Disabled)</span>
+						<span class="text-zinc-400">›</span>
+					</button>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+					</p>
+				</div>
+				<div class="space-y-4">
+					<button onclick="window.location.href='analytics.html'" class="w-full flex items-center justify-between h-6 text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+						<span>Data Analytics</span>
+						<span class="text-zinc-400">›</span>
+					</button>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+						Opt-in here to help make Pals better for everyone.
+					</p>
+				</div>
+				<div class="space-y-4">
+					<button onclick="window.location.href='delete.html'" class="w-full flex items-center justify-between h-6 text-zinc-800 dark:text-zinc-200 text-lg font-normal">
+						<span>Delete Pals Account</span>
+						<span class="text-zinc-400">›</span>
+					</button>
+					<p class="text-zinc-600 dark:text-zinc-400 text-base font-normal">
+						Danger zone!
+					</p>
+				</div>
+			</section>
+		</main>
+	</div>
+</body>
+</html>

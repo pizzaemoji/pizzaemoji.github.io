@@ -1,0 +1,147 @@
+/* Pizza Emoji Blog Cascading Style Sheet - /blog/blog.css */
+* {
+	box-sizing: border-box;
+}
+html {
+	font-size: 16px;
+	scroll-padding-top: 100px;
+}
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	background-color: rgb(38, 40, 45); /* Remember to update theme-color on index! */
+	color: #F0F0F0;
+	font-size: 14px;
+	line-height: 1.5;
+	margin: 0;
+}
+/* Header content */
+main {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0px 10px;
+}
+header {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	text-align: center;
+	margin: 0 auto;
+	padding-top: 200px; /* Safari rendering bug, don't use margin here! */
+	padding-bottom: 50px;
+}
+h1 {
+	color: #EEEEEE;
+	font-size: 3rem;
+	line-height: 1;
+	font-weight: 700;
+	letter-spacing: 0.05rem;
+	border-bottom: 3px solid #FE6000; /* swapped from byline top */
+	padding-bottom: 2px;
+	margin: 0;
+}
+h2 {
+	color: #EEEEEE;
+	font-size: 2rem;
+	line-height: 1;
+	font-weight: 500;
+	margin: 0;
+}
+.anchor {
+	color: rgb(38, 40, 45);
+	font-size: 1rem;
+	font-weight: 100;
+	margin: 0;
+}
+.byline {
+	display: inline-block;
+	font-size: 1rem;
+	font-weight: 300;
+	margin-top: 1px;
+}
+/* Article and sections formatting */
+article {
+	max-width: 724px;
+	width: 90%;
+	font-size: 1.8em;
+	font-weight: 200;
+	letter-spacing: 0.01em;
+	margin: 0 auto;
+	padding-bottom: 20px;
+	hyphens: auto;
+	text-wrap: pretty;
+}
+section {
+	padding: 3rem 0 0 0;
+}
+time {
+	font-size: .75em;
+	font-weight: 100;
+	line-height: 1;
+}
+h3 {
+ 	font-size: 1.5rem;
+	font-weight: 600;
+	padding: 0;
+	margin: 0;
+}
+p {
+	opacity: 0.9;
+}
+.shortDescription {
+	font-style: italic;
+}
+blockquote {
+	margin: 2rem 2rem 2rem 0rem;
+	padding: 0 0 0 1.5rem;
+	border-left: #FE6000 3px solid;
+}
+/* Link Styling */
+article a, footer a {
+	text-decoration: none;
+}
+article a:link, article a:visited, footer a:link, footer a:visited {
+	text-decoration: none;
+	color: #F0F0F0;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 1px 0;
+}
+article a:hover, article a:active, footer a:hover, footer a:active {
+	text-decoration: none;
+	color: #F0F0F0;
+	border-color: #FE6000;
+}
+/* Image and Captioning */
+.image-container {
+	text-align: center;
+	max-width: 90%;
+	margin: 40px auto 0 auto;
+}
+.image-large {
+	display: block;
+	width: 100%;
+	height: auto;
+	margin: 0 auto;
+}
+.caption {
+	color: #F0F0F0;
+	display: block;
+	font-size: 1rem;
+	line-height: 1.4rem;
+	font-style: italic;
+	margin: 1rem auto 0 auto;
+	padding: 0;
+	width: 78%;
+	max-width: fit-content;
+}
+footer {
+	color: #EEEEEE;
+	font-size: 1rem;
+	text-align: center;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+/* Desktop override */
+@media (min-width: 800px) {
+
+}

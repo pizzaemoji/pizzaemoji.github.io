@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="flippin.css">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<link rel="icon" type="image/svg+xml" href="favicon.svg">
+<link rel="apple-touch-icon" href="https://pizzaemoji.net/games/flippin/flippin-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="apple-mobile-web-app-title" content="Flippin'">
+<meta name="theme-color" content="#922020">
+<title>Flippin'</title>
+</head>
+<body>
+
+<div id="confetti-container"></div>
+<div id="mismatch-overlay"></div>
+
+<div class="game-wrap">
+  <div class="header">
+    <div style="min-width:60px"></div>
+    <div class="header-center">
+      <h1>Flippin'</h1>
+      <div class="subtitle">US State Birds</div>
+      <div class="score" id="score">0 flips &nbsp;·&nbsp; 0 matches</div>
+    </div>
+    <div class="best" id="bestDisplay"></div>
+  </div>
+  <div class="grid" id="grid"></div>
+  <div class="name-display">
+    <div class="name-label" id="nameA"></div>
+    <div class="name-label" id="nameB"></div>
+  </div>
+</div>
+
+<div class="win-overlay" id="winOverlay">
+  <div class="win-game-title">Flippin'</div>
+  <div class="win-subtitle" id="winSubtitle"></div>
+  <div class="win-divider"></div>
+  <div class="win-title">All matched!</div>
+  <div class="win-score" id="winScore"></div>
+  <div class="win-best" id="winBest"></div>
+  <button class="action-btn" id="playAgainBtn">Play Again</button>
+  <a class="action-btn-secondary" href="index.html">All Games</a>
+</div>
+
+<script>
+const ALL_PAIRS = [
+  { state: 'Alabama',        bird: 'Yellowhammer'              },
+  { state: 'Alaska',         bird: 'Willow Ptarmigan'          },
+  { state: 'Arizona',        bird: 'Cactus Wren'               },
+  { state: 'Arkansas',       bird: 'Northern Mockingbird'      },
+  { state: 'California',     bird: 'California Quail'          },
+  { state: 'Colorado',       bird: 'Lark Bunting'              },
+  { state: 'Connecticut',    bird: 'American Robin'            },
+  { state: 'Delaware',       bird: 'Blue Hen Chicken'          },
+  { state: 'Florida',        bird: 'Northern Mockingbird'      },
+  { state: 'Georgia',        bird: 'Brown Thrasher'            },
+  { state: 'Hawaii',         bird: 'Nene'                      },
+  { state: 'Idaho',          bird: 'Mountain Bluebird'         },
+  { state: 'Illinois',       bird: 'Northern Cardinal'         },
+  { state: 'Indiana',        bird: 'Northern Cardinal'         },
+  { state: 'Iowa',           bird: 'American Goldfinch'        },
+  { state: 'Kansas',         bird: 'Western Meadowlark'        },
+  { state: 'Kentucky',       bird: 'Northern Cardinal'         },
+  { state: 'Louisiana',      bird: 'Brown Pelican'             },
+  { state: 'Maine',          bird: 'Black-capped Chickadee'    },
+  { state: 'Maryland',       bird: 'Baltimore Oriole'          },
+  { state: 'Massachusetts',  bird: 'Black-capped Chickadee'    },
+  { state: 'Michigan',       bird: 'American Robin'            },
+  { state: 'Minnesota',      bird: 'Common Loon'               },
+  { state: 'Mississippi',    bird: 'Northern Mockingbird'      },
+  { state: 'Missouri',       bird: 'Eastern Bluebird'          },
+  { state: 'Montana',        bird: 'Western Meadowlark'        },
+  { state: 'Nebraska',       bird: 'Western Meadowlark'        },
+  { state: 'Nevada',         bird: 'Mountain Bluebird'         },
+  { state: 'New Hampshire',  bird: 'Purple Finch'              },
+  { state: 'New Jersey',     bird: 'American Goldfinch'        },
+  { state: 'New Mexico',     bird: 'Greater Roadrunner'        },
+  { state: 'New York',       bird: 'Eastern Bluebird'          },
+  { state: 'North Carolina', bird: 'Northern Cardinal'         },
+  { state: 'North Dakota',   bird: 'Western Meadowlark'        },
+  { state: 'Ohio',           bird: 'Northern Cardinal'         },
+  { state: 'Oklahoma',       bird: 'Scissor-tailed Flycatcher' },
+  { state: 'Oregon',         bird: 'Western Meadowlark'        },
+  { state: 'Pennsylvania',   bird: 'Ruffed Grouse'             },
+  { state: 'Rhode Island',   bird: 'Rhode Island Red'          },
+  { state: 'South Carolina', bird: 'Carolina Wren'             },
+  { state: 'South Dakota',   bird: 'Ring-necked Pheasant'      },
+  { state: 'Tennessee',      bird: 'Northern Mockingbird'      },
+  { state: 'Texas',          bird: 'Northern Mockingbird'      },
+  { state: 'Utah',           bird: 'California Gull'           },
+  { state: 'Vermont',        bird: 'Hermit Thrush'             },
+  { state: 'Virginia',       bird: 'Northern Cardinal'         },
+  { state: 'Washington',     bird: 'American Goldfinch'        },
+  { state: 'West Virginia',  bird: 'Northern Cardinal'         },
+  { state: 'Wisconsin',      bird: 'American Robin'            },
+  { state: 'Wyoming',        bird: 'Western Meadowlark'        },
+];
+
+const blankSVG = `<svg viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg">
+  <rect x="8" y="8" width="44" height="44" rx="4" fill="none" stroke="#B5D4F4" stroke-width="1.5" stroke-dasharray="4 3"/>
+</svg>`;
+
+const confettiColors = ['#FF6685','#FFB366','#FFF066','#66FF84','#66E0FF','#A366FF'];
+const confettiContainer = document.getElementById('confetti-container');
+
+function launchConfetti(tile) {
+  const rect = tile.getBoundingClientRect();
+  const originX = rect.left + rect.width / 2;
+  const originY = rect.top + rect.height / 2;
+  const pieces = [];
+  for (let i = 0; i < 40; i++) {
+    const el = document.createElement('div');
+    el.style.cssText = `position:absolute;width:${Math.random()*4+2}px;height:${Math.random()*10+5}px;background-color:${confettiColors[Math.floor(Math.random()*confettiColors.length)]};border-radius:1px;left:${originX}px;top:${originY}px;`;
+    confettiContainer.appendChild(el);
+    const speed = Math.random() * 5 + 2;
+    const angle = Math.PI + (Math.random() * Math.PI);
+    pieces.push({ el, x:0, y:0, vx:Math.cos(angle)*speed, vy:Math.sin(angle)*speed, gravity:Math.random()*0.1+0.07, rotation:Math.random()*360, rotationSpeed:(Math.random()-0.5)*10 });
+  }
+  function animate() {
+    let alive = false;
+    pieces.forEach(p => {
+      if (p.y < window.innerHeight) {
+        p.vy += p.gravity; p.x += p.vx; p.y += p.vy; p.rotation += p.rotationSpeed;
+        p.el.style.transform = `translate(${p.x}px,${p.y}px) rotate(${p.rotation}deg)`;
+        alive = true;
+      } else if (p.el.parentNode) { p.el.remove(); }
+    });
+    if (alive) requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+}
+
+
+// Best score
+function getBest() { return parseInt(localStorage.getItem('flippin-best-usbirds') || '0'); }
+function setBest(flips) {
+  const current = getBest();
+  if (!current || flips < current) { localStorage.setItem('flippin-best-usbirds', flips); return true; }
+  return false;
+}
+function updateBestDisplay() {
+  const best = getBest();
+  const el = document.getElementById('bestDisplay');
+  el.textContent = best ? `best\n${best} flips` : '';
+  el.style.whiteSpace = 'pre';
+}
+
+// Name display
+const nameA = document.getElementById('nameA');
+const nameB = document.getElementById('nameB');
+
+function showName(slot, text) {
+  const el = slot === 0 ? nameA : nameB;
+  el.textContent = text;
+  requestAnimationFrame(() => el.classList.add('visible'));
+}
+
+function clearNames() {
+  nameA.classList.remove('visible');
+  nameB.classList.remove('visible');
+  setTimeout(() => { nameA.textContent = ''; nameB.textContent = ''; }, 400);
+}
+
+// Mismatch overlay
+const mismatchOverlay = document.getElementById('mismatch-overlay');
+
+function showMismatchOverlay() { mismatchOverlay.classList.add('active'); }
+function hideMismatchOverlay() { mismatchOverlay.classList.remove('active'); }
+
+mismatchOverlay.addEventListener('click', () => {
+  flippedTiles.forEach(t => t.classList.remove('flipped'));
+  flippedTiles = [];
+  locked = false;
+  hideMismatchOverlay();
+  clearNames();
+});
+
+// Pick 10 pairs with unique birds
+function pickUniquePairs() {
+  const shuffled = [...ALL_PAIRS].sort(() => Math.random() - 0.5);
+  const selected = [];
+  const usedBirds = new Set();
+  for (const pair of shuffled) {
+    if (!usedBirds.has(pair.bird)) {
+      selected.push(pair);
+      usedBirds.add(pair.bird);
+    }
+    if (selected.length === 10) break;
+  }
+  return selected;
+}
+
+// Game state
+let flippedTiles = [];
+let locked = false;
+let matches = 0;
+let flips = 0;
+let activePairs = [];
+
+const grid         = document.getElementById('grid');
+const scoreEl      = document.getElementById('score');
+const winOverlay   = document.getElementById('winOverlay');
+const winScore     = document.getElementById('winScore');
+const winBest      = document.getElementById('winBest');
+const playAgainBtn = document.getElementById('playAgainBtn');
+
+function updateScore() {
+  const flipLabel  = flips === 1   ? '1 flip'  : `${flips} flips`;
+  const matchLabel = matches === 1 ? '1 match' : `${matches} matches`;
+  scoreEl.textContent = `${flipLabel} · ${matchLabel}`;
+}
+
+function buildBoard() {
+  grid.innerHTML = '';
+  flippedTiles = [];
+  locked = false;
+  matches = 0;
+  flips = 0;
+  hideMismatchOverlay();
+  clearNames();
+  winOverlay.classList.remove('visible');
+  updateScore();
+  updateBestDisplay();
+
+  activePairs = pickUniquePairs();
+
+  const tileData = [];
+  activePairs.forEach((pair, i) => {
+    tileData.push({ type: 'state',   name: pair.state, pairId: i });
+    tileData.push({ type: 'capital', name: pair.bird,  pairId: i });
+  });
+  tileData.sort(() => Math.random() - 0.5);
+
+  tileData.forEach((data) => {
+    const tile = document.createElement('div');
+    tile.className = `tile ${data.type === 'state' ? 'primary' : 'secondary'}`;
+    tile.dataset.pairId = data.pairId;
+    tile.dataset.name   = data.name;
+
+    const inner = document.createElement('div');
+    inner.className = 'tile-inner';
+
+    const back = document.createElement('div');
+    back.className = 'tile-back';
+
+    const front = document.createElement('div');
+    front.className = 'tile-front';
+    front.innerHTML = data.type === 'state'
+      ? blankSVG + `<div class="tile-name">${data.name}</div>`
+      : `<div class="tile-name">${data.name}</div>`;
+
+    inner.appendChild(back);
+    inner.appendChild(front);
+    tile.appendChild(inner);
+    tile.addEventListener('click', () => handleTileTap(tile));
+    grid.appendChild(tile);
+  });
+}
+
+function handleTileTap(tile) {
+  if (locked) return;
+  if (tile.classList.contains('cleared')) return;
+  if (tile.classList.contains('flipped')) return;
+
+  tile.classList.add('flipped');
+  flips++;
+  updateScore();
+  flippedTiles.push(tile);
+  showName(flippedTiles.length - 1, tile.dataset.name);
+
+  if (flippedTiles.length === 2) {
+    locked = true;
+    checkMatch();
+  }
+}
+
+function checkMatch() {
+  const [a, b] = flippedTiles;
+  const isMatch = a.dataset.pairId === b.dataset.pairId;
+
+  if (isMatch) {
+    setTimeout(() => {
+      launchConfetti(b);
+      a.classList.add('matched');
+      b.classList.add('matched');
+      clearNames();
+      setTimeout(() => {
+        a.classList.add('cleared');
+        b.classList.add('cleared');
+        a.classList.remove('matched');
+        b.classList.remove('matched');
+        matches++;
+        updateScore();
+        flippedTiles = [];
+        locked = false;
+
+        if (matches === activePairs.length) {
+          setTimeout(() => {
+            const isNewBest = setBest(flips);
+            document.getElementById('winSubtitle').textContent = document.querySelector('.subtitle').textContent;
+            winScore.textContent = `${flips} flips · ${matches} matches`;
+            winBest.textContent  = isNewBest ? '🎉 New best!' : `Best: ${getBest()} flips`;
+            winOverlay.classList.add('visible');
+          }, 300);
+        }
+      }, 350);
+    }, 900);
+  } else {
+    locked = false;
+    showMismatchOverlay();
+  }
+}
+
+playAgainBtn.addEventListener('click', buildBoard);
+buildBoard();
+</script>
+</body>
+</html>

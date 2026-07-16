@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta name="color-scheme" content="light dark">
+	<title>Pals | Invite or Add a Pal</title>
+	<script src="https://cdn.tailwindcss.com"></script>
+	<script src="pals.js"></script>
+	<script>
+		function showSuccess() {
+			document.getElementById('screen-main').classList.add('hidden');
+			document.getElementById('screen-success').classList.remove('hidden');
+			launchConfetti();
+		}
+
+		function showMain() {
+			document.getElementById('screen-success').classList.add('hidden');
+			document.getElementById('screen-main').classList.remove('hidden');
+			document.getElementById('confetti-container').innerHTML = '';
+		}
+
+		function launchConfetti() {
+			const container = document.getElementById('confetti-container');
+			container.innerHTML = '';
+			const isDark = document.documentElement.classList.contains('dark');
+			const colors = isDark
+				? ['#FFADAD', '#FFD6A5', '#FDFFB6', '#CAFFBF', '#9BF6FF', '#BDB2FF']
+				: ['#F28B82', '#F7AD8F', '#FCE58E', '#81C995', '#8AB4F8', '#C58AF9'];
+			const pieces = [];
+
+			for (let i = 0; i < 120; i++) {
+				const el = document.createElement('div');
+				el.style.cssText = `
+					position: absolute;
+					width: ${Math.random() * 4 + 2}px;
+					height: ${Math.random() * 12 + 6}px;
+					background-color: ${colors[Math.floor(Math.random() * colors.length)]};
+					border-radius: 1px;
+					left: 50%;
+					top: 50%;
+				`;
+				container.appendChild(el);
+
+				const speed = Math.random() * 10 + 4;
+				const spread = Math.PI / 9;
+				const angle = (Math.PI / 2) + (Math.random() * spread * 2) - spread;
+				pieces.push({
+					el,
+					x: 0,
+					y: 0,
+					vx: Math.cos(angle) * speed,
+					vy: -Math.sin(angle) * speed,
+					gravity: Math.random() * 0.3 + 0.1,
+					rotation: Math.random() * 360,
+					rotationSpeed: (Math.random() - 0.5) * 10
+				});
+			}
+
+			function animate() {
+				let alive = false;
+				pieces.forEach(p => {
+					p.vy += p.gravity;
+					p.x += p.vx;
+					p.y += p.vy;
+					p.rotation += p.rotationSpeed;
+					p.el.style.transform = `translate(${p.x}px, ${p.y}px) rotate(${p.rotation}deg)`;
+					if (p.y < window.innerHeight) alive = true;
+				});
+				if (alive) requestAnimationFrame(animate);
+			}
+
+			requestAnimationFrame(animate);
+		}
+	</script>
+	<style>
+		.no-scrollbar::-webkit-scrollbar { display: none; }
+		.no-scrollbar { -ms-overflow-style: none; scrollbar-width: none; }
+
+		@keyframes pulse-slow {
+			0%, 100% { opacity: 0.3; transform: scale(1); }
+			50% { opacity: 0.6; transform: scale(1.05); }
+		}
+		.animate-pulse-slow { animation: pulse-slow 3s infinite ease-in-out; }
+	</style>
+</head>
+<body class="bg-white dark:bg-black antialiased transition-colors duration-200">
+	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
+		<header class="w-full flex justify-between items-center px-4 pt-4 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
+			<a href="profile.html" class="w-10 text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
+				</svg>
+			</a>
+			<img src="images/Pals_Logo.png" alt="Pals" class="h-7">
+			<div class="w-10 flex justify-end items-center">
+			</div>
+		</header>
+
+		<!-- Main NFC screen -->
+		<main id="screen-main" class="flex-1 overflow-y-auto no-scrollbar flex flex-col items-center text-center px-8 py-8">
+			<h2 class="text-2xl font-black text-zinc-900 dark:text-zinc-100">
+				Tap Phones
+			</h2>
+			<p class="text-lg font-medium text-zinc-900 dark:text-zinc-100 mb-12">
+				to Invite or Add Someone to Pals
+			</p>
+			<div class="relative w-64 h-64 flex items-center justify-center mb-12">
+				<div class="absolute inset-0 border-2 border-red-500/20 rounded-full animate-pulse-slow"></div>
+				<div class="absolute inset-4 border-2 border-red-500/10 rounded-full animate-pulse-slow" style="animation-delay: 1s"></div>
+				<button onclick="showSuccess()" class="z-10 bg-red-500 text-white w-32 h-32 rounded-3xl shadow-2xl flex flex-col items-center justify-center active:scale-95 transition-transform">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-12 h-12 mb-2">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M9.348 14.651a3.75 3.75 0 0 1 0-5.303m5.304 0a3.75 3.75 0 0 1 0 5.303m-7.425 2.122a6.75 6.75 0 0 1 0-9.546m9.547 0a6.75 6.75 0 0 1 0 9.546M5.106 18.894c-3.808-3.808-3.808-9.982 0-13.79m13.788 0c3.808 3.808 3.808 9.982 0 13.79" />
+					</svg>
+					<span class="text-sm font-black uppercase tracking-[0.2em] text-center leading-tight">
+						Simulate<br>NFC Tap
+					</span>
+				</button>
+			</div>
+			<div class="w-full space-y-4">
+				<button class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Show a QR Code
+				</button>
+				<button class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Copy a Code
+				</button>
+				<button onclick="toggleAbout()" class="w-full py-4 text-zinc-500 dark:text-zinc-500 font-medium text-base">
+					How does this work?
+				</button>
+			</div>
+		</main>
+
+		<!-- Success screen -->
+		<main id="screen-success" class="hidden flex-1 w-full flex flex-col items-center justify-center px-8 text-center relative overflow-hidden">
+			<div id="confetti-container" class="absolute inset-0 pointer-events-none"></div>
+			<span class="text-red-500 font-serif italic text-6xl mb-2 -rotate-3 block">
+				You've got a<br>new Pal!
+			</span>
+			<div class="flex items-center gap-2 mt-6 mb-16">
+				<div class="w-2 h-2 bg-red-500 rounded-full animate-bounce"></div>
+				<div class="w-2 h-2 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.2s"></div>
+				<div class="w-2 h-2 bg-red-500 rounded-full animate-bounce" style="animation-delay: 0.4s"></div>
+			</div>
+			<div class="w-full space-y-4">
+				<button onclick="showMain()" class="w-full py-4 bg-red-500 text-white font-black text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Add Another Pal
+				</button>
+				<button onclick="window.location.href='index.html'" class="w-full py-4 bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-white font-bold text-lg rounded-2xl active:scale-[0.98] transition-transform">
+					Return to Messages
+				</button>
+			</div>
+		</main>
+
+		<div id="overlay" onclick="toggleAbout()" class="absolute inset-0 bg-black/40 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300 z-40"></div>
+		<div id="aboutPanel" class="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 rounded-t-[3rem] p-10 transform translate-y-full transition-transform duration-500 ease-out z-50 shadow-[0_-20px_50px_rgba(0,0,0,0)]">
+			<div class="mx-auto mb-10">
+			</div>
+			<h2 class="text-2xl font-black text-zinc-900 dark:text-white mb-4">How to add or invite a Pal</h2>
+			<div class="space-y-4 text-zinc-600 dark:text-zinc-400 leading-relaxed text-lg">
+				<p>If you're inviting a person to join Pals, ask them to tap <strong>Accept an Invite</strong> from the welcome screen. Then tap your phones lightly together.</p>
+				<p>If they're already on Pals, ask them to open the <strong>Add or Invite</strong> page from the Profile Menu. Then tap your phones lightly together.</p>
+				<p>Or, they can snap a picture of your QR code, or you can send them a link. (But we think tapping is more fun.)</p>
+			</div>
+			<button onclick="toggleAbout()" class="mt-10 w-full py-4 border-2 border-zinc-100 dark:border-zinc-800 text-zinc-900 dark:text-white font-bold rounded-2xl">
+				Okay
+			</button>
+		</div>
+	</div>
+</body>
+</html>

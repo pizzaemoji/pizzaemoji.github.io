@@ -1,0 +1,292 @@
+/* Pizza Emoji Blog Cascading Style Sheet - /blog/features.css */
+* {
+	box-sizing: border-box;
+}
+html {
+	font-size: 16px;
+}
+body {
+	font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+	background-color: rgb(38, 40, 45); /* Remember to update theme-color on index! */
+	color: #F0F0F0;
+	font-size: 14px;
+	line-height: 1.5;
+	margin: 0;
+	counter-reset: fn_counter; /* Creates footnote <sup> counter */
+}
+/* Header content */
+main {
+	max-width: 1000px;
+	margin: 0 auto;
+	padding: 0px 10px;
+}
+header {
+	width: 100%;
+	margin: 0 auto;
+	padding-top: 120px;
+	padding-bottom: 20px;
+}
+h1 {
+	color: #EEEEEE;
+	font-size: 3.3rem;
+	line-height: 1;
+	font-weight: 900;
+	word-spacing: .05rem;
+	margin: 0;
+}
+h2 {
+	color: #EEEEEE;
+	font-size: 2.5rem;
+	line-height: 1;
+	font-weight: 100;
+	font-style: italic;
+	margin: 0;
+}
+#hero {
+	display: block;
+	background-color: inherit;
+	padding-top: .5rem;
+	padding-bottom: 2rem;
+	margin: auto;
+	border: 0;
+	width: 100%;
+}
+.byline {
+	display: inline-block;
+	font-size: 1.3em;
+	line-height: 1;
+	font-weight: 600;
+	padding-top: 2px; /* Puts a little space above border */
+	border-top: 3px solid #FE6000;
+}
+time {
+	font-size: 1.2em;
+	line-height: 1;
+	font-weight: 100;
+}
+#endslice {
+	height: 1rem;
+}
+/* Article and sections formatting */
+article {
+	max-width: 724px;
+	width: 90%;
+	font-size: 1.715em;
+	font-weight: 200;
+	margin: 0 auto;
+	padding: 0;
+	hyphens: auto;
+	text-wrap: pretty;
+}
+section {
+	padding: 0;
+}
+p {
+	opacity: 0.9;
+}
+p.dropcap::first-letter {
+	float: left;
+	font-size: 8rem;
+	font-weight: 900;
+	line-height: 1;
+	padding: 0 0.02em 0 0;
+	margin: -12px 0 0 0;
+}
+h3 {
+ 	font-size: 1.5rem;
+	font-weight: 600;
+	padding: 0;
+	margin: 0;
+}
+blockquote {
+	margin: 2rem 2rem 2rem 0rem;
+	padding: 0 0 0 1.5rem;
+	border-left: #FE6000 3px solid;
+}
+/* Link Styling */
+article a, footer a {
+	text-decoration: none;
+}
+article a:link, article a:visited, footer a:link, footer a:visited {
+	text-decoration: none;
+	color: #F0F0F0;
+	border-width: 0 0 1px 0;
+	border-style: none none solid none;
+	padding: 0 0 1px 0;
+}
+article a:hover, article a:active, footer a:hover, footer a:active {
+	text-decoration: none;
+	color: #F0F0F0;
+	border-color: #FE6000;
+}
+
+/* Image and Captioning */
+.image-container {
+	text-align: center;
+	max-width: 100%;
+	margin: 40px auto 0 auto;
+}
+.image-large {
+	display: block;
+	width: 90%;
+	height: auto;
+	margin: 0 auto;
+}
+.caption {
+	color: #F0F0F0;
+	display: block;
+	font-size: 1rem;
+	line-height: 1.4rem;
+	font-style: italic;
+	margin: 1rem auto 0 auto;
+	padding: 0;
+	width: 90%;
+	max-width: fit-content;
+}
+footer {
+	color: #EEEEEE;
+	font-size: 1rem;
+	text-align: center;
+	padding-top: 1rem;
+	padding-bottom: 1rem;
+}
+/* Special formatting */
+/* 2024-10-28-ios-the-apple-intelligence-update */
+#apple-intelligence-gradient {
+	background: -webkit-linear-gradient(0deg, #55CBFF 20%, #DF7CFF 40%, #FF796E 60%, #FFAD5B 80%, #FAFF55 100%);
+	-webkit-background-clip: text;
+	-webkit-text-fill-color: transparent;
+}
+/* 2025-02-04-a-brief-history-of-spider-man-in-cinema */
+#spidey-proverb {
+	color: #EEEEEE;
+	font-size: 1.2em;
+	font-style: italic;
+	font-weight: 300;
+	text-align: center;
+	padding-top: 2rem;
+}
+/* Footnotes */
+.footnote {
+	font-size: 1.2rem;
+	line-height: 1.5;
+	font-weight: 200;
+	margin-top: 3em;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+sup {
+	color: #FE6000;
+	font-size: 1rem;
+	font-weight: 900;
+	line-height: 0; /* removes gap above superscript number */
+}
+sup::after {
+	counter-increment: fn_counter; /* Increments footnote counter */
+	content: counter(fn_counter); /* Displays footnote counter */
+}
+ol {
+	padding: 0;
+	margin: 0;
+}
+li {
+	padding: 1rem 0;
+	margin: 0 auto;
+	scroll-margin-top: 120px; /* Scrolls down a bit to accommodate nav overlay */
+}
+a.fnlink:link, a.fnlink:visited {
+	text-decoration: none;
+	border: none;
+}
+a.fnlink:hover, a.fnlink:active {
+	text-decoration: none;
+	color: #F0F0F0;
+	cursor: pointer;
+}
+/* Pullquotes and Small Images */
+/* margin: position of element padding: space between element and lines */
+.pullquote-left {
+	display: inline;
+	float: left;
+	hyphens: none;
+	color: #FE6000;
+	font-size: 2rem;
+	font-weight: 100;
+	line-height: 1.05;
+	font-style: italic;
+	word-spacing: 25%;
+	text-transform: uppercase;
+	text-align: left;
+	hyphens: auto;
+	text-wrap: pretty;
+	border-top: #FE6000 1px solid;
+	border-bottom: #FE6000 1px solid;
+	padding: 1rem 0 1rem 0;
+	width: 100%;
+	margin-bottom: 1rem;
+}
+.pullquote-right {
+	display: inline;
+	float: right;
+	hyphens: none;
+	color: #FE6000;
+	font-size: 2rem;
+	font-weight: 100;
+	line-height: 1.05;
+	font-style: italic;
+	word-spacing: 25%;
+	text-transform: uppercase;
+	text-align: left;
+	hyphens: auto;
+	text-wrap: pretty;
+	border-top: #FE6000 1px solid;
+	border-bottom: #FE6000 1px solid;
+	padding: 1rem 0 1rem 0;
+	width: 100%;
+	margin-bottom: 1rem;
+}
+.image-small-left {
+	display: inline;
+	float: left;
+	text-align: left;
+	border-top: #FE6000 1px solid;
+	border-bottom: #FE6000 1px solid;
+	padding: 15px 0 15px 0;
+	width: 150px;
+	margin: 10px 10px 10px -15px;
+}
+.image-small-right {
+	display: inline;
+	float: right;
+	text-align: right;
+	border-top: #FE6000 1px solid;
+	border-bottom: #FE6000 1px solid;
+	padding: 15px 0 15px 0;
+	width: 150px;
+	margin: 10px -15px 10px 10px;
+}
+/* Desktop override */
+@media (min-width: 800px) {
+	.image-small-left {
+		width: 300px;
+		margin: 10px 30px 10px -60px;
+	}
+	.image-small-right {
+		width: 300px;
+		margin: 10px -60px 10px 30px;
+	}
+	.pullquote-left {
+		width: 60%;
+		text-align: left;
+		margin: 10px 30px 10px -60px;
+	}
+	.pullquote-right {
+		width: 60%;
+		text-align: right;
+		margin: 10px -60px 10px 30px;
+	}
+	.footnote {
+		padding-left: 3rem;
+		padding-right: 3rem;
+	}
+}

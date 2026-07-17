@@ -153,6 +153,7 @@ article a:hover, article a:active, footer a:hover, footer a:active {
 #secret {
 	display: block;
 	margin: 0 auto;
+	height: 100px;
 }
 .image-container {
 	text-align: center;

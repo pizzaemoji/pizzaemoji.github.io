@@ -190,6 +190,7 @@ footer {
 }
 #secret {
 	padding-top: 120px;
+	padding-bottom: 20px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

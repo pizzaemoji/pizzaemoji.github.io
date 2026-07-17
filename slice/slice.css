@@ -150,11 +150,6 @@ article a:hover, article a:active, footer a:hover, footer a:active {
 }
 
 /* Image and Captioning */
-#secret {
-	display: block;
-	margin: 0 auto;
-	height: 100px;
-}
 .image-container {
 	text-align: center;
 	max-width: 100%;
@@ -192,6 +187,12 @@ footer {
 	font-weight: 300;
 	text-align: center;
 	padding-top: 2rem;
+}
+#secret {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
 }
 /* Footnotes */
 .footnote {

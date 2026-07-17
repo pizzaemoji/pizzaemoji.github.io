@@ -14,12 +14,38 @@ body {
 	margin: 0;
 	counter-reset: fn_counter; /* Creates footnote <sup> counter */
 }
-/* Header content */
+.top {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 100px;
+	background: rgba(20, 20, 20, 0.4);
+	backdrop-filter: blur(20px);
+/*	-webkit-backdrop-filter: blur(20px); */
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	padding: 0 1rem;
+	border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+	z-index: 1000;
+}
+/* Logo */
+.logo-container {
+	display: flex;
+	align-items: center;
+	margin: 10px;
+}
+#logo {
+	height: 25px;
+}
 main {
 	max-width: 1000px;
 	margin: 0 auto;
-	padding: 0px 10px;
+	padding: 0px 20px;
+	box-sizing: border-box;
 }
+/* Header content */
 header {
 	width: 100%;
 	margin: 0 auto;

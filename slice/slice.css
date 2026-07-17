@@ -194,6 +194,9 @@ footer {
 	align-items: center;
 	justify-content: center;
 }
+#secret img {
+	width: 50px;
+}
 /* Footnotes */
 .footnote {
 	font-size: 1.2rem;

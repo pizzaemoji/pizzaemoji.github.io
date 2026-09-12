@@ -16,23 +16,23 @@
 			const overlay = document.getElementById('profileOverlay');
 			panel.classList.toggle('translate-y-full');
 			overlay.classList.toggle('hidden');
-			document.getElementById('accountMenu').classList.add('hidden');
+			closeAccountMenu();
 		}
 
 		function toggleAccountMenu(e) {
 			e.stopPropagation();
-			document.getElementById('accountMenu').classList.toggle('hidden');
-		}
-		window.addEventListener('click', function(e) {
 			const menu = document.getElementById('accountMenu');
-			const btn = document.getElementById('accountMenuButton');
-			if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
-				menu.classList.add('hidden');
-			}
-		});
+			const overlay = document.getElementById('accountMenuOverlay');
+			menu.classList.toggle('translate-x-full');
+			overlay.classList.toggle('hidden');
+		}
+		function closeAccountMenu() {
+			document.getElementById('accountMenu').classList.add('translate-x-full');
+			document.getElementById('accountMenuOverlay').classList.add('hidden');
+		}
 
 		function viewProfile() {
-			document.getElementById('accountMenu').classList.add('hidden');
+			closeAccountMenu();
 			toggleProfilePanel();
 		}
 
@@ -81,48 +81,49 @@
 					<span class="w-1.5 h-1.5 bg-zinc-800 dark:bg-zinc-200  rounded-full"></span>
 					<span class="w-1.5 h-1.5 bg-zinc-800 dark:bg-zinc-200 rounded-full"></span>
 				</button>
-				<div id="accountMenu" class="hidden absolute top-12 right-0 w-52 max-h-[70vh] overflow-y-auto no-scrollbar bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 dark:border-zinc-800 z-[100]">
-					<div class="flex flex-col py-1">
-						<a href="newGroupChat.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							New Group Chat
-						</a>
-						<div class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							Search
-						</div>
-						<a href="memories.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							Memories
-						</a>
-						<a href="shop.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							Digital Shop
-						</a>
-						<a href="addInvite.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800">
-							Add / Invite a Pal
-						</a>
-
-						<div class="h-px bg-gray-100 dark:bg-zinc-800 my-1 mx-3"></div>
-
-						<button onclick="viewProfile()" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							View / Edit Profile
-						</button>
-						<a href="settings.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							Settings & Support
-						</a>
-						<a href="about.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							About Pals
-						</a>
-
-						<div class="h-px bg-gray-100 dark:bg-zinc-800 my-1 mx-3"></div>
-
-						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							Logout
-						</a>
-						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800">
-							Onboarding Demo
-						</a>
-					</div>
-				</div>
 			</div>
 		</header>
+		<div id="accountMenuOverlay" onclick="toggleAccountMenu(event)" class="hidden absolute inset-0 bg-black/40 z-[90] transition-opacity duration-150"></div>
+		<div id="accountMenu" class="absolute top-0 right-0 h-full w-[70%] bg-zinc-100/90 dark:bg-zinc-900/90 backdrop-blur-xl z-[100] translate-x-full transition-transform duration-150 ease-out shadow-2xl">
+			<div class="flex flex-col h-full pt-8">
+				<a href="newGroupChat.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
+					New Group Chat
+				</a>
+				<div class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
+					Search
+				</div>
+				<a href="memories.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
+					Memories
+				</a>
+				<a href="shop.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
+					Digital Shop
+				</a>
+				<a href="addInvite.html" class="px-6 py-3 text-left text-[15px] text-red-500 active:bg-white/40 dark:active:bg-black/20">
+					Add / Invite a Pal
+				</a>
+
+				<div class="h-px bg-zinc-300 dark:bg-zinc-700 my-1 mx-6"></div>
+
+				<button onclick="viewProfile()" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
+					View / Edit Profile
+				</button>
+				<a href="settings.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
+					Settings & Support
+				</a>
+				<a href="about.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
+					About Pals
+				</a>
+
+				<div class="h-px bg-zinc-300 dark:bg-zinc-700 my-1 mx-6"></div>
+
+				<a href="onboarding1.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
+					Logout
+				</a>
+				<a href="onboarding1.html" class="px-6 py-3 text-left text-[15px] text-red-500 active:bg-white/40 dark:active:bg-black/20">
+					Onboarding Demo
+				</a>
+			</div>
+		</div>
 		<nav class="flex border-b border-zinc-50 dark:border-zinc-900 shrink-0 z-40">
 			<button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-4 text-center text-xl font-black border-b-2 border-red-500 text-red-500">
 				Messages

@@ -14,6 +14,46 @@
 		if (lastMessage) lastMessage.scrollIntoView({ block: 'end' });
 	});
 
+		// Group info panel
+		function toggleGroupInfo() {
+			const panel = document.getElementById('groupInfoPanel');
+			const overlay = document.getElementById('groupInfoOverlay');
+			panel.classList.toggle('translate-y-full');
+			overlay.classList.toggle('hidden');
+		}
+
+		// Add Pal request modal
+		function openAddPalModal() {
+			document.getElementById('addPalModal').classList.remove('hidden');
+		}
+		function closeAddPalModal() {
+			document.getElementById('addPalModal').classList.add('hidden');
+		}
+
+		// Unmet Pals explainer modal
+		function openUnmetPalsModal() {
+			document.getElementById('unmetPalsModal').classList.remove('hidden');
+		}
+		function closeUnmetPalsModal() {
+			document.getElementById('unmetPalsModal').classList.add('hidden');
+		}
+
+		// Share your name modal
+		function openShareNameModal() {
+			document.getElementById('shareNameModal').classList.remove('hidden');
+		}
+		function closeShareNameModal() {
+			document.getElementById('shareNameModal').classList.add('hidden');
+		}
+		function confirmShareName() {
+			closeShareNameModal();
+			const row = document.getElementById('shareNameRow');
+			row.textContent = 'Your name is shared with this group';
+			row.classList.remove('text-red-500');
+			row.classList.add('text-zinc-400', 'dark:text-zinc-500', 'cursor-default');
+			row.onclick = null;
+		}
+
 		// Feature menu toggle
 		function toggleFeatureMenu(e) {
 			e.stopPropagation();
@@ -163,12 +203,12 @@
                 </svg>
             </a>
 			<div class="flex flex-1 items-center ml-2">
-				<div class="flex items-center gap-3">
+				<button onclick="toggleGroupInfo()" class="flex items-center gap-3 active:opacity-60 transition-opacity">
 					<img src="images/icon_the_lab_group.png" alt="The Lab Group" class="w-12 h-12 rounded-full object-cover">
 					<h1 class="font-medium text-zinc-900 dark:text-white text-2xl">
 						The Lab Group
 					</h1>
-				</div>
+				</button>
 			</div>
 			<div class="flex gap-6 text-red-500 pr-2">
 				<button aria-label="Audio Call" class="active:scale-90 transition-transform">
@@ -191,13 +231,13 @@
 		</div>
 	</div>
 	<div class="flex flex-col items-start">
-		<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-1 ml-1">A Pal You Haven't Met Yet</span>
+		<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-1 ml-1">Henry Pine</span>
 		<div class="bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-4 py-3 rounded-2xl rounded-tl-none max-w-[80%] text-base shadow-sm">
 			Hey
 		</div>
 	</div>
 	<div class="flex flex-col items-start">
-		<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-1 ml-1">A Pal You Haven't Met Yet</span>
+		<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-1 ml-1">Henry Pine</span>
 		<div class="bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-4 py-3 rounded-2xl rounded-tl-none max-w-[80%] text-base shadow-sm">
 			This is Henry btw
 		</div>
@@ -208,7 +248,7 @@
 		</div>
 	</div>
 	<div class="flex flex-col items-start">
-		<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-1 ml-1">A Pal You Haven't Met Yet</span>
+		<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-1 ml-1">Henry Pine</span>
 		<div class="bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-4 py-3 rounded-2xl rounded-tl-none max-w-[80%] text-base shadow-sm">
 			So what should our report be about?
 		</div>
@@ -222,6 +262,12 @@
 		<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-1 ml-1">Jamie Parker</span>
 		<div class="bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-4 py-3 rounded-2xl rounded-tl-none max-w-[80%] text-base shadow-sm">
 			I was thinking we should do a report on whales 🐳
+		</div>
+	</div>
+	<div class="flex flex-col items-start">
+		<span class="text-xs font-semibold text-zinc-400 dark:text-zinc-500 mb-1 ml-1">Pal #1</span>
+		<div class="bg-zinc-100 dark:bg-zinc-900 text-zinc-900 dark:text-zinc-100 px-4 py-3 rounded-2xl rounded-tl-none max-w-[80%] text-base shadow-sm">
+			Whales work for me 🐳
 		</div>
 	</div>
 	<div class="flex justify-end">
@@ -245,6 +291,11 @@
                     <span>🤍</span> Stickers
                 </button>
             </div>
+        </div>
+        <div class="shrink-0 px-4 py-2 bg-red-50/60 dark:bg-red-500/10 border-t border-red-100 dark:border-red-500/20">
+            <p class="text-[11px] leading-snug text-zinc-500 dark:text-zinc-400 text-center">
+                You're in a group chat with people you haven't connected with on Pals. Don't share things like your location or passwords. If you feel unsafe, leave or report the group.
+            </p>
         </div>
         <div id="input-bar" class="p-4 bg-white dark:bg-black border-t border-gray-100 dark:border-zinc-900 z-50 shrink-0">
             <div class="flex items-center gap-2">
@@ -318,6 +369,70 @@
                 </div>
             </div>
         </div>  
+
+        <!-- Group Info bottom sheet -->
+        <div id="groupInfoOverlay" onclick="toggleGroupInfo()" class="hidden absolute inset-0 bg-black/40 backdrop-blur-sm z-[90] transition-opacity duration-300"></div>
+        <div id="groupInfoPanel" class="absolute bottom-0 left-0 right-0 bg-white dark:bg-zinc-900 rounded-t-[2.5rem] p-8 transform translate-y-full transition-transform duration-300 ease-out z-[95] shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
+            <div class="w-12 h-1.5 bg-zinc-200 dark:bg-zinc-800 rounded-full mx-auto mb-6"></div>
+            <p class="text-lg font-black text-zinc-900 dark:text-white mb-1">5 Participants</p>
+            <p class="text-sm text-zinc-500 dark:text-zinc-400 mb-6">Group started by Jamie Parker</p>
+            <div class="space-y-1 mb-6">
+                 <a href="profile.html" class="flex items-center gap-3 px-2 py-3 active:bg-zinc-50 dark:active:bg-zinc-800 rounded-xl transition-colors">
+                    <img src="images/icon.png" alt="Mia Fisher" class="w-11 h-11 rounded-full object-cover">
+                    <span class="font-medium text-zinc-900 dark:text-zinc-100 text-base">Mia Fisher (You)</span>
+                </a>           
+                <a href="profile_jamie_parker.html" class="flex items-center gap-3 px-2 py-3 active:bg-zinc-50 dark:active:bg-zinc-800 rounded-xl transition-colors">
+                    <img src="images/icon_jamie_parker.png" alt="Jamie Parker" class="w-11 h-11 rounded-full object-cover">
+                    <span class="font-medium text-zinc-900 dark:text-zinc-100 text-base">Jamie Parker</span>
+                </a>
+                <button onclick="openAddPalModal()" class="w-full flex items-center gap-3 px-2 py-3 active:bg-zinc-50 dark:active:bg-zinc-800 rounded-xl transition-colors">
+                    <div class="w-11 h-11 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 text-sm font-bold shrink-0">?</div>
+                    <span class="font-medium text-zinc-900 dark:text-zinc-100 text-base">Henry Pine</span>
+                </button>
+                <button onclick="openUnmetPalsModal()" class="w-full flex items-center gap-3 px-2 py-3 active:bg-zinc-50 dark:active:bg-zinc-800 rounded-xl transition-colors">
+                    <div class="w-11 h-11 rounded-full bg-zinc-100 dark:bg-zinc-800 flex items-center justify-center text-zinc-400 dark:text-zinc-500 text-xs font-bold shrink-0">+2</div>
+                    <span class="font-medium text-zinc-500 dark:text-zinc-400 text-base">+2 More</span>
+                </button>
+            </div>
+            <div class="border-t border-zinc-100 dark:border-zinc-800 pt-4">
+                <button id="shareNameRow" onclick="openShareNameModal()" class="w-full py-3 text-red-500 font-bold text-base active:opacity-60 transition-opacity">
+                    Share your name with the group
+                </button>
+            </div>
+        </div>
+
+        <!-- Add Pal request modal -->
+        <div id="addPalModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md">
+            <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] p-8 shadow-2xl border border-zinc-100 dark:border-zinc-800 max-w-sm w-full text-center">
+                <h2 class="text-xl font-black text-zinc-900 dark:text-zinc-100 mb-3 tracking-tight">Send a Pal request to Henry Pine?</h2>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">Your name and photo will be included in the request.</p>
+                <div class="space-y-3">
+                    <button onclick="closeAddPalModal()" class="w-full py-4 bg-red-500 text-white font-black rounded-2xl active:scale-[0.98] transition-transform">Send</button>
+                    <button onclick="closeAddPalModal()" class="w-full py-3 text-zinc-500 dark:text-zinc-400 font-bold">Don't Send</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Unmet Pals explainer modal -->
+        <div id="unmetPalsModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md">
+            <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] p-8 shadow-2xl border border-zinc-100 dark:border-zinc-800 max-w-sm w-full text-center">
+                <h2 class="text-xl font-black text-zinc-900 dark:text-zinc-100 mb-3 tracking-tight">You haven't met them yet</h2>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">These are Pals you haven't connected with, and they haven't shared their names with this group yet.</p>
+                <button onclick="closeUnmetPalsModal()" class="w-full py-4 bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-black rounded-2xl active:scale-[0.98] transition-transform">Okay</button>
+            </div>
+        </div>
+
+        <!-- Share your name modal -->
+        <div id="shareNameModal" class="hidden fixed inset-0 z-[100] flex items-center justify-center p-6 bg-black/60 backdrop-blur-md">
+            <div class="bg-white dark:bg-zinc-900 rounded-[2.5rem] p-8 shadow-2xl border border-zinc-100 dark:border-zinc-800 max-w-sm w-full text-center">
+                <h2 class="text-xl font-black text-zinc-900 dark:text-zinc-100 mb-3 tracking-tight">Share your name?</h2>
+                <p class="text-sm text-zinc-500 dark:text-zinc-400 leading-relaxed mb-8">You're about to share the name you use on Pals with this group. It includes people you haven't connected with.</p>
+                <div class="space-y-3">
+                    <button onclick="confirmShareName()" class="w-full py-4 bg-red-500 text-white font-black rounded-2xl active:scale-[0.98] transition-transform">Continue</button>
+                    <button onclick="closeShareNameModal()" class="w-full py-3 text-zinc-500 dark:text-zinc-400 font-bold">Cancel</button>
+                </div>
+            </div>
+        </div>
     </div>
 </body>
 </html>

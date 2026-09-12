@@ -87,6 +87,15 @@
 					<img src="images/icon.png" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500 object-cover p-[2px] bg-white dark:bg-zinc-900">
 				</a>
 			</div>
+			
+			<div class="w-10 flex justify-end items-center">
+				<button onclick="toggleMenu()" class="text-zinc-800 dark:text-zinc-200 z-[60] active:scale-90 transition-transform">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+				</button>
+			</div>			
+			
 		</header>
 		<nav class="flex border-b border-zinc-50 dark:border-zinc-900 shrink-0 z-40">
 			<button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-4 text-center text-xl font-black border-b-2 border-red-500 text-red-500">
@@ -424,6 +433,41 @@
 					<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5z" />
 				</svg>
 			</button>
+		</div>
+		<div id="menuOverlay" onclick="toggleMenu()" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-[70] opacity-0 pointer-events-none transition-opacity duration-200"></div>
+		<div id="profileMenu" class="absolute top-0 right-0 w-[70%] h-screen bg-white dark:bg-zinc-900 z-[80] translate-x-full transition-transform duration-200 ease-out shadow-2xl">
+			<div class="flex flex-col h-full pt-8">
+				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+					<a href="about.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						About Pals
+					</a>
+					<a href="shop.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Digital Shop
+					</a>
+					<a href="memories.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Memories
+					</a>
+				</div>
+				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+					<a href="edit_profile.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Edit Profile
+					</a>
+					<a href="settings.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Settings
+					</a>
+					<a href="support.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						App Support
+					</a>
+				</div>
+				<div class="px-6 py-2">
+					<a href="onboarding1.html" class="block w-full text-left py-3 text-red-500 font-medium active:opacity-50">
+						Logout
+					</a>
+					<a href="onboarding1.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Onboarding Demo
+					</a>
+				</div>
+			</div>
 		</div>
         <!-- Profile popup -->
         <div id="profileOverlay" onclick="toggleProfilePanel()" class="hidden absolute inset-0 bg-black/40 backdrop-blur-sm z-[90] transition-opacity duration-300"></div>

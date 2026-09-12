@@ -23,6 +23,27 @@
 				menu.classList.add('hidden');
 			}
 		});
+		
+		// Profile popup
+		function toggleProfilePanel() {
+			const panel = document.getElementById('profilePanel');
+			const overlay = document.getElementById('profileOverlay');
+			panel.classList.toggle('translate-y-full');
+			overlay.classList.toggle('hidden');
+			document.getElementById('profileActionsMenu').classList.add('hidden');
+		}
+
+		function toggleProfileActions(e) {
+			e.stopPropagation();
+			document.getElementById('profileActionsMenu').classList.toggle('hidden');
+		}
+		window.addEventListener('click', function(e) {
+			const menu = document.getElementById('profileActionsMenu');
+			const moreBtn = document.getElementById('profileMoreButton');
+			if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !moreBtn.contains(e.target)) {
+				menu.classList.add('hidden');
+			}
+		});
 
 		// Message/Moments Tab Switcher
 		function switchTab(tab) {

@@ -13,6 +13,27 @@
 		const lastMessage = document.querySelector('#chat-container > div:last-child');
 		if (lastMessage) lastMessage.scrollIntoView({ block: 'end' });
 	});
+	
+		// Profile popup
+		function toggleProfilePanel() {
+			const panel = document.getElementById('profilePanel');
+			const overlay = document.getElementById('profileOverlay');
+			panel.classList.toggle('translate-y-full');
+			overlay.classList.toggle('hidden');
+			document.getElementById('profileActionsMenu').classList.add('hidden');
+		}
+
+		function toggleProfileActions(e) {
+			e.stopPropagation();
+			document.getElementById('profileActionsMenu').classList.toggle('hidden');
+		}
+		window.addEventListener('click', function(e) {
+			const menu = document.getElementById('profileActionsMenu');
+			const moreBtn = document.getElementById('profileMoreButton');
+			if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !moreBtn.contains(e.target)) {
+				menu.classList.add('hidden');
+			}
+		});
 
 		// Feature menu toggle
 		function toggleFeatureMenu(e) {
@@ -163,12 +184,12 @@
                 </svg>
             </a>
 			<div class="flex flex-1 items-center ml-2">
-				<a href="profile_tom_wilson.html" class="flex items-center gap-3">
+				<button onclick="toggleProfilePanel()" class="flex items-center gap-3">
 					<img src="images/icon_tom_wilson.png" alt="Tom Wilson" class="w-12 h-12 rounded-full object-cover">
 					<h1 class="font-medium text-zinc-900 dark:text-white text-2xl">
 						Tom Wilson
 					</h1>
-				</a>
+				</button>
 			</div>
 			<div class="flex gap-6 text-red-500 pr-2">
 				<button aria-label="Audio Call" class="active:scale-90 transition-transform">

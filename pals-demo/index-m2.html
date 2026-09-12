@@ -16,7 +16,20 @@
 			const overlay = document.getElementById('profileOverlay');
 			panel.classList.toggle('translate-y-full');
 			overlay.classList.toggle('hidden');
+			document.getElementById('accountMenu').classList.add('hidden');
 		}
+
+		function toggleAccountMenu(e) {
+			e.stopPropagation();
+			document.getElementById('accountMenu').classList.toggle('hidden');
+		}
+		window.addEventListener('click', function(e) {
+			const menu = document.getElementById('accountMenu');
+			const btn = document.getElementById('accountMenuButton');
+			if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
+				menu.classList.add('hidden');
+			}
+		});
 
 		// Message/Moments Tab Switcher
 		function switchTab(tab) {
@@ -400,57 +413,50 @@
 				</svg>
 			</button>
 		</div>
-		<div id="menuOverlay" onclick="toggleMenu()" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-[70] opacity-0 pointer-events-none transition-opacity duration-200"></div>
-		<div id="profileMenu" class="absolute top-0 right-0 w-[60%] h-screen bg-white dark:bg-zinc-900 z-[80] translate-x-full transition-transform duration-200 ease-out shadow-2xl">
-			<div class="flex flex-col h-full pt-8">
-				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
-					<a href="newGroupChat.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						New Group Chat
-					</a>
-					<a href="addInvite.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						Add / Invite a Pal
-					</a>
-					<a href="shop.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						Digital Shop
-					</a>
-					<a href="memories.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						Memories
-					</a>
-				</div>
-				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
-					<a href="edit_profile.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						Edit Profile
-					</a>
-					<a href="settings.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						Settings
-					</a>
-					<a href="support.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						App Support
-					</a>
-					<a href="about.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						About Pals
-					</a>
-				</div>
-				<div class="px-6 py-2">
-					<a href="onboarding1.html" class="block w-full text-left py-3 text-red-500 font-medium active:opacity-50">
-						Logout
-					</a>
-					<a href="onboarding1.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
-						Onboarding Demo
-					</a>
-				</div>
-			</div>
-		</div>
 		<!-- Profile popup -->
 		<div id="profileOverlay" onclick="toggleProfilePanel()" class="hidden absolute inset-0 bg-black/40 backdrop-blur-sm z-[90] transition-opacity duration-300"></div>
 		<div id="profilePanel" class="absolute bottom-0 left-0 right-0 h-[70vh] overflow-y-auto no-scrollbar bg-zinc-100 dark:bg-zinc-900 rounded-t-[2.5rem] p-6 pb-8 transform translate-y-full transition-transform duration-300 ease-out z-[95] shadow-[0_-20px_50px_rgba(0,0,0,0.2)]">
 			<div class="w-12 h-1.5 bg-zinc-300 dark:bg-zinc-700 rounded-full mx-auto mb-6"></div>
 			<div class="w-full px-4 py-6 bg-white dark:bg-zinc-800/60 rounded-3xl relative shadow-sm">
-				<button onclick="toggleMenu()" class="absolute top-3 right-3 w-6 h-6 flex items-center justify-center gap-[3px] active:opacity-50 transition-opacity">
+				<button id="accountMenuButton" onclick="toggleAccountMenu(event)" class="absolute top-3 right-3 w-6 h-6 flex items-center justify-center gap-[3px] active:opacity-50 transition-opacity">
 					<span class="w-1 h-1 bg-zinc-500 rounded-full"></span>
 					<span class="w-1 h-1 bg-zinc-500 rounded-full"></span>
 					<span class="w-1 h-1 bg-zinc-500 rounded-full"></span>
 				</button>
+				<div id="accountMenu" class="hidden absolute top-11 right-3 w-48 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 dark:border-zinc-800 z-[100] overflow-hidden">
+					<div class="flex flex-col">
+						<a href="newGroupChat.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
+							New Group Chat
+						</a>
+						<a href="addInvite.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Add / Invite a Pal
+						</a>
+						<a href="shop.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Digital Shop
+						</a>
+						<a href="memories.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Memories
+						</a>
+						<a href="edit_profile.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Edit Profile
+						</a>
+						<a href="settings.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Settings
+						</a>
+						<a href="support.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							App Support
+						</a>
+						<a href="about.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							About Pals
+						</a>
+						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Logout
+						</a>
+						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Onboarding Demo
+						</a>
+					</div>
+				</div>
 				<div class="w-full mb-4 flex justify-center">
 					<img src="images/icon.png" alt="Mia Fisher" class="w-32 h-32 rounded-full border-2 border-red-500 object-cover p-[2px] bg-white dark:bg-zinc-800">
 				</div>

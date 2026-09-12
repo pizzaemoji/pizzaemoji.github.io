@@ -82,34 +82,12 @@
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
 	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
 		<header class="w-full flex justify-between items-center px-6 pt-3 pb-3 shrink-0 bg-white/90 dark:bg-black/90 backdrop-blur-md z-50 border-b border-zinc-50 dark:border-zinc-900">
-			<div class="w-12 relative">
-				<button id="addMenuButton" onclick="toggleAddMenu(event)" class="w-12 h-12 rounded-full border-2 border-zinc-700 dark:border-zinc-300 flex items-center justify-center text-zinc-700 dark:text-zinc-300 active:scale-90 transition-transform">
-					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
-						<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
-					</svg>
-				</button>
-				<div id="addMenu" class="hidden absolute top-12 left-0 w-52 bg-white/90 dark:bg-zinc-900/90 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 dark:border-zinc-800 z-[60] overflow-hidden">
-					<div class="flex flex-col">
-						<a href="inviteAdd.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 flex items-center gap-3 border-b border-gray-50 dark:border-zinc-800">
-							Add Pal
-						</a>
-						<a href="inviteAdd.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 flex items-center gap-3 border-b border-gray-50 dark:border-zinc-800">
-							Invite Pal
-						</a>
-						<a href="startGroupChat.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 flex items-center gap-3">
-							Start Group Chat
-						</a>
-					</div>
-				</div>
-			</div>
 			<img src="images/Pals_Logo.png" alt="Pals" class="h-8 w-auto object-contain">
 			<div class="w-12 flex justify-end items-center">
 				<button onclick="toggleProfilePanel()" class="active:scale-90 transition-transform shrink-0">
 					<img src="images/icon.png" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500 object-cover p-[2px] bg-white dark:bg-zinc-900">
 				</button>
-			</div>
-			
-			<div class="w-10 flex justify-end items-center">
+
 				<button onclick="toggleMenu()" class="text-zinc-800 dark:text-zinc-200 z-[60] active:scale-90 transition-transform">
 					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
 						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />

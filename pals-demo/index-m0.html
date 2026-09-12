@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark">
 	<link rel="shortcut icon" href="images/favicon.ico">
 	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <title>Pals Demo</title>
+    <title>Pals</title>
     <script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
 	<script>
@@ -16,24 +16,6 @@
 			const overlay = document.getElementById('profileOverlay');
 			panel.classList.toggle('translate-y-full');
 			overlay.classList.toggle('hidden');
-			document.getElementById('accountMenu').classList.add('hidden');
-		}
-
-		function toggleAccountMenu(e) {
-			e.stopPropagation();
-			document.getElementById('accountMenu').classList.toggle('hidden');
-		}
-		window.addEventListener('click', function(e) {
-			const menu = document.getElementById('accountMenu');
-			const btn = document.getElementById('accountMenuButton');
-			if (!menu.classList.contains('hidden') && !menu.contains(e.target) && !btn.contains(e.target)) {
-				menu.classList.add('hidden');
-			}
-		});
-
-		function viewProfile() {
-			document.getElementById('accountMenu').classList.add('hidden');
-			toggleProfilePanel();
 		}
 
 		// Message/Moments Tab Switcher
@@ -73,48 +55,17 @@
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
 	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
 		<header class="w-full flex justify-between items-center px-6 pt-3 pb-3 shrink-0 bg-white/90 dark:bg-black/90 backdrop-blur-md z-50 border-b border-zinc-50 dark:border-zinc-900">
-			<div class="w-12"></div>
+			<div class="w-24"></div>
 			<img src="images/Pals_Logo.png" alt="Pals" class="h-8 w-auto object-contain">
-			<div class="w-12 flex justify-end items-center relative">
-				<button id="accountMenuButton" onclick="toggleAccountMenu(event)" class="w-10 h-10 flex items-center justify-center gap-[3px] active:opacity-50 transition-opacity">
-					<span class="w-1.5 h-1.5 bg-zinc-500 rounded-full"></span>
-					<span class="w-1.5 h-1.5 bg-zinc-500 rounded-full"></span>
-					<span class="w-1.5 h-1.5 bg-zinc-500 rounded-full"></span>
+			<div class="w-24 flex justify-end items-center gap-2">
+				<button onclick="toggleProfilePanel()" class="active:scale-90 transition-transform shrink-0">
+					<img src="images/icon.png" alt="Profile" class="w-12 h-12 rounded-full border-2 border-red-500 object-cover p-[2px] bg-white dark:bg-zinc-900">
 				</button>
-				<div id="accountMenu" class="hidden absolute top-12 right-0 w-48 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 dark:border-zinc-800 z-[100] overflow-hidden">
-					<div class="flex flex-col">
-						<a href="newGroupChat.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							New Group Chat
-						</a>
-						<div class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Search
-						</div>
-						<a href="memories.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Memories
-						</a>
-						<a href="shop.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Digital Shop
-						</a>
-						<button onclick="viewProfile()" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							View/Edit Profile
-						</button>
-						<a href="settings.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Settings & Support
-						</a>
-						<a href="about.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							About Pals
-						</a>
-						<a href="addInvite.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Add / Invite a Pal
-						</a>
-						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Logout
-						</a>
-						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Onboarding Demo
-						</a>
-					</div>
-				</div>
+				<button onclick="toggleMenu()" class="text-zinc-800 dark:text-zinc-200 z-[60] active:scale-90 transition-transform shrink-0">
+					<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" class="w-6 h-6">
+						<path stroke-linecap="round" stroke-linejoin="round" d="M3.75 6.75h16.5M3.75 12h16.5m-16.5 5.25h16.5" />
+					</svg>
+				</button>
 			</div>
 		</header>
 		<nav class="flex border-b border-zinc-50 dark:border-zinc-900 shrink-0 z-40">
@@ -434,6 +385,18 @@
 			Read “A Letter About Pals” from Brandon
 		</a>
 		<div class="absolute bottom-[72px] right-6 z-50 flex flex-row gap-3 items-end">
+			<!-- Memories Button -->
+			<button class="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-300/50 dark:bg-zinc-700/50 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 active:scale-90 transition-transform">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+					<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
+				</svg>
+			</button>
+			<!-- Search Button -->
+			<button class="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-300/50 dark:bg-zinc-700/50 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 active:scale-90 transition-transform">
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
+					<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
+				</svg>
+			</button>
 			<!-- Camera Button -->
 			<button class="w-10 h-10 rounded-full flex items-center justify-center border border-zinc-200 dark:border-zinc-800 bg-red-500 text-white active:scale-90 transition-transform">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
@@ -441,6 +404,47 @@
 					<path stroke-linecap="round" stroke-linejoin="round" d="M16.5 12.75a4.5 4.5 0 1 1-9 0 4.5 4.5 0 0 1 9 0ZM18.75 10.5h.008v.008h-.008V10.5z" />
 				</svg>
 			</button>
+		</div>
+		<div id="menuOverlay" onclick="toggleMenu()" class="absolute inset-0 bg-black/40 backdrop-blur-[2px] z-[70] opacity-0 pointer-events-none transition-opacity duration-200"></div>
+		<div id="profileMenu" class="absolute top-0 right-0 w-[60%] h-screen bg-white dark:bg-zinc-900 z-[80] translate-x-full transition-transform duration-200 ease-out shadow-2xl">
+			<div class="flex flex-col h-full pt-8">
+				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+					<a href="newGroupChat.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						New Group Chat
+					</a>
+					<a href="addInvite.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Add / Invite a Pal
+					</a>
+					<a href="shop.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Digital Shop
+					</a>
+					<a href="memories.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Memories
+					</a>
+				</div>
+				<div class="px-6 py-2 border-b border-gray-100 dark:border-zinc-800">
+					<a href="edit_profile.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Edit Profile
+					</a>
+					<a href="settings.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Settings
+					</a>
+					<a href="support.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						App Support
+					</a>
+					<a href="about.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						About Pals
+					</a>
+				</div>
+				<div class="px-6 py-2">
+					<a href="onboarding1.html" class="block w-full text-left py-3 text-red-500 font-medium active:opacity-50">
+						Logout
+					</a>
+					<a href="onboarding1.html" class="block w-full text-left py-3 text-zinc-800 dark:text-zinc-200 font-medium active:opacity-50">
+						Onboarding Demo
+					</a>
+				</div>
+			</div>
 		</div>
 		<!-- Profile popup -->
 		<div id="profileOverlay" onclick="toggleProfilePanel()" class="hidden absolute inset-0 bg-black/40 backdrop-blur-sm z-[90] transition-opacity duration-300"></div>

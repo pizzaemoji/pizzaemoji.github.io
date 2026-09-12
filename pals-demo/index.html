@@ -10,18 +10,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
 	<script>
-		function toggleAccountMenu(e) {
-			e.stopPropagation();
-			const menu = document.getElementById('accountMenu');
-			const overlay = document.getElementById('accountMenuOverlay');
-			menu.classList.toggle('translate-x-full');
-			overlay.classList.toggle('hidden');
-		}
-		function closeAccountMenu() {
-			document.getElementById('accountMenu').classList.add('translate-x-full');
-			document.getElementById('accountMenuOverlay').classList.add('hidden');
-		}
-
 		// Message/Moments Tab Switcher
 		function switchTab(tab) {
 			const msgView = document.getElementById('messagesView');
@@ -61,55 +49,8 @@
 		<header class="w-full flex justify-between items-center px-6 pt-3 pb-3 shrink-0 bg-white/90 dark:bg-black/90 backdrop-blur-md z-50 border-b border-zinc-50 dark:border-zinc-900">
 			<div class="w-12"></div>
 			<img src="images/Pals_Logo.png" alt="Pals" class="h-8 w-auto object-contain">
-			<div class="w-12 flex justify-end items-center relative">
-				<button id="accountMenuButton" onclick="toggleAccountMenu(event)" class="w-10 h-10 flex items-center justify-center gap-[3px] active:opacity-50 transition-opacity">
-					<span class="w-1.5 h-1.5 bg-zinc-800 dark:bg-zinc-200 rounded-full"></span>
-					<span class="w-1.5 h-1.5 bg-zinc-800 dark:bg-zinc-200  rounded-full"></span>
-					<span class="w-1.5 h-1.5 bg-zinc-800 dark:bg-zinc-200 rounded-full"></span>
-				</button>
-			</div>
+			<div class="w-12"></div>
 		</header>
-		<div id="accountMenuOverlay" onclick="toggleAccountMenu(event)" class="hidden absolute inset-0 bg-black/40 z-[90] transition-opacity duration-150"></div>
-		<div id="accountMenu" class="absolute top-0 right-0 h-full w-[70%] bg-zinc-100/90 dark:bg-zinc-900/90 backdrop-blur-xl z-[100] translate-x-full transition-transform duration-150 ease-out shadow-2xl">
-			<div class="flex flex-col h-full pt-8">
-				<a href="newGroupChat.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
-					New Group Chat
-				</a>
-				<div class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
-					Search
-				</div>
-				<a href="memories.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
-					Memories
-				</a>
-				<a href="shop.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
-					Digital Shop
-				</a>
-				<a href="addInvite.html" class="px-6 py-3 text-left text-[15px] text-red-500 active:bg-white/40 dark:active:bg-black/20">
-					Add / Invite a Pal
-				</a>
-
-				<div class="h-px bg-zinc-300 dark:bg-zinc-700 my-1 mx-6"></div>
-
-				<a href="profile.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
-					View / Edit Profile
-				</a>
-				<a href="settings.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
-					Settings & Support
-				</a>
-				<a href="about.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
-					About Pals
-				</a>
-
-				<div class="h-px bg-zinc-300 dark:bg-zinc-700 my-1 mx-6"></div>
-
-				<a href="onboarding1.html" class="px-6 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-white/40 dark:active:bg-black/20">
-					Logout
-				</a>
-				<a href="onboarding1.html" class="px-6 py-3 text-left text-[15px] text-red-500 active:bg-white/40 dark:active:bg-black/20">
-					Onboarding Demo
-				</a>
-			</div>
-		</div>
 		<nav class="flex border-b border-zinc-50 dark:border-zinc-900 shrink-0 z-40">
 			<button id="msgTab" onclick="switchTab('messages')" class="flex-1 py-4 text-center text-xl font-black border-b-2 border-red-500 text-red-500">
 				Messages
@@ -428,8 +369,19 @@
 		<div class="absolute bottom-6 inset-x-0 z-50 flex items-center justify-center gap-3 px-6">
 			<!-- New Group Chat -->
 			<a href="newGroupChat.html" class="w-16 h-16 shrink-0 rounded-full flex items-center justify-center bg-white/60 dark:bg-zinc-900/60 backdrop-blur-2xl border border-white/60 dark:border-white/10 shadow-[0_8px_30px_rgba(0,0,0,0.12)] dark:shadow-[0_8px_30px_rgba(0,0,0,0.5)] text-zinc-700 dark:text-zinc-300 active:scale-90 transition-transform">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-9 h-9">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v15m7.5-7.5h-15" />
+				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" class="w-[50px] h-[50px]">
+					<g transform="translate(-8.3,0) translate(12,12) scale(0.46) translate(-12,-12)">
+						<path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0Z" />
+						<path d="M4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+					</g>
+					<g transform="translate(12,12) scale(0.62) translate(-12,-12)">
+						<path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0Z" />
+						<path d="M4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+					</g>
+					<g transform="translate(8.3,0) translate(12,12) scale(0.46) translate(-12,-12)">
+						<path d="M15.75 6a3.75 3.75 0 11-7.5 0 3.75 3.75 0 017.5 0Z" />
+						<path d="M4.501 20.118a7.5 7.5 0 0114.998 0A17.933 17.933 0 0112 21.75c-2.676 0-5.216-.584-7.499-1.632Z" />
+					</g>
 				</svg>
 			</a>
 

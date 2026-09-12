@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark">
 	<link rel="shortcut icon" href="images/favicon.ico">
 	<link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
-    <title>Pals</title>
+    <title>Pals Demo</title>
     <script src="https://cdn.tailwindcss.com"></script>
 	<script src="pals.js"></script>
 	<script>
@@ -83,37 +83,34 @@
 				</button>
 				<div id="accountMenu" class="hidden absolute top-12 right-0 w-48 bg-white/95 dark:bg-zinc-900/95 backdrop-blur-xl rounded-2xl shadow-2xl border border-gray-100 dark:border-zinc-800 z-[100] overflow-hidden">
 					<div class="flex flex-col">
-						<button onclick="viewProfile()" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
-							View Profile
-						</button>
 						<a href="newGroupChat.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
 							New Group Chat
 						</a>
-						<a href="addInvite.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Add / Invite a Pal
+						<div class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Search
+						</div>
+						<a href="memories.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Memories
 						</a>
 						<a href="shop.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
 							Digital Shop
 						</a>
-						<a href="memories.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Memories
-						</a>
-						<a href="edit_profile.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Edit Profile
-						</a>
+						<button onclick="viewProfile()" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800">
+							View/Edit Profile
+						</button>
 						<a href="settings.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							Settings
-						</a>
-						<a href="support.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
-							App Support
+							Settings & Support
 						</a>
 						<a href="about.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
 							About Pals
 						</a>
+						<a href="addInvite.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+							Add / Invite a Pal
+						</a>
 						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
 							Logout
 						</a>
-						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-zinc-800 dark:text-zinc-200 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
+						<a href="onboarding1.html" class="px-4 py-3 text-left text-[15px] text-red-500 active:bg-zinc-100 dark:active:bg-zinc-800 border-t border-gray-50 dark:border-zinc-800">
 							Onboarding Demo
 						</a>
 					</div>
@@ -437,18 +434,6 @@
 			Read “A Letter About Pals” from Brandon
 		</a>
 		<div class="absolute bottom-[72px] right-6 z-50 flex flex-row gap-3 items-end">
-			<!-- Memories Button -->
-			<button class="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-300/50 dark:bg-zinc-700/50 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 active:scale-90 transition-transform">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
-					<path stroke-linecap="round" stroke-linejoin="round" d="M21 8.25c0-2.485-2.099-4.5-4.688-4.5-1.935 0-3.597 1.126-4.312 2.733-.715-1.607-2.377-2.733-4.313-2.733C5.1 3.75 3 5.765 3 8.25c0 7.22 9 12 9 12s9-4.78 9-12Z" />
-				</svg>
-			</button>
-			<!-- Search Button -->
-			<button class="w-10 h-10 rounded-full flex items-center justify-center bg-zinc-300/50 dark:bg-zinc-700/50 backdrop-blur-2xl border border-zinc-200 dark:border-zinc-800 text-zinc-900 dark:text-zinc-100 active:scale-90 transition-transform">
-				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">
-					<path stroke-linecap="round" stroke-linejoin="round" d="m21 21-5.197-5.197m0 0A7.5 7.5 0 1 0 5.196 5.196a7.5 7.5 0 0 0 10.607 10.607Z" />
-				</svg>
-			</button>
 			<!-- Camera Button -->
 			<button class="w-10 h-10 rounded-full flex items-center justify-center border border-zinc-200 dark:border-zinc-800 bg-red-500 text-white active:scale-90 transition-transform">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-5 h-5">

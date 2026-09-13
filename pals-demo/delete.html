@@ -23,15 +23,14 @@
 </head>
 <body class="bg-white dark:bg-black antialiased transition-colors duration-200">
 	<div class="w-full h-dvh flex flex-col bg-white dark:bg-black relative overflow-hidden mx-auto max-w-2xl">
-		<header class="w-full flex justify-between items-center px-4 pt-4 pb-4 shrink-0 border-b border-zinc-100 dark:border-zinc-900">
-			<a href="settings.html" class="w-10 text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
+		<header class="w-full flex justify-between items-center px-6 pt-3 pb-3 shrink-0 bg-white/90 dark:bg-black/90 backdrop-blur-md z-50 border-b border-zinc-50 dark:border-zinc-900">
+			<a href="prefs.html" class="w-12 text-zinc-800 dark:text-zinc-200 active:scale-90 transition-transform">
 				<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2.5" stroke="currentColor" class="w-6 h-6">
 					<path stroke-linecap="round" stroke-linejoin="round" d="M10.5 19.5L3 12m0 0l7.5-7.5M3 12h18" />
 				</svg>
 			</a>
-			<img src="images/Pals_Logo.png" alt="Pals" class="h-7">
-			<div class="w-10 flex justify-end items-center">
-			</div>
+			<img src="images/Pals_Logo.png" alt="Pals" class="h-8 w-auto object-contain">
+			<div class="w-12"></div>
 		</header>
 		<main class="flex-1 overflow-y-auto no-scrollbar px-8 py-8 text-zinc-900 dark:text-zinc-100">
 			<h1 class="text-3xl font-bold text-zinc-900 dark:text-zinc-100 leading-tight mb-2">
@@ -43,13 +42,13 @@
 			<article class="space-y-10 leading-relaxed">
 				<section class="space-y-8">
 					<div class="space-y-4">
-						<h2 class="text-xl font-black uppercase tracking-widest text-red-500 mb-4">
-							Please read carefully
+						<h2 class="text-xl font-black tracking-widest text-zinc-600 dark:text-zinc-300 mb-4">
+							A few things before you go:
 						</h2>
 						<ul class="space-y-4 text-lg text-zinc-600 dark:text-zinc-300 leading-relaxed">
 							<li class="flex gap-3">
 								<span class="shrink-0 text-red-500">•</span>
-								<span>Deleting your account is permanent. All of your data, including messages and photos, will be erased from our servers. <span class="font-bold text-zinc-900 dark:text-zinc-100">This cannot be undone.</span></span>
+								<span>Deleting your account is permanent. All of your data, including messages and photos, will be erased from the app. <span class="font-bold text-zinc-900 dark:text-zinc-100">This cannot be undone.</span></span>
 							</li>
 							<li class="flex gap-3">
 								<span class="shrink-0 text-red-500">•</span>
@@ -57,7 +56,7 @@
 							</li>
 							<li class="flex gap-3">
 								<span class="shrink-0 text-red-500">•</span>
-								<span>If you are having problems with the app, questions about your privacy, or if you are experiencing trouble with another Pal, we'd like to help before you go. Please <a href="#" class="text-red-500 font-bold underline decoration-2 underline-offset-4">reach out</a> to us.</span>
+								<span>If you had a bad experience with the app, we'd like to hear about it. You can contact us <a href="#" class="text-red-500 underline decoration-2 underline-offset-4">here</a>.</span>
 							</li>
 							<li class="flex gap-3">
 								<span class="shrink-0 text-red-500">•</span>
@@ -89,7 +88,7 @@
 					Request received
 				</h2>
 				<p class="text-xl text-zinc-800 dark:text-zinc-200 leading-relaxed mb-8">
-					We're preparing to delete your Pals account. You will receive a text message in about an hour. Tap the link in that message to complete the deletion process.
+					We’re preparing to delete your Pals account. You will receive a text message once the process is complete. We’ll miss you.
 				</p>
 				<button onclick="window.location.href='onboarding1.html'" class="w-full py-4 rounded-full bg-zinc-100 dark:bg-zinc-800 text-zinc-900 dark:text-zinc-100 font-black active:scale-95 transition-all">
 					Okay

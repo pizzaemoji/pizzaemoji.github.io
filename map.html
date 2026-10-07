@@ -108,7 +108,7 @@ else s+='<circle class="'+CLS[t]+'" cx="10" cy="10" r="7.5" stroke-width="1.4"/>
 return s+'</svg>'}
 var sym='<svg width="22" height="18"><rect x="1.5" y="2.5" width="19" height="13" rx="4" fill="#7F77DD" fill-opacity="0.2" stroke="#7F77DD" stroke-dasharray="3 2"/></svg>';
 var rg='<svg width="20" height="20"><circle cx="10" cy="10" r="7.5" fill="none" stroke="#E24B4A" stroke-width="2" stroke-dasharray="4 3"/></svg>';
-document.getElementById('lg').innerHTML='<span>'+icon('formal')+'Formal (title, budget)</span><span>'+icon('relational')+'Relational (trust, access)</span><span>'+icon('low')+'External or little influence</span><span>'+sym+'Open floor (symbolic influence shared by everyone)</span><p><span>Bigger shape = more connections</span><span>Thicker line = more traffic or priority</span></p>';
+document.getElementById('lg').innerHTML='<span>'+icon('formal')+'Formal (title, budget)</span><span>'+icon('relational')+'Relational (trust, access)</span><span>'+icon('low')+'External or little influence</span><span>'+sym+'Open floor (symbolic influence shared by everyone)</span><span>Bigger shape = more connections</span><span>Thicker line = more traffic or priority</span>';
 function hull(P){P=P.slice().sort(function(a,b){return a[0]-b[0]||a[1]-b[1]});
 function cr(o,a,b){return (a[0]-o[0])*(b[1]-o[1])-(a[1]-o[1])*(b[0]-o[0])}
 var L=[],U=[],i,p;

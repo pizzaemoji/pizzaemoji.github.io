@@ -159,6 +159,27 @@
   .color-choice.selected-purple  .choice-name { color: #c5b3e6; }
   .color-choice.selected-green .choice-name { color: #a5d6a7; }
 
+  .confirm-toggle {
+    display: flex; align-items: flex-start; gap: 14px; width: 100%;
+    background: #1e2a33; border: 1px solid #2d3e4a; border-radius: 16px;
+    padding: 16px 18px; margin-bottom: 28px; cursor: pointer;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .confirm-toggle input {
+    appearance: none; -webkit-appearance: none; flex-shrink: 0;
+    width: 28px; height: 28px; margin-top: 1px; border-radius: 8px;
+    border: 2px solid #3d5060; background: #2c3640; cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: background 0.15s, border-color 0.15s;
+  }
+  .confirm-toggle input:checked { background: #e8c97a; border-color: #e8c97a; }
+  .confirm-toggle input:checked::after {
+    content: '\2713'; color: #2c3640; font-size: 19px; font-weight: 800; line-height: 1;
+  }
+  .confirm-toggle-text { display: flex; flex-direction: column; gap: 3px; text-align: left; }
+  .confirm-toggle-name { font-size: 18px; font-weight: 800; color: #f0ebe0; }
+  .confirm-toggle-desc { font-size: 14px; font-weight: 600; color: #8fa0b0; line-height: 1.4; }
+
   /* WAITING */
   #waitingScreen { height: 100vh; height: -webkit-fill-available; justify-content: center; gap: 0; }
   .waiting-title {
@@ -409,6 +430,13 @@
       <span class="choice-name">Green</span>
     </div>
   </div>
+  <label class="confirm-toggle" for="confirmToggle">
+    <input type="checkbox" id="confirmToggle" checked>
+    <span class="confirm-toggle-text">
+      <span class="confirm-toggle-name">Tap to confirm moves</span>
+      <span class="confirm-toggle-desc">Shows a Confirm button after you pick a column. Good for new players. This only changes your phone.</span>
+    </span>
+  </label>
   <button class="btn-main" id="letsPlayBtn" disabled>Let's Play</button>
 </div>
 
@@ -481,6 +509,11 @@ let lastMoveRow = null, lastMoveCol = null;
 let chaseInterval = null, unsubscribe = null;
 let localMode = false;   // true = Pass and Play (one device, no Firestore)
 let scores = { green: 0, purple: 0 };   // wins this session, by color
+const CONFIRM_KEY = 'cutefour_confirm';
+let confirmMoves = true;                 // per-device: show the Confirm button? (online only)
+try { confirmMoves = localStorage.getItem(CONFIRM_KEY) !== 'off'; } catch (e) {}
+let committing = false;                  // true while a move is being saved
+const needsConfirm = () => confirmMoves && !localMode;
 
 /* ── Helpers ──────────────────────────────── */
 const myTurn  = () => currentTurn === myRole;
@@ -563,6 +596,10 @@ document.getElementById('letsPlayBtn')  .addEventListener('click', onPlayer1Read
 document.getElementById('copyBtn')      .addEventListener('click', () => copyLink('copyBtn'));
 document.getElementById('waitingCopyBtn').addEventListener('click', () => copyLink('waitingCopyBtn'));
 document.getElementById('btnHome')      .addEventListener('click', goHome);
+document.getElementById('confirmToggle').addEventListener('change', e => {
+  confirmMoves = e.target.checked;
+  try { localStorage.setItem(CONFIRM_KEY, confirmMoves ? 'on' : 'off'); } catch (err) {}
+});
 
 document.getElementById('choicePurple')   .addEventListener('click', () => selectColor('purple'));
 document.getElementById('choiceGreen')  .addEventListener('click', () => selectColor('green'));
@@ -667,6 +704,7 @@ async function onNewGame() {
   document.getElementById('choicePurple').className  = 'color-choice';
   document.getElementById('choiceGreen').className = 'color-choice';
   document.getElementById('letsPlayBtn').disabled  = true;
+  document.getElementById('confirmToggle').checked = confirmMoves;
   myColor = null;
   show('shareScreen');
 }
@@ -927,7 +965,7 @@ function disableBoard() {
 
 /* ── Tap to place ─────────────────────────── */
 function onCellClick(col) {
-  if (isAnimating || gameOver || !myTurn()) return;
+  if (isAnimating || committing || gameOver || !myTurn()) return;
   const row = getDropRow(col);
   if (row===-1) return;
   if (pendingCol===col) return;
@@ -954,8 +992,12 @@ function onCellClick(col) {
   setTimeout(() => {
     isAnimating = false;
     tok.classList.remove('dropping');
-    tok.classList.add('pending-'+myColor);
-    setConfirm('confirm');
+    if (needsConfirm()) {
+      tok.classList.add('pending-'+myColor);
+      setConfirm('confirm');
+    } else {
+      confirmMove();   // no Confirm button: the tap is the move
+    }
   }, duration*1000+30);
 }
 
@@ -1007,6 +1049,7 @@ function cancelPending() {
 /* ── Confirm and write to Firestore ─────────── */
 async function confirmMove() {
   if (isAnimating||gameOver||pendingCol===null) return;
+  committing = true;
   const col=pendingCol, row=pendingRow;
   document.removeEventListener('click', onOutsideClick, {capture:true});
   outsideClickActive=false;
@@ -1034,8 +1077,9 @@ async function confirmMove() {
       loserRole:   win ? (myRole==='player1' ? 'player2' : 'player1') : null
     };
     if (win) update['scores.' + myRole] = increment(1);
-    await updateDoc(gameRef(), update);
+    try { await updateDoc(gameRef(), update); } finally { committing = false; }
   }
+  committing = false;
 
   setConfirm('empty');
 

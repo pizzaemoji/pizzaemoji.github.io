@@ -263,14 +263,13 @@ const COLORS = [
   { n: 'White',  h: '#eae4d6' },
 ];
 const DAILY_CFG    = { c: 6, l: 4, r: true };   // the Daily Puzzle's fixed settings
-const DAILY_LAUNCH = [2026, 11, 1];             // Daily #1
 
 /* ── State ────────────────────────────────── */
 let mode = null;            // 'solo' | 'vs' | 'daily'
 let seed = '', cfg = { c: 5, l: 4, r: false };
 let code = [], guesses = [], cur = [], sel = 0;
 let over = false, won = false, maxG = 10;
-let dateKey = '', dailyNum = 0;
+let dateKey = '', dailyLabel = '';
 let setup = { c: 5, l: 4, r: false };   // setup-screen choices (defaults: 5 colors, 4 long, no repeats)
 let setupMode = 'solo', setupSeed = '';
 let fromFriendLink = false;
@@ -408,7 +407,9 @@ function resetShareBtn() {
 
 async function shareLink(url, text, btn) {
   try {
-    if (navigator.share) { await navigator.share({ title: 'Secret Code', text, url }); return true; }
+    // Everything goes in one block of text (link last). Passing the link as a separate field makes
+    // some phone share sheets (iMessage etc.) drop the text and send only the link.
+    if (navigator.share) { await navigator.share({ text: text + '\n' + url }); return true; }
   } catch (e) { if (e && e.name === 'AbortError') return false; }
   try { await navigator.clipboard.writeText(text + '\n' + url); }
   catch (e) {
@@ -461,9 +462,7 @@ function startVs()   { startGame('vs', setup, setupSeed); }
 function startDaily() {
   const d = new Date();
   dateKey = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
-  const today  = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
-  const launch = Date.UTC(DAILY_LAUNCH[0], DAILY_LAUNCH[1] - 1, DAILY_LAUNCH[2]);
-  dailyNum = Math.max(1, Math.floor((today - launch) / 86400000) + 1);
+  dailyLabel = d.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });   // e.g. "Oct 28"
   startGame('daily', DAILY_CFG, 'daily-' + dateKey);
 }
 
@@ -471,7 +470,7 @@ function startDaily() {
 function renderAll() { renderHeader(); renderControls(); renderBoard(); }   // controls first: the board sizes itself to the space that's left
 
 function renderHeader() {
-  const label = mode === 'daily' ? 'Daily Puzzle #' + dailyNum : mode === 'vs' ? 'VS Friend' : 'Solo Game';
+  const label = mode === 'daily' ? 'Daily Puzzle · ' + dailyLabel : mode === 'vs' ? 'VS Friend' : 'Solo Game';
   $('gameInfo').textContent = over ? label : label + ' · Guess ' + Math.min(guesses.length + 1, maxG) + ' of ' + maxG;
   let sub = cfg.c + ' colors · ' + cfg.l + ' spots · ' + (cfg.r ? 'repeats allowed' : 'no repeats');
   if (mode === 'vs' && fromFriendLink && !over) sub = "Same code as your friend. Fewest guesses wins!";
@@ -624,7 +623,7 @@ function resultGrid() {
 }
 function shareText() {
   const n = guesses.length;
-  if (mode === 'daily') return 'Secret Code · Daily #' + dailyNum + '\n' + (won ? 'Cracked it in ' + n + '/' + maxG : 'Missed it (X/' + maxG + ')') + '\n' + resultGrid();
+  if (mode === 'daily') return 'Secret Code · Daily ' + dailyLabel + '\n' + (won ? 'Cracked it in ' + n + '/' + maxG : 'Missed it (X/' + maxG + ')') + '\n' + resultGrid();
   return won ? 'I cracked the code in ' + n + ' guess' + (n === 1 ? '' : 'es') + '! Can you beat me?'
              : "I couldn't crack the code in " + n + " guesses. Can you?";
 }

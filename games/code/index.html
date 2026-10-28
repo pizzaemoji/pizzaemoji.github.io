@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<title>Crack the Code</title>
+<title>Secret Code</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
 
@@ -31,13 +31,11 @@
   /* HOME */
   #homeScreen { height: 100vh; height: -webkit-fill-available; justify-content: center; }
   .home-title {
-    font-family: 'Lora', serif; font-size: 56px; font-weight: 700;
-    color: #f0ebe0; letter-spacing: -1.5px; text-align: center; line-height: 1.05; margin-bottom: 22px;
+    font-family: 'Lora', serif; font-size: 62px; font-weight: 700;
+    color: #f0ebe0; letter-spacing: 3px; text-align: center; line-height: 1.12; margin-bottom: 34px;
   }
-  .home-dots { display: flex; gap: 10px; justify-content: center; margin-bottom: 34px; }
-  .home-dot { width: 34px; height: 10px; border-radius: 4px; animation: bob 2.4s ease-in-out infinite; }
-  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
-
+  .tl { white-space: nowrap; }
+  .ld { display: inline-block; width: 0.62em; height: 0.14em; border-radius: 0.05em; vertical-align: 0.27em; margin: 0 0.09em; }
   .mode-card {
     width: 100%; background: #1e2a33; border: 1.5px solid #2d3e4a; border-radius: 18px;
     padding: 18px 24px; margin-bottom: 14px; text-align: left; cursor: pointer; color: inherit;
@@ -90,7 +88,7 @@
   #gameScreen { height: 100vh; height: -webkit-fill-available; justify-content: center; padding-top: 10px; padding-bottom: 12px; gap: 0; overflow: hidden; }
   .game-top { width: 100%; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; margin-bottom: 2px; }
   .game-title-btn {
-    font-family: 'Lora', serif; font-size: 17px; font-weight: 600; color: #7a9aaa; cursor: pointer;
+    font-family: 'Lora', serif; font-size: 17px; font-weight: 700; color: #a8b8c4; letter-spacing: 1.5px; cursor: pointer;
     background: none; border: none; padding: 4px 0;
   }
   .game-title-btn:active { color: #a0bfcc; }
@@ -177,20 +175,21 @@
 
 <!-- HOME -->
 <div class="screen active" id="homeScreen">
-  <div class="eyebrow">a game for one or two</div>
-  <div class="home-title">Crack<br>the Code</div>
-  <div class="home-dots" id="homeDots"></div>
+  <div class="home-title" role="img" aria-label="Secret Code">
+    <div class="tl" aria-hidden="true">S<i class="ld" style="background:#ef7b7b"></i>CR<i class="ld" style="background:#5aa9e6"></i>T</div>
+    <div class="tl" aria-hidden="true">C<i class="ld" style="background:#f2d45c"></i>D<i class="ld" style="background:#7bc67e"></i></div>
+  </div>
   <button class="mode-card" id="btnSolo">
     <div class="mode-card-name">Play Solo</div>
     <div class="mode-card-desc">Crack a secret code on your own.</div>
   </button>
   <button class="mode-card" id="btnVs">
-    <div class="mode-card-name">Race a Friend</div>
+    <div class="mode-card-name">VS Friend</div>
     <div class="mode-card-desc">You both get the same code. Fewest guesses wins.</div>
   </button>
   <button class="mode-card" id="btnDaily">
     <div class="mode-card-name">Daily Puzzle</div>
-    <div class="mode-card-desc">Everyone gets the same code today.</div>
+    <div class="mode-card-desc">Solve today's code.</div>
   </button>
   <button class="help-link" id="btnHowHome">How to play</button>
 </div>
@@ -227,7 +226,7 @@
 <!-- GAME -->
 <div class="screen" id="gameScreen">
   <div class="game-top">
-    <button class="game-title-btn" id="btnHome">Crack the Code</button>
+    <button class="game-title-btn" id="btnHome" aria-label="Secret Code, back to home"><span aria-hidden="true">S<i class="ld" style="background:#ef7b7b"></i>CR<i class="ld" style="background:#5aa9e6"></i>T C<i class="ld" style="background:#f2d45c"></i>D<i class="ld" style="background:#7bc67e"></i></span></button>
     <button class="help-btn" id="btnHowGame" aria-label="How to play">?</button>
   </div>
   <div class="game-info" id="gameInfo"></div>
@@ -360,17 +359,6 @@ function buildUrl(m, s, c) {
 function setUrl(u) { try { history.replaceState({}, '', u); } catch (e) {} }
 
 /* ── Home ─────────────────────────────────── */
-(function buildHomeDots() {
-  const el = $('homeDots');
-  COLORS.forEach((c, i) => {
-    const d = document.createElement('div');
-    d.className = 'home-dot';
-    d.style.background = c.h;
-    d.style.animationDelay = (i * 0.18) + 's';
-    el.appendChild(d);
-  });
-})();
-
 function goHome() {
   closeModal();
   setUrl(baseUrl());
@@ -387,7 +375,7 @@ function openSetup(m) {
   setupSeed = newSeed();
   setup = { c: 5, l: 4, r: false };
   $('setupEyebrow').textContent = m === 'vs' ? 'you and a friend get the same code' : 'just you';
-  $('setupTitle').textContent = m === 'vs' ? 'Race a Friend' : 'Solo Game';
+  $('setupTitle').textContent = m === 'vs' ? 'VS Friend' : 'Solo Game';
   $('btnShare').style.display = m === 'vs' ? '' : 'none';
   resetShareBtn();
   renderSetup();
@@ -420,7 +408,7 @@ function resetShareBtn() {
 
 async function shareLink(url, text, btn) {
   try {
-    if (navigator.share) { await navigator.share({ title: 'Crack the Code', text, url }); return true; }
+    if (navigator.share) { await navigator.share({ title: 'Secret Code', text, url }); return true; }
   } catch (e) { if (e && e.name === 'AbortError') return false; }
   try { await navigator.clipboard.writeText(text + '\n' + url); }
   catch (e) {
@@ -483,7 +471,7 @@ function startDaily() {
 function renderAll() { renderHeader(); renderControls(); renderBoard(); }   // controls first: the board sizes itself to the space that's left
 
 function renderHeader() {
-  const label = mode === 'daily' ? 'Daily Puzzle #' + dailyNum : mode === 'vs' ? 'Race a Friend' : 'Solo Game';
+  const label = mode === 'daily' ? 'Daily Puzzle #' + dailyNum : mode === 'vs' ? 'VS Friend' : 'Solo Game';
   $('gameInfo').textContent = over ? label : label + ' · Guess ' + Math.min(guesses.length + 1, maxG) + ' of ' + maxG;
   let sub = cfg.c + ' colors · ' + cfg.l + ' spots · ' + (cfg.r ? 'repeats allowed' : 'no repeats');
   if (mode === 'vs' && fromFriendLink && !over) sub = "Same code as your friend. Fewest guesses wins!";
@@ -636,7 +624,7 @@ function resultGrid() {
 }
 function shareText() {
   const n = guesses.length;
-  if (mode === 'daily') return 'Crack the Code · Daily #' + dailyNum + '\n' + (won ? 'Cracked it in ' + n + '/' + maxG : 'Missed it (X/' + maxG + ')') + '\n' + resultGrid();
+  if (mode === 'daily') return 'Secret Code · Daily #' + dailyNum + '\n' + (won ? 'Cracked it in ' + n + '/' + maxG : 'Missed it (X/' + maxG + ')') + '\n' + resultGrid();
   return won ? 'I cracked the code in ' + n + ' guess' + (n === 1 ? '' : 'es') + '! Can you beat me?'
              : "I couldn't crack the code in " + n + " guesses. Can you?";
 }
@@ -668,7 +656,7 @@ function showResult() {
     btns.appendChild(shareBtn);
   }
   if (mode === 'solo') btns.appendChild(mkBtn('btn-main', 'Play again', () => startGame('solo', cfg, newSeed())));
-  if (mode === 'vs')   btns.appendChild(mkBtn('btn-ghost', 'New race', () => openSetup('vs')));
+  if (mode === 'vs')   btns.appendChild(mkBtn('btn-ghost', 'New game', () => openSetup('vs')));
   btns.appendChild(mkBtn('btn-ghost', 'See the board', closeModal));
   btns.appendChild(mkBtn('btn-ghost', 'Home', goHome));
   box.appendChild(btns);

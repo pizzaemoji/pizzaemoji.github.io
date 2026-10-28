@@ -35,7 +35,7 @@
     color: #f0ebe0; letter-spacing: -1.5px; text-align: center; line-height: 1.05; margin-bottom: 22px;
   }
   .home-dots { display: flex; gap: 10px; justify-content: center; margin-bottom: 34px; }
-  .home-dot { width: 26px; height: 26px; border-radius: 50%; animation: bob 2.4s ease-in-out infinite; }
+  .home-dot { width: 34px; height: 10px; border-radius: 4px; animation: bob 2.4s ease-in-out infinite; }
   @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
 
   .mode-card {
@@ -87,8 +87,8 @@
   }
 
   /* GAME */
-  #gameScreen { height: 100vh; height: -webkit-fill-available; justify-content: flex-start; padding-top: 14px; padding-bottom: 14px; gap: 0; overflow: hidden; }
-  .game-top { width: 100%; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; margin-bottom: 6px; }
+  #gameScreen { height: 100vh; height: -webkit-fill-available; justify-content: center; padding-top: 10px; padding-bottom: 12px; gap: 0; overflow: hidden; }
+  .game-top { width: 100%; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; margin-bottom: 2px; }
   .game-title-btn {
     font-family: 'Lora', serif; font-size: 17px; font-weight: 600; color: #7a9aaa; cursor: pointer;
     background: none; border: none; padding: 4px 0;
@@ -99,46 +99,44 @@
     color: #7a9aaa; font-size: 16px; font-weight: 800; cursor: pointer;
   }
   .game-info { font-size: 16px; font-weight: 800; color: #c8d8e0; text-align: center; flex-shrink: 0; }
+  .mini-dash { display: inline-block; width: 22px; height: 8px; border-radius: 3px; margin-left: 5px; vertical-align: middle; }
   .game-sub { font-size: 13px; font-weight: 700; color: #8fa0b0; text-align: center; flex-shrink: 0; margin-top: 1px; min-height: 17px; }
-  .secret-wrap { flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 8px; margin: 10px 0 8px; }
-  .secret-label { font-family: 'Lora', serif; font-style: italic; font-size: 13px; color: #7a9aaa; margin-right: 4px; }
-  .legend { flex-shrink: 0; display: flex; gap: 16px; justify-content: center; font-size: 13px; font-weight: 700; color: #8fa0b0; margin-bottom: 8px; }
+  .legend { flex-shrink: 0; display: flex; gap: 16px; justify-content: center; font-size: 13px; font-weight: 700; color: #8fa0b0; margin: 4px 0 6px; }
   .legend span { display: inline-flex; align-items: center; gap: 6px; }
 
   .board {
-    width: 100%; flex: 1; min-height: 0; overflow-y: auto; padding: 10px 12px;
+    width: 100%; flex: 1; min-height: 0; overflow-y: auto; padding: 8px 10px; position: relative;
     background: #3d4e5c; border-radius: 18px;
     box-shadow: 0 8px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
   }
-  .row { display: flex; align-items: center; gap: 10px; padding: 5px 6px; border-radius: 14px; }
+  .row { display: flex; align-items: center; gap: 10px; height: var(--rowh, 40px); padding: 0 6px; border-radius: 10px; }
   .row.active { background: #2c3640; }
   .row.active .fbd:not(.exact):not(.near) { background: #3d4e5c; }
   .row.empty { opacity: 0.45; }
   .rnum { width: 20px; text-align: right; font-size: 13px; font-weight: 800; color: #8fa0b0; flex-shrink: 0; }
-  .pegs { display: flex; gap: 8px; }
-  .peg { width: var(--peg); height: var(--peg); border-radius: 50%; flex-shrink: 0; background: #243040; }
+  .pegs { display: flex; gap: 8px; flex: 1; min-width: 0; }
+  .peg { flex: 1; min-width: 0; height: var(--dh, 16px); border-radius: 4px; background: #243040; position: relative; }
   .peg.slot { cursor: pointer; }
-  .peg.sel { box-shadow: 0 0 0 3px #e8c97a; }
+  .peg.slot::before { content: ''; position: absolute; inset: -14px -4px; }   /* bigger tap area than the thin dash */
+  .peg.sel { box-shadow: 0 0 0 2px #e8c97a; }
   .peg.pop { animation: pegPop 0.18s cubic-bezier(0.175,0.885,0.32,1.275); }
-  @keyframes pegPop { from { transform: scale(0.6); } to { transform: scale(1); } }
-  .fb { display: grid; gap: 4px; margin-left: 4px; }
-  .fbd { width: 12px; height: 12px; border-radius: 50%; background: #2c3640; }
-  .fbd.exact { background: #e8c97a; }
-  .fbd.near { background: transparent; box-shadow: inset 0 0 0 2.5px #e8c97a; }
-  .legend .fbd { background: #e8c97a; }
+  @keyframes pegPop { from { transform: scale(0.7, 0.3); } to { transform: scale(1); } }
+  .fb { display: grid; gap: 3px; margin-left: 4px; flex-shrink: 0; }
+  .fbd { width: var(--fbd, 12px); height: var(--fbd, 12px); border-radius: 50%; background: #2c3640; }
+  .fbd.exact { background: #d9dde0; }
+  .fbd.near { background: transparent; box-shadow: inset 0 0 0 calc(var(--fbd, 12px) * 0.22) #d9dde0; }
+  .legend .fbd { background: #d9dde0; }
   .legend .fbd.near { background: transparent; }
 
-  .secret-peg { width: 30px; height: 30px; border-radius: 50%; background: #243040; display: flex; align-items: center; justify-content: center; color: #5d7284; font-weight: 800; font-size: 16px; }
-  .secret-peg.reveal { animation: pegPop 0.35s cubic-bezier(0.175,0.885,0.32,1.275); color: transparent; }
 
-  .controls { width: 100%; flex-shrink: 0; margin-top: 12px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .controls { width: 100%; flex-shrink: 0; margin-top: 10px; display: flex; flex-direction: column; align-items: center; gap: 10px; }
   .palette { display: flex; gap: 10px; justify-content: center; }
-  .pal { width: var(--pal); height: var(--pal); border-radius: 50%; border: none; cursor: pointer; transition: transform 0.1s, opacity 0.15s; }
+  .pal { width: var(--palw); height: 40px; border-radius: 8px; border: none; cursor: pointer; transition: transform 0.1s, opacity 0.15s; }
   .pal:active { transform: scale(0.9); }
   .pal:disabled { opacity: 0.18; cursor: default; transform: none; }
   .ctl-row { display: flex; gap: 12px; width: 100%; justify-content: center; }
   .ctl-btn {
-    border: none; border-radius: 16px; font-size: 20px; font-weight: 800; padding: 14px 0; cursor: pointer;
+    border: none; border-radius: 16px; font-size: 20px; font-weight: 800; padding: 12px 0; cursor: pointer;
     transition: transform 0.1s, background 0.15s;
   }
   .ctl-btn:active { transform: scale(0.97); }
@@ -157,7 +155,7 @@
   .modal-title { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
   .modal-sub { font-size: 18px; font-weight: 700; color: #c8d8e0; margin-bottom: 16px; line-height: 1.4; }
   .modal-code { display: flex; gap: 8px; justify-content: center; margin-bottom: 18px; }
-  .modal-code .peg { --peg: 34px; }
+  .modal-code .peg { width: 44px; height: 14px; flex: none; }
   .modal-btns { display: flex; flex-direction: column; gap: 10px; align-items: center; }
   .modal-btns .btn-main, .modal-btns .btn-ghost { width: 100%; max-width: 260px; padding-left: 0; padding-right: 0; }
   .how { text-align: left; font-size: 16px; font-weight: 600; color: #c8d8e0; line-height: 1.5; margin-bottom: 18px; }
@@ -209,7 +207,7 @@
   </div>
   <div class="opt-group">
     <div class="opt-label">Code length</div>
-    <div class="opt-hint">How many dots are in the secret code.</div>
+    <div class="opt-hint">How many spots are in the secret code.</div>
     <div class="seg" id="segLen"></div>
   </div>
   <div class="opt-group">
@@ -234,7 +232,6 @@
   </div>
   <div class="game-info" id="gameInfo"></div>
   <div class="game-sub" id="gameSub"></div>
-  <div class="secret-wrap" id="secretWrap"></div>
   <div class="legend">
     <span><i class="fbd exact"></i> right spot</span>
     <span><i class="fbd near"></i> right color, wrong spot</span>
@@ -483,36 +480,23 @@ function startDaily() {
 }
 
 /* ── Rendering ────────────────────────────── */
-function pegSize() {
-  const avail = Math.min(window.innerWidth, 520) - 32 - 24 - 12;      // screen padding, board padding, row padding
-  const fbW = Math.ceil(cfg.l / 2) * 16;
-  const w = avail - 20 - 10 - 14 - fbW - (cfg.l - 1) * 8;
-  return Math.max(24, Math.min(46, Math.floor(w / cfg.l)));
-}
-function renderAll() { renderHeader(); renderSecret(); renderBoard(); renderControls(); }
+function renderAll() { renderHeader(); renderControls(); renderBoard(); }   // controls first: the board sizes itself to the space that's left
 
 function renderHeader() {
   const label = mode === 'daily' ? 'Daily Puzzle #' + dailyNum : mode === 'vs' ? 'Race a Friend' : 'Solo Game';
   $('gameInfo').textContent = over ? label : label + ' · Guess ' + Math.min(guesses.length + 1, maxG) + ' of ' + maxG;
-  let sub = cfg.c + ' colors · ' + cfg.l + ' dots · ' + (cfg.r ? 'repeats allowed' : 'no repeats');
+  let sub = cfg.c + ' colors · ' + cfg.l + ' spots · ' + (cfg.r ? 'repeats allowed' : 'no repeats');
   if (mode === 'vs' && fromFriendLink && !over) sub = "Same code as your friend. Fewest guesses wins!";
-  $('gameSub').textContent = sub;
-}
-function renderSecret() {
-  const w = $('secretWrap');
-  w.innerHTML = '<span class="secret-label">secret code</span>';
-  for (let i = 0; i < cfg.l; i++) {
-    const p = document.createElement('div');
-    p.className = 'secret-peg';
-    if (over) { p.style.background = COLORS[code[i]].h; p.classList.add('reveal'); }
-    else p.textContent = '?';
-    w.appendChild(p);
-  }
+  const subEl = $('gameSub');
+  if (over && !won) {                       // lost: show the answer here, so the board never changes size
+    subEl.textContent = 'The code was';
+    code.forEach(ci => { const d = document.createElement('i'); d.className = 'mini-dash'; d.style.background = COLORS[ci].h; subEl.appendChild(d); });
+  } else subEl.textContent = sub;
 }
 function fbEl(f, l) {
   const fb = document.createElement('div');
   fb.className = 'fb';
-  fb.style.gridTemplateColumns = 'repeat(' + Math.ceil(l / 2) + ', 12px)';
+  fb.style.gridTemplateColumns = 'repeat(' + Math.ceil(l / 2) + ', var(--fbd, 12px))';
   for (let i = 0; i < l; i++) {
     const d = document.createElement('div');
     d.className = 'fbd' + (f ? (i < f.exact ? ' exact' : i < f.exact + f.near ? ' near' : '') : '');
@@ -522,7 +506,21 @@ function fbEl(f, l) {
 }
 function renderBoard() {
   const board = $('board');
-  board.style.setProperty('--peg', pegSize() + 'px');
+  /* Fit all rows on screen: measure the space the board has and divide it up.
+     If a very small screen can't fit them, rows stop shrinking and the board scrolls instead. */
+  const PAD = 8, MINROW = 20, MAXROW = 56;
+  board.style.maxHeight = '';
+  const avail = board.clientHeight - PAD * 2;
+  let rowH = Math.floor(avail / maxG);
+  const fits = rowH >= MINROW;
+  rowH = Math.max(MINROW, Math.min(MAXROW, rowH));
+  if (fits && rowH === MAXROW) board.style.maxHeight = (rowH * maxG + PAD * 2) + 'px';   // very tall screens: don't stretch
+  const dh  = Math.max(9, Math.min(20, Math.round(rowH * 0.42)));        // thickness of each colored dash
+  const fbd = Math.max(6, Math.min(12, Math.floor((rowH - 6) / 2) - 2));  // size of the small feedback dots
+  board.style.setProperty('--rowh', rowH + 'px');
+  board.style.setProperty('--dh', dh + 'px');
+  board.style.setProperty('--fbd', fbd + 'px');
+  board.style.overflowY = fits ? 'hidden' : 'auto';
   board.innerHTML = '';
   let activeRow = null;
   for (let i = 0; i < maxG; i++) {
@@ -550,10 +548,13 @@ function renderBoard() {
     row.appendChild(num); row.appendChild(pegs); row.appendChild(fbEl(f, cfg.l));
     board.appendChild(row);
   }
-  const target = activeRow || board.lastElementChild;
-  if (target) {
-    const top = target.offsetTop - board.clientHeight / 2 + target.offsetHeight / 2;
-    board.scrollTop = Math.max(0, top);
+  if (!fits) {                               // only on tiny screens: nudge just enough to keep the active row in view
+    const target = activeRow || board.lastElementChild;
+    if (target) {
+      const t = target.offsetTop, b = t + target.offsetHeight;
+      if (t < board.scrollTop) board.scrollTop = t - PAD;
+      else if (b > board.scrollTop + board.clientHeight) board.scrollTop = b - board.clientHeight + PAD;
+    }
   }
 }
 function renderControls() {
@@ -566,8 +567,8 @@ function renderControls() {
     c.appendChild(b);
     return;
   }
-  const palSize = Math.max(30, Math.min(46, Math.floor((Math.min(window.innerWidth, 520) - 32 - (cfg.c - 1) * 10) / cfg.c)));
-  c.style.setProperty('--pal', palSize + 'px');
+  const palW = Math.max(28, Math.min(64, Math.floor((Math.min(window.innerWidth, 520) - 32 - (cfg.c - 1) * 10) / cfg.c)));
+  c.style.setProperty('--palw', palW + 'px');
   const pal = document.createElement('div'); pal.className = 'palette';
   for (let i = 0; i < cfg.c; i++) {
     const b = document.createElement('button');
@@ -598,7 +599,7 @@ function placeColor(ci) {
   if (at === -1) return;
   cur[at] = ci;
   sel = firstEmpty();
-  renderBoard(); renderControls();
+  renderControls(); renderBoard();
   const slot = $('board').querySelector('.row.active').children[1].children[at];
   if (slot) slot.classList.add('pop');
 }
@@ -606,7 +607,7 @@ function tapSlot(k) {
   if (over) return;
   if (cur[k] !== null) cur[k] = null;
   sel = k;
-  renderBoard(); renderControls();
+  renderControls(); renderBoard();
 }
 function deleteLast() {
   if (over) return;
@@ -614,7 +615,7 @@ function deleteLast() {
   for (let i = cfg.l - 1; i >= 0; i--) if (cur[i] !== null) { last = i; break; }
   if (last === -1) return;
   cur[last] = null; sel = last;
-  renderBoard(); renderControls();
+  renderControls(); renderBoard();
 }
 function submitGuess() {
   if (over || cur.includes(null)) return;
@@ -631,7 +632,7 @@ function submitGuess() {
 
 /* ── Results + sharing ────────────────────── */
 function resultGrid() {
-  return guesses.map(x => '🟡'.repeat(x.f.exact) + '⚪'.repeat(x.f.near) + '⚫'.repeat(cfg.l - x.f.exact - x.f.near)).join('\n');
+  return guesses.map(x => '⬜'.repeat(x.f.exact) + '🔳'.repeat(x.f.near) + '⬛'.repeat(cfg.l - x.f.exact - x.f.near)).join('\n');
 }
 function shareText() {
   const n = guesses.length;
@@ -679,11 +680,11 @@ function showHow() {
   const t = document.createElement('div'); t.className = 'modal-title'; t.textContent = 'How to play';
   const how = document.createElement('div'); how.className = 'how';
   how.innerHTML =
-    '<p>There is a secret code made of colored dots. Crack it in as few guesses as you can.</p>' +
+    '<p>There is a secret code made of colored dashes. Crack it in as few guesses as you can.</p>' +
     '<p>Tap colors to fill a row, then tap <b>Check</b>.</p>' +
-    '<p><i class="fbd exact"></i> A solid gold dot means one of your colors is correct and in the right spot.</p>' +
-    '<p><i class="fbd near"></i> A gold ring means that color is in the code, but in a different spot.</p>' +
-    '<p>The little dots do not line up with your dots. They only tell you how many, not which ones.</p>';
+    '<p><i class="fbd exact"></i> A solid light-gray dot means one of your colors is correct and in the right spot.</p>' +
+    '<p><i class="fbd near"></i> A light-gray ring means that color is in the code, but in a different spot.</p>' +
+    '<p>The little dots do not line up with your dashes. They only tell you how many, not which ones.</p>';
   const btns = document.createElement('div'); btns.className = 'modal-btns';
   btns.appendChild(mkBtn('btn-main', 'Got it', closeModal));
   box.appendChild(t); box.appendChild(how); box.appendChild(btns);

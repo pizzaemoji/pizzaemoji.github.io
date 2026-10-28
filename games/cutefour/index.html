@@ -161,8 +161,8 @@
 
   .confirm-toggle {
     display: flex; align-items: flex-start; gap: 14px; width: 100%;
-    background: #1e2a33; border: 1px solid #2d3e4a; border-radius: 16px;
-    padding: 16px 18px; margin-bottom: 28px; cursor: pointer;
+    background: none; border: none;
+    padding: 8px 4px; margin-bottom: 28px; cursor: pointer;
     -webkit-tap-highlight-color: transparent;
   }
   .confirm-toggle input {
@@ -434,7 +434,7 @@
     <input type="checkbox" id="confirmToggle" checked>
     <span class="confirm-toggle-text">
       <span class="confirm-toggle-name">Tap to confirm moves</span>
-      <span class="confirm-toggle-desc">Shows a Confirm button after you pick a column. Good for new players. This only changes your phone.</span>
+      <span class="confirm-toggle-desc">Shows a Confirm button after you play a token. Good for new players.</span>
     </span>
   </label>
   <button class="btn-main" id="letsPlayBtn" disabled>Let's Play</button>
@@ -509,9 +509,7 @@ let lastMoveRow = null, lastMoveCol = null;
 let chaseInterval = null, unsubscribe = null;
 let localMode = false;   // true = Pass and Play (one device, no Firestore)
 let scores = { green: 0, purple: 0 };   // wins this session, by color
-const CONFIRM_KEY = 'cutefour_confirm';
-let confirmMoves = true;                 // per-device: show the Confirm button? (online only)
-try { confirmMoves = localStorage.getItem(CONFIRM_KEY) !== 'off'; } catch (e) {}
+let confirmMoves = false;                // chosen by the host, stored in the game so both players match (online only)
 let committing = false;                  // true while a move is being saved
 const needsConfirm = () => confirmMoves && !localMode;
 
@@ -596,10 +594,6 @@ document.getElementById('letsPlayBtn')  .addEventListener('click', onPlayer1Read
 document.getElementById('copyBtn')      .addEventListener('click', () => copyLink('copyBtn'));
 document.getElementById('waitingCopyBtn').addEventListener('click', () => copyLink('waitingCopyBtn'));
 document.getElementById('btnHome')      .addEventListener('click', goHome);
-document.getElementById('confirmToggle').addEventListener('change', e => {
-  confirmMoves = e.target.checked;
-  try { localStorage.setItem(CONFIRM_KEY, confirmMoves ? 'on' : 'off'); } catch (err) {}
-});
 
 document.getElementById('choicePurple')   .addEventListener('click', () => selectColor('purple'));
 document.getElementById('choiceGreen')  .addEventListener('click', () => selectColor('green'));
@@ -698,13 +692,14 @@ async function onNewGame() {
     player2Rematch: null,
     loserRole:    null,
     scores:       { player1: 0, player2: 0 },
+    confirmMoves: false,
     createdAt:    serverTimestamp()
   });
   document.getElementById('shareLinkUrl').textContent = gameUrl();
   document.getElementById('choicePurple').className  = 'color-choice';
   document.getElementById('choiceGreen').className = 'color-choice';
   document.getElementById('letsPlayBtn').disabled  = true;
-  document.getElementById('confirmToggle').checked = confirmMoves;
+  document.getElementById('confirmToggle').checked = false;
   myColor = null;
   show('shareScreen');
 }
@@ -721,7 +716,8 @@ function selectColor(color) {
 async function onPlayer1Ready() {
   if (!myColor) return;
   opponentColor = myColor === 'purple' ? 'green' : 'purple';
-  await updateDoc(gameRef(), { player1Color: myColor });
+  confirmMoves = document.getElementById('confirmToggle').checked;
+  await updateDoc(gameRef(), { player1Color: myColor, confirmMoves });
   saveJSON(SESSION_KEY, { gameId, role: 'player1' });
   document.getElementById('waitingLinkUrl').textContent = gameUrl();
   show('waitingScreen');
@@ -785,6 +781,7 @@ async function resumeGame(saved) {
   myColor       = myRole === 'player1' ? data.player1Color : data.player2Color;
   opponentColor = myRole === 'player1' ? data.player2Color : data.player1Color;
   applyScores(data);
+  confirmMoves = !!data.confirmMoves;
 
   if (data.status === 'waiting') {
     document.getElementById('waitingLinkUrl').textContent = gameUrl();
@@ -816,6 +813,7 @@ function listenForGame() {
 /* ── React to state changes ───────────────── */
 function handleGameState(data) {
   applyScores(data);   // stored quietly; shown when a game ends or a new one starts
+  confirmMoves = !!data.confirmMoves;
   const onWaiting = document.getElementById('waitingScreen').classList.contains('active');
   const onGame    = document.getElementById('gameScreen').classList.contains('active');
 
@@ -1353,11 +1351,18 @@ function fireFlash(cell, color) {
 /* ── Win detection ────────────────────────── */
 function checkWin(row,col) {
   const dirs=[[0,1],[1,0],[1,1],[1,-1]], p=board[row][col];
+  const same=(r,c)=>r>=0&&r<ROWS&&c>=0&&c<COLS&&board[r][c]===p;
   for(const [dr,dc] of dirs){
-    const cells=[[row,col]];
-    for(let i=1;i<4;i++){const r=row+dr*i,c=col+dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
-    for(let i=1;i<4;i++){const r=row-dr*i,c=col-dc*i;if(r<0||r>=ROWS||c<0||c>=COLS||board[r][c]!==p)break;cells.push([r,c]);}
-    if(cells.length>=4)return cells.slice(0,4);
+    // Walk both ways from the placed token, then lay the cells out in order along the line
+    const back=[], fwd=[];
+    for(let i=1;i<4&&same(row-dr*i,col-dc*i);i++) back.unshift([row-dr*i,col-dc*i]);
+    for(let i=1;i<4&&same(row+dr*i,col+dc*i);i++) fwd.push([row+dr*i,col+dc*i]);
+    const line=back.concat([[row,col]], fwd);
+    if(line.length>=4){
+      // pick 4 in a row that include the token just placed
+      const start=Math.max(0, Math.min(back.length, line.length-4));
+      return line.slice(start,start+4);
+    }
   }
   return null;
 }

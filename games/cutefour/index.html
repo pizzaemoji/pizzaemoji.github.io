@@ -210,6 +210,20 @@
     border-radius: 50%; vertical-align: middle; margin-right: 7px; position: relative; top: -2px;
   }
 
+  .score-tally {
+    height: 22px; margin-bottom: 6px; flex-shrink: 0;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    font-size: 17px; font-weight: 800; color: #8fa0b0;
+  }
+  .score-tally .tally-dot { width: 12px; height: 12px; border-radius: 50%; }
+  .score-tally .tally-num { min-width: 14px; text-align: center; color: #c8d8e0; }
+  .score-tally .tally-num.pop { animation: tallyPop 0.5s cubic-bezier(0.175,0.885,0.32,1.275); }
+  @keyframes tallyPop {
+    0%   { transform: scale(1); }
+    40%  { transform: scale(1.6); color: #e8c97a; }
+    100% { transform: scale(1); }
+  }
+
   .board-wrap {
     background: #3d4e5c; border-radius: 18px; padding: 10px;
     box-shadow: 0 8px 40px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.06);
@@ -418,6 +432,7 @@
 <!-- GAME -->
 <div class="screen" id="gameScreen">
   <button class="game-title-btn" id="btnHome">Cute Four</button>
+  <div class="score-tally" id="scoreTally"></div>
   <div class="turn-banner" id="turnBanner"></div>
   <div class="board-wrap" id="boardWrap">
     <div class="grid" id="grid"></div>
@@ -437,7 +452,7 @@
 <script type="module">
 import { initializeApp }                          from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-app.js';
 import { getFirestore, doc, setDoc, getDoc,
-         updateDoc, onSnapshot, serverTimestamp,
+         updateDoc, onSnapshot, serverTimestamp, runTransaction, increment,
          initializeFirestore, persistentLocalCache } from 'https://www.gstatic.com/firebasejs/12.13.0/firebase-firestore.js';
 
 /* ── Firebase ─────────────────────────────── */
@@ -465,6 +480,7 @@ let pendingCol = null, pendingRow = null, isAnimating = false;
 let lastMoveRow = null, lastMoveCol = null;
 let chaseInterval = null, unsubscribe = null;
 let localMode = false;   // true = Pass and Play (one device, no Firestore)
+let scores = { green: 0, purple: 0 };   // wins this session, by color
 
 /* ── Helpers ──────────────────────────────── */
 const myTurn  = () => currentTurn === myRole;
@@ -474,6 +490,48 @@ const gameUrl = () => location.origin + location.pathname + '?game=' + gameId;
 const emptyBoard  = () => Array(ROWS * COLS).fill(0);
 const flatBoard   = () => board.reduce((a, r) => a.concat(r), []);
 const unflatBoard = flat => Array.from({length:ROWS}, (_, r) => flat.slice(r*COLS, r*COLS+COLS));
+
+/* ── Saved games (so a refresh doesn't lose your place) ── */
+const SESSION_KEY = 'cutefour_online';
+const LOCAL_KEY   = 'cutefour_local';
+const MAX_AGE     = 12 * 60 * 60 * 1000;   // forget saved games after 12 hours
+function saveJSON(key, val) {
+  try { localStorage.setItem(key, JSON.stringify(Object.assign({ ts: Date.now() }, val))); } catch (e) {}
+}
+function loadJSON(key) {
+  try {
+    const v = JSON.parse(localStorage.getItem(key));
+    if (v && Date.now() - v.ts < MAX_AGE) return v;
+  } catch (e) {}
+  return null;
+}
+function clearJSON(key) { try { localStorage.removeItem(key); } catch (e) {} }
+function saveLocal(over, winCol) {
+  saveJSON(LOCAL_KEY, { board: flatBoard(), turn: myRole, scores, over, winnerColor: winCol });
+}
+
+/* ── Score tally ──────────────────────────── */
+function applyScores(data) {
+  const s = data.scores || {};
+  if (data.player1Color) scores[data.player1Color] = s.player1 || 0;
+  if (data.player2Color) scores[data.player2Color] = s.player2 || 0;
+}
+function renderTally(popColor) {
+  const el = document.getElementById('scoreTally');
+  if (scores.green + scores.purple === 0) { el.innerHTML = ''; return; }
+  const num = c => `<span class="tally-num${popColor===c ? ' pop' : ''}">${scores[c]}</span>`;
+  el.innerHTML =
+    `<span class="tally-dot" style="background:${COLOR_HEX.green}"></span>${num('green')}` +
+    `<span>&ndash;</span>` +
+    `${num('purple')}<span class="tally-dot" style="background:${COLOR_HEX.purple}"></span>`;
+}
+
+/* ── Tab title: lets you know when it's your move ── */
+function updateTitle() {
+  const inGame = document.getElementById('gameScreen').classList.contains('active');
+  const yourMove = !localMode && gameId && inGame && !gameOver && myTurn();
+  document.title = yourMove ? '\u25CF Your move \u00B7 Cute Four' : 'Cute Four';
+}
 
 /* ── iOS viewport ─────────────────────────── */
 function setVH() {
@@ -540,11 +598,6 @@ document.getElementById('boardWrap')    .addEventListener('click', e => {
   });
 })();
 
-/* ── Check for join link on load ─────────── */
-(function checkJoinLink() {
-  const gid = new URLSearchParams(location.search).get('game');
-  if (gid) joinGame(gid);
-})();
 
 /* ── Pass and Play ────────────────────────────
    One device, no Firestore. Player 1 is always Green.
@@ -559,10 +612,10 @@ function setLocalTurn(role) {
   opponentColor = role === 'player1' ? 'purple' : 'green';
 }
 
-function startLocalGame(starterRole) {
+function startLocalGame(starterRole, saved) {
   localMode   = true;
   gameId      = null;
-  board       = unflatBoard(emptyBoard());
+  board       = unflatBoard(saved ? saved.board : emptyBoard());
   gameOver    = false;
   winnerColor = null;
   lastMoveRow = null; lastMoveCol = null;
@@ -574,9 +627,19 @@ function startLocalGame(starterRole) {
   renderBoard();
   updateBanner();
   setConfirm('empty');
+  renderTally();
+  if (saved && saved.over) {
+    gameOver = true; disableBoard();
+    if (saved.winnerColor) showWinState(saved.winnerColor === 'green' ? 'player1' : 'player2');
+    else showDrawState();
+  } else if (!saved) {
+    saveLocal(false, null);
+  }
 }
 
 function onPassAndPlay() {
+  scores = { green: 0, purple: 0 };
+  clearJSON(SESSION_KEY);
   startLocalGame('player1');
 }
 
@@ -584,6 +647,9 @@ function onPassAndPlay() {
 async function onNewGame() {
   gameId = uid();
   myRole = 'player1';
+  localMode = false;
+  scores = { green: 0, purple: 0 };
+  clearJSON(SESSION_KEY); clearJSON(LOCAL_KEY);
   await setDoc(gameRef(), {
     board:        emptyBoard(),
     currentTurn:  'player1',
@@ -594,6 +660,7 @@ async function onNewGame() {
     player1Rematch: null,
     player2Rematch: null,
     loserRole:    null,
+    scores:       { player1: 0, player2: 0 },
     createdAt:    serverTimestamp()
   });
   document.getElementById('shareLinkUrl').textContent = gameUrl();
@@ -617,22 +684,86 @@ async function onPlayer1Ready() {
   if (!myColor) return;
   opponentColor = myColor === 'purple' ? 'green' : 'purple';
   await updateDoc(gameRef(), { player1Color: myColor });
+  saveJSON(SESSION_KEY, { gameId, role: 'player1' });
   document.getElementById('waitingLinkUrl').textContent = gameUrl();
   show('waitingScreen');
   listenForGame();
 }
 
 /* ── Player 2: join ───────────────────────── */
+function leaveToWelcome() {
+  gameId = null; myRole = null; myColor = null; opponentColor = null;
+  history.replaceState({}, '', location.pathname);
+  show('welcomeScreen');
+}
+
 async function joinGame(gid) {
+  // Already part of this game (e.g. you refreshed the page)? Pick up where you left off.
+  const saved = loadJSON(SESSION_KEY);
+  if (saved && saved.gameId === gid) { resumeGame(saved); return; }
+
   gameId = gid;
   myRole = 'player2';
-  const snap = await getDoc(gameRef());
-  if (!snap.exists()) { alert('Game not found. Ask your friend for a new link.'); return; }
-  const data = snap.data();
-  myColor       = data.player1Color === 'purple' ? 'green' : 'purple';
-  opponentColor = data.player1Color;
-  await updateDoc(gameRef(), { player2Color: myColor, status: 'active' });
+  scores = { green: 0, purple: 0 };
+  try {
+    // A transaction makes sure two people can't both grab the second seat.
+    const result = await runTransaction(db, async tx => {
+      const snap = await tx.get(gameRef());
+      if (!snap.exists()) throw new Error('missing');
+      const d = snap.data();
+      if (!d.player1Color) throw new Error('notready');
+      if (d.player2Color || d.status !== 'waiting') throw new Error('full');
+      const color = d.player1Color === 'purple' ? 'green' : 'purple';
+      tx.update(gameRef(), { player2Color: color, status: 'active' });
+      return { color, opp: d.player1Color };
+    });
+    myColor       = result.color;
+    opponentColor = result.opp;
+  } catch (e) {
+    const msgs = {
+      missing:  'Game not found. Ask your friend for a new link.',
+      notready: 'Your friend is still setting up the game. Try the link again in a moment.',
+      full:     'This game already has two players. Ask your friend for a new link.'
+    };
+    alert(msgs[e.message] || "Couldn't join the game. Check your connection and try again.");
+    leaveToWelcome();
+    return;
+  }
+  clearJSON(LOCAL_KEY);
+  saveJSON(SESSION_KEY, { gameId: gid, role: 'player2' });
   listenForGame();
+}
+
+/* ── Pick an online game back up after a refresh ── */
+async function resumeGame(saved) {
+  gameId = saved.gameId;
+  myRole = saved.role;
+  let snap;
+  try { snap = await getDoc(gameRef()); }
+  catch (e) { gameId = null; myRole = null; return; }   // offline: keep the save, try again next load
+  if (!snap.exists()) { clearJSON(SESSION_KEY); leaveToWelcome(); return; }
+
+  const data = snap.data();
+  myColor       = myRole === 'player1' ? data.player1Color : data.player2Color;
+  opponentColor = myRole === 'player1' ? data.player2Color : data.player1Color;
+  applyScores(data);
+
+  if (data.status === 'waiting') {
+    document.getElementById('waitingLinkUrl').textContent = gameUrl();
+    show('waitingScreen');
+  } else {
+    startGameUI(data);
+    if (data.status === 'done') showFinishedGame(data);
+  }
+  listenForGame();
+}
+
+function showFinishedGame(data) {
+  gameOver = true; disableBoard();
+  const lm  = data.lastMove;
+  const win = lm ? checkWin(lm.row, lm.col) : null;
+  if (win) showWinState(board[lm.row][lm.col] === 1 ? 'player1' : 'player2');
+  else     showDrawState();
 }
 
 /* ── Firestore listener ───────────────────── */
@@ -646,6 +777,7 @@ function listenForGame() {
 
 /* ── React to state changes ───────────────── */
 function handleGameState(data) {
+  applyScores(data);   // stored quietly; shown when a game ends or a new one starts
   const onWaiting = document.getElementById('waitingScreen').classList.contains('active');
   const onGame    = document.getElementById('gameScreen').classList.contains('active');
 
@@ -693,6 +825,7 @@ function startGameUI(data) {
   renderBoard();
   updateBanner();
   setConfirm(myTurn() ? 'empty' : 'waiting');
+  renderTally();
 }
 
 /* ── Sync opponent move ───────────────────── */
@@ -769,7 +902,7 @@ function renderBoard() {
                                         : (myRole==='player2' ? myColor : opponentColor);
         const tok = document.createElement('div');
         tok.className = 'token ' + color;
-        if (r===lastMoveRow && c===lastMoveCol) tok.classList.add('last-'+opponentColor);
+        if (r===lastMoveRow && c===lastMoveCol) tok.classList.add('last-'+color);
         cell.appendChild(tok);
       }
       cell.addEventListener('click', (col => () => onCellClick(col))(c));
@@ -891,22 +1024,28 @@ async function confirmMove() {
   const draw = !win && checkDraw();
   const nextTurn = myRole==='player1' ? 'player2' : 'player1';
 
+  const scoreBefore = scores[myColor];
   if (!localMode) {
-    await updateDoc(gameRef(), {
+    const update = {
       board:       flatBoard(),
       currentTurn: nextTurn,
       lastMove:    { row: movedRow, col: movedCol },
       status:      (win||draw) ? 'done' : 'active',
       loserRole:   win ? (myRole==='player1' ? 'player2' : 'player1') : null
-    });
+    };
+    if (win) update['scores.' + myRole] = increment(1);
+    await updateDoc(gameRef(), update);
   }
 
   setConfirm('empty');
 
   if (win) {
+    scores[myColor] = scoreBefore + 1;
     gameOver=true; disableBoard();
+    if (localMode) saveLocal(true, myColor);
     startChase(win, myRole);
   } else if (draw) {
+    if (localMode) saveLocal(true, null);
     showDrawState();
   } else {
     clearLastMoveMarker();
@@ -914,6 +1053,7 @@ async function confirmMove() {
     tok.classList.add('last-'+myColor);
     if (localMode) {
       setLocalTurn(nextTurn);
+      saveLocal(false, null);
       updateBanner();
       setConfirm('empty');
     } else {
@@ -927,6 +1067,7 @@ async function confirmMove() {
 function updateBanner() {
   const banner = document.getElementById('turnBanner');
   banner.className = 'turn-banner';
+  updateTitle();
   if (localMode) {
     banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[myColor]}"></span>${COLOR_NAME[myColor]}'s turn`;
   } else if (myTurn()) {
@@ -959,6 +1100,8 @@ function showWinState(winnerRole) {
   banner.className='turn-banner win-banner';
   banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[winnerColor]}"></span>${COLOR_NAME[winnerColor]} Wins!`;
   setConfirm('continue');
+  renderTally(winnerColor);
+  updateTitle();
 }
 function showDrawState() {
   gameOver=true; winnerColor=null; disableBoard();
@@ -966,6 +1109,7 @@ function showDrawState() {
   banner.className='turn-banner win-banner';
   banner.textContent="It's a draw!";
   setConfirm('continue');
+  updateTitle();
 }
 function showNewGameModal() {
   stopChase();
@@ -1116,11 +1260,14 @@ function handleRematchVotes(data) {
 function goHome() {
   stopChase();
   localMode=false;
+  scores={ green:0, purple:0 }; winnerColor=null; gameOver=false;
+  clearJSON(SESSION_KEY); clearJSON(LOCAL_KEY);
   if (unsubscribe) { unsubscribe(); unsubscribe=null; }
   gameId=null; myRole=null; myColor=null; opponentColor=null;
   document.getElementById('modal').classList.remove('open');
   show('welcomeScreen');
   history.replaceState({}, '', location.pathname);
+  updateTitle();
 }
 
 /* ── Copy link ────────────────────────────── */
@@ -1171,6 +1318,20 @@ function checkWin(row,col) {
   return null;
 }
 function checkDraw(){ return board[0].every(v=>v!==0); }
+
+/* ── On load: open a join link, or pick up where we left off ── */
+(function init() {
+  const gid = new URLSearchParams(location.search).get('game');
+  if (gid) { joinGame(gid); return; }
+  const local = loadJSON(LOCAL_KEY);
+  if (local) {
+    scores = local.scores || { green: 0, purple: 0 };
+    startLocalGame(local.turn, local);
+    return;
+  }
+  const online = loadJSON(SESSION_KEY);
+  if (online) resumeGame(online);
+})();
 
 </script>
 <p class="branding"><a href="https://pizzaemoji.net/games" class="branding-link"><img src="/images/smallslice.webp" id="smallslice" alt="Small Slice icon"> Pizza Emoji Games</a></p>

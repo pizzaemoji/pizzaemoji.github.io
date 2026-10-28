@@ -77,6 +77,28 @@
   .btn-main:disabled { opacity: 0.4; cursor: default; transform: none; }
   #welcomeScreen .btn-main { margin-bottom: 40px; }
 
+  /* MODE PICK */
+  #modeScreen { height: 100vh; height: -webkit-fill-available; justify-content: center; gap: 0; }
+  .mode-title {
+    font-family: 'Lora', serif; font-size: 32px; font-weight: 700;
+    color: #f0ebe0; text-align: center; margin-bottom: 32px; line-height: 1.2;
+  }
+  .mode-card {
+    width: 100%; background: #1e2a33; border: 1.5px solid #2d3e4a; border-radius: 18px;
+    padding: 22px 24px; margin-bottom: 16px; text-align: left; cursor: pointer;
+    font-family: 'Nunito', sans-serif; transition: background 0.15s, border-color 0.15s, transform 0.1s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .mode-card:active { background: #26363f; border-color: #e8c97a; transform: scale(0.99); }
+  .mode-card-name { font-size: 22px; font-weight: 800; color: #f0ebe0; margin-bottom: 4px; }
+  .mode-card-desc { font-size: 16px; font-weight: 600; color: #8fa0b0; line-height: 1.4; }
+  .mode-back {
+    background: none; border: none; margin-top: 12px; padding: 10px 20px;
+    font-family: 'Nunito', sans-serif; font-size: 16px; font-weight: 700;
+    color: #7a9aaa; cursor: pointer; -webkit-tap-highlight-color: transparent;
+  }
+  .mode-back:active { color: #a0bfcc; }
+
   /* SHARE */
   #shareScreen {
     height: 100vh; height: -webkit-fill-available;
@@ -338,6 +360,21 @@
   <button class="btn-main" id="btnNewGame">New Game</button>
 </div>
 
+<!-- MODE PICK -->
+<div class="screen" id="modeScreen">
+  <div class="welcome-eyebrow" style="margin-bottom:16px;">Cute Four</div>
+  <div class="mode-title">How do you want to play?</div>
+  <button class="mode-card" id="btnPassPlay">
+    <div class="mode-card-name">Pass and Play</div>
+    <div class="mode-card-desc">Use one phone and take turns passing it back and forth.</div>
+  </button>
+  <button class="mode-card" id="btnPlayOnline">
+    <div class="mode-card-name">Play Online</div>
+    <div class="mode-card-desc">Each person uses their own phone. You'll send a link to your friend.</div>
+  </button>
+  <button class="mode-back" id="btnModeBack">Back</button>
+</div>
+
 <!-- SHARE / COLOR PICK -->
 <div class="screen" id="shareScreen">
   <div class="welcome-eyebrow" style="margin-bottom:16px;">Cute Four</div>
@@ -440,7 +477,7 @@ const unflatBoard = flat => Array.from({length:ROWS}, (_, r) => flat.slice(r*COL
 /* ── iOS viewport ─────────────────────────── */
 function setVH() {
   const h = window.innerHeight + 'px';
-  ['welcomeScreen','shareScreen','waitingScreen','gameScreen'].forEach(id => {
+  ['welcomeScreen','modeScreen','shareScreen','waitingScreen','gameScreen'].forEach(id => {
     document.getElementById(id).style.height = h;
   });
 }
@@ -449,7 +486,7 @@ window.addEventListener('resize', setVH);
 
 /* ── Show screen ──────────────────────────── */
 function show(id) {
-  ['welcomeScreen','shareScreen','waitingScreen','gameScreen'].forEach(s => {
+  ['welcomeScreen','modeScreen','shareScreen','waitingScreen','gameScreen'].forEach(s => {
     document.getElementById(s).classList.toggle('active', s === id);
   });
   setVH();
@@ -459,7 +496,10 @@ function show(id) {
    No onclick attributes in HTML — all listeners
    attached here inside the module scope.
 ─────────────────────────────────────────────── */
-document.getElementById('btnNewGame')    .addEventListener('click', onNewGame);
+document.getElementById('btnNewGame')    .addEventListener('click', () => show('modeScreen'));
+document.getElementById('btnPlayOnline') .addEventListener('click', onNewGame);
+document.getElementById('btnPassPlay')   .addEventListener('click', onPassAndPlay);
+document.getElementById('btnModeBack')   .addEventListener('click', () => show('welcomeScreen'));
 document.getElementById('letsPlayBtn')  .addEventListener('click', onPlayer1Ready);
 document.getElementById('copyBtn')      .addEventListener('click', () => copyLink('copyBtn'));
 document.getElementById('waitingCopyBtn').addEventListener('click', () => copyLink('waitingCopyBtn'));
@@ -504,6 +544,11 @@ document.getElementById('boardWrap')    .addEventListener('click', e => {
   const gid = new URLSearchParams(location.search).get('game');
   if (gid) joinGame(gid);
 })();
+
+/* ── Pass and Play (placeholder — built in the next section) ── */
+function onPassAndPlay() {
+  alert('Pass and Play is coming in the next step!');
+}
 
 /* ── Player 1: new game ───────────────────── */
 async function onNewGame() {

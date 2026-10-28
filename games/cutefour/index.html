@@ -464,6 +464,7 @@ let board = [], currentTurn = null, gameOver = false;
 let pendingCol = null, pendingRow = null, isAnimating = false;
 let lastMoveRow = null, lastMoveCol = null;
 let chaseInterval = null, unsubscribe = null;
+let localMode = false;   // true = Pass and Play (one device, no Firestore)
 
 /* ── Helpers ──────────────────────────────── */
 const myTurn  = () => currentTurn === myRole;
@@ -545,9 +546,38 @@ document.getElementById('boardWrap')    .addEventListener('click', e => {
   if (gid) joinGame(gid);
 })();
 
-/* ── Pass and Play (placeholder — built in the next section) ── */
+/* ── Pass and Play ────────────────────────────
+   One device, no Firestore. Player 1 is always Green.
+   After each confirmed move, myRole/myColor swap to the
+   next player, so myTurn() stays true and all the existing
+   board/confirm logic works unchanged.
+─────────────────────────────────────────────── */
+function setLocalTurn(role) {
+  myRole        = role;
+  currentTurn   = role;
+  myColor       = role === 'player1' ? 'green'  : 'purple';
+  opponentColor = role === 'player1' ? 'purple' : 'green';
+}
+
+function startLocalGame(starterRole) {
+  localMode   = true;
+  gameId      = null;
+  board       = unflatBoard(emptyBoard());
+  gameOver    = false;
+  winnerColor = null;
+  lastMoveRow = null; lastMoveCol = null;
+  pendingCol  = null; pendingRow  = null; isAnimating = false;
+  stopChase();
+  setLocalTurn(starterRole);
+  document.getElementById('modal').classList.remove('open');
+  show('gameScreen');
+  renderBoard();
+  updateBanner();
+  setConfirm('empty');
+}
+
 function onPassAndPlay() {
-  alert('Pass and Play is coming in the next step!');
+  startLocalGame('player1');
 }
 
 /* ── Player 1: new game ───────────────────── */
@@ -861,13 +891,15 @@ async function confirmMove() {
   const draw = !win && checkDraw();
   const nextTurn = myRole==='player1' ? 'player2' : 'player1';
 
-  await updateDoc(gameRef(), {
-    board:       flatBoard(),
-    currentTurn: nextTurn,
-    lastMove:    { row: movedRow, col: movedCol },
-    status:      (win||draw) ? 'done' : 'active',
-    loserRole:   win ? (myRole==='player1' ? 'player2' : 'player1') : null
-  });
+  if (!localMode) {
+    await updateDoc(gameRef(), {
+      board:       flatBoard(),
+      currentTurn: nextTurn,
+      lastMove:    { row: movedRow, col: movedCol },
+      status:      (win||draw) ? 'done' : 'active',
+      loserRole:   win ? (myRole==='player1' ? 'player2' : 'player1') : null
+    });
+  }
 
   setConfirm('empty');
 
@@ -880,8 +912,14 @@ async function confirmMove() {
     clearLastMoveMarker();
     lastMoveRow=movedRow; lastMoveCol=movedCol;
     tok.classList.add('last-'+myColor);
-    updateBanner();
-    setConfirm('waiting');
+    if (localMode) {
+      setLocalTurn(nextTurn);
+      updateBanner();
+      setConfirm('empty');
+    } else {
+      updateBanner();
+      setConfirm('waiting');
+    }
   }
 }
 
@@ -889,7 +927,9 @@ async function confirmMove() {
 function updateBanner() {
   const banner = document.getElementById('turnBanner');
   banner.className = 'turn-banner';
-  if (myTurn()) {
+  if (localMode) {
+    banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[myColor]}"></span>${COLOR_NAME[myColor]}'s turn`;
+  } else if (myTurn()) {
     banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[myColor]}"></span>Your turn`;
   } else {
     banner.innerHTML = `<span class="turn-dot" style="background:${COLOR_HEX[opponentColor]}"></span>${COLOR_NAME[opponentColor]}'s turn`;
@@ -1002,6 +1042,12 @@ function setModalState(state) {
 }
 
 async function onPlayAgainYes() {
+  if (localMode) {
+    // Loser goes first (same rule as online); a draw starts with Green
+    const starter = winnerColor === 'green' ? 'player2' : 'player1';
+    startLocalGame(starter);
+    return;
+  }
   // Write my vote to Firestore
   const myVoteField = myRole + 'Rematch';
   await updateDoc(gameRef(), { [myVoteField]: 'yes' });
@@ -1009,6 +1055,7 @@ async function onPlayAgainYes() {
 }
 
 async function onPlayAgainNo() {
+  if (localMode) { goHome(); return; }
   const myVoteField = myRole + 'Rematch';
   await updateDoc(gameRef(), { [myVoteField]: 'no' });
   goHome();
@@ -1068,6 +1115,7 @@ function handleRematchVotes(data) {
 /* ── Go home ──────────────────────────────── */
 function goHome() {
   stopChase();
+  localMode=false;
   if (unsubscribe) { unsubscribe(); unsubscribe=null; }
   gameId=null; myRole=null; myColor=null; opponentColor=null;
   document.getElementById('modal').classList.remove('open');

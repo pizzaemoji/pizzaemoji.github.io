@@ -11,7 +11,7 @@
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://pizzaemoji.net/games/secretcode/">
 <meta property="og:title" content="Secret Code">
-<meta property="og:description" content="Can you crack the code?">
+<meta property="og:description" content="Can you solve the code?">
 <meta property="og:image" content="https://pizzaemoji.net/games/secretcode/secretcode-icon.png">
 <meta property="og:image:width" content="512">
 <meta property="og:image:height" content="512">
@@ -164,6 +164,8 @@
   }
   .modal-title { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
   .modal-sub { font-size: 18px; font-weight: 700; color: #c8d8e0; margin-bottom: 16px; line-height: 1.4; }
+  .modal-detail { font-size: 15px; font-weight: 700; color: #8fa0b0; margin: 0 0 18px; }
+  .modal-detail.tight { margin-top: -8px; }
   .modal-code { display: flex; gap: 8px; justify-content: center; margin-bottom: 18px; }
   .modal-code .peg { width: 44px; height: 14px; flex: none; }
   .modal-btns { display: flex; flex-direction: column; gap: 10px; align-items: center; }
@@ -193,7 +195,7 @@
   </div>
   <button class="mode-card" id="btnSolo">
     <div class="mode-card-name">Play Solo</div>
-    <div class="mode-card-desc">Crack a secret code on your own.</div>
+    <div class="mode-card-desc">Solve a secret code on your own.</div>
   </button>
   <button class="mode-card" id="btnVs">
     <div class="mode-card-name">VS Friend</div>
@@ -435,7 +437,7 @@ async function shareLink(url, text, btn) {
 async function onShareGame() {
   const url = buildUrl('vs', setupSeed, setup);
   const btn = $('btnShare');
-  const ok = await shareLink(url, "I'm challenging you! We get the same secret code. Can you crack it in fewer guesses?", btn);
+  const ok = await shareLink(url, "I'm challenging you! We get the same secret code. Can you solve it in fewer guesses?", btn);
   if (ok && btn.textContent !== 'Link copied!') { btn.textContent = 'Shared!'; }
   if (ok) btn.classList.add('done');
 }
@@ -481,10 +483,12 @@ function startDaily() {
 /* ── Rendering ────────────────────────────── */
 function renderAll() { renderHeader(); renderControls(); renderBoard(); }   // controls first: the board sizes itself to the space that's left
 
+const settingsText = () => cfg.c + ' colors · ' + cfg.l + ' spots · ' + (cfg.r ? 'repeats allowed' : 'no repeats');
+
 function renderHeader() {
   const label = mode === 'daily' ? 'Daily Puzzle · ' + dailyLabel : mode === 'vs' ? 'VS Friend' : 'Solo Game';
   $('gameInfo').textContent = over ? label : label + ' · Guess ' + Math.min(guesses.length + 1, maxG) + ' of ' + maxG;
-  let sub = cfg.c + ' colors · ' + cfg.l + ' spots · ' + (cfg.r ? 'repeats allowed' : 'no repeats');
+  let sub = settingsText();
   if (mode === 'vs' && fromFriendLink && !over) sub = "Same code as your friend. Fewest guesses wins!";
   const subEl = $('gameSub');
   if (over && !won) {                       // lost: show the answer here, so the board never changes size
@@ -635,9 +639,9 @@ function resultGrid() {
 }
 function shareText() {
   const n = guesses.length;
-  if (mode === 'daily') return 'Secret Code · Daily ' + dailyLabel + '\n' + (won ? 'Cracked it in ' + n + '/' + maxG : 'Missed it (X/' + maxG + ')') + '\n' + resultGrid();
-  return won ? 'I cracked the code in ' + n + ' guess' + (n === 1 ? '' : 'es') + '! Can you beat me?'
-             : "I couldn't crack the code in " + n + " guesses. Can you?";
+  if (mode === 'daily') return 'Secret Code · Daily ' + dailyLabel + '\n' + (won ? 'Solved it in ' + n + '/' + maxG : 'Missed it (X/' + maxG + ')') + '\n' + resultGrid();
+  return won ? 'I solved the code in ' + n + ' guess' + (n === 1 ? '' : 'es') + '! Can you beat me?'
+             : "I couldn't solve the code in " + n + " guesses. Can you?";
 }
 function closeModal() { $('modal').classList.remove('open'); }
 function openModal(html) { $('modalBox').innerHTML = ''; $('modalBox').appendChild(html); $('modal').classList.add('open'); }
@@ -648,7 +652,7 @@ function showResult() {
   const box = document.createElement('div');
   const n = guesses.length;
   const t = document.createElement('div'); t.className = 'modal-title';
-  t.textContent = won ? 'Cracked it!' : 'Out of guesses';
+  t.textContent = won ? 'Solved it!' : 'Out of guesses';
   const s = document.createElement('div'); s.className = 'modal-sub';
   s.textContent = won ? 'in ' + n + ' guess' + (n === 1 ? '' : 'es') : 'The secret code was:';
   box.appendChild(t); box.appendChild(s);
@@ -657,6 +661,9 @@ function showResult() {
     code.forEach(ci => { const p = document.createElement('div'); p.className = 'peg'; p.style.background = COLORS[ci].h; cd.appendChild(p); });
     box.appendChild(cd);
   }
+  const detail = document.createElement('div'); detail.className = 'modal-detail' + (won ? ' tight' : '');
+  detail.textContent = settingsText();
+  box.appendChild(detail);
   const btns = document.createElement('div'); btns.className = 'modal-btns';
   if (mode === 'daily' || mode === 'vs') {
     const shareBtn = mkBtn('btn-main', mode === 'vs' ? 'Challenge a friend' : 'Share result', async () => {
@@ -679,7 +686,7 @@ function showHow() {
   const t = document.createElement('div'); t.className = 'modal-title'; t.textContent = 'How to play';
   const how = document.createElement('div'); how.className = 'how';
   how.innerHTML =
-    '<p>There is a secret code made of colored dashes. Crack it in as few guesses as you can.</p>' +
+    '<p>There is a secret code made of colored dashes. Solve it in as few guesses as you can.</p>' +
     '<p>Tap colors to fill a row, then tap <b>Check</b>.</p>' +
     '<p><i class="fbd exact"></i> A solid light-gray dot means one of your colors is correct and in the right spot.</p>' +
     '<p><i class="fbd near"></i> A light-gray ring means that color is in the code, but in a different spot.</p>' +

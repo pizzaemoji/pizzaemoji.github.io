@@ -1,0 +1,718 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<title>Crack the Code</title>
+<style>
+  @import url('https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400;0,600;0,700;1,400;1,600&family=Nunito:wght@400;600;700;800&display=swap');
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { height: -webkit-fill-available; }
+  body {
+    font-family: 'Nunito', sans-serif;
+    background: #2c3640;
+    min-height: 100vh; min-height: -webkit-fill-available;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden; color: #f0ebe0;
+  }
+  button { font-family: 'Nunito', sans-serif; -webkit-tap-highlight-color: transparent; }
+
+  .screen { display: none; flex-direction: column; align-items: center; width: 100%; max-width: 520px; padding: 0 16px; }
+  .screen.active { display: flex; }
+
+  .eyebrow {
+    font-family: 'Lora', serif; font-style: italic;
+    font-size: 15px; color: #8fa0b0; letter-spacing: 0.5px; margin-bottom: 6px; text-align: center;
+  }
+
+  /* HOME */
+  #homeScreen { height: 100vh; height: -webkit-fill-available; justify-content: center; }
+  .home-title {
+    font-family: 'Lora', serif; font-size: 56px; font-weight: 700;
+    color: #f0ebe0; letter-spacing: -1.5px; text-align: center; line-height: 1.05; margin-bottom: 22px;
+  }
+  .home-dots { display: flex; gap: 10px; justify-content: center; margin-bottom: 34px; }
+  .home-dot { width: 26px; height: 26px; border-radius: 50%; animation: bob 2.4s ease-in-out infinite; }
+  @keyframes bob { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-9px); } }
+
+  .mode-card {
+    width: 100%; background: #1e2a33; border: 1.5px solid #2d3e4a; border-radius: 18px;
+    padding: 18px 24px; margin-bottom: 14px; text-align: left; cursor: pointer; color: inherit;
+    transition: background 0.15s, border-color 0.15s, transform 0.1s;
+  }
+  .mode-card:active { background: #26363f; border-color: #e8c97a; transform: scale(0.99); }
+  .mode-card-name { font-size: 22px; font-weight: 800; color: #f0ebe0; margin-bottom: 3px; }
+  .mode-card-desc { font-size: 15px; font-weight: 600; color: #8fa0b0; line-height: 1.4; }
+  .help-link {
+    background: none; border: none; margin-top: 6px; padding: 10px 20px;
+    font-size: 16px; font-weight: 700; color: #7a9aaa; cursor: pointer;
+  }
+  .help-link:active { color: #a0bfcc; }
+
+  /* SETUP */
+  #setupScreen { height: 100vh; height: -webkit-fill-available; justify-content: center; overflow-y: auto; padding-top: 24px; padding-bottom: 24px; }
+  .setup-title { font-family: 'Lora', serif; font-size: 30px; font-weight: 700; text-align: center; margin-bottom: 22px; }
+  .opt-group { width: 100%; margin-bottom: 20px; }
+  .opt-label { font-size: 18px; font-weight: 800; color: #f0ebe0; margin-bottom: 2px; }
+  .opt-hint { font-size: 14px; font-weight: 600; color: #8fa0b0; margin-bottom: 9px; }
+  .seg { display: flex; gap: 8px; }
+  .seg button {
+    flex: 1; padding: 13px 0; border-radius: 12px; border: 2px solid #3d5060; background: #2c3640;
+    color: #c8d8e0; font-size: 20px; font-weight: 800; cursor: pointer;
+    transition: background 0.12s, border-color 0.12s, color 0.12s;
+  }
+  .seg button.on { background: #e8c97a; border-color: #e8c97a; color: #2c3640; }
+  .seg button:disabled { opacity: 0.28; cursor: default; }
+  .count-line { font-size: 15px; font-weight: 700; color: #7a9aaa; text-align: center; margin: 2px 0 18px; }
+  .btn-main {
+    background: #e8c97a; border: none; border-radius: 16px; color: #2c3640;
+    font-size: 20px; font-weight: 800; padding: 15px 52px; cursor: pointer; flex-shrink: 0;
+    transition: transform 0.1s, background 0.15s;
+  }
+  .btn-main:active { background: #dbb95e; transform: scale(0.98); }
+  .btn-main:disabled { opacity: 0.4; cursor: default; transform: none; }
+  .btn-ghost {
+    background: transparent; border: 2px solid #3d5060; border-radius: 16px; color: #c8d8e0;
+    font-size: 18px; font-weight: 800; padding: 13px 28px; cursor: pointer; width: 100%; max-width: 320px;
+  }
+  .btn-ghost:active { background: #3d5060; }
+  .btn-ghost.done { color: #a5d6a7; border-color: #a5d6a7; }
+  .setup-btns { display: flex; flex-direction: column; align-items: center; gap: 12px; width: 100%; }
+  .back-link {
+    background: none; border: none; margin-top: 8px; padding: 8px 20px;
+    font-size: 16px; font-weight: 700; color: #7a9aaa; cursor: pointer;
+  }
+
+  /* GAME */
+  #gameScreen { height: 100vh; height: -webkit-fill-available; justify-content: flex-start; padding-top: 14px; padding-bottom: 14px; gap: 0; overflow: hidden; }
+  .game-top { width: 100%; display: flex; align-items: center; justify-content: space-between; flex-shrink: 0; margin-bottom: 6px; }
+  .game-title-btn {
+    font-family: 'Lora', serif; font-size: 17px; font-weight: 600; color: #7a9aaa; cursor: pointer;
+    background: none; border: none; padding: 4px 0;
+  }
+  .game-title-btn:active { color: #a0bfcc; }
+  .help-btn {
+    width: 30px; height: 30px; border-radius: 50%; border: 1.5px solid #3d5060; background: none;
+    color: #7a9aaa; font-size: 16px; font-weight: 800; cursor: pointer;
+  }
+  .game-info { font-size: 16px; font-weight: 800; color: #c8d8e0; text-align: center; flex-shrink: 0; }
+  .game-sub { font-size: 13px; font-weight: 700; color: #8fa0b0; text-align: center; flex-shrink: 0; margin-top: 1px; min-height: 17px; }
+  .secret-wrap { flex-shrink: 0; display: flex; align-items: center; justify-content: center; gap: 8px; margin: 10px 0 8px; }
+  .secret-label { font-family: 'Lora', serif; font-style: italic; font-size: 13px; color: #7a9aaa; margin-right: 4px; }
+  .legend { flex-shrink: 0; display: flex; gap: 16px; justify-content: center; font-size: 13px; font-weight: 700; color: #8fa0b0; margin-bottom: 8px; }
+  .legend span { display: inline-flex; align-items: center; gap: 6px; }
+
+  .board {
+    width: 100%; flex: 1; min-height: 0; overflow-y: auto; padding: 10px 12px;
+    background: #3d4e5c; border-radius: 18px;
+    box-shadow: 0 8px 40px rgba(0,0,0,0.35), inset 0 1px 0 rgba(255,255,255,0.06);
+  }
+  .row { display: flex; align-items: center; gap: 10px; padding: 5px 6px; border-radius: 14px; }
+  .row.active { background: #2c3640; }
+  .row.active .fbd:not(.exact):not(.near) { background: #3d4e5c; }
+  .row.empty { opacity: 0.45; }
+  .rnum { width: 20px; text-align: right; font-size: 13px; font-weight: 800; color: #8fa0b0; flex-shrink: 0; }
+  .pegs { display: flex; gap: 8px; }
+  .peg { width: var(--peg); height: var(--peg); border-radius: 50%; flex-shrink: 0; background: #243040; }
+  .peg.slot { cursor: pointer; }
+  .peg.sel { box-shadow: 0 0 0 3px #e8c97a; }
+  .peg.pop { animation: pegPop 0.18s cubic-bezier(0.175,0.885,0.32,1.275); }
+  @keyframes pegPop { from { transform: scale(0.6); } to { transform: scale(1); } }
+  .fb { display: grid; gap: 4px; margin-left: 4px; }
+  .fbd { width: 12px; height: 12px; border-radius: 50%; background: #2c3640; }
+  .fbd.exact { background: #e8c97a; }
+  .fbd.near { background: transparent; box-shadow: inset 0 0 0 2.5px #e8c97a; }
+  .legend .fbd { background: #e8c97a; }
+  .legend .fbd.near { background: transparent; }
+
+  .secret-peg { width: 30px; height: 30px; border-radius: 50%; background: #243040; display: flex; align-items: center; justify-content: center; color: #5d7284; font-weight: 800; font-size: 16px; }
+  .secret-peg.reveal { animation: pegPop 0.35s cubic-bezier(0.175,0.885,0.32,1.275); color: transparent; }
+
+  .controls { width: 100%; flex-shrink: 0; margin-top: 12px; display: flex; flex-direction: column; align-items: center; gap: 12px; }
+  .palette { display: flex; gap: 10px; justify-content: center; }
+  .pal { width: var(--pal); height: var(--pal); border-radius: 50%; border: none; cursor: pointer; transition: transform 0.1s, opacity 0.15s; }
+  .pal:active { transform: scale(0.9); }
+  .pal:disabled { opacity: 0.18; cursor: default; transform: none; }
+  .ctl-row { display: flex; gap: 12px; width: 100%; justify-content: center; }
+  .ctl-btn {
+    border: none; border-radius: 16px; font-size: 20px; font-weight: 800; padding: 14px 0; cursor: pointer;
+    transition: transform 0.1s, background 0.15s;
+  }
+  .ctl-btn:active { transform: scale(0.97); }
+  .ctl-del { background: #3d5060; color: #f0ebe0; flex: 1; max-width: 140px; }
+  .ctl-ok { background: #e8c97a; color: #2c3640; flex: 2; max-width: 240px; }
+  .ctl-ok:disabled { opacity: 0.35; cursor: default; transform: none; }
+  .ctl-ok:not(:disabled):active { background: #dbb95e; }
+
+  /* MODAL */
+  .modal-backdrop { display: none; position: fixed; inset: 0; background: rgba(20,30,38,0.88); align-items: center; justify-content: center; z-index: 100; }
+  .modal-backdrop.open { display: flex; }
+  .modal {
+    background: #2c3640; border-radius: 24px; padding: 28px 28px; text-align: center;
+    max-width: 340px; width: 90%; border: 1px solid #3d5060; max-height: 90vh; overflow-y: auto;
+  }
+  .modal-title { font-family: 'Lora', serif; font-size: 28px; font-weight: 700; margin-bottom: 8px; }
+  .modal-sub { font-size: 18px; font-weight: 700; color: #c8d8e0; margin-bottom: 16px; line-height: 1.4; }
+  .modal-code { display: flex; gap: 8px; justify-content: center; margin-bottom: 18px; }
+  .modal-code .peg { --peg: 34px; }
+  .modal-btns { display: flex; flex-direction: column; gap: 10px; align-items: center; }
+  .modal-btns .btn-main, .modal-btns .btn-ghost { width: 100%; max-width: 260px; padding-left: 0; padding-right: 0; }
+  .how { text-align: left; font-size: 16px; font-weight: 600; color: #c8d8e0; line-height: 1.5; margin-bottom: 18px; }
+  .how p { margin-bottom: 10px; }
+  .how .fbd { display: inline-block; vertical-align: middle; margin: 0 2px 2px; }
+
+  .branding {
+    position: fixed; bottom: 6px; left: 0; right: 0; text-align: center;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+    font-size: 0.8rem; font-weight: 400; color: #F5F0E8; letter-spacing: 0.02em; opacity: 0.8; pointer-events: none;
+  }
+  .branding a { pointer-events: auto; }
+  #smallslice { height: 0.8rem; vertical-align: middle; margin-left: 2px; }
+  .branding-link { color: inherit; text-decoration: none; }
+  body.in-game .branding { display: none; }
+</style>
+</head>
+<body>
+
+<!-- HOME -->
+<div class="screen active" id="homeScreen">
+  <div class="eyebrow">a game for one or two</div>
+  <div class="home-title">Crack<br>the Code</div>
+  <div class="home-dots" id="homeDots"></div>
+  <button class="mode-card" id="btnSolo">
+    <div class="mode-card-name">Play Solo</div>
+    <div class="mode-card-desc">Crack a secret code on your own.</div>
+  </button>
+  <button class="mode-card" id="btnVs">
+    <div class="mode-card-name">Race a Friend</div>
+    <div class="mode-card-desc">You both get the same code. Fewest guesses wins.</div>
+  </button>
+  <button class="mode-card" id="btnDaily">
+    <div class="mode-card-name">Daily Puzzle</div>
+    <div class="mode-card-desc">Everyone gets the same code today.</div>
+  </button>
+  <button class="help-link" id="btnHowHome">How to play</button>
+</div>
+
+<!-- SETUP -->
+<div class="screen" id="setupScreen">
+  <div class="eyebrow" id="setupEyebrow"></div>
+  <div class="setup-title" id="setupTitle"></div>
+
+  <div class="opt-group">
+    <div class="opt-label">How many colors?</div>
+    <div class="opt-hint">More colors means a harder code.</div>
+    <div class="seg" id="segColors"></div>
+  </div>
+  <div class="opt-group">
+    <div class="opt-label">Code length</div>
+    <div class="opt-hint">How many dots are in the secret code.</div>
+    <div class="seg" id="segLen"></div>
+  </div>
+  <div class="opt-group">
+    <div class="opt-label">Allow repeats?</div>
+    <div class="opt-hint">Yes means the same color can show up more than once.</div>
+    <div class="seg" id="segRep"></div>
+  </div>
+  <div class="count-line" id="countLine"></div>
+
+  <div class="setup-btns">
+    <button class="btn-ghost" id="btnShare" style="display:none;">Share game with a friend</button>
+    <button class="btn-main" id="btnStart">Start</button>
+    <button class="back-link" id="btnSetupBack">Back</button>
+  </div>
+</div>
+
+<!-- GAME -->
+<div class="screen" id="gameScreen">
+  <div class="game-top">
+    <button class="game-title-btn" id="btnHome">Crack the Code</button>
+    <button class="help-btn" id="btnHowGame" aria-label="How to play">?</button>
+  </div>
+  <div class="game-info" id="gameInfo"></div>
+  <div class="game-sub" id="gameSub"></div>
+  <div class="secret-wrap" id="secretWrap"></div>
+  <div class="legend">
+    <span><i class="fbd exact"></i> right spot</span>
+    <span><i class="fbd near"></i> right color, wrong spot</span>
+  </div>
+  <div class="board" id="board"></div>
+  <div class="controls" id="controls"></div>
+</div>
+
+<!-- MODAL -->
+<div class="modal-backdrop" id="modal">
+  <div class="modal" id="modalBox"></div>
+</div>
+
+<p class="branding"><a href="https://pizzaemoji.net/games" class="branding-link"><img src="/images/smallslice.webp" id="smallslice" alt="Small Slice icon"> Pizza Emoji Games</a></p>
+
+<script>
+/* ── Colors ───────────────────────────────────
+   Order matters: a smaller game uses the first N,
+   so the first colors are the most different from
+   each other.
+─────────────────────────────────────────────── */
+const COLORS = [
+  { n: 'Red',    h: '#ef7b7b' },
+  { n: 'Blue',   h: '#5aa9e6' },
+  { n: 'Yellow', h: '#f2d45c' },
+  { n: 'Green',  h: '#7bc67e' },
+  { n: 'Purple', h: '#b794e6' },
+  { n: 'Orange', h: '#f5a65b' },
+  { n: 'Pink',   h: '#f4a6c8' },
+  { n: 'White',  h: '#eae4d6' },
+];
+const DAILY_CFG    = { c: 6, l: 4, r: true };   // the Daily Puzzle's fixed settings
+const DAILY_LAUNCH = [2026, 11, 1];             // Daily #1
+
+/* ── State ────────────────────────────────── */
+let mode = null;            // 'solo' | 'vs' | 'daily'
+let seed = '', cfg = { c: 5, l: 4, r: false };
+let code = [], guesses = [], cur = [], sel = 0;
+let over = false, won = false, maxG = 10;
+let dateKey = '', dailyNum = 0;
+let setup = { c: 5, l: 4, r: false };   // setup-screen choices (defaults: 5 colors, 4 long, no repeats)
+let setupMode = 'solo', setupSeed = '';
+let fromFriendLink = false;
+
+const $ = id => document.getElementById(id);
+const SCREENS = ['homeScreen', 'setupScreen', 'gameScreen'];
+
+/* ── Seeded random (same seed → same code) ── */
+function xmur3(str) {
+  let h = 1779033703 ^ str.length;
+  for (let i = 0; i < str.length; i++) { h = Math.imul(h ^ str.charCodeAt(i), 3432918353); h = h << 13 | h >>> 19; }
+  return function () { h = Math.imul(h ^ h >>> 16, 2246822507); h = Math.imul(h ^ h >>> 13, 3266489909); return (h ^= h >>> 16) >>> 0; };
+}
+function mulberry32(a) {
+  return function () {
+    a |= 0; a = a + 0x6D2B79F5 | 0;
+    let t = Math.imul(a ^ a >>> 15, 1 | a);
+    t = t + Math.imul(t ^ t >>> 7, 61 | t) ^ t;
+    return ((t ^ t >>> 14) >>> 0) / 4294967296;
+  };
+}
+const newSeed = () => Math.random().toString(36).slice(2, 8);
+
+function makeCode(seedStr, c) {
+  const rng = mulberry32(xmur3(seedStr + '|' + c.c + c.l + (c.r ? 1 : 0))());
+  const out = [];
+  if (c.r) {
+    for (let i = 0; i < c.l; i++) out.push(Math.floor(rng() * c.c));
+  } else {
+    const pool = Array.from({ length: c.c }, (_, i) => i);
+    for (let i = pool.length - 1; i > 0; i--) { const j = Math.floor(rng() * (i + 1)); [pool[i], pool[j]] = [pool[j], pool[i]]; }
+    for (let i = 0; i < c.l; i++) out.push(pool[i]);
+  }
+  return out;
+}
+
+/* ── Scoring ──────────────────────────────────
+   exact = right color, right spot
+   near  = right color, wrong spot
+   Handles repeated colors correctly.
+─────────────────────────────────────────────── */
+function score(guess, secret) {
+  let exact = 0;
+  const gc = {}, sc = {};
+  for (let i = 0; i < secret.length; i++) {
+    if (guess[i] === secret[i]) exact++;
+    else { gc[guess[i]] = (gc[guess[i]] || 0) + 1; sc[secret[i]] = (sc[secret[i]] || 0) + 1; }
+  }
+  let near = 0;
+  for (const k in gc) near += Math.min(gc[k], sc[k] || 0);
+  return { exact, near };
+}
+
+function countCodes(c) {
+  if (c.r) return Math.pow(c.c, c.l);
+  let n = 1; for (let i = 0; i < c.l; i++) n *= (c.c - i);
+  return n;
+}
+const maxGuessesFor = n => n <= 1500 ? 10 : n <= 8000 ? 12 : 14;
+
+/* ── Screens ──────────────────────────────── */
+function setVH() {
+  const h = window.innerHeight + 'px';
+  SCREENS.forEach(id => { $(id).style.height = h; });
+}
+function show(id) {
+  SCREENS.forEach(s => $(s).classList.toggle('active', s === id));
+  document.body.classList.toggle('in-game', id === 'gameScreen');
+  setVH();
+}
+window.addEventListener('resize', () => { setVH(); if ($('gameScreen').classList.contains('active')) renderAll(); });
+setVH();
+
+/* ── Saving + URL ─────────────────────────── */
+function gameKey() {
+  return mode === 'daily' ? 'mm:daily:' + dateKey : 'mm:' + seed + ':' + cfg.c + cfg.l + (cfg.r ? 1 : 0);
+}
+function saveGame() {
+  try { localStorage.setItem(gameKey(), JSON.stringify(guesses.map(x => x.g))); } catch (e) {}
+}
+function baseUrl() { return location.href.split('?')[0].split('#')[0]; }
+function buildUrl(m, s, c) {
+  if (m === 'daily') return baseUrl() + '?m=daily';
+  return baseUrl() + '?m=' + m + '&s=' + s + '&c=' + c.c + '&l=' + c.l + '&r=' + (c.r ? 1 : 0);
+}
+function setUrl(u) { try { history.replaceState({}, '', u); } catch (e) {} }
+
+/* ── Home ─────────────────────────────────── */
+(function buildHomeDots() {
+  const el = $('homeDots');
+  COLORS.forEach((c, i) => {
+    const d = document.createElement('div');
+    d.className = 'home-dot';
+    d.style.background = c.h;
+    d.style.animationDelay = (i * 0.18) + 's';
+    el.appendChild(d);
+  });
+})();
+
+function goHome() {
+  closeModal();
+  setUrl(baseUrl());
+  mode = null; fromFriendLink = false;
+  show('homeScreen');
+}
+
+/* ── Setup ────────────────────────────────── */
+function normalizeSetup() {
+  if (!setup.r && setup.l > setup.c) setup.l = setup.c;   // can't have more dots than colors without repeats
+}
+function openSetup(m) {
+  setupMode = m;
+  setupSeed = newSeed();
+  setup = { c: 5, l: 4, r: false };
+  $('setupEyebrow').textContent = m === 'vs' ? 'you and a friend get the same code' : 'just you';
+  $('setupTitle').textContent = m === 'vs' ? 'Race a Friend' : 'Solo Game';
+  $('btnShare').style.display = m === 'vs' ? '' : 'none';
+  resetShareBtn();
+  renderSetup();
+  show('setupScreen');
+}
+function seg(el, values, current, isDisabled, onPick) {
+  el.innerHTML = '';
+  values.forEach(v => {
+    const b = document.createElement('button');
+    b.textContent = v.label;
+    if (v.value === current) b.classList.add('on');
+    if (isDisabled(v.value)) b.disabled = true;
+    b.addEventListener('click', () => onPick(v.value));
+    el.appendChild(b);
+  });
+}
+function renderSetup() {
+  normalizeSetup();
+  seg($('segColors'), [5, 6, 7, 8].map(n => ({ value: n, label: String(n) })), setup.c, () => false, v => { setup.c = v; resetShareBtn(); renderSetup(); });
+  seg($('segLen'), [4, 5, 6].map(n => ({ value: n, label: String(n) })), setup.l, v => !setup.r && v > setup.c, v => { setup.l = v; resetShareBtn(); renderSetup(); });
+  seg($('segRep'), [{ value: false, label: 'No' }, { value: true, label: 'Yes' }], setup.r, () => false, v => { setup.r = v; resetShareBtn(); renderSetup(); });
+  const n = countCodes(setup);
+  $('countLine').textContent = n.toLocaleString() + ' possible codes';
+}
+function resetShareBtn() {
+  const b = $('btnShare');
+  b.textContent = 'Share game with a friend';
+  b.classList.remove('done');
+}
+
+async function shareLink(url, text, btn) {
+  try {
+    if (navigator.share) { await navigator.share({ title: 'Crack the Code', text, url }); return true; }
+  } catch (e) { if (e && e.name === 'AbortError') return false; }
+  try { await navigator.clipboard.writeText(text + '\n' + url); }
+  catch (e) {
+    const ta = document.createElement('textarea'); ta.value = text + '\n' + url; document.body.appendChild(ta); ta.select();
+    try { document.execCommand('copy'); } catch (e2) {} ta.remove();
+  }
+  if (btn) { const old = btn.textContent; btn.textContent = 'Link copied!'; setTimeout(() => { if (btn.textContent === 'Link copied!') btn.textContent = old; }, 2200); }
+  return true;
+}
+
+async function onShareGame() {
+  const url = buildUrl('vs', setupSeed, setup);
+  const btn = $('btnShare');
+  const ok = await shareLink(url, "I'm challenging you! We get the same secret code. Can you crack it in fewer guesses?", btn);
+  if (ok && btn.textContent !== 'Link copied!') { btn.textContent = 'Shared!'; }
+  if (ok) btn.classList.add('done');
+}
+
+/* ── Start a game ─────────────────────────── */
+function startGame(m, c, s) {
+  mode = m; cfg = { c: c.c, l: c.l, r: !!c.r }; seed = s;
+  code = makeCode(seed, cfg);
+  maxG = maxGuessesFor(countCodes(cfg));
+  guesses = []; over = false; won = false;
+  cur = Array(cfg.l).fill(null); sel = 0;
+
+  try {
+    const saved = JSON.parse(localStorage.getItem(gameKey()));
+    if (Array.isArray(saved)) saved.forEach(g => {
+      if (Array.isArray(g) && g.length === cfg.l && !over) {
+        const f = score(g, code);
+        guesses.push({ g, f });
+        if (f.exact === cfg.l) { over = true; won = true; }
+        else if (guesses.length >= maxG) { over = true; }
+      }
+    });
+  } catch (e) {}
+
+  if (m === 'daily') setUrl(buildUrl('daily'));
+  else setUrl(buildUrl(m, seed, cfg));
+
+  closeModal();
+  show('gameScreen');
+  renderAll();
+  if (over) setTimeout(showResult, 400);
+}
+function startSolo() { startGame('solo', setup, setupSeed); }
+function startVs()   { startGame('vs', setup, setupSeed); }
+
+function startDaily() {
+  const d = new Date();
+  dateKey = d.getFullYear() + '-' + String(d.getMonth() + 1).padStart(2, '0') + '-' + String(d.getDate()).padStart(2, '0');
+  const today  = Date.UTC(d.getFullYear(), d.getMonth(), d.getDate());
+  const launch = Date.UTC(DAILY_LAUNCH[0], DAILY_LAUNCH[1] - 1, DAILY_LAUNCH[2]);
+  dailyNum = Math.max(1, Math.floor((today - launch) / 86400000) + 1);
+  startGame('daily', DAILY_CFG, 'daily-' + dateKey);
+}
+
+/* ── Rendering ────────────────────────────── */
+function pegSize() {
+  const avail = Math.min(window.innerWidth, 520) - 32 - 24 - 12;      // screen padding, board padding, row padding
+  const fbW = Math.ceil(cfg.l / 2) * 16;
+  const w = avail - 20 - 10 - 14 - fbW - (cfg.l - 1) * 8;
+  return Math.max(24, Math.min(46, Math.floor(w / cfg.l)));
+}
+function renderAll() { renderHeader(); renderSecret(); renderBoard(); renderControls(); }
+
+function renderHeader() {
+  const label = mode === 'daily' ? 'Daily Puzzle #' + dailyNum : mode === 'vs' ? 'Race a Friend' : 'Solo Game';
+  $('gameInfo').textContent = over ? label : label + ' · Guess ' + Math.min(guesses.length + 1, maxG) + ' of ' + maxG;
+  let sub = cfg.c + ' colors · ' + cfg.l + ' dots · ' + (cfg.r ? 'repeats allowed' : 'no repeats');
+  if (mode === 'vs' && fromFriendLink && !over) sub = "Same code as your friend. Fewest guesses wins!";
+  $('gameSub').textContent = sub;
+}
+function renderSecret() {
+  const w = $('secretWrap');
+  w.innerHTML = '<span class="secret-label">secret code</span>';
+  for (let i = 0; i < cfg.l; i++) {
+    const p = document.createElement('div');
+    p.className = 'secret-peg';
+    if (over) { p.style.background = COLORS[code[i]].h; p.classList.add('reveal'); }
+    else p.textContent = '?';
+    w.appendChild(p);
+  }
+}
+function fbEl(f, l) {
+  const fb = document.createElement('div');
+  fb.className = 'fb';
+  fb.style.gridTemplateColumns = 'repeat(' + Math.ceil(l / 2) + ', 12px)';
+  for (let i = 0; i < l; i++) {
+    const d = document.createElement('div');
+    d.className = 'fbd' + (f ? (i < f.exact ? ' exact' : i < f.exact + f.near ? ' near' : '') : '');
+    fb.appendChild(d);
+  }
+  return fb;
+}
+function renderBoard() {
+  const board = $('board');
+  board.style.setProperty('--peg', pegSize() + 'px');
+  board.innerHTML = '';
+  let activeRow = null;
+  for (let i = 0; i < maxG; i++) {
+    const row = document.createElement('div');
+    row.className = 'row';
+    const num = document.createElement('span'); num.className = 'rnum'; num.textContent = i + 1;
+    const pegs = document.createElement('div'); pegs.className = 'pegs';
+    let f = null;
+    if (i < guesses.length) {
+      guesses[i].g.forEach(ci => { const p = document.createElement('div'); p.className = 'peg'; p.style.background = COLORS[ci].h; pegs.appendChild(p); });
+      f = guesses[i].f;
+    } else if (i === guesses.length && !over) {
+      row.classList.add('active'); activeRow = row;
+      for (let k = 0; k < cfg.l; k++) {
+        const p = document.createElement('div');
+        p.className = 'peg slot' + (k === sel ? ' sel' : '');
+        if (cur[k] !== null) p.style.background = COLORS[cur[k]].h;
+        p.addEventListener('click', () => tapSlot(k));
+        pegs.appendChild(p);
+      }
+    } else {
+      row.classList.add('empty');
+      for (let k = 0; k < cfg.l; k++) { const p = document.createElement('div'); p.className = 'peg'; pegs.appendChild(p); }
+    }
+    row.appendChild(num); row.appendChild(pegs); row.appendChild(fbEl(f, cfg.l));
+    board.appendChild(row);
+  }
+  const target = activeRow || board.lastElementChild;
+  if (target) {
+    const top = target.offsetTop - board.clientHeight / 2 + target.offsetHeight / 2;
+    board.scrollTop = Math.max(0, top);
+  }
+}
+function renderControls() {
+  const c = $('controls');
+  c.innerHTML = '';
+  if (over) {
+    const b = document.createElement('button');
+    b.className = 'btn-main'; b.textContent = won ? 'See results' : 'Game over';
+    b.addEventListener('click', showResult);
+    c.appendChild(b);
+    return;
+  }
+  const palSize = Math.max(30, Math.min(46, Math.floor((Math.min(window.innerWidth, 520) - 32 - (cfg.c - 1) * 10) / cfg.c)));
+  c.style.setProperty('--pal', palSize + 'px');
+  const pal = document.createElement('div'); pal.className = 'palette';
+  for (let i = 0; i < cfg.c; i++) {
+    const b = document.createElement('button');
+    b.className = 'pal'; b.style.background = COLORS[i].h; b.setAttribute('aria-label', COLORS[i].n);
+    if (!cfg.r && cur.includes(i)) b.disabled = true;
+    b.addEventListener('click', () => placeColor(i));
+    pal.appendChild(b);
+  }
+  c.appendChild(pal);
+  const row = document.createElement('div'); row.className = 'ctl-row';
+  const del = document.createElement('button'); del.className = 'ctl-btn ctl-del'; del.textContent = 'Delete';
+  del.addEventListener('click', deleteLast);
+  const ok = document.createElement('button'); ok.className = 'ctl-btn ctl-ok'; ok.textContent = 'Check';
+  ok.disabled = cur.includes(null);
+  ok.addEventListener('click', submitGuess);
+  row.appendChild(del); row.appendChild(ok);
+  c.appendChild(row);
+}
+
+/* ── Playing ──────────────────────────────── */
+const firstEmpty = () => cur.indexOf(null);
+
+function placeColor(ci) {
+  if (over) return;
+  if (!cfg.r && cur.includes(ci)) return;
+  let at = sel;
+  if (at < 0 || at >= cfg.l || cur[at] !== null) at = firstEmpty();
+  if (at === -1) return;
+  cur[at] = ci;
+  sel = firstEmpty();
+  renderBoard(); renderControls();
+  const slot = $('board').querySelector('.row.active').children[1].children[at];
+  if (slot) slot.classList.add('pop');
+}
+function tapSlot(k) {
+  if (over) return;
+  if (cur[k] !== null) cur[k] = null;
+  sel = k;
+  renderBoard(); renderControls();
+}
+function deleteLast() {
+  if (over) return;
+  let last = -1;
+  for (let i = cfg.l - 1; i >= 0; i--) if (cur[i] !== null) { last = i; break; }
+  if (last === -1) return;
+  cur[last] = null; sel = last;
+  renderBoard(); renderControls();
+}
+function submitGuess() {
+  if (over || cur.includes(null)) return;
+  const g = cur.slice();
+  const f = score(g, code);
+  guesses.push({ g, f });
+  saveGame();
+  cur = Array(cfg.l).fill(null); sel = 0;
+  if (f.exact === cfg.l) { over = true; won = true; }
+  else if (guesses.length >= maxG) { over = true; }
+  renderAll();
+  if (over) setTimeout(showResult, 700);
+}
+
+/* ── Results + sharing ────────────────────── */
+function resultGrid() {
+  return guesses.map(x => '🟡'.repeat(x.f.exact) + '⚪'.repeat(x.f.near) + '⚫'.repeat(cfg.l - x.f.exact - x.f.near)).join('\n');
+}
+function shareText() {
+  const n = guesses.length;
+  if (mode === 'daily') return 'Crack the Code · Daily #' + dailyNum + '\n' + (won ? 'Cracked it in ' + n + '/' + maxG : 'Missed it (X/' + maxG + ')') + '\n' + resultGrid();
+  return won ? 'I cracked the code in ' + n + ' guess' + (n === 1 ? '' : 'es') + '! Can you beat me?'
+             : "I couldn't crack the code in " + n + " guesses. Can you?";
+}
+function closeModal() { $('modal').classList.remove('open'); }
+function openModal(html) { $('modalBox').innerHTML = ''; $('modalBox').appendChild(html); $('modal').classList.add('open'); }
+
+function mkBtn(cls, text, fn) { const b = document.createElement('button'); b.className = cls; b.textContent = text; b.addEventListener('click', fn); return b; }
+
+function showResult() {
+  const box = document.createElement('div');
+  const n = guesses.length;
+  const t = document.createElement('div'); t.className = 'modal-title';
+  t.textContent = won ? 'Cracked it!' : 'Out of guesses';
+  const s = document.createElement('div'); s.className = 'modal-sub';
+  s.textContent = won ? 'in ' + n + ' guess' + (n === 1 ? '' : 'es') : 'The secret code was:';
+  box.appendChild(t); box.appendChild(s);
+  if (!won) {
+    const cd = document.createElement('div'); cd.className = 'modal-code';
+    code.forEach(ci => { const p = document.createElement('div'); p.className = 'peg'; p.style.background = COLORS[ci].h; cd.appendChild(p); });
+    box.appendChild(cd);
+  }
+  const btns = document.createElement('div'); btns.className = 'modal-btns';
+  if (mode === 'daily' || mode === 'vs') {
+    const shareBtn = mkBtn('btn-main', mode === 'vs' ? 'Challenge a friend' : 'Share result', async () => {
+      const url = mode === 'vs' ? buildUrl('vs', seed, cfg) : buildUrl('daily');
+      const text = mode === 'daily' ? shareText() : shareText() + (fromFriendLink ? '' : ' We get the same code.');
+      await shareLink(url, text, shareBtn);
+    });
+    btns.appendChild(shareBtn);
+  }
+  if (mode === 'solo') btns.appendChild(mkBtn('btn-main', 'Play again', () => startGame('solo', cfg, newSeed())));
+  if (mode === 'vs')   btns.appendChild(mkBtn('btn-ghost', 'New race', () => openSetup('vs')));
+  btns.appendChild(mkBtn('btn-ghost', 'See the board', closeModal));
+  btns.appendChild(mkBtn('btn-ghost', 'Home', goHome));
+  box.appendChild(btns);
+  openModal(box);
+}
+
+function showHow() {
+  const box = document.createElement('div');
+  const t = document.createElement('div'); t.className = 'modal-title'; t.textContent = 'How to play';
+  const how = document.createElement('div'); how.className = 'how';
+  how.innerHTML =
+    '<p>There is a secret code made of colored dots. Crack it in as few guesses as you can.</p>' +
+    '<p>Tap colors to fill a row, then tap <b>Check</b>.</p>' +
+    '<p><i class="fbd exact"></i> A solid gold dot means one of your colors is correct and in the right spot.</p>' +
+    '<p><i class="fbd near"></i> A gold ring means that color is in the code, but in a different spot.</p>' +
+    '<p>The little dots do not line up with your dots. They only tell you how many, not which ones.</p>';
+  const btns = document.createElement('div'); btns.className = 'modal-btns';
+  btns.appendChild(mkBtn('btn-main', 'Got it', closeModal));
+  box.appendChild(t); box.appendChild(how); box.appendChild(btns);
+  openModal(box);
+}
+
+/* ── Wire up ──────────────────────────────── */
+$('btnSolo').addEventListener('click', () => openSetup('solo'));
+$('btnVs').addEventListener('click', () => openSetup('vs'));
+$('btnDaily').addEventListener('click', startDaily);
+$('btnHowHome').addEventListener('click', showHow);
+$('btnHowGame').addEventListener('click', showHow);
+$('btnSetupBack').addEventListener('click', goHome);
+$('btnShare').addEventListener('click', onShareGame);
+$('btnStart').addEventListener('click', () => setupMode === 'vs' ? startVs() : startSolo());
+$('btnHome').addEventListener('click', goHome);
+$('modal').addEventListener('click', e => { if (e.target === $('modal')) closeModal(); });
+
+/* ── On load: open a shared link ──────────── */
+(function init() {
+  const q = new URLSearchParams(location.search);
+  const m = q.get('m');
+  if (m === 'daily') { startDaily(); return; }
+  if ((m === 'solo' || m === 'vs') && q.get('s')) {
+    const c = { c: parseInt(q.get('c'), 10), l: parseInt(q.get('l'), 10), r: q.get('r') === '1' };
+    const ok = c.c >= 5 && c.c <= 8 && c.l >= 4 && c.l <= 6 && (c.r || c.l <= c.c);
+    if (ok) { fromFriendLink = (m === 'vs'); startGame(m, c, q.get('s').slice(0, 24)); }
+  }
+})();
+</script>
+</body>
+</html>

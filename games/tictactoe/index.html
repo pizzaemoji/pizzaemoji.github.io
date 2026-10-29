@@ -7,6 +7,16 @@
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
 <meta name="apple-mobile-web-app-title" content="Tic Tac Toe">
+<link rel="icon" type="image/svg+xml" href="tictactoe-icon.svg">
+<link rel="apple-touch-icon" href="https://pizzaemoji.net/games/tictactoe/tictactoe-icon.png">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://pizzaemoji.net/games/tictactoe/">
+<meta property="og:title" content="Tic Tac Toe">
+<meta property="og:image" content="https://pizzaemoji.net/games/tictactoe/tictactoe-icon.png">
+<meta property="og:image:width" content="512">
+<meta property="og:image:height" content="512">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pizzaemoji.net/games/tictactoe/tictactoe-icon.png">
 <title>Tic Tac Toe</title>
 <style>
   @import url('https://fonts.googleapis.com/css2?family=Jost:wght@300;400;500;600&display=swap');
@@ -50,7 +60,8 @@
   .grid-line { stroke: #fff; stroke-width: 4; stroke-linecap: round; }
   .x-outer { stroke: #fff; stroke-width: 26; stroke-linecap: round; }
   .x-inner { stroke: #000; stroke-width: 15; stroke-linecap: round; }
-  .o-mark   { fill: #fff; }
+  .o-outer { fill: none; stroke: #fff; stroke-width: 26; }
+  .o-inner { fill: none; stroke: #000; stroke-width: 15; }
 
   .pop { animation: pop 0.22s cubic-bezier(0.2, 0.9, 0.3, 1.3) both; }
   @keyframes pop {
@@ -134,7 +145,8 @@
   const KEY = 'tictactoe_local';
   const MAX_AGE = 12 * 60 * 60 * 1000;
 
-  let board, turn, scores, over, winner, line, awaitingTap = false;
+  const COLORS = ['#FF6685', '#FFB366', '#FFF066', '#66FF84', '#66E0FF', '#A366FF'];
+  let board, turn, scores, over, winner, line, strikeColor, awaitingTap = false;
 
   const $ = id => document.getElementById(id);
   const marksEl = $('marks'), strikeEl = $('strikeLayer'), hitsEl = $('hits');
@@ -154,7 +166,7 @@
   /* ── Persistence ── */
   function save() {
     try {
-      localStorage.setItem(KEY, JSON.stringify({ ts: Date.now(), board, turn, scores, over, winner, line }));
+      localStorage.setItem(KEY, JSON.stringify({ ts: Date.now(), board, turn, scores, over, winner, line, strikeColor }));
     } catch (e) {}
   }
   function load() {
@@ -184,10 +196,12 @@
         });
       });
     } else {
-      const c = document.createElementNS(NS, 'circle');
-      c.setAttribute('class', 'o-mark');
-      c.setAttribute('r', 30);
-      inner.appendChild(c);
+      ['o-outer', 'o-inner'].forEach(cls => {
+        const c = document.createElementNS(NS, 'circle');
+        c.setAttribute('class', cls);
+        c.setAttribute('r', 25);
+        inner.appendChild(c);
+      });
     }
     outer.appendChild(inner);
     marksEl.appendChild(outer);
@@ -202,6 +216,7 @@
     x2 += dx / len * ext; y2 += dy / len * ext;
     const s = document.createElementNS(NS, 'line');
     s.setAttribute('class', 'strike');
+    s.style.stroke = strikeColor || COLORS[0];
     s.setAttribute('x1', x1); s.setAttribute('y1', y1);
     s.setAttribute('x2', x2); s.setAttribute('y2', y2);
     strikeEl.appendChild(s);
@@ -256,6 +271,7 @@
     const hit = LINES.find(l => l.every(k => board[k] === turn));
     if (hit) {
       over = 'win'; winner = turn; line = hit;
+      strikeColor = COLORS[Math.floor(Math.random() * COLORS.length)];
       scores[turn]++;
       drawStrike(hit, true);
       renderStatus(); renderScore(); save();
@@ -291,7 +307,7 @@
   const saved = load();
   if (saved) {
     board = saved.board; turn = saved.turn; scores = saved.scores;
-    over = saved.over; winner = saved.winner; line = saved.line;
+    over = saved.over; winner = saved.winner; line = saved.line; strikeColor = saved.strikeColor;
     renderAll();
     if (over) awaitingTap = true;
   } else {

@@ -50,13 +50,14 @@
       text-align: center;
     }
 
+    /* Fixed-width columns, as many as fit, block centered, last row left-aligned */
     .grid {
-      display: flex;
-      flex-direction: row;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, 88px);
       gap: 28px;
       justify-content: center;
-      align-items: flex-start;
-      flex-wrap: wrap;
+      align-items: start;
+      width: 100%;
     }
 
     .game {
@@ -155,17 +156,17 @@
 		</div>
 		<span class="game-label">Secret Code</span>
 	</a>
-	<a class="game" href="tictactoe/">
-		<div class="icon-wrap">
-			<img src="tictactoe/tictactoe-icon.png" alt="Tic Tac Toe" />
-		</div>
-		<span class="game-label">Tic Tac Toe</span>
-	</a>
 	<a class="game" href="flippin/">
 		<div class="icon-wrap">
 			<img src="flippin/flippin-icon.png" alt="Flippin'" />
 		</div>
 		<span class="game-label">Flippin'</span>
+	</a>
+	<a class="game" href="tictactoe/">
+		<div class="icon-wrap">
+			<img src="tictactoe/tictactoe-icon.png" alt="Tic Tac Toe" />
+		</div>
+		<span class="game-label">Tic Tac Toe</span>
 	</a>
   </div>
 

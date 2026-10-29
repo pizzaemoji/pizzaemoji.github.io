@@ -50,14 +50,13 @@
       text-align: center;
     }
 
-    /* Fixed-width columns, as many as fit, block centered, last row left-aligned */
+    /* Always 3 columns (phone and desktop), block centered, last row left-aligned */
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, 88px);
+      grid-template-columns: repeat(3, 88px);
       gap: 28px;
       justify-content: center;
       align-items: start;
-      width: 100%;
     }
 
     .game {
